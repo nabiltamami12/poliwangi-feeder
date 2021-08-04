@@ -33,31 +33,32 @@
                 <input type="text" class="form-control" id="nama" name="nama" readonly></select>
               </div>
             </div>
-            <div class="col-sm-6 col-12">
-              <div class="form-group row mb-0">
-                <label>
-                    Semester
-                    <select class="form-control">
-                        <option value="1"> 1 </option>
-                        <option value="2"> 2 </option>
-                        <option value="3"> 3 </option>
-                    </select>
-                </label>
-              </div>
-            </div>
-            <div class="col-sm-6 col-12">
-              <div class="form-group row mb-0">
-              <button type="submit" class="btn--blue w-100 simpanData-btn add-btn">Tambah Semester</button>
-              </div>
-            </div>
+            
             <div class="col-sm-12 col-12">
             <div class="form-row">
-                <div class="col-sm-12 col-12">
+                <div class="col-sm-5 col-12">
+                    <div class="form-group row mb-0">
+                        <label>Program Studi</label>
+                    </div>
+                </div>
+                <div class="col-sm-5 col-12">
                     <div class="form-group row mb-0">
                         <label>Matakuliah</label>
                     </div>
                 </div>
-                <div class="col-sm-10 col-12">
+                <div class="col-sm-2 col-12">
+                    <div class="form-group row mb-0">
+                        <label></label>
+                    </div>
+                </div>
+                <div class="col-sm-5 col-12">
+                    <div class="form-group row mb-0">
+                        <select class="form-control" id="matkul_1">
+
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm-5 col-12">
                     <div class="form-group row mb-0">
                         <select class="form-control" id="matkul_1">
 
@@ -73,7 +74,6 @@
             </div>
           </div>
           <hr class="mt">
-          <button type="submit" class="btn--blue w-100 simpanData-btn add-btn">{{ ($id==null)?"Tambah":"Ubah" }} Data</button>
         </form>
         
       </div>
@@ -124,7 +124,8 @@ $(document).ready(function() {
     })
 } );
 
-function getData(id) {
+async function getData(id) {
+  await getGlobalData();
     if (id!="") {
         $.ajax({
             url: url_api+"/dosenpengampu/"+id,

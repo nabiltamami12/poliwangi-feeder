@@ -22,8 +22,17 @@ class DosenPengampuController extends Controller
     
     public function index()
     {
-        $this->data = DosenPengampu::get();
-
+        
+        $this->data = DosenPengampu::select(
+            'pegawai.nama',
+            'pegawai.nomor',
+            DB::raw('count(DISTINCT dosen_pengampu.matakuliah) as jumlah_matkul'),
+        )
+        ->join("pegawai", "dosen_pengampu.dosen", "=", "pegawai.nomor",'right')
+        ->join("staff", "pegawai.staff", "=", "staff.nomor")
+        ->where("pegawai.staff", "=", 4)
+        ->groupBy('pegawai.nomor', 'pegawai.nama')
+        ->get();
         $this->status = "success";
 
        
@@ -145,34 +154,20 @@ class DosenPengampuController extends Controller
     {
         DB::statement("SET SQL_MODE=''");
         
-        $data = Kuliah::select(
-            'matakuliah.nomor AS id_matakuliah',
-            'kuliah.semester',
-            'pegawai.nama',
-            'pegawai.nomor',
-            'matakuliah.matakuliah')
-        ->join('matakuliah', 'kuliah.matakuliah', '=', 'matakuliah.nomor')
-        ->join("pegawai", "kuliah.dosen", "=", "pegawai.nomor")
-        ->join("staff", "pegawai.staff", "=", "staff.nomor")
+        $data = DosenPengampu::select(
+            'dosen_pengampu.*',
+            'pegawai.nama'
+        )
+        ->join("pegawai", "dosen_pengampu.dosen", "=", "pegawai.nomor",'right')
         ->where("pegawai.staff", "=", 4)
-        ->where('kuliah.dosen', '=', $id)
-        ->groupBy('matakuliah.kode')
+        ->where("pegawai.nomor",$id)
         ->get();
-
-        $array = [];
-
-        foreach ($data as $key=>$value) {
-            array_push($array, [
-                "semester" => $data[$key]['semester'],
-                "matakuliah" => [
-                    'id_matakuliah'=> $data[$key]['id_matakuliah'],
-                    'matakuliah'   => $data[$key]['matakuliah']]
-            ]);
-        }
+        
         $this->data = [
             'nama' => $data[0]['nama'],
-            'data' => $array
+            'matkul' => $data
         ];
+
         $this->status = "success";
 
        
