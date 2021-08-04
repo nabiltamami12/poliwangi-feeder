@@ -101,7 +101,7 @@
           </div>
           <div class="row register_account">
             <div class="col text-center">
-              <p>Daftar Mahasiswa Baru? <a href="/register">Klik Disini</a></p>
+              <p>Daftar Mahasiswa Baru? <a href="{{ url('/akademik/dashboard') }}">Klik Disini</a></p>
             </div>
           </div>
         </div>
@@ -120,7 +120,7 @@
   <script src="{{ url('argon') }}/assets/js/argon.js?v=1.2.0"></script>
   <script type="text/javascript">
     function auth() {
-      window.location = "{{ url('/admin/dashboard') }}";
+      window.location = "{{ url('/akademik/dashboard') }}";
     }
   </script>
 </body>
