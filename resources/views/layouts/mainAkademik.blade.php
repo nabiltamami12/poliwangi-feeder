@@ -27,7 +27,7 @@
   <link href="{{ asset('css/akademik.css') }}" rel="stylesheet">
   <link href="{{ asset('css/responsive.css') }}" rel="stylesheet">
   <!-- Datatable CSS -->
-  <link href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap4.min.css">
   <!-- Bootstrap CSS -->
   <!-- <link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' rel='stylesheet' type='text/css'> -->
 
@@ -38,7 +38,8 @@
   <!-- JQUERY JS -->
   <script src="{{ url('argon') }}/assets/vendor/jquery/dist/jquery.min.js"></script>
   <!-- Datatable JS -->
-  <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.min.js"></script>
   <!-- Bootstrap JS -->
   <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js' type='text/javascript'></script>
 
@@ -71,9 +72,58 @@
       padding-right: 1.3rem !important;
       margin-top: 16px !important;
     }
-
     form button {
       height: 49px;
+    }
+
+    /*datatable*/
+    .table-responsive{
+      padding-top: 1em;
+    }
+    .table.dataTable{
+      border-collapse: unset;
+    }
+    .table.dataTable thead th, table.dataTable thead td{
+      border-bottom: unset;
+    }
+    .table.dataTable.no-footer{
+      border-bottom: unset;
+    }
+    .dataTables_wrapper .page-item.active .page-link {
+      border-color: #28A3EB;
+      background-color: #28A3EB;
+    }
+    .dataTables_wrapper .custom-select {
+      font-weight: 400;
+      font-size: 0.875rem;
+      line-height: 1.21em;
+      color: #041f2f;
+      min-width: 70px;
+      max-width: 70px;
+      height: 30px;
+      border: 1px solid #999999;
+      border-radius: 0.5rem;
+      padding: 0 10px;
+      background-image: url("https://api.iconify.design/bx/bx-chevron-down.svg?color=#041F2F");
+      background-repeat: no-repeat;
+      background-size: 17px;
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      box-shadow: none;
+    }
+    .dataTables_wrapper div.dataTables_filter input{
+      border: 1px solid #28a3eb;
+      padding: 0 0.75rem;
+      max-height: 35px;
+    }
+    .dataTables_wrapper .dataTables_length select.form-control{
+      margin: 0px;
+    }
+
+    /*sidebar*/
+    .sub-aktif{
+      color: #28a3eb !important;
     }
   </style>
 </head>
@@ -111,6 +161,50 @@
   <script src="{{ url('argon') }}/assets/js/argon.js?v=1.2.0"></script>
   <script src="{{ url('js/util.js') }}"></script>
   <script src="{{ asset('js/script.js') }}"></script>
+  <script type="text/javascript">
+    // set menu active
+    var tagMenu = document.querySelector(`[href="{{ url(Request::segment(1).'/'.Request::segment(2).'/'.Request::segment(3)) }}"]`);
+    if (tagMenu) {
+      tagMenu.childNodes[1].classList.add('sub-aktif');
+      tagMenu.parentNode.parentNode.parentNode.classList.add('showsubmenu');
+    }
+
+    var dt, dt_url, dt_opt;
+    var dt_init = document.getElementById("datatable");
+    $(document).ready(function() {
+      // datatable
+      if (dt_init) {
+        dt = $('#datatable').DataTable({
+          "processing": true,
+          "ajax": {
+            url: dt_url,
+            type: 'GET',
+            data: {},
+            headers: {
+              "Authorization": window.localStorage.getItem('token')
+            },
+          },
+          ...dt_opt,
+          // "dom": 'lfrtip',
+          "language": {
+            "paginate": {
+              "next": 'Lanjut',
+              "previous": 'Kembali'
+            },
+            "processing": "Proses ...",
+            "emptyTable": "Tidak ada data dalam tabel",
+            "info": "Menampilkan _START_ sampai _END_ dari _TOTAL_ total data",
+            "infoEmpty": "Menampilkan 0 sampai 0 dari 0 total data",
+            "infoFiltered": "(difilter dari _MAX_ total)",
+            "lengthMenu": "_MENU_ Data per halaman",
+            "search": "",
+            "searchPlaceholder": "Pencarian ..."
+          }
+        });
+      }
+
+    });
+  </script>
   @yield('js')
 </body>
 

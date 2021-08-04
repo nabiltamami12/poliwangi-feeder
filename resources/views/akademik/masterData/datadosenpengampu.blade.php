@@ -51,7 +51,7 @@
         </div>
 
         <div class="table-responsive">
-          <table id="datatable" class="table align-items-center table-flush">
+          <table id="datatable" class="table align-items-center table-flush table-borderless table-hover">
             <thead class="table-header">
               <tr>
                 <th scope="col">NO</th>
@@ -65,15 +65,6 @@
             </tbody>
           </table>
 
-        </div>
-
-        <div class="row justify-content-between align-items-center table-info">
-          <h3>Menampilkan 1 sampai 7 dari 7 total data</h3>
-          <div class="pagination mt-2 mt-sm-0">
-            <button type="button" class="btn-prev">Previous</button>
-            <button type="button" class="btn-number">1</button>
-            <button type="button" class="btn-next">Next</button>
-          </div>
         </div>
       </div>
     </div>

@@ -21,3 +21,6 @@ $php artisan key:generate
 ```sh
 $php artisan migrate
 ```
+
+### Permision server
+sudo chown -R $USER:www-data storage
