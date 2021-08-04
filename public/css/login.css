@@ -1,0 +1,214 @@
+@import url(https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap);
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
+}
+
+.login_page .bg-default,
+.register_page .bg-default {
+  background-color: #172b4d !important;
+}
+.login_page .bg-secondary,
+.register_page .bg-secondary {
+  background-color: #f7fafc !important;
+}
+.login_page .bg-gradient-primary,
+.register_page .bg-gradient-primary {
+  background: linear-gradient(90.18deg, #b2def8 -4.39%, #6f7bf7 132.48%) !important;
+}
+.login_page .header-body h1,
+.register_page .header-body h1 {
+  font-weight: 600;
+  font-size: 1.625rem;
+  line-height: 1.22em;
+  color: #ffffff;
+  margin-top: 1rem;
+}
+.login_page .header-body p,
+.register_page .header-body p {
+  font-weight: 600;
+  font-size: 0.8125rem;
+  line-height: 1.22em;
+  color: #ffffff;
+  margin-top: 0.5rem;
+}
+.login_page .card,
+.register_page .card {
+  border-radius: 4px;
+  position: relative;
+}
+.login_page .card .card-body p,
+.register_page .card .card-body p {
+  font-weight: 500;
+  font-size: 0.75rem;
+  line-height: 1.25em;
+  color: #adb5bd;
+  margin-bottom: 2rem;
+}
+.login_page .card .card-body .form-control::-moz-placeholder, .register_page .card .card-body .form-control::-moz-placeholder {
+  font-weight: 500;
+  font-size: 0.75rem;
+  line-height: 1.22em;
+  color: #adb5bd;
+}
+.login_page .card .card-body .form-control:-ms-input-placeholder, .register_page .card .card-body .form-control:-ms-input-placeholder {
+  font-weight: 500;
+  font-size: 0.75rem;
+  line-height: 1.22em;
+  color: #adb5bd;
+}
+.login_page .card .card-body .form-control::placeholder,
+.register_page .card .card-body .form-control::placeholder {
+  font-weight: 500;
+  font-size: 0.75rem;
+  line-height: 1.22em;
+  color: #adb5bd;
+}
+.login_page .card .card-body .form-group:first-child,
+.register_page .card .card-body .form-group:first-child {
+  margin-bottom: 1rem;
+}
+.login_page .card .card-body .input-group,
+.register_page .card .card-body .input-group {
+  box-shadow: 1px 2px 10px rgba(0, 0, 0, 0.1);
+}
+.login_page .card .card-body .custom-control-label::before,
+.register_page .card .card-body .custom-control-label::before {
+  position: absolute;
+  top: 0;
+  display: block;
+  width: 1rem;
+  height: 1rem;
+  content: "";
+  pointer-events: none;
+  border: 0;
+  background-color: #fff;
+  box-shadow: 1px 2px 10px rgba(0, 0, 0, 0.1);
+}
+.login_page .card .card-body .custom-control-label,
+.register_page .card .card-body .custom-control-label {
+  font-weight: 500;
+  font-size: 0.75rem;
+  line-height: 1.2em;
+  color: #adb5bd;
+}
+.login_page .card .card-body .btn--blue,
+.register_page .card .card-body .btn--blue {
+  font-weight: 600;
+  font-size: 0.75rem;
+  line-height: 1.25em;
+  color: #fff;
+  background-color: #28a3eb;
+  padding: 12px;
+}
+.login_page .register_account,
+.register_page .register_account {
+  margin-top: 3rem;
+}
+.login_page .register_account p,
+.register_page .register_account p {
+  font-weight: 600;
+  font-size: 0.8125rem;
+  line-height: 1.22em;
+  color: #fff;
+}
+.login_page .register_account a,
+.register_page .register_account a {
+  text-decoration: underline;
+}
+
+.login_page .card .card-body {
+  padding: 2.5rem 2rem 1.1rem 2rem;
+}
+
+.register_page .card {
+  max-width: 800px;
+}
+.register_page .card .card-body {
+  padding: 2.5rem;
+}
+.register_page .card_inner {
+  background-color: #fff;
+  padding: 2rem;
+  box-shadow: 2px 2px 16px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+.register_page .card_inner h2 {
+  font-weight: 600;
+  font-size: 1.125rem;
+  line-height: 1.22em;
+  color: #000;
+}
+.register_page .card_inner hr {
+  margin: 1.3rem 0 1.5rem 0;
+}
+.register_page .form-group {
+  margin-bottom: 0;
+}
+.register_page select {
+  border: 1px solid #c4c4c4;
+  border-radius: 8px;
+  padding-left: 1.5rem;
+  background-image: url("https://api.iconify.design/bx/bx-chevron-down.svg?color=#041F2F");
+  background-position: calc(100% - 1.2rem), calc(100% - 24px);
+  background-repeat: no-repeat;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  color: #adb5bd;
+}
+.register_page select option {
+  color: #041f2f;
+}
+.register_page input {
+  border: 1px solid #c4c4c4;
+  border-radius: 8px;
+  padding-left: 1.5rem;
+}
+.register_page input::-moz-placeholder {
+  font-weight: 600;
+  font-size: 0.75rem;
+  line-height: 1.22em;
+  color: #8d8f91;
+}
+.register_page input:-ms-input-placeholder {
+  font-weight: 600;
+  font-size: 0.75rem;
+  line-height: 1.22em;
+  color: #8d8f91;
+}
+.register_page input::placeholder {
+  font-weight: 600;
+  font-size: 0.75rem;
+  line-height: 1.22em;
+  color: #8d8f91;
+}
+.register_page label {
+  font-weight: 500;
+  font-size: 1rem;
+  line-height: 1.22em;
+  color: #041f2f;
+}
+.register_page label span {
+  color: #f46a6a;
+}
+.register_page .font-bold {
+  font-weight: 600;
+}
+.register_page .fileUpload-icon {
+  font-size: 3rem;
+  color: #28a3eb;
+}
+.register_page input[type=file] {
+  display: none;
+}
+.register_page .input-foto-siswa {
+  min-height: 230px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #c4c4c4;
+  border-radius: 8px;
+}

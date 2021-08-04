@@ -1,0 +1,326 @@
+@import "./variable";
+@import "./mixin";
+
+.informasi_mahasiswa {
+    background-color: #fff;
+    border-radius: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    p {
+        @include mixintext(400, 1.25rem, 1.21em, $font-black);
+    }
+}
+
+.card_presensi {
+    h6 {
+        @include mixintext(500, 0.875rem, 1.21em, $placeholder);
+    }
+    h5 {
+        @include mixintext(600, 1rem, 1.21em, $font-black);
+    }
+}
+
+#dashboard,
+#heregistrasi,
+#daftar_ulang {
+    .table-responsive {
+        .table-body {
+            td {
+                padding: 1.5rem 1.5rem;
+            }
+
+            tr:first-child,
+            tr:last-child {
+                td {
+                    padding: 1rem 1.5rem;
+                }
+            }
+        }
+    }
+}
+
+#krsMahasiswa {
+    .form-select {
+        .form-group {
+            margin-bottom: 16px;
+        }
+        .form-group:nth-child(1) {
+            padding-right: 1.5rem;
+        }
+        .form-group:nth-child(2) {
+            padding-left: 1.5rem;
+        }
+        .form-group:nth-child(3) {
+            display: flex;
+            justify-content: flex-end;
+        }
+    }
+}
+
+#konfirmasi_pembayaran {
+    input::placeholder {
+        @include mixintext(400, 0.875rem, 1.21em, $font-black);
+    }
+    .form-group {
+        margin: 0;
+    }
+    .form-row {
+        margin-top: 1.5rem;
+    }
+    .upload {
+        display: flex;
+        align-items: flex-end;
+        justify-content: flex-end;
+    }
+}
+
+#presensi,
+#absensi_harian {
+    select {
+        height: 33px;
+    }
+}
+
+#form_cuti {
+    .form-input {
+        margin-top: 0;
+        .form-group:nth-child(odd) {
+            padding-right: 40px;
+        }
+        .form-group:nth-child(even) {
+            padding-left: 40px;
+        }
+    }
+
+    .form-cuti {
+        ::placeholder {
+            @include mixintext(400, 0.875rem, 1.21em, $font-black);
+        }
+        h1 {
+            @include mixintext(600, 1.125rem, 1.22em, $font-black);
+            margin-top: 40px;
+            margin-bottom: 16px;
+        }
+        .form-row:nth-child(3) {
+            margin-top: 40px;
+        }
+        .form-group:nth-child(2) {
+            padding-left: 40px;
+        }
+        .padding-right {
+            padding-right: 40px;
+        }
+    }
+
+    .submit {
+        margin-top: 40px;
+        padding: 0 1rem;
+    }
+}
+
+#pmb {
+    .form-select {
+        padding: 0 8px;
+    }
+
+    .form-input {
+        margin-top: 0;
+        ::placeholder {
+            @include mixintext(400, 0.875rem, 1.21em, $font-black);
+        }
+    }
+
+    .form-image {
+        padding: 0;
+        input {
+            display: none;
+        }
+        .file-input {
+            min-height: 138px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #c4c4c4;
+            border-radius: 8px;
+        }
+    }
+}
+
+#tahapan {
+    h2 {
+        @include mixintext(600, 1.125rem, 1.22em, $font-black);
+    }
+    button {
+        border-radius: 4px;
+    }
+
+    .input-group {
+        .input-group-text {
+            font-size: 1.125rem;
+            color: $font-black;
+            background-color: #c4c4c4;
+            padding-left: 1.167em;
+            padding-right: 1.167em;
+            border-radius: 8px 0 0 8px;
+            border: 1px solid #c4c4c4;
+            border-right: 0;
+        }
+        .form-control {
+            @include mixintext(400, 0.875rem, 1.21em, $font-black);
+            background-color: #fff;
+            border: 2px solid #c4c4c4;
+            border-left: 0;
+            border-radius: 0 8px 8px 0;
+        }
+        &.active {
+            .input-group-text {
+                background-color: #f0f8fe;
+                border: 1px solid $button-blue;
+                color: $button-blue;
+            }
+            .form-control {
+                border: 2px solid $button-blue;
+                background-color: $button-blue;
+                color: #fff;
+            }
+        }
+    }
+
+    .tab-body > div {
+        display: none;
+    }
+    .tab-body > div.active {
+        display: block;
+    }
+
+    .card-form {
+        .form-group {
+            &:first-child {
+                padding-right: 1.5rem;
+            }
+            &:nth-child(2) {
+                padding: 0 1.5rem;
+            }
+            &:last-child {
+                padding-left: 1.5rem;
+            }
+        }
+        ::placeholder {
+            @include mixintext(400, 0.875rem, 1.21em, $font-black);
+        }
+        select {
+            padding-left: 1.5rem;
+            border: 1px solid #c4c4c4;
+        }
+    }
+
+    .card_step {
+        position: relative;
+        input {
+            height: 49px;
+        }
+        hr {
+            position: relative;
+            top: 1.5rem;
+        }
+    }
+
+    .form-berkas {
+        input {
+            display: none;
+        }
+        .input-foto-siswa,
+        .input-foto-ijazah,
+        .input-pengajuan-keringanan {
+            min-height: 160px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #c4c4c4;
+            border-radius: 8px;
+        }
+        p {
+            @include mixintext(500, 0.875rem, 1.21em, $danger);
+            font-style: italic;
+        }
+    }
+
+    .form_action {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        column-gap: 0.5rem;
+        .button_sebelumnya {
+            background-color: $button-info;
+            color: $button-blue;
+        }
+    }
+}
+
+#pembayaran_va {
+    .alert {
+        padding: 0.5rem;
+        p {
+            @include mixintext(600, 1.125rem, 1.21em, $success);
+        }
+    }
+    .alert-success {
+        color: $success;
+        border: 0;
+        background-color: rgba(52, 195, 143, 0.1);
+    }
+
+    .pembayaran {
+        h2 {
+            @include mixintext(600, 1.125rem, 1.21em, #000);
+            margin-top: 2.5rem;
+        }
+    }
+
+    .va_aktif {
+        label {
+            @include mixintext(500, 1rem, 1.21em, #000);
+        }
+        .field_kode {
+            position: relative;
+        }
+        input:read-only {
+            background-color: #fff;
+            @include mixintext(600, 1.5rem, 1.21em, #000);
+            max-height: 50px;
+        }
+        .salin_kode {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 0 0.5rem 0.5rem 0;
+            border-left: 1px solid #c4c4c4;
+        }
+    }
+}
+
+#daftar_ulang {
+    .modal-title {
+        @include mixintext(600, 1.25rem, 1.21em, $font-dark);
+    }
+    .modal-body {
+        .input_file {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #c4c4c4;
+            border-radius: 8px;
+        }
+        .iconify {
+            font-size: 2rem;
+            color: $button-blue;
+        }
+        i {
+            @include mixintext(400, 1rem, 1.21em, $font-dark);
+        }
+    }
+    .modal-footer {
+        button {
+            border-radius: 4px;
+        }
+    }
+}

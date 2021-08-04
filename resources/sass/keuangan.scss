@@ -1,0 +1,80 @@
+@import "./variable";
+@import "./mixin";
+
+.page-content__keuangan {
+    .btn_aksi {
+        padding: 8px 12px;
+        border-radius: 8px;
+        border: 0;
+    }
+    .btn--info {
+        @include mixintext(500, 0.75rem, 1.25em, $font-black);
+        background-color: $button-info;
+    }
+    .btn--blue {
+        @include mixintext(500, 0.75rem, 1.25em, #fff);
+        span {
+            color: #fff !important;
+        }
+    }
+
+    .modal {
+        .modal-header {
+            padding-top: 2.25rem;
+            padding-bottom: 2.25rem;
+            .modal-title {
+                @include mixintext(600, 1.25rem, 1.2em, $font-dark);
+            }
+        }
+        .modal-body {
+            .detail_dokumen {
+                width: 100%;
+                border: 1px solid #c4c4c4;
+                border-radius: 8px;
+                padding: 1.5rem;
+            }
+            .iconify {
+                font-size: 1.7rem;
+                color: #000;
+            }
+            .iconify:last-child {
+                color: $button-blue;
+            }
+            .nama_dokumen {
+                @include mixintext(400, 1.125rem, 1.2em, $font-black);
+            }
+        }
+        .modal-footer {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            column-gap: 1.5rem;
+            .btn {
+                width: 100%;
+                border-radius: 4px;
+                @include mixintext(600, 1rem, 1.22em, $font-black);
+            }
+            .btn-modal-kembali {
+                border: 2px solid $placeholder;
+                color: $placeholder;
+                padding: 10px;
+            }
+            .btn-modal-kembali:hover {
+                background-color: $placeholder;
+                color: $white;
+            }
+            .btn-modal-setujui {
+                color: $font-white;
+                background-color: $success;
+                padding: 12px 16px;
+                border-radius: 4px;
+                border: 0;
+            }
+            .btn-modal-setujui:hover {
+                background-color: $white;
+                border: 2px solid $success;
+                color: $success;
+                padding: 10px;
+            }
+        }
+    }
+}

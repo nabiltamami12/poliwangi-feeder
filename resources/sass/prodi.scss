@@ -1,0 +1,63 @@
+@import "./variable";
+@import "./mixin";
+
+.page-content__prodi {
+    ::placeholder {
+        @include mixintext(400, 0.875rem, 1.21em, $font-black);
+    }
+    &#tambah_data,
+    &#update_data {
+        select {
+            border: 1px solid #c4c4c4;
+            padding-left: 1.5rem;
+        }
+        .tambahData-btn,
+        .simpanData-btn {
+            border-radius: 4px;
+            margin-top: 24px;
+        }
+    }
+    .modal {
+        .modal-header {
+            h5 {
+                @include mixintext(600, 1.25rem, 1.2em, $warning);
+                background: rgba(241, 180, 76, 0.2);
+                border-radius: 8px;
+                width: 100%;
+                padding: 12px;
+            }
+        }
+        .modal-body {
+            p {
+                @include mixintext(600, 1rem, 1.21em, $font-black);
+            }
+            h2 {
+                @include mixintext(700, 1.375rem, 1.22em, $font-black);
+            }
+        }
+        .modal-footer {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            column-gap: 1.5rem;
+            .btn {
+                width: 100%;
+                border-radius: 4px;
+            }
+            .btn-modal-cancel {
+                border: 2px solid $danger;
+                color: $danger;
+                padding: 10px;
+            }
+            .btn-modal-cancel:hover {
+                background-color: $danger;
+                color: $white;
+            }
+            .btn-modal-ok:hover {
+                background-color: $white;
+                border: 2px solid $button-blue;
+                color: $button-blue;
+                padding: 10px;
+            }
+        }
+    }
+}
