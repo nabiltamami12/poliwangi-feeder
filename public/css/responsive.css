@@ -58,29 +58,6 @@
     padding: 0;
   }
 
-  #form_cuti .form-input .form-group:nth-child(odd) {
-    padding-left: 0;
-    padding-right: 0;
-  }
-  #form_cuti .form-input .form-group:nth-child(even) {
-    padding-left: 0;
-    padding-right: 0;
-  }
-  #form_cuti .form-cuti .form-group {
-    padding: 0 0;
-  }
-  #form_cuti .form-cuti .form-row:nth-child(3) {
-    margin-top: 16px;
-  }
-  #form_cuti .form-cuti .form-group:nth-child(2) {
-    padding-left: 0;
-    padding-right: 0;
-  }
-  #form_cuti .form-cuti .padding-group {
-    padding-left: 0;
-    padding-right: 0;
-  }
-
   #tahapan .card-form .form-group:first-child, #tahapan .card-form .form-group:nth-child(2), #tahapan .card-form .form-group:last-child {
     padding: 0;
   }
@@ -104,7 +81,8 @@
   }
 
   .login_page .card .card-body,
-.register_page .card .card-body {
+.register_page .card .card-body,
+.pmbGenerateVA_page .card .card-body {
     padding: 1.5rem 1rem;
   }
 }
@@ -126,7 +104,8 @@
   }
 
   .login_page .logo,
-.register_page .logo {
+.register_page .logo,
+.pmbGenerateVA_page .logo {
     width: 20%;
   }
 }

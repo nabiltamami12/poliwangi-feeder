@@ -112,7 +112,7 @@
               <tr>
                 <td class="text-center px-2">1</td>
                 <td>4891203526</td>
-                <td class="font--bold text-capitalize">Dwi Rahmawati</td>
+                <td class="font-weight-bold text-capitalize">Dwi Rahmawati</td>
                 <td class="text-center">04/06/2001</td>
                 <td class="text-center">081469785240</td>
                 <td class="text-center">Dwi.rahma@gmail.com</td>
@@ -127,7 +127,7 @@
               <tr>
                 <td class="text-center px-2">2</td>
                 <td>4892062262</td>
-                <td class="font--bold text-capitalize">Januar Pratama</td>
+                <td class="font-weight-bold text-capitalize">Januar Pratama</td>
                 <td class="text-center">24/12/2002</td>
                 <td class="text-center">087562986265</td>
                 <td class="text-center">januar2412@gmail.com</td>
@@ -142,7 +142,7 @@
               <tr>
                 <td class="text-center px-2">3</td>
                 <td>4892058323</td>
-                <td class="font--bold text-capitalize">indah pratiwi</td>
+                <td class="font-weight-bold text-capitalize">indah pratiwi</td>
                 <td class="text-center">13/01/2002</td>
                 <td class="text-center">081247925428</td>
                 <td class="text-center">indah.prtw@gmail.com</td>
@@ -157,7 +157,7 @@
               <tr>
                 <td class="text-center px-2">4</td>
                 <td>4892058323</td>
-                <td class="font--bold text-capitalize">indah pratiwi</td>
+                <td class="font-weight-bold text-capitalize">indah pratiwi</td>
                 <td class="text-center">13/01/2002</td>
                 <td class="text-center">081247925428</td>
                 <td class="text-center">indah.prtw@gmail.com</td>
@@ -172,7 +172,7 @@
               <tr>
                 <td class="text-center px-2">5</td>
                 <td>4892058323</td>
-                <td class="font--bold text-capitalize">indah pratiwi</td>
+                <td class="font-weight-bold text-capitalize">indah pratiwi</td>
                 <td class="text-center">13/01/2002</td>
                 <td class="text-center">081247925428</td>
                 <td class="text-center">indah.prtw@gmail.com</td>
@@ -187,7 +187,7 @@
               <tr>
                 <td class="text-center px-2">6</td>
                 <td>4892058323</td>
-                <td class="font--bold text-capitalize">indah pratiwi</td>
+                <td class="font-weight-bold text-capitalize">indah pratiwi</td>
                 <td class="text-center">13/01/2002</td>
                 <td class="text-center">081247925428</td>
                 <td class="text-center">indah.prtw@gmail.com</td>
@@ -202,7 +202,7 @@
               <tr>
                 <td class="text-center px-2">7</td>
                 <td>4892058323</td>
-                <td class="font--bold text-capitalize">indah pratiwi</td>
+                <td class="font-weight-bold text-capitalize">indah pratiwi</td>
                 <td class="text-center">13/01/2002</td>
                 <td class="text-center">081247925428</td>
                 <td class="text-center">indah.prtw@gmail.com</td>

@@ -22,58 +22,61 @@
             </div>
           </div>
         </div>
-        <hr class="mt">
-        <form class="form-input">
-          <div class="form-row">
-            <div class="col-md-6 form-group">
-              <label for="nama">Nama</label>
-              <input type="text" class="form-control" id="nama" placeholder="Jessica Clara">
-            </div>
-            <div class="col-md-6 form-group mt-3 mt-md-0">
-              <label for="nim">NIM</label>
-              <input type="text" class="form-control" id="nim" placeholder="2204719384">
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="col-md-6 form-group">
-              <label for="jurusan">Jurusan</label>
-              <input type="text" class="form-control" id="jurusan" placeholder="Nama Jurusan">
-            </div>
-            <div class="col-md-6 form-group mt-3 mt-md-0">
-              <label for="program-studi">Program Studi</label>
-              <input type="text" class="form-control" id="program-studi" placeholder="Ilmu Kedokteran Gigi Anak">
-            </div>
-          </div>
-        </form>
-
+        <hr class="my-4">
 
         <form class="form-cuti">
-          <h1>Waktu Cuti</h1>
-          <div class="form-row">
-            <div class="col-md-6 form-group padding-right">
-              <label for="mulai">Mulai</label>
-              <input class="form-control" type="date" value="2021-09-21" id="tanggal-lahir">
+          <div class="form-row position-relative px-3">
+            <div class="col-12 col-md-6 form-group pr-0 pr-md-4">
+              <label>Mulai</label>
+              <div class="d-flex align-items-center date_picker">
+                <input id="txtDate" type="text" class="txtDateMulai form-control date-input cursor_default"
+                  value="21 Sept 2021" readonly />
+                <label class="input-group-btn" for="txtDate">
+                  <span class="date_button">
+                    <span class="iconify" data-icon="bx:bx-calendar" data-inline="false"></span>
+                  </span>
+                </label>
+              </div>
             </div>
-            <div class="col-md-6 form-group mt-3 mt-md-0">
-              <label for="selesai">Hingga</label>
-              <input class="form-control" type="date" value="2022-09-21" id="tanggal-lahir">
+
+            <div class="col-12 col-md-6 form-group pl-0 pl-md-4 mt-3 mt-md-0">
+              <label>Hingga</label>
+              <div class="d-flex align-items-center date_picker">
+                <input id="txtDate" type="text" class="txtDateSelesai form-control date-input cursor_default"
+                  value="21 Sept 2022" readonly />
+                <label class="input-group-btn" for="txtDate">
+                  <span class="date_button">
+                    <span class="iconify" data-icon="bx:bx-calendar" data-inline="false"></span>
+                  </span>
+                </label>
+              </div>
             </div>
           </div>
-          <div class="form-row">
-            <div class="col-12 form-group">
+
+          <div class="form-row px-3">
+            <div class="col-12 form-group mt-3">
               <label for="keterangan">Alasan Mengambil Cuti</label>
               <input type="text" class="form-control" id="keterangan"
                 placeholder="Ada pekerjaan yang harus dikerjakan fulltime">
             </div>
           </div>
+          <button type="submit" class="btn btn--blue w-100 mt-4-5">Ajukan Cuti</button>
         </form>
-
-        <div class="row submit justify-content-end align-items-center">
-          <button type="submit" class="btn btn--blue">Ajukan Cuti</button>
-        </div>
-
       </div>
     </div>
   </div>
 </section>
+@endsection
+
+@section('js')
+<script>
+  $(function () {
+    $(".txtDateMulai").datepicker({
+        format: "dd MM yyyy",
+    });
+    $(".txtDateSelesai").datepicker({
+        format: "dd MM yyyy",
+    });
+  });
+</script>
 @endsection

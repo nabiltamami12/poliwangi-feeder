@@ -87,7 +87,7 @@
             <tbody class="table-body">
               <tr>
                 <td rowspan="3" class="text-center px-2">1</td>
-                <td rowspan="3" class="font--bold text-capitalize">Senin</td>
+                <td rowspan="3" class="font-weight-bold text-capitalize">Senin</td>
                 <td class="text-center">1</td>
                 <td class="text-center">07:00</td>
                 <td class="text-center">09:00</td>
@@ -111,7 +111,7 @@
 
               <tr>
                 <td rowspan="2" class="text-center px-2">2</td>
-                <td rowspan="2" class="font--bold text-capitalize">Selasa</td>
+                <td rowspan="2" class="font-weight-bold text-capitalize">Selasa</td>
                 <td class="text-center">1</td>
                 <td class="text-center">07:00</td>
                 <td class="text-center">09:00</td>
@@ -130,7 +130,7 @@
 
               <tr>
                 <td rowspan="2" class="text-center px-2">3</td>
-                <td rowspan="2" class="font--bold text-capitalize">Rabu</td>
+                <td rowspan="2" class="font-weight-bold text-capitalize">Rabu</td>
                 <td class="text-center">1</td>
                 <td class="text-center">07:00</td>
                 <td class="text-center">09:00</td>
@@ -149,7 +149,7 @@
 
               <tr>
                 <td rowspan="3" class="text-center px-2">4</td>
-                <td rowspan="3" class="font--bold text-capitalize">Kamis</td>
+                <td rowspan="3" class="font-weight-bold text-capitalize">Kamis</td>
                 <td class="text-center">1</td>
                 <td class="text-center">07:00</td>
                 <td class="text-center">09:00</td>
@@ -174,7 +174,7 @@
 
               <tr>
                 <td rowspan="2" class="text-center px-2">5</td>
-                <td rowspan="2" class="font--bold text-capitalize">Jum'at</td>
+                <td rowspan="2" class="font-weight-bold text-capitalize">Jum'at</td>
                 <td class="text-center">1</td>
                 <td class="text-center">07:00</td>
                 <td class="text-center">09:00</td>

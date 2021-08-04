@@ -92,7 +92,7 @@
               <tr>
                 <td class="text-center px-1">1</td>
                 <td class="pr-0">4891203526</td>
-                <td class="font--bold text-capitalize">Dwi Rahmawati</td>
+                <td class="font-weight-bold text-capitalize">Dwi Rahmawati</td>
                 <td class="text-capitalize">berisikan judul tugas akhir mahasiswa</td>
                 <td>
                   <span class="iconify color--success" data-icon="akar-icons:circle-check-fill"
@@ -104,7 +104,7 @@
               <tr>
                 <td class="text-center px-1">2</td>
                 <td class="pr-0">4891203526</td>
-                <td class="font--bold text-capitalize">Dwi Rahmawati</td>
+                <td class="font-weight-bold text-capitalize">Dwi Rahmawati</td>
                 <td class="text-capitalize">berisikan judul tugas akhir mahasiswa</td>
                 <td>
                   <span class="iconify color--success" data-icon="akar-icons:circle-check-fill"
@@ -116,7 +116,7 @@
               <tr>
                 <td class="text-center px-1">2</td>
                 <td class="pr-0">4891203526</td>
-                <td class="font--bold text-capitalize">Dwi Rahmawati</td>
+                <td class="font-weight-bold text-capitalize">Dwi Rahmawati</td>
                 <td class="text-capitalize">berisikan judul tugas akhir mahasiswa</td>
                 <td>
                   <span class="iconify color--danger" data-icon="bi:x-circle-fill" data-inline="true"></span>

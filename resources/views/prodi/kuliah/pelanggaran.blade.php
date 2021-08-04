@@ -103,7 +103,7 @@
               <tr>
                 <td class="text-center">13 Juli 2021</td>
                 <td>4891203526</td>
-                <td class="font--bold text-capitalize">Dwi Rahmawati</td>
+                <td class="font-weight-bold text-capitalize">Dwi Rahmawati</td>
                 <td class="text-capitalize">berisi penjelasan pelanggaran</td>
                 <td class="text-center">2</td>
                 <td class="text-center">
@@ -115,7 +115,7 @@
               <tr>
                 <td class="text-center">13 Juli 2021</td>
                 <td>4891203526</td>
-                <td class="font--bold text-capitalize">Dwi Rahmawati</td>
+                <td class="font-weight-bold text-capitalize">Dwi Rahmawati</td>
                 <td class="text-capitalize">berisi penjelasan pelanggaran</td>
                 <td class="text-center">2</td>
                 <td class="text-center">
@@ -127,7 +127,7 @@
               <tr>
                 <td class="text-center">13 Juli 2021</td>
                 <td>4891203526</td>
-                <td class="font--bold text-capitalize">Dwi Rahmawati</td>
+                <td class="font-weight-bold text-capitalize">Dwi Rahmawati</td>
                 <td class="text-capitalize">berisi penjelasan pelanggaran</td>
                 <td class="text-center">2</td>
                 <td class="text-center">
@@ -139,7 +139,7 @@
               <tr>
                 <td class="text-center">13 Juli 2021</td>
                 <td>4891203526</td>
-                <td class="font--bold text-capitalize">Dwi Rahmawati</td>
+                <td class="font-weight-bold text-capitalize">Dwi Rahmawati</td>
                 <td class="text-capitalize">berisi penjelasan pelanggaran</td>
                 <td class="text-center">2</td>
                 <td class="text-center">
@@ -151,7 +151,7 @@
               <tr>
                 <td class="text-center">13 Juli 2021</td>
                 <td>4891203526</td>
-                <td class="font--bold text-capitalize">Dwi Rahmawati</td>
+                <td class="font-weight-bold text-capitalize">Dwi Rahmawati</td>
                 <td class="text-capitalize">berisi penjelasan pelanggaran</td>
                 <td class="text-center">2</td>
                 <td class="text-center">
@@ -163,7 +163,7 @@
               <tr>
                 <td class="text-center">13 Juli 2021</td>
                 <td>4891203526</td>
-                <td class="font--bold text-capitalize">Dwi Rahmawati</td>
+                <td class="font-weight-bold text-capitalize">Dwi Rahmawati</td>
                 <td class="text-capitalize">berisi penjelasan pelanggaran</td>
                 <td class="text-center">2</td>
                 <td class="text-center">
@@ -175,7 +175,7 @@
               <tr>
                 <td class="text-center">13 Juli 2021</td>
                 <td>4891203526</td>
-                <td class="font--bold text-capitalize">Dwi Rahmawati</td>
+                <td class="font-weight-bold text-capitalize">Dwi Rahmawati</td>
                 <td class="text-capitalize">berisi penjelasan pelanggaran</td>
                 <td class="text-center">2</td>
                 <td class="text-center">

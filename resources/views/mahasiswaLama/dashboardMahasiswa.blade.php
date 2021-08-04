@@ -70,28 +70,28 @@
 
             <tbody class="table-body">
               <tr>
-                <td class="font--bold wordwrap">Pengantar perkuliahan II</td>
+                <td class="font-weight-bold wordwrap">Pengantar perkuliahan II</td>
                 <td class="wordwrap">Prof.Seno Prasetya,drg.,SU.,Ph.D., Sp.KGA(K)</td>
                 <td class="text-center">KGA12</td>
                 <td class="text-center">08:00</td>
               </tr>
 
               <tr>
-                <td class="font--bold wordwrap">Matematika Dasar</td>
+                <td class="font-weight-bold wordwrap">Matematika Dasar</td>
                 <td class="wordwrap">Dr. Amin Suyitno, M.Pd</td>
                 <td class="text-center">MT001</td>
                 <td class="text-center">12:00</td>
               </tr>
 
               <tr>
-                <td class="font--bold wordwrap">Bahasa Inggris</td>
+                <td class="font-weight-bold wordwrap">Bahasa Inggris</td>
                 <td class="wordwrap">Dr. Pradana Putra, M.Pd</td>
                 <td class="text-center">Lang02</td>
                 <td class="text-center">14:00</td>
               </tr>
 
               <tr>
-                <td class="font--bold wordwrap">Pengantar perkuliahan II</td>
+                <td class="font-weight-bold wordwrap">Pengantar perkuliahan II</td>
                 <td class="wordwrap">Prawati Nuraini,drg.M.Kes.,SpKGA(K)</td>
                 <td class="text-center">KGA12</td>
                 <td class="text-center">16:00</td>

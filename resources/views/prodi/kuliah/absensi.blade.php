@@ -102,7 +102,7 @@
               <tr>
                 <td class="text-center">13 Juli 2021</td>
                 <td>4891203526</td>
-                <td class="font--bold text-capitalize">Dwi Rahmawati</td>
+                <td class="font-weight-bold text-capitalize">Dwi Rahmawati</td>
                 <td class="text-center">Ilmu gigi</td>
                 <td class="text-center">12:14</td>
                 <td class="text-center">13:00</td>
@@ -114,7 +114,7 @@
               <tr>
                 <td class="text-center">13 Juli 2021</td>
                 <td>4891203526</td>
-                <td class="font--bold text-capitalize">Dwi Rahmawati</td>
+                <td class="font-weight-bold text-capitalize">Dwi Rahmawati</td>
                 <td class="text-center">Ilmu gigi</td>
                 <td class="text-center">12:14</td>
                 <td class="text-center">13:00</td>
@@ -126,7 +126,7 @@
               <tr>
                 <td class="text-center">13 Juli 2021</td>
                 <td>4891203526</td>
-                <td class="font--bold text-capitalize">indah pratiwi</td>
+                <td class="font-weight-bold text-capitalize">indah pratiwi</td>
                 <td class="text-center">Ilmu gigi</td>
                 <td class="text-center">12:17</td>
                 <td class="text-center">13:00</td>
@@ -138,7 +138,7 @@
               <tr>
                 <td class="text-center">13 Juli 2021</td>
                 <td>4891203526</td>
-                <td class="font--bold text-capitalize">indah pratiwi</td>
+                <td class="font-weight-bold text-capitalize">indah pratiwi</td>
                 <td class="text-center">Ilmu gigi</td>
                 <td class="text-center">12:17</td>
                 <td class="text-center">13:00</td>
@@ -150,7 +150,7 @@
               <tr>
                 <td class="text-center">13 Juli 2021</td>
                 <td>4891203526</td>
-                <td class="font--bold text-capitalize">indah pratiwi</td>
+                <td class="font-weight-bold text-capitalize">indah pratiwi</td>
                 <td class="text-center">Ilmu gigi</td>
                 <td class="text-center">12:17</td>
                 <td class="text-center">13:00</td>
@@ -162,7 +162,7 @@
               <tr>
                 <td class="text-center">13 Juli 2021</td>
                 <td>4891203526</td>
-                <td class="font--bold text-capitalize">indah pratiwi</td>
+                <td class="font-weight-bold text-capitalize">indah pratiwi</td>
                 <td class="text-center">Ilmu gigi</td>
                 <td class="text-center">12:17</td>
                 <td class="text-center">13:00</td>
@@ -174,7 +174,7 @@
               <tr>
                 <td class="text-center">13 Juli 2021</td>
                 <td>4891203526</td>
-                <td class="font--bold text-capitalize">indah pratiwi</td>
+                <td class="font-weight-bold text-capitalize">indah pratiwi</td>
                 <td class="text-center">Ilmu gigi</td>
                 <td class="text-center">12:17</td>
                 <td class="text-center">13:00</td>

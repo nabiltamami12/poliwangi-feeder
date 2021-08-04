@@ -91,7 +91,7 @@
             <tbody class="table-body">
               <tr>
                 <td class="text-center px-2">1</td>
-                <td class="font--bold text-capitalize">Ilmu gigi I</td>
+                <td class="font-weight-bold text-capitalize">Ilmu gigi I</td>
                 <td class="text-center">G001</td>
                 <td class="text-center">24</td>
                 <td class="text-center">
@@ -104,7 +104,7 @@
 
               <tr>
                 <td class="text-center px-2">2</td>
-                <td class="font--bold text-capitalize">Ilmu gigi I</td>
+                <td class="font-weight-bold text-capitalize">Ilmu gigi I</td>
                 <td class="text-center">G002</td>
                 <td class="text-center">40</td>
                 <td class="text-center">
@@ -117,7 +117,7 @@
 
               <tr>
                 <td class="text-center px-2">3</td>
-                <td class="font--bold text-capitalize">Ilmu gigi I</td>
+                <td class="font-weight-bold text-capitalize">Ilmu gigi I</td>
                 <td class="text-center">G003</td>
                 <td class="text-center">24</td>
                 <td class="text-center">
@@ -130,7 +130,7 @@
 
               <tr>
                 <td class="text-center px-2">4</td>
-                <td class="font--bold text-capitalize">Ilmu gigi I</td>
+                <td class="font-weight-bold text-capitalize">Ilmu gigi I</td>
                 <td class="text-center">G004</td>
                 <td class="text-center">45</td>
                 <td class="text-center">
@@ -143,7 +143,7 @@
 
               <tr>
                 <td class="text-center px-2">5</td>
-                <td class="font--bold text-capitalize">Ilmu gigi I</td>
+                <td class="font-weight-bold text-capitalize">Ilmu gigi I</td>
                 <td class="text-center">G005</td>
                 <td class="text-center">35</td>
                 <td class="text-center">
@@ -156,7 +156,7 @@
 
               <tr>
                 <td class="text-center px-2">6</td>
-                <td class="font--bold text-capitalize">Ilmu gigi I</td>
+                <td class="font-weight-bold text-capitalize">Ilmu gigi I</td>
                 <td class="text-center">G006</td>
                 <td class="text-center">40</td>
                 <td class="text-center">
@@ -169,7 +169,7 @@
 
               <tr>
                 <td class="text-center px-2">7</td>
-                <td class="font--bold text-capitalize">Ilmu gigi I</td>
+                <td class="font-weight-bold text-capitalize">Ilmu gigi I</td>
                 <td class="text-center">G007</td>
                 <td class="text-center">50</td>
                 <td class="text-center">
@@ -182,7 +182,7 @@
 
               <tr>
                 <td class="text-center px-2">8</td>
-                <td class="font--bold text-capitalize">Ilmu gigi I</td>
+                <td class="font-weight-bold text-capitalize">Ilmu gigi I</td>
                 <td class="text-center">G008</td>
                 <td class="text-center">50</td>
                 <td class="text-center">
@@ -195,7 +195,7 @@
 
               <tr>
                 <td class="text-center px-2">9</td>
-                <td class="font--bold text-capitalize">Ilmu gigi I</td>
+                <td class="font-weight-bold text-capitalize">Ilmu gigi I</td>
                 <td class="text-center">G009</td>
                 <td class="text-center">50</td>
                 <td class="text-center">

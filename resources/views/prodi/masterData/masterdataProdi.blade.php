@@ -88,7 +88,7 @@
             <tbody class="table-body">
               <tr>
                 <td class="text-center px-2">1</td>
-                <td class="font--bold text-capitalize">D3 Teknik Sipil</td>
+                <td class="font-weight-bold text-capitalize">D3 Teknik Sipil</td>
                 <td class="text-center">
                   <a href="/prodi/masterdata/dataprodi/updatedata"><span class="iconify edit-icon"
                       data-icon="bx:bx-edit-alt" data-inline="true"></span></a>
@@ -99,7 +99,7 @@
 
               <tr>
                 <td class="text-center px-2">2</td>
-                <td class="font--bold text-capitalize">D3 Teknik Mesin</td>
+                <td class="font-weight-bold text-capitalize">D3 Teknik Mesin</td>
                 <td class="text-center">
                   <a href="/prodi/masterdata/dataprodi/updatedata"><span class="iconify edit-icon"
                       data-icon="bx:bx-edit-alt" data-inline="true"></span></a>
@@ -110,7 +110,7 @@
 
               <tr>
                 <td class="text-center px-2">3</td>
-                <td class="font--bold text-capitalize">D3 Teknik Informatika</td>
+                <td class="font-weight-bold text-capitalize">D3 Teknik Informatika</td>
                 <td class="text-center">
                   <a href="/prodi/masterdata/dataprodi/updatedata"><span class="iconify edit-icon"
                       data-icon="bx:bx-edit-alt" data-inline="true"></span></a>
@@ -121,7 +121,7 @@
 
               <tr>
                 <td class="text-center px-2">4</td>
-                <td class="font--bold text-capitalize">D4 Agribisnis</td>
+                <td class="font-weight-bold text-capitalize">D4 Agribisnis</td>
                 <td class="text-center">
                   <a href="/prodi/masterdata/dataprodi/updatedata"><span class="iconify edit-icon"
                       data-icon="bx:bx-edit-alt" data-inline="true"></span></a>
@@ -132,7 +132,7 @@
 
               <tr>
                 <td class="text-center px-2">5</td>
-                <td class="font--bold text-capitalize">D4 Manajemen Bisnis Pariwisata</td>
+                <td class="font-weight-bold text-capitalize">D4 Manajemen Bisnis Pariwisata</td>
                 <td class="text-center">
                   <a href="/prodi/masterdata/dataprodi/updatedata"><span class="iconify edit-icon"
                       data-icon="bx:bx-edit-alt" data-inline="true"></span></a>
@@ -143,7 +143,7 @@
 
               <tr>
                 <td class="text-center px-2">6</td>
-                <td class="font--bold text-capitalize">D4 Teknik Pengolahan Hasil Ternak</td>
+                <td class="font-weight-bold text-capitalize">D4 Teknik Pengolahan Hasil Ternak</td>
                 <td class="text-center">
                   <a href="/prodi/masterdata/dataprodi/updatedata"><span class="iconify edit-icon"
                       data-icon="bx:bx-edit-alt" data-inline="true"></span></a>
@@ -154,7 +154,7 @@
 
               <tr>
                 <td class="text-center px-2">7</td>
-                <td class="font--bold text-capitalize">D4 Teknik Manufaktur Perkapalan.</td>
+                <td class="font-weight-bold text-capitalize">D4 Teknik Manufaktur Perkapalan.</td>
                 <td class="text-center">
                   <a href="/prodi/masterdata/dataprodi/updatedata"><span class="iconify edit-icon"
                       data-icon="bx:bx-edit-alt" data-inline="true"></span></a>

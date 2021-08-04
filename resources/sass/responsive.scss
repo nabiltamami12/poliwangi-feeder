@@ -78,35 +78,24 @@
         }
     }
 
-    #form_cuti {
-        .form-input {
-            .form-group:nth-child(odd) {
-                padding-left: 0;
-                padding-right: 0;
-            }
-            .form-group:nth-child(even) {
-                padding-left: 0;
-                padding-right: 0;
-            }
-        }
-
-        .form-cuti {
-            .form-group {
-                padding: 0 0;
-            }
-            .form-row:nth-child(3) {
-                margin-top: 16px;
-            }
-            .form-group:nth-child(2) {
-                padding-left: 0;
-                padding-right: 0;
-            }
-            .padding-group {
-                padding-left: 0;
-                padding-right: 0;
-            }
-        }
-    }
+    // #form_cuti {
+    //     .form-cuti {
+    //         .form-group {
+    //             padding: 0 0;
+    //         }
+    //         .form-row:nth-child(3) {
+    //             margin-top: 16px;
+    //         }
+    //         .form-group:nth-child(2) {
+    //             padding-left: 0;
+    //             padding-right: 0;
+    //         }
+    //         .padding-group {
+    //             padding-left: 0;
+    //             padding-right: 0;
+    //         }
+    //     }
+    // }
 
     #tahapan {
         .card-form {
@@ -144,7 +133,8 @@
     }
 
     .login_page,
-    .register_page {
+    .register_page,
+    .pmbGenerateVA_page {
         .card {
             .card-body {
                 padding: 1.5rem 1rem;
@@ -181,7 +171,8 @@
     }
 
     .login_page,
-    .register_page {
+    .register_page,
+    .pmbGenerateVA_page {
         .logo {
             width: 20%;
         }

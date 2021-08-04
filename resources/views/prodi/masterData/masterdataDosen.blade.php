@@ -94,7 +94,7 @@
               <tr>
                 <td class="text-center px-2">1</td>
                 <td class="text-center">4891203526</td>
-                <td class="font--bold text-capitalize pl-2">dwi rahmawati</td>
+                <td class="font-weight-bold text-capitalize pl-2">dwi rahmawati</td>
                 <td class="text-center">04/06/2001</td>
                 <td class="text-center">081469785240</td>
                 <td class="text-center text-lowercase">Dwi.rahma@gmail.com</td>
@@ -109,7 +109,7 @@
               <tr>
                 <td class="text-center px-2">2</td>
                 <td class="text-center">4892062262</td>
-                <td class="font--bold text-capitalize pl-2">januar pratama</td>
+                <td class="font-weight-bold text-capitalize pl-2">januar pratama</td>
                 <td class="text-center">24/12/2002</td>
                 <td class="text-center">087562986265</td>
                 <td class="text-center text-lowercase">januar2412@gmail.com</td>
@@ -124,7 +124,7 @@
               <tr>
                 <td class="text-center px-2">3</td>
                 <td class="text-center">4892062262</td>
-                <td class="font--bold text-capitalize pl-2">januar pratama</td>
+                <td class="font-weight-bold text-capitalize pl-2">januar pratama</td>
                 <td class="text-center">24/12/2002</td>
                 <td class="text-center">087562986265</td>
                 <td class="text-center text-lowercase">januar2412@gmail.com</td>
@@ -139,7 +139,7 @@
               <tr>
                 <td class="text-center px-2">4</td>
                 <td class="text-center">4892062262</td>
-                <td class="font--bold text-capitalize pl-2">januar pratama</td>
+                <td class="font-weight-bold text-capitalize pl-2">januar pratama</td>
                 <td class="text-center">24/12/2002</td>
                 <td class="text-center">087562986265</td>
                 <td class="text-center text-lowercase">januar2412@gmail.com</td>
@@ -154,7 +154,7 @@
               <tr>
                 <td class="text-center px-2">5</td>
                 <td class="text-center">4892062262</td>
-                <td class="font--bold text-capitalize pl-2">januar pratama</td>
+                <td class="font-weight-bold text-capitalize pl-2">januar pratama</td>
                 <td class="text-center">24/12/2002</td>
                 <td class="text-center">087562986265</td>
                 <td class="text-center text-lowercase">januar2412@gmail.com</td>
@@ -169,7 +169,7 @@
               <tr>
                 <td class="text-center px-2">6</td>
                 <td class="text-center">4892062262</td>
-                <td class="font--bold text-capitalize pl-2">januar pratama</td>
+                <td class="font-weight-bold text-capitalize pl-2">januar pratama</td>
                 <td class="text-center">24/12/2002</td>
                 <td class="text-center">087562986265</td>
                 <td class="text-center text-lowercase">januar2412@gmail.com</td>
@@ -184,7 +184,7 @@
               <tr>
                 <td class="text-center px-2">7</td>
                 <td class="text-center">4892062262</td>
-                <td class="font--bold text-capitalize pl-2">januar pratama</td>
+                <td class="font-weight-bold text-capitalize pl-2">januar pratama</td>
                 <td class="text-center">24/12/2002</td>
                 <td class="text-center">087562986265</td>
                 <td class="text-center text-lowercase">januar2412@gmail.com</td>
@@ -199,7 +199,7 @@
               <tr>
                 <td class="text-center px-2">8</td>
                 <td class="text-center">4892062262</td>
-                <td class="font--bold text-capitalize pl-2">januar pratama</td>
+                <td class="font-weight-bold text-capitalize pl-2">januar pratama</td>
                 <td class="text-center">24/12/2002</td>
                 <td class="text-center">087562986265</td>
                 <td class="text-center text-lowercase">januar2412@gmail.com</td>
@@ -214,7 +214,7 @@
               <tr>
                 <td class="text-center px-2">9</td>
                 <td class="text-center">4892062262</td>
-                <td class="font--bold text-capitalize pl-2">januar pratama</td>
+                <td class="font-weight-bold text-capitalize pl-2">januar pratama</td>
                 <td class="text-center">24/12/2002</td>
                 <td class="text-center">087562986265</td>
                 <td class="text-center text-lowercase">januar2412@gmail.com</td>

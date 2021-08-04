@@ -91,7 +91,7 @@
               <tr>
                 <td class="text-center"><input type="checkbox" name="pilih1" id="pilih1"></td>
                 <td>4891203526</td>
-                <td class="font--bold text-capitalize">dwi rahmawati</td>
+                <td class="font-weight-bold text-capitalize">dwi rahmawati</td>
                 <td class="text-center">3</td>
                 <td class="text-center">2019</td>
                 <td class="text-lowercase">Ilmu Kedokteran Gigi Anak</td>
@@ -100,7 +100,7 @@
               <tr>
                 <td class="text-center"><input type="checkbox" name="pilih1" id="pilih1"></td>
                 <td>4891203526</td>
-                <td class="font--bold text-capitalize">dwi rahmawati</td>
+                <td class="font-weight-bold text-capitalize">dwi rahmawati</td>
                 <td class="text-center">1</td>
                 <td class="text-center">2019</td>
                 <td class="text-lowercase">Ilmu Kedokteran Gigi Anak</td>
@@ -109,7 +109,7 @@
               <tr>
                 <td class="text-center"><input type="checkbox" name="pilih1" id="pilih1"></td>
                 <td>4891203526</td>
-                <td class="font--bold text-capitalize">dwi rahmawati</td>
+                <td class="font-weight-bold text-capitalize">dwi rahmawati</td>
                 <td class="text-center">3</td>
                 <td class="text-center">2019</td>
                 <td class="text-lowercase">Ilmu Kedokteran Gigi Anak</td>
@@ -118,7 +118,7 @@
               <tr>
                 <td class="text-center"><input type="checkbox" name="pilih1" id="pilih1"></td>
                 <td>4891203526</td>
-                <td class="font--bold text-capitalize">dwi rahmawati</td>
+                <td class="font-weight-bold text-capitalize">dwi rahmawati</td>
                 <td class="text-center">3</td>
                 <td class="text-center">2019</td>
                 <td class="text-lowercase">Ilmu Kedokteran Gigi Anak</td>
@@ -127,7 +127,7 @@
               <tr>
                 <td class="text-center"><input type="checkbox" name="pilih1" id="pilih1"></td>
                 <td>4891203526</td>
-                <td class="font--bold text-capitalize">dwi rahmawati</td>
+                <td class="font-weight-bold text-capitalize">dwi rahmawati</td>
                 <td class="text-center">1</td>
                 <td class="text-center">2019</td>
                 <td class="text-lowercase">Ilmu Kedokteran Gigi Anak</td>
@@ -136,7 +136,7 @@
               <tr>
                 <td class="text-center"><input type="checkbox" name="pilih1" id="pilih1"></td>
                 <td>4891203526</td>
-                <td class="font--bold text-capitalize">dwi rahmawati</td>
+                <td class="font-weight-bold text-capitalize">dwi rahmawati</td>
                 <td class="text-center">1</td>
                 <td class="text-center">2019</td>
                 <td class="text-lowercase">Ilmu Kedokteran Gigi Anak</td>
@@ -145,7 +145,7 @@
               <tr>
                 <td class="text-center"><input type="checkbox" name="pilih1" id="pilih1"></td>
                 <td>4891203526</td>
-                <td class="font--bold text-capitalize">dwi rahmawati</td>
+                <td class="font-weight-bold text-capitalize">dwi rahmawati</td>
                 <td class="text-center">1</td>
                 <td class="text-center">2019</td>
                 <td class="text-lowercase">Ilmu Kedokteran Gigi Anak</td>

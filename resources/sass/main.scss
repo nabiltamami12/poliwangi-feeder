@@ -182,7 +182,7 @@ nav#navbar {
         padding: 10px 16px;
         background-color: $button-blue;
         border-radius: 0.5rem;
-        border: 0;
+        border: 1px solid $button-blue;
     }
 
     #pengumuman {
@@ -303,7 +303,7 @@ nav#navbar {
             border: 1px solid #999999;
             border-radius: 0.5rem;
             padding: 0 10px;
-            background-image: url("https://api.iconify.design/bx/bx-chevron-down.svg?color=#041F2F");
+            background-image: url("https://api.iconify.design/bx/bx-chevron-down.svg?color=%23041F2F");
             background-position: calc(100% - 10px), calc(100% - 10px);
             background-repeat: no-repeat;
             appearance: none;
@@ -384,9 +384,6 @@ nav#navbar {
             }
             tr.bordered {
                 border-bottom: 1px solid rgba(153, 153, 153, 0.5);
-            }
-            .font--bold {
-                font-weight: 600;
             }
             .text--blue {
                 color: $button-blue;
@@ -472,15 +469,33 @@ nav#navbar {
         }
     }
 
-    .custom-select {
-        background-image: url("/images/select-droplist.png");
-        background-position: right;
-        background-repeat: no-repeat;
-        background-size: 33px;
-        border-radius: 0.5rem;
-        border-right: 0;
-        border-color: #c4c4c4;
-        @include mixintext(400, 0.875rem, 1.21em, $font-black);
+    .custom_select {
+        position: relative;
+        &::after {
+            content: "";
+            background-image: url("https://api.iconify.design/bx/bx-chevron-down.svg?height=25&color=%23fff");
+            background-repeat: no-repeat;
+            background-position: center;
+            position: absolute;
+            right: 0;
+            top: 0;
+            pointer-events: none;
+            background-color: $button-blue;
+            height: 100%;
+            width: 48px;
+            border-radius: 0 0.5rem 0.5rem 0;
+        }
+        select {
+            border-color: #c4c4c4;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            width: 100%;
+            background-image: none;
+        }
+        select::-ms-expand {
+            display: none;
+        }
     }
 
     .date_picker {
@@ -525,7 +540,7 @@ nav#navbar {
         border: 1px solid #999999;
         border-radius: 0.5rem;
         padding: 0.5rem 1rem;
-        background-image: url("https://api.iconify.design/bx/bx-chevron-down.svg?color=#041F2F");
+        background-image: url("https://api.iconify.design/bx/bx-chevron-down.svg?color=%23041F2F");
         background-position: calc(100% - 16px), calc(100% - 24px);
         background-repeat: no-repeat;
         appearance: none;

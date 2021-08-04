@@ -88,7 +88,7 @@
             <tbody class="table-body">
               <tr>
                 <td class="text-center px-2">1</td>
-                <td class="font--bold text-capitalize">jurusan 1</td>
+                <td class="font-weight-bold text-capitalize">jurusan 1</td>
                 <td class="text-center">
                   <a href="/prodi/masterdata/datajurusan/updatedata"><span class="iconify edit-icon"
                       data-icon="bx:bx-edit-alt" data-inline="true"></span></a>
@@ -99,7 +99,7 @@
 
               <tr>
                 <td class="text-center px-2">2</td>
-                <td class="font--bold text-capitalize">jurusan 2</td>
+                <td class="font-weight-bold text-capitalize">jurusan 2</td>
                 <td class="text-center">
                   <a href="/prodi/masterdata/datajurusan/updatedata"><span class="iconify edit-icon"
                       data-icon="bx:bx-edit-alt" data-inline="true"></span></a>
@@ -110,7 +110,7 @@
 
               <tr>
                 <td class="text-center px-2">3</td>
-                <td class="font--bold text-capitalize">jurusan 3</td>
+                <td class="font-weight-bold text-capitalize">jurusan 3</td>
                 <td class="text-center">
                   <a href="/prodi/masterdata/datajurusan/updatedata"><span class="iconify edit-icon"
                       data-icon="bx:bx-edit-alt" data-inline="true"></span></a>
@@ -121,7 +121,7 @@
 
               <tr>
                 <td class="text-center px-2">4</td>
-                <td class="font--bold text-capitalize">jurusan 4</td>
+                <td class="font-weight-bold text-capitalize">jurusan 4</td>
                 <td class="text-center">
                   <a href="/prodi/masterdata/datajurusan/updatedata"><span class="iconify edit-icon"
                       data-icon="bx:bx-edit-alt" data-inline="true"></span></a>
@@ -132,7 +132,7 @@
 
               <tr>
                 <td class="text-center px-2">5</td>
-                <td class="font--bold text-capitalize">jurursan 5</td>
+                <td class="font-weight-bold text-capitalize">jurursan 5</td>
                 <td class="text-center">
                   <a href="/prodi/masterdata/datajurusan/updatedata"><span class="iconify edit-icon"
                       data-icon="bx:bx-edit-alt" data-inline="true"></span></a>
@@ -143,7 +143,7 @@
 
               <tr>
                 <td class="text-center px-2">6</td>
-                <td class="font--bold text-capitalize">jurusan 6</td>
+                <td class="font-weight-bold text-capitalize">jurusan 6</td>
                 <td class="text-center">
                   <a href="/prodi/masterdata/datajurusan/updatedata"><span class="iconify edit-icon"
                       data-icon="bx:bx-edit-alt" data-inline="true"></span></a>
@@ -154,7 +154,7 @@
 
               <tr>
                 <td class="text-center px-2">7</td>
-                <td class="font--bold text-capitalize">jurusan 7</td>
+                <td class="font-weight-bold text-capitalize">jurusan 7</td>
                 <td class="text-center">
                   <a href="/prodi/masterdata/datajurusan/updatedata"><span class="iconify edit-icon"
                       data-icon="bx:bx-edit-alt" data-inline="true"></span></a>
@@ -165,7 +165,7 @@
 
               <tr>
                 <td class="text-center px-2">8</td>
-                <td class="font--bold text-capitalize">jurusan 8</td>
+                <td class="font-weight-bold text-capitalize">jurusan 8</td>
                 <td class="text-center">
                   <a href="/prodi/masterdata/datajurusan/updatedata"><span class="iconify edit-icon"
                       data-icon="bx:bx-edit-alt" data-inline="true"></span></a>
@@ -176,7 +176,7 @@
 
               <tr>
                 <td class="text-center px-2">9</td>
-                <td class="font--bold text-capitalize">jurusan 9</td>
+                <td class="font-weight-bold text-capitalize">jurusan 9</td>
                 <td class="text-center">
                   <a href="/prodi/masterdata/datajurusan/updatedata"><span class="iconify edit-icon"
                       data-icon="bx:bx-edit-alt" data-inline="true"></span></a>

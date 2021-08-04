@@ -111,7 +111,7 @@
               <tr>
                 <td class="text-center px-2">351321090</td>
                 <td class="text-capitalize">fatimah azzahra</td>
-                <td class="font--bold text-capitalize">Bahasa Inggris</td>
+                <td class="font-weight-bold text-capitalize">Bahasa Inggris</td>
                 <td>tugas harian</td>
                 <td class="text-center">98</td>
                 <td class="text-center">
@@ -123,7 +123,7 @@
               <tr>
                 <td class="text-center px-2">351321090</td>
                 <td class="text-capitalize">fatimah azzahra</td>
-                <td class="font--bold text-capitalize">Bahasa Indonesia</td>
+                <td class="font-weight-bold text-capitalize">Bahasa Indonesia</td>
                 <td>quiz</td>
                 <td class="text-center">67</td>
                 <td class="text-center">
@@ -135,7 +135,7 @@
               <tr>
                 <td class="text-center px-2">351321090</td>
                 <td class="text-capitalize">fatimah azzahra</td>
-                <td class="font--bold text-capitalize">Pengantar perkuliahan I</td>
+                <td class="font-weight-bold text-capitalize">Pengantar perkuliahan I</td>
                 <td>tugas harian</td>
                 <td class="text-center">78</td>
                 <td class="text-center">
@@ -147,7 +147,7 @@
               <tr>
                 <td class="text-center px-2">351321090</td>
                 <td class="text-capitalize">fatimah azzahra</td>
-                <td class="font--bold text-capitalize">Pengantar perkuliahan II</td>
+                <td class="font-weight-bold text-capitalize">Pengantar perkuliahan II</td>
                 <td>tugas harian</td>
                 <td class="text-center">88</td>
                 <td class="text-center">
@@ -159,7 +159,7 @@
               <tr>
                 <td class="text-center px-2">351321090</td>
                 <td class="text-capitalize">fatimah azzahra</td>
-                <td class="font--bold text-capitalize">Matematika Dasar</td>
+                <td class="font-weight-bold text-capitalize">Matematika Dasar</td>
                 <td>tugas harian</td>
                 <td class="text-center">84</td>
                 <td class="text-center">
@@ -171,7 +171,7 @@
               <tr>
                 <td class="text-center px-2">351321090</td>
                 <td class="text-capitalize">fatimah azzahra</td>
-                <td class="font--bold text-capitalize">Matematika Lanjutan</td>
+                <td class="font-weight-bold text-capitalize">Matematika Lanjutan</td>
                 <td>tugas harian</td>
                 <td class="text-center">85</td>
                 <td class="text-center">
@@ -183,7 +183,7 @@
               <tr>
                 <td class="text-center px-2">351321090</td>
                 <td class="text-capitalize">fatimah azzahra</td>
-                <td class="font--bold text-capitalize">ilmu gigi I</td>
+                <td class="font-weight-bold text-capitalize">ilmu gigi I</td>
                 <td>tugas harian</td>
                 <td class="text-center">80</td>
                 <td class="text-center">
@@ -195,7 +195,7 @@
               <tr>
                 <td class="text-center px-2">351321090</td>
                 <td class="text-capitalize">fatimah azzahra</td>
-                <td class="font--bold text-capitalize">ilmu gigi II</td>
+                <td class="font-weight-bold text-capitalize">ilmu gigi II</td>
                 <td>quiz</td>
                 <td class="text-center">91</td>
                 <td class="text-center">
@@ -207,7 +207,7 @@
               <tr>
                 <td class="text-center px-2">351321090</td>
                 <td class="text-capitalize">fatimah azzahra</td>
-                <td class="font--bold text-capitalize">ilmu gigi III</td>
+                <td class="font-weight-bold text-capitalize">ilmu gigi III</td>
                 <td>quiz</td>
                 <td class="text-center">74</td>
                 <td class="text-center">

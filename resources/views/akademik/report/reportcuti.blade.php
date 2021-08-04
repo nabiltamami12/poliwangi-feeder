@@ -93,7 +93,7 @@
               <tr>
                 <td class="text-center px-2">1</td>
                 <td>4891203526</td>
-                <td class="font--bold text-capitalize">Dwi Rahmawati</td>
+                <td class="font-weight-bold text-capitalize">Dwi Rahmawati</td>
                 <td class="text-center">04/06/2001</td>
                 <td class="text-center">04/06/2002</td>
                 <td class="wordwrap text-lowercase">disini berisi alasan cuti yang diberikan mahasiswa</td>
@@ -106,7 +106,7 @@
               <tr>
                 <td class="text-center px-2">2</td>
                 <td>4891203526</td>
-                <td class="font--bold text-capitalize">Dwi Rahmawati</td>
+                <td class="font-weight-bold text-capitalize">Dwi Rahmawati</td>
                 <td class="text-center">04/06/2001</td>
                 <td class="text-center">04/06/2002</td>
                 <td class="wordwrap text-lowercase">disini berisi alasan cuti yang diberikan mahasiswa</td>
@@ -119,7 +119,7 @@
               <tr>
                 <td class="text-center px-2">3</td>
                 <td>4891203526</td>
-                <td class="font--bold text-capitalize">Dwi Rahmawati</td>
+                <td class="font-weight-bold text-capitalize">Dwi Rahmawati</td>
                 <td class="text-center">04/06/2001</td>
                 <td class="text-center">04/06/2002</td>
                 <td class="wordwrap text-lowercase">disini berisi alasan cuti yang diberikan mahasiswa</td>
@@ -132,7 +132,7 @@
               <tr>
                 <td class="text-center px-2">4</td>
                 <td>4891203526</td>
-                <td class="font--bold text-capitalize">Dwi Rahmawati</td>
+                <td class="font-weight-bold text-capitalize">Dwi Rahmawati</td>
                 <td class="text-center">04/06/2001</td>
                 <td class="text-center">04/06/2002</td>
                 <td class="wordwrap text-lowercase">disini berisi alasan cuti yang diberikan mahasiswa</td>
@@ -145,7 +145,7 @@
               <tr>
                 <td class="text-center px-2">5</td>
                 <td>4891203526</td>
-                <td class="font--bold text-capitalize">Dwi Rahmawati</td>
+                <td class="font-weight-bold text-capitalize">Dwi Rahmawati</td>
                 <td class="text-center">04/06/2001</td>
                 <td class="text-center">04/06/2002</td>
                 <td class="wordwrap text-lowercase">disini berisi alasan cuti yang diberikan mahasiswa</td>

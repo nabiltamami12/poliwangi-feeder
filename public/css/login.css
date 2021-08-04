@@ -7,19 +7,23 @@
 }
 
 .login_page .bg-default,
-.register_page .bg-default {
+.register_page .bg-default,
+.pmbGenerateVA_page .bg-default {
   background-color: #172b4d !important;
 }
 .login_page .bg-secondary,
-.register_page .bg-secondary {
+.register_page .bg-secondary,
+.pmbGenerateVA_page .bg-secondary {
   background-color: #f7fafc !important;
 }
 .login_page .bg-gradient-primary,
-.register_page .bg-gradient-primary {
+.register_page .bg-gradient-primary,
+.pmbGenerateVA_page .bg-gradient-primary {
   background: linear-gradient(90.18deg, #b2def8 -4.39%, #6f7bf7 132.48%) !important;
 }
 .login_page .header-body h1,
-.register_page .header-body h1 {
+.register_page .header-body h1,
+.pmbGenerateVA_page .header-body h1 {
   font-weight: 600;
   font-size: 1.625rem;
   line-height: 1.22em;
@@ -27,7 +31,8 @@
   margin-top: 1rem;
 }
 .login_page .header-body p,
-.register_page .header-body p {
+.register_page .header-body p,
+.pmbGenerateVA_page .header-body p {
   font-weight: 600;
   font-size: 0.8125rem;
   line-height: 1.22em;
@@ -35,47 +40,53 @@
   margin-top: 0.5rem;
 }
 .login_page .card,
-.register_page .card {
+.register_page .card,
+.pmbGenerateVA_page .card {
   border-radius: 4px;
   position: relative;
 }
 .login_page .card .card-body p,
-.register_page .card .card-body p {
+.register_page .card .card-body p,
+.pmbGenerateVA_page .card .card-body p {
   font-weight: 500;
   font-size: 0.75rem;
   line-height: 1.25em;
   color: #adb5bd;
   margin-bottom: 2rem;
 }
-.login_page .card .card-body .form-control::-moz-placeholder, .register_page .card .card-body .form-control::-moz-placeholder {
+.login_page .card .card-body .form-control::-moz-placeholder, .register_page .card .card-body .form-control::-moz-placeholder, .pmbGenerateVA_page .card .card-body .form-control::-moz-placeholder {
   font-weight: 500;
   font-size: 0.75rem;
   line-height: 1.22em;
   color: #adb5bd;
 }
-.login_page .card .card-body .form-control:-ms-input-placeholder, .register_page .card .card-body .form-control:-ms-input-placeholder {
+.login_page .card .card-body .form-control:-ms-input-placeholder, .register_page .card .card-body .form-control:-ms-input-placeholder, .pmbGenerateVA_page .card .card-body .form-control:-ms-input-placeholder {
   font-weight: 500;
   font-size: 0.75rem;
   line-height: 1.22em;
   color: #adb5bd;
 }
 .login_page .card .card-body .form-control::placeholder,
-.register_page .card .card-body .form-control::placeholder {
+.register_page .card .card-body .form-control::placeholder,
+.pmbGenerateVA_page .card .card-body .form-control::placeholder {
   font-weight: 500;
   font-size: 0.75rem;
   line-height: 1.22em;
   color: #adb5bd;
 }
 .login_page .card .card-body .form-group:first-child,
-.register_page .card .card-body .form-group:first-child {
+.register_page .card .card-body .form-group:first-child,
+.pmbGenerateVA_page .card .card-body .form-group:first-child {
   margin-bottom: 1rem;
 }
 .login_page .card .card-body .input-group,
-.register_page .card .card-body .input-group {
+.register_page .card .card-body .input-group,
+.pmbGenerateVA_page .card .card-body .input-group {
   box-shadow: 1px 2px 10px rgba(0, 0, 0, 0.1);
 }
 .login_page .card .card-body .custom-control-label::before,
-.register_page .card .card-body .custom-control-label::before {
+.register_page .card .card-body .custom-control-label::before,
+.pmbGenerateVA_page .card .card-body .custom-control-label::before {
   position: absolute;
   top: 0;
   display: block;
@@ -88,14 +99,16 @@
   box-shadow: 1px 2px 10px rgba(0, 0, 0, 0.1);
 }
 .login_page .card .card-body .custom-control-label,
-.register_page .card .card-body .custom-control-label {
+.register_page .card .card-body .custom-control-label,
+.pmbGenerateVA_page .card .card-body .custom-control-label {
   font-weight: 500;
   font-size: 0.75rem;
   line-height: 1.2em;
   color: #adb5bd;
 }
 .login_page .card .card-body .btn--blue,
-.register_page .card .card-body .btn--blue {
+.register_page .card .card-body .btn--blue,
+.pmbGenerateVA_page .card .card-body .btn--blue {
   font-weight: 600;
   font-size: 0.75rem;
   line-height: 1.25em;
@@ -104,18 +117,21 @@
   padding: 12px;
 }
 .login_page .register_account,
-.register_page .register_account {
+.register_page .register_account,
+.pmbGenerateVA_page .register_account {
   margin-top: 3rem;
 }
 .login_page .register_account p,
-.register_page .register_account p {
+.register_page .register_account p,
+.pmbGenerateVA_page .register_account p {
   font-weight: 600;
   font-size: 0.8125rem;
   line-height: 1.22em;
   color: #fff;
 }
 .login_page .register_account a,
-.register_page .register_account a {
+.register_page .register_account a,
+.pmbGenerateVA_page .register_account a {
   text-decoration: underline;
 }
 
@@ -194,15 +210,9 @@
 .register_page label span {
   color: #f46a6a;
 }
-.register_page .font-bold {
-  font-weight: 600;
-}
 .register_page .fileUpload-icon {
   font-size: 3rem;
   color: #28a3eb;
-}
-.register_page input[type=file] {
-  display: none;
 }
 .register_page .input-foto-siswa {
   min-height: 230px;
@@ -211,4 +221,93 @@
   justify-content: center;
   border: 1px solid #c4c4c4;
   border-radius: 8px;
+}
+
+.pmbGenerateVA_page .btn--blue {
+  font-weight: 500;
+  font-size: 1rem;
+  line-height: 1.21em;
+  color: #fff;
+  padding: 10px 16px;
+  background-color: #28a3eb;
+  border-radius: 0.5rem;
+  border: 1px solid #28a3eb;
+}
+.pmbGenerateVA_page .card-body {
+  padding: 2.5rem;
+}
+.pmbGenerateVA_page .alert h6 {
+  font-weight: 600;
+  font-size: 1.125rem;
+  line-height: 1.21em;
+  color: #34c38f;
+}
+.pmbGenerateVA_page .alert-success {
+  border: 0;
+  background-color: rgba(52, 195, 143, 0.1);
+}
+.pmbGenerateVA_page .va_aktif label {
+  font-weight: 500;
+  font-size: 1rem;
+  line-height: 1.21em;
+  color: #000;
+}
+.pmbGenerateVA_page .va_aktif .field_kode {
+  position: relative;
+}
+.pmbGenerateVA_page .va_aktif input:-moz-read-only {
+  background-color: #fff;
+  font-weight: 400;
+  font-size: 1.5rem;
+  line-height: 1.21em;
+  color: #000;
+  max-height: 50px;
+}
+.pmbGenerateVA_page .va_aktif input:read-only {
+  background-color: #fff;
+  font-weight: 400;
+  font-size: 1.5rem;
+  line-height: 1.21em;
+  color: #000;
+  max-height: 50px;
+}
+.pmbGenerateVA_page .va_aktif button.salin_kode:hover {
+  background-color: rgba(178, 222, 248, 0.2);
+  border-color: #28a3eb;
+  color: #28a3eb;
+}
+.pmbGenerateVA_page .va_aktif .salin_kode {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 0 0.5rem 0.5rem 0;
+  border-left: 1px solid #c4c4c4;
+}
+.pmbGenerateVA_page .informasi_pembayaran ul {
+  list-style: none;
+}
+.pmbGenerateVA_page .informasi_pembayaran li {
+  font-weight: 400;
+  font-size: 0.875rem;
+  line-height: 1.5em;
+  color: #adb5bd;
+}
+.pmbGenerateVA_page .informasi_pembayaran h6 {
+  font-weight: 600;
+  font-size: 0.75rem;
+  line-height: 1.5em;
+  color: #d10429;
+}
+.pmbGenerateVA_page .total_tagihan p {
+  font-weight: 400;
+  font-size: 0.75rem;
+  line-height: 1.5em;
+  color: #062e46;
+}
+.pmbGenerateVA_page .total_tagihan h1 {
+  font-weight: 700;
+  font-size: 1.375rem;
+  line-height: 0.8em;
+  color: #28a3eb;
 }

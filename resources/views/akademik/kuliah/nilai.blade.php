@@ -111,7 +111,7 @@
               <tr>
                 <td class="text-center p-2">351321090</td>
                 <td class="text-capitalize">fatimah azzahra</td>
-                <td class="font--bold text-capitalize">Bahasa Inggris</td>
+                <td class="font-weight-bold text-capitalize">Bahasa Inggris</td>
                 <td>tugas harian</td>
                 <td>98</td>
                 <td class="text-center">
@@ -123,7 +123,7 @@
               <tr>
                 <td class="text-center p-2">351321090</td>
                 <td class="text-capitalize">fatimah azzahra</td>
-                <td class="font--bold text-capitalize">Bahasa Inggris</td>
+                <td class="font-weight-bold text-capitalize">Bahasa Inggris</td>
                 <td>tugas harian</td>
                 <td>98</td>
                 <td class="text-center">
@@ -135,7 +135,7 @@
               <tr>
                 <td class="text-center p-2">351321090</td>
                 <td class="text-capitalize">fatimah azzahra</td>
-                <td class="font--bold text-capitalize">Bahasa Inggris</td>
+                <td class="font-weight-bold text-capitalize">Bahasa Inggris</td>
                 <td>tugas harian</td>
                 <td>98</td>
                 <td class="text-center">
@@ -147,7 +147,7 @@
               <tr>
                 <td class="text-center p-2">351321090</td>
                 <td class="text-capitalize">fatimah azzahra</td>
-                <td class="font--bold text-capitalize">Bahasa Inggris</td>
+                <td class="font-weight-bold text-capitalize">Bahasa Inggris</td>
                 <td>tugas harian</td>
                 <td>98</td>
                 <td class="text-center">
@@ -159,7 +159,7 @@
               <tr>
                 <td class="text-center p-2">351321090</td>
                 <td class="text-capitalize">fatimah azzahra</td>
-                <td class="font--bold text-capitalize">Bahasa Inggris</td>
+                <td class="font-weight-bold text-capitalize">Bahasa Inggris</td>
                 <td>tugas harian</td>
                 <td>98</td>
                 <td class="text-center">
@@ -171,7 +171,7 @@
               <tr>
                 <td class="text-center p-2">351321090</td>
                 <td class="text-capitalize">fatimah azzahra</td>
-                <td class="font--bold text-capitalize">Bahasa Inggris</td>
+                <td class="font-weight-bold text-capitalize">Bahasa Inggris</td>
                 <td>tugas harian</td>
                 <td>98</td>
                 <td class="text-center">
@@ -183,7 +183,7 @@
               <tr>
                 <td class="text-center p-2">351321090</td>
                 <td class="text-capitalize">fatimah azzahra</td>
-                <td class="font--bold text-capitalize">Bahasa Inggris</td>
+                <td class="font-weight-bold text-capitalize">Bahasa Inggris</td>
                 <td>tugas harian</td>
                 <td>98</td>
                 <td class="text-center">
@@ -195,7 +195,7 @@
               <tr>
                 <td class="text-center p-2">351321090</td>
                 <td class="text-capitalize">fatimah azzahra</td>
-                <td class="font--bold text-capitalize">Bahasa Inggris</td>
+                <td class="font-weight-bold text-capitalize">Bahasa Inggris</td>
                 <td>tugas harian</td>
                 <td>98</td>
                 <td class="text-center">
@@ -207,7 +207,7 @@
               <tr>
                 <td class="text-center p-2">351321090</td>
                 <td class="text-capitalize">fatimah azzahra</td>
-                <td class="font--bold text-capitalize">Bahasa Inggris</td>
+                <td class="font-weight-bold text-capitalize">Bahasa Inggris</td>
                 <td>tugas harian</td>
                 <td>98</td>
                 <td class="text-center">

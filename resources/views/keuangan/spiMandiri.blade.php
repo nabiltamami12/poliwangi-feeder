@@ -72,7 +72,7 @@
             <tbody class="table-body">
               <tr>
                 <td class="text-center px-2">1</td>
-                <td class="font--bold text-capitalize">Jessica Charisa</td>
+                <td class="font-weight-bold text-capitalize">Jessica Charisa</td>
                 <td class="text-center">4891203526</td>
                 <td class="text-center">13 Juli 2021</td>
                 <td class="text-center">Rp. 5.000.000</td>
@@ -85,7 +85,7 @@
 
               <tr>
                 <td class="text-center px-2">2</td>
-                <td class="font--bold text-capitalize">John Martin</td>
+                <td class="font-weight-bold text-capitalize">John Martin</td>
                 <td class="text-center">4891203526</td>
                 <td class="text-center">13 Juli 2021</td>
                 <td class="text-center">Rp. 5.000.000</td>
@@ -98,7 +98,7 @@
 
               <tr>
                 <td class="text-center px-2">3</td>
-                <td class="font--bold text-capitalize">Farhan Pratama</td>
+                <td class="font-weight-bold text-capitalize">Farhan Pratama</td>
                 <td class="text-center">4891203526</td>
                 <td class="text-center">13 Juli 2021</td>
                 <td class="text-center">Rp. 5.000.000</td>
@@ -111,7 +111,7 @@
 
               <tr>
                 <td class="text-center px-2">4</td>
-                <td class="font--bold text-capitalize">Widya Astuti</td>
+                <td class="font-weight-bold text-capitalize">Widya Astuti</td>
                 <td class="text-center">4891203526</td>
                 <td class="text-center">13 Juli 2021</td>
                 <td class="text-center">Rp. 5.000.000</td>
@@ -124,7 +124,7 @@
 
               <tr>
                 <td class="text-center px-2">5</td>
-                <td class="font--bold text-capitalize">Jessica Charisa</td>
+                <td class="font-weight-bold text-capitalize">Jessica Charisa</td>
                 <td class="text-center">4891203526</td>
                 <td class="text-center">13 Juli 2021</td>
                 <td class="text-center">Rp. 5.000.000</td>
@@ -137,7 +137,7 @@
 
               <tr>
                 <td class="text-center px-2">6</td>
-                <td class="font--bold text-capitalize">Jessica Charisa</td>
+                <td class="font-weight-bold text-capitalize">Jessica Charisa</td>
                 <td class="text-center">4891203526</td>
                 <td class="text-center">13 Juli 2021</td>
                 <td class="text-center">Rp. 5.000.000</td>
@@ -150,7 +150,7 @@
 
               <tr>
                 <td class="text-center px-2">7</td>
-                <td class="font--bold text-capitalize">Jessica Charisa</td>
+                <td class="font-weight-bold text-capitalize">Jessica Charisa</td>
                 <td class="text-center">4891203526</td>
                 <td class="text-center">13 Juli 2021</td>
                 <td class="text-center">Rp. 5.000.000</td>
@@ -163,7 +163,7 @@
 
               <tr>
                 <td class="text-center px-2">8</td>
-                <td class="font--bold text-capitalize">Jessica Charisa</td>
+                <td class="font-weight-bold text-capitalize">Jessica Charisa</td>
                 <td class="text-center">4891203526</td>
                 <td class="text-center">13 Juli 2021</td>
                 <td class="text-center">Rp. 5.000.000</td>
@@ -176,7 +176,7 @@
 
               <tr>
                 <td class="text-center px-2">9</td>
-                <td class="font--bold text-capitalize">Jessica Charisa</td>
+                <td class="font-weight-bold text-capitalize">Jessica Charisa</td>
                 <td class="text-center">4891203526</td>
                 <td class="text-center">13 Juli 2021</td>
                 <td class="text-center">Rp. 5.000.000</td>

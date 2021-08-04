@@ -23,9 +23,77 @@
   color: #041f2f;
 }
 
+.va_aktif label {
+  font-weight: 500;
+  font-size: 1rem;
+  line-height: 1.21em;
+  color: #000;
+}
+.va_aktif .field_kode {
+  position: relative;
+}
+.va_aktif input:-moz-read-only {
+  background-color: #fff;
+  font-weight: 400;
+  font-size: 1.5rem;
+  line-height: 1.21em;
+  color: #000;
+  max-height: 50px;
+}
+.va_aktif input:read-only {
+  background-color: #fff;
+  font-weight: 400;
+  font-size: 1.5rem;
+  line-height: 1.21em;
+  color: #000;
+  max-height: 50px;
+}
+.va_aktif button.salin_kode:hover {
+  background-color: rgba(178, 222, 248, 0.2);
+  border-color: #28a3eb;
+  color: #28a3eb;
+}
+.va_aktif .salin_kode {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 0 0.5rem 0.5rem 0;
+  border-left: 1px solid #c4c4c4;
+}
+
+.rincian_pembayaran label {
+  font-weight: 500;
+  font-size: 1rem;
+  line-height: 1.21em;
+  color: #000;
+}
+.rincian_pembayaran input[type=text] {
+  background-color: rgba(173, 181, 189, 0.2);
+  color: #adb5bd;
+}
+
+.informasi_pembayaran ul {
+  list-style: none;
+}
+.informasi_pembayaran li {
+  font-weight: 400;
+  font-size: 0.875rem;
+  line-height: 1.5em;
+  color: #adb5bd;
+}
+.informasi_pembayaran h6 {
+  font-weight: 600;
+  font-size: 0.75rem;
+  line-height: 1.5em;
+  color: #d10429;
+}
+
 #dashboard .table-responsive .table-body td,
 #heregistrasi .table-responsive .table-body td,
-#daftar_ulang .table-responsive .table-body td {
+#daftar_ulang .table-responsive .table-body td,
+#mala_presensi .table-responsive .table-body td,
+#mala_nilai .table-responsive .table-body td {
   padding: 1.5rem 1.5rem;
 }
 #dashboard .table-responsive .table-body tr:first-child td,
@@ -33,147 +101,33 @@
 #heregistrasi .table-responsive .table-body tr:first-child td,
 #heregistrasi .table-responsive .table-body tr:last-child td,
 #daftar_ulang .table-responsive .table-body tr:first-child td,
-#daftar_ulang .table-responsive .table-body tr:last-child td {
+#daftar_ulang .table-responsive .table-body tr:last-child td,
+#mala_presensi .table-responsive .table-body tr:first-child td,
+#mala_presensi .table-responsive .table-body tr:last-child td,
+#mala_nilai .table-responsive .table-body tr:first-child td,
+#mala_nilai .table-responsive .table-body tr:last-child td {
   padding: 1rem 1.5rem;
 }
 
-#krsMahasiswa .form-select .form-group {
-  margin-bottom: 16px;
-}
-#krsMahasiswa .form-select .form-group:nth-child(1) {
-  padding-right: 1.5rem;
-}
-#krsMahasiswa .form-select .form-group:nth-child(2) {
-  padding-left: 1.5rem;
-}
-#krsMahasiswa .form-select .form-group:nth-child(3) {
-  display: flex;
-  justify-content: flex-end;
-}
-
-#konfirmasi_pembayaran input::-moz-placeholder {
-  font-weight: 400;
-  font-size: 0.875rem;
-  line-height: 1.21em;
-  color: #041f2f;
-}
-
-#konfirmasi_pembayaran input:-ms-input-placeholder {
-  font-weight: 400;
-  font-size: 0.875rem;
-  line-height: 1.21em;
-  color: #041f2f;
-}
-
-#konfirmasi_pembayaran input::placeholder {
-  font-weight: 400;
-  font-size: 0.875rem;
-  line-height: 1.21em;
-  color: #041f2f;
-}
-#konfirmasi_pembayaran .form-group {
-  margin: 0;
-}
-#konfirmasi_pembayaran .form-row {
-  margin-top: 1.5rem;
-}
-#konfirmasi_pembayaran .upload {
-  display: flex;
-  align-items: flex-end;
-  justify-content: flex-end;
-}
-
-#presensi select,
-#absensi_harian select {
-  height: 33px;
-}
-
-#form_cuti .form-input {
-  margin-top: 0;
-}
-#form_cuti .form-input .form-group:nth-child(odd) {
-  padding-right: 40px;
-}
-#form_cuti .form-input .form-group:nth-child(even) {
-  padding-left: 40px;
-}
 #form_cuti .form-cuti ::-moz-placeholder {
   font-weight: 400;
   font-size: 0.875rem;
   line-height: 1.21em;
   color: #041f2f;
 }
+
 #form_cuti .form-cuti :-ms-input-placeholder {
   font-weight: 400;
   font-size: 0.875rem;
   line-height: 1.21em;
   color: #041f2f;
 }
+
 #form_cuti .form-cuti ::placeholder {
   font-weight: 400;
   font-size: 0.875rem;
   line-height: 1.21em;
   color: #041f2f;
-}
-#form_cuti .form-cuti h1 {
-  font-weight: 600;
-  font-size: 1.125rem;
-  line-height: 1.22em;
-  color: #041f2f;
-  margin-top: 40px;
-  margin-bottom: 16px;
-}
-#form_cuti .form-cuti .form-row:nth-child(3) {
-  margin-top: 40px;
-}
-#form_cuti .form-cuti .form-group:nth-child(2) {
-  padding-left: 40px;
-}
-#form_cuti .form-cuti .padding-right {
-  padding-right: 40px;
-}
-#form_cuti .submit {
-  margin-top: 40px;
-  padding: 0 1rem;
-}
-
-#pmb .form-select {
-  padding: 0 8px;
-}
-#pmb .form-input {
-  margin-top: 0;
-}
-#pmb .form-input ::-moz-placeholder {
-  font-weight: 400;
-  font-size: 0.875rem;
-  line-height: 1.21em;
-  color: #041f2f;
-}
-#pmb .form-input :-ms-input-placeholder {
-  font-weight: 400;
-  font-size: 0.875rem;
-  line-height: 1.21em;
-  color: #041f2f;
-}
-#pmb .form-input ::placeholder {
-  font-weight: 400;
-  font-size: 0.875rem;
-  line-height: 1.21em;
-  color: #041f2f;
-}
-#pmb .form-image {
-  padding: 0;
-}
-#pmb .form-image input {
-  display: none;
-}
-#pmb .form-image .file-input {
-  min-height: 138px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid #c4c4c4;
-  border-radius: 8px;
 }
 
 #tahapan h2 {
@@ -265,9 +219,7 @@
 #tahapan .form-berkas input {
   display: none;
 }
-#tahapan .form-berkas .input-foto-siswa,
-#tahapan .form-berkas .input-foto-ijazah,
-#tahapan .form-berkas .input-pengajuan-keringanan {
+#tahapan .form-berkas .input_file {
   min-height: 160px;
   display: flex;
   align-items: center;
@@ -291,61 +243,6 @@
 #tahapan .form_action .button_sebelumnya {
   background-color: #b2def8;
   color: #28a3eb;
-}
-
-#pembayaran_va .alert {
-  padding: 0.5rem;
-}
-#pembayaran_va .alert p {
-  font-weight: 600;
-  font-size: 1.125rem;
-  line-height: 1.21em;
-  color: #34c38f;
-}
-#pembayaran_va .alert-success {
-  color: #34c38f;
-  border: 0;
-  background-color: rgba(52, 195, 143, 0.1);
-}
-#pembayaran_va .pembayaran h2 {
-  font-weight: 600;
-  font-size: 1.125rem;
-  line-height: 1.21em;
-  color: #000;
-  margin-top: 2.5rem;
-}
-#pembayaran_va .va_aktif label {
-  font-weight: 500;
-  font-size: 1rem;
-  line-height: 1.21em;
-  color: #000;
-}
-#pembayaran_va .va_aktif .field_kode {
-  position: relative;
-}
-#pembayaran_va .va_aktif input:-moz-read-only {
-  background-color: #fff;
-  font-weight: 600;
-  font-size: 1.5rem;
-  line-height: 1.21em;
-  color: #000;
-  max-height: 50px;
-}
-#pembayaran_va .va_aktif input:read-only {
-  background-color: #fff;
-  font-weight: 600;
-  font-size: 1.5rem;
-  line-height: 1.21em;
-  color: #000;
-  max-height: 50px;
-}
-#pembayaran_va .va_aktif .salin_kode {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  border-radius: 0 0.5rem 0.5rem 0;
-  border-left: 1px solid #c4c4c4;
 }
 
 #daftar_ulang .modal-title {

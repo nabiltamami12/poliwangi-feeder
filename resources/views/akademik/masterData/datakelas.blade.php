@@ -75,7 +75,7 @@
                 <td>
                   Hukum
                 </td>
-                <td class="font--bold text-capitalize">
+                <td class="font-weight-bold text-capitalize">
                   Pengantar hukum I
                 </td>
                 <td class="text-center">
@@ -100,7 +100,7 @@
                 <td>
                   Hukum
                 </td>
-                <td class="font--bold text-capitalize">
+                <td class="font-weight-bold text-capitalize">
                   Pengantar hukum I
                 </td>
                 <td class="text-center">
@@ -125,7 +125,7 @@
                 <td>
                   Hukum
                 </td>
-                <td class="font--bold text-capitalize">
+                <td class="font-weight-bold text-capitalize">
                   Pengantar hukum I
                 </td>
                 <td class="text-center">
@@ -150,7 +150,7 @@
                 <td>
                   Hukum
                 </td>
-                <td class="font--bold text-capitalize">
+                <td class="font-weight-bold text-capitalize">
                   Pengantar hukum I
                 </td>
                 <td class="text-center">
@@ -175,7 +175,7 @@
                 <td>
                   Hukum
                 </td>
-                <td class="font--bold text-capitalize">
+                <td class="font-weight-bold text-capitalize">
                   Pengantar hukum I
                 </td>
                 <td class="text-center">
@@ -200,7 +200,7 @@
                 <td>
                   Hukum
                 </td>
-                <td class="font--bold text-capitalize">
+                <td class="font-weight-bold text-capitalize">
                   Pengantar hukum I
                 </td>
                 <td class="text-center">
@@ -225,7 +225,7 @@
                 <td>
                   Hukum
                 </td>
-                <td class="font--bold text-capitalize">
+                <td class="font-weight-bold text-capitalize">
                   Pengantar hukum I
                 </td>
                 <td class="text-center">
@@ -239,7 +239,7 @@
                 </td>
                 <td class="text-center">
                 </td> -->
-              <!-- </tr>
+            <!-- </tr>
             </tbody> -->
           </table>
         </div>
@@ -269,7 +269,7 @@
   </div>
 </section>
 <script>
-$(document).ready(function() {
+  $(document).ready(function() {
   var nomor = 1;
 dt = $('#datatable').DataTable({
     "processing": true,

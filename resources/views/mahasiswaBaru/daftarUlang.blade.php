@@ -113,6 +113,56 @@
                   <span class="iconify status-rejected" data-icon="bi:x-circle-fill" data-inline="true"></span>
                 </td>
               </tr>
+
+              <tr>
+                <td class="text-center px-2">5</td>
+                <td>
+                  <h2 class="mb-0">Surat Pernyataan Taat Peraturan</h2>
+                </td>
+                <td>
+                  <span data-toggle="modal" data-target="#unggahDokumen" class="pointer">
+                    <span class="iconify text--blue" data-icon="bx:bx-upload" data-inline="true"></span>
+                    <span class="text--blue">Unggah Ulang Dokumen</span>
+                  </span>
+                </td>
+                <td class="text-center">
+                  <span class="iconify status-rejected" data-icon="bi:x-circle-fill" data-inline="true"></span>
+                </td>
+              </tr>
+
+              <tr>
+                <td class="text-center px-2">6</td>
+                <td>
+                  <h2 class="mb-0">Upload Foto dengan Almamater</h2>
+                </td>
+                <td>
+                  <span data-toggle="modal" data-target="#unggahDokumen" class="pointer">
+                    <span class="iconify text--blue" data-icon="bx:bx-upload" data-inline="true"></span>
+                    <span class="text--blue">Unggah Ulang Dokumen</span>
+                  </span>
+                </td>
+                <td class="text-center">
+                  <span class="iconify status-rejected" data-icon="bi:x-circle-fill" data-inline="true"></span>
+                </td>
+              </tr>
+
+              <tr>
+                <td class="text-center px-2">7</td>
+                <td>
+                  <h2 class="mb-0">Upload Dokumen Pengajuan Keringanan
+                    <span class="font-weight-bold text-warning">(Optional)</span>
+                  </h2>
+                </td>
+                <td>
+                  <span data-toggle="modal" data-target="#unggahDokumen" class="pointer">
+                    <span class="iconify text--blue" data-icon="bx:bx-upload" data-inline="true"></span>
+                    <span class="text--blue">Unggah Dokumen</span>
+                  </span>
+                </td>
+                <td class="text-center">
+                  <span class="iconify status-pending" data-icon="fluent:clock-20-filled" data-inline="true"></span>
+                </td>
+              </tr>
             </tbody>
           </table>
         </div>

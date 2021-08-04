@@ -5,7 +5,7 @@
 <header class="header"></header>
 
 <!-- Page content -->
-<section class="page-content container-fluid" id="maba_pembayaran">
+<section class="page-content container-fluid" id="mala_pembayaran">
   <div class="row">
     <div class="col-xl-12">
       <div class="card shadow padding--medium">
@@ -22,7 +22,7 @@
           <hr class="mt-4">
           <div class="va_aktif">
             <div class="form-group">
-              <label class="mt-4-5">VA untuk Pembayaran UKT</label>
+              <label class="mt-4-5">VA Aktif Saat Ini</label>
               <div class="field_kode mt-2">
                 <input type="text" class="form-control pl-2" id="va-aktif" value="1281928746273601" readonly>
                 <button class="salin_kode btn--blue">Salin Kode</button>

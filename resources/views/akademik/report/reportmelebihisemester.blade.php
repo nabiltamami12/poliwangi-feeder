@@ -89,7 +89,7 @@
               <tr>
                 <td class="text-center px-1">1</td>
                 <td class="pr-0">4891203526</td>
-                <td class="font--bold text-capitalize px-1">Dwi Rahmawati</td>
+                <td class="font-weight-bold text-capitalize px-1">Dwi Rahmawati</td>
                 <td class="text-center">2021</td>
                 <td class="text-center">
                   <span class="iconify edit-icon" data-icon="bx:bx-edit-alt" data-inline="true"></span>
@@ -100,7 +100,7 @@
               <tr>
                 <td class="text-center px-1">2</td>
                 <td class="pr-0">4891203526</td>
-                <td class="font--bold text-capitalize px-1">Dwi Rahmawati</td>
+                <td class="font-weight-bold text-capitalize px-1">Dwi Rahmawati</td>
                 <td class="text-center">2021</td>
                 <td class="text-center">
                   <span class="iconify edit-icon" data-icon="bx:bx-edit-alt" data-inline="true"></span>
@@ -111,7 +111,7 @@
               <tr>
                 <td class="text-center px-1">3</td>
                 <td class="pr-0">4891203526</td>
-                <td class="font--bold text-capitalize px-1">Dwi Rahmawati</td>
+                <td class="font-weight-bold text-capitalize px-1">Dwi Rahmawati</td>
                 <td class="text-center">2021</td>
                 <td class="text-center">
                   <span class="iconify edit-icon" data-icon="bx:bx-edit-alt" data-inline="true"></span>

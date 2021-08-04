@@ -34,6 +34,10 @@ Route::get('/register', function () {
     return view('register');
 })->name('register');
 
+Route::get('/pmbgenerateva', function () {
+    return view('pmbGenerateVA');
+})->name('generateVA-PMB');
+
 Route::prefix('admin')->group(function () {
     Route::get('/dashboard', function () {
         return view('admin.dashboard');

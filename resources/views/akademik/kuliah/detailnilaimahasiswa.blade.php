@@ -94,7 +94,7 @@
             <tbody class="table-body">
               <tr>
                 <td rowspan="6" class="text-center px-2">1</td>
-                <td rowspan="6" class="font--bold text-capitalize">Ilmu Gigi</td>
+                <td rowspan="6" class="font-weight-bold text-capitalize">Ilmu Gigi</td>
                 <td class="text-center">UTS</td>
                 <td class="text-center">15%</td>
                 <td class="text-center">90</td>
@@ -136,7 +136,7 @@
 
               <tr>
                 <td rowspan="6" class="text-center px-2">2</td>
-                <td rowspan="6" class="font--bold text-capitalize">Ilmu Gigi</td>
+                <td rowspan="6" class="font-weight-bold text-capitalize">Ilmu Gigi</td>
                 <td class="text-center">UTS</td>
                 <td class="text-center">15%</td>
                 <td class="text-center">90</td>

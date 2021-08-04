@@ -97,7 +97,7 @@
               <tr>
                 <td class="text-center px-2">1</td>
                 <td class="pr-0">23/08/2021</td>
-                <td class="font--bold text-capitalize">Jessica Charisa</td>
+                <td class="font-weight-bold text-capitalize">Jessica Charisa</td>
                 <td>4891203526</td>
                 <td class="text-center pr-0">4.500.000</td>
                 <td class="text-center px-0">
@@ -116,7 +116,7 @@
               <tr>
                 <td class="text-center px-2">2</td>
                 <td class="pr-0">23/08/2021</td>
-                <td class="font--bold text-capitalize">Jessica Charisa</td>
+                <td class="font-weight-bold text-capitalize">Jessica Charisa</td>
                 <td>4891203526</td>
                 <td class="text-center pr-0">4.500.000</td>
                 <td class="text-center px-0">
@@ -134,7 +134,7 @@
               <tr>
                 <td class="text-center px-2">3</td>
                 <td class="pr-0">23/08/2021</td>
-                <td class="font--bold text-capitalize">Jessica Charisa</td>
+                <td class="font-weight-bold text-capitalize">Jessica Charisa</td>
                 <td>4891203526</td>
                 <td class="text-center pr-0">4.500.000</td>
                 <td class="text-center px-0">
@@ -152,7 +152,7 @@
               <tr>
                 <td class="text-center px-2">4</td>
                 <td class="pr-0">23/08/2021</td>
-                <td class="font--bold text-capitalize">Jessica Charisa</td>
+                <td class="font-weight-bold text-capitalize">Jessica Charisa</td>
                 <td>4891203526</td>
                 <td class="text-center pr-0">4.500.000</td>
                 <td class="text-center px-0">
@@ -170,7 +170,7 @@
               <tr>
                 <td class="text-center px-2">5</td>
                 <td class="pr-0">23/08/2021</td>
-                <td class="font--bold text-capitalize">Jessica Charisa</td>
+                <td class="font-weight-bold text-capitalize">Jessica Charisa</td>
                 <td>4891203526</td>
                 <td class="text-center pr-0">4.500.000</td>
                 <td class="text-center px-0">
@@ -188,7 +188,7 @@
               <tr>
                 <td class="text-center px-2">6</td>
                 <td class="pr-0">23/08/2021</td>
-                <td class="font--bold text-capitalize">Jessica Charisa</td>
+                <td class="font-weight-bold text-capitalize">Jessica Charisa</td>
                 <td>4891203526</td>
                 <td class="text-center pr-0">4.500.000</td>
                 <td class="text-center px-0">
@@ -206,7 +206,7 @@
               <tr>
                 <td class="text-center px-2">7</td>
                 <td class="pr-0">23/08/2021</td>
-                <td class="font--bold text-capitalize">Jessica Charisa</td>
+                <td class="font-weight-bold text-capitalize">Jessica Charisa</td>
                 <td>4891203526</td>
                 <td class="text-center pr-0">4.500.000</td>
                 <td class="text-center px-0">
@@ -224,7 +224,7 @@
               <tr>
                 <td class="text-center px-2">8</td>
                 <td class="pr-0">23/08/2021</td>
-                <td class="font--bold text-capitalize">Jessica Charisa</td>
+                <td class="font-weight-bold text-capitalize">Jessica Charisa</td>
                 <td>4891203526</td>
                 <td class="text-center pr-0">4.500.000</td>
                 <td class="text-center px-0">
@@ -242,7 +242,7 @@
               <tr>
                 <td class="text-center px-2">9</td>
                 <td class="pr-0">23/08/2021</td>
-                <td class="font--bold text-capitalize">Jessica Charisa</td>
+                <td class="font-weight-bold text-capitalize">Jessica Charisa</td>
                 <td>4891203526</td>
                 <td class="text-center pr-0">4.500.000</td>
                 <td class="text-center px-0">

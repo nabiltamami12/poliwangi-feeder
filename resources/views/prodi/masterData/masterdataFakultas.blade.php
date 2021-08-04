@@ -88,7 +88,7 @@
             <tbody class="table-body">
               <tr>
                 <td class="text-center px-2">1</td>
-                <td class="font--bold text-capitalize">fakultas bahasa</td>
+                <td class="font-weight-bold text-capitalize">fakultas bahasa</td>
                 <td class="text-center">
                   <a href="/prodi/masterdata/datafakultas/updatedata"><span class="iconify edit-icon"
                       data-icon="bx:bx-edit-alt" data-inline="true"></span></a>
@@ -99,7 +99,7 @@
 
               <tr>
                 <td class="text-center px-2">2</td>
-                <td class="font--bold text-capitalize">fakultas hukum</td>
+                <td class="font-weight-bold text-capitalize">fakultas hukum</td>
                 <td class="text-center">
                   <a href="/prodi/masterdata/datafakultas/updatedata"><span class="iconify edit-icon"
                       data-icon="bx:bx-edit-alt" data-inline="true"></span></a>
@@ -110,7 +110,7 @@
 
               <tr>
                 <td class="text-center px-2">3</td>
-                <td class="font--bold text-capitalize">fakultas ekonomi dan bisnis</td>
+                <td class="font-weight-bold text-capitalize">fakultas ekonomi dan bisnis</td>
                 <td class="text-center">
                   <a href="/prodi/masterdata/datafakultas/updatedata"><span class="iconify edit-icon"
                       data-icon="bx:bx-edit-alt" data-inline="true"></span></a>
@@ -121,7 +121,7 @@
 
               <tr>
                 <td class="text-center px-2">4</td>
-                <td class="font--bold text-capitalize">fakultas ilmu administrasi</td>
+                <td class="font-weight-bold text-capitalize">fakultas ilmu administrasi</td>
                 <td class="text-center">
                   <a href="/prodi/masterdata/datafakultas/updatedata"><span class="iconify edit-icon"
                       data-icon="bx:bx-edit-alt" data-inline="true"></span></a>

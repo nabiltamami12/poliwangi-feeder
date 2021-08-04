@@ -61,12 +61,12 @@
     <div class="container mt--9 pb-7">
       <div class="row justify-content-center">
         <div class="col-lg-9 col-md-8">
-          <div class="card bg-secondary mt-4 border-0 mb-0">
+          <div class="card bg-secondary mt-5 border-0 mb-0">
             <div class="card-body">
               <div class="card_inner">
                 <form>
                   <div class="form-group">
-                    <label for="jalur-seleksi" class="font-bold">Pilih Jalur Seleksi</label>
+                    <label for="jalur-seleksi" class="font-weight-bold">Pilih Jalur Seleksi</label>
                     <select class="form-control" id="jalur-seleksi">
                       <option selected="true" disabled="disabled">Jalur Seleksi</option>
                       <option>2</option>
@@ -108,7 +108,7 @@
                           <span class="iconify fileUpload-icon" data-icon="bx:bx-image-add" data-inline="false"></span>
                         </label>
                       </div>
-                      <input type="file" class="form-control-file">
+                      <input type="file" class="form-control-file d-none">
                     </div>
                   </div>
                 </div>

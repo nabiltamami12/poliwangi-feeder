@@ -91,7 +91,7 @@
               <tr>
                 <td class="text-center p-2">1</td>
                 <td>4891203526</td>
-                <td class="font--bold text-capitalize">Dwi Rahmawati</td>
+                <td class="font-weight-bold text-capitalize">Dwi Rahmawati</td>
                 <td class="text-center">04/06/2021</td>
                 <td class="wordwrap text-lowercase">Disini berisi alasan mahasiswa didrop out</td>
                 <td class="text-center">
@@ -103,7 +103,7 @@
               <tr>
                 <td class="text-center p-2">2</td>
                 <td>4891203526</td>
-                <td class="font--bold text-capitalize">Dwi Rahmawati</td>
+                <td class="font-weight-bold text-capitalize">Dwi Rahmawati</td>
                 <td class="text-center">04/06/2021</td>
                 <td class="wordwrap text-lowercase">Disini berisi alasan mahasiswa didrop out</td>
                 <td class="text-center">
@@ -115,7 +115,7 @@
               <tr>
                 <td class="text-center p-2">3</td>
                 <td>4891203526</td>
-                <td class="font--bold text-capitalize">Dwi Rahmawati</td>
+                <td class="font-weight-bold text-capitalize">Dwi Rahmawati</td>
                 <td class="text-center">04/06/2021</td>
                 <td class="wordwrap text-lowercase">Disini berisi alasan mahasiswa didrop out</td>
                 <td class="text-center">

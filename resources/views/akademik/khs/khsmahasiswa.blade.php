@@ -60,7 +60,7 @@
                 </td>
                 <td class="text-center">
                   <span class="iconify download-icon text--blue" data-icon="bx:bx-download" data-inline="true"></span>
-                  <span class="font--bold text--blue">Unduh File PDF</span>
+                  <span class="font-weight-bold text--blue">Unduh File PDF</span>
                 </td>
               </tr>
 
@@ -71,7 +71,7 @@
                 </td>
                 <td class="text-center">
                   <span class="iconify download-icon text--blue" data-icon="bx:bx-download" data-inline="true"></span>
-                  <span class="font--bold text--blue">Unduh File PDF</span>
+                  <span class="font-weight-bold text--blue">Unduh File PDF</span>
                 </td>
               </tr>
 
@@ -82,7 +82,7 @@
                 </td>
                 <td class="text-center">
                   <span class="iconify download-icon text--blue" data-icon="bx:bx-download" data-inline="true"></span>
-                  <span class="font--bold text--blue">Unduh File PDF</span>
+                  <span class="font-weight-bold text--blue">Unduh File PDF</span>
                 </td>
               </tr>
               <tr>
@@ -92,7 +92,7 @@
                   </th>
                 <td class="text-center">
                   <span class="iconify download-icon text--blue" data-icon="bx:bx-download" data-inline="true"></span>
-                  <span class="font--bold text--blue">Unduh File PDF</span>
+                  <span class="font-weight-bold text--blue">Unduh File PDF</span>
                 </td>
               </tr>
             </tbody>

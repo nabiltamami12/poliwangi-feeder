@@ -96,7 +96,7 @@
               <tr>
                 <td class="text-center px-2">1</td>
                 <td class="text-center">1111</td>
-                <td class="font--bold text-capitalize">Bahasa Inggris</td>
+                <td class="font-weight-bold text-capitalize">Bahasa Inggris</td>
                 <td class="text-capitalize">kur. percobaan1</td>
                 <td class="text-center">1</td>
                 <td class="text-center">2</td>
@@ -113,7 +113,7 @@
               <tr>
                 <td class="text-center px-2">2</td>
                 <td class="text-center">1111</td>
-                <td class="font--bold text-capitalize">Bahasa Inggris</td>
+                <td class="font-weight-bold text-capitalize">Bahasa Inggris</td>
                 <td class="text-capitalize">kur. percobaan1</td>
                 <td class="text-center">1</td>
                 <td class="text-center">2</td>
@@ -130,7 +130,7 @@
               <tr>
                 <td class="text-center px-2">3</td>
                 <td class="text-center">1111</td>
-                <td class="font--bold text-capitalize">Bahasa Inggris</td>
+                <td class="font-weight-bold text-capitalize">Bahasa Inggris</td>
                 <td class="text-capitalize">kur. percobaan1</td>
                 <td class="text-center">1</td>
                 <td class="text-center">2</td>
@@ -147,7 +147,7 @@
               <tr>
                 <td class="text-center px-2">4</td>
                 <td class="text-center">1111</td>
-                <td class="font--bold text-capitalize">Bahasa Inggris</td>
+                <td class="font-weight-bold text-capitalize">Bahasa Inggris</td>
                 <td class="text-capitalize">kur. percobaan1</td>
                 <td class="text-center">1</td>
                 <td class="text-center">2</td>
@@ -164,7 +164,7 @@
               <tr>
                 <td class="text-center px-2">5</td>
                 <td class="text-center">1111</td>
-                <td class="font--bold text-capitalize">Bahasa Inggris</td>
+                <td class="font-weight-bold text-capitalize">Bahasa Inggris</td>
                 <td class="text-capitalize">kur. percobaan1</td>
                 <td class="text-center">1</td>
                 <td class="text-center">2</td>
@@ -181,7 +181,7 @@
               <tr>
                 <td class="text-center px-2">6</td>
                 <td class="text-center">1111</td>
-                <td class="font--bold text-capitalize">Bahasa Inggris</td>
+                <td class="font-weight-bold text-capitalize">Bahasa Inggris</td>
                 <td class="text-capitalize">kur. percobaan1</td>
                 <td class="text-center">1</td>
                 <td class="text-center">2</td>
@@ -198,7 +198,7 @@
               <tr>
                 <td class="text-center px-2">7</td>
                 <td class="text-center">1111</td>
-                <td class="font--bold text-capitalize">Bahasa Inggris</td>
+                <td class="font-weight-bold text-capitalize">Bahasa Inggris</td>
                 <td class="text-capitalize">kur. percobaan1</td>
                 <td class="text-center">1</td>
                 <td class="text-center">2</td>
@@ -215,7 +215,7 @@
               <tr>
                 <td class="text-center px-2">8</td>
                 <td class="text-center">1111</td>
-                <td class="font--bold text-capitalize">Bahasa Inggris</td>
+                <td class="font-weight-bold text-capitalize">Bahasa Inggris</td>
                 <td class="text-capitalize">kur. percobaan1</td>
                 <td class="text-center">1</td>
                 <td class="text-center">2</td>
@@ -232,7 +232,7 @@
               <tr>
                 <td class="text-center px-2">9</td>
                 <td class="text-center">1111</td>
-                <td class="font--bold text-capitalize">Bahasa Inggris</td>
+                <td class="font-weight-bold text-capitalize">Bahasa Inggris</td>
                 <td class="text-capitalize">kur. percobaan1</td>
                 <td class="text-center">1</td>
                 <td class="text-center">2</td>

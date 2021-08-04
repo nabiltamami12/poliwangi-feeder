@@ -95,7 +95,7 @@
               <tr>
                 <td class="text-center px-1">1</td>
                 <td>4891203526</td>
-                <td class="font--bold text-capitalize">Dwi Rahmawati</td>
+                <td class="font-weight-bold text-capitalize">Dwi Rahmawati</td>
                 <td class="text-center">12/04/2021</td>
                 <td>091015//04.2021/102</td>
                 <td>091015//04.2021/102</td>
@@ -108,7 +108,7 @@
               <tr>
                 <td class="text-center px-1">2</td>
                 <td>4891203526</td>
-                <td class="font--bold text-capitalize">Dwi Rahmawati</td>
+                <td class="font-weight-bold text-capitalize">Dwi Rahmawati</td>
                 <td class="text-center">12/04/2021</td>
                 <td>091015//04.2021/102</td>
                 <td>091015//04.2021/102</td>
@@ -121,7 +121,7 @@
               <tr>
                 <td class="text-center px-1">3</td>
                 <td>4891203526</td>
-                <td class="font--bold text-capitalize">Dwi Rahmawati</td>
+                <td class="font-weight-bold text-capitalize">Dwi Rahmawati</td>
                 <td class="text-center">12/04/2021</td>
                 <td>091015//04.2021/102</td>
                 <td>091015//04.2021/102</td>
