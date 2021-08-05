@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Jurusan;
 use Illuminate\Support\Facades\Validator;
-
+use DB;
 class JurusanController extends Controller
 {
     /**
@@ -18,6 +18,8 @@ class JurusanController extends Controller
     protected $status = null;
     protected $err = null;
     protected $data = null;
+
+    
     
     public function index()
     {

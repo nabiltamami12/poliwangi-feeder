@@ -11,6 +11,8 @@ class DosenPengampu extends Model
     public $timestamps = false;
     public $table = "dosen_pengampu";
     protected $fillable = [
-        
+        'nomor',
+        'dosen',
+        'matakuliah'
     ];
 }

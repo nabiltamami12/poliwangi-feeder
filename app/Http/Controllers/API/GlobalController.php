@@ -11,6 +11,8 @@ use App\Models\Jurusan;
 use App\Models\Dosen;
 use App\Models\Status;
 use App\Models\Kelas;
+use App\Models\Matakuliah;
+use App\Models\Prodi;
 use Illuminate\Support\Facades\Validator;
 
 class GlobalController extends Controller
@@ -55,6 +57,29 @@ class GlobalController extends Controller
         ->join('program', 'program.nomor', '=', 'kelas.program')
         ->join('pegawai', 'pegawai.nomor', '=', 'kelas.wali_kelas','left')
         ->get();
+        $prodi = Prodi::select(
+            "program_studi.*",
+            "program.program as nama_program",
+            "jurusan.jurusan as nama_jurusan",
+            "departemen.departemen as nama_departemen",
+        )
+        ->join("program", "program_studi.program", "=", "program.NOMOR")
+        ->join("jurusan", "program_studi.jurusan", "=", "jurusan.NOMOR")
+        ->join("departemen", "program_studi.departemen", "=", "departemen.NOMOR")
+        ->get();
+
+        $matakuliah = Matakuliah::select(
+            'matakuliah.*',
+            'kelas.kode as kode_kelas',
+            'jurusan.jurusan as nama_jurusan',
+            'program.program as nama_program',
+            'matakuliah_jenis.matakuliah_jenis as nama_mk_jenis',
+        )
+        ->join('kelas', 'kelas.nomor', '=', 'matakuliah.kelas')
+        ->join('jurusan', 'jurusan.nomor', '=', 'matakuliah.jurusan')
+        ->join('program', 'program.nomor', '=', 'matakuliah.program')
+        ->join('matakuliah_jenis', 'matakuliah_jenis.nomor', '=', 'matakuliah.matakuliah_jenis')
+        ->get();
         
         $this->status = "success";
 
@@ -66,6 +91,8 @@ class GlobalController extends Controller
             'kelas'=>$kelas,
             'mk_jenis'=>$matkul_jenis,
             'status'=>$status,
+            'prodi'=>$prodi,
+            'matakuliah'=>$matakuliah,
         ];
 
        
