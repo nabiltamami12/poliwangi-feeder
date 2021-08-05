@@ -10,6 +10,13 @@ body {
   background-color: #fff;
 }
 
+.component-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  letter-spacing: 0px;
+  color: #000;
+}
+
 .m-4-5 {
   margin: 2rem !important;
 }
@@ -32,13 +39,6 @@ body {
 .ml-4-5,
 .mx-4-5 {
   margin-left: 2rem !important;
-}
-
-.component-title {
-  font-size: 1.125rem;
-  font-weight: 600;
-  letter-spacing: 0px;
-  color: #000;
 }
 
 h1,
@@ -87,37 +87,41 @@ h6,
   color: #495057;
 }
 
-p {
-  margin-top: 0;
-  margin-bottom: 0;
+.text-primary {
+  color: #28a3eb !important;
+}
+
+.text-secondary {
+  color: #adb5bd !important;
 }
 
 .text-success {
   color: #34c38f !important;
 }
 
-.custom-file-label {
-  border: 1px solid #c4c4c4;
-  border-radius: 0.5rem;
-  background-color: #fff;
-  max-height: 50px;
-  display: flex;
-  align-items: center;
+.text-warning {
+  color: #f1b44c !important;
 }
 
-.custom-file-label::after {
-  content: "Salin Kode";
-  color: #fff;
-  background-color: #28a3eb;
-  border-radius: 0 0.5rem 0.5rem 0;
-  border: 0 !important;
-  line-height: 1.21em;
-  font-size: 1rem;
-  padding: 0.9em 1em;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.text-danger {
+  color: #f46a6a !important;
+}
+
+.text-dark {
+  color: #343a40 !important;
+}
+
+.badge {
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.5rem;
+}
+
+.badge-success {
+  background-color: #34c38f;
+}
+
+.badge-danger {
+  background-color: #f46a6a;
 }
 
 .bg-primary {
@@ -148,41 +152,13 @@ p {
   background-color: #343a40 !important;
 }
 
-.text-primary {
-  color: #556ee6 !important;
-}
-
-.text-secondary {
-  color: #74788d !important;
-}
-
-.text-success {
-  color: #34c38f !important;
-}
-
-.text-info {
-  color: #50a5f1 !important;
-}
-
-.text-warning {
-  color: #f1b44c !important;
-}
-
-.text-danger {
-  color: #f46a6a !important;
-}
-
-.text-dark {
-  color: #343a40 !important;
-}
-
 .btn {
   font-family: "Montserrat", sans-serif;
   font-size: 0.8125rem;
   font-weight: 400;
   line-height: 1rem;
-  padding: 0.5rem 0.75rem;
-  border-radius: 4px;
+  padding: 0.625rem 1rem;
+  border-radius: 0.5rem;
   display: inline-block;
   cursor: pointer;
   -webkit-user-select: none;
@@ -263,8 +239,7 @@ p {
 .btn-warning:hover {
   color: #fff;
   border-color: #f1b44c;
-  background-color: #d8992b;
-  box-shadow: none;
+  background-color: #f1b44c;
 }
 .btn-warning:not(:disabled):not(.disabled):active, .btn-warning:not(:disabled):not(.disabled).active, .show > .btn-warning.dropdown-toggle {
   color: #fff;
@@ -710,7 +685,7 @@ option[disabled] {
 .card {
   background-color: #ffffff;
   box-shadow: none;
-  border-radius: 8px;
+  border-radius: 0.5rem;
 }
 
 .shadow {

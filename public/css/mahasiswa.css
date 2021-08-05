@@ -10,19 +10,6 @@
   color: #041f2f;
 }
 
-.card_presensi h6 {
-  font-weight: 500;
-  font-size: 0.875rem;
-  line-height: 1.21em;
-  color: #adb5bd;
-}
-.card_presensi h5 {
-  font-weight: 600;
-  font-size: 1rem;
-  line-height: 1.21em;
-  color: #041f2f;
-}
-
 .va_aktif label {
   font-weight: 500;
   font-size: 1rem;
@@ -89,26 +76,6 @@
   color: #d10429;
 }
 
-#dashboard .table-responsive .table-body td,
-#heregistrasi .table-responsive .table-body td,
-#daftar_ulang .table-responsive .table-body td,
-#mala_presensi .table-responsive .table-body td,
-#mala_nilai .table-responsive .table-body td {
-  padding: 1.5rem 1.5rem;
-}
-#dashboard .table-responsive .table-body tr:first-child td,
-#dashboard .table-responsive .table-body tr:last-child td,
-#heregistrasi .table-responsive .table-body tr:first-child td,
-#heregistrasi .table-responsive .table-body tr:last-child td,
-#daftar_ulang .table-responsive .table-body tr:first-child td,
-#daftar_ulang .table-responsive .table-body tr:last-child td,
-#mala_presensi .table-responsive .table-body tr:first-child td,
-#mala_presensi .table-responsive .table-body tr:last-child td,
-#mala_nilai .table-responsive .table-body tr:first-child td,
-#mala_nilai .table-responsive .table-body tr:last-child td {
-  padding: 1rem 1.5rem;
-}
-
 #form_cuti .form-cuti ::-moz-placeholder {
   font-weight: 400;
   font-size: 0.875rem;
@@ -137,7 +104,7 @@
   color: #041f2f;
 }
 #tahapan button {
-  border-radius: 4px;
+  border-radius: 0.25rem;
 }
 #tahapan .input-group .input-group-text {
   font-size: 1.125rem;
@@ -157,7 +124,7 @@
   background-color: #fff;
   border: 2px solid #c4c4c4;
   border-left: 0;
-  border-radius: 0 8px 8px 0;
+  border-radius: 0 0.5rem 0.5rem 0;
 }
 #tahapan .input-group.active .input-group-text {
   background-color: #f0f8fe;
@@ -225,7 +192,7 @@
   align-items: center;
   justify-content: center;
   border: 1px solid #c4c4c4;
-  border-radius: 8px;
+  border-radius: 0.5rem;
 }
 #tahapan .form-berkas p {
   font-weight: 500;
@@ -256,7 +223,7 @@
   align-items: center;
   justify-content: center;
   border: 1px solid #c4c4c4;
-  border-radius: 8px;
+  border-radius: 0.5rem;
 }
 #daftar_ulang .modal-body .iconify {
   font-size: 2rem;
@@ -269,5 +236,5 @@
   color: #062e46;
 }
 #daftar_ulang .modal-footer button {
-  border-radius: 4px;
+  border-radius: 0.25rem;
 }

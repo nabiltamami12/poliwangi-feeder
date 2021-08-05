@@ -51,10 +51,10 @@
 .page-content input[type=date]::-webkit-calendar-picker-indicator {
     width: 38px;
   }
-
-  #krsMahasiswa .form-select .form-group,
-#krsMahasiswa .form-select .form-group:nth-child(1),
-#krsMahasiswa .form-select .form-group:nth-child(2) {
+  .page-content .form-select .form-group:nth-child(odd) {
+    padding: 0;
+  }
+  .page-content .form-select .form-group:nth-child(even) {
     padding: 0;
   }
 
@@ -62,22 +62,8 @@
     padding: 0;
   }
 
-  .page-content__akademik .form-select .form-group:nth-child(odd),
-.page-content__prodi .form-select .form-group:nth-child(odd) {
-    padding: 0;
-  }
-  .page-content__akademik .form-select .form-group:nth-child(even),
-.page-content__prodi .form-select .form-group:nth-child(even) {
-    padding: 0;
-  }
-
   .register_page .input-foto-siswa {
     min-height: 130px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid #c4c4c4;
-    border-radius: 8px;
   }
 
   .login_page .card .card-body,

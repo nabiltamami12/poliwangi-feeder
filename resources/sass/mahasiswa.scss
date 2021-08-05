@@ -10,15 +10,6 @@
     }
 }
 
-.card_presensi {
-    h6 {
-        @include mixintext(500, 0.875rem, 1.21em, $placeholder);
-    }
-    h5 {
-        @include mixintext(600, 1rem, 1.21em, $font-black);
-    }
-}
-
 .va_aktif {
     label {
         @include mixintext(500, 1rem, 1.21em, #000);
@@ -70,27 +61,6 @@
     }
 }
 
-#dashboard,
-#heregistrasi,
-#daftar_ulang,
-#mala_presensi,
-#mala_nilai {
-    .table-responsive {
-        .table-body {
-            td {
-                padding: 1.5rem 1.5rem;
-            }
-
-            tr:first-child,
-            tr:last-child {
-                td {
-                    padding: 1rem 1.5rem;
-                }
-            }
-        }
-    }
-}
-
 #form_cuti {
     .form-cuti {
         ::placeholder {
@@ -104,7 +74,7 @@
         @include mixintext(600, 1.125rem, 1.22em, $font-black);
     }
     button {
-        border-radius: 4px;
+        border-radius: 0.25rem;
     }
 
     .input-group {
@@ -123,7 +93,7 @@
             background-color: #fff;
             border: 2px solid #c4c4c4;
             border-left: 0;
-            border-radius: 0 8px 8px 0;
+            border-radius: 0 0.5rem 0.5rem 0;
         }
         &.active {
             .input-group-text {
@@ -188,7 +158,7 @@
             align-items: center;
             justify-content: center;
             border: 1px solid #c4c4c4;
-            border-radius: 8px;
+            border-radius: 0.5rem;
         }
         p {
             @include mixintext(500, 0.875rem, 1.21em, $danger);
@@ -217,7 +187,7 @@
             align-items: center;
             justify-content: center;
             border: 1px solid #c4c4c4;
-            border-radius: 8px;
+            border-radius: 0.5rem;
         }
         .iconify {
             font-size: 2rem;
@@ -229,7 +199,7 @@
     }
     .modal-footer {
         button {
-            border-radius: 4px;
+            border-radius: 0.25rem;
         }
     }
 }

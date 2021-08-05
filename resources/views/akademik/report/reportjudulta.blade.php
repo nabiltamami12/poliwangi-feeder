@@ -95,8 +95,7 @@
                 <td class="font-weight-bold text-capitalize">Dwi Rahmawati</td>
                 <td class="text-capitalize">berisikan judul tugas akhir mahasiswa</td>
                 <td>
-                  <span class="iconify color--success" data-icon="akar-icons:circle-check-fill"
-                    data-inline="true"></span>
+                  <span class="iconify text-success" data-icon="akar-icons:circle-check-fill" data-inline="true"></span>
                   <span>Diterima</span>
                 </td>
               </tr>
@@ -107,8 +106,7 @@
                 <td class="font-weight-bold text-capitalize">Dwi Rahmawati</td>
                 <td class="text-capitalize">berisikan judul tugas akhir mahasiswa</td>
                 <td>
-                  <span class="iconify color--success" data-icon="akar-icons:circle-check-fill"
-                    data-inline="true"></span>
+                  <span class="iconify text-success" data-icon="akar-icons:circle-check-fill" data-inline="true"></span>
                   <span>Diterima</span>
                 </td>
               </tr>
@@ -119,7 +117,7 @@
                 <td class="font-weight-bold text-capitalize">Dwi Rahmawati</td>
                 <td class="text-capitalize">berisikan judul tugas akhir mahasiswa</td>
                 <td>
-                  <span class="iconify color--danger" data-icon="bi:x-circle-fill" data-inline="true"></span>
+                  <span class="iconify text-danger" data-icon="bi:x-circle-fill" data-inline="true"></span>
                   <span>Ditolak</span>
                 </td>
               </tr>

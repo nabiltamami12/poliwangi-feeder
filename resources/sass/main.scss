@@ -13,6 +13,7 @@ body {
     background-color: #f1f9fe;
 }
 
+@import "./component";
 @import "./loading";
 
 .pointer {
@@ -51,72 +52,69 @@ body {
         max-height: auto;
     }
 
-    .sidenav-menu {
-        .navbar-nav {
-            margin-top: 10px;
+    .navbar-nav {
+        margin-top: 10px;
 
-            .nav-item {
+        .nav-item {
+            position: relative;
+            list-style: none;
+
+            .nav-item-dropdown-content {
                 position: relative;
-                list-style: none;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.5s ease-out;
+                padding-left: 35px;
+            }
 
-                .nav-item-dropdown-content {
-                    position: relative;
-                    max-height: 0;
-                    overflow: hidden;
-                    transition: max-height 0.5s ease-out;
-                    padding-left: 35px;
-                }
+            &.showsubmenu .nav-item-dropdown-content {
+                max-height: 500px;
+                transition: max-height 0.5s ease-in;
+            }
 
-                &.showsubmenu .nav-item-dropdown-content {
-                    max-height: 500px;
-                    transition: max-height 0.5s ease-in;
-                }
-
-                &.showsubmenu {
-                    .nav-link {
-                        .arrow {
-                            transition: -webkit-transform 0.5s ease-in-out;
-                            -webkit-transition: -webkit-transform 0.5s
-                                ease-in-out;
-                            transform: rotate(90deg);
-                        }
-                    }
-                }
-
+            &.showsubmenu {
                 .nav-link {
-                    position: relative;
-                    margin: 0 6px;
-                    padding: 17px;
-                    &.aktif {
-                        background-color: #f6f9fc;
-                        margin: 0 6px;
-                        border-radius: 0.5rem;
-                        .iconify {
-                            color: $button-blue;
-                        }
-                    }
-
-                    .iconify {
-                        color: $font-black;
-                        font-size: 15px;
-                    }
-
-                    .nav-link-text {
-                        @include mixintext(500, 0.875rem, 1.22em, $font-black);
-                        margin-left: 1.28em;
-                    }
-
                     .arrow {
-                        position: absolute;
-                        margin: auto 0;
-                        position: absolute;
-                        top: 0;
-                        bottom: 0;
-                        right: 25px;
                         transition: -webkit-transform 0.5s ease-in-out;
                         -webkit-transition: -webkit-transform 0.5s ease-in-out;
-                        transform: rotate(0deg);
+                        transform: rotate(90deg);
                     }
+                }
+            }
+
+            .nav-link {
+                position: relative;
+                margin: 0 6px;
+                padding: 17px;
+                &.aktif {
+                    background-color: #f6f9fc;
+                    margin: 0 6px;
+                    border-radius: 0.5rem;
+                    .iconify {
+                        color: $button-blue;
+                    }
+                }
+
+                .iconify {
+                    color: $font-black;
+                    font-size: 15px;
+                }
+
+                .nav-link-text {
+                    @include mixintext(500, 0.875rem, 1.22em, $font-black);
+                    margin-left: 1.28em;
+                }
+
+                .arrow {
+                    position: absolute;
+                    margin: auto 0;
+                    position: absolute;
+                    top: 0;
+                    bottom: 0;
+                    right: 25px;
+                    transition: -webkit-transform 0.5s ease-in-out;
+                    -webkit-transition: -webkit-transform 0.5s ease-in-out;
+                    transform: rotate(0deg);
                 }
             }
         }
@@ -157,6 +155,7 @@ nav#navbar {
 .page-content {
     position: relative;
     margin-top: -200px;
+
     .padding--big {
         padding: 1.5rem 1.625rem;
     }
@@ -170,19 +169,39 @@ nav#navbar {
         @include mixintext(500, 1.3125rem, 1.22em, $font-black);
         margin-top: 1.5rem;
     }
-    .color--success {
-        color: $success;
-    }
-    .color--danger {
-        color: $danger;
-    }
 
     .btn--blue {
         @include mixintext(500, 1rem, 1.21em, #fff);
-        padding: 10px 16px;
+        padding: 0.625rem 1rem;
         background-color: $button-blue;
         border-radius: 0.5rem;
         border: 1px solid $button-blue;
+    }
+
+    input {
+        @include mixintext(400, 0.875rem, 1.21em, $font-black);
+        border: 1px solid #c4c4c4;
+        border-radius: 0.5rem;
+        padding-left: 1.5rem;
+        // height: 49px;
+    }
+
+    label {
+        @include mixintext(500, 1rem, 1.25em, $font-black);
+    }
+
+    select {
+        border: 1px solid #999999;
+        border-radius: 0.5rem;
+        padding: 0.5rem 1rem;
+        background-image: url("https://api.iconify.design/bx/bx-chevron-down.svg?color=%23041F2F");
+        background-position: calc(100% - 16px), calc(100% - 24px);
+        background-repeat: no-repeat;
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        color: $font-black;
+        // height: 49px;
     }
 
     #pengumuman {
@@ -213,11 +232,11 @@ nav#navbar {
     #piechart {
         border-radius: 0.5rem;
         background-color: #fff;
-        margin-top: 32px;
-        padding: 30px 25px;
+        margin-top: 2rem;
+        padding: 1.875rem 1.5625rem;
         .page-heading {
             text-align: center;
-            margin-bottom: 18px;
+            margin-bottom: 1.125rem;
         }
 
         .data-piechart {
@@ -232,33 +251,12 @@ nav#navbar {
                 max-width: 100%;
             }
         }
-
-        // #piechart-mahasiswa {
-        //     -ms-transform: rotate(-108deg);
-        //     -webkit-transform: rotate(-108deg);
-        //     transform: rotate(-108deg);
-        // }
-        // #piechart-alumni {
-        //     -ms-transform: rotate(-80deg);
-        //     -webkit-transform: rotate(-80deg);
-        //     transform: rotate(-80deg);
-        // }
-        // #piechart-dosen {
-        //     -ms-transform: rotate(-65deg);
-        //     -webkit-transform: rotate(-65deg);
-        //     transform: rotate(-65deg);
-        // }
-        // #piechart-pegawai {
-        //     -ms-transform: rotate(-10deg);
-        //     -webkit-transform: rotate(-10deg);
-        //     transform: rotate(-10deg);
-        // }
     }
 
     #barchart {
-        margin-top: 32px;
+        margin-top: 2rem;
         .page-heading {
-            margin-bottom: 20px;
+            margin-bottom: 1.25rem;
         }
     }
 
@@ -342,11 +340,12 @@ nav#navbar {
         }
     }
 
+    // Table
     .table-responsive {
         border-radius: 0 0 0.5rem 0.5rem;
 
         .wordwrap {
-            max-width: 230px !important;
+            max-width: 250px !important;
             white-space: normal !important;
             overflow-wrap: break-all !important;
         }
@@ -360,6 +359,7 @@ nav#navbar {
         .table-header {
             background-color: #f6f9fc;
             th {
+                border: 0;
                 text-transform: uppercase;
                 @include mixintext(700, 0.6875rem, 1.18em, #adb5bd);
             }
@@ -384,9 +384,6 @@ nav#navbar {
             }
             tr.bordered {
                 border-bottom: 1px solid rgba(153, 153, 153, 0.5);
-            }
-            .text--blue {
-                color: $button-blue;
             }
             img,
             .iconify {
@@ -413,6 +410,20 @@ nav#navbar {
             }
             .status-success {
                 color: #34c38f;
+            }
+            .status_absensi {
+                span {
+                    @include mixintext(500, 0.875rem, 1.21em, $font-white);
+                }
+            }
+            input[type="text"] {
+                @include mixintext(600, 0.8125rem, 1.21em, $font-black);
+                width: 50px;
+                padding: 0;
+                text-align: center;
+                &:focus {
+                    border-color: $button-blue;
+                }
             }
         }
     }
@@ -492,12 +503,13 @@ nav#navbar {
             appearance: none;
             width: 100%;
             background-image: none;
-        }
-        select::-ms-expand {
-            display: none;
+            &::-ms-expand {
+                display: none;
+            }
         }
     }
 
+    // input type date
     .date_picker {
         position: relative;
     }
@@ -524,38 +536,15 @@ nav#navbar {
         }
     }
 
-    input {
-        @include mixintext(400, 0.875rem, 1.21em, $font-black);
-        border: 1px solid #c4c4c4;
-        border-radius: 0.5rem;
-        padding-left: 1.5rem;
-        // height: 49px;
-    }
-
-    label {
-        @include mixintext(500, 1rem, 1.25em, $font-black);
-    }
-
-    select {
-        border: 1px solid #999999;
-        border-radius: 0.5rem;
-        padding: 0.5rem 1rem;
-        background-image: url("https://api.iconify.design/bx/bx-chevron-down.svg?color=%23041F2F");
-        background-position: calc(100% - 16px), calc(100% - 24px);
-        background-repeat: no-repeat;
-        appearance: none;
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        color: $font-black;
-        // height: 49px;
-        option {
-            color: $font-black;
+    .card_presensi {
+        h6 {
+            @include mixintext(500, 0.875rem, 1.21em, $placeholder);
+        }
+        h5 {
+            @include mixintext(600, 1rem, 1.21em, $font-black);
         }
     }
-}
 
-.page-content__akademik,
-.page-content__prodi {
     .form-select {
         .form-row:nth-child(2) {
             margin-top: 1rem;
@@ -569,6 +558,25 @@ nav#navbar {
         select {
             padding-left: 1.5rem;
             @include mixintext(400, 0.875rem, 1.21em, $font-black);
+        }
+    }
+}
+
+#dashboard_mala,
+#daftar_ulang,
+#mala_presensi,
+#mala_nilai,
+#dashboard_dosen {
+    .table-body {
+        td {
+            padding: 1.5rem 1.5rem;
+        }
+
+        tr:first-child,
+        tr:last-child {
+            td {
+                padding: 1rem 1.5rem;
+            }
         }
     }
 }

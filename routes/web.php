@@ -110,8 +110,26 @@ Route::prefix('mahasiswalama')->group(function () {
             "title" => "mala-formcuti"
         ]);
     });
-   
+});
 
+Route::prefix('dosen')->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dosen.dashboardDosen', [
+            "title" => "dosen-dashboard"
+        ]);
+    });
+
+    Route::get('/presensi', function () {
+        return view('dosen.presensiDosen', [
+            "title" => "dosen-presensi"
+        ]);
+    });
+
+    Route::get('/penilaian', function () {
+        return view('dosen.inputNilai', [
+            "title" => "dosen-penilaian"
+        ]);
+    });
 });
 
 
