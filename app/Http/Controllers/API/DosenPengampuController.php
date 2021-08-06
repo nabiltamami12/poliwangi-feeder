@@ -66,6 +66,8 @@ class DosenPengampuController extends Controller
             
         ]);
 
+        
+
         if ($validated->fails()) {
             $this->status = 'error';
             $this->err = $validated->errors();
@@ -74,9 +76,21 @@ class DosenPengampuController extends Controller
             $this->data = $data;
             $this->status = "success";
         }
+        $data = DosenPengampu::select(
+            'dosen_pengampu.*',
+            'pegawai.nama',
+            'matakuliah.jurusan',
+            'matakuliah.program',
+            DB::raw('(select nomor from program_studi ps where ps.program = matakuliah.program and ps.jurusan = matakuliah.jurusan) as program_studi')
+        )
+        ->join("pegawai", "dosen_pengampu.dosen", "=", "pegawai.nomor",'right')
+        ->join("matakuliah", "dosen_pengampu.matakuliah", "=", "matakuliah.nomor",'right')
+        ->where("pegawai.staff", "=", 4)
+        ->where("dosen_pengampu.nomor",$this->data->id)
+        ->get();
         return response()->json([
             'status' => $this->status,
-            'data' => $this->data,
+            'data' => $data,
             'error' => $this->err
         ]);
     }
@@ -173,7 +187,7 @@ class DosenPengampuController extends Controller
      */
     public function destroy($id)
     {
-        $check = Kuliah::where('NOMOR', $id);
+        $check = DosenPengampu::where('NOMOR', $id);
 
         if ($check) {
             $this->status = "success";

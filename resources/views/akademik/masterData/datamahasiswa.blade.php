@@ -124,18 +124,9 @@ async function getData() {
 }
 function setDatatable() {
   var nomor = 1;
-
-  dt = $('#datatable').DataTable({
-      "processing": true,
-      "ajax": {
-        url: `${url_api}/mahasiswa?program=${$('#program').val()}&jurusan=${$('#jurusan').val()}&status=${$('#status').val()}&kelas=${$('#kelas').val()}`,
-        type: 'GET',
-        data: {},
-        headers: {
-          "Authorization": window.localStorage.getItem('token')
-        },
-      },
-      "aoColumnDefs": [
+  dt_url = `${url_api}/mahasiswa?program=${$('#program').val()}&jurusan=${$('#jurusan').val()}&status=${$('#status').val()}&kelas=${$('#kelas').val()}`;
+dt_opt = {
+  "columnDefs": [
         {
           "aTargets": [0],
           "mData": null,
@@ -190,26 +181,7 @@ function setDatatable() {
             return res;
           }
         },
-      ],
-      "sDom": 'lrtip',
-      "lengthChange": false,
-      "info": false,
-      "language": {
-        "paginate": {
-          "next": '&gt;',
-          "previous": '&lt;'
-        },
-        "processing": "Loading ..."
-      }
-    })
-    dt.on('order.dt search.dt', function() {
-      dt.column(0, {
-        search: 'applied',
-        order: 'applied'
-      }).nodes().each(function(cell, i) {
-        cell.innerHTML = i + 1;
-      });
-    }).draw();
+      ]}
 }
 </script>
 @endsection
