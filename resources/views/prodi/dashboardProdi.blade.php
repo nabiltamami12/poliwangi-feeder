@@ -6,7 +6,7 @@
 <header class="header"></header>
 
 <!-- Page content -->
-<section class="page-content page-content__akademik container-fluid" id="akademik_dashboard">
+<section class="page-content  container-fluid" id="akademik_dashboard">
   <div class="row">
     <div class="col">
       <div id="pengumuman" class="carousel slide" data-ride="carousel">

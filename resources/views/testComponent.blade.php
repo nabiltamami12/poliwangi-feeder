@@ -46,27 +46,27 @@
 
 @section('iconButton')
 <button class="btn btn-icon btn-primary mt-3" type="button">
-  <span class="btn-inner--icon"><span class="iconify" data-icon="bx:bx-smile" data-inline="true"></span></span>
+  <span class="btn-inner--icon"><span class="iconify" data-icon="bx:bx-smile"></span></span>
   <span class="btn-inner--text">Primary</span>
 </button>
 
 <button class="btn btn-icon btn-success mt-3" type="button">
-  <span class="btn-inner--icon"><span class="iconify" data-icon="bx:bx-check-double" data-inline="true"></span></span>
+  <span class="btn-inner--icon"><span class="iconify" data-icon="bx:bx-check-double"></span></span>
   <span class="btn-inner--text">Success</span>
 </button>
 
 <button class="btn btn-icon btn-warning mt-3" type="button">
-  <span class="btn-inner--icon"><span class="iconify" data-icon="bx:bx-error" data-inline="true"></span></span>
+  <span class="btn-inner--icon"><span class="iconify" data-icon="bx:bx-error"></span></span>
   <span class="btn-inner--text">Warning</span>
 </button>
 
 <button class="btn btn-icon btn-danger mt-3" type="button">
-  <span class="btn-inner--icon"><span class="iconify" data-icon="bx:bx-block" data-inline="true"></span></span>
+  <span class="btn-inner--icon"><span class="iconify" data-icon="bx:bx-block"></span></span>
   <span class="btn-inner--text">Danger</span>
 </button>
 
 <button class="btn btn-icon btn-light mt-3" type="button">
-  <span class="btn-inner--icon"><span class="iconify" data-icon="bx:bx-hourglass" data-inline="true"></span></span>
+  <span class="btn-inner--icon"><span class="iconify" data-icon="bx:bx-hourglass"></span></span>
   <span class="btn-inner--text">Loading</span>
 </button>
 
@@ -132,7 +132,7 @@
   <button type="button" class="btn btn-primary">Primary</button>
   <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"
     aria-haspopup="true" aria-expanded="false">
-    <span class="iconify" data-icon="bi:chevron-down" data-inline="true"></span>
+    <span class="iconify" data-icon="bi:chevron-down"></span>
   </button>
   <div class="dropdown-menu">
     <a class="dropdown-item" href="#">Action</a>
@@ -147,7 +147,7 @@
   <button type="button" class="btn btn-secondary">Secondary</button>
   <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"
     aria-haspopup="true" aria-expanded="false">
-    <span class="iconify" data-icon="bi:chevron-down" data-inline="true"></span>
+    <span class="iconify" data-icon="bi:chevron-down"></span>
   </button>
   <div class="dropdown-menu">
     <a class="dropdown-item" href="#">Action</a>
@@ -162,7 +162,7 @@
   <button type="button" class="btn btn-success">Success</button>
   <button type="button" class="btn btn-success dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"
     aria-haspopup="true" aria-expanded="false">
-    <span class="iconify" data-icon="bi:chevron-down" data-inline="true"></span>
+    <span class="iconify" data-icon="bi:chevron-down"></span>
   </button>
   <div class="dropdown-menu">
     <a class="dropdown-item" href="#">Action</a>
@@ -177,7 +177,7 @@
   <button type="button" class="btn btn-info">Info</button>
   <button type="button" class="btn btn-info dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"
     aria-haspopup="true" aria-expanded="false">
-    <span class="iconify" data-icon="bi:chevron-down" data-inline="true"></span>
+    <span class="iconify" data-icon="bi:chevron-down"></span>
   </button>
   <div class="dropdown-menu">
     <a class="dropdown-item" href="#">Action</a>
@@ -192,7 +192,7 @@
   <button type="button" class="btn btn-danger">Danger</button>
   <button type="button" class="btn btn-danger dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"
     aria-haspopup="true" aria-expanded="false">
-    <span class="iconify" data-icon="bi:chevron-down" data-inline="true"></span>
+    <span class="iconify" data-icon="bi:chevron-down"></span>
   </button>
   <div class="dropdown-menu">
     <a class="dropdown-item" href="#">Action</a>
@@ -207,7 +207,7 @@
   <button type="button" class="btn btn-warning">Warning</button>
   <button type="button" class="btn btn-warning dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"
     aria-haspopup="true" aria-expanded="false">
-    <span class="iconify" data-icon="bi:chevron-down" data-inline="true"></span>
+    <span class="iconify" data-icon="bi:chevron-down"></span>
   </button>
   <div class="dropdown-menu">
     <a class="dropdown-item" href="#">Action</a>
@@ -224,7 +224,7 @@
   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
     aria-haspopup="true" aria-expanded="false">
     Dropdown button
-    <span class="iconify" data-icon="bi:chevron-down" data-inline="true"></span>
+    <span class="iconify" data-icon="bi:chevron-down"></span>
   </button>
   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
     <a class="dropdown-item" href="#">Action</a>
@@ -237,7 +237,7 @@
   <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
     aria-haspopup="true" aria-expanded="false">
     Dropdown link
-    <span class="iconify" data-icon="bi:chevron-down" data-inline="true"></span>
+    <span class="iconify" data-icon="bi:chevron-down"></span>
   </a>
 
   <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -254,7 +254,7 @@
   <button class="btn btn-secondary btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true"
     aria-expanded="false">
     Large button
-    <span class="iconify ml-2" data-icon="bi:chevron-down" data-inline="true"></span>
+    <span class="iconify ml-2" data-icon="bi:chevron-down"></span>
   </button>
   <div class="dropdown-menu">
     <a class="dropdown-item" href="#">Action</a>
@@ -268,7 +268,7 @@
   </button>
   <button type="button" class="btn btn-lg btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"
     aria-haspopup="true" aria-expanded="false">
-    <span class="iconify" data-icon="bi:chevron-down" data-inline="true"></span>
+    <span class="iconify" data-icon="bi:chevron-down"></span>
   </button>
   <div class="dropdown-menu">
     <a class="dropdown-item" href="#">Action</a>
@@ -284,7 +284,7 @@
   <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true"
     aria-expanded="false">
     Small button
-    <span class="iconify ml-2" data-icon="bi:chevron-down" data-inline="true"></span>
+    <span class="iconify ml-2" data-icon="bi:chevron-down"></span>
   </button>
   <div class="dropdown-menu">
     <a class="dropdown-item" href="#">Action</a>
@@ -298,7 +298,7 @@
   </button>
   <button type="button" class="btn btn-sm btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"
     aria-haspopup="true" aria-expanded="false">
-    <span class="iconify" data-icon="bi:chevron-down" data-inline="true"></span>
+    <span class="iconify" data-icon="bi:chevron-down"></span>
   </button>
   <div class="dropdown-menu">
     <a class="dropdown-item" href="#">Action</a>
@@ -634,8 +634,8 @@
           <td class="text-center">Beasiswa Kampus</td>
           <td>Didapatkan Pada 12/04/21</td>
           <td class="aksi text-center">
-            <span class="iconify edit-icon" data-icon="bx:bx-edit-alt" data-inline="true"></span>
-            <span class="iconify delete-icon" data-icon="bx:bx-trash" data-inline="true"></span>
+            <span class="iconify edit-icon" data-icon="bx:bx-edit-alt"></span>
+            <span class="iconify delete-icon" data-icon="bx:bx-trash"></span>
           </td>
         </tr>
         <tr>
@@ -646,8 +646,8 @@
           <td class="text-center">Beasiswa Kampus</td>
           <td>Didapatkan Pada 12/04/21</td>
           <td class="aksi text-center">
-            <span class="iconify edit-icon" data-icon="bx:bx-edit-alt" data-inline="true"></span>
-            <span class="iconify delete-icon" data-icon="bx:bx-trash" data-inline="true"></span>
+            <span class="iconify edit-icon" data-icon="bx:bx-edit-alt"></span>
+            <span class="iconify delete-icon" data-icon="bx:bx-trash"></span>
           </td>
         </tr>
       </tbody>

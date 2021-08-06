@@ -8,12 +8,12 @@
 </header>
 
 <!-- Page content -->
-<section class="page-content page-content__akademik container-fluid" id="akademik_datajurusan">
+<section class="page-content  container-fluid" id="akademik_datajurusan">
   <div class="row">
     <div class="col-xl-12">
       <div class="card padding--small">
 
-        <div class="card-header p-0 m-0 border-0 rounded-0">
+        <div class="card-header p-0 m-0 border-0 ">
           <div class="row align-items-center">
             <div class="col">
               <h2 class="mb-0">{{ ($id==null)?"TAMBAH":"UBAH" }} DATA DOSEN PENGAMPU</h2>
@@ -21,12 +21,12 @@
           </div>
         </div>
 
-        <hr class="mt">
+        <hr class="my-4">
 
         <form id="form_cu">
           <input type="hidden" id="nomor" name="nomor">
           <div class="form-row">
-            
+
             <div class="col-sm-12 col-12">
               <div class="form-group row mb-0">
                 <label>Dosen</label>
@@ -36,52 +36,53 @@
             <div class="col-sm-6 col-12">
               <div class="form-group row mb-0">
                 <label>
-                    Semester
-                    <select class="form-control">
-                        <option value="1"> 1 </option>
-                        <option value="2"> 2 </option>
-                        <option value="3"> 3 </option>
-                    </select>
+                  Semester
+                  <select class="form-control">
+                    <option value="1"> 1 </option>
+                    <option value="2"> 2 </option>
+                    <option value="3"> 3 </option>
+                  </select>
                 </label>
               </div>
             </div>
             <div class="col-sm-6 col-12">
               <div class="form-group row mb-0">
-              <button type="submit" class="btn--blue w-100 simpanData-btn add-btn">Tambah Semester</button>
+                <button type="submit" class="btn-primary w-100 simpanData-btn ">Tambah Semester</button>
               </div>
             </div>
             <div class="col-sm-12 col-12">
-            <div class="form-row">
+              <div class="form-row">
                 <div class="col-sm-12 col-12">
-                    <div class="form-group row mb-0">
-                        <label>Matakuliah</label>
-                    </div>
+                  <div class="form-group row mb-0">
+                    <label>Matakuliah</label>
+                  </div>
                 </div>
                 <div class="col-sm-10 col-12">
-                    <div class="form-group row mb-0">
-                        <select class="form-control" id="matkul_1">
+                  <div class="form-group row mb-0">
+                    <select class="form-control" id="matkul_1">
 
-                        </select>
-                    </div>
+                    </select>
+                  </div>
                 </div>
                 <div class="col-sm-2 col-12">
-                    <div class="form-group row mb-0">
-                        <button type="button" class="btn btn-danger">Hapus</button>
-                    </div>
+                  <div class="form-group row mb-0">
+                    <button type="button" class="btn btn-danger">Hapus</button>
+                  </div>
                 </div>
-          </div>
+              </div>
             </div>
           </div>
-          <hr class="mt">
-          <button type="submit" class="btn--blue w-100 simpanData-btn add-btn">{{ ($id==null)?"Tambah":"Ubah" }} Data</button>
+          <hr class="my-4">
+          <button type="submit" class="btn-primary w-100 simpanData-btn ">{{ ($id==null)?"Tambah":"Ubah" }}
+            Data</button>
         </form>
-        
+
       </div>
     </div>
   </div>
 </section>
 <script>
-$(document).ready(function() {
+  $(document).ready(function() {
     var id = "{{$id}}";
     getData(id);        
 

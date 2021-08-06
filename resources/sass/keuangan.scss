@@ -7,16 +7,6 @@
         border-radius: 8px;
         border: 0;
     }
-    .btn--info {
-        @include mixintext(500, 0.75rem, 1.25em, $font-black);
-        background-color: $button-info;
-    }
-    .btn--blue {
-        @include mixintext(500, 0.75rem, 1.25em, #fff);
-        span {
-            color: #fff !important;
-        }
-    }
 
     .modal {
         .modal-header {

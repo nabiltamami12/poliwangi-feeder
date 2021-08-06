@@ -10,26 +10,26 @@
     <div class="col-xl-12">
       <div class="card shadow padding--small">
 
-        <div class="card-header p-0 m-0 border-0 rounded-0">
+        <div class="card-header p-0 m-0 border-0 ">
           <div class="row align-items-center">
             <div class="col-12 col-md-6">
               <h2 class="mb-0 text-center text-md-left">Data Beasiswa</h2>
             </div>
             <div class="col-12 col-md-6 text-center text-md-right mt-3 mt-md-0">
-              <button type="button" class="btn--blue">
-                <span class="iconify mr-2" data-icon="bx:bx-download" data-inline="true"></span>
+              <button type="button" class="btn btn-primary">
+                <span class="iconify mr-2" data-icon="bx:bx-download"></span>
                 <span>Import</span>
               </button>
-              <button type="button" class="btn--blue ml-3">
-                <span class="iconify mr-2" data-icon="bx:bx-upload" data-inline="true"></span>
+              <button type="button" class="btn btn-primary ml-3">
+                <span class="iconify mr-2" data-icon="bx:bx-upload"></span>
                 <span>Eksport</span>
               </button>
             </div>
           </div>
 
-          <hr class="mt">
+          <hr class="my-4">
 
-          <div class="row align-items-center padding--small py-0 filterSearch-data">
+          <div class="row align-items-center padding--small py-0 ">
             <div class="col-sm-6 col-12">
               <div class="form-group row">
                 <select class="form-control" id="dataperhalaman">
@@ -47,7 +47,7 @@
                 <input type="search" class="form-control" id="searchdata" placeholder="Pencarian ...">
                 <div class="input-group-prepend">
                   <div class="input-group-text search-icon">
-                    <span class="iconify" data-icon="fluent:search-32-regular" data-inline="true"></span>
+                    <span class="iconify" data-icon="fluent:search-32-regular"></span>
                   </div>
                 </div>
               </div>
@@ -78,8 +78,8 @@
                 <td class="text-center">Beasiswa Kampus</td>
                 <td class="text-capitalize">didapatkan pada 12/04/21</td>
                 <td class="text-center">
-                  <span class="iconify edit-icon" data-icon="bx:bx-edit-alt" data-inline="true"></span>
-                  <span class="iconify delete-icon" data-icon="bx:bx-trash" data-inline="true"></span>
+                  <span class="iconify edit-icon" data-icon="bx:bx-edit-alt"></span>
+                  <span class="iconify delete-icon" data-icon="bx:bx-trash"></span>
                 </td>
               </tr>
 
@@ -91,8 +91,8 @@
                 <td class="text-center">Beasiswa Kampus</td>
                 <td class="text-capitalize">didapatkan pada 12/04/21</td>
                 <td class="text-center">
-                  <span class="iconify edit-icon" data-icon="bx:bx-edit-alt" data-inline="true"></span>
-                  <span class="iconify delete-icon" data-icon="bx:bx-trash" data-inline="true"></span>
+                  <span class="iconify edit-icon" data-icon="bx:bx-edit-alt"></span>
+                  <span class="iconify delete-icon" data-icon="bx:bx-trash"></span>
                 </td>
               </tr>
 
@@ -104,8 +104,8 @@
                 <td class="text-center">Beasiswa Kampus</td>
                 <td class="text-capitalize">didapatkan pada 12/04/21</td>
                 <td class="text-center">
-                  <span class="iconify edit-icon" data-icon="bx:bx-edit-alt" data-inline="true"></span>
-                  <span class="iconify delete-icon" data-icon="bx:bx-trash" data-inline="true"></span>
+                  <span class="iconify edit-icon" data-icon="bx:bx-edit-alt"></span>
+                  <span class="iconify delete-icon" data-icon="bx:bx-trash"></span>
                 </td>
               </tr>
 
@@ -117,8 +117,8 @@
                 <td class="text-center">Beasiswa Kampus</td>
                 <td class="text-capitalize">didapatkan pada 12/04/21</td>
                 <td class="text-center">
-                  <span class="iconify edit-icon" data-icon="bx:bx-edit-alt" data-inline="true"></span>
-                  <span class="iconify delete-icon" data-icon="bx:bx-trash" data-inline="true"></span>
+                  <span class="iconify edit-icon" data-icon="bx:bx-edit-alt"></span>
+                  <span class="iconify delete-icon" data-icon="bx:bx-trash"></span>
                 </td>
               </tr>
 
@@ -130,8 +130,8 @@
                 <td class="text-center">Beasiswa Kampus</td>
                 <td class="text-capitalize">didapatkan pada 12/04/21</td>
                 <td class="text-center">
-                  <span class="iconify edit-icon" data-icon="bx:bx-edit-alt" data-inline="true"></span>
-                  <span class="iconify delete-icon" data-icon="bx:bx-trash" data-inline="true"></span>
+                  <span class="iconify edit-icon" data-icon="bx:bx-edit-alt"></span>
+                  <span class="iconify delete-icon" data-icon="bx:bx-trash"></span>
                 </td>
               </tr>
 
@@ -143,8 +143,8 @@
                 <td class="text-center">Beasiswa Kampus</td>
                 <td class="text-capitalize">didapatkan pada 12/04/21</td>
                 <td class="text-center">
-                  <span class="iconify edit-icon" data-icon="bx:bx-edit-alt" data-inline="true"></span>
-                  <span class="iconify delete-icon" data-icon="bx:bx-trash" data-inline="true"></span>
+                  <span class="iconify edit-icon" data-icon="bx:bx-edit-alt"></span>
+                  <span class="iconify delete-icon" data-icon="bx:bx-trash"></span>
                 </td>
               </tr>
 
@@ -156,8 +156,8 @@
                 <td class="text-center">Beasiswa Kampus</td>
                 <td class="text-capitalize">didapatkan pada 12/04/21</td>
                 <td class="text-center">
-                  <span class="iconify edit-icon" data-icon="bx:bx-edit-alt" data-inline="true"></span>
-                  <span class="iconify delete-icon" data-icon="bx:bx-trash" data-inline="true"></span>
+                  <span class="iconify edit-icon" data-icon="bx:bx-edit-alt"></span>
+                  <span class="iconify delete-icon" data-icon="bx:bx-trash"></span>
                 </td>
               </tr>
 
@@ -169,8 +169,8 @@
                 <td class="text-center">Beasiswa Kampus</td>
                 <td class="text-capitalize">didapatkan pada 12/04/21</td>
                 <td class="text-center">
-                  <span class="iconify edit-icon" data-icon="bx:bx-edit-alt" data-inline="true"></span>
-                  <span class="iconify delete-icon" data-icon="bx:bx-trash" data-inline="true"></span>
+                  <span class="iconify edit-icon" data-icon="bx:bx-edit-alt"></span>
+                  <span class="iconify delete-icon" data-icon="bx:bx-trash"></span>
                 </td>
               </tr>
 
@@ -182,8 +182,8 @@
                 <td class="text-center">Beasiswa Kampus</td>
                 <td class="text-capitalize">didapatkan pada 12/04/21</td>
                 <td class="text-center">
-                  <span class="iconify edit-icon" data-icon="bx:bx-edit-alt" data-inline="true"></span>
-                  <span class="iconify delete-icon" data-icon="bx:bx-trash" data-inline="true"></span>
+                  <span class="iconify edit-icon" data-icon="bx:bx-edit-alt"></span>
+                  <span class="iconify delete-icon" data-icon="bx:bx-trash"></span>
                 </td>
               </tr>
             </tbody>

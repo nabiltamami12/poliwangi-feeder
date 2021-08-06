@@ -18,14 +18,14 @@
         </div>
         <hr class="my-4">
         <div class="card-body p-0">
-          <button type="button" class="btn--blue w-100">Generate VA Pembayaran</button>
+          <button type="button" class="btn-primary w-100">Generate VA Pembayaran</button>
           <hr class="mt-4">
           <div class="va_aktif">
             <div class="form-group">
               <label class="mt-4-5">VA untuk Pembayaran UKT</label>
               <div class="field_kode mt-2">
                 <input type="text" class="form-control pl-2" id="va-aktif" value="1281928746273601" readonly>
-                <button class="salin_kode btn--blue">Salin Kode</button>
+                <button class="salin_kode btn-primary">Salin Kode</button>
               </div>
             </div>
           </div>

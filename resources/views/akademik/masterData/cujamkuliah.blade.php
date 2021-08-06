@@ -8,12 +8,12 @@
 </header>
 
 <!-- Page content -->
-<section class="page-content page-content__akademik container-fluid" id="akademik_datajamkuliah">
+<section class="page-content  container-fluid" id="akademik_datajamkuliah">
   <div class="row">
     <div class="col-xl-12">
       <div class="card padding--small">
 
-        <div class="card-header p-0 m-0 border-0 rounded-0">
+        <div class="card-header p-0 m-0 border-0 ">
           <div class="row align-items-center">
             <div class="col">
               <h2 class="mb-0">{{ ($id==null)?"TAMBAH":"UBAH" }} DATA JAM KULIAH</h2>
@@ -21,15 +21,15 @@
           </div>
         </div>
 
-        <hr class="mt">
+        <hr class="my-4">
 
-        <form id="form_cu" class="form-input mt-0">
+        <form id="form_cu" class="form-input">
           <input type="hidden" id="nomor" name="nomor">
           <div class="form-row">
             <div class="col-sm-12 col-12">
               <div class="form-group row mb-0">
                 <label>Khusus</label>
-                <input type="text" class="form-control" id="khusus" name="khusus" >
+                <input type="text" class="form-control" id="khusus" name="khusus">
               </div>
             </div>
             <div class="col-sm-12 col-12">
@@ -57,13 +57,13 @@
             <div class="col-sm-6 col-12">
               <div class="form-group row mb-0">
                 <label>Kode</label>
-                <input type="text" class="form-control" id="kode" name="kode" >
+                <input type="text" class="form-control" id="kode" name="kode">
               </div>
             </div>
             <div class="col-sm-6 col-12">
               <div class="form-group row mb-0">
                 <label>Jam</label>
-                <input type="text" class="form-control" id="jam" name="jam" >
+                <input type="text" class="form-control" id="jam" name="jam">
               </div>
             </div>
             <div class="col-sm-6 col-12">
@@ -76,16 +76,17 @@
               </div>
             </div>
           </div>
-          <hr class="mt">
-          <button type="submit" class="btn--blue w-100 simpanData-btn add-btn">{{ ($id==null)?"Tambah":"Ubah" }} Data</button>
+          <hr class="my-4">
+          <button type="submit" class="btn-primary w-100 simpanData-btn ">{{ ($id==null)?"Tambah":"Ubah" }}
+            Data</button>
         </form>
-        
+
       </div>
     </div>
   </div>
 </section>
 <script>
-$(document).ready(function() {
+  $(document).ready(function() {
     var id = "{{$id}}";
     getData(id);        
 

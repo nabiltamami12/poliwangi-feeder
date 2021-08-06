@@ -31,7 +31,7 @@
     <div class="col-xl-12">
       <div class="card shadow padding--small">
 
-        <div class="card-header p-0 m-0 border-0 rounded-0">
+        <div class="card-header p-0 m-0 border-0">
           <div class="row align-items-center">
             <div class="col-12 col-md-6">
               <h2 class="mb-0 text-center text-md-left">Data Ruang</h2>
@@ -44,7 +44,7 @@
             </div>
           </div>
 
-          <hr class="mt">
+          <hr class="my-4">
 
           <div class="row align-items-center padding--small py-0 filterSearch-data">
             <div class="col-sm-6 col-12">

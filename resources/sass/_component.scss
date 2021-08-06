@@ -112,11 +112,35 @@ h6,
     background-color: $danger !important;
 }
 
+// BORDER RADIUS
+.rounded {
+    border-radius: 0.5rem !important;
+}
+.rounded-top {
+    border-top-left-radius: 0.5rem !important;
+    border-top-right-radius: 0.5rem !important;
+}
+
+.rounded-right {
+    border-top-right-radius: 0.5rem !important;
+    border-bottom-right-radius: 0.5rem !important;
+}
+
+.rounded-bottom {
+    border-bottom-right-radius: 0.5rem !important;
+    border-bottom-left-radius: 0.5rem !important;
+}
+
+.rounded-left {
+    border-top-left-radius: 0.5rem !important;
+    border-bottom-left-radius: 0.5rem !important;
+}
+
 // BUTTON
 .btn {
     font-family: "Montserrat", sans-serif;
     font-size: 1rem;
-    font-weight: 500;
+    font-weight: 400 !important;
     line-height: 1.21em;
     padding: 0.625rem 1rem;
     border-radius: 0.5rem;
@@ -125,10 +149,6 @@ h6,
         text-decoration: none;
         color: $font-white;
     }
-}
-
-.btn_radius-sm {
-    border-radius: 0.25rem;
 }
 
 .btn-primary {
@@ -376,29 +396,6 @@ h6,
     }
 }
 
-// FORM
-.form-group {
-    margin-bottom: 0;
-}
-.form-control-label,
-.form-check-label {
-    font-size: 0.1rem;
-    font-weight: 500;
-    line-height: 1.21em;
-    color: $font-black;
-}
-
-.form-control {
-    font-size: 0.8125rem;
-    font-weight: 400;
-    line-height: 1.21em;
-    display: block;
-    padding: 1rem 1.5rem;
-    color: $font-black;
-    border: 1px solid #c4c4c4;
-    box-shadow: none;
-}
-
 option {
     font-size: 1rem;
     font-weight: 400;
@@ -447,149 +444,57 @@ option {
     box-shadow: 2px 2px 16px rgba(0, 0, 0, 0.1) !important;
 }
 
-// CHECKBOX
-.custom-checkbox {
-    display: flex;
-    align-items: center;
-    .custom-control-input ~ .custom-control-label::before {
-        top: 0;
-        border-color: #dedede;
-        background-color: #b5b5b5;
-    }
-    .custom-control-input:checked ~ .custom-control-label::before {
-        border-color: #556ee6;
-        background-image: url("https://api.iconify.design/bx/bx-check.svg?width=15&height=15&color=white");
-        background-color: #556ee6;
-        box-shadow: 0 3px 2px rgba(233, 236, 239, 0.05);
-    }
-    .checkbox-success.custom-control-input:checked
-        ~ .custom-control-label::before {
-        border-color: $success;
-        background-color: $success;
-    }
-    .custom-control-input:focus:not(:checked) ~ .custom-control-label::before {
-        border-color: #dedede;
-    }
-    .custom-control-input:not(:disabled):active
-        ~ .custom-control-label::before {
-        color: #fff;
-        border-color: #556ee6;
-        background-color: #556ee6;
-        box-shadow: 0 3px 2px rgba(233, 236, 239, 0.05);
-    }
-}
-
-.custom-control-input {
-    position: absolute;
-    z-index: -1;
-    left: 0;
-    width: 1rem;
-    height: 1.25rem;
-    opacity: 0;
-}
-
-.custom-control-label {
-    position: relative;
+// FORM
+.form-group {
     margin-bottom: 0;
-    vertical-align: baseline;
-    font-size: 0.8125rem;
-    font-weight: 600;
-    line-height: 1rem;
-    color: #495057;
 }
 
-.custom-control-input[disabled] ~ .custom-control-label,
-.custom-control-input:disabled ~ .custom-control-label {
-    color: #495057;
+.form-control {
+    @include mixintext(400, 0.875rem, 1.21em, $font-black !important);
+    display: block;
+    padding-left: 1.5rem;
+    color: $font-black;
+    border: 1px solid #c4c4c4;
+    box-shadow: none;
+    border-radius: 0.5rem;
 }
 
-.custom-control-input[disabled] ~ .custom-control-label::before,
-.custom-control-input:disabled ~ .custom-control-label::before {
-    background-color: #ccc;
+label {
+    @include mixintext(500, 1rem, 1.25em, $font-black);
 }
 
-// Radio Button
-.default-radio input[type="radio"] {
-    /* remove standard background appearance */
+select {
+    background-image: url("https://api.iconify.design/bx/bx-chevron-down.svg?color=%23041F2F");
+    background-position: calc(100% - 16px), calc(100% - 24px);
+    background-repeat: no-repeat;
+    appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
-    appearance: none;
-    /* create custom radiobutton appearance */
-    display: inline-block;
-    width: 15px;
-    height: 15px;
-    padding: 2.5px;
-    /* background-color only for content */
-    background-clip: content-box;
-    border: 1px solid #b5b5b5;
-    border-radius: 50%;
-    &:checked {
-        background-color: #666666;
-    }
-    &.radio-primary:checked {
-        border: 1px solid $primary;
-        background-color: $primary;
-    }
 }
 
-// custom radio
-.custom-radio input[type="radio"]:checked,
-.custom-radio input[type="radio"]:not(:checked) {
+// input type date
+.date_picker {
+    position: relative;
+}
+
+#txtDate {
+    background-color: #fff;
+    cursor: default;
+}
+
+.date_button {
     position: absolute;
-    left: -9999px;
-    & + .custom-control-label,
-    & + .custom-control-label {
-        position: relative;
-        padding-left: 20px;
-        cursor: pointer;
-        display: inline-block;
-        color: #666;
+    top: 0;
+    right: 0;
+    background-color: $primary;
+    width: 48px;
+    height: 100%;
+    border-radius: 0 0.5rem 0.5rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .iconify {
+        font-size: 1.5rem;
+        color: #fff;
     }
-
-    & + .custom-control-label:before,
-    & + .custom-control-label:before {
-        content: "";
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 15px;
-        height: 15px;
-        border: 0;
-        border-radius: 50%;
-    }
-    & + .custom-control-label:after,
-    & + .custom-control-label:after {
-        content: "";
-        width: 7px;
-        height: 7px;
-        background: #fff;
-        position: absolute;
-        top: 4px;
-        left: 4px;
-        border-radius: 100%;
-        -webkit-transition: all 0.2s ease;
-        transition: all 0.2s ease;
-    }
-}
-
-.custom-radio .radio-primary:checked + .custom-control-label:before,
-.custom-radio .radio-primary:not(:checked) + .custom-control-label:before {
-    background: $primary;
-}
-
-.custom-radio .radio-success:checked + .custom-control-label:before,
-.custom-radio .radio-success:not(:checked) + .custom-control-label:before {
-    background: $success;
-}
-
-.custom-radio input[type="radio"]:not(:checked) + .custom-control-label:after {
-    opacity: 0;
-    -webkit-transform: scale(0);
-    transform: scale(0);
-}
-
-.custom-radio input[type="radio"]:checked + .custom-control-label:after {
-    opacity: 1;
-    -webkit-transform: scale(1);
-    transform: scale(1);
 }

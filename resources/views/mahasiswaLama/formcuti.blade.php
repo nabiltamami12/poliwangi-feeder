@@ -60,7 +60,7 @@
                 placeholder="Ada pekerjaan yang harus dikerjakan fulltime">
             </div>
           </div>
-          <button type="submit" class="btn btn--blue w-100 mt-4-5">Ajukan Cuti</button>
+          <button type="submit" class="btn btn-primary w-100 mt-4-5">Ajukan Cuti</button>
         </form>
       </div>
     </div>

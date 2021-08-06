@@ -26,6 +26,10 @@
     type="text/css">
   <!-- Iconify -->
   <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
+  <!-- Bootstrap Datepicker -->
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css"
+    type="text/css" />
   <!-- Argon CSS -->
   <link rel="stylesheet" href="{{ url('argon') }}/assets/css/argon.css?v=1.2.0" type="text/css">
   <script src="{{ url('js/util.js') }}"></script>
@@ -89,9 +93,16 @@
                         <input type="text" class="form-control" id="nama-lengkap" placeholder="Nama Lengkap" required>
                       </div>
                       <div class="form-group mt-3">
-                        <label for="exampleFormControlInput1">Tanggal Lahir<span>*</span></label>
-                        <input type="date" class="form-control" id="exampleFormControlInput1"
-                          placeholder="name@example.com" required>
+                        <label>Tanggal Lahir<span>*</span></label>
+                        <div class="d-flex align-items-center date_picker">
+                          <input id="txtDate" type="text" class="form-control date-input cursor_default"
+                            placeholder="DD/MM/YYYY" readonly />
+                          <label class="input-group-btn" for="txtDate">
+                            <span class="date_button">
+                              <span class="iconify" data-icon="bx:bx-calendar" data-inline="false"></span>
+                            </span>
+                          </label>
+                        </div>
                       </div>
                       <div class="form-group mt-3">
                         <label for="asal-sekolah">Asal Sekolah<span>*</span></label>
@@ -135,7 +146,7 @@
                   </div>
                 </div>
               </div>
-              <button type="submit" class="btn btn--blue w-100 mt-4">Submit</button>
+              <button type="submit" class="btn btn-primary w-100 mt-4 rounded-sm">Submit</button>
 
             </div>
           </div>
@@ -156,9 +167,18 @@
   <script src="{{ url('argon') }}/assets/vendor/js-cookie/js.cookie.js"></script>
   <script src="{{ url('argon') }}/assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js"></script>
   <script src="{{ url('argon') }}/assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js"></script>
+  <!-- Bootstrap Datepicker -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.js"
+    type="text/javascript"></script>
   <!-- Argon JS -->
   <script src="{{ url('argon') }}/assets/js/argon.js?v=1.2.0"></script>
   <script type="text/javascript">
+    $(document).ready(function(){
+      $("#txtDate").datepicker({
+        format: "dd MM yyyy",
+      });
+    })
+
     function auth() {
       window.location = "{{ url('/admin/dashboard') }}";
     }

@@ -23,14 +23,14 @@
         <ul class="navbar-nav">
           <li class="nav-item">
             <a class="nav-link {{($title === "maba-dashboard") ? 'aktif' : ''}}" href="/mahasiswabaru/dashboard">
-              <span class="iconify" data-icon="bx-bx-home-circle" data-inline="true"></span>
+              <span class="iconify" data-icon="bx-bx-home-circle"></span>
               <span class="nav-link-text">Dashboard</span>
             </a>
           </li>
 
           <li class="nav-item">
             <div class="nav-link {{($title === "maba-mahasiswa") ? 'aktif' : ''}}">
-              <span class="iconify" data-icon="bx:bx-user-pin" data-inline="true"></span>
+              <span class="iconify" data-icon="bx:bx-user-pin"></span>
               <span class="nav-link-text">Mahasiswa Baru<img src="{{ url('images') }}/sidebar-right.png" class="arrow"
                   alt=""></span>
             </div>

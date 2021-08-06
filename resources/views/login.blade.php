@@ -89,12 +89,14 @@
                       required autocomplete="current-password">
                   </div>
                 </div>
-                <div class="custom-control custom-checkbox">
+
+                <div class="custom-control custom-checkbox mt-4">
                   <input type="checkbox" class="custom-control-input" id="customCheck1">
                   <label class="custom-control-label" for="customCheck1">Ingat Saya</label>
                 </div>
+
                 <div class="text-center">
-                  <button type="submit" class="btn btn--blue w-100 my-4">{{ __('Masuk') }}</button>
+                  <button type="submit" class="btn btn-primary w-100 my-4-5 rounded-sm">{{ __('Masuk') }}</button>
                 </div>
               </form>
             </div>

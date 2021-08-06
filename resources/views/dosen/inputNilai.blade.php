@@ -20,18 +20,18 @@
                 <span class="btn-inner--icon"><span class="iconify" data-icon="bx:bx-printer"></span></span>
                 <span class="btn-inner--text">Cetak Data</span>
               </button>
-              <button type="button" class="btn btn-icon btn-secondary mt-3 mt-md-0">
+              <button type="button" class="btn btn-icon btn-secondary mt-3 mt-md-0 ml-0 ml-md-3">
                 <span class="btn-inner--icon"><span class="iconify" data-icon="bx:bx-share-alt"></span></span>
                 <span class="btn-inner--text">Publish Nilai</span>
               </button>
-              <button type="button" class="btn btn-primary mt-3 mt-md-0">
+              <button type="button" class="btn btn-primary mt-3 mt-md-0 ml-0 ml-md-3">
                 <span>Simpan</span>
               </button>
             </div>
           </div>
         </div>
         <hr class="my-4">
-        <form class="form-select rounded-0">
+        <form class="form-select ">
           <div class="form-row">
             <div class="col-md-6 form-group">
               <label for="program-studi">Program Studi</label>
@@ -92,42 +92,42 @@
                 <td class="font-weight-bold text-capitalize pl-1">Jessica Wijaya</td>
                 <td class="text-center px-3">
                   <div class="form-group">
-                    <input type="text" class="form-control" id="uts" value="75">
+                    <input type="text" class="form-control" id="uts1" value="75">
                   </div>
                 </td>
                 <td class="text-center px-3">
                   <div class="form-group">
-                    <input type="text" class="form-control" id="uas">
+                    <input type="text" class="form-control" id="uas1">
                   </div>
                 </td>
                 <td class="text-center px-3">
                   <div class="form-group">
-                    <input type="text" class="form-control" id="tugas">
+                    <input type="text" class="form-control" id="tugas1">
                   </div>
                 </td>
                 <td class="text-center px-3">
                   <div class="form-group">
-                    <input type="text" class="form-control" id="kuis">
+                    <input type="text" class="form-control" id="kuis1">
                   </div>
                 </td>
                 <td class="text-center px-3">
                   <div class="form-group">
-                    <input type="text" class="form-control" id="praktek">
+                    <input type="text" class="form-control" id="praktek1">
                   </div>
                 </td>
                 <td class="text-center px-3">
                   <div class="form-group">
-                    <input type="text" class="form-control" id="up">
+                    <input type="text" class="form-control" id="up1">
                   </div>
                 </td>
                 <td class="text-center px-3">
                   <div class="form-group">
-                    <input type="text" class="form-control" id="kehadiran">
+                    <input type="text" class="form-control" id="kehadiran1">
                   </div>
                 </td>
                 <td class="text-center px-3">
                   <div class="form-group">
-                    <input type="text" class="form-control" id="akumulasi">
+                    <input type="text" class="form-control" id="akumulasi1">
                   </div>
                 </td>
                 <td class="text-center px-2">Keterangan</td>
@@ -139,42 +139,42 @@
                 <td class="font-weight-bold text-capitalize pl-1">Jessica Wijaya</td>
                 <td class="text-center px-3">
                   <div class="form-group">
-                    <input type="text" class="form-control" id="uts" value="75">
+                    <input type="text" class="form-control" id="uts2" value="75">
                   </div>
                 </td>
                 <td class="text-center px-3">
                   <div class="form-group">
-                    <input type="text" class="form-control" id="uas">
+                    <input type="text" class="form-control" id="uas2">
                   </div>
                 </td>
                 <td class="text-center px-3">
                   <div class="form-group">
-                    <input type="text" class="form-control" id="tugas">
+                    <input type="text" class="form-control" id="tugas2">
                   </div>
                 </td>
                 <td class="text-center px-3">
                   <div class="form-group">
-                    <input type="text" class="form-control" id="kuis">
+                    <input type="text" class="form-control" id="kuis2">
                   </div>
                 </td>
                 <td class="text-center px-3">
                   <div class="form-group">
-                    <input type="text" class="form-control" id="praktek">
+                    <input type="text" class="form-control" id="praktek2">
                   </div>
                 </td>
                 <td class="text-center px-3">
                   <div class="form-group">
-                    <input type="text" class="form-control" id="up">
+                    <input type="text" class="form-control" id="up2">
                   </div>
                 </td>
                 <td class="text-center px-3">
                   <div class="form-group">
-                    <input type="text" class="form-control" id="kehadiran">
+                    <input type="text" class="form-control" id="kehadiran2">
                   </div>
                 </td>
                 <td class="text-center px-3">
                   <div class="form-group">
-                    <input type="text" class="form-control" id="akumulasi">
+                    <input type="text" class="form-control" id="akumulasi2">
                   </div>
                 </td>
                 <td class="text-center px-2">Keterangan</td>
@@ -186,42 +186,42 @@
                 <td class="font-weight-bold text-capitalize pl-1">Jessica Wijaya</td>
                 <td class="text-center px-3">
                   <div class="form-group">
-                    <input type="text" class="form-control" id="uts" value="75">
+                    <input type="text" class="form-control" id="uts3" value="75">
                   </div>
                 </td>
                 <td class="text-center px-3">
                   <div class="form-group">
-                    <input type="text" class="form-control" id="uas">
+                    <input type="text" class="form-control" id="uas3">
                   </div>
                 </td>
                 <td class="text-center px-3">
                   <div class="form-group">
-                    <input type="text" class="form-control" id="tugas">
+                    <input type="text" class="form-control" id="tugas3">
                   </div>
                 </td>
                 <td class="text-center px-3">
                   <div class="form-group">
-                    <input type="text" class="form-control" id="kuis">
+                    <input type="text" class="form-control" id="kuis3">
                   </div>
                 </td>
                 <td class="text-center px-3">
                   <div class="form-group">
-                    <input type="text" class="form-control" id="praktek">
+                    <input type="text" class="form-control" id="praktek3">
                   </div>
                 </td>
                 <td class="text-center px-3">
                   <div class="form-group">
-                    <input type="text" class="form-control" id="up">
+                    <input type="text" class="form-control" id="up3">
                   </div>
                 </td>
                 <td class="text-center px-3">
                   <div class="form-group">
-                    <input type="text" class="form-control" id="kehadiran">
+                    <input type="text" class="form-control" id="kehadiran3">
                   </div>
                 </td>
                 <td class="text-center px-3">
                   <div class="form-group">
-                    <input type="text" class="form-control" id="akumulasi">
+                    <input type="text" class="form-control" id="akumulasi3">
                   </div>
                 </td>
                 <td class="text-center px-2">Keterangan</td>
@@ -233,42 +233,42 @@
                 <td class="font-weight-bold text-capitalize pl-1">Jessica Wijaya</td>
                 <td class="text-center px-3">
                   <div class="form-group">
-                    <input type="text" class="form-control" id="uts" value="75">
+                    <input type="text" class="form-control" id="uts4" value="75">
                   </div>
                 </td>
                 <td class="text-center px-3">
                   <div class="form-group">
-                    <input type="text" class="form-control" id="uas">
+                    <input type="text" class="form-control" id="uas4">
                   </div>
                 </td>
                 <td class="text-center px-3">
                   <div class="form-group">
-                    <input type="text" class="form-control" id="tugas">
+                    <input type="text" class="form-control" id="tugas4">
                   </div>
                 </td>
                 <td class="text-center px-3">
                   <div class="form-group">
-                    <input type="text" class="form-control" id="kuis">
+                    <input type="text" class="form-control" id="kuis4">
                   </div>
                 </td>
                 <td class="text-center px-3">
                   <div class="form-group">
-                    <input type="text" class="form-control" id="praktek">
+                    <input type="text" class="form-control" id="praktek4">
                   </div>
                 </td>
                 <td class="text-center px-3">
                   <div class="form-group">
-                    <input type="text" class="form-control" id="up">
+                    <input type="text" class="form-control" id="up4">
                   </div>
                 </td>
                 <td class="text-center px-3">
                   <div class="form-group">
-                    <input type="text" class="form-control" id="kehadiran">
+                    <input type="text" class="form-control" id="kehadiran4">
                   </div>
                 </td>
                 <td class="text-center px-3">
                   <div class="form-group">
-                    <input type="text" class="form-control" id="akumulasi">
+                    <input type="text" class="form-control" id="akumulasi4">
                   </div>
                 </td>
                 <td class="text-center px-2">Keterangan</td>
@@ -280,42 +280,42 @@
                 <td class="font-weight-bold text-capitalize pl-1">Jessica Wijaya</td>
                 <td class="text-center px-3">
                   <div class="form-group">
-                    <input type="text" class="form-control" id="uts" value="75">
+                    <input type="text" class="form-control" id="uts5" value="75">
                   </div>
                 </td>
                 <td class="text-center px-3">
                   <div class="form-group">
-                    <input type="text" class="form-control" id="uas">
+                    <input type="text" class="form-control" id="uas5">
                   </div>
                 </td>
                 <td class="text-center px-3">
                   <div class="form-group">
-                    <input type="text" class="form-control" id="tugas">
+                    <input type="text" class="form-control" id="tugas5">
                   </div>
                 </td>
                 <td class="text-center px-3">
                   <div class="form-group">
-                    <input type="text" class="form-control" id="kuis">
+                    <input type="text" class="form-control" id="kuis5">
                   </div>
                 </td>
                 <td class="text-center px-3">
                   <div class="form-group">
-                    <input type="text" class="form-control" id="praktek">
+                    <input type="text" class="form-control" id="praktek5">
                   </div>
                 </td>
                 <td class="text-center px-3">
                   <div class="form-group">
-                    <input type="text" class="form-control" id="up">
+                    <input type="text" class="form-control" id="up5">
                   </div>
                 </td>
                 <td class="text-center px-3">
                   <div class="form-group">
-                    <input type="text" class="form-control" id="kehadiran">
+                    <input type="text" class="form-control" id="kehadiran5">
                   </div>
                 </td>
                 <td class="text-center px-3">
                   <div class="form-group">
-                    <input type="text" class="form-control" id="akumulasi">
+                    <input type="text" class="form-control" id="akumulasi5">
                   </div>
                 </td>
                 <td class="text-center px-2">Keterangan</td>

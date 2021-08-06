@@ -3,22 +3,6 @@
   border-radius: 8px;
   border: 0;
 }
-.page-content__keuangan .btn--info {
-  font-weight: 500;
-  font-size: 0.75rem;
-  line-height: 1.25em;
-  color: #041f2f;
-  background-color: #b2def8;
-}
-.page-content__keuangan .btn--blue {
-  font-weight: 500;
-  font-size: 0.75rem;
-  line-height: 1.25em;
-  color: #fff;
-}
-.page-content__keuangan .btn--blue span {
-  color: #fff !important;
-}
 .page-content__keuangan .modal .modal-header {
   padding-top: 2.25rem;
   padding-bottom: 2.25rem;

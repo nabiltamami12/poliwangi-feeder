@@ -105,7 +105,7 @@
           <h5 class="mb-0 mt-2">45</h5>
           <h6 class="mb-0 mt-4">Status Presensi</h6>
           <h5 class="mb-0 mt-2 text-danger">Belum Di Cek</h5>
-          <button type="button" class="btn--blue w-100 mt-4">Cek Presensi</button>
+          <button type="button" class="btn btn-primary w-100 mt-4 rounded-sm">Cek Presensi</button>
         </div>
       </div>
     </div>

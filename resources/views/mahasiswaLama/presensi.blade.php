@@ -122,10 +122,10 @@
 
 @section('js')
 <script>
-  $(function () {
+  $(document).ready(function(){
     $("#txtDate").datepicker({
-        format: "dd MM yyyy",
+      format: "dd MM yyyy",
     });
-  });
+  })
 </script>
 @endsection

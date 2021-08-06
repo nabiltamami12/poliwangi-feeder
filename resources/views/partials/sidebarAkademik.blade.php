@@ -23,44 +23,25 @@
 
         <!-- Nav items -->
         <ul class="navbar-nav">
+
           <li class="nav-item">
             <a class="nav-link {{($title === "akademik-dashboard") ? 'aktif' : ''}}"
               href="{{ url('/akademik/dashboard') }} ">
-              <span class="iconify" data-icon="bx-bx-home-circle" data-inline="true"></span>
+              <span class="iconify" data-icon="bx-bx-home-circle"></span>
               <span class="nav-link-text">Dashboard</span>
             </a>
           </li>
 
           <li class="nav-item">
             <div class="nav-link {{($title === "akademik-master") ? 'aktif' : ''}}">
-              <span class="iconify" data-icon="bx:bx-user-pin" data-inline="true"></span>
+              <span class="iconify" data-icon="bx:bx-user-pin"></span>
               <span class="nav-link-text">Master Data<img src="{{ url('images') }}/sidebar-right.png" class="arrow"
                   alt=""></span>
             </div>
             <ul class="nav-item-dropdown-content">
               <li class="nav-item">
-                <a class="nav-link" href="{{ url('/akademik/master/dataperiode')}}">
-                  <span class="nav-link-text ml-0">Data Periode</span>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{{ url('/akademik/master/datahariaktif')}}">
-                  <span class="nav-link-text ml-0">Data Hari Aktif</span>
-                </a>
-              </li>
-              <li class="nav-item">
                 <a class="nav-link" href="{{ url('/akademik/master/datamahasiswa')}}">
                   <span class="nav-link-text ml-0">Data Mahasiswa</span>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{{ url('/akademik/master/datadosenpengampu')}}">
-                  <span class="nav-link-text ml-0">Data Dosen Pengampu</span>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{{ url('/akademik/master/datamatakuliah')}}">
-                  <span class="nav-link-text ml-0">Data Matakuliah</span>
                 </a>
               </li>
               <li class="nav-item">
@@ -69,28 +50,8 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{{ url('/akademik/master/dataruangan')}}">
-                  <span class="nav-link-text ml-0">Data Ruangan</span>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{{ url('/akademik/master/datajamkuliah')}}">
-                  <span class="nav-link-text ml-0">Data Jam Kuliah</span>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{{url('/akademik/master/datajurusan')}}">
-                  <span class="nav-link-text ml-0">Data Jurusan</span>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{{url('/akademik/master/dataprodi')}}">
-                  <span class="nav-link-text ml-0">Data Program Studi</span>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{{url('/akademik/master/datarangenilai')}}">
-                  <span class="nav-link-text ml-0">Data Range Nilai</span>
+                <a class="nav-link" href="{{ url('/akademik/master/datakuliah')}}">
+                  <span class="nav-link-text ml-0">Data Kuliah</span>
                 </a>
               </li>
             </ul>
@@ -118,7 +79,7 @@
 
           <li class="nav-item">
             <div class="nav-link {{($title === "akademik-kuliah") ? 'aktif' : ''}}">
-              <span class="iconify" data-icon="bx:bx-calendar-star" data-inline="true"></span>
+              <span class="iconify" data-icon="bx:bx-calendar-star"></span>
               <span class="nav-link-text">Kuliah<img src="{{ url('images') }}/sidebar-right.png" class="arrow"
                   alt=""></span>
             </div>
@@ -148,7 +109,7 @@
 
           <li class="nav-item">
             <div class="nav-link {{($title === "akademik-report") ? 'aktif' : ''}}">
-              <span class="iconify" data-icon="bx:bx-file-blank" data-inline="true"></span>
+              <span class="iconify" data-icon="bx:bx-file-blank"></span>
               <span class="nav-link-text">Report<img src="{{ url('images') }}/sidebar-right.png" class="arrow"
                   alt=""></span>
             </div>
@@ -188,7 +149,6 @@
                     <span class="nav-link-text ml-0">Judul Tugas Akhir</span>
                   </a>
                 </li>
-
                 <li class="nav-item">
                   <a class="nav-link" href="/akademik/report/wali">
                     <span class="nav-link-text ml-0">Wali</span>
@@ -197,7 +157,6 @@
               </ul>
             </div>
           </li>
-
         </ul>
       </div>
     </div>

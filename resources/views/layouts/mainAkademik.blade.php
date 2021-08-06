@@ -22,9 +22,7 @@
   <!-- Argon CSS -->
   <link rel="stylesheet" href="{{ url('argon') }}/assets/css/argon.css?v=1.2.0" type="text/css">
   <!-- Custom CSS -->
-  <link href="{{ asset('css/customComponent.css') }}" rel="stylesheet">
   <link href="{{ asset('css/main.css') }}" rel="stylesheet">
-  <link href="{{ asset('css/akademik.css') }}" rel="stylesheet">
   <link href="{{ asset('css/responsive.css') }}" rel="stylesheet">
   <!-- Datatable CSS -->
   <link href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css" rel="stylesheet">
@@ -36,8 +34,6 @@
     type="text/css" />
   <!-- Font Awesome -->
   <script src="https://kit.fontawesome.com/fd5eab281a.js" crossorigin="anonymous"></script>
-  <!-- Iconify -->
-  <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
   <!-- JQUERY JS -->
   <script src="{{ url('argon') }}/assets/vendor/jquery/dist/jquery.min.js"></script>
   <!-- Datatable JS -->
@@ -58,7 +54,7 @@
     var url = "{{ base_path(); }}";
     var dataJurusan,dataDosen,dataProgram;
   </script>
-  <style type="text/css">
+  {{-- <style type="text/css">
     .form-group {
       padding-left: 1.5rem !important;
       padding-right: 1.3rem !important;
@@ -68,12 +64,12 @@
     form button {
       height: 49px;
     }
-  </style>
+  </style> --}}
 </head>
 
 
 <body>
-  @yield('loader')
+  {{-- @yield('loader') --}}
   @include('partials.sidebarAkademik')
 
   <!-- Main content -->

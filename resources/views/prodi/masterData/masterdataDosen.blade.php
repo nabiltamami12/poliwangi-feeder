@@ -21,7 +21,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-modal-cancel" data-dismiss="modal">Batal</button>
-          <button type="button" class="btn btn--blue btn-modal-ok">Hapus data</button>
+          <button type="button" class="btn btn-primary btn-modal-ok">Hapus data</button>
         </div>
       </div>
     </div>
@@ -31,26 +31,26 @@
     <div class="col-xl-12">
       <div class="card shadow padding--small">
 
-        <div class="card-header p-0 m-0 border-0 rounded-0">
+        <div class="card-header p-0 m-0 border-0 ">
           <div class="row align-items-center">
             <div class="col-12 col-md-6">
               <h2 class="mb-0 text-center text-md-left">Data Dosen</h2>
             </div>
             <div class="col-12 col-md-6 text-center text-md-right mt-3 mt-md-0">
-              <a class="btn btn--blue" href="/prodi/masterdata/datadosen/tambahdata" role="button">
-                <span class="iconify mr-2" data-icon="bx:bxs-plus-circle" data-inline="true"></span>
+              <a class="btn btn-primary" href="/prodi/masterdata/datadosen/tambahdata" role="button">
+                <span class="iconify mr-2" data-icon="bx:bxs-plus-circle"></span>
                 Tambah
               </a>
-              <button type="button" class="btn--blue ml-3">
-                <span class="iconify" data-icon="bx:bx-upload" data-inline="true"></span>
+              <button type="button" class="btn-primary ml-3">
+                <span class="iconify" data-icon="bx:bx-upload"></span>
                 Eksport
               </button>
             </div>
           </div>
 
-          <hr class="mt">
+          <hr class="my-4">
 
-          <div class="row align-items-center padding--small py-0 filterSearch-data">
+          <div class="row align-items-center padding--small py-0 ">
             <div class="col-sm-6 col-12">
               <div class="form-group row mb-0">
                 <select class="form-control" id="dataperhalaman">
@@ -68,7 +68,7 @@
                 <input type="search" class="form-control" id="searchdata" placeholder="Pencarian ...">
                 <div class="input-group-prepend">
                   <div class="input-group-text search-icon">
-                    <span class="iconify" data-icon="fluent:search-32-regular" data-inline="true"></span>
+                    <span class="iconify" data-icon="fluent:search-32-regular"></span>
                   </div>
                 </div>
               </div>
@@ -100,9 +100,9 @@
                 <td class="text-center text-lowercase">Dwi.rahma@gmail.com</td>
                 <td class="text-center">
                   <a href="/prodi/masterdata/datadosen/updatedata"><span class="iconify edit-icon"
-                      data-icon="bx:bx-edit-alt" data-inline="true"></span></a>
+                      data-icon="bx:bx-edit-alt"></span></a>
                   <span data-toggle="modal" data-target="#deleteDosenModal" class="iconify delete-icon"
-                    data-icon="bx:bx-trash" data-inline="true"></span>
+                    data-icon="bx:bx-trash"></span>
                 </td>
               </tr>
 
@@ -115,9 +115,9 @@
                 <td class="text-center text-lowercase">januar2412@gmail.com</td>
                 <td class="text-center">
                   <a href="/prodi/masterdata/datadosen/updatedata"><span class="iconify edit-icon"
-                      data-icon="bx:bx-edit-alt" data-inline="true"></span></a>
+                      data-icon="bx:bx-edit-alt"></span></a>
                   <span data-toggle="modal" data-target="#deleteDosenModal" class="iconify delete-icon"
-                    data-icon="bx:bx-trash" data-inline="true"></span>
+                    data-icon="bx:bx-trash"></span>
                 </td>
               </tr>
 
@@ -130,9 +130,9 @@
                 <td class="text-center text-lowercase">januar2412@gmail.com</td>
                 <td class="text-center">
                   <a href="/prodi/masterdata/datadosen/updatedata"><span class="iconify edit-icon"
-                      data-icon="bx:bx-edit-alt" data-inline="true"></span></a>
+                      data-icon="bx:bx-edit-alt"></span></a>
                   <span data-toggle="modal" data-target="#deleteDosenModal" class="iconify delete-icon"
-                    data-icon="bx:bx-trash" data-inline="true"></span>
+                    data-icon="bx:bx-trash"></span>
                 </td>
               </tr>
 
@@ -145,9 +145,9 @@
                 <td class="text-center text-lowercase">januar2412@gmail.com</td>
                 <td class="text-center">
                   <a href="/prodi/masterdata/datadosen/updatedata"><span class="iconify edit-icon"
-                      data-icon="bx:bx-edit-alt" data-inline="true"></span></a>
+                      data-icon="bx:bx-edit-alt"></span></a>
                   <span data-toggle="modal" data-target="#deleteDosenModal" class="iconify delete-icon"
-                    data-icon="bx:bx-trash" data-inline="true"></span>
+                    data-icon="bx:bx-trash"></span>
                 </td>
               </tr>
 
@@ -160,9 +160,9 @@
                 <td class="text-center text-lowercase">januar2412@gmail.com</td>
                 <td class="text-center">
                   <a href="/prodi/masterdata/datadosen/updatedata"><span class="iconify edit-icon"
-                      data-icon="bx:bx-edit-alt" data-inline="true"></span></a>
+                      data-icon="bx:bx-edit-alt"></span></a>
                   <span data-toggle="modal" data-target="#deleteDosenModal" class="iconify delete-icon"
-                    data-icon="bx:bx-trash" data-inline="true"></span>
+                    data-icon="bx:bx-trash"></span>
                 </td>
               </tr>
 
@@ -175,9 +175,9 @@
                 <td class="text-center text-lowercase">januar2412@gmail.com</td>
                 <td class="text-center">
                   <a href="/prodi/masterdata/datadosen/updatedata"><span class="iconify edit-icon"
-                      data-icon="bx:bx-edit-alt" data-inline="true"></span></a>
+                      data-icon="bx:bx-edit-alt"></span></a>
                   <span data-toggle="modal" data-target="#deleteDosenModal" class="iconify delete-icon"
-                    data-icon="bx:bx-trash" data-inline="true"></span>
+                    data-icon="bx:bx-trash"></span>
                 </td>
               </tr>
 
@@ -190,9 +190,9 @@
                 <td class="text-center text-lowercase">januar2412@gmail.com</td>
                 <td class="text-center">
                   <a href="/prodi/masterdata/datadosen/updatedata"><span class="iconify edit-icon"
-                      data-icon="bx:bx-edit-alt" data-inline="true"></span></a>
+                      data-icon="bx:bx-edit-alt"></span></a>
                   <span data-toggle="modal" data-target="#deleteDosenModal" class="iconify delete-icon"
-                    data-icon="bx:bx-trash" data-inline="true"></span>
+                    data-icon="bx:bx-trash"></span>
                 </td>
               </tr>
 
@@ -205,9 +205,9 @@
                 <td class="text-center text-lowercase">januar2412@gmail.com</td>
                 <td class="text-center">
                   <a href="/prodi/masterdata/datadosen/updatedata"><span class="iconify edit-icon"
-                      data-icon="bx:bx-edit-alt" data-inline="true"></span></a>
+                      data-icon="bx:bx-edit-alt"></span></a>
                   <span data-toggle="modal" data-target="#deleteDosenModal" class="iconify delete-icon"
-                    data-icon="bx:bx-trash" data-inline="true"></span>
+                    data-icon="bx:bx-trash"></span>
                 </td>
               </tr>
 
@@ -220,9 +220,9 @@
                 <td class="text-center text-lowercase">januar2412@gmail.com</td>
                 <td class="text-center">
                   <a href="/prodi/masterdata/datadosen/updatedata"><span class="iconify edit-icon"
-                      data-icon="bx:bx-edit-alt" data-inline="true"></span></a>
+                      data-icon="bx:bx-edit-alt"></span></a>
                   <span data-toggle="modal" data-target="#deleteDosenModal" class="iconify delete-icon"
-                    data-icon="bx:bx-trash" data-inline="true"></span>
+                    data-icon="bx:bx-trash"></span>
                 </td>
               </tr>
 

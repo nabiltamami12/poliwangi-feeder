@@ -130,11 +130,12 @@
   background-color: #f0f8fe;
   border: 1px solid #28a3eb;
   color: #28a3eb;
+  font-weight: 600;
 }
 #tahapan .input-group.active .form-control {
   border: 2px solid #28a3eb;
   background-color: #28a3eb;
-  color: #fff;
+  color: #ffffff !important;
 }
 #tahapan .tab-body > div {
   display: none;
@@ -168,10 +169,6 @@
   font-size: 0.875rem;
   line-height: 1.21em;
   color: #041f2f;
-}
-#tahapan .card-form select {
-  padding-left: 1.5rem;
-  border: 1px solid #c4c4c4;
 }
 #tahapan .card_step {
   position: relative;

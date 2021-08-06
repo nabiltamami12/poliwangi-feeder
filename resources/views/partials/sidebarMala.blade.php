@@ -23,28 +23,28 @@
         <ul class="navbar-nav">
           <li class="nav-item">
             <a class="nav-link {{($title === "mala-dashboard") ? 'aktif' : ''}}" href="/mahasiswalama/dashboard">
-              <span class="iconify" data-icon="bx-bx-home-circle" data-inline="true"></span>
+              <span class="iconify" data-icon="bx-bx-home-circle"></span>
               <span class="nav-link-text">Dashboard</span>
             </a>
           </li>
 
           <li class="nav-item">
             <a class="nav-link {{($title === "mala-pembayaran") ? 'aktif' : ''}}" href="/mahasiswalama/pembayaran">
-              <span class="iconify" data-icon="bx:bx-dollar-circle" data-inline="true"></span>
+              <span class="iconify" data-icon="bx:bx-dollar-circle"></span>
               <span class="nav-link-text">Pembayaran</span>
             </a>
           </li>
 
           <li class="nav-item">
             <a class="nav-link {{($title === "mala-presensi") ? 'aktif' : ''}}" href="/mahasiswalama/presensi">
-              <span class="iconify" data-icon="bx:bx-badge-check" data-inline="true"></span>
+              <span class="iconify" data-icon="bx:bx-badge-check"></span>
               <span class="nav-link-text">Presensi</span>
             </a>
           </li>
 
           <li class="nav-item">
             <div class="nav-link {{($title === "mala-penilaian") ? 'aktif' : ''}}">
-              <span class=" iconify" data-icon="bx:bx-book-bookmark" data-inline="true"></span>
+              <span class=" iconify" data-icon="bx:bx-book-bookmark"></span>
               <span class="nav-link-text">Penilaian<img src="{{ url('images') }}/sidebar-right.png" class="arrow"
                   alt=""></span>
             </div>
@@ -64,7 +64,7 @@
 
           <li class="nav-item">
             <a class="nav-link {{($title === "mala-formcuti") ? 'aktif' : ''}}" href="/mahasiswalama/formcuti">
-              <span class="iconify" data-icon="bx:bx-calendar-star" data-inline="true"></span>
+              <span class="iconify" data-icon="bx:bx-calendar-star"></span>
               <span class="nav-link-text">Form Cuti</span>
             </a>
           </li>

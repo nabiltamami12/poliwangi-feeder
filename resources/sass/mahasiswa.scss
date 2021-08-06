@@ -1,6 +1,16 @@
 @import "./variable";
 @import "./mixin";
 
+$primary: #28a3eb;
+$secondary: #6f7bf7;
+$success: #34c38f;
+$info: #b2def8;
+$warning: #f1b44c;
+$danger: #f46a6a;
+
+$font-black: #041f2f;
+$font-white: #ffffff;
+
 .informasi_mahasiswa {
     background-color: #fff;
     border-radius: 0.5rem;
@@ -25,8 +35,8 @@
     button.salin_kode {
         &:hover {
             background-color: rgba(178, 222, 248, 0.2);
-            border-color: $button-blue;
-            color: $button-blue;
+            border-color: $primary;
+            color: $primary;
         }
     }
     .salin_kode {
@@ -98,13 +108,14 @@
         &.active {
             .input-group-text {
                 background-color: #f0f8fe;
-                border: 1px solid $button-blue;
-                color: $button-blue;
+                border: 1px solid $primary;
+                color: $primary;
+                font-weight: 600;
             }
             .form-control {
-                border: 2px solid $button-blue;
-                background-color: $button-blue;
-                color: #fff;
+                border: 2px solid $primary;
+                background-color: $primary;
+                color: $font-white !important;
             }
         }
     }
@@ -130,10 +141,6 @@
         }
         ::placeholder {
             @include mixintext(400, 0.875rem, 1.21em, $font-black);
-        }
-        select {
-            padding-left: 1.5rem;
-            border: 1px solid #c4c4c4;
         }
     }
 
@@ -172,7 +179,7 @@
         column-gap: 0.5rem;
         .button_sebelumnya {
             background-color: $button-info;
-            color: $button-blue;
+            color: $primary;
         }
     }
 }
@@ -191,7 +198,7 @@
         }
         .iconify {
             font-size: 2rem;
-            color: $button-blue;
+            color: $primary;
         }
         i {
             @include mixintext(400, 1rem, 1.21em, $font-dark);

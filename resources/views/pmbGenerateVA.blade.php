@@ -78,9 +78,9 @@
                 <div class="form-group">
                   <label class="mt-4">VA untuk Pembayaran Biaya Pendaftaran</label>
                   <div class="field_kode mt-2">
-                    <input type="text" class="form-control font-weight-bold pl-2" id="va-aktif" value="1281928746273601"
-                      readonly>
-                    <button class="salin_kode btn--blue">Salin Kode</button>
+                    <input type="text" class="form-control font-weight-bold pl-2 rounded" id="va-aktif"
+                      value="1281928746273601" readonly>
+                    <button class="salin_kode btn btn-primary">Salin Kode</button>
                   </div>
                 </div>
               </div>

@@ -8,7 +8,7 @@
 </header>
 
 <!-- Page content -->
-<section class="page-content page-content__akademik container-fluid" id="akademik_datajurusan">
+<section class="page-content  container-fluid" id="akademik_datajurusan">
   <div class="row">
     <div class="col-xl-12">
       <div class="card shadow padding--small">
@@ -21,76 +21,77 @@
           </div>
         </div>
 
-        <hr class="mt">
+        <hr class="my-4">
 
-        <form id="form_cu" class="form-input mt-0">
+        <form id="form_cu" class="form-input">
           <input type="hidden" id="nomor" name="nomor">
           <div class="form-row">
             <div class="col-sm-12 col-12">
               <div class="form-group row mb-0">
                 <label for="jurusan">Jurusan</label>
-                <input type="text" class="form-control" id="jurusan" name="jurusan" >
+                <input type="text" class="form-control" id="jurusan" name="jurusan">
               </div>
             </div>
             <div class="col-sm-6 col-12">
               <div class="form-group row mb-0">
                 <label for="kajur">Ketua Jurusan</label>
-                <input type="text" class="form-control" id="kajur" name="kajur" >
+                <input type="text" class="form-control" id="kajur" name="kajur">
               </div>
             </div>
             <div class="col-sm-6 col-12">
               <div class="form-group row mb-0">
                 <label for="sekjur">Sekretaris Jurusan</label>
-                <input type="text" class="form-control" id="sekjur" name="sekjur" >
+                <input type="text" class="form-control" id="sekjur" name="sekjur">
               </div>
             </div>
             <div class="col-sm-6 col-12">
               <div class="form-group row mb-0">
                 <label for="alias">Alias</label>
-                <input type="text" class="form-control" id="alias" name="alias" >
+                <input type="text" class="form-control" id="alias" name="alias">
               </div>
             </div>
             <div class="col-sm-6 col-12">
               <div class="form-group row mb-0">
                 <label for="jurusan_inggris">Jurusan Inggris</label>
-                <input type="text" class="form-control" id="jurusan_inggris" name="jurusan_inggris" >
+                <input type="text" class="form-control" id="jurusan_inggris" name="jurusan_inggris">
               </div>
             </div>
             <div class="col-sm-6 col-12">
               <div class="form-group row mb-0">
                 <label for="jurusan_lengkap">Jurusan Lengkap</label>
-                <input type="text" class="form-control" id="jurusan_lengkap" name="jurusan_lengkap" >
+                <input type="text" class="form-control" id="jurusan_lengkap" name="jurusan_lengkap">
               </div>
             </div>
             <div class="col-sm-6 col-12">
               <div class="form-group row mb-0">
                 <label for="konsentrasi">Konsentrasi</label>
-                <input type="text" class="form-control" id="konsentrasi" name="konsentrasi" >
+                <input type="text" class="form-control" id="konsentrasi" name="konsentrasi">
               </div>
             </div>
             <div class="col-sm-6 col-12">
               <div class="form-group row mb-0">
                 <label for="akreditasi">Akreditasi</label>
-                <input type="text" class="form-control" id="akreditasi" name="akreditasi" >
+                <input type="text" class="form-control" id="akreditasi" name="akreditasi">
               </div>
             </div>
             <div class="col-sm-6 col-12">
               <div class="form-group row mb-0">
                 <label for="sk_akreditasi">SK Akreditasi</label>
-                <input type="text" class="form-control" id="sk_akreditasi" name="sk_akreditasi" >
+                <input type="text" class="form-control" id="sk_akreditasi" name="sk_akreditasi">
               </div>
             </div>
           </div>
-          <hr class="mt">
-          <button type="submit" class="btn--blue w-100 simpanData-btn add-btn">{{ ($id==null)?"Tambah":"Ubah" }} Data</button>
+          <hr class="my-4">
+          <button type="submit" class="btn-primary w-100 simpanData-btn ">{{ ($id==null)?"Tambah":"Ubah" }}
+            Data</button>
         </form>
-        
+
       </div>
     </div>
   </div>
 </section>
 <script>
-$(document).ready(function() {
+  $(document).ready(function() {
     var id = "{{$id}}";
     if (id!="") {
         getData(id);        

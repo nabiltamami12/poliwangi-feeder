@@ -35,26 +35,26 @@
     <div class="col-xl-12">
       <div class="card shadow padding--small">
 
-        <div class="card-header p-0 m-0 border-0 rounded-0">
+        <div class="card-header p-0 m-0 border-0 ">
           <div class="row align-items-center">
             <div class="col-12 col-md-6">
               <h2 class="mb-0 text-center text-md-left">Piutang Mahasiswa</h2>
             </div>
             <div class="col-12 col-md-6 text-center text-md-right mt-3 mt-md-0">
-              <button type="button" class="btn--blue">
+              <button type="button" class="btn btn-primary">
                 <span>Upload</span>
-                <span class="iconify ml-2" data-icon="bx:bx-caret-down" data-inline="true"></span>
+                <span class="iconify ml-2" data-icon="bx:bx-caret-down"></span>
               </button>
-              <button type="button" class="btn--blue ml-3">
-                <span class="iconify mr-2" data-icon="bx:bx-cloud-download" data-inline="true"></span>
+              <button type="button" class="btn btn-primary ml-3">
+                <span class="iconify mr-2" data-icon="bx:bx-cloud-download"></span>
                 <span>Download Rekap</span>
               </button>
             </div>
           </div>
 
-          <hr class="mt">
+          <hr class="my-4">
 
-          <div class="row align-items-center padding--small py-0 filterSearch-data">
+          <div class="row align-items-center padding--small py-0 ">
             <div class="col-sm-6 col-12">
               <div class="form-group row">
                 <select class="form-control" id="dataperhalaman">
@@ -72,7 +72,7 @@
                 <input type="search" class="form-control" id="searchdata" placeholder="Pencarian ...">
                 <div class="input-group-prepend">
                   <div class="input-group-text search-icon">
-                    <span class="iconify" data-icon="fluent:search-32-regular" data-inline="true"></span>
+                    <span class="iconify" data-icon="fluent:search-32-regular"></span>
                   </div>
                 </div>
               </div>
@@ -101,13 +101,13 @@
                 <td>4891203526</td>
                 <td class="text-center pr-0">4.500.000</td>
                 <td class="text-center px-0">
-                  <button type="button" class="btn_aksi btn--info mr-2" data-toggle="modal"
+                  <button type="button" class="btn_aksi btn btn-info mr-2" data-toggle="modal"
                     data-target="#dokumenPiutangModal">
-                    <span class="iconify mr-2" data-icon="bx:bx-spreadsheet" data-inline="true"></span>
+                    <span class="iconify mr-2" data-icon="bx:bx-spreadsheet"></span>
                     <span>Lihat Dokumen</span>
                   </button>
-                  <button type="button" class="btn_aksi btn--blue">
-                    <span class="iconify mr-2" data-icon="bx:bx-upload" data-inline="true"></span>
+                  <button type="button" class="btn_aksi btn btn-primary">
+                    <span class="iconify mr-2" data-icon="bx:bx-upload"></span>
                     <span>Upload Perjanjian</span>
                   </button>
                 </td>
@@ -120,12 +120,12 @@
                 <td>4891203526</td>
                 <td class="text-center pr-0">4.500.000</td>
                 <td class="text-center px-0">
-                  <button type="button" class="btn_aksi btn--info mr-2">
-                    <span class="iconify mr-2" data-icon="bx:bx-spreadsheet" data-inline="true"></span>
+                  <button type="button" class="btn_aksi btn btn-info mr-2">
+                    <span class="iconify mr-2" data-icon="bx:bx-spreadsheet"></span>
                     <span>Lihat Dokumen</span>
                   </button>
-                  <button type="button" class="btn_aksi btn--blue">
-                    <span class="iconify mr-2" data-icon="bx:bx-upload" data-inline="true"></span>
+                  <button type="button" class="btn_aksi btn btn-primary">
+                    <span class="iconify mr-2" data-icon="bx:bx-upload"></span>
                     <span>Upload Perjanjian</span>
                   </button>
                 </td>
@@ -138,12 +138,12 @@
                 <td>4891203526</td>
                 <td class="text-center pr-0">4.500.000</td>
                 <td class="text-center px-0">
-                  <button type="button" class="btn_aksi btn--info mr-2">
-                    <span class="iconify mr-2" data-icon="bx:bx-spreadsheet" data-inline="true"></span>
+                  <button type="button" class="btn_aksi btn btn-info mr-2">
+                    <span class="iconify mr-2" data-icon="bx:bx-spreadsheet"></span>
                     <span>Lihat Dokumen</span>
                   </button>
-                  <button type="button" class="btn_aksi btn--blue">
-                    <span class="iconify mr-2" data-icon="bx:bx-upload" data-inline="true"></span>
+                  <button type="button" class="btn_aksi btn btn-primary">
+                    <span class="iconify mr-2" data-icon="bx:bx-upload"></span>
                     <span>Upload Perjanjian</span>
                   </button>
                 </td>
@@ -156,12 +156,12 @@
                 <td>4891203526</td>
                 <td class="text-center pr-0">4.500.000</td>
                 <td class="text-center px-0">
-                  <button type="button" class="btn_aksi btn--info mr-2">
-                    <span class="iconify mr-2" data-icon="bx:bx-spreadsheet" data-inline="true"></span>
+                  <button type="button" class="btn_aksi btn btn-info mr-2">
+                    <span class="iconify mr-2" data-icon="bx:bx-spreadsheet"></span>
                     <span>Lihat Dokumen</span>
                   </button>
-                  <button type="button" class="btn_aksi btn--blue">
-                    <span class="iconify mr-2" data-icon="bx:bx-upload" data-inline="true"></span>
+                  <button type="button" class="btn_aksi btn btn-primary">
+                    <span class="iconify mr-2" data-icon="bx:bx-upload"></span>
                     <span>Upload Perjanjian</span>
                   </button>
                 </td>
@@ -174,12 +174,12 @@
                 <td>4891203526</td>
                 <td class="text-center pr-0">4.500.000</td>
                 <td class="text-center px-0">
-                  <button type="button" class="btn_aksi btn--info mr-2">
-                    <span class="iconify mr-2" data-icon="bx:bx-spreadsheet" data-inline="true"></span>
+                  <button type="button" class="btn_aksi btn btn-info mr-2">
+                    <span class="iconify mr-2" data-icon="bx:bx-spreadsheet"></span>
                     <span>Lihat Dokumen</span>
                   </button>
-                  <button type="button" class="btn_aksi btn--blue">
-                    <span class="iconify mr-2" data-icon="bx:bx-upload" data-inline="true"></span>
+                  <button type="button" class="btn_aksi btn btn-primary">
+                    <span class="iconify mr-2" data-icon="bx:bx-upload"></span>
                     <span>Upload Perjanjian</span>
                   </button>
                 </td>
@@ -192,12 +192,12 @@
                 <td>4891203526</td>
                 <td class="text-center pr-0">4.500.000</td>
                 <td class="text-center px-0">
-                  <button type="button" class="btn_aksi btn--info mr-2">
-                    <span class="iconify mr-2" data-icon="bx:bx-spreadsheet" data-inline="true"></span>
+                  <button type="button" class="btn_aksi btn btn-info mr-2">
+                    <span class="iconify mr-2" data-icon="bx:bx-spreadsheet"></span>
                     <span>Lihat Dokumen</span>
                   </button>
-                  <button type="button" class="btn_aksi btn--blue">
-                    <span class="iconify mr-2" data-icon="bx:bx-upload" data-inline="true"></span>
+                  <button type="button" class="btn_aksi btn btn-primary">
+                    <span class="iconify mr-2" data-icon="bx:bx-upload"></span>
                     <span>Upload Perjanjian</span>
                   </button>
                 </td>
@@ -210,12 +210,12 @@
                 <td>4891203526</td>
                 <td class="text-center pr-0">4.500.000</td>
                 <td class="text-center px-0">
-                  <button type="button" class="btn_aksi btn--info mr-2">
-                    <span class="iconify mr-2" data-icon="bx:bx-spreadsheet" data-inline="true"></span>
+                  <button type="button" class="btn_aksi btn btn-info mr-2">
+                    <span class="iconify mr-2" data-icon="bx:bx-spreadsheet"></span>
                     <span>Lihat Dokumen</span>
                   </button>
-                  <button type="button" class="btn_aksi btn--blue">
-                    <span class="iconify mr-2" data-icon="bx:bx-upload" data-inline="true"></span>
+                  <button type="button" class="btn_aksi btn btn-primary">
+                    <span class="iconify mr-2" data-icon="bx:bx-upload"></span>
                     <span>Upload Perjanjian</span>
                   </button>
                 </td>
@@ -228,12 +228,12 @@
                 <td>4891203526</td>
                 <td class="text-center pr-0">4.500.000</td>
                 <td class="text-center px-0">
-                  <button type="button" class="btn_aksi btn--info mr-2">
-                    <span class="iconify mr-2" data-icon="bx:bx-spreadsheet" data-inline="true"></span>
+                  <button type="button" class="btn_aksi btn btn-info mr-2">
+                    <span class="iconify mr-2" data-icon="bx:bx-spreadsheet"></span>
                     <span>Lihat Dokumen</span>
                   </button>
-                  <button type="button" class="btn_aksi btn--blue">
-                    <span class="iconify mr-2" data-icon="bx:bx-upload" data-inline="true"></span>
+                  <button type="button" class="btn_aksi btn btn-primary">
+                    <span class="iconify mr-2" data-icon="bx:bx-upload"></span>
                     <span>Upload Perjanjian</span>
                   </button>
                 </td>
@@ -246,12 +246,12 @@
                 <td>4891203526</td>
                 <td class="text-center pr-0">4.500.000</td>
                 <td class="text-center px-0">
-                  <button type="button" class="btn_aksi btn--info mr-2">
-                    <span class="iconify mr-2" data-icon="bx:bx-spreadsheet" data-inline="true"></span>
+                  <button type="button" class="btn_aksi btn btn-info mr-2">
+                    <span class="iconify mr-2" data-icon="bx:bx-spreadsheet"></span>
                     <span>Lihat Dokumen</span>
                   </button>
-                  <button type="button" class="btn_aksi btn--blue">
-                    <span class="iconify mr-2" data-icon="bx:bx-upload" data-inline="true"></span>
+                  <button type="button" class="btn_aksi btn btn-primary">
+                    <span class="iconify mr-2" data-icon="bx:bx-upload"></span>
                     <span>Upload Perjanjian</span>
                   </button>
                 </td>

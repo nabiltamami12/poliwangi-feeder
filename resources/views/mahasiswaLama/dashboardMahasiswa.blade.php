@@ -119,7 +119,7 @@
           <h5 class="mb-0 mt-2">Dr. Amin Suyitno, M.Pd</h5>
           <h6 class="mb-0 mt-4">Status Anda</h6>
           <h5 class="mb-0 mt-2 text-danger">Belum Presensi</h5>
-          <button type="button" class="btn--blue w-100 mt-4">Presensi Sekarang</button>
+          <button type="button" class="btn btn-primary w-100 mt-4 rounded-sm">Presensi Sekarang</button>
         </div>
       </div>
     </div>

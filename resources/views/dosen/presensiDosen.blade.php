@@ -10,7 +10,7 @@
     <div class="col-xl-12">
       <div class="card shadow padding--small">
 
-        <form class="form-select rounded-0">
+        <form class="form-select ">
           <div class="form-row">
             <div class="col-md-6 form-group">
               <label for="program-studi">Program Studi</label>
@@ -45,7 +45,6 @@
           </div>
         </form>
         <hr class="my-4">
-
         <div class="table-responsive">
           <table class="table align-items-center table-flush table-borderless table-hover">
             <thead class="table-header">
@@ -152,6 +151,12 @@
               </tr>
             </tbody>
           </table>
+        </div>
+
+        <div class="row">
+          <div class="col text-right">
+            <button type="submit" class="btn btn-primary">Simpan</button>
+          </div>
         </div>
       </div>
     </div>
