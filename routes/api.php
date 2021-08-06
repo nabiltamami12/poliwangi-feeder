@@ -117,7 +117,13 @@ Route::prefix('v1')->group(function () {
     Route::post('/dosenpengampu', [Ctr\DosenPengampuController::class, 'store']);
     Route::put('/dosenpengampu/{id}', [Ctr\DosenPengampuController::class, 'update']);
     Route::delete('dosenpengampu/{id}', [Ctr\DosenPengampuController::class, 'destroy']);
-}); 
+
+    //INPUTNILAIDOSEN
+    Route::get('/inputnilai/{tahun}&{mk}&{kls}&{prodi}', '\App\Http\Controllers\API\InputNilaiController@show');
+    Route::post('/inputnilai', '\App\Http\Controllers\API\InputNilaiController@store');
+    Route::put('/inputnilai/{id}', '\App\Http\Controllers\API\InputNilaiController@update');
+    Route::delete('/inputnilai/{id}', '\App\Http\Controllers\API\InputNilaiController@destroy');
+});
 Route::prefix('v1')->middleware('auth:api')->group(function () {
     Route::get('/user', function (Request $request) {
         return $request->user();
