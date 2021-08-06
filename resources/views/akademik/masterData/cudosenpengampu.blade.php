@@ -48,32 +48,36 @@
   </div>
 </section>
 <script>
+var id = "{{$id}}";
 $(document).ready(function() {
-  var id = "{{$id}}";
   getData(id);
 });
 
-function searchMatkul(program,jurusan,id_pengampu,id_matkul) {
+function searchMatkul(program,jurusan,id_pengampu,id_matkul,status) {
   console.log("search func")
+  console.log(program)
+  console.log(jurusan)
   var matkul = $.grep(dataGlobal['matakuliah'], function(e){ return e.program == program; });
   var matkul = $.grep(dataGlobal['matakuliah'], function(e){ return e.jurusan == jurusan; });
-  var optMatkul = `<option value=""> - </option>`;
-  console.log("id_pengampu = "+id_pengampu)
-  console.log("id_matkul = "+id_matkul)
-  $.each(matkul,function (key,row) {
-    if (row.nomor==id_matkul) {
-      var selected = "selected";
-    } else {
-      var selected = "";
-    }
-    optMatkul += `<option ${selected} value="${row.nomor}">${row.matakuliah}</option>`
-  })
-  if (id_pengampu==null) {
-    $('#matkul').append(optMatkul)
-  } else {
-    $('#matkul_'+id_pengampu).append(optMatkul);
-    $('#matkul_'+id_pengampu).attr('data-id',id_pengampu);
-  }
+  console.log(matkul)
+  // var optMatkul = `<option value=""> - </option>`;
+  // console.log("id_pengampu = "+id_pengampu)
+  // console.log("id_matkul = "+id_matkul)
+  // $.each(matkul,function (key,row) {
+  //   if (row.nomor==id_matkul) {
+  //     var selected = "selected";
+  //   } else {
+  //     var selected = "";
+  //   }
+  //   optMatkul += `<option ${selected} value="${row.nomor}">${row.matakuliah}</option>`
+  // })
+  // if (status=="tambah") {
+  //   $('#matkul').html('')
+  //   $('#matkul').append(optMatkul)
+  // } else {
+  //   $('#matkul_'+id_pengampu).append(optMatkul);
+  //   $('#matkul_'+id_pengampu).attr('data-id',id_pengampu);
+  // }
 }
 
 function setMatkul(id_select_prodi,id_select_matkul,row,status) {
@@ -96,7 +100,7 @@ function setMatkul(id_select_prodi,id_select_matkul,row,status) {
               </div>
               <div class="col-sm-5 col-12">
                   <div class="form-group row mb-0">
-                      <select class="form-control select-prodi" data-id="${row.nomor}" data-idmatkul="${row.matakuliah}" id="${id_select_prodi}">
+                      <select class="form-control select-prodi" id="${id_select_prodi}" `+(status=="update")?`data-id=${row.nomor} data-matkul=${row.matakuliah}`:''+` >
 
                       </select>
                   </div>
@@ -118,7 +122,10 @@ function setMatkul(id_select_prodi,id_select_matkul,row,status) {
   $('.row-matkul').append(html);
   var optProdi = `<option value=""> - </option>`;
   $.each(dataGlobal['prodi'],function (key_prodi,row_prodi) {
-      if (id_select_prodi != "prodi") {
+      if (status == "tambah") {
+        var selected = "";
+        optProdi += `<option ${selected} value="${row_prodi.nomor}" data-program="${row_prodi.program}" data-jurusan="${row_prodi.jurusan}">${row_prodi.nama_program} ${row_prodi.nama_jurusan}</option>`
+      }else{
         if (row.program_studi==row_prodi.nomor) {
           var selected = "selected";
           optProdi += `<option ${selected} value="${row_prodi.nomor}" data-program="${row_prodi.program}" data-jurusan="${row_prodi.jurusan}">${row_prodi.nama_program} ${row_prodi.nama_jurusan}</option>`
@@ -126,58 +133,57 @@ function setMatkul(id_select_prodi,id_select_matkul,row,status) {
           var selected = "";
           optProdi += `<option ${selected} value="${row_prodi.nomor}" data-program="${row_prodi.program}" data-jurusan="${row_prodi.jurusan}">${row_prodi.nama_program} ${row_prodi.nama_jurusan}</option>`
         }
-      }else{
-        var selected = "";
-        optProdi += `<option ${selected} value="${row_prodi.nomor}" data-program="${row_prodi.program}" data-jurusan="${row_prodi.jurusan}">${row_prodi.nama_program} ${row_prodi.nama_jurusan}</option>`
       }
   })
-  $(`.select-prodi`).append(optProdi);
-  $('.select-prodi').on('change',function (e) {
-    var program = $('.select-prodi :selected').data('program');
-    var jurusan = $('.select-prodi :selected').data('jurusan');
+  $('#'+id_select_prodi).append(optProdi);
+  $('#'+id_select_prodi).on('change',function (e) {
+    var program = $('#'+id_select_prodi+' :selected').data('program');
+    var jurusan = $('#'+id_select_prodi+' :selected').data('jurusan');
     var id_pengampu = $(this).data('id');
     var id_matkul = $(this).data('idmatkul');
-    console.log(id_pengampu)
-    console.log(id_matkul)
-    searchMatkul(program,jurusan,id_pengampu,id_matkul);
+    // console.log(id_pengampu)
+    // console.log(id_matkul)
+    console.log(program)
+    console.log(jurusan)
+    searchMatkul(program,jurusan,id_pengampu,id_matkul,status);
   })
-  $('.select-matkul').on('change',function (e) {
-    var id_pengampu = $(this).data('id');
-    var id_matkul = $(this).val();
-    console.log("id_pengampu = "+id_pengampu)
-    console.log("id_matkul = "+id_matkul)
-    if (id_pengampu == undefined) {
-      id_pengampu = ""
-      var type = "post"
-    }else{
-      var type = "put"
-    }
-    var arr = {
-      'dosen' : id,
-      'matakuliah' : id_matkul
-    }
-    $.ajax({
-      url: url_api+"/dosenpengampu/"+id_pengampu,
-      type: type,
-      dataType: 'json',
-      data: arr,
-      beforeSend: function(text) {
-        // loading func
-        console.log("loading")
-      },
-      success: function(res) {
-        if (res.status=="success") {
-          window.location.href = "{{url('/akademik/master/datakelas')}}";                    
-        } else {
-          // alert gagal
-        }
-      }
-    });
-  })
+  // $('.select-matkul').on('change',function (e) {
+  //   var id_pengampu = $(this).data('id');
+  //   var id_matkul = $(this).val();
+  //   console.log("id_pengampu = "+id_pengampu)
+  //   console.log("id_matkul = "+id_matkul)
+  //   if (id_pengampu == undefined) {
+  //     id_pengampu = ""
+  //     var type = "post"
+  //   }else{
+  //     var type = "put"
+  //   }
+  //   var arr = {
+  //     'dosen' : id,
+  //     'matakuliah' : id_matkul
+  //   }
+  //   $.ajax({
+  //     url: url_api+"/dosenpengampu/"+id_pengampu,
+  //     type: type,
+  //     dataType: 'json',
+  //     data: arr,
+  //     beforeSend: function(text) {
+  //       // loading func
+  //       console.log("loading")
+  //     },
+  //     success: function(res) {
+  //       if (res.status=="success") {
+  //         window.location.href = "{{url('/akademik/master/datakelas')}}";                    
+  //       } else {
+  //         // alert gagal
+  //       }
+  //     }
+  //   });
+  // })
 }
 
 async function getData(id) {
-  await getGlobalData();
+  
 
     if (id!="") {
         $.ajax({

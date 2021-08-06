@@ -99,7 +99,7 @@ $(document).ready(function() {
   })
 } );
 async function getData() {
-  await getGlobalData();
+  
     var optProgram,optJurusan,optKelas,optStatus;
     $.each(dataGlobal['program'],function (key,row) {
         optProgram += `<option value="${row.nomor}">${row.program}</option>`

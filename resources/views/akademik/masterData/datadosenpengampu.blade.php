@@ -22,32 +22,7 @@
 
           <hr class="mt">
 
-          <div class="row align-items-center card-header__filter-search">
-            <div class="col-sm-6 col-12">
-              <div class="form-group row mb-0">
-                <div class="col-2 pr-6">
-                  <select class="form-control m-0" id="dataperhalaman">
-                    <option>10</option>
-                    <option>20</option>
-                    <option>30</option>
-                  </select>
-                </div>
-                <div class="col-sm-6 col-7 ml-3 ml-md-0">
-                  <label class="dataperhalaman" for="dataperhalaman">Data per Halaman</label>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-4 col-12 offset-md-2 offset-0 mt-md-0 mt-2 text-right">
-              <label class="sr-only" for="searchdata">Search</label>
-              <div class="input-group search-group">
-                <input type="search" class="form-control" id="searchdata" placeholder="Pencarian ...">
-                <div class="input-group-prepend">
-                  <div class="input-group-text search-icon"><img src="/images/search-icon.png" alt=""></div>
-                </div>
-              </div>
-            </div>
-          </div>
+          
         </div>
 
         <div class="table-responsive">
@@ -73,23 +48,10 @@
 <script>
 $(document).ready(function() {
   var nomor = 1;
-dt = $('#datatable').DataTable({
-    "processing": true,
-    "ajax": {
-      url: `${url_api}/dosenpengampu`,
-      type: 'GET',
-      data: {},
-      headers: {
-        "Authorization": window.localStorage.getItem('token')
-      },
-    },
-    pageLength: 10,
-    filter: true,
-    deferRender: true,
-    scrollCollapse: true,
-    scroller: true,
-    "searching": true,
-    "aoColumnDefs": [
+  dt_url = `${url_api}/dosenpengampu`;
+dt_opt = {
+  "columnDefs": [
+
       {
         "aTargets": [0],
         "mData": null,
@@ -122,30 +84,7 @@ dt = $('#datatable').DataTable({
           return res;
         }
       },
-    ],
-    "sDom": 'lrtip',
-    "lengthChange": false,
-    "info": false,
-    "language": {
-      "paginate": {
-        "next": '&gt;',
-        "previous": '&lt;'
-      },
-      "processing": "Loading ..."
-    }
-  })
-  dt.on('order.dt search.dt', function() {
-    dt.column(0, {
-      search: 'applied',
-      order: 'applied'
-    }).nodes().each(function(cell, i) {
-      cell.innerHTML = i + 1;
-    });
-  }).draw();
-
-  $('#searchdata').on('keyup', function() {
-    dt.search(this.value).draw();
-  });
+    ]}
 } );
 </script>
 @endsection

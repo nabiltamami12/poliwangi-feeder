@@ -64,7 +64,7 @@
   <script>
     var url_api = "http://127.0.0.1:8000/api/v1";
     var url = "{{ base_path(); }}";
-    var dataGlobal;
+    var dataGlobal = JSON.parse(localStorage.getItem('globalData')) 
   </script>
   <style type="text/css">
     .form-group {

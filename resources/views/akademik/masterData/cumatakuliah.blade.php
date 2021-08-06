@@ -191,7 +191,7 @@ $(document).ready(function() {
 } );
 
 async function getData(id) {
-    await getGlobalData();
+    
 
     var optProgram = `<option value=""> - </option>`;
     $.each(dataGlobal['program'],function (key,row) {

@@ -25,6 +25,10 @@
     </div>
 </div>
 <script>
+    if (localStorage.getItem("globalData") === null) {
+        getGlobalData();
+    }
+
     function update_btn(id) {
         window.location.href = window.location.href+"/cu/"+id;
     }
@@ -74,7 +78,7 @@
             },
             success: function(res) {
                 if (res.status=="success") {
-                    dataGlobal = res['data'];
+                    localStorage.setItem('globalData', JSON.stringify(res['data']));
                 } else {
                     // alert gagal
                 }
