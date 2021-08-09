@@ -123,6 +123,14 @@ Route::prefix('v1')->group(function () {
     Route::post('/inputnilai', '\App\Http\Controllers\API\InputNilaiController@store');
     Route::put('/inputnilai/{id}', '\App\Http\Controllers\API\InputNilaiController@update');
     Route::delete('/inputnilai/{id}', '\App\Http\Controllers\API\InputNilaiController@destroy');
+
+    // Absensi
+    Route::get('/absensi', [Ctr\AbsensiController::class, 'index']);
+    Route::get('/absensi/{id}', [Ctr\AbsensiController::class, 'show']);
+    Route::get('/rekap/{id}', [Ctr\AbsensiController::class, 'rekap']);
+    Route::post('/absensi', [Ctr\AbsensiController::class, 'store']);
+    Route::put('/absensi/{id}', [Ctr\AbsensiController::class, 'update']);
+    Route::delete('/absensi/{id}', [Ctr\AbsensiController::class, 'destroy']);
 });
 Route::prefix('v1')->middleware('auth:api')->group(function () {
     Route::get('/user', function (Request $request) {
