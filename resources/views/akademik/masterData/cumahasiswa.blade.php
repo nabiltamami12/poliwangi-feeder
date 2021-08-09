@@ -26,25 +26,27 @@
         <form id="form_cu" class="form-input mt-0">
             <input type="hidden" id="nomor" name="nomor">
             <div class="form-row">
-                <div class="col-sm-6 col-12">
-                <div class="form-group row mb-0">
-                    <label>Kelas</label>
-                    <select class="form-control" id="kelas" name="kelas" required>
-
-                    </select>
+                <div class="col-sm-12 col-12">
+                    <div class="form-group row mb-0">
+                        <label for="jurusan">Nama Siswa</label>
+                        <input type="text" class="form-control" id="nama" name="nama" required>
+                    </div>
                 </div>
+                <div class="col-sm-6 col-12">
+                    <div class="form-group row mb-0">
+                        <label>Kelas</label>
+                        <select class="form-control" id="kelas" name="kelas" required>
+
+                        </select>
+                    </div>
                 </div>
                 <div class="col-sm-6 col-12">
                 <div class="form-group row mb-0">
                     <label>Status</label>
-                    <input type="text" class="form-control" id="status" name="status" >
+                    <select class="form-control" id="status" name="status" required>
+
+                    </select>
                 </div>
-                </div>
-                <div class="col-sm-12 col-12">
-                    <div class="form-group row mb-0">
-                    <label for="jurusan">Nama Siswa</label>
-                    <input type="text" class="form-control" id="nama" name="nama" required>
-                    </div>
                 </div>
                 <div class="col-sm-4 col-12">
                     <div class="form-group row mb-0">
@@ -85,7 +87,10 @@
                 <div class="col-sm-6 col-12">
                     <div class="form-group row mb-0">
                     <label for="jurusan_inggris">Jenis Kelamin</label>
-                    <input type="text" class="form-control" id="jenis_kelamin" name="jenis_kelamin" >
+                    <select class="form-control" id="jenis_kelamin" name="jenis_kelamin" required>
+                        <option value="L">Laki-laki</option>
+                        <option value="P">Perempuan</option>
+                    </select>
                     </div>
                 </div>
                 <div class="col-sm-6 col-12">
@@ -101,14 +106,24 @@
                     </div>
                 </div>
             </div>
-            <div class="card-header p-0 m-0 border-0">
-                <div class="row align-items-center">
-                    <div class="col">
-                    <h2 class="mb-0">ALAMAT MAHASISWA</h2>
-                    </div>
-                </div>
-            </div>
             <div class="form-row">
+                <div class="col-sm-12 col-12">
+                    <div class="form-group row mb-0">
+                        <div class="card-header p-0 m-0 border-0">
+                            <div class="row align-items-center">
+                                <div class="col">
+                                    <h2 class="mb-0">ALAMAT MAHASISWA</h2>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-sm-12 col-12">
+                    <hr class="mt">
+                </div>
                 <div class="col-sm-12 col-12">
                     <div class="form-group row mb-0">
                     <label for="jurusan">Alamat</label>
@@ -145,9 +160,14 @@
                     <input type="text" class="form-control" id="kode_pos" name="kode_pos" >
                     </div>
                 </div>
-            </div>
-            
-            <button type="submit" class="btn--blue w-100 simpanData-btn add-btn">{{ ($id==null)?"Tambah":"Ubah" }} Data</button>
+            </div>            
+            <div class="form-row">
+                <div class="col-sm-12 col-12">
+                    <div class="form-group row mb-0">
+                        <button type="submit" class="btn--blue w-100 simpanData-btn add-btn">{{ ($id==null)?"Tambah":"Ubah" }} Data</button>
+                    </div>
+                </div>
+            </div>            
         </form>
         
       </div>
@@ -196,6 +216,12 @@ async function getData(id) {
         optKelas += `<option value="${row.nomor}">${row.kode}</option>`
     })
     $('#kelas').append(optKelas)
+
+    var optStatus = `<option value=""> - </option>`;
+    $.each(dataGlobal['status'],function (key,row) {
+        optStatus += `<option value="${row.kode}">${row.status}</option>`
+    })
+    $('#status').append(optStatus)
 
     if (id!="") {
         $.ajax({

@@ -16,8 +16,8 @@
               <h2 class="mb-0">Data Kelas</h2>
             </div>
             <div class="col text-right">
-              <button type="button" class="btn--blue add-btn">
-                <span class="iconify mr-2" onclick="add_btn()" data-icon="bx:bxs-plus-circle" data-inline="true"></span>
+              <button type="button" onclick="add_btn()" class="btn--blue add-btn">
+                <span class="iconify mr-2" data-icon="bx:bxs-plus-circle" data-inline="true"></span>
                 Tambah
               </button>
             </div>

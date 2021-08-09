@@ -8,7 +8,7 @@
 </header>
 
 <!-- Page content -->
-<section class="page-content page-content__akademik container-fluid" id="akademik_datajurusan">
+<section class="page-content page-content__akademik container-fluid" id="akademik_datamatakuliah">
   <div class="row">
     <div class="col-xl-12">
       <div class="card padding--small">
@@ -16,7 +16,7 @@
         <div class="card-header p-0 m-0 border-0 rounded-0">
           <div class="row align-items-center">
             <div class="col">
-              <h2 class="mb-0">{{ ($id==null)?"TAMBAH":"UBAH" }} DATA JURUSAN</h2>
+              <h2 class="mb-0">{{ ($id==null)?"TAMBAH":"UBAH" }} DATA MATAKULIAH</h2>
             </div>
           </div>
         </div>
@@ -158,7 +158,32 @@
 <script>
 $(document).ready(function() {
     var id = "{{$id}}";
-    getData(id);        
+    getData(id);      
+    $('#program').on('change',function (e) {
+      var program = $(this).val()
+      var jurusan = $.grep(dataGlobal['prodi'], function(e){ return e.program == program; });
+      $('#jurusan').html('')
+      var optJurusan = `<option value=""> - </option>`;
+      $.each(jurusan,function (key,row) {
+        optJurusan += `<option value="${row.jurusan}">${row.nama_jurusan}</option>`
+      })
+      $('#jurusan').append(optJurusan);
+    })
+    $('#jurusan').on('change',function (e) {
+      var program = $('#program').val()
+      var jurusan = $(this).val()
+      var kelas = $.grep(dataGlobal['kelas'], function(e){ return e.program == program; });
+      var kelas = $.grep(dataGlobal['kelas'], function(e){ return e.jurusan == jurusan; });
+      $('#kelas').html('')
+      
+      var optKelas = `<option value=""> - </option>`;
+      $.each(kelas,function (key,row) {
+        console.log(row)
+        optKelas += `<option value="${row.nomor}">${row.kode}</option>`
+      })
+      $('#kelas').append(optKelas);
+    
+    })  
 
     // form tambah data
     $("#form_cu").submit(function(e) {
@@ -199,17 +224,21 @@ async function getData(id) {
     })
     $('#program').append(optProgram)
 
-    var optJurusan = `<option value=""> - </option>`;
-    $.each(dataGlobal['jurusan'],function (key,row) {
-        optJurusan += `<option value="${row.nomor}" data-alias="${row.alias}">${row.jurusan}</option>`
-    })
-    $('#jurusan').append(optJurusan)
+    // if ($('#program').val()==null ) {
+      
+    // }
 
-    var optKelas = `<option value=""> - </option>`;
-    $.each(dataGlobal['kelas'],function (key,row) {
-        optKelas += `<option value="${row.nomor}">${row.kode}</option>`
-    })
-    $('#kelas').append(optKelas)
+    // var optJurusan = `<option value=""> - </option>`;
+    // $.each(dataGlobal['jurusan'],function (key,row) {
+    //     optJurusan += `<option value="${row.nomor}" data-alias="${row.alias}">${row.jurusan}</option>`
+    // })
+    // $('#jurusan').append(optJurusan)
+
+    // var optKelas = `<option value=""> - </option>`;
+    // $.each(dataGlobal['kelas'],function (key,row) {
+    //     optKelas += `<option value="${row.nomor}">${row.kode}</option>`
+    // })
+    // $('#kelas').append(optKelas)
 
     var optMatkulJenis = `<option value=""> - </option>`;
     $.each(dataGlobal['mk_jenis'],function (key,row) {
@@ -236,6 +265,33 @@ async function getData(id) {
                     })                
                     $('#jurusan').val(data.jurusan).change();
                     $('#wali_kelas').val(data.id_wali_kelas).change();
+                    var jurusan = $.grep(dataGlobal['prodi'], function(e){ return e.program == data.program; });
+                    var optJurusan = `<option value=""> - </option>`;
+                    $.each(jurusan,function (key,row) {
+                      if (row.jurusan == data.jurusan) {
+                        var select = "selected";
+                      }else{
+                        var select = "";
+                      }
+                      optJurusan += `<option ${select} value="${row.jurusan}">${row.nama_jurusan}</option>`
+                    })
+                    $('#jurusan').append(optJurusan);
+
+                    var kelas = $.grep(dataGlobal['kelas'], function(e){ return e.program == data.program; });
+                    var kelas = $.grep(dataGlobal['kelas'], function(e){ return e.jurusan == data.jurusan; });
+                    
+                    var optKelas = `<option value=""> - </option>`;
+                    $.each(kelas,function (key,row) {
+                      if (row.jurusan == data.jurusan) {
+                        var select = "selected";
+                      }else{
+                        var select = "";
+                      }
+
+                      optKelas += `<option ${select} value="${row.nomor}">${row.kode}</option>`
+                    })
+                    $('#kelas').append(optKelas);
+
                 } else {
                     // alert gagal
                 }
