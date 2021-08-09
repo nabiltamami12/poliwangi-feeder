@@ -22,19 +22,18 @@
   <!-- Argon CSS -->
   <link rel="stylesheet" href="{{ url('argon') }}/assets/css/argon.css?v=1.2.0" type="text/css">
   <!-- Custom CSS -->
-  <link href="{{ asset('css/customComponent.css') }}" rel="stylesheet">
   <link href="{{ asset('css/main.css') }}" rel="stylesheet">
-  <link href="{{ asset('css/akademik.css') }}" rel="stylesheet">
   <link href="{{ asset('css/responsive.css') }}" rel="stylesheet">
   <!-- Datatable CSS -->
   <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap4.min.css">
   <!-- Bootstrap CSS -->
   <!-- <link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' rel='stylesheet' type='text/css'> -->
-
+  <!-- Bootstrap Datepicker -->
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css"
+    type="text/css" />
   <!-- Font Awesome -->
   <script src="https://kit.fontawesome.com/fd5eab281a.js" crossorigin="anonymous"></script>
-  <!-- Iconify -->
-  <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
   <!-- JQUERY JS -->
   <script src="{{ url('argon') }}/assets/vendor/jquery/dist/jquery.min.js"></script>
   <!-- Datatable JS -->
@@ -44,16 +43,6 @@
   <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js' type='text/javascript'></script>
 
   <!-- Font Awesome JS -->
-  <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"> </script>
-  <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"> </script>
-  
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.css" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.js"></script>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
-
   <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
     integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous">
   </script>
@@ -65,8 +54,9 @@
     var url_api = "http://127.0.0.1:8000/api/v1";
     var url = "{{ base_path(); }}";
     var dataGlobal = JSON.parse(localStorage.getItem('globalData')) 
+    var dataJurusan,dataDosen,dataProgram;
   </script>
-  <style type="text/css">
+  {{-- <style type="text/css">
     .form-group {
       padding-left: 1.5rem !important;
       padding-right: 1.3rem !important;
@@ -125,12 +115,12 @@
     .sub-aktif{
       color: #28a3eb !important;
     }
-  </style>
+  </style> --}}
 </head>
 
 
 <body>
-  @yield('loader')
+  {{-- @yield('loader') --}}
   @include('partials.sidebarAkademik')
 
   <!-- Main content -->
@@ -205,6 +195,8 @@
 
     });
   </script>
+  <!-- Bootstrap Datepicker -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.js" type="text/javascript"></script>
   @yield('js')
 </body>
 

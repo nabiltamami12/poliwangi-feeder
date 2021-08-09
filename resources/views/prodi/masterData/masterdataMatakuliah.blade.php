@@ -21,7 +21,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-modal-cancel" data-dismiss="modal">Batal</button>
-          <button type="button" class="btn btn--blue btn-modal-ok">Hapus data</button>
+          <button type="button" class="btn btn-primary btn-modal-ok">Hapus data</button>
         </div>
       </div>
     </div>
@@ -31,26 +31,26 @@
     <div class="col-xl-12">
       <div class="card shadow padding--small">
 
-        <div class="card-header p-0 m-0 border-0 rounded-0">
+        <div class="card-header p-0 m-0 border-0 ">
           <div class="row align-items-center">
             <div class="col-12 col-md-6">
               <h2 class="mb-0 text-center text-md-left">Data Mata Kuliah</h2>
             </div>
             <div class="col-12 col-md-6 text-center text-md-right mt-3 mt-md-0">
-              <a class="btn btn--blue" href="/prodi/masterdata/datamatakuliah/tambahdata" role="button">
-                <span class="iconify mr-2" data-icon="bx:bxs-plus-circle" data-inline="true"></span>
+              <a class="btn btn-primary" href="/prodi/masterdata/datamatakuliah/tambahdata" role="button">
+                <span class="iconify mr-2" data-icon="bx:bxs-plus-circle"></span>
                 Tambah
               </a>
-              <button type="button" class="btn--blue ml-3">
-                <span class="iconify" data-icon="bx:bx-download" data-inline="true"></span>
+              <button type="button" class="btn-primary ml-3">
+                <span class="iconify" data-icon="bx:bx-download"></span>
                 Import
               </button>
             </div>
           </div>
 
-          <hr class="mt">
+          <hr class="my-4">
 
-          <div class="row align-items-center padding--small py-0 filterSearch-data">
+          <div class="row align-items-center padding--small py-0 ">
             <div class="col-sm-6 col-12">
               <div class="form-group row mb-0">
                 <select class="form-control" id="dataperhalaman">
@@ -68,7 +68,7 @@
                 <input type="search" class="form-control" id="searchdata" placeholder="Pencarian ...">
                 <div class="input-group-prepend">
                   <div class="input-group-text search-icon">
-                    <span class="iconify" data-icon="fluent:search-32-regular" data-inline="true"></span>
+                    <span class="iconify" data-icon="fluent:search-32-regular"></span>
                   </div>
                 </div>
               </div>
@@ -96,7 +96,7 @@
               <tr>
                 <td class="text-center px-2">1</td>
                 <td class="text-center">1111</td>
-                <td class="font--bold text-capitalize">Bahasa Inggris</td>
+                <td class="font-weight-bold text-capitalize">Bahasa Inggris</td>
                 <td class="text-capitalize">kur. percobaan1</td>
                 <td class="text-center">1</td>
                 <td class="text-center">2</td>
@@ -104,16 +104,16 @@
                 <td class="text-center">1</td>
                 <td class="text-center">
                   <a href="/prodi/masterdata/datamatakuliah/updatedata"><span class="iconify edit-icon"
-                      data-icon="bx:bx-edit-alt" data-inline="true"></span></a>
+                      data-icon="bx:bx-edit-alt"></span></a>
                   <span data-toggle="modal" data-target="#deleteMatkulModal" class="iconify delete-icon"
-                    data-icon="bx:bx-trash" data-inline="true"></span>
+                    data-icon="bx:bx-trash"></span>
                 </td>
               </tr>
 
               <tr>
                 <td class="text-center px-2">2</td>
                 <td class="text-center">1111</td>
-                <td class="font--bold text-capitalize">Bahasa Inggris</td>
+                <td class="font-weight-bold text-capitalize">Bahasa Inggris</td>
                 <td class="text-capitalize">kur. percobaan1</td>
                 <td class="text-center">1</td>
                 <td class="text-center">2</td>
@@ -121,16 +121,16 @@
                 <td class="text-center">1</td>
                 <td class="text-center">
                   <a href="/prodi/masterdata/datamatakuliah/updatedata"><span class="iconify edit-icon"
-                      data-icon="bx:bx-edit-alt" data-inline="true"></span></a>
+                      data-icon="bx:bx-edit-alt"></span></a>
                   <span data-toggle="modal" data-target="#deleteMatkulModal" class="iconify delete-icon"
-                    data-icon="bx:bx-trash" data-inline="true"></span>
+                    data-icon="bx:bx-trash"></span>
                 </td>
               </tr>
 
               <tr>
                 <td class="text-center px-2">3</td>
                 <td class="text-center">1111</td>
-                <td class="font--bold text-capitalize">Bahasa Inggris</td>
+                <td class="font-weight-bold text-capitalize">Bahasa Inggris</td>
                 <td class="text-capitalize">kur. percobaan1</td>
                 <td class="text-center">1</td>
                 <td class="text-center">2</td>
@@ -138,16 +138,16 @@
                 <td class="text-center">1</td>
                 <td class="text-center">
                   <a href="/prodi/masterdata/datamatakuliah/updatedata"><span class="iconify edit-icon"
-                      data-icon="bx:bx-edit-alt" data-inline="true"></span></a>
+                      data-icon="bx:bx-edit-alt"></span></a>
                   <span data-toggle="modal" data-target="#deleteMatkulModal" class="iconify delete-icon"
-                    data-icon="bx:bx-trash" data-inline="true"></span>
+                    data-icon="bx:bx-trash"></span>
                 </td>
               </tr>
 
               <tr>
                 <td class="text-center px-2">4</td>
                 <td class="text-center">1111</td>
-                <td class="font--bold text-capitalize">Bahasa Inggris</td>
+                <td class="font-weight-bold text-capitalize">Bahasa Inggris</td>
                 <td class="text-capitalize">kur. percobaan1</td>
                 <td class="text-center">1</td>
                 <td class="text-center">2</td>
@@ -155,16 +155,16 @@
                 <td class="text-center">1</td>
                 <td class="text-center">
                   <a href="/prodi/masterdata/datamatakuliah/updatedata"><span class="iconify edit-icon"
-                      data-icon="bx:bx-edit-alt" data-inline="true"></span></a>
+                      data-icon="bx:bx-edit-alt"></span></a>
                   <span data-toggle="modal" data-target="#deleteMatkulModal" class="iconify delete-icon"
-                    data-icon="bx:bx-trash" data-inline="true"></span>
+                    data-icon="bx:bx-trash"></span>
                 </td>
               </tr>
 
               <tr>
                 <td class="text-center px-2">5</td>
                 <td class="text-center">1111</td>
-                <td class="font--bold text-capitalize">Bahasa Inggris</td>
+                <td class="font-weight-bold text-capitalize">Bahasa Inggris</td>
                 <td class="text-capitalize">kur. percobaan1</td>
                 <td class="text-center">1</td>
                 <td class="text-center">2</td>
@@ -172,16 +172,16 @@
                 <td class="text-center">1</td>
                 <td class="text-center">
                   <a href="/prodi/masterdata/datamatakuliah/updatedata"><span class="iconify edit-icon"
-                      data-icon="bx:bx-edit-alt" data-inline="true"></span></a>
+                      data-icon="bx:bx-edit-alt"></span></a>
                   <span data-toggle="modal" data-target="#deleteMatkulModal" class="iconify delete-icon"
-                    data-icon="bx:bx-trash" data-inline="true"></span>
+                    data-icon="bx:bx-trash"></span>
                 </td>
               </tr>
 
               <tr>
                 <td class="text-center px-2">6</td>
                 <td class="text-center">1111</td>
-                <td class="font--bold text-capitalize">Bahasa Inggris</td>
+                <td class="font-weight-bold text-capitalize">Bahasa Inggris</td>
                 <td class="text-capitalize">kur. percobaan1</td>
                 <td class="text-center">1</td>
                 <td class="text-center">2</td>
@@ -189,16 +189,16 @@
                 <td class="text-center">1</td>
                 <td class="text-center">
                   <a href="/prodi/masterdata/datamatakuliah/updatedata"><span class="iconify edit-icon"
-                      data-icon="bx:bx-edit-alt" data-inline="true"></span></a>
+                      data-icon="bx:bx-edit-alt"></span></a>
                   <span data-toggle="modal" data-target="#deleteMatkulModal" class="iconify delete-icon"
-                    data-icon="bx:bx-trash" data-inline="true"></span>
+                    data-icon="bx:bx-trash"></span>
                 </td>
               </tr>
 
               <tr>
                 <td class="text-center px-2">7</td>
                 <td class="text-center">1111</td>
-                <td class="font--bold text-capitalize">Bahasa Inggris</td>
+                <td class="font-weight-bold text-capitalize">Bahasa Inggris</td>
                 <td class="text-capitalize">kur. percobaan1</td>
                 <td class="text-center">1</td>
                 <td class="text-center">2</td>
@@ -206,16 +206,16 @@
                 <td class="text-center">1</td>
                 <td class="text-center">
                   <a href="/prodi/masterdata/datamatakuliah/updatedata"><span class="iconify edit-icon"
-                      data-icon="bx:bx-edit-alt" data-inline="true"></span></a>
+                      data-icon="bx:bx-edit-alt"></span></a>
                   <span data-toggle="modal" data-target="#deleteMatkulModal" class="iconify delete-icon"
-                    data-icon="bx:bx-trash" data-inline="true"></span>
+                    data-icon="bx:bx-trash"></span>
                 </td>
               </tr>
 
               <tr>
                 <td class="text-center px-2">8</td>
                 <td class="text-center">1111</td>
-                <td class="font--bold text-capitalize">Bahasa Inggris</td>
+                <td class="font-weight-bold text-capitalize">Bahasa Inggris</td>
                 <td class="text-capitalize">kur. percobaan1</td>
                 <td class="text-center">1</td>
                 <td class="text-center">2</td>
@@ -223,16 +223,16 @@
                 <td class="text-center">1</td>
                 <td class="text-center">
                   <a href="/prodi/masterdata/datamatakuliah/updatedata"><span class="iconify edit-icon"
-                      data-icon="bx:bx-edit-alt" data-inline="true"></span></a>
+                      data-icon="bx:bx-edit-alt"></span></a>
                   <span data-toggle="modal" data-target="#deleteMatkulModal" class="iconify delete-icon"
-                    data-icon="bx:bx-trash" data-inline="true"></span>
+                    data-icon="bx:bx-trash"></span>
                 </td>
               </tr>
 
               <tr>
                 <td class="text-center px-2">9</td>
                 <td class="text-center">1111</td>
-                <td class="font--bold text-capitalize">Bahasa Inggris</td>
+                <td class="font-weight-bold text-capitalize">Bahasa Inggris</td>
                 <td class="text-capitalize">kur. percobaan1</td>
                 <td class="text-center">1</td>
                 <td class="text-center">2</td>
@@ -240,9 +240,9 @@
                 <td class="text-center">1</td>
                 <td class="text-center">
                   <a href="/prodi/masterdata/datamatakuliah/updatedata"><span class="iconify edit-icon"
-                      data-icon="bx:bx-edit-alt" data-inline="true"></span></a>
+                      data-icon="bx:bx-edit-alt"></span></a>
                   <span data-toggle="modal" data-target="#deleteMatkulModal" class="iconify delete-icon"
-                    data-icon="bx:bx-trash" data-inline="true"></span>
+                    data-icon="bx:bx-trash"></span>
                 </td>
               </tr>
             </tbody>

@@ -8,19 +8,19 @@
 </header>
 
 <!-- Page content -->
-<section class="page-content page-content__akademik container-fluid" id="akademik_datadosen">
+<section class="page-content  container-fluid" id="akademik_datadosen">
   <div class="row">
     <div class="col-xl-12">
       <div class="card padding--small">
 
-        <div class="card-header p-0 m-0 border-0 rounded-0">
+        <div class="card-header p-0 m-0 border-0 ">
           <div class="row align-items-center">
             <div class="col">
               <h2 class="mb-0">Data Dosen Pengampu</h2>
             </div>
           </div>
 
-          <hr class="mt">
+          <hr class="my-4">
 
           
         </div>
@@ -46,7 +46,7 @@
   </div>
 </section>
 <script>
-$(document).ready(function() {
+  $(document).ready(function() {
   var nomor = 1;
   dt_url = `${url_api}/dosenpengampu`;
 dt_opt = {
@@ -79,7 +79,7 @@ dt_opt = {
         "mRender": function(data, type, full) {
           var id = data['nomor'];
           var text_hapus = data['jurusan'];
-          var btn_update = `<span class="iconify edit-icon" onclick='update_btn(${id})' data-icon="bx:bx-edit-alt" data-inline="true"></span>` 
+          var btn_update = `<span class="iconify edit-icon" onclick='update_btn(${id})' data-icon="bx:bx-edit-alt" ></span>` 
           res = btn_update;
           return res;
         }

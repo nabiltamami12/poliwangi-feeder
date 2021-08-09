@@ -10,26 +10,26 @@
     <div class="col-xl-12">
       <div class="card shadow padding--small">
 
-        <div class="card-header p-0 m-0 border-0 rounded-0">
+        <div class="card-header p-0 m-0 border-0 ">
           <div class="row align-items-center">
             <div class="col-12 col-md-7">
               <h2 class="mb-0 text-center text-md-left">Data Sumbangan Pengembangan Institusi Jalur Mandiri</h2>
             </div>
             <div class="col-12 col-md-5 text-center text-md-right mt-3 mt-md-0">
-              <button type="button" class="btn--blue">
-                <span class="iconify mr-2" data-icon="bx:bx-download" data-inline="true"></span>
+              <button type="button" class="btn-primary">
+                <span class="iconify mr-2" data-icon="bx:bx-download"></span>
                 <span>Import</span>
               </button>
-              <button type="button" class="btn--blue ml-3">
-                <span class="iconify mr-2" data-icon="bx:bx-upload" data-inline="true"></span>
+              <button type="button" class="btn-primary ml-3">
+                <span class="iconify mr-2" data-icon="bx:bx-upload"></span>
                 <span>Eksport</span>
               </button>
             </div>
           </div>
 
-          <hr class="mt">
+          <hr class="my-4">
 
-          <div class="row align-items-center padding--small py-0 filterSearch-data">
+          <div class="row align-items-center padding--small py-0 ">
             <div class="col-sm-6 col-12">
               <div class="form-group row">
                 <select class="form-control" id="dataperhalaman">
@@ -47,7 +47,7 @@
                 <input type="search" class="form-control" id="searchdata" placeholder="Pencarian ...">
                 <div class="input-group-prepend">
                   <div class="input-group-text search-icon">
-                    <span class="iconify" data-icon="fluent:search-32-regular" data-inline="true"></span>
+                    <span class="iconify" data-icon="fluent:search-32-regular"></span>
                   </div>
                 </div>
               </div>
@@ -72,118 +72,118 @@
             <tbody class="table-body">
               <tr>
                 <td class="text-center px-2">1</td>
-                <td class="font--bold text-capitalize">Jessica Charisa</td>
+                <td class="font-weight-bold text-capitalize">Jessica Charisa</td>
                 <td class="text-center">4891203526</td>
                 <td class="text-center">13 Juli 2021</td>
                 <td class="text-center">Rp. 5.000.000</td>
                 <td class="text-capitalize">SPI bulan juli</td>
                 <td class="text-center">
-                  <span class="iconify edit-icon" data-icon="bx:bx-edit-alt" data-inline="true"></span>
-                  <span class="iconify delete-icon" data-icon="bx:bx-trash" data-inline="true"></span>
+                  <span class="iconify edit-icon" data-icon="bx:bx-edit-alt"></span>
+                  <span class="iconify delete-icon" data-icon="bx:bx-trash"></span>
                 </td>
               </tr>
 
               <tr>
                 <td class="text-center px-2">2</td>
-                <td class="font--bold text-capitalize">John Martin</td>
+                <td class="font-weight-bold text-capitalize">John Martin</td>
                 <td class="text-center">4891203526</td>
                 <td class="text-center">13 Juli 2021</td>
                 <td class="text-center">Rp. 5.000.000</td>
                 <td class="text-capitalize">SPI bulan juli</td>
                 <td class="text-center">
-                  <span class="iconify edit-icon" data-icon="bx:bx-edit-alt" data-inline="true"></span>
-                  <span class="iconify delete-icon" data-icon="bx:bx-trash" data-inline="true"></span>
+                  <span class="iconify edit-icon" data-icon="bx:bx-edit-alt"></span>
+                  <span class="iconify delete-icon" data-icon="bx:bx-trash"></span>
                 </td>
               </tr>
 
               <tr>
                 <td class="text-center px-2">3</td>
-                <td class="font--bold text-capitalize">Farhan Pratama</td>
+                <td class="font-weight-bold text-capitalize">Farhan Pratama</td>
                 <td class="text-center">4891203526</td>
                 <td class="text-center">13 Juli 2021</td>
                 <td class="text-center">Rp. 5.000.000</td>
                 <td class="text-capitalize">SPI bulan juli</td>
                 <td class="text-center">
-                  <span class="iconify edit-icon" data-icon="bx:bx-edit-alt" data-inline="true"></span>
-                  <span class="iconify delete-icon" data-icon="bx:bx-trash" data-inline="true"></span>
+                  <span class="iconify edit-icon" data-icon="bx:bx-edit-alt"></span>
+                  <span class="iconify delete-icon" data-icon="bx:bx-trash"></span>
                 </td>
               </tr>
 
               <tr>
                 <td class="text-center px-2">4</td>
-                <td class="font--bold text-capitalize">Widya Astuti</td>
+                <td class="font-weight-bold text-capitalize">Widya Astuti</td>
                 <td class="text-center">4891203526</td>
                 <td class="text-center">13 Juli 2021</td>
                 <td class="text-center">Rp. 5.000.000</td>
                 <td class="text-capitalize">SPI bulan juli</td>
                 <td class="text-center">
-                  <span class="iconify edit-icon" data-icon="bx:bx-edit-alt" data-inline="true"></span>
-                  <span class="iconify delete-icon" data-icon="bx:bx-trash" data-inline="true"></span>
+                  <span class="iconify edit-icon" data-icon="bx:bx-edit-alt"></span>
+                  <span class="iconify delete-icon" data-icon="bx:bx-trash"></span>
                 </td>
               </tr>
 
               <tr>
                 <td class="text-center px-2">5</td>
-                <td class="font--bold text-capitalize">Jessica Charisa</td>
+                <td class="font-weight-bold text-capitalize">Jessica Charisa</td>
                 <td class="text-center">4891203526</td>
                 <td class="text-center">13 Juli 2021</td>
                 <td class="text-center">Rp. 5.000.000</td>
                 <td class="text-capitalize">SPI bulan juli</td>
                 <td class="text-center">
-                  <span class="iconify edit-icon" data-icon="bx:bx-edit-alt" data-inline="true"></span>
-                  <span class="iconify delete-icon" data-icon="bx:bx-trash" data-inline="true"></span>
+                  <span class="iconify edit-icon" data-icon="bx:bx-edit-alt"></span>
+                  <span class="iconify delete-icon" data-icon="bx:bx-trash"></span>
                 </td>
               </tr>
 
               <tr>
                 <td class="text-center px-2">6</td>
-                <td class="font--bold text-capitalize">Jessica Charisa</td>
+                <td class="font-weight-bold text-capitalize">Jessica Charisa</td>
                 <td class="text-center">4891203526</td>
                 <td class="text-center">13 Juli 2021</td>
                 <td class="text-center">Rp. 5.000.000</td>
                 <td class="text-capitalize">SPI bulan juli</td>
                 <td class="text-center">
-                  <span class="iconify edit-icon" data-icon="bx:bx-edit-alt" data-inline="true"></span>
-                  <span class="iconify delete-icon" data-icon="bx:bx-trash" data-inline="true"></span>
+                  <span class="iconify edit-icon" data-icon="bx:bx-edit-alt"></span>
+                  <span class="iconify delete-icon" data-icon="bx:bx-trash"></span>
                 </td>
               </tr>
 
               <tr>
                 <td class="text-center px-2">7</td>
-                <td class="font--bold text-capitalize">Jessica Charisa</td>
+                <td class="font-weight-bold text-capitalize">Jessica Charisa</td>
                 <td class="text-center">4891203526</td>
                 <td class="text-center">13 Juli 2021</td>
                 <td class="text-center">Rp. 5.000.000</td>
                 <td class="text-capitalize">SPI bulan juli</td>
                 <td class="text-center">
-                  <span class="iconify edit-icon" data-icon="bx:bx-edit-alt" data-inline="true"></span>
-                  <span class="iconify delete-icon" data-icon="bx:bx-trash" data-inline="true"></span>
+                  <span class="iconify edit-icon" data-icon="bx:bx-edit-alt"></span>
+                  <span class="iconify delete-icon" data-icon="bx:bx-trash"></span>
                 </td>
               </tr>
 
               <tr>
                 <td class="text-center px-2">8</td>
-                <td class="font--bold text-capitalize">Jessica Charisa</td>
+                <td class="font-weight-bold text-capitalize">Jessica Charisa</td>
                 <td class="text-center">4891203526</td>
                 <td class="text-center">13 Juli 2021</td>
                 <td class="text-center">Rp. 5.000.000</td>
                 <td class="text-capitalize">SPI bulan juli</td>
                 <td class="text-center">
-                  <span class="iconify edit-icon" data-icon="bx:bx-edit-alt" data-inline="true"></span>
-                  <span class="iconify delete-icon" data-icon="bx:bx-trash" data-inline="true"></span>
+                  <span class="iconify edit-icon" data-icon="bx:bx-edit-alt"></span>
+                  <span class="iconify delete-icon" data-icon="bx:bx-trash"></span>
                 </td>
               </tr>
 
               <tr>
                 <td class="text-center px-2">9</td>
-                <td class="font--bold text-capitalize">Jessica Charisa</td>
+                <td class="font-weight-bold text-capitalize">Jessica Charisa</td>
                 <td class="text-center">4891203526</td>
                 <td class="text-center">13 Juli 2021</td>
                 <td class="text-center">Rp. 5.000.000</td>
                 <td class="text-capitalize">SPI bulan juli</td>
                 <td class="text-center">
-                  <span class="iconify edit-icon" data-icon="bx:bx-edit-alt" data-inline="true"></span>
-                  <span class="iconify delete-icon" data-icon="bx:bx-trash" data-inline="true"></span>
+                  <span class="iconify edit-icon" data-icon="bx:bx-edit-alt"></span>
+                  <span class="iconify delete-icon" data-icon="bx:bx-trash"></span>
                 </td>
               </tr>
 

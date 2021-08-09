@@ -2,37 +2,39 @@
 
 @section('content')
 <style>
-.fc-unthemed td.fc-today span {
-    color: #28A3EB!important;
-}
-.fc-unthemed td.fc-today {
-    background: transparent!important;
-}
-.fc-libur{
-    color:#F46A6A!important;
-}
+    .fc-unthemed td.fc-today span {
+        color: #28A3EB !important;
+    }
+
+    .fc-unthemed td.fc-today {
+        background: transparent !important;
+    }
+
+    .fc-libur {
+        color: #F46A6A !important;
+    }
 </style>
 <!-- Header -->
 <header class="header">
 
 </header>
-<section class="page-content page-content__akademik container-fluid" id="akademik_datajurusan">
+<section class="page-content  container-fluid" id="akademik_datajurusan">
     <div class="row">
         <div class="col-xl-8">
             <div class="card padding--small">
                 <div id='calendar'></div>
-            </div>   
-        </div>   
+            </div>
+        </div>
         <div class="col-xl-4">
             <div class="card padding--small">
-                <div class="card-header p-0 m-0 border-0 rounded-0">
+                <div class="card-header p-0 m-0 border-0 ">
                     <div class="row align-items-center">
                         <div class="col">
                             <h2 class="mb-0">Detail Kalender</h2>
                         </div>
                     </div>
 
-                    <hr class="mt">
+                    <hr class="my-4">
                     <div class="row align-items-center ml-1">
                         <input type="hidden" id="tanggal">
                         <div class="col-sm-12 col-12">
@@ -52,15 +54,15 @@
                         </div>
                     </div>
                     <div class="col text-right">
-                        <button type="button" class="btn--blue add-btn">Simpan</button>
+                        <button type="button" class="btn-primary ">Simpan</button>
                     </div>
                 </div>
             </div>
         </div>
-    </div>   
-</section>   
+    </div>
+</section>
 <script>
-var calendar;
+    var calendar;
 $(document).ready(function () {
     arrHari=[];
     calendar = $('#calendar').fullCalendar({
@@ -83,7 +85,7 @@ $(document).ready(function () {
     });
 
     getData();
-    $('.add-btn').on('click',function (e) {
+    $('.').on('click',function (e) {
         var tanggal = $('#tanggal').val();
         var keterangan = $('#keterangan').val();
         var libur = $('#libur').val();
@@ -156,5 +158,5 @@ async function getData(){
     })
 }
 </script>
-  
+
 @endsection

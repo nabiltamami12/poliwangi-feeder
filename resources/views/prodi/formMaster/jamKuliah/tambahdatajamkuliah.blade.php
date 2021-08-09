@@ -17,9 +17,9 @@
           </div>
         </div>
 
-        <hr class="mt">
+        <hr class="my-4">
 
-        <form class="form-input mt-0">
+        <form class="form-input">
           <div class="form-row">
             <div class="col-md-6 form-group">
               <label for="hari">Hari</label>
@@ -49,7 +49,7 @@
               <input type="text" class="form-control" id="jam-akhir-kuliah" placeholder="00:00">
             </div>
           </div>
-          <button type="submit" class="btn--blue w-100 tambahData-btn">Tambah Data</button>
+          <button type="submit" class="btn-primary w-100 tambahData-btn">Tambah Data</button>
         </form>
       </div>
     </div>

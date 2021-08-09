@@ -23,7 +23,6 @@
     href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css"
     type="text/css" />
   <!-- Custom CSS -->
-  <link href="{{ asset('css/customComponent.css') }}" rel="stylesheet">
   <link href="{{ asset('css/main.css') }}" rel="stylesheet">
   <link href="{{ asset('css/mahasiswa.css') }}" rel="stylesheet">
   <link href="{{ asset('css/responsive.css') }}" rel="stylesheet">

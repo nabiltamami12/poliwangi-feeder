@@ -8,12 +8,12 @@
 </header>
 
 <!-- Page content -->
-<section class="page-content page-content__akademik container-fluid" id="akademik_datajurusan">
+<section class="page-content  container-fluid" id="akademik_datajurusan">
   <div class="row">
     <div class="col-xl-12">
       <div class="card padding--small">
 
-        <div class="card-header p-0 m-0 border-0 rounded-0">
+        <div class="card-header p-0 m-0 border-0 ">
           <div class="row align-items-center">
             <div class="col">
               <h2 class="mb-0">{{ ($id==null)?"TAMBAH":"UBAH" }} DATA JURUSAN</h2>
@@ -21,7 +21,7 @@
           </div>
         </div>
 
-        <hr class="mt">
+        <hr class="my-4">
 
         <form id="form_cu">
           <input type="hidden" id="nomor" name="nomor">
@@ -30,7 +30,7 @@
             <div class="col-sm-12 col-12">
               <div class="form-group row mb-0">
                 <label>Matakuliah</label>
-                <input type="text" class="form-control" id="matakuliah" name="matakuliah" >
+                <input type="text" class="form-control" id="matakuliah" name="matakuliah">
               </div>
             </div>
             <div class="col-sm-6 col-12">
@@ -101,38 +101,38 @@
             <div class="col-sm-6 col-12">
               <div class="form-group row mb-0">
                 <label>Tahun</label>
-                <input type="text" class="form-control" id="tahun" name="tahun" >
+                <input type="text" class="form-control" id="tahun" name="tahun">
               </div>
             </div>
             <div class="col-sm-6 col-12">
               <div class="form-group row mb-0">
                 <label>Matakuliah Inggris</label>
-                <input type="text" class="form-control" id="matakuliah_inggris" name="matakuliah_inggris" >
+                <input type="text" class="form-control" id="matakuliah_inggris" name="matakuliah_inggris">
               </div>
             </div>
             <div class="col-sm-6 col-12">
               <div class="form-group row mb-0">
                 <label>Matakuliah Singkatan</label>
-                <input type="text" class="form-control" id="matakuliah_singkatan" name="matakuliah_singkatan" >
+                <input type="text" class="form-control" id="matakuliah_singkatan" name="matakuliah_singkatan">
               </div>
             </div>
             <div class="col-sm-6 col-12">
               <div class="form-group row mb-0">
                 <label>Tanggal mulai efektif</label>
-                <input type="text" class="form-control" id="tanggal_mulai_efektif" name="tanggal_mulai_efektif" >
+                <input type="text" class="form-control" id="tanggal_mulai_efektif" name="tanggal_mulai_efektif">
               </div>
             </div>
             <div class="col-sm-6 col-12">
               <div class="form-group row mb-0">
                 <label>Tanggal akhir efektif</label>
-                <input type="text" class="form-control" id="tanggal_akhir_efektif" name="tanggal_akhir_efektif" >
+                <input type="text" class="form-control" id="tanggal_akhir_efektif" name="tanggal_akhir_efektif">
               </div>
             </div>
             <div class="col-sm-6 col-12">
               <div class="form-group row mb-0">
                 <label>Matakuliah Jenis</label>
                 <select class="form-control" id="matakuliah_jenis" name="matakuliah_jenis" required>
-                  
+
                 </select>
               </div>
             </div>
@@ -146,17 +146,18 @@
               </div>
             </div>
           </div>
-          <hr class="mt">
+          <hr class="my-4">
 
-          <button type="submit" class="btn--blue w-100 simpanData-btn add-btn">{{ ($id==null)?"Tambah":"Ubah" }} Data</button>
+          <button type="submit" class="btn-primary w-100 simpanData-btn ">{{ ($id==null)?"Tambah":"Ubah" }}
+            Data</button>
         </form>
-        
+
       </div>
     </div>
   </div>
 </section>
 <script>
-$(document).ready(function() {
+  $(document).ready(function() {
     var id = "{{$id}}";
     getData(id);        
 

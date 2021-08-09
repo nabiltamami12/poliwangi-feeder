@@ -8,18 +8,19 @@
 </header>
 
 <!-- Page content -->
-<section class="page-content page-content__akademik container-fluid" id="akademik_dataperiode">
+<section class="page-content  container-fluid" id="akademik_dataperiode">
   <div class="row">
     <div class="col-xl-12">
       <div class="card padding--small">
 
-        <div class="card-header p-0 m-0 border-0 rounded-0">
+        <div class="card-header p-0 m-0 border-0 ">
           <div class="row align-items-center">
             <div class="col">
               <h2 class="mb-0">Data Periode</h2>
             </div>
             <div class="col text-right">
-              <button type="button" onclick="add_btn()" class="btn--blue add-btn"><img src="/images/add-icon--white.png" alt="">
+              <button type="button" onclick="add_btn()" class="btn-primary "><img src="/images/add-icon--white.png"
+                  alt="">
                 Tambah</button>
             </div>
           </div>
@@ -41,7 +42,7 @@
           </table>
         </div>
 
-        
+
       </div>
     </div>
   </div>

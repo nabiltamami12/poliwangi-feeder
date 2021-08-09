@@ -17,9 +17,9 @@
           </div>
         </div>
 
-        <hr class="mt">
+        <hr class="my-4">
 
-        <form class="form-input mt-0">
+        <form class="form-input">
           <div class="form-row">
             <div class="col-12 form-group pr-0 pr-md-1">
               <label for="kode-kelas">Kode Kelas</label>
@@ -44,7 +44,7 @@
               <input type="text" class="form-control" id="keterangan-ruang" placeholder="Keterangan">
             </div>
           </div>
-          <button type="submit" class="btn--blue w-100 tambahData-btn">Tambah Data</button>
+          <button type="submit" class="btn-primary w-100 tambahData-btn">Tambah Data</button>
         </form>
       </div>
     </div>

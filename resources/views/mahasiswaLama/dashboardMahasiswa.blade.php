@@ -5,7 +5,7 @@
 <header class="header"></header>
 
 <!-- Page content -->
-<section class="page-content container-fluid" id="dashboard">
+<section class="page-content container-fluid" id="dashboard_mala">
   <div class="row">
     <div class="col">
       <div class="d-md-flex justify-content-between informasi_mahasiswa mt-4">
@@ -70,28 +70,28 @@
 
             <tbody class="table-body">
               <tr>
-                <td class="font--bold wordwrap">Pengantar perkuliahan II</td>
+                <td class="font-weight-bold wordwrap">Pengantar perkuliahan II</td>
                 <td class="wordwrap">Prof.Seno Prasetya,drg.,SU.,Ph.D., Sp.KGA(K)</td>
                 <td class="text-center">KGA12</td>
                 <td class="text-center">08:00</td>
               </tr>
 
               <tr>
-                <td class="font--bold wordwrap">Matematika Dasar</td>
+                <td class="font-weight-bold wordwrap">Matematika Dasar</td>
                 <td class="wordwrap">Dr. Amin Suyitno, M.Pd</td>
                 <td class="text-center">MT001</td>
                 <td class="text-center">12:00</td>
               </tr>
 
               <tr>
-                <td class="font--bold wordwrap">Bahasa Inggris</td>
+                <td class="font-weight-bold wordwrap">Bahasa Inggris</td>
                 <td class="wordwrap">Dr. Pradana Putra, M.Pd</td>
                 <td class="text-center">Lang02</td>
                 <td class="text-center">14:00</td>
               </tr>
 
               <tr>
-                <td class="font--bold wordwrap">Pengantar perkuliahan II</td>
+                <td class="font-weight-bold wordwrap">Pengantar perkuliahan II</td>
                 <td class="wordwrap">Prawati Nuraini,drg.M.Kes.,SpKGA(K)</td>
                 <td class="text-center">KGA12</td>
                 <td class="text-center">16:00</td>
@@ -119,7 +119,7 @@
           <h5 class="mb-0 mt-2">Dr. Amin Suyitno, M.Pd</h5>
           <h6 class="mb-0 mt-4">Status Anda</h6>
           <h5 class="mb-0 mt-2 text-danger">Belum Presensi</h5>
-          <button type="button" class="btn--blue w-100 mt-4">Presensi Sekarang</button>
+          <button type="button" class="btn btn-primary w-100 mt-4 rounded-sm">Presensi Sekarang</button>
         </div>
       </div>
     </div>

@@ -20,7 +20,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-modal-cancel" data-dismiss="modal">Batal</button>
-          <button type="button" class="btn btn--blue btn-modal-ok">Hapus data</button>
+          <button type="button" class="btn btn-primary btn-modal-ok">Hapus data</button>
         </div>
       </div>
     </div>
@@ -30,26 +30,26 @@
     <div class="col-xl-12">
       <div class="card shadow padding--small">
 
-        <div class="card-header p-0 m-0 border-0 rounded-0">
+        <div class="card-header p-0 m-0 border-0 ">
           <div class="row align-items-center">
             <div class="col-12 col-md-6">
               <h2 class="mb-0 text-center text-md-left">Data Mahasiswa</h2>
             </div>
             <div class="col-12 col-md-6 text-center text-md-right mt-3 mt-md-0">
-              <a class="btn btn--blue" href="/prodi/masterdata/datamahasiswa/tambahdata" role="button">
-                <span class="iconify mr-2" data-icon="bx:bxs-plus-circle" data-inline="true"></span>
+              <a class="btn btn-primary" href="/prodi/masterdata/datamahasiswa/tambahdata" role="button">
+                <span class="iconify mr-2" data-icon="bx:bxs-plus-circle"></span>
                 Tambah
               </a>
-              <button type="button" class="btn--blue ml-3">
-                <span class="iconify" data-icon="bx:bx-upload" data-inline="true"></span>
+              <button type="button" class="btn-primary ml-3">
+                <span class="iconify" data-icon="bx:bx-upload"></span>
                 Eksport
               </button>
             </div>
           </div>
 
-          <hr class="mt">
+          <hr class="my-4">
 
-          <form class="form-select rounded-0">
+          <form class="form-select ">
             <div class="form-row">
               <div class="col-md-6 form-group">
                 <label for="kelas">Kelas</label>
@@ -68,7 +68,7 @@
             </div>
           </form>
 
-          <div class="row align-items-center padding--small py-0 filterSearch-data">
+          <div class="row align-items-center padding--small py-0 ">
             <div class="col-sm-6 col-12">
               <div class="form-group row mb-0">
                 <select class="form-control" id="dataperhalaman">
@@ -86,7 +86,7 @@
                 <input type="search" class="form-control" id="searchdata" placeholder="Pencarian ...">
                 <div class="input-group-prepend">
                   <div class="input-group-text search-icon">
-                    <span class="iconify" data-icon="fluent:search-32-regular" data-inline="true"></span>
+                    <span class="iconify" data-icon="fluent:search-32-regular"></span>
                   </div>
                 </div>
               </div>
@@ -112,105 +112,105 @@
               <tr>
                 <td class="text-center px-2">1</td>
                 <td>4891203526</td>
-                <td class="font--bold text-capitalize">Dwi Rahmawati</td>
+                <td class="font-weight-bold text-capitalize">Dwi Rahmawati</td>
                 <td class="text-center">04/06/2001</td>
                 <td class="text-center">081469785240</td>
                 <td class="text-center">Dwi.rahma@gmail.com</td>
                 <td class="text-center">
                   <a href="/prodi/masterdata/datamahasiswa/updatedata"><span class="iconify edit-icon"
-                      data-icon="bx:bx-edit-alt" data-inline="true"></span></a>
+                      data-icon="bx:bx-edit-alt"></span></a>
                   <span data-toggle="modal" data-target="#deleteMahasiswaModal" class="iconify delete-icon"
-                    data-icon="bx:bx-trash" data-inline="true"></span>
+                    data-icon="bx:bx-trash"></span>
                 </td>
               </tr>
 
               <tr>
                 <td class="text-center px-2">2</td>
                 <td>4892062262</td>
-                <td class="font--bold text-capitalize">Januar Pratama</td>
+                <td class="font-weight-bold text-capitalize">Januar Pratama</td>
                 <td class="text-center">24/12/2002</td>
                 <td class="text-center">087562986265</td>
                 <td class="text-center">januar2412@gmail.com</td>
                 <td class="text-center">
                   <a href="/prodi/masterdata/datamahasiswa/updatedata"><span class="iconify edit-icon"
-                      data-icon="bx:bx-edit-alt" data-inline="true"></span></a>
+                      data-icon="bx:bx-edit-alt"></span></a>
                   <span data-toggle="modal" data-target="#deleteMahasiswaModal" class="iconify delete-icon"
-                    data-icon="bx:bx-trash" data-inline="true"></span>
+                    data-icon="bx:bx-trash"></span>
                 </td>
               </tr>
 
               <tr>
                 <td class="text-center px-2">3</td>
                 <td>4892058323</td>
-                <td class="font--bold text-capitalize">indah pratiwi</td>
+                <td class="font-weight-bold text-capitalize">indah pratiwi</td>
                 <td class="text-center">13/01/2002</td>
                 <td class="text-center">081247925428</td>
                 <td class="text-center">indah.prtw@gmail.com</td>
                 <td class="text-center">
                   <a href="/prodi/masterdata/datamahasiswa/updatedata"><span class="iconify edit-icon"
-                      data-icon="bx:bx-edit-alt" data-inline="true"></span></a>
+                      data-icon="bx:bx-edit-alt"></span></a>
                   <span data-toggle="modal" data-target="#deleteMahasiswaModal" class="iconify delete-icon"
-                    data-icon="bx:bx-trash" data-inline="true"></span>
+                    data-icon="bx:bx-trash"></span>
                 </td>
               </tr>
 
               <tr>
                 <td class="text-center px-2">4</td>
                 <td>4892058323</td>
-                <td class="font--bold text-capitalize">indah pratiwi</td>
+                <td class="font-weight-bold text-capitalize">indah pratiwi</td>
                 <td class="text-center">13/01/2002</td>
                 <td class="text-center">081247925428</td>
                 <td class="text-center">indah.prtw@gmail.com</td>
                 <td class="text-center">
                   <a href="/prodi/masterdata/datamahasiswa/updatedata"><span class="iconify edit-icon"
-                      data-icon="bx:bx-edit-alt" data-inline="true"></span></a>
+                      data-icon="bx:bx-edit-alt"></span></a>
                   <span data-toggle="modal" data-target="#deleteMahasiswaModal" class="iconify delete-icon"
-                    data-icon="bx:bx-trash" data-inline="true"></span>
+                    data-icon="bx:bx-trash"></span>
                 </td>
               </tr>
 
               <tr>
                 <td class="text-center px-2">5</td>
                 <td>4892058323</td>
-                <td class="font--bold text-capitalize">indah pratiwi</td>
+                <td class="font-weight-bold text-capitalize">indah pratiwi</td>
                 <td class="text-center">13/01/2002</td>
                 <td class="text-center">081247925428</td>
                 <td class="text-center">indah.prtw@gmail.com</td>
                 <td class="text-center">
                   <a href="/prodi/masterdata/datamahasiswa/updatedata"><span class="iconify edit-icon"
-                      data-icon="bx:bx-edit-alt" data-inline="true"></span></a>
+                      data-icon="bx:bx-edit-alt"></span></a>
                   <span data-toggle="modal" data-target="#deleteMahasiswaModal" class="iconify delete-icon"
-                    data-icon="bx:bx-trash" data-inline="true"></span>
+                    data-icon="bx:bx-trash"></span>
                 </td>
               </tr>
 
               <tr>
                 <td class="text-center px-2">6</td>
                 <td>4892058323</td>
-                <td class="font--bold text-capitalize">indah pratiwi</td>
+                <td class="font-weight-bold text-capitalize">indah pratiwi</td>
                 <td class="text-center">13/01/2002</td>
                 <td class="text-center">081247925428</td>
                 <td class="text-center">indah.prtw@gmail.com</td>
                 <td class="text-center">
                   <a href="/prodi/masterdata/datamahasiswa/updatedata"><span class="iconify edit-icon"
-                      data-icon="bx:bx-edit-alt" data-inline="true"></span></a>
+                      data-icon="bx:bx-edit-alt"></span></a>
                   <span data-toggle="modal" data-target="#deleteMahasiswaModal" class="iconify delete-icon"
-                    data-icon="bx:bx-trash" data-inline="true"></span>
+                    data-icon="bx:bx-trash"></span>
                 </td>
               </tr>
 
               <tr>
                 <td class="text-center px-2">7</td>
                 <td>4892058323</td>
-                <td class="font--bold text-capitalize">indah pratiwi</td>
+                <td class="font-weight-bold text-capitalize">indah pratiwi</td>
                 <td class="text-center">13/01/2002</td>
                 <td class="text-center">081247925428</td>
                 <td class="text-center">indah.prtw@gmail.com</td>
                 <td class="text-center">
                   <a href="/prodi/masterdata/datamahasiswa/updatedata"><span class="iconify edit-icon"
-                      data-icon="bx:bx-edit-alt" data-inline="true"></span></a>
+                      data-icon="bx:bx-edit-alt"></span></a>
                   <span data-toggle="modal" data-target="#deleteMahasiswaModal" class="iconify delete-icon"
-                    data-icon="bx:bx-trash" data-inline="true"></span>
+                    data-icon="bx:bx-trash"></span>
                 </td>
               </tr>
             </tbody>

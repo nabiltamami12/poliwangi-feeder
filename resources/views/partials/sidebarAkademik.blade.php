@@ -23,17 +23,18 @@
 
         <!-- Nav items -->
         <ul class="navbar-nav">
+
           <li class="nav-item">
             <a class="nav-link {{($title === "akademik-dashboard") ? 'aktif' : ''}}"
               href="{{ url('/akademik/dashboard') }} ">
-              <span class="iconify" data-icon="bx-bx-home-circle" data-inline="true"></span>
+              <span class="iconify" data-icon="bx-bx-home-circle"></span>
               <span class="nav-link-text">Dashboard</span>
             </a>
           </li>
 
           <li class="nav-item">
             <div class="nav-link {{($title === "akademik-master") ? 'aktif' : ''}}">
-              <span class="iconify" data-icon="bx:bx-user-pin" data-inline="true"></span>
+              <span class="iconify" data-icon="bx:bx-user-pin"></span>
               <span class="nav-link-text">Master Data<img src="{{ url('images') }}/sidebar-right.png" class="arrow"
                   alt=""></span>
             </div>
@@ -92,11 +93,16 @@
                 <a class="nav-link" href="{{url('/akademik/master/datarangenilai')}}">
                   <span class="nav-link-text ml-0">Data Range Nilai</span>
                 </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url('/akademik/master/datakuliah')}}">
+                  <span class="nav-link-text ml-0">Data Kuliah</span>
+                </a>
               </li> -->
             </ul>
           </li>
 
-          <!-- <li class="nav-item">
+          <li class="nav-item">
             <div class="nav-link {{($title === "akademik-khs") ? 'aktif' : ''}}"">
               <span class=" iconify" data-icon="bx:bx-book-bookmark" data-inline="true"></span>
               <span class=" nav-link-text">KHS<img src="{{ url('images') }}/sidebar-right.png" class="arrow"
@@ -118,7 +124,7 @@
 
           <li class="nav-item">
             <div class="nav-link {{($title === "akademik-kuliah") ? 'aktif' : ''}}">
-              <span class="iconify" data-icon="bx:bx-calendar-star" data-inline="true"></span>
+              <span class="iconify" data-icon="bx:bx-calendar-star"></span>
               <span class="nav-link-text">Kuliah<img src="{{ url('images') }}/sidebar-right.png" class="arrow"
                   alt=""></span>
             </div>
@@ -148,7 +154,7 @@
 
           <li class="nav-item">
             <div class="nav-link {{($title === "akademik-report") ? 'aktif' : ''}}">
-              <span class="iconify" data-icon="bx:bx-file-blank" data-inline="true"></span>
+              <span class="iconify" data-icon="bx:bx-file-blank"></span>
               <span class="nav-link-text">Report<img src="{{ url('images') }}/sidebar-right.png" class="arrow"
                   alt=""></span>
             </div>
@@ -188,7 +194,6 @@
                     <span class="nav-link-text ml-0">Judul Tugas Akhir</span>
                   </a>
                 </li>
-
                 <li class="nav-item">
                   <a class="nav-link" href="/akademik/report/wali">
                     <span class="nav-link-text ml-0">Wali</span>
@@ -196,8 +201,7 @@
                 </li>
               </ul>
             </div>
-          </li> -->
-
+          </li>
         </ul>
       </div>
     </div>

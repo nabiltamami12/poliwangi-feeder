@@ -12,6 +12,13 @@ body {
     background-color: #fff;
 }
 
+.component-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    letter-spacing: 0px;
+    color: #000;
+}
+
 .m-4-5 {
     margin: 2rem !important;
 }
@@ -34,13 +41,6 @@ body {
 .ml-4-5,
 .mx-4-5 {
     margin-left: 2rem !important;
-}
-
-.component-title {
-    font-size: 1.125rem;
-    font-weight: 600;
-    letter-spacing: 0px;
-    color: #000;
 }
 
 h1,
@@ -89,39 +89,46 @@ h6,
     color: #495057;
 }
 
-p {
-    margin-top: 0;
-    margin-bottom: 0;
+//text color
+.text-primary {
+    color: #28a3eb !important;
+}
+
+.text-secondary {
+    color: #adb5bd !important;
 }
 
 .text-success {
     color: #34c38f !important;
 }
 
-.custom-file-label {
-    border: 1px solid #c4c4c4;
+.text-warning {
+    color: #f1b44c !important;
+}
+
+.text-danger {
+    color: #f46a6a !important;
+}
+
+.text-dark {
+    color: $dark !important;
+}
+
+//Badge
+.badge {
+    padding: 0.5rem 0.75rem;
     border-radius: 0.5rem;
-    background-color: #fff;
-    max-height: 50px;
-    display: flex;
-    align-items: center;
 }
 
-.custom-file-label::after {
-    content: "Salin Kode";
-    color: #fff;
-    background-color: $button-blue;
-    border-radius: 0 0.5rem 0.5rem 0;
-    border: 0 !important;
-    line-height: 1.21em;
-    font-size: 1rem;
-    padding: 0.9em 1em;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.badge-success {
+    background-color: #34c38f;
 }
 
+.badge-danger {
+    background-color: #f46a6a;
+}
+
+// Background color
 .bg-primary {
     background-color: $primary !important;
 }
@@ -150,37 +157,14 @@ p {
     background-color: $dark !important;
 }
 
-// TEXT
-.text-primary {
-    color: $primary !important;
-}
-.text-secondary {
-    color: $secondary !important;
-}
-.text-success {
-    color: $success !important;
-}
-.text-info {
-    color: $info !important;
-}
-.text-warning {
-    color: $warning !important;
-}
-.text-danger {
-    color: $danger !important;
-}
-.text-dark {
-    color: $dark !important;
-}
-
-// BUTTON
+// Button
 .btn {
     font-family: "Montserrat", sans-serif;
     font-size: 0.8125rem;
     font-weight: 400;
     line-height: 1rem;
-    padding: 0.5rem 0.75rem;
-    border-radius: 4px;
+    padding: 0.625rem 1rem;
+    border-radius: 0.5rem;
     display: inline-block;
     cursor: pointer;
     -webkit-user-select: none;
@@ -262,8 +246,7 @@ p {
     &:hover {
         color: #fff;
         border-color: #f1b44c;
-        background-color: #d8992b;
-        box-shadow: none;
+        background-color: #f1b44c;
     }
     &:not(:disabled):not(.disabled):active,
     &:not(:disabled):not(.disabled).active,
@@ -740,9 +723,33 @@ option {
 .card {
     background-color: #ffffff;
     box-shadow: none;
-    border-radius: 8px;
+    border-radius: 0.5rem;
 }
 
 .shadow {
     box-shadow: 2px 2px 16px rgba(0, 0, 0, 0.1) !important;
 }
+
+// .custom-file-label {
+//     border: 1px solid #c4c4c4;
+//     border-radius: 0.5rem;
+//     background-color: #fff;
+//     max-height: 50px;
+//     display: flex;
+//     align-items: center;
+// }
+
+// .custom-file-label::after {
+//     content: "Salin Kode";
+//     color: #fff;
+//     background-color: $button-blue;
+//     border-radius: 0 0.5rem 0.5rem 0;
+//     border: 0 !important;
+//     line-height: 1.21em;
+//     font-size: 1rem;
+//     padding: 0.9em 1em;
+//     height: 100%;
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+// }

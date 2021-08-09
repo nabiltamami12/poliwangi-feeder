@@ -66,44 +66,13 @@
         input[type="date"]::-webkit-calendar-picker-indicator {
             width: 38px;
         }
-    }
 
-    #krsMahasiswa {
         .form-select {
-            .form-group,
-            .form-group:nth-child(1),
-            .form-group:nth-child(2) {
+            .form-group:nth-child(odd) {
                 padding: 0;
             }
-        }
-    }
-
-    #form_cuti {
-        .form-input {
-            .form-group:nth-child(odd) {
-                padding-left: 0;
-                padding-right: 0;
-            }
             .form-group:nth-child(even) {
-                padding-left: 0;
-                padding-right: 0;
-            }
-        }
-
-        .form-cuti {
-            .form-group {
-                padding: 0 0;
-            }
-            .form-row:nth-child(3) {
-                margin-top: 16px;
-            }
-            .form-group:nth-child(2) {
-                padding-left: 0;
-                padding-right: 0;
-            }
-            .padding-group {
-                padding-left: 0;
-                padding-right: 0;
+                padding: 0;
             }
         }
     }
@@ -120,31 +89,15 @@
         }
     }
 
-    .page-content__akademik,
-    .page-content__prodi {
-        .form-select {
-            .form-group:nth-child(odd) {
-                padding: 0;
-            }
-            .form-group:nth-child(even) {
-                padding: 0;
-            }
-        }
-    }
-
     .register_page {
         .input-foto-siswa {
             min-height: 130px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid #c4c4c4;
-            border-radius: 8px;
         }
     }
 
     .login_page,
-    .register_page {
+    .register_page,
+    .pmbGenerateVA_page {
         .card {
             .card-body {
                 padding: 1.5rem 1rem;
@@ -181,7 +134,8 @@
     }
 
     .login_page,
-    .register_page {
+    .register_page,
+    .pmbGenerateVA_page {
         .logo {
             width: 20%;
         }

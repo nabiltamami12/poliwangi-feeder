@@ -39,7 +39,7 @@
       <div class="tab-body">
         {{-- DATA CALON PESERTA DIDIK --}}
         <div class="card shadow mt-0 padding--big card-form active">
-          <div class="card-header p-0 m-0 rounded-0 border-0">
+          <div class="card-header p-0 m-0  border-0">
             <div class="row align-items-center">
               <div class="col">
                 <h2 class="mb-0 mt-0">Identitas Calon Pendaftar</h2>
@@ -112,7 +112,7 @@
             </div>
           </form>
 
-          <div class="card-header p-0 m-0 rounded-0 border-0">
+          <div class="card-header p-0 m-0  border-0">
             <div class="row align-items-center">
               <div class="col">
                 <h2 class="mb-0 mt-4-5">Alamat Calon Peserta Didik</h2>
@@ -154,13 +154,13 @@
                 <input type="text" class="form-control" id="kode-pos" placeholder="65122">
               </div>
             </div>
-            <button type="submit" class="btn btn--blue bg-success w-100 mt-4-5 button_selanjutnya">Selanjutnya</button>
+            <button type="submit" class="btn btn-success w-100 mt-4-5 button_selanjutnya">Selanjutnya</button>
           </form>
         </div>
 
         {{-- UNGGAH BERKAS --}}
         <div class="card shadow mt-0 padding--big card-form">
-          <div class="card-header p-0 m-0 rounded-0 border-0">
+          <div class="card-header p-0 m-0  border-0">
             <div class="row align-items-center">
               <div class="col">
                 <h2 class="mb-0 mt-0">Foto Data Diri</h2>
@@ -171,49 +171,42 @@
           <form class="form-berkas">
             <div class="form-row">
               <div class="col-md-6 form-group">
-                <label for="foto-siswa">Foto Calon Peserta Didik</label>
-                <div class="input-foto-siswa">
+                <label>Foto Calon Peserta Didik</label>
+                <div class="input_file">
                   <label for="file-input-foto">
-                    <span class="iconify fileUpload-icon" data-icon="bx:bx-image-add" data-inline="true"></span>
+                    <span class="iconify fileUpload-icon" data-icon="bx:bx-image-add"></span>
                   </label>
                 </div>
                 <input type="file" class="form-control-file" id="file-input-foto">
               </div>
               <div class="col-md-6 form-group mt-3 mt-md-0 pr-0 pr-md-1">
-                <label for="foto-ijazah">Foto Ijazah</label>
-                <div class="input-foto-ijazah">
+                <label>Foto Ijazah</label>
+                <div class="input_file">
                   <label for="file-input-ijazah">
-                    <span class="iconify fileUpload-icon" data-icon="bx:bx-image-add" data-inline="true"></span>
+                    <span class="iconify fileUpload-icon" data-icon="bx:bx-image-add"></span>
                   </label>
                 </div>
                 <input type="file" class="form-control-file" id="file-input-ijazah">
               </div>
             </div>
-          </form>
-          <div class="card-header p-0 m-0 rounded-0 border-0">
-            <div class="row align-items-center">
-              <div class="col">
-                <h2 class="mb-0 mt-4-5">Upload Dokumen Pengajuan Keringanan Biaya* (Opsional)</h2>
-              </div>
-            </div>
-          </div>
-          <hr class="my-4">
-          <form class="form-berkas">
+
             <div class="form-row">
-              <div class="col-md-12 form-group p-0 m-0">
-                <div class="input-pengajuan-keringanan">
-                  <label for="file-input-foto">
-                    <span class="iconify fileUpload-icon" data-icon="bx:bx-image-add" data-inline="true"></span>
+              <div class="col-md-12 form-group p-0 mt-4">
+                <label>Surat Pernyataan Taat Peraturan</label>
+                <div class="input_file">
+                  <label for="file-input-peraturan">
+                    <span class="iconify fileUpload-icon" data-icon="bx:bx-image-add"></span>
                   </label>
                 </div>
-                <input type="file" class="form-control-file" id="input-pengajuan-keringanan">
-                <p class="mt-2">Max Size Dokumen 2MB (doc/pdf)</p>
+                <input type="file" class="form-control-file" id="file-input-peraturan">
               </div>
             </div>
             <div class="form_action mt-4">
               <button class="btn button_sebelumnya">Sebelumnya</button>
-              <button type="submit" class="btn btn--blue">Submit</button>
+              <button type="submit" class="btn btn-primary">Submit</button>
             </div>
+
+
           </form>
         </div>
       </div>
@@ -224,6 +217,12 @@
 
 @section('js')
 <script>
+  $(document).ready(function(){
+    $("#txtDate").datepicker({
+      format: "dd MM yyyy",
+    });
+  })
+
   // TABS TAHAPAN
   let tabHeader = document.querySelector(".tab-header");
   let tabBody = document.getElementsByClassName("tab-body")[0];
@@ -262,11 +261,5 @@
     inputGroup[0].classList.add('active');
     inputGroup[1].classList.remove('active');
   })
-
-  $(function () {
-        $("#txtDate").datepicker({
-          format: "dd MM yyyy",
-        });
-      });
 </script>
 @endsection

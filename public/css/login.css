@@ -6,20 +6,489 @@
   font-family: "Montserrat", sans-serif;
 }
 
+.m-4-5 {
+  margin: 2rem !important;
+}
+
+.mt-4-5,
+.my-4-5 {
+  margin-top: 2rem !important;
+}
+
+.mr-4-5,
+.mx-4-5 {
+  margin-right: 2rem !important;
+}
+
+.mb-4-5,
+.my-4-5 {
+  margin-bottom: 2rem !important;
+}
+
+.ml-4-5,
+.mx-4-5 {
+  margin-left: 2rem !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+  font-family: "Montserrat", sans-serif;
+  color: #041f2f;
+}
+
+.text-primary {
+  color: #28a3eb !important;
+}
+
+.text-secondary {
+  color: #6f7bf7 !important;
+}
+
+.text-success {
+  color: #34c38f !important;
+}
+
+.text-warning {
+  color: #f1b44c !important;
+}
+
+.text-danger {
+  color: #f46a6a !important;
+}
+
+.badge {
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.5rem;
+}
+
+.badge-success {
+  background-color: #34c38f;
+}
+
+.badge-danger {
+  background-color: #f46a6a;
+}
+
+.bg-primary {
+  background-color: #28a3eb !important;
+}
+
+.bg-secondary {
+  background-color: #6f7bf7 !important;
+}
+
+.bg-success {
+  background-color: #34c38f !important;
+}
+
+.bg-info {
+  background-color: #b2def8 !important;
+}
+
+.bg-warning {
+  background-color: #f1b44c !important;
+}
+
+.bg-danger {
+  background-color: #f46a6a !important;
+}
+
+.rounded {
+  border-radius: 0.5rem !important;
+}
+
+.rounded-top {
+  border-top-left-radius: 0.5rem !important;
+  border-top-right-radius: 0.5rem !important;
+}
+
+.rounded-right {
+  border-top-right-radius: 0.5rem !important;
+  border-bottom-right-radius: 0.5rem !important;
+}
+
+.rounded-bottom {
+  border-bottom-right-radius: 0.5rem !important;
+  border-bottom-left-radius: 0.5rem !important;
+}
+
+.rounded-left {
+  border-top-left-radius: 0.5rem !important;
+  border-bottom-left-radius: 0.5rem !important;
+}
+
+.btn {
+  font-family: "Montserrat", sans-serif;
+  font-size: 1rem;
+  font-weight: 400 !important;
+  line-height: 1.21em;
+  padding: 0.625rem 1rem;
+  border-radius: 0.5rem;
+  color: #ffffff;
+}
+.btn::hover {
+  text-decoration: none;
+  color: #ffffff;
+}
+
+.btn-primary {
+  color: #ffffff;
+  border-color: #28a3eb;
+  background-color: #28a3eb;
+  box-shadow: none;
+}
+.btn-primary:hover {
+  color: #ffffff;
+  border-color: #28a3eb;
+  background-color: #28a3eb;
+}
+
+.btn-secondary {
+  color: #ffffff;
+  border-color: #6f7bf7;
+  background-color: #6f7bf7;
+  box-shadow: none;
+}
+.btn-secondary:hover {
+  color: #ffffff;
+  border-color: #6f7bf7;
+  background-color: #6f7bf7;
+}
+
+.btn-success {
+  color: #ffffff;
+  border-color: #34c38f;
+  background-color: #34c38f;
+  box-shadow: none;
+}
+.btn-success:hover {
+  color: #ffffff;
+  border-color: #34c38f;
+  background-color: #34c38f;
+}
+
+.btn-info {
+  color: #ffffff;
+  border-color: #b2def8;
+  background-color: #b2def8;
+  box-shadow: none;
+}
+.btn-info:hover {
+  color: #ffffff;
+  border-color: #b2def8;
+  background-color: #b2def8;
+}
+
+.btn-warning {
+  color: #ffffff;
+  border-color: #f1b44c;
+  background-color: #f1b44c;
+  box-shadow: none;
+}
+.btn-warning:hover {
+  color: #ffffff;
+  border-color: #f1b44c;
+  background-color: #f1b44c;
+}
+
+.btn-danger {
+  color: #ffffff;
+  border-color: #f46a6a;
+  background-color: #f46a6a;
+  box-shadow: none;
+}
+.btn-danger:hover {
+  color: #ffffff;
+  border-color: #f46a6a;
+  background-color: #f46a6a;
+}
+
+.rounded-pill {
+  border-radius: 50rem !important;
+}
+
+.btn-outline-primary {
+  color: #ffffff;
+  border-color: #28a3eb;
+  background-color: transparent;
+  background-image: none;
+}
+.btn-outline-primary:hover {
+  color: #ffffff;
+  border-color: #28a3eb;
+  background-color: #28a3eb;
+  box-shadow: none;
+}
+
+.btn-outline-secondary {
+  color: #ffffff;
+  border-color: #6f7bf7;
+  background-color: transparent;
+  background-image: none;
+}
+.btn-outline-secondary:hover {
+  color: #ffffff;
+  border-color: #6f7bf7;
+  background-color: #6f7bf7;
+  box-shadow: none;
+}
+
+.btn-outline-success {
+  color: #ffffff;
+  border-color: #34c38f;
+  background-color: transparent;
+  background-image: none;
+}
+.btn-outline-success:hover {
+  color: #ffffff;
+  border-color: #34c38f;
+  background-color: #34c38f;
+  box-shadow: none;
+}
+
+.btn-outline-info {
+  color: #ffffff;
+  border-color: #b2def8;
+  background-color: transparent;
+  background-image: none;
+}
+.btn-outline-info:hover {
+  color: #ffffff;
+  border-color: #b2def8;
+  background-color: #b2def8;
+  box-shadow: none;
+}
+
+.btn-outline-warning {
+  color: #ffffff;
+  border-color: #f1b44c;
+  background-color: transparent;
+  background-image: none;
+}
+.btn-outline-warning:hover {
+  color: #ffffff;
+  border-color: #f1b44c;
+  background-color: #f1b44c;
+  box-shadow: none;
+}
+
+.btn-outline-danger {
+  color: #ffffff;
+  border-color: #f46a6a;
+  background-color: transparent;
+  background-image: none;
+}
+.btn-outline-danger:hover {
+  color: #ffffff;
+  border-color: #f46a6a;
+  background-color: #f46a6a;
+  box-shadow: none;
+}
+
+.btn-icon {
+  border-radius: 0.5rem;
+}
+.btn-icon .btn-inner--icon .iconify {
+  font-size: 1rem;
+}
+.btn-icon .btn-inner--text:not(:first-child) {
+  margin-left: 0.5em;
+}
+
+.btn-lg,
+.btn-group-lg > .btn {
+  font-size: 1.015rem;
+  line-height: 1.238rem;
+  padding: 0.7rem 0.937rem;
+  border-radius: 0.4rem;
+}
+
+.btn-sm,
+.btn-group-sm > .btn {
+  font-size: 0.71125rem;
+  line-height: 0.866rem;
+  padding: 0.4rem 0.5rem;
+  border-radius: 0.2rem;
+}
+
+.btn-group .btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.btn-group .iconify {
+  font-size: 0.9rem;
+}
+
+.dropdown-toggle .iconify {
+  font-size: 10px;
+}
+.dropdown-toggle::after {
+  display: none;
+}
+
+.dropdown-menu {
+  box-shadow: 0px 2px 4px rgba(100, 100, 100, 0.498039);
+  border-radius: 2px;
+}
+
+.page-item .page-link,
+.page-item span {
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.8125rem;
+  margin: 0;
+  border-radius: 0 !important;
+  border: 1px solid #ced4da;
+  border-left: 0;
+  color: #495057;
+  width: 36px;
+}
+.page-item:first-child .page-link {
+  border-radius: 0.25rem 0 0 0.25rem !important;
+  border-left: 1px solid #ced4da;
+  padding-right: 12px;
+  padding-left: 12px;
+  width: auto;
+}
+.page-item:last-child .page-link {
+  border-radius: 0 0.25rem 0.25rem 0 !important;
+  padding-right: 12px;
+  padding-left: 12px;
+  width: auto;
+}
+.page-item.active .page-link {
+  box-shadow: none;
+}
+
+option {
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.21em;
+  color: #041f2f;
+  margin: 10px;
+}
+option:first-child {
+  margin-top: 0;
+}
+option[disabled] {
+  font-weight: 700;
+  margin-left: 5px;
+}
+
+.table {
+  color: #041f2f;
+}
+.table .thead-light th {
+  color: #adb5bd;
+  background-color: #f6f9fc;
+  border: 0;
+}
+.table th,
+.table td {
+  vertical-align: baseline;
+}
+.table .aksi .iconify {
+  color: #28a3eb;
+  font-size: 1.5rem;
+}
+
+.card {
+  background-color: #ffffff;
+  box-shadow: none;
+  border-radius: 0.5rem;
+}
+
+.shadow {
+  box-shadow: 2px 2px 16px rgba(0, 0, 0, 0.1) !important;
+}
+
+.form-group {
+  margin-bottom: 0;
+}
+
+.form-control {
+  font-weight: 400;
+  font-size: 0.875rem;
+  line-height: 1.21em;
+  color: #041f2f !important;
+  display: block;
+  padding-left: 1.5rem;
+  color: #041f2f;
+  border: 1px solid #c4c4c4;
+  box-shadow: none;
+  border-radius: 0.5rem;
+}
+
+label {
+  font-weight: 500;
+  font-size: 1rem;
+  line-height: 1.25em;
+  color: #041f2f;
+}
+
+select {
+  background-image: url("https://api.iconify.design/bx/bx-chevron-down.svg?color=%23041F2F");
+  background-position: calc(100% - 16px), calc(100% - 24px);
+  background-repeat: no-repeat;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.date_picker {
+  position: relative;
+}
+
+#txtDate {
+  background-color: #fff;
+  cursor: default;
+}
+
+.date_button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #28a3eb;
+  width: 48px;
+  height: 100%;
+  border-radius: 0 0.5rem 0.5rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.date_button .iconify {
+  font-size: 1.5rem;
+  color: #fff;
+}
+
 .login_page .bg-default,
-.register_page .bg-default {
+.register_page .bg-default,
+.pmbGenerateVA_page .bg-default {
   background-color: #172b4d !important;
 }
 .login_page .bg-secondary,
-.register_page .bg-secondary {
+.register_page .bg-secondary,
+.pmbGenerateVA_page .bg-secondary {
   background-color: #f7fafc !important;
 }
 .login_page .bg-gradient-primary,
-.register_page .bg-gradient-primary {
+.register_page .bg-gradient-primary,
+.pmbGenerateVA_page .bg-gradient-primary {
   background: linear-gradient(90.18deg, #b2def8 -4.39%, #6f7bf7 132.48%) !important;
 }
 .login_page .header-body h1,
-.register_page .header-body h1 {
+.register_page .header-body h1,
+.pmbGenerateVA_page .header-body h1 {
   font-weight: 600;
   font-size: 1.625rem;
   line-height: 1.22em;
@@ -27,7 +496,8 @@
   margin-top: 1rem;
 }
 .login_page .header-body p,
-.register_page .header-body p {
+.register_page .header-body p,
+.pmbGenerateVA_page .header-body p {
   font-weight: 600;
   font-size: 0.8125rem;
   line-height: 1.22em;
@@ -35,87 +505,81 @@
   margin-top: 0.5rem;
 }
 .login_page .card,
-.register_page .card {
+.register_page .card,
+.pmbGenerateVA_page .card {
   border-radius: 4px;
   position: relative;
 }
 .login_page .card .card-body p,
-.register_page .card .card-body p {
+.register_page .card .card-body p,
+.pmbGenerateVA_page .card .card-body p {
   font-weight: 500;
   font-size: 0.75rem;
   line-height: 1.25em;
   color: #adb5bd;
   margin-bottom: 2rem;
 }
-.login_page .card .card-body .form-control::-moz-placeholder, .register_page .card .card-body .form-control::-moz-placeholder {
+.login_page .card .card-body .form-control::-moz-placeholder, .register_page .card .card-body .form-control::-moz-placeholder, .pmbGenerateVA_page .card .card-body .form-control::-moz-placeholder {
   font-weight: 500;
   font-size: 0.75rem;
   line-height: 1.22em;
   color: #adb5bd;
 }
-.login_page .card .card-body .form-control:-ms-input-placeholder, .register_page .card .card-body .form-control:-ms-input-placeholder {
+.login_page .card .card-body .form-control:-ms-input-placeholder, .register_page .card .card-body .form-control:-ms-input-placeholder, .pmbGenerateVA_page .card .card-body .form-control:-ms-input-placeholder {
   font-weight: 500;
   font-size: 0.75rem;
   line-height: 1.22em;
   color: #adb5bd;
 }
 .login_page .card .card-body .form-control::placeholder,
-.register_page .card .card-body .form-control::placeholder {
+.register_page .card .card-body .form-control::placeholder,
+.pmbGenerateVA_page .card .card-body .form-control::placeholder {
   font-weight: 500;
   font-size: 0.75rem;
   line-height: 1.22em;
   color: #adb5bd;
 }
 .login_page .card .card-body .form-group:first-child,
-.register_page .card .card-body .form-group:first-child {
+.register_page .card .card-body .form-group:first-child,
+.pmbGenerateVA_page .card .card-body .form-group:first-child {
   margin-bottom: 1rem;
 }
 .login_page .card .card-body .input-group,
-.register_page .card .card-body .input-group {
+.register_page .card .card-body .input-group,
+.pmbGenerateVA_page .card .card-body .input-group {
   box-shadow: 1px 2px 10px rgba(0, 0, 0, 0.1);
 }
-.login_page .card .card-body .custom-control-label::before,
-.register_page .card .card-body .custom-control-label::before {
-  position: absolute;
-  top: 0;
-  display: block;
-  width: 1rem;
-  height: 1rem;
-  content: "";
-  pointer-events: none;
+.login_page .custom-checkbox .custom-control-label::before,
+.register_page .custom-checkbox .custom-control-label::before,
+.pmbGenerateVA_page .custom-checkbox .custom-control-label::before {
+  border-radius: 0.25rem;
   border: 0;
-  background-color: #fff;
   box-shadow: 1px 2px 10px rgba(0, 0, 0, 0.1);
 }
-.login_page .card .card-body .custom-control-label,
-.register_page .card .card-body .custom-control-label {
+.login_page .custom-control-label,
+.register_page .custom-control-label,
+.pmbGenerateVA_page .custom-control-label {
   font-weight: 500;
-  font-size: 0.75rem;
-  line-height: 1.2em;
+  font-size: 0.75rem !important;
+  line-height: 2;
   color: #adb5bd;
 }
-.login_page .card .card-body .btn--blue,
-.register_page .card .card-body .btn--blue {
-  font-weight: 600;
-  font-size: 0.75rem;
-  line-height: 1.25em;
-  color: #fff;
-  background-color: #28a3eb;
-  padding: 12px;
-}
 .login_page .register_account,
-.register_page .register_account {
+.register_page .register_account,
+.pmbGenerateVA_page .register_account {
   margin-top: 3rem;
 }
 .login_page .register_account p,
-.register_page .register_account p {
+.register_page .register_account p,
+.pmbGenerateVA_page .register_account p {
   font-weight: 600;
   font-size: 0.8125rem;
   line-height: 1.22em;
   color: #fff;
 }
 .login_page .register_account a,
-.register_page .register_account a {
+.register_page .register_account a,
+.pmbGenerateVA_page .register_account a {
   text-decoration: underline;
 }
 
@@ -147,44 +611,6 @@
 .register_page .form-group {
   margin-bottom: 0;
 }
-.register_page select {
-  border: 1px solid #c4c4c4;
-  border-radius: 8px;
-  padding-left: 1.5rem;
-  background-image: url("https://api.iconify.design/bx/bx-chevron-down.svg?color=#041F2F");
-  background-position: calc(100% - 1.2rem), calc(100% - 24px);
-  background-repeat: no-repeat;
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  color: #adb5bd;
-}
-.register_page select option {
-  color: #041f2f;
-}
-.register_page input {
-  border: 1px solid #c4c4c4;
-  border-radius: 8px;
-  padding-left: 1.5rem;
-}
-.register_page input::-moz-placeholder {
-  font-weight: 600;
-  font-size: 0.75rem;
-  line-height: 1.22em;
-  color: #8d8f91;
-}
-.register_page input:-ms-input-placeholder {
-  font-weight: 600;
-  font-size: 0.75rem;
-  line-height: 1.22em;
-  color: #8d8f91;
-}
-.register_page input::placeholder {
-  font-weight: 600;
-  font-size: 0.75rem;
-  line-height: 1.22em;
-  color: #8d8f91;
-}
 .register_page label {
   font-weight: 500;
   font-size: 1rem;
@@ -194,15 +620,9 @@
 .register_page label span {
   color: #f46a6a;
 }
-.register_page .font-bold {
-  font-weight: 600;
-}
 .register_page .fileUpload-icon {
   font-size: 3rem;
   color: #28a3eb;
-}
-.register_page input[type=file] {
-  display: none;
 }
 .register_page .input-foto-siswa {
   min-height: 230px;
@@ -210,5 +630,84 @@
   align-items: center;
   justify-content: center;
   border: 1px solid #c4c4c4;
-  border-radius: 8px;
+  border-radius: 0.5rem;
+}
+
+.pmbGenerateVA_page .card-body {
+  padding: 2.5rem;
+}
+.pmbGenerateVA_page .alert h6 {
+  font-weight: 600;
+  font-size: 1.125rem;
+  line-height: 1.21em;
+  color: #34c38f;
+}
+.pmbGenerateVA_page .alert-success {
+  border: 0;
+  background-color: rgba(52, 195, 143, 0.1);
+}
+.pmbGenerateVA_page .va_aktif label {
+  font-weight: 500;
+  font-size: 1rem;
+  line-height: 1.21em;
+  color: #000;
+}
+.pmbGenerateVA_page .va_aktif .field_kode {
+  position: relative;
+}
+.pmbGenerateVA_page .va_aktif input:-moz-read-only {
+  background-color: #fff;
+  font-weight: 400;
+  font-size: 1.5rem;
+  line-height: 1.21em;
+  color: #000;
+  max-height: 50px;
+}
+.pmbGenerateVA_page .va_aktif input:read-only {
+  background-color: #fff;
+  font-weight: 400;
+  font-size: 1.5rem;
+  line-height: 1.21em;
+  color: #000;
+  max-height: 50px;
+}
+.pmbGenerateVA_page .va_aktif button.salin_kode:hover {
+  background-color: rgba(178, 222, 248, 0.2);
+  border-color: #28a3eb;
+  color: #28a3eb;
+}
+.pmbGenerateVA_page .va_aktif .salin_kode {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 0 0.5rem 0.5rem 0;
+  border-left: 1px solid #c4c4c4;
+}
+.pmbGenerateVA_page .informasi_pembayaran ul {
+  list-style: none;
+}
+.pmbGenerateVA_page .informasi_pembayaran li {
+  font-weight: 400;
+  font-size: 0.875rem;
+  line-height: 1.5em;
+  color: #adb5bd;
+}
+.pmbGenerateVA_page .informasi_pembayaran h6 {
+  font-weight: 600;
+  font-size: 0.75rem;
+  line-height: 1.5em;
+  color: #d10429;
+}
+.pmbGenerateVA_page .total_tagihan p {
+  font-weight: 400;
+  font-size: 0.75rem;
+  line-height: 1.5em;
+  color: #062e46;
+}
+.pmbGenerateVA_page .total_tagihan h1 {
+  font-weight: 700;
+  font-size: 1.375rem;
+  line-height: 0.8em;
+  color: #28a3eb;
 }

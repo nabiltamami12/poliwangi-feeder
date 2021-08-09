@@ -17,16 +17,16 @@
           </div>
         </div>
 
-        <hr class="mt">
+        <hr class="my-4">
 
-        <form class="form-input mt-0">
+        <form class="form-input">
           <div class="form-row">
             <div class="col-12 form-group pr-0 pr-md-1">
               <label for="nama-fakultas">Nama Fakultas</label>
               <input type="text" class="form-control" id="nama-fakultas" value="Fakultas Kedokteran Gigi">
             </div>
           </div>
-          <button type="submit" class="btn--blue w-100 simpanData-btn">Simpan Data</button>
+          <button type="submit" class="btn-primary w-100 simpanData-btn">Simpan Data</button>
         </form>
       </div>
     </div>

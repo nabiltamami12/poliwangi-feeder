@@ -10,7 +10,7 @@
     <div class="col-xl-12">
       <div class="card shadow padding--small">
 
-        <div class="card-header p-0 m-0 border-0 rounded-0">
+        <div class="card-header p-0 m-0 border-0 ">
           <div class="row align-items-center">
             <div class="col-12 col-md-6">
               <h2 class="mb-0 text-center text-md-left">Absensi Mahasiswa</h2>
@@ -21,9 +21,9 @@
             </div>
           </div>
 
-          <hr class="mt">
+          <hr class="my-4">
 
-          <form class="form-select rounded-0">
+          <form class="form-select ">
             <div class="form-row">
               <div class="col-md-6 form-group">
                 <label for="program-studi">Program Studi</label>
@@ -58,7 +58,7 @@
             </div>
           </form>
 
-          <div class="row align-items-center padding--small py-0 filterSearch-data">
+          <div class="row align-items-center padding--small py-0 ">
             <div class="col-sm-6 col-12">
               <div class="form-group row">
                 <select class="form-control" id="dataperhalaman">
@@ -76,7 +76,7 @@
                 <input type="search" class="form-control" id="searchdata" placeholder="Pencarian ...">
                 <div class="input-group-prepend">
                   <div class="input-group-text search-icon">
-                    <span class="iconify" data-icon="fluent:search-32-regular" data-inline="true"></span>
+                    <span class="iconify" data-icon="fluent:search-32-regular"></span>
                   </div>
                 </div>
               </div>
@@ -102,84 +102,84 @@
               <tr>
                 <td class="text-center">13 Juli 2021</td>
                 <td>4891203526</td>
-                <td class="font--bold text-capitalize">Dwi Rahmawati</td>
+                <td class="font-weight-bold text-capitalize">Dwi Rahmawati</td>
                 <td class="text-center">Ilmu gigi</td>
                 <td class="text-center">12:14</td>
                 <td class="text-center">13:00</td>
                 <td class="text-center">
-                  <span class="iconify delete-icon" data-icon="bx:bx-trash" data-inline="true"></span>
+                  <span class="iconify delete-icon" data-icon="bx:bx-trash"></span>
                 </td>
               </tr>
 
               <tr>
                 <td class="text-center">13 Juli 2021</td>
                 <td>4891203526</td>
-                <td class="font--bold text-capitalize">Dwi Rahmawati</td>
+                <td class="font-weight-bold text-capitalize">Dwi Rahmawati</td>
                 <td class="text-center">Ilmu gigi</td>
                 <td class="text-center">12:14</td>
                 <td class="text-center">13:00</td>
                 <td class="text-center">
-                  <span class="iconify delete-icon" data-icon="bx:bx-trash" data-inline="true"></span>
+                  <span class="iconify delete-icon" data-icon="bx:bx-trash"></span>
                 </td>
               </tr>
 
               <tr>
                 <td class="text-center">13 Juli 2021</td>
                 <td>4891203526</td>
-                <td class="font--bold text-capitalize">indah pratiwi</td>
+                <td class="font-weight-bold text-capitalize">indah pratiwi</td>
                 <td class="text-center">Ilmu gigi</td>
                 <td class="text-center">12:17</td>
                 <td class="text-center">13:00</td>
                 <td class="text-center">
-                  <span class="iconify delete-icon" data-icon="bx:bx-trash" data-inline="true"></span>
+                  <span class="iconify delete-icon" data-icon="bx:bx-trash"></span>
                 </td>
               </tr>
 
               <tr>
                 <td class="text-center">13 Juli 2021</td>
                 <td>4891203526</td>
-                <td class="font--bold text-capitalize">indah pratiwi</td>
+                <td class="font-weight-bold text-capitalize">indah pratiwi</td>
                 <td class="text-center">Ilmu gigi</td>
                 <td class="text-center">12:17</td>
                 <td class="text-center">13:00</td>
                 <td class="text-center">
-                  <span class="iconify delete-icon" data-icon="bx:bx-trash" data-inline="true"></span>
+                  <span class="iconify delete-icon" data-icon="bx:bx-trash"></span>
                 </td>
               </tr>
 
               <tr>
                 <td class="text-center">13 Juli 2021</td>
                 <td>4891203526</td>
-                <td class="font--bold text-capitalize">indah pratiwi</td>
+                <td class="font-weight-bold text-capitalize">indah pratiwi</td>
                 <td class="text-center">Ilmu gigi</td>
                 <td class="text-center">12:17</td>
                 <td class="text-center">13:00</td>
                 <td class="text-center">
-                  <span class="iconify delete-icon" data-icon="bx:bx-trash" data-inline="true"></span>
+                  <span class="iconify delete-icon" data-icon="bx:bx-trash"></span>
                 </td>
               </tr>
 
               <tr>
                 <td class="text-center">13 Juli 2021</td>
                 <td>4891203526</td>
-                <td class="font--bold text-capitalize">indah pratiwi</td>
+                <td class="font-weight-bold text-capitalize">indah pratiwi</td>
                 <td class="text-center">Ilmu gigi</td>
                 <td class="text-center">12:17</td>
                 <td class="text-center">13:00</td>
                 <td class="text-center">
-                  <span class="iconify delete-icon" data-icon="bx:bx-trash" data-inline="true"></span>
+                  <span class="iconify delete-icon" data-icon="bx:bx-trash"></span>
                 </td>
               </tr>
 
               <tr>
                 <td class="text-center">13 Juli 2021</td>
                 <td>4891203526</td>
-                <td class="font--bold text-capitalize">indah pratiwi</td>
+                <td class="font-weight-bold text-capitalize">indah pratiwi</td>
                 <td class="text-center">Ilmu gigi</td>
                 <td class="text-center">12:17</td>
                 <td class="text-center">13:00</td>
                 <td class="text-center">
-                  <span class="iconify delete-icon" data-icon="bx:bx-trash" data-inline="true"></span>
+                  <span class="iconify delete-icon" data-icon="bx:bx-trash"></span>
                 </td>
               </tr>
             </tbody>

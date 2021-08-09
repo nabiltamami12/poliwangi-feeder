@@ -8,24 +8,26 @@
 </header>
 
 <!-- Page content -->
-<section class="page-content page-content__akademik container-fluid" id="akademik_datajurusan">
+<section class="page-content  container-fluid" id="akademik_datajurusan">
   <div class="row">
     <div class="col-xl-12">
       <div class="card padding--small">
 
-        <div class="card-header p-0 m-0 border-0 rounded-0">
-          <div class="row align-items-center">
-            <div class="col">
-              <h2 class="mb-0">Data Jurusan</h2>
-            </div>
-            <div class="col text-right">
-              <button type="button" onclick="add_btn()" class="btn--blue add-btn"><img src="/images/add-icon--white.png" alt="">
-                Tambah</button>
-            </div>
+        <div class="card-header p-0 m-0 border-0 
+          <div class=" row align-items-center">
+          <div class="col">
+            <h2 class="mb-0">Data Jurusan</h2>
           </div>
-
-          <hr class="mt">
+          <div class="col text-right">
+            <button type="button" onclick="add_btn()" class="btn-primary "><img src="/images/add-icon--white.png"
+                alt="">
+              Tambah</button>
+          </div>
         </div>
+
+          <hr class="mt my-4">
+        </div>
+      </div>
 
         <div class="table-responsive">
           <table id="datatable" class="table align-items-center table-flush table-borderless table-hover">
@@ -38,16 +40,17 @@
             </thead>
             <tbody>
 
-            </tbody>
-          </table>
+          </tbody>
+        </table>
 
         </div>
       </div>
     </div>
   </div>
+  </div>
 </section>
 <script>
-$(document).ready(function() {
+  $(document).ready(function() {
   var nomor = 1;
   dt_url = `${url_api}/jurusan`;
 dt_opt = {
@@ -73,8 +76,8 @@ dt_opt = {
         "mRender": function(data, type, full) {
           var id = data['nomor'];
           var text_hapus = data['jurusan'];
-          var btn_update = `<span class="iconify edit-icon" onclick='update_btn(${id})' data-icon="bx:bx-edit-alt" data-inline="true"></span>` 
-          var btn_delete = `<span class="iconify delete-icon" data-icon="bx:bx-trash" data-inline="true" onclick='delete_btn(${id},"jurusan","jurusan","${text_hapus}")'></span>`; 
+          var btn_update = `<span class="iconify edit-icon" onclick='update_btn(${id})' data-icon="bx:bx-edit-alt" ></span>` 
+          var btn_delete = `<span class="iconify delete-icon" data-icon="bx:bx-trash"  onclick='delete_btn(${id},"jurusan","jurusan","${text_hapus}")'></span>`; 
           res = btn_update+" "+btn_delete;
           return res;
         }

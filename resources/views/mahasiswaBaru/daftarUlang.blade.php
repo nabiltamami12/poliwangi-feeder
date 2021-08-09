@@ -25,7 +25,7 @@
           <p class="mt-2 mb-0 font-italic">Upload Document dengan format .pdf (Max size 2MB)</p>
         </div>
         <div class="modal-footer pt-3">
-          <button type="button" class="btn btn--blue btn-modal-ok w-100">Upload</button>
+          <button type="button" class="btn btn-primary btn-modal-ok w-100">Upload</button>
         </div>
       </div>
     </div>
@@ -47,7 +47,7 @@
             <thead class="table-header">
               <tr>
                 <th scope="col" class="border-0 text-center px-2">No</th>
-                <th scope="col" class="border-0" style="width: 50%">Keterangan</th>
+                <th scope="col" class="border-0" style="width: 58%">Keterangan</th>
                 <th scope="col" class="border-0">File</th>
                 <th scope="col" class="border-0 text-center">Status</th>
               </tr>
@@ -60,11 +60,11 @@
                   <h2 class="mb-0">Ijazah SMA/SMK/MA/Sederajat</h2>
                 </td>
                 <td>
-                  <span class="iconify text--blue" data-icon="bx:bx-file-blank" data-inline="true"></span>
-                  <span class="text--blue">dokumen terunggah</span>
+                  <span class="iconify text-primary" data-icon="bx:bx-file-blank"></span>
+                  <span class="text-primary">dokumen terunggah</span>
                 </td>
                 <td class="text-center">
-                  <span class="iconify status-success" data-icon="fluent:clock-20-filled" data-inline="true"></span>
+                  <span class="iconify status-success" data-icon="fluent:clock-20-filled"></span>
                 </td>
               </tr>
 
@@ -75,12 +75,12 @@
                 </td>
                 <td>
                   <span data-toggle="modal" data-target="#unggahDokumen" class="pointer">
-                    <span class="iconify text--blue" data-icon="bx:bx-upload" data-inline="true"></span>
-                    <span class="text--blue">Unggah Dokumen</span>
+                    <span class="iconify text-primary" data-icon="bx:bx-upload"></span>
+                    <span class="text-primary">Unggah Dokumen</span>
                   </span>
                 </td>
                 <td class="text-center">
-                  <span class="iconify status-pending" data-icon="fluent:clock-20-filled" data-inline="true"></span>
+                  <span class="iconify status-pending" data-icon="fluent:clock-20-filled"></span>
                 </td>
               </tr>
 
@@ -90,11 +90,11 @@
                   <h2 class="mb-0">Bukti Pembayaran Pendaftaran</h2>
                 </td>
                 <td>
-                  <span class="iconify text--blue" data-icon="bx:bx-file-blank" data-inline="true"></span>
-                  <span class="text--blue">dokumen terunggah</span>
+                  <span class="iconify text-primary" data-icon="bx:bx-file-blank"></span>
+                  <span class="text-primary">dokumen terunggah</span>
                 </td>
                 <td class="text-center">
-                  <span class="iconify status-success" data-icon="fluent:clock-20-filled" data-inline="true"></span>
+                  <span class="iconify status-success" data-icon="fluent:clock-20-filled"></span>
                 </td>
               </tr>
 
@@ -105,12 +105,62 @@
                 </td>
                 <td>
                   <span data-toggle="modal" data-target="#unggahDokumen" class="pointer">
-                    <span class="iconify text--blue" data-icon="bx:bx-upload" data-inline="true"></span>
-                    <span class="text--blue">Unggah Ulang Dokumen</span>
+                    <span class="iconify text-primary" data-icon="bx:bx-upload"></span>
+                    <span class="text-primary">Unggah Ulang Dokumen</span>
                   </span>
                 </td>
                 <td class="text-center">
-                  <span class="iconify status-rejected" data-icon="bi:x-circle-fill" data-inline="true"></span>
+                  <span class="iconify status-rejected" data-icon="bi:x-circle-fill"></span>
+                </td>
+              </tr>
+
+              <tr>
+                <td class="text-center px-2">5</td>
+                <td>
+                  <h2 class="mb-0">Surat Pernyataan Taat Peraturan</h2>
+                </td>
+                <td>
+                  <span data-toggle="modal" data-target="#unggahDokumen" class="pointer">
+                    <span class="iconify text-primary" data-icon="bx:bx-upload"></span>
+                    <span class="text-primary">Unggah Ulang Dokumen</span>
+                  </span>
+                </td>
+                <td class="text-center">
+                  <span class="iconify status-rejected" data-icon="bi:x-circle-fill"></span>
+                </td>
+              </tr>
+
+              <tr>
+                <td class="text-center px-2">6</td>
+                <td>
+                  <h2 class="mb-0">Upload Foto dengan Almamater</h2>
+                </td>
+                <td>
+                  <span data-toggle="modal" data-target="#unggahDokumen" class="pointer">
+                    <span class="iconify text-primary" data-icon="bx:bx-upload"></span>
+                    <span class="text-primary">Unggah Ulang Dokumen</span>
+                  </span>
+                </td>
+                <td class="text-center">
+                  <span class="iconify status-rejected" data-icon="bi:x-circle-fill"></span>
+                </td>
+              </tr>
+
+              <tr>
+                <td class="text-center px-2">7</td>
+                <td>
+                  <h2 class="mb-0 d-inline">Upload Dokumen Pengajuan Keringanan
+                    <h2 class="d-inline text-warning">(Optional)</span>
+                    </h2>
+                </td>
+                <td>
+                  <span data-toggle="modal" data-target="#unggahDokumen" class="pointer">
+                    <span class="iconify text-primary" data-icon="bx:bx-upload"></span>
+                    <span class="text-primary">Unggah Dokumen</span>
+                  </span>
+                </td>
+                <td class="text-center">
+                  <span class="iconify status-pending" data-icon="fluent:clock-20-filled"></span>
                 </td>
               </tr>
             </tbody>
