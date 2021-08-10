@@ -146,9 +146,13 @@
                             </div>
                         </div>
                     </div>
-
-                    <button type="submit" class="btn-primary w-100 simpanData-btn ">{{ ($id==null)?"Tambah":"Ubah" }}
-                        Data</button>
+                    <div class="form-row">
+                        <div class="col-md-12">
+                            <div class="form-group row mb-0">
+                                <button type="submit" class="btn btn-primary w-100 simpanData-btn ">{{ ($id==null)?"Tambah":"Ubah" }} Data</button>
+                            </div>
+                        </div>
+                    </div>
                 </form>
 
             </div>

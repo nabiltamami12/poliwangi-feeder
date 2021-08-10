@@ -19,15 +19,11 @@
               <h2 class="mb-0">Data Periode</h2>
             </div>
             <div class="col text-right">
-              <button type="button" onclick="add_btn()" class="btn-primary "><img src="/images/add-icon--white.png"
-                  alt="">
-                Tambah</button>
+              <button type="button" onclick="add_btn()" class="btn btn-primary"><img src="/images/add-icon--white.png" alt=""> Tambah</button>
             </div>
           </div>
-
-          <hr class="mt">
         </div>
-
+        <hr class="mt">
         <div class="table-responsive">
           <table id="datatable" class="table align-items-center table-flush table-borderless table-hover">
             <thead class="table-header">

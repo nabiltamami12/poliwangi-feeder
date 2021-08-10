@@ -49,73 +49,13 @@
   <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"
     integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous">
   </script>
-
+  <link rel="stylesheet" href="{{ asset('assets/core.css') }}">
   <script>
     var url_api = "http://127.0.0.1:8000/api/v1";
     var url = "{{ base_path(); }}";
     var dataGlobal = JSON.parse(localStorage.getItem('globalData')) 
     var dataJurusan,dataDosen,dataProgram;
   </script>
-  {{-- <style type="text/css">
-    .form-group {
-      padding-left: 1.5rem !important;
-      padding-right: 1.3rem !important;
-      margin-top: 16px !important;
-    }
-    form button {
-      height: 49px;
-    }
-
-    /*datatable*/
-    .table-responsive{
-      padding-top: 1em;
-    }
-    .table.dataTable{
-      border-collapse: unset;
-    }
-    .table.dataTable thead th, table.dataTable thead td{
-      border-bottom: unset;
-    }
-    .table.dataTable.no-footer{
-      border-bottom: unset;
-    }
-    .dataTables_wrapper .page-item.active .page-link {
-      border-color: #28A3EB;
-      background-color: #28A3EB;
-    }
-    .dataTables_wrapper .custom-select {
-      font-weight: 400;
-      font-size: 0.875rem;
-      line-height: 1.21em;
-      color: #041f2f;
-      min-width: 70px;
-      max-width: 70px;
-      height: 30px;
-      border: 1px solid #999999;
-      border-radius: 0.5rem;
-      padding: 0 10px;
-      background-image: url("https://api.iconify.design/bx/bx-chevron-down.svg?color=#041F2F");
-      background-repeat: no-repeat;
-      background-size: 17px;
-      appearance: none;
-      -webkit-appearance: none;
-      -moz-appearance: none;
-      box-shadow: none;
-    }
-    .dataTables_wrapper div.dataTables_filter input{
-      border: 1px solid #28a3eb;
-      padding: 0 0.75rem;
-      max-height: 35px;
-    }
-    .dataTables_wrapper .dataTables_length select.form-control{
-      margin: 0px;
-    }
-
-    /*sidebar*/
-    .sub-aktif{
-      color: #28a3eb !important;
-    }
-  </style> --}}
 </head>
 
 

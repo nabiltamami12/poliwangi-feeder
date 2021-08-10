@@ -16,7 +16,7 @@
               <h2 class="mb-0">Data Kelas</h2>
             </div>
             <div class="col text-right">
-              <button type="button" class="btn btn-primary ">
+              <button type="button" class="btn btn-primary">
                 <span class="iconify mr-2" onclick="add_btn()" data-icon="bx:bxs-plus-circle"></span>
                 Tambah
               </button>
@@ -24,7 +24,6 @@
           </div>
         </div>
         <hr class="mt">
-        </div>
 
         <div class="table-responsive">
           <table id="datatable" class="table align-items-center table-flush table-borderless table-hover">

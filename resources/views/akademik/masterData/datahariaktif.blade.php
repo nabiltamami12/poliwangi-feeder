@@ -35,7 +35,7 @@
                     </div>
 
                     <hr class="my-4">
-                    <div class="row align-items-center ml-1">
+                    <div class="row align-items-center ml-1 mb-3">
                         <input type="hidden" id="tanggal">
                         <div class="col-sm-12 col-12">
                             <div class="form-group row mb-0">
@@ -54,7 +54,7 @@
                         </div>
                     </div>
                     <div class="col text-right">
-                        <button type="button" class="btn-primary ">Simpan</button>
+                        <button type="button" class="btn btn-primary">Simpan</button>
                     </div>
                 </div>
             </div>

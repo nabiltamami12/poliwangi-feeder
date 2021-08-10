@@ -52,6 +52,12 @@
 
               </select>
             </div>
+            <div class="col-md-6 form-group mt-3 mt-md-0">
+              <label for="kelas">Kelas</label>
+              <select class="form-control" id="kelas" name="kelas">
+
+              </select>
+            </div>
           </form>
           <hr class="mt"></hr>
         </div>

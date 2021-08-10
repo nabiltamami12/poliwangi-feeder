@@ -12,41 +12,34 @@
   <div class="row">
     <div class="col-xl-12">
       <div class="card padding--small">
-
-        <div class="card-header p-0 m-0 border-0 
+        
+        <div class="card-header p-0 m-0 border-0">
           <div class=" row align-items-center">
-          <div class="col">
-            <h2 class="mb-0">Data Jurusan</h2>
+            <div class="col">
+              <h2 class="mb-0">Data Jurusan</h2>
+            </div>
+            <div class="col text-right">
+              <button type="button" onclick="add_btn()" class="btn btn-primary "><img src="/images/add-icon--white.png" alt="">Tambah</button>
+            </div>
           </div>
-          <div class="col text-right">
-            <button type="button" onclick="add_btn()" class="btn-primary "><img src="/images/add-icon--white.png"
-                alt="">
-              Tambah</button>
-          </div>
-        </div>
-
+          
           <hr class="mt my-4">
-        </div>
-      </div>
-
-        <div class="table-responsive">
-          <table id="datatable" class="table align-items-center table-flush table-borderless table-hover">
-            <thead class="table-header">
-              <tr>
-                <th scope="col">NO</th>
-                <th scope="col">JURUSAN</th>
-                <th scope="col">AKSI</th>
-              </tr>
-            </thead>
-            <tbody>
-
-          </tbody>
-        </table>
-
+          
+          <div class="table-responsive">
+            <table id="datatable" class="table align-items-center table-flush table-borderless table-hover">
+              <thead class="table-header">
+                <tr>
+                  <th scope="col">NO</th>
+                  <th scope="col">JURUSAN</th>
+                  <th scope="col">AKSI</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
-  </div>
   </div>
 </section>
 <script>
