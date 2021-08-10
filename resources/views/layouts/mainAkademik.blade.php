@@ -51,7 +51,7 @@
   </script>
   <link rel="stylesheet" href="{{ asset('assets/core.css') }}">
   <script>
-    var url_api = "http://127.0.0.1:8000/api/v1";
+    var url_api = "{{ url('/api/v1') }}";
     var url = "{{ base_path(); }}";
     var dataGlobal = JSON.parse(localStorage.getItem('globalData')) 
     var dataJurusan,dataDosen,dataProgram;
