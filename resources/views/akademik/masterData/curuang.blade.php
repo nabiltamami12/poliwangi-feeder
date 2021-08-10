@@ -109,8 +109,7 @@
           </div>
           <hr class="my-4">
 
-          <button type="submit" class="btn-primary w-100 simpanData-btn ">{{ ($id==null)?"Tambah":"Ubah" }}
-            Data</button>
+          <button type="submit" class="btn btn-primary w-100 simpanData-btn ">{{ ($id==null)?"Tambah":"Ubah" }} Data</button>
         </form>
 
       </div>

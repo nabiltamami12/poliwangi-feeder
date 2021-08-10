@@ -101,7 +101,7 @@
               </li>
             </ul>
           </li>
-
+          {{--
           <li class="nav-item">
             <div class="nav-link {{($title === "akademik-khs") ? 'aktif' : ''}}"">
               <span class=" iconify" data-icon="bx:bx-book-bookmark" data-inline="true"></span>
@@ -202,6 +202,7 @@
               </ul>
             </div>
           </li>
+          --}}
         </ul>
       </div>
     </div>
