@@ -51,6 +51,14 @@
   .dataTables_wrapper .dataTables_length select.form-control{
     margin: 0px;
   }
+  table tr td .iconify{
+    font-size: 1.5rem;
+    color: #28a3eb;
+    cursor: pointer;
+  }
+  table tr td .iconify:hover{
+    color: #036bb1;
+  }
 
   /*sidebar*/
   .sub-aktif{
