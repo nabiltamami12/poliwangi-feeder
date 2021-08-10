@@ -46,7 +46,7 @@
             <div class="col-md-4 col-12 offset-md-2 offset-0 mt-md-0 mt-2 text-right">
               <label class="sr-only" for="searchdata">Search</label>
               <div class="input-group search-group">
-                <input type="search" class="form-control" id="searchdata" placeholder="Pencarian ...">
+                <input type="search" class="form-control form-control-sm" id="searchdata" placeholder="Pencarian ...">
                 <div class="input-group-prepend">
                   <div class="input-group-text search-icon"><img src="/images/search-icon.png" alt=""></div>
                 </div>

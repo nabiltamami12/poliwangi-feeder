@@ -10,7 +10,7 @@
     <div class="col">
       <div class="d-md-flex justify-content-between informasi_mahasiswa mt-4">
         <p class="mb-0">Masa: <strong class="font-weight-bold">29 Januari 2021 - 29 Mei 2021</strong></p>
-        <p class="mb-0 mt-2 mt-md-0">Status Mahasiswa: <span class="text-warning">Cuti</span></p>
+        <p class="mb-0 mt-2 mt-md-0">Status Mahasiswa: <span class="text-success">Aktif</span></p>
       </div>
     </div>
   </div>

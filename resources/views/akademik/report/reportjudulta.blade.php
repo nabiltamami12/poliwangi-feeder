@@ -52,7 +52,7 @@
           <div class="col-12 col-md-6">
             <form class="form-inline">
               <div class="form-group row">
-                <select class="form-control" id="dataperhalaman">
+                <select class="form-control form-control-sm" id="dataperhalaman">
                   <option>10</option>
                   <option>20</option>
                   <option>30</option>
@@ -63,7 +63,7 @@
           </div>
           <div class="col-12 col-md-4 offset-md-2 offset-0 text-right p-0 mt-3 mt-md-0">
             <div class="input-group">
-              <input type="search" class="form-control" id="searchdata" placeholder="Pencarian ...">
+              <input type="search" class="form-control form-control-sm" id="searchdata" placeholder="Pencarian ...">
               <div class="input-group-prepend">
                 <div class="input-group-text search-icon rounded-right">
                   <span class="iconify" data-icon="fluent:search-32-regular"></span>

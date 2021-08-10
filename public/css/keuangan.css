@@ -53,7 +53,7 @@
 }
 .page-content__keuangan .modal .modal-footer .btn-modal-kembali:hover {
   background-color: #adb5bd;
-  color: #ffffff;
+  color: #fff;
 }
 .page-content__keuangan .modal .modal-footer .btn-modal-setujui {
   color: #ffffff;
@@ -63,7 +63,7 @@
   border: 0;
 }
 .page-content__keuangan .modal .modal-footer .btn-modal-setujui:hover {
-  background-color: #ffffff;
+  background-color: #fff;
   border: 2px solid #34c38f;
   color: #34c38f;
   padding: 10px;

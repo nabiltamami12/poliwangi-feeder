@@ -18,19 +18,8 @@
         </div>
         <hr class="my-4">
         <div class="card-body p-0">
-          <button type="button" class="btn btn-primary w-100">Generate VA Pembayaran</button>
-          <hr class="mt-4">
-          <div class="va_aktif">
-            <div class="form-group">
-              <label class="mt-4-5">VA Aktif Saat Ini</label>
-              <div class="field_kode mt-2">
-                <input type="text" class="form-control pl-2" id="va-aktif" value="1281928746273601" readonly>
-                <button class="salin_kode btn btn-primary">Salin Kode</button>
-              </div>
-            </div>
-          </div>
           <div class="rincian_pembayaran">
-            <div class="row mt-4-5">
+            <div class="row">
               <div class="col-12 col-md-6 pr-auto pr-md-1">
                 <div class="form-group">
                   <label for="bulan-pembayaran">Pembayaran Bulan</label>
@@ -46,6 +35,18 @@
               </div>
             </div>
           </div>
+          <button type="button" class="btn btn-primary w-100 mt-4">Generate VA Pembayaran</button>
+          <hr class="mt-4">
+          <div class="va_aktif">
+            <div class="form-group">
+              <label class="mt-4-5">VA Aktif Saat Ini</label>
+              <div class="field_kode mt-2">
+                <input type="text" class="form-control pl-2" id="va-aktif" value="1281928746273601" readonly>
+                <button class="salin_kode btn btn-primary">Salin Kode</button>
+              </div>
+            </div>
+          </div>
+
           <div class="informasi_pembayaran">
             <div class="instruksi_pembayaran mt-4-5">
               <ul>

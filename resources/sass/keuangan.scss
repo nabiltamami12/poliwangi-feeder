@@ -28,7 +28,7 @@
                 color: #000;
             }
             .iconify:last-child {
-                color: $button-blue;
+                color: $primary;
             }
             .nama_dokumen {
                 @include mixintext(400, 1.125rem, 1.2em, $font-black);

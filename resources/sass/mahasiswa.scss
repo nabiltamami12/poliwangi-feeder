@@ -1,16 +1,6 @@
 @import "./variable";
 @import "./mixin";
 
-$primary: #28a3eb;
-$secondary: #6f7bf7;
-$success: #34c38f;
-$info: #b2def8;
-$warning: #f1b44c;
-$danger: #f46a6a;
-
-$font-black: #041f2f;
-$font-white: #ffffff;
-
 .informasi_mahasiswa {
     background-color: #fff;
     border-radius: 0.5rem;
@@ -55,7 +45,7 @@ $font-white: #ffffff;
     }
     input[type="text"] {
         background-color: rgba(173, 181, 189, 0.2);
-        color: $placeholder;
+        color: $font-placeholder !important;
     }
 }
 
@@ -178,7 +168,7 @@ $font-white: #ffffff;
         grid-template-columns: 1fr 1fr;
         column-gap: 0.5rem;
         .button_sebelumnya {
-            background-color: $button-info;
+            background-color: $info;
             color: $primary;
         }
     }
@@ -208,5 +198,12 @@ $font-white: #ffffff;
         button {
             border-radius: 0.25rem;
         }
+    }
+}
+
+#mala_presensi {
+    #txtDate {
+        height: 33px;
+        padding-left: 0.75rem;
     }
 }

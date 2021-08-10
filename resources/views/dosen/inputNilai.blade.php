@@ -24,8 +24,12 @@
                 <span class="btn-inner--icon"><span class="iconify" data-icon="bx:bx-share-alt"></span></span>
                 <span class="btn-inner--text">Publish Nilai</span>
               </button>
-              <button type="button" class="btn btn-primary mt-3 mt-md-0 ml-0 ml-md-3">
-                <span>Simpan</span>
+              <button type="button" class="btn btn-icon btn-primary mt-3 mt-md-0 ml-0 ml-md-3">
+                <span class="btn-inner--icon">
+                  <span class="iconify" data-icon="bx:bx-save"></span>
+                </span>
+                <span class="btn-inner--text">Simpan</span>
+              </button>
               </button>
             </div>
           </div>

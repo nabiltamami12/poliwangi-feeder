@@ -57,7 +57,7 @@
 }
 .rincian_pembayaran input[type=text] {
   background-color: rgba(173, 181, 189, 0.2);
-  color: #adb5bd;
+  color: #adb5bd !important;
 }
 
 .informasi_pembayaran ul {
@@ -234,4 +234,9 @@
 }
 #daftar_ulang .modal-footer button {
   border-radius: 0.25rem;
+}
+
+#mala_presensi #txtDate {
+  height: 33px;
+  padding-left: 0.75rem;
 }

@@ -68,7 +68,7 @@ body {
             }
 
             &.showsubmenu .nav-item-dropdown-content {
-                max-height: 500px;
+                max-height: 1000px;
                 transition: max-height 0.5s ease-in;
             }
 
@@ -266,7 +266,6 @@ nav#navbar {
         @include mixintext(400, 0.875rem, 1.21em, $font-black);
         min-width: 65px;
         max-width: 65px;
-        max-height: 25px;
         border: 1px solid #999999;
         border-radius: 0.5rem;
         padding: 0 12px;
@@ -282,10 +281,22 @@ nav#navbar {
         }
     }
 
+    select:focus {
+        border-color: $primary;
+    }
+
+    select#status {
+        option {
+            box-shadow: 2px 2px 8px rgba(255, 0, 0, 0.15) !important;
+            // background-color: aqua;
+            border: 0 !important;
+        }
+    }
+
     .search-icon {
         background-color: $primary;
         border: 0;
-        max-height: 35px;
+        max-height: 2rem;
         color: #fff;
         border-radius: 0 0.5rem 0.5rem 0;
     }
@@ -300,6 +311,10 @@ nav#navbar {
 
     input[type="search"]::placeholder {
         @include mixintext(400, 0.75rem, 1.21em, $font-black);
+    }
+
+    .textarea_notresize {
+        resize: none;
     }
 
     // Table
@@ -458,6 +473,9 @@ nav#navbar {
             border-radius: 0 0.5rem 0.5rem 0;
         }
         select {
+            height: 33px;
+            border-radius: 0.5rem;
+            padding-left: 0.75rem;
             border-color: #c4c4c4;
             -webkit-appearance: none;
             -moz-appearance: none;

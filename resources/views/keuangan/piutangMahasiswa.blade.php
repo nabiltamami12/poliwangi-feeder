@@ -57,7 +57,7 @@
           <div class="row align-items-center padding--small py-0 ">
             <div class="col-sm-6 col-12">
               <div class="form-group row">
-                <select class="form-control" id="dataperhalaman">
+                <select class="form-control form-control-sm" id="dataperhalaman">
                   <option>10</option>
                   <option>20</option>
                   <option>30</option>
@@ -69,7 +69,7 @@
             <div class="col-md-4 col-12 offset-md-2 offset-0 mt-md-0 mt-2 p-0 text-right">
               <label class="sr-only" for="searchdata">Search</label>
               <div class="input-group">
-                <input type="search" class="form-control" id="searchdata" placeholder="Pencarian ...">
+                <input type="search" class="form-control form-control-sm" id="searchdata" placeholder="Pencarian ...">
                 <div class="input-group-prepend">
                   <div class="input-group-text search-icon">
                     <span class="iconify" data-icon="fluent:search-32-regular"></span>

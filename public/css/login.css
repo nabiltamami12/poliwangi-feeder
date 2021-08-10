@@ -179,8 +179,8 @@ h6,
 
 .btn-info {
   color: #ffffff;
-  border-color: #b2def8;
-  background-color: #b2def8;
+  border-color: transparent;
+  background-color: rgba(178, 222, 248, 0.4);
   box-shadow: none;
 }
 .btn-info:hover {

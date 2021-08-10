@@ -15,6 +15,9 @@
             margin-left: 288px;
         }
     }
+    select#dataperhalaman {
+        max-height: 1.5rem;
+    }
 }
 
 @media screen and (max-width: 991.98px) {
@@ -58,7 +61,7 @@
             .form-group:nth-child(even) {
                 padding-left: 0;
                 padding-right: 0;
-                margin-top: 16px;
+                margin-top: 1rem;
             }
         }
 
@@ -138,6 +141,21 @@
     .pmbGenerateVA_page {
         .logo {
             width: 20%;
+        }
+    }
+
+    .page-content__admin {
+        .calendar_content {
+            div {
+                &.blank {
+                    height: 4rem;
+                }
+            }
+        }
+    
+        .calendar_weekdays div,
+        .calendar_content div {
+            height: 4rem;
         }
     }
 }
