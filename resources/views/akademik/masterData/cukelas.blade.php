@@ -82,8 +82,7 @@
             </div>
           </div>
           <hr class="my-4">
-          <button type="submit" class="btn-primary w-100 simpanData-btn ">{{ ($id==null)?"Tambah":"Ubah" }}
-            Data</button>
+          <button type="submit" class="btn btn-primary w-100 simpanData-btn ">{{ ($id==null)?"Tambah":"Ubah" }} Data</button>
         </form>
 
       </div>
@@ -94,6 +93,19 @@
   $(document).ready(function() {
     var id = "{{$id}}";
     getData(id);        
+
+    $('#program').on('change',function (e) {
+      var program = $(this).val()
+      var jurusan = $.grep(dataGlobal['prodi'], function(e){ return e.program == program; });
+      console.log(jurusan)
+      $('#jurusan').html('')
+      var optJurusan = `<option value=""> - </option>`;
+      $.each(jurusan,function (key,row) {
+        optJurusan += `<option value="${row.jurusan}" data-alias="${row.alias}">${row.nama_jurusan}</option>`
+      })
+      $('#jurusan').append(optJurusan);
+    })
+     
 
     // form tambah data
     $("#form_cu").submit(function(e) {
@@ -143,11 +155,11 @@ async function getData(id) {
     })
     $('#program').append(optProgram)
 
-    var optJurusan = `<option value=""> - </option>`;
-    $.each(dataGlobal['jurusan'],function (key,row) {
-        optJurusan += `<option value="${row.nomor}" data-alias="${row.alias}">${row.jurusan}</option>`
-    })
-    $('#jurusan').append(optJurusan)
+    // var optJurusan = `<option value=""> - </option>`;
+    // $.each(dataGlobal['jurusan'],function (key,row) {
+    //     optJurusan += `<option value="${row.nomor}" data-alias="${row.alias}">${row.jurusan}</option>`
+    // })
+    // $('#jurusan').append(optJurusan)
 
     var optDosen = `<option value=""> - </option>`;
     $.each(dataGlobal['dosen'],function (key,row) {

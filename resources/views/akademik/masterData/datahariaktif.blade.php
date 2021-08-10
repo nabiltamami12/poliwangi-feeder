@@ -49,6 +49,7 @@
                                 <select class="form-control" id="libur">
                                     <option value="0">Hari aktif</option>
                                     <option value="1">Hari libur</option>
+                                    <option value="3">Hari libur Nasional</option>
                                 </select>
                             </div>
                         </div>
@@ -120,7 +121,7 @@ $(document).ready(function () {
     })
 });
 function change_date(tanggal,status) {
-    if (status=="1") {
+    if (status=="1" || status=="3") {
         $('.fc-day-top[data-date="'+tanggal+'"]').addClass('fc-libur');
     } else {
         $('.fc-day-top[data-date="'+tanggal+'"]').removeClass('fc-libur');

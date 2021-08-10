@@ -27,10 +27,8 @@
             </div>
           </div>
         </div>
-
-        <hr class="my-4">
-
-        <form class="form-select ">
+        <hr class="my-4 mt">
+        <form class="form-select rounded-0">
           <div class="form-row">
             <div class="col-md-6 form-group">
               <label for="jenjang-pendidikan">Jenjang Pendidikan</label>
@@ -38,31 +36,30 @@
 
               </select>
             </div>
-            <div class="col-md-6 form-group mt-3 mt-md-0">
-              <label for="status-mahasiswa">Status Mahasiswa</label>
-              <select class="form-control" id="status" name="status">
-
-              </select>
-            </div>
-          </div>
-          <div class="form-row">
             <div class="col-md-6 form-group">
               <label for="program-studi">Program Studi</label>
               <select class="form-control" id="jurusan" name="jurusan">
 
               </select>
             </div>
+          </div>
+          <div class="form-row">
+            
             <div class="col-md-6 form-group mt-3 mt-md-0">
               <label for="kelas">Kelas</label>
               <select class="form-control" id="kelas" name="kelas">
 
               </select>
             </div>
-          </form>
-          <hr class="mt"></hr>
-        </div>
-
-
+            <div class="col-md-6 form-group mt-3 mt-md-0">
+              <label for="status-mahasiswa">Status Mahasiswa</label>
+              <select class="form-control" id="status" name="status">
+                
+              </select>
+            </div>
+          </div>
+        </form>
+        <hr class="mt">
         <div class="table-responsive">
           <table id="datatable" class="table align-items-center table-flush table-borderless table-hover">
             <thead class="table-header">
@@ -76,9 +73,7 @@
                 <th scope="col" class="text-center">Aksi</th>
               </tr>
             </thead>
-            <tbody>
-
-            </tbody>
+            <tbody></tbody>
           </table>
         </div>
       </div>
@@ -88,15 +83,37 @@
 <script>
   $(document).ready(function() {
   getData();
-  console.log($("#program").val())
 
   $('#searchdata').on('keyup', function() {
     dt.search(this.value).draw();
   });
+  $('#program').on('change',function (e) {
+    var program = $(this).val()
+    var jurusan = $.grep(dataGlobal['prodi'], function(e){ return e.program == program; });
+    
+      $('#jurusan').html('')
+    var optJurusan = `<option value=""> - </option>`;
+    $.each(jurusan,function (key,row) {
+      optJurusan += `<option value="${row.jurusan}">${row.nama_jurusan}</option>`
+    })
+    $('#jurusan').append(optJurusan);
+  })
+  $('#jurusan').on('change',function (e) {
+    var jurusan = $(this).val()
+    var kelas = $.grep(dataGlobal['kelas'], function(e){ return e.jurusan == jurusan; });
+    var kelas = $.grep(dataGlobal['kelas'], function(e){ return e.jurusan == jurusan; });
+    
+      $('#kelas').html('')
+    var optKelas = `<option value=""> - </option>`;
+    $.each(kelas,function (key,row) {
+      optKelas += `<option value="${row.nomor}">${row.kode}</option>`
+    })
+    $('#kelas').append(optKelas);
+  
+  })
   $('select').on('change',function (e) {
     var url = `${url_api}/mahasiswa?program=${$('#program').val()}&jurusan=${$('#jurusan').val()}&status=${$('#status').val()}&kelas=${$('#kelas').val()}`;
     dt.ajax.url(url).load();
-
   })
 } );
 async function getData() {
@@ -107,15 +124,15 @@ async function getData() {
     })
     $('#program').append(optProgram)
     
-    $.each(dataGlobal['jurusan'],function (key,row) {
-        optJurusan += `<option value="${row.nomor}" data-alias="${row.alias}">${row.jurusan}</option>`
-    })
-    $('#jurusan').append(optJurusan)
+    // $.each(dataGlobal['jurusan'],function (key,row) {
+    //     optJurusan += `<option value="${row.nomor}" data-alias="${row.alias}">${row.jurusan}</option>`
+    // })
+    // $('#jurusan').append(optJurusan)
 
-    $.each(dataGlobal['kelas'],function (key,row) {
-        optKelas += `<option value="${row.nomor}">${row.kode}</option>`
-    })
-    $('#kelas').append(optKelas)
+    // $.each(dataGlobal['kelas'],function (key,row) {
+    //     optKelas += `<option value="${row.nomor}">${row.kode}</option>`
+    // })
+    // $('#kelas').append(optKelas)
 
     $.each(dataGlobal['status'],function (key,row) {
         optStatus += `<option value="${row.kode}">${row.status}</option>`

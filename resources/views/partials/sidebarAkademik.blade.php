@@ -50,11 +50,6 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{{ url('/akademik/master/datajamkuliah')}}">
-                  <span class="nav-link-text ml-0">Data Jam Kuliah</span>
-                </a>
-              </li>
-              <li class="nav-item">
                 <a class="nav-link" href="{{ url('/akademik/master/datamahasiswa')}}">
                   <span class="nav-link-text ml-0">Data Mahasiswa</span>
                 </a>
@@ -84,9 +79,14 @@
                   <span class="nav-link-text ml-0">Data Program Studi</span>
                 </a>
               </li>
-              <!-- <li class="nav-item">
+              <li class="nav-item">
                 <a class="nav-link" href="{{ url('/akademik/master/dataruangan')}}">
                   <span class="nav-link-text ml-0">Data Ruangan</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url('/akademik/master/datajamkuliah')}}">
+                  <span class="nav-link-text ml-0">Data Jam Kuliah</span>
                 </a>
               </li>
               <li class="nav-item">
@@ -98,7 +98,7 @@
                 <a class="nav-link" href="{{ url('/akademik/master/datakuliah')}}">
                   <span class="nav-link-text ml-0">Data Kuliah</span>
                 </a>
-              </li> -->
+              </li>
             </ul>
           </li>
 

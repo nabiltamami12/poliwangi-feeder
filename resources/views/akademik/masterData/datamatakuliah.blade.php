@@ -5,7 +5,7 @@
 <header class="header"></header>
 
 <!-- Page content -->
-<section class="page-content  container-fluid" id="akademik_datakelas">
+<section class="page-content  container-fluid" id="akademik_datamatakuliah">
   <div class="row">
     <div class="col-xl-12">
       <div class="card shadow padding--small">
@@ -13,7 +13,7 @@
 
           <div class="row align-items-center">
             <div class="col">
-              <h2 class="mb-0">Data Kelas</h2>
+              <h2 class="mb-0">Data Matakuliah</h2>
             </div>
             <div class="col text-right">
               <button type="button" class="btn btn-primary">
@@ -22,10 +22,8 @@
               </button>
             </div>
           </div>
-
-          <hr class="mt my-4">
         </div>
-
+        <hr class="mt my-4">
         <div class="table-responsive">
           <table id="datatable" class="table align-items-center table-flush table-borderless table-hover">
 
