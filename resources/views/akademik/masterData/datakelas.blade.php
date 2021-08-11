@@ -34,8 +34,7 @@
                 <th scope="col">Prodi</th>
                 <th scope="col" style="width: 30%">Nama</th>
                 <th scope="col" class="text-center">Kode</th>
-                <th scope="col" class="text-center">Kapasitas</th>
-                <th scope="col" class="text-center">Ruang</th>
+                <th scope="col" class="text-center">Wali Kelas</th>
                 <th scope="col" class="text-center">Aksi</th>
               </tr>
             </thead>

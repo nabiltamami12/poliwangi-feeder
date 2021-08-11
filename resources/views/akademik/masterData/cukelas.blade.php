@@ -64,7 +64,7 @@
             </div>
             <div class="col-sm-6 col-12">
               <div class="form-group row mb-0">
-                <label>konsentrasi</label>
+                <label>Konsentrasi</label>
                 <input type="text" class="form-control" id="konsentrasi" name="konsentrasi">
               </div>
             </div>
