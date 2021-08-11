@@ -14,13 +14,7 @@ class Jurusan extends Model
     protected $fillable = [
         'nomor',
         'jurusan',
-        'kajur',
-        'sekjur',
-        'alias',
+        'kepala',
         'jurusan_inggris',
-        'jurusan_lengkap',
-        'konsentrasi',
-        'akreditasi',
-        'sk_akreditasi'
     ];
 }

@@ -33,6 +33,7 @@
               <tr>
                 <th scope="col">NO</th>
                 <th scope="col">JURUSAN</th>
+                <th scope="col">Kepala jurusan</th>
                 <th scope="col">AKSI</th>
               </tr>
             </thead>
@@ -52,7 +53,6 @@ $(document).ready(function() {
   dt_url = `${url_api}/jurusan`;
 dt_opt = {
   "columnDefs": [
-
       {
         "aTargets": [0],
         "mData": null,
@@ -69,6 +69,13 @@ dt_opt = {
         }
       },{
         "aTargets": [2],
+        "mData": null,
+        "mRender": function(data, type, full) {
+          res = data['kajur'];
+          return res;
+        }
+      },{
+        "aTargets": [3],
         "mData": null,
         "mRender": function(data, type, full) {
           var id = data['nomor'];

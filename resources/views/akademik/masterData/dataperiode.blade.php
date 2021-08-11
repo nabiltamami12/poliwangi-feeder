@@ -102,13 +102,15 @@ function change_status(id) {
         beforeSend: function(text) {
             // loading func
             console.log("loading")
-        },
-        success: function(res) {
+            loading('show');
+          },
+          success: function(res) {
             if (res.status=="success") {
-                dt.ajax.reload();                
+              dt.ajax.reload();                
             } else {
-                // alert gagal
+              // alert gagal
             }
+            loading('hide');
         }
     });
 }

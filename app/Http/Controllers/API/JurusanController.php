@@ -23,7 +23,8 @@ class JurusanController extends Controller
     
     public function index()
     {
-        $this->data = Jurusan::get();
+        $this->data = Jurusan::select('jurusan.*','pegawai.nama as kajur')
+        ->join('pegawai','pegawai.nomor','=','jurusan.kepala')->get();
         $this->status = "success";
 
        
@@ -124,7 +125,7 @@ class JurusanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $check = Jurusan::where('NOMOR', $id);
+        $check = Jurusan::where('nomor', $id);
         $data = $request->all();
 
         $validate = Validator::make($data, [
@@ -167,7 +168,7 @@ class JurusanController extends Controller
      */
     public function destroy($id)
     {
-        $check = Jurusan::where('NOMOR', $id);
+        $check = Jurusan::where('nomor', $id);
 
         if ($check) {
             $this->status = "success";

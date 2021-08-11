@@ -16,7 +16,7 @@
         <div class="card-header p-0 m-0 border-0 rounded-0">
           <div class="row align-items-center">
             <div class="col">
-              <h2 class="mb-0">{{ ($id==null)?"TAMBAH":"UBAH" }} DATA JURUSAN</h2>
+              <h2 class="mb-0">{{ ($id==null)?"TAMBAH":"UBAH" }} DATA PROGRAM STUDI</h2>
             </div>
           </div>
         </div>
@@ -26,7 +26,15 @@
         <form id="form_cu">
           <input type="hidden" id="nomor" name="nomor">
           <div class="form-row">
-            <div class="col-sm-12 col-12">
+            <div class="col-sm-6 col-12">
+              <div class="form-group row mb-0">
+                <label>Jurusan</label>
+                <select class="form-control" id="jurusan" name="jurusan">
+
+                </select>
+              </div>
+            </div>
+            <div class="col-sm-6 col-12">
               <div class="form-group row mb-0">
                 <label>Program</label>
                 <select class="form-control" id="program" name="program" required>
@@ -36,10 +44,14 @@
             </div>
             <div class="col-sm-6 col-12">
               <div class="form-group row mb-0">
-                <label>Jurusan</label>
-                <select class="form-control" id="jurusan" name="jurusan" required>
-
-                </select>
+                <label>Program Studi</label>
+                <input type="text" class="form-control" id="program_studi" name="program_studi" >
+              </div>
+            </div>
+            <div class="col-sm-6 col-12">
+              <div class="form-group row mb-0">
+                <label>Alias</label>
+                <input type="text" class="form-control" id="alias" name="alias" >
               </div>
             </div>
             <div class="col-sm-6 col-12">
@@ -54,26 +66,6 @@
               <div class="form-group row mb-0">
                 <label>Kode EPSBED</label>
                 <input type="text" class="form-control" id="kode_epsbed" name="kode_epsbed" >
-              </div>
-            </div>
-            <div class="col-sm-6 col-12">
-              <div class="form-group row mb-0">
-                <label>Departemen</label>
-                <select class="form-control" id="departemen" name="departemen">
-
-                </select>
-              </div>
-            </div>
-            <div class="col-sm-6 col-12">
-              <div class="form-group row mb-0">
-                <label>Gelar</label>
-                <input type="text" class="form-control" id="gelar" name="gelar" >
-              </div>
-            </div>
-            <div class="col-sm-6 col-12">
-              <div class="form-group row mb-0">
-                <label>Gelar Inggris</label>
-                <input type="text" class="form-control" id="gelar_inggris" name="gelar_inggris" >
               </div>
             </div>
           </div>
@@ -109,6 +101,7 @@ $(document).ready(function() {
             beforeSend: function(text) {
                 // loading func
                 console.log("loading")
+                loading('show')
             },
             success: function(res) {
                 if (res.status=="success") {
@@ -116,6 +109,7 @@ $(document).ready(function() {
                 } else {
                     // alert gagal
                 }
+                loading('hide')
             }
         });
     });
@@ -142,12 +136,6 @@ async function getData(id) {
     })
     $('#kepala').append(optDosen)
 
-    var optDepartemen = `<option value=""> - </option>`;
-    $.each(dataGlobal['departemen'],function (key,row) {
-        optDepartemen += `<option value="${row.nomor}">${row.departemen}</option>`
-    })
-    $('#departemen').append(optDepartemen)
-
     if (id!="") {
         $.ajax({
             url: url_api+"/prodi/"+id,
@@ -157,6 +145,7 @@ async function getData(id) {
             beforeSend: function(text) {
                     // loading func
                     console.log("loading")
+                    loading('show')
             },
             success: function(res) {
                 if (res.status=="success") {
@@ -167,6 +156,7 @@ async function getData(id) {
                 } else {
                     // alert gagal
                 }
+                loading('hide')
             }
         });
     }

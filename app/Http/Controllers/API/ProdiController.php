@@ -26,12 +26,12 @@ class ProdiController extends Controller
             "program_studi.*",
             "program.program as nama_program",
             "jurusan.jurusan as nama_jurusan",
-            "departemen.departemen as nama_departemen",
+            "pegawai.nama as kaprodi"
         )
 
-            ->join("program", "program_studi.program", "=", "program.NOMOR")
-            ->join("jurusan", "program_studi.jurusan", "=", "jurusan.NOMOR")
-            ->join("departemen", "program_studi.departemen", "=", "departemen.NOMOR")
+            ->join("program", "program_studi.program", "=", "program.nomor")
+            ->join("jurusan", "program_studi.jurusan", "=", "jurusan.nomor")
+            ->join("pegawai", "program_studi.kepala", "=", "pegawai.nomor",'LEFT')
             ->get();
        
         return response()->json([
@@ -68,7 +68,6 @@ class ProdiController extends Controller
             // 'jurusan' => 'required',
             // 'kepala' => 'required',
             // 'kode_epsbed' => 'required',
-            // 'departemen' => 'required',
             // 'gelar' => 'required',
             // 'gelar_inggr' => 'required'
         ]);
@@ -108,15 +107,13 @@ class ProdiController extends Controller
             "program_studi.*",
             "program.program as nama_program",
             "jurusan.jurusan as nama_jurusan",
-            "departemen.departemen as nama_departemen",
 
 
         )
 
-            ->join("program", "program_studi.program", "=", "program.NOMOR")
-            ->join("jurusan", "program_studi.jurusan", "=", "jurusan.NOMOR")
-            ->join("departemen", "program_studi.departemen", "=", "departemen.NOMOR")
-            ->where('program_studi.NOMOR', $id)
+            ->join("program", "program_studi.program", "=", "program.nomor")
+            ->join("jurusan", "program_studi.jurusan", "=", "jurusan.nomor")
+            ->where('program_studi.nomor', $id)
             ->get();
             return response()->json([
                 "status" => 'success',
@@ -145,7 +142,7 @@ class ProdiController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $check = Prodi::where('NOMOR', $id);
+        $check = Prodi::where('nomor', $id);
         $data = $request->all();
 
         if(!$check){
@@ -173,7 +170,7 @@ class ProdiController extends Controller
      */
     public function destroy($id)
     {
-        $check = Prodi::where('NOMOR', $id);
+        $check = Prodi::where('nomor', $id);
 
         if ($check) {
             $this->status = "success";

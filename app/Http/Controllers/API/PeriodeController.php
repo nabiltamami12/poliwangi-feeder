@@ -110,7 +110,7 @@ class PeriodeController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $periode = Periode::where('NOMOR', $id);
+        $periode = Periode::where('nomor', $id);
         $data = $request->all();
 
         $validate = Validator::make($data, [
@@ -137,7 +137,7 @@ class PeriodeController extends Controller
 
     public function change_status($id)
     {
-        $periode = DB::table('PERIODE')->update(['status'=>0]);
+        $periode = DB::table('periode')->update(['status'=>0]);
         $periode = Periode::where('nomor',$id)->update(['status'=>1]);
 
         return response()->json([

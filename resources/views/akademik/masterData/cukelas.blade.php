@@ -8,7 +8,7 @@
 </header>
 
 <!-- Page content -->
-<section class="page-content page-content__akademik container-fluid" id="akademik_datajurusan">
+<section class="page-content page-content__akademik container-fluid" id="akademik_datakelas">
   <div class="row">
     <div class="col-xl-12">
       <div class="card padding--small">
@@ -16,7 +16,7 @@
         <div class="card-header p-0 m-0 border-0 rounded-0">
           <div class="row align-items-center">
             <div class="col">
-              <h2 class="mb-0">{{ ($id==null)?"TAMBAH":"UBAH" }} DATA JURUSAN</h2>
+              <h2 class="mb-0">{{ ($id==null)?"TAMBAH":"UBAH" }} DATA KELAS</h2>
             </div>
           </div>
         </div>
@@ -26,16 +26,10 @@
         <form id="form_cu">
           <input type="hidden" id="nomor" name="nomor">
           <div class="form-row">
-            <div class="col-sm-12 col-12">
-              <div class="form-group row mb-0">
-                <label>Program</label>
-                <select class="form-control" id="program" name="program"></select>
-              </div>
-            </div>
             <div class="col-sm-6 col-12">
               <div class="form-group row mb-0">
-                <label>Jurusan</label>
-                <select class="form-control" id="jurusan" name="jurusan"></select>
+                <label>Program Studi</label>
+                <select class="form-control" id="program_studi" name="program_studi"></select>
               </div>
             </div>
             <div class="col-sm-6 col-12">
@@ -94,16 +88,17 @@ $(document).ready(function() {
     var id = "{{$id}}";
     getData(id);        
 
-    $('#program').on('change',function (e) {
-      var program = $(this).val()
-      var jurusan = $.grep(dataGlobal['prodi'], function(e){ return e.program == program; });
-      console.log(jurusan)
-      $('#jurusan').html('')
-      var optJurusan = `<option value=""> - </option>`;
-      $.each(jurusan,function (key,row) {
-        optJurusan += `<option value="${row.jurusan}" data-alias="${row.alias}">${row.nama_jurusan}</option>`
-      })
-      $('#jurusan').append(optJurusan);
+    $('#program_studi').on('change',function (e) {
+        var program_studi = $(this).val()
+        var kelas = $.grep(dataGlobal['kelas'], function(e){ return e.program_studi == program_studi; });
+        console.log(program_studi)
+        console.log(kelas)
+        $('#kelas').html('')
+        var optKelas = `<option value=""> - </option>`;
+        $.each(kelas,function (key,row) {
+        optKelas += `<option value="${row.nomor}">${row.kode}</option>`
+        })
+        $('#kelas').append(optKelas); 
     })
      
 
@@ -124,6 +119,7 @@ $(document).ready(function() {
             beforeSend: function(text) {
                 // loading func
                 console.log("loading")
+                loading('show')
             },
             success: function(res) {
                 if (res.status=="success") {
@@ -131,6 +127,7 @@ $(document).ready(function() {
                 } else {
                     // alert gagal
                 }
+                loading('hide')
             }
         });
     });
@@ -149,17 +146,19 @@ $(document).ready(function() {
 async function getData(id) {
     
 
-    var optProgram = `<option value=""> - </option>`;
-    $.each(dataGlobal['program'],function (key,row) {
-        optProgram += `<option value="${row.nomor}">${row.program}</option>`
+    var optProdi = `<option value=""> - </option>`;
+    $.each(dataGlobal['prodi'],function (key,row) {
+        optProdi += `<option value="${row.nomor}">${row.nama_program} ${row.program_studi}</option>`
     })
-    $('#program').append(optProgram)
+    $('#program_studi').append(optProdi)
 
-    // var optJurusan = `<option value=""> - </option>`;
-    // $.each(dataGlobal['jurusan'],function (key,row) {
-    //     optJurusan += `<option value="${row.nomor}" data-alias="${row.alias}">${row.jurusan}</option>`
-    // })
-    // $('#jurusan').append(optJurusan)
+    var kelas = $.grep(dataGlobal['kelas'], function(e){ return e.program_studi == $('#program_studi').val(); });
+    $('#kelas').html('')
+    var optKelas = `<option value=""> - </option>`;
+    $.each(kelas,function (key,row) {
+      optKelas += `<option value="${row.nomor}">${row.kode}</option>`
+    })
+    $('#kelas').append(optKelas); 
 
     var optDosen = `<option value=""> - </option>`;
     $.each(dataGlobal['dosen'],function (key,row) {
@@ -176,6 +175,7 @@ async function getData(id) {
             beforeSend: function(text) {
                     // loading func
                     console.log("loading")
+                    loading('show')
             },
             success: function(res) {
                 if (res.status=="success") {
@@ -183,11 +183,24 @@ async function getData(id) {
                     $.each(data,function (key,row) {
                         $('#'+key).val(row);
                     })                
+                    var jurusan = $.grep(dataGlobal['prodi'], function(e){ return e.program == data.program; });
+                    $('#jurusan').html('')              
+                    var optJurusan = `<option value=""> - </option>`;
+                    $.each(dataGlobal['jurusan'],function (key,row) {
+                      if (row.nomor == data.jurusan) {
+                        var select = 'selected';
+                      } else {
+                        var select = '';
+                      }
+                        optJurusan += `<option ${select} value="${row.nomor}" data-alias="${row.alias}">${row.jurusan}</option>`
+                    })
+                    $('#jurusan').append(optJurusan)
                     $('#jurusan').val(data.jurusan).change();
                     $('#wali_kelas').val(data.id_wali_kelas).change();
                 } else {
                     // alert gagal
                 }
+                loading('hide')
             }
         });
     }

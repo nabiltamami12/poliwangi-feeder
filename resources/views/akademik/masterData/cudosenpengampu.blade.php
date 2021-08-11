@@ -58,10 +58,10 @@ $(document).ready(function() {
   getData(id);
 });
 
-function searchMatkul(id_select_matkul,program,jurusan,id_pengampu,id_matkul,status) {
+function searchMatkul(id_select_matkul,program_studi,id_pengampu,id_matkul,status) {
   console.log("search func")
-  var matkul = $.grep(dataGlobal['matakuliah'], function(e){ return e.program == program; });
-  var matkul = $.grep(dataGlobal['matakuliah'], function(e){ return e.jurusan == jurusan; });
+  var matkul = $.grep(dataGlobal['matakuliah'], function(e){ return e.program_studi == program_studi; });
+  $('#'+id_select_matkul).html('')
   var optMatkul = `<option value=""> - </option>`;
   $.each(matkul,function (key,row) {
     if (row.nomor==id_matkul) {
@@ -141,12 +141,11 @@ function setMatkul(id_select_prodi,id_select_matkul,row,status) {
   })
   $('#'+id_select_prodi).append(optProdi);
   $('#'+id_select_prodi).on('change',function (e) {
-    var program = $('#'+id_select_prodi+' :selected').data('program');
-    var jurusan = $('#'+id_select_prodi+' :selected').data('jurusan');
+    var program_studi = $(this).val();
     var id_pengampu = $(this).data('id');
     var id_matkul = $(this).data('idmatkul');
 
-    searchMatkul(id_select_matkul,program,jurusan,id_pengampu,id_matkul,status);
+    searchMatkul(id_select_matkul,program_studi,id_pengampu,id_matkul,status);
   })
   $('#'+id_select_matkul).on('change',function (e) {
     var id_pengampu = $(this).data('id');
@@ -168,27 +167,35 @@ function setMatkul(id_select_prodi,id_select_matkul,row,status) {
       data: arr,
       beforeSend: function(text) {
         // loading func
+        loading("show");
         console.log("loading")
       },
       success: function(res) {
         if (res.status=="success") {
-          var id_select_prodi = 'prodi_'+id_pengampu;
-          var id_select_matkul = 'matkul_'+id_pengampu;
+          if (type=="post") {
+            var id_select_prodi = 'prodi_'+res.data[0].nomor;
+            var id_select_matkul = 'matkul_'+res.data[0].nomor;
+            setMatkul(id_select_prodi,id_select_matkul,res.data[0],'update')
+            searchMatkul(id_select_matkul,res.data[0].program_studi,res.data[0].nomor,res.data[0].matakuliah)
+          }else{
+            var id_select_prodi = 'prodi_'+id_pengampu;
+            var id_select_matkul = 'matkul_'+id_pengampu;
+            $('#prodi_'+id_pengampu).val(res.data[0].program_studi)
+            $('#matkul_'+id_pengampu).val(res.data[0].matakuliah)
+          }
 
-          setMatkul(id_select_prodi,id_select_matkul,res.data[0],'update')
-          searchMatkul(id_select_matkul,res.data[0].program,res.data[0].jurusan,res.data[0].nomor,res.data[0].matakuliah)
           $('#prodi').val('');
           $('#matkul').html('')
         } else {
           // alert gagal
         }
+        loading("hide");
       }
     });
   })
 }
 
 function fun_hapus(id) {
-  console.log(id)
   $.ajax({
       url: `${url_api}/dosenpengampu/${id}`,
       type: 'delete',
@@ -196,6 +203,7 @@ function fun_hapus(id) {
       data: {},
       beforeSend: function(text) {
           // loading func
+          loading("show");
           console.log("loading")
       },
       success: function(res) {
@@ -204,6 +212,7 @@ function fun_hapus(id) {
           } else {
               // alert gagal
           }
+          loading("hide");
       }
   });
 }
@@ -218,6 +227,7 @@ async function getData(id) {
             beforeSend: function(text) {
                     // loading func
                     console.log("loading")
+                    loading("show");
             },
             success: function(res) {
                 if (res.status=="success") {
@@ -233,10 +243,10 @@ async function getData(id) {
                         var id_select_matkul = 'matkul_'+id_pengampu;
                       }
                       setMatkul(id_select_prodi,id_select_matkul,row,'update')
-                      searchMatkul(id_select_matkul,row.program,row.jurusan,id_pengampu,row.matakuliah)
-                      console.log(id_pengampu)
+                      searchMatkul(id_select_matkul,row.program_studi,id_pengampu,row.matakuliah)
                     })
                     setMatkul("prodi","matkul",null,'tambah')
+                    loading("hide");
                 } else {
                     // alert gagal
                 }

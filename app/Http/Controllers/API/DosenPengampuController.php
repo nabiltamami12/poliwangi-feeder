@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\DosenPengampu;
+use App\Models\Dosen;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Validator;
 
@@ -79,9 +80,8 @@ class DosenPengampuController extends Controller
         $data = DosenPengampu::select(
             'dosen_pengampu.*',
             'pegawai.nama',
-            'matakuliah.jurusan',
-            'matakuliah.program',
-            DB::raw('(select nomor from program_studi ps where ps.program = matakuliah.program and ps.jurusan = matakuliah.jurusan) as program_studi')
+            'matakuliah.program_studi',
+            DB::raw('(select nomor from program_studi ps where ps.nomor = matakuliah.program_studi) as program_studi')
         )
         ->join("pegawai", "dosen_pengampu.dosen", "=", "pegawai.nomor",'right')
         ->join("matakuliah", "dosen_pengampu.matakuliah", "=", "matakuliah.nomor",'right')
@@ -106,19 +106,20 @@ class DosenPengampuController extends Controller
         DB::statement("SET SQL_MODE=''");
         $data = DosenPengampu::select(
             'dosen_pengampu.*',
-            'pegawai.nama',
-            'matakuliah.jurusan',
-            'matakuliah.program',
-            DB::raw('(select nomor from program_studi ps where ps.program = matakuliah.program and ps.jurusan = matakuliah.jurusan) as program_studi')
+            'matakuliah.program_studi',
+            DB::raw('(select nomor from program_studi ps where ps.nomor = matakuliah.program_studi) as program_studi')
         )
         ->join("pegawai", "dosen_pengampu.dosen", "=", "pegawai.nomor",'right')
         ->join("matakuliah", "dosen_pengampu.matakuliah", "=", "matakuliah.nomor",'right')
         ->where("pegawai.staff", "=", 4)
         ->where("pegawai.nomor",$id)
         ->get();
+        $dosen = Dosen::select('nama')
+        ->where('nomor',$id)
+        ->get();
 
         $this->data = [
-            'nama' => $data[0]['nama'],
+            'nama' => $dosen[0]['nama'],
             'matkul' => $data
         ];
 
@@ -172,9 +173,21 @@ class DosenPengampuController extends Controller
             $this->data = $data;
             $this->status = "success";
         }
+
+        $data = DosenPengampu::select(
+            'dosen_pengampu.*',
+            'pegawai.nama',
+            'matakuliah.program_studi',
+            DB::raw('(select nomor from program_studi ps where ps.nomor = matakuliah.program_studi) as program_studi')
+        )
+        ->join("pegawai", "dosen_pengampu.dosen", "=", "pegawai.nomor",'right')
+        ->join("matakuliah", "dosen_pengampu.matakuliah", "=", "matakuliah.nomor",'right')
+        ->where("pegawai.staff", "=", 4)
+        ->where("dosen_pengampu.nomor",$id)
+        ->get();
         return response()->json([
             'status' => $this->status,
-            'data' => $this->data,
+            'data' => $data,
             'error' => $this->err
         ]);
     }

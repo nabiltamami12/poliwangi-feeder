@@ -16,7 +16,7 @@
         <div class="card-header p-0 m-0 border-0 rounded-0">
           <div class="row align-items-center">
             <div class="col">
-              <h2 class="mb-0">Data Jurusan</h2>
+              <h2 class="mb-0">Data Jam Kuliah</h2>
             </div>
             <div class="col text-right">
               <button type="button" onclick="add_btn()" class="btn--blue add-btn"><img src="/images/add-icon--white.png" alt="">

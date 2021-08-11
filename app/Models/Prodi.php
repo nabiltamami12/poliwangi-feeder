@@ -13,11 +13,10 @@ class Prodi extends Model
     protected $fillable = [
         'nomor',
         'program',
-        'jurusan',
+        'program_studi',
         'kepala',
         'kode_epsbed',
-        'departemen',
-        'gelar',
-        'gelar_inggris'
+        'jurusan',
+        'alias'
     ];
 }
