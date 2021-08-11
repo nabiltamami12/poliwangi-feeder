@@ -26,7 +26,6 @@ Route::prefix('v1')->group(function () {
     // Program
     Route::get('/program', [Ctr\ProgramController::class, 'index']);
     // Program
-    Route::get('/departemen', [Ctr\DepartemenController::class, 'index']);
     // Matakuliah jenis
     Route::get('/matkul_jenis', [Ctr\MatakuliahJenisController::class, 'index']);
     // Range Nilai

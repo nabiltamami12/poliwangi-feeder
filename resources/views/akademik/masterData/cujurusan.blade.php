@@ -35,49 +35,14 @@
             <div class="col-sm-6 col-12">
               <div class="form-group row mb-0">
                 <label for="kajur">Ketua Jurusan</label>
-                <input type="text" class="form-control" id="kajur" name="kajur">
+                <select class="form-control" id="kepala" name="kepala" >
+                </select>
               </div>
             </div>
             <div class="col-sm-6 col-12">
               <div class="form-group row mb-0">
-                <label for="sekjur">Sekretaris Jurusan</label>
-                <input type="text" class="form-control" id="sekjur" name="sekjur">
-              </div>
-            </div>
-            <div class="col-sm-6 col-12">
-              <div class="form-group row mb-0">
-                <label for="alias">Alias</label>
-                <input type="text" class="form-control" id="alias" name="alias">
-              </div>
-            </div>
-            <div class="col-sm-6 col-12">
-              <div class="form-group row mb-0">
-                <label for="jurusan_inggris">Jurusan Inggris</label>
-                <input type="text" class="form-control" id="jurusan_inggris" name="jurusan_inggris">
-              </div>
-            </div>
-            <div class="col-sm-6 col-12">
-              <div class="form-group row mb-0">
-                <label for="jurusan_lengkap">Jurusan Lengkap</label>
-                <input type="text" class="form-control" id="jurusan_lengkap" name="jurusan_lengkap">
-              </div>
-            </div>
-            <div class="col-sm-6 col-12">
-              <div class="form-group row mb-0">
-                <label for="konsentrasi">Konsentrasi</label>
-                <input type="text" class="form-control" id="konsentrasi" name="konsentrasi">
-              </div>
-            </div>
-            <div class="col-sm-6 col-12">
-              <div class="form-group row mb-0">
-                <label for="akreditasi">Akreditasi</label>
-                <input type="text" class="form-control" id="akreditasi" name="akreditasi">
-              </div>
-            </div>
-            <div class="col-sm-6 col-12">
-              <div class="form-group row mb-0">
-                <label for="sk_akreditasi">SK Akreditasi</label>
-                <input type="text" class="form-control" id="sk_akreditasi" name="sk_akreditasi">
+                <label for="sekjur">Jurusan Inggris</label>
+                <input type="text" class="form-control" id="jurusan_inggris" name="jurusan_inggris" >
               </div>
             </div>
           </div>
@@ -93,6 +58,12 @@
 <script>
   $(document).ready(function() {
     var id = "{{$id}}";
+    var optDosen = `<option value=""> - </option>`;
+    $.each(dataGlobal['dosen'],function (key,row) {
+        optDosen += `<option value="${row.nomor}">${row.nama}</option>`
+    })
+    $('#kepala').append(optDosen)
+
     if (id!="") {
         getData(id);        
     }
@@ -114,6 +85,7 @@
             beforeSend: function(text) {
                 // loading func
                 console.log("loading")
+                loading('show')
             },
             success: function(res) {
                 if (res.status=="success") {
@@ -121,12 +93,15 @@
                 } else {
                     // alert gagal
                 }
+                loading('hide')
+
             }
         });
     });
 } );
 
 function getData(id) {
+    
     $.ajax({
         url: url_api+"/jurusan/"+id,
         type: 'get',
@@ -135,6 +110,8 @@ function getData(id) {
         beforeSend: function(text) {
                 // loading func
                 console.log("loading")
+                loading('show')
+
         },
         success: function(res) {
             if (res.status=="success") {
@@ -145,6 +122,8 @@ function getData(id) {
             } else {
                 // alert gagal
             }
+            loading('hide')
+
         }
     });
 }

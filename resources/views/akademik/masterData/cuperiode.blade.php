@@ -71,6 +71,7 @@
             beforeSend: function(text) {
                 // loading func
                 console.log("loading")
+                loading('show')
             },
             success: function(res) {
                 if (res.status=="success") {
@@ -78,6 +79,7 @@
                 } else {
                     // alert gagal
                 }
+                loading('hide')
             }
         });
     });
@@ -92,6 +94,7 @@ function getData(id) {
         beforeSend: function(text) {
                 // loading func
                 console.log("loading")
+                loading('show')
         },
         success: function(res) {
             if (res.status=="success") {
@@ -102,6 +105,7 @@ function getData(id) {
             } else {
                 // alert gagal
             }
+            loading('hide')
         }
     });
 }

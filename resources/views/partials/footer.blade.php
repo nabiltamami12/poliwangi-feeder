@@ -1,30 +1,27 @@
-<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel"
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel"
     aria-hidden="true">
-    <div class="modal-dialog modal-sm" role="document">
-        <div class="modal-content">
-            <input type="hidden" id="id_delete">
-            <input type="hidden" id="endpoint">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content p-0 padding--medium">
+        <input type="hidden" id="id_delete">
+        <input type="hidden" id="endpoint">
 
-            <div class="modal-header">
-                <b>KONFIRMASI HAPUS</b>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div>
-                    Apakah anda yakin menghapus <span id="context_hapus"></span> <b><span id="text_hapus"></span></b> ?
-                </div>
-            </div>
-            <div class="modal-footer">
-                <div>
-                    <button id="btn_modal_hapus" onclick="delete_func()">Hapus</button>
-                </div>
-            </div>
+        <div class="modal-header">
+          <h5 class="modal-title text-warning text-center">Peringatan</h5>
         </div>
+        <div class="modal-body">
+          <p class="text-center">Apakah anda yakin mau menghapus data <span id="context_hapus"></span> :</p>
+          <h2 class="text-center"><span id="text_hapus"></span></h2>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-modal-cancel" data-dismiss="modal">Batal</button>
+          <button type="button" class="btn btn--blue btn-modal-ok" id="btn_modal_hapus" onclick="delete_func()">Hapus data</button>
+        </div>
+      </div>
     </div>
 </div>
+
 <script>
+
     if (localStorage.getItem("globalData") === null) {
         getGlobalData();
     }
@@ -52,6 +49,7 @@
             data: {},
             beforeSend: function(text) {
                 // loading func
+                loading("show");
                 console.log("loading")
             },
             success: function(res) {
@@ -61,8 +59,18 @@
                 } else {
                     // alert gagal
                 }
+                loading("hide");
             }
         });
+    }
+    function loading(status) {
+        if (status=="show") {
+            $(".loaderScreen-wrapper").fadeIn("fast");
+            console.log('show')
+        } else {
+            console.log('hide')
+            $(".loaderScreen-wrapper").fadeOut("slow");
+        }
     }
 
     // AMBIL DATA GLOBAL
@@ -75,6 +83,7 @@
             beforeSend: function(text) {
                     // loading func
                     console.log("loading")
+                    loading("show");
             },
             success: function(res) {
                 if (res.status=="success") {
@@ -82,6 +91,7 @@
                 } else {
                     // alert gagal
                 }
+                loading("hide");
             }
         });
     }

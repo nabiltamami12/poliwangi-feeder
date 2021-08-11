@@ -34,10 +34,10 @@
             <thead class="table-header">
               <tr>
                 <th scope="col">NO</th>
-                <th scope="col">NA</th>
-                <th scope="col">NH</th>
+                <th scope="col">Nilai Angka</th>
+                <th scope="col">Nilai huruf</th>
                 <th scope="col">Akumulasi</th>
-                <th scope="col">NA atas</th>
+                <th scope="col">Nilai angka atas</th>
                 <th scope="col">AKSI</th>
               </tr>
             </thead>
@@ -55,17 +55,9 @@
 <script>
   $(document).ready(function() {
   var nomor = 1;
-dt = $('#datatable').DataTable({
-    "processing": true,
-    "ajax": {
-      url: `${url_api}/rangenilai`,
-      type: 'GET',
-      data: {},
-      headers: {
-        "Authorization": window.localStorage.getItem('token')
-      },
-    },
-    "aoColumnDefs": [
+  dt_url = `${url_api}/rangenilai`;
+dt_opt = {
+  "columnDefs": [
       {
         "aTargets": [0],
         "mData": null,
@@ -113,30 +105,7 @@ dt = $('#datatable').DataTable({
           return res;
         }
       },
-    ],
-    "sDom": 'lrtip',
-    "lengthChange": false,
-    "info": false,
-    "language": {
-      "paginate": {
-        "next": '&gt;',
-        "previous": '&lt;'
-      },
-      "processing": "Loading ..."
-    }
-  })
-  dt.on('order.dt search.dt', function() {
-    dt.column(0, {
-      search: 'applied',
-      order: 'applied'
-    }).nodes().each(function(cell, i) {
-      cell.innerHTML = i + 1;
-    });
-  }).draw();
-
-  $('#searchdata').on('keyup', function() {
-    dt.search(this.value).draw();
-  });
+    ]}
 } );
 </script>
 @endsection

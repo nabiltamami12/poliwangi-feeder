@@ -4,7 +4,6 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Departemen;
 use App\Models\Program;
 use App\Models\MatakuliahJenis;
 use App\Models\Jurusan;
@@ -29,7 +28,6 @@ class GlobalController extends Controller
     
     public function index()
     {
-        $departemen = Departemen::get();
         $jurusan = Jurusan::get();
         $program = Program::get();
         $matkul_jenis = MatakuliahJenis::get();
@@ -48,36 +46,36 @@ class GlobalController extends Controller
         ->get();
         $kelas = Kelas::select(
             'kelas.*',
-            'jurusan.jurusan as nama_jurusan',
-            'program.program as nama_program',
+            'pegawai.nama as wali_kelas',
             'pegawai.nomor as id_wali_kelas',
             'pegawai.nama as wali_kelas',
+            'program_studi.program_studi as nama_prodi',
+            'program.program as nama_program',
         )
-        ->join('jurusan', 'jurusan.nomor', '=', 'kelas.jurusan')
-        ->join('program', 'program.nomor', '=', 'kelas.program')
+        ->join('program_studi', 'program_studi.nomor', '=', 'kelas.program_studi')
+        ->join('program', 'program.nomor', '=', 'program_studi.program')
+        ->join('jurusan', 'jurusan.nomor', '=', 'program_studi.jurusan')
         ->join('pegawai', 'pegawai.nomor', '=', 'kelas.wali_kelas','left')
         ->get();
         $prodi = Prodi::select(
             "program_studi.*",
             "program.program as nama_program",
             "jurusan.jurusan as nama_jurusan",
-            "departemen.departemen as nama_departemen",
+            "program_studi.alias",
         )
         ->join("program", "program_studi.program", "=", "program.NOMOR")
         ->join("jurusan", "program_studi.jurusan", "=", "jurusan.NOMOR")
-        ->join("departemen", "program_studi.departemen", "=", "departemen.NOMOR")
         ->get();
 
         $matakuliah = Matakuliah::select(
             'matakuliah.*',
             'kelas.kode as kode_kelas',
-            'jurusan.jurusan as nama_jurusan',
-            'program.program as nama_program',
+            'program_studi.program_studi as nama_program',
             'matakuliah_jenis.matakuliah_jenis as nama_mk_jenis',
         )
         ->join('kelas', 'kelas.nomor', '=', 'matakuliah.kelas')
-        ->join('jurusan', 'jurusan.nomor', '=', 'matakuliah.jurusan')
-        ->join('program', 'program.nomor', '=', 'matakuliah.program')
+        ->join('program_studi', 'program_studi.nomor', '=', 'matakuliah.program_studi')
+        ->join('jurusan', 'jurusan.nomor', '=', 'program_studi.jurusan')
         ->join('matakuliah_jenis', 'matakuliah_jenis.nomor', '=', 'matakuliah.matakuliah_jenis')
         ->get();
         
@@ -86,7 +84,6 @@ class GlobalController extends Controller
         $this->data = [
             'program'=>$program,
             'jurusan'=>$jurusan,
-            'departemen'=>$departemen,
             'dosen'=>$dosen,
             'kelas'=>$kelas,
             'mk_jenis'=>$matkul_jenis,

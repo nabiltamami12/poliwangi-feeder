@@ -481,6 +481,7 @@ select {
   position: absolute;
   top: 0;
   left: 0;
+  opacity: 0.6;
   background-color: #242f3f;
   display: flex;
   justify-content: center;
@@ -548,8 +549,8 @@ ul {
   transition: max-height 0.5s ease-out;
   padding-left: 35px;
 }
-.sidenav#sidenav-main .navbar-nav .nav-item.showsubmenu .nav-item-dropdown-content {
-  max-height: 500px;
+.sidenav#sidenav-main .sidenav-menu .navbar-nav .nav-item.showsubmenu .nav-item-dropdown-content {
+  max-height: 600px;
   transition: max-height 0.5s ease-in;
 }
 .sidenav#sidenav-main .navbar-nav .nav-item.showsubmenu .nav-link .arrow {

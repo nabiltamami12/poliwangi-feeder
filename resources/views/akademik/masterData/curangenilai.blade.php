@@ -16,7 +16,7 @@
         <div class="card-header p-0 m-0 border-0 ">
           <div class="row align-items-center">
             <div class="col">
-              <h2 class="mb-0">{{ ($id==null)?"TAMBAH":"UBAH" }} DATA JURUSAN</h2>
+              <h2 class="mb-0">{{ ($id==null)?"TAMBAH":"UBAH" }} DATA RANGE NILAI</h2>
             </div>
           </div>
         </div>
@@ -85,6 +85,7 @@
             beforeSend: function(text) {
                 // loading func
                 console.log("loading")
+                loading('show')
             },
             success: function(res) {
                 if (res.status=="success") {
@@ -92,6 +93,7 @@
                 } else {
                     // alert gagal
                 }
+                loading('hide')
             }
         });
     });
@@ -106,6 +108,7 @@ function getData(id) {
         beforeSend: function(text) {
                 // loading func
                 console.log("loading")
+                loading('show')
         },
         success: function(res) {
             if (res.status=="success") {
@@ -116,6 +119,7 @@ function getData(id) {
             } else {
                 // alert gagal
             }
+            loading('hide')
         }
     });
 }

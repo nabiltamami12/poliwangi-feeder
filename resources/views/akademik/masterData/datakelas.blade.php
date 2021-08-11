@@ -65,7 +65,7 @@
         "aTargets": [1],
         "mData": null,
         "mRender": function(data, type, full) {
-          res = data['nama_program']+" "+data['nama_jurusan'];
+          res = data['nama_program']+" "+data['nama_prodi'];
           return res;
         }
       },{

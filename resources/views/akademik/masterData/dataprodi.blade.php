@@ -29,7 +29,8 @@
               <tr>
                 <th scope="col">NO</th>
                 <th scope="col">PROGRAM STUDI</th>
-                <th scope="col">GELAR</th>
+                <th scope="col">ALIAS</th>
+                <th scope="col">KEPALA PRODI</th>
                 <th scope="col">AKSI</th>
               </tr>
             </thead>
@@ -58,24 +59,31 @@ dt_opt = {
         "aTargets": [1],
         "mData": null,
         "mRender": function(data, type, full) {
-          res = data['nama_program']+" "+data['nama_jurusan'];
+          res = data['nama_program']+" "+data['program_studi'];
           return res;
         }
       },{
         "aTargets": [2],
         "mData": null,
         "mRender": function(data, type, full) {
-          res = data['gelar'];
+          res = data['alias'];
           return res;
         }
       },{
         "aTargets": [3],
         "mData": null,
         "mRender": function(data, type, full) {
+          res = data['kaprodi'];
+          return res;
+        }
+      },{
+        "aTargets": [4],
+        "mData": null,
+        "mRender": function(data, type, full) {
           var id = data['nomor'];
-          var text_hapus = data['nama_program']+" "+data['nama_jurusan'];
-          var btn_update = `<span class="iconify edit-icon" onclick='update_btn(${id})' data-icon="bx:bx-edit-alt" ></span>` 
-          var btn_delete = `<span class="iconify delete-icon" data-icon="bx:bx-trash"  onclick='delete_btn(${id},"prodi","program studi","${text_hapus}")'></span>`; 
+          var text_hapus = data['nama_program']+" "+data['program_studi'];
+          var btn_update = `<span class="iconify edit-icon" onclick='update_btn(${id})' data-icon="bx:bx-edit-alt" data-inline="true"></span>` 
+          var btn_delete = `<span class="iconify delete-icon" data-icon="bx:bx-trash" data-inline="true" onclick='delete_btn(${id},"prodi","program studi","${text_hapus}")'></span>`; 
           res = btn_update+" "+btn_delete;
           return res;
         }

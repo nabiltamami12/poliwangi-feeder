@@ -98,6 +98,7 @@ $(document).ready(function () {
             beforeSend: function(text) {
                     // loading func
                     console.log("loading")
+                    loading('show')
             },
             success: function(res) {
                 change_date(tanggal,libur)
@@ -116,6 +117,7 @@ $(document).ready(function () {
                 $('.fc-day-top[data-date="'+tanggal+'"]').attr('data-status',libur);
                 $('.fc-day-top[data-date="'+tanggal+'"]').attr('data-keterangan',keterangan);
 
+                loading('hide')
             }
         })
     })
@@ -137,6 +139,7 @@ async function getData(){
         beforeSend: function(text) {
                 // loading func
                 console.log("loading")
+                loading('show')
         },
         success: function(res) {
             $.each(res.data,function (key,row) {
@@ -154,6 +157,7 @@ async function getData(){
                 change_date(row.tanggal.split(" ")[0],row.libur)
                 $('.fc-day-top[data-date="'+row.tanggal.split(" ")[0]+'"]').attr('data-status',row.libur);
                 $('.fc-day-top[data-date="'+row.tanggal.split(" ")[0]+'"]').attr('data-keterangan',row.keterangan);
+                loading('hide')
             })
         }
     })

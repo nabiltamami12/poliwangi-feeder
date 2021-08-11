@@ -22,21 +22,25 @@
               <button type="button" onclick="add_btn()" class="btn btn-primary "><img src="/images/add-icon--white.png" alt="">Tambah</button>
             </div>
           </div>
-          
-          <hr class="mt my-4">
-          
-          <div class="table-responsive">
-            <table id="datatable" class="table align-items-center table-flush table-borderless table-hover">
-              <thead class="table-header">
-                <tr>
-                  <th scope="col">NO</th>
-                  <th scope="col">JURUSAN</th>
-                  <th scope="col">AKSI</th>
-                </tr>
-              </thead>
-              <tbody></tbody>
-            </table>
-          </div>
+
+          <hr class="mt">
+        </div>
+
+        <div class="table-responsive">
+          <table id="datatable" class="table align-items-center table-flush table-borderless table-hover">
+            <thead class="table-header">
+              <tr>
+                <th scope="col">NO</th>
+                <th scope="col">JURUSAN</th>
+                <th scope="col">Kepala jurusan</th>
+                <th scope="col">AKSI</th>
+              </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+          </table>
+
         </div>
       </div>
     </div>
@@ -48,7 +52,6 @@
   dt_url = `${url_api}/jurusan`;
 dt_opt = {
   "columnDefs": [
-
       {
         "aTargets": [0],
         "mData": null,
@@ -65,6 +68,13 @@ dt_opt = {
         }
       },{
         "aTargets": [2],
+        "mData": null,
+        "mRender": function(data, type, full) {
+          res = data['kajur'];
+          return res;
+        }
+      },{
+        "aTargets": [3],
         "mData": null,
         "mRender": function(data, type, full) {
           var id = data['nomor'];

@@ -48,17 +48,9 @@
 <script>
   $(document).ready(function() {
   var nomor = 1;
-dt = $('#datatable').DataTable({
-    "processing": true,
-    "ajax": {
-      url: `${url_api}/ruangan`,
-      type: 'GET',
-      data: {},
-      headers: {
-        "Authorization": window.localStorage.getItem('token')
-      },
-    },
-    "aoColumnDefs": [
+  dt_url = `${url_api}/ruangan`;
+dt_opt = {
+  "columnDefs": [
       {
         "aTargets": [0],
         "mData": null,
@@ -107,30 +99,7 @@ dt = $('#datatable').DataTable({
 
         }
       },
-    ],
-    "sDom": 'lrtip',
-    "lengthChange": false,
-    "info": false,
-    "language": {
-      "paginate": {
-        "next": '&gt;',
-        "previous": '&lt;'
-      },
-      "processing": "Loading ..."
-    }
-  })
-  dt.on('order.dt search.dt', function() {
-    dt.column(0, {
-      search: 'applied',
-      order: 'applied'
-    }).nodes().each(function(cell, i) {
-      cell.innerHTML = i + 1;
-    });
-  }).draw();
-
-  $('#searchdata').on('keyup', function() {
-    dt.search(this.value).draw();
-  });
+    ]}
 } );
 </script>
 @endsection

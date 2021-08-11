@@ -20,13 +20,11 @@ class MatakuliahController extends Controller
         $matakuliah = Matakuliah::select(
                             'matakuliah.*',
                             'kelas.kode as kode_kelas',
-                            'jurusan.jurusan as nama_jurusan',
-                            'program.program as nama_program',
+                            'program_studi.program_studi as nama_program',
                             'matakuliah_jenis.matakuliah_jenis as nama_mk_jenis',
                         )
                         ->join('kelas', 'kelas.nomor', '=', 'matakuliah.kelas')
-                        ->join('jurusan', 'jurusan.nomor', '=', 'matakuliah.jurusan')
-                        ->join('program', 'program.nomor', '=', 'matakuliah.program')
+                        ->join('program_studi', 'program_studi.nomor', '=', 'matakuliah.program_studi')
                         ->join('matakuliah_jenis', 'matakuliah_jenis.nomor', '=', 'matakuliah.matakuliah_jenis')
                         ->get();
         return response()->json([

@@ -30,28 +30,19 @@
         <hr class="my-4 mt">
         <form class="form-select rounded-0">
           <div class="form-row">
-            <div class="col-md-6 form-group">
+            <div class="col-md-4 form-group">
               <label for="jenjang-pendidikan">Jenjang Pendidikan</label>
-              <select class="form-control" id="program" name="program">
-
+              <select class="form-control" id="program_studi" name="program_studi">
+                
               </select>
             </div>
-            <div class="col-md-6 form-group">
-              <label for="program-studi">Program Studi</label>
-              <select class="form-control" id="jurusan" name="jurusan">
-
-              </select>
-            </div>
-          </div>
-          <div class="form-row">
-            
-            <div class="col-md-6 form-group mt-3 mt-md-0">
+            <div class="col-md-4 form-group">
               <label for="kelas">Kelas</label>
               <select class="form-control" id="kelas" name="kelas">
-
+                
               </select>
             </div>
-            <div class="col-md-6 form-group mt-3 mt-md-0">
+            <div class="col-md-4 form-group mt-3 mt-md-0">
               <label for="status-mahasiswa">Status Mahasiswa</label>
               <select class="form-control" id="status" name="status">
                 
@@ -87,52 +78,36 @@
   $('#searchdata').on('keyup', function() {
     dt.search(this.value).draw();
   });
-  $('#program').on('change',function (e) {
-    var program = $(this).val()
-    var jurusan = $.grep(dataGlobal['prodi'], function(e){ return e.program == program; });
-    
-      $('#jurusan').html('')
-    var optJurusan = `<option value=""> - </option>`;
-    $.each(jurusan,function (key,row) {
-      optJurusan += `<option value="${row.jurusan}">${row.nama_jurusan}</option>`
-    })
-    $('#jurusan').append(optJurusan);
-  })
-  $('#jurusan').on('change',function (e) {
-    var jurusan = $(this).val()
-    var kelas = $.grep(dataGlobal['kelas'], function(e){ return e.jurusan == jurusan; });
-    var kelas = $.grep(dataGlobal['kelas'], function(e){ return e.jurusan == jurusan; });
-    
-      $('#kelas').html('')
+  $('#program_studi').on('change',function (e) {
+    var program_studi = $(this).val()
+    var kelas = $.grep(dataGlobal['kelas'], function(e){ return e.program_studi == program_studi; });
+    $('#kelas').html('')
     var optKelas = `<option value=""> - </option>`;
     $.each(kelas,function (key,row) {
       optKelas += `<option value="${row.nomor}">${row.kode}</option>`
     })
-    $('#kelas').append(optKelas);
-  
+    $('#kelas').append(optKelas); 
   })
   $('select').on('change',function (e) {
-    var url = `${url_api}/mahasiswa?program=${$('#program').val()}&jurusan=${$('#jurusan').val()}&status=${$('#status').val()}&kelas=${$('#kelas').val()}`;
+    var url = `${url_api}/mahasiswa?program_studi=${$('#program_studi').val()}&status=${$('#status').val()}&kelas=${$('#kelas').val()}`;
     dt.ajax.url(url).load();
   })
 } );
 async function getData() {
   
     var optProgram,optJurusan,optKelas,optStatus;
-    $.each(dataGlobal['program'],function (key,row) {
-        optProgram += `<option value="${row.nomor}">${row.program}</option>`
+    $.each(dataGlobal['prodi'],function (key,row) {
+        optProgram += `<option value="${row.nomor}">${row.nama_program} ${row.program_studi}</option>`
     })
-    $('#program').append(optProgram)
-    
-    // $.each(dataGlobal['jurusan'],function (key,row) {
-    //     optJurusan += `<option value="${row.nomor}" data-alias="${row.alias}">${row.jurusan}</option>`
-    // })
-    // $('#jurusan').append(optJurusan)
+    $('#program_studi').append(optProgram)
 
-    // $.each(dataGlobal['kelas'],function (key,row) {
-    //     optKelas += `<option value="${row.nomor}">${row.kode}</option>`
-    // })
-    // $('#kelas').append(optKelas)
+    var kelas = $.grep(dataGlobal['kelas'], function(e){ return e.program_studi == $('#program_studi').val(); });
+    $('#kelas').html('')
+    var optKelas = `<option value=""> - </option>`;
+    $.each(kelas,function (key,row) {
+      optKelas += `<option value="${row.nomor}">${row.kode}</option>`
+    })
+    $('#kelas').append(optKelas); 
 
     $.each(dataGlobal['status'],function (key,row) {
         optStatus += `<option value="${row.kode}">${row.status}</option>`
