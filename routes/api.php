@@ -92,6 +92,7 @@ Route::prefix('v1')->group(function () {
     //periode
     Route::get('/periode/', '\App\Http\Controllers\API\PeriodeController@index');
     Route::put('/periode/change_status/{id}', '\App\Http\Controllers\API\PeriodeController@change_status');
+    Route::put('/periode/change_semester/{id}/{semester}', '\App\Http\Controllers\API\PeriodeController@change_semester');
     Route::get('/periode/{id}', '\App\Http\Controllers\API\PeriodeController@show');
     Route::post('/periode', '\App\Http\Controllers\API\PeriodeController@store');
     Route::put('/periode/{id}', '\App\Http\Controllers\API\PeriodeController@update');
@@ -136,6 +137,12 @@ Route::prefix('v1')->group(function () {
     Route::post('/inputnilai', '\App\Http\Controllers\API\InputNilaiController@store');
     Route::put('/inputnilai/{id}', '\App\Http\Controllers\API\InputNilaiController@update');
     Route::delete('/inputnilai/{id}', '\App\Http\Controllers\API\InputNilaiController@destroy');
+
+    //daftar matkul dosen pengampu
+    Route::get('/daftar/{id}', '\App\Http\Controllers\API\DaftarMatkulController@show');
+    Route::post('/daftar', '\App\Http\Controllers\API\DaftarMatkulController@store');
+    Route::put('/daftar/{id}', '\App\Http\Controllers\API\DaftarMatkulController@update');
+    Route::delete('/daftar/{id}', '\App\Http\Controllers\API\DaftarMatkulController@destroy');
 });
 Route::prefix('v1')->middleware('auth:api')->group(function () {
     Route::get('/user', function (Request $request) {
