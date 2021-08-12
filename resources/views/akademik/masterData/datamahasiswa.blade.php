@@ -117,7 +117,7 @@ async function getData() {
 }
 function setDatatable() {
   var nomor = 1;
-  dt_url = `${url_api}/mahasiswa?program=${$('#program').val()}&jurusan=${$('#jurusan').val()}&status=${$('#status').val()}&kelas=${$('#kelas').val()}`;
+  dt_url = `${url_api}/mahasiswa?program_studi=${$('#program_studi').val()}&status=${$('#status').val()}&kelas=${$('#kelas').val()}`;
 dt_opt = {
   "columnDefs": [
         {
