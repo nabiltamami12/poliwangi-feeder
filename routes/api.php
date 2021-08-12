@@ -92,6 +92,7 @@ Route::prefix('v1')->group(function () {
     //periode
     Route::get('/periode/', '\App\Http\Controllers\API\PeriodeController@index');
     Route::put('/periode/change_status/{id}', '\App\Http\Controllers\API\PeriodeController@change_status');
+    Route::put('/periode/change_semester/{id}/{semester}', '\App\Http\Controllers\API\PeriodeController@change_semester');
     Route::get('/periode/{id}', '\App\Http\Controllers\API\PeriodeController@show');
     Route::post('/periode', '\App\Http\Controllers\API\PeriodeController@store');
     Route::put('/periode/{id}', '\App\Http\Controllers\API\PeriodeController@update');
