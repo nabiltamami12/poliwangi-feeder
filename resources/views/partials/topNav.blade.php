@@ -18,7 +18,7 @@
             </ul>
 
             <div class="navbar-title">
-                <h1>Semester Ganjil 2020/2021, Program Studi Ilmu Kedokteran Gigi Anak</h1>
+                <h1>Semester Ganjil 2020/2021{{--, Program Studi Ilmu Kedokteran Gigi Anak --}}</h1>
             </div>
 
             <ul class="navbar-nav align-items-center ml-auto ml-md-0">
