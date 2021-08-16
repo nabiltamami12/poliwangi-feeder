@@ -65,11 +65,6 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{{ url('/akademik/master/datadosenpengampu')}}">
-                  <span class="nav-link-text ml-0">Data Dosen Pengampu</span>
-                </a>
-              </li>
-              <li class="nav-item">
                 <a class="nav-link" href="{{url('/akademik/master/datajurusan')}}">
                   <span class="nav-link-text ml-0">Data Jurusan</span>
                 </a>
@@ -94,13 +89,6 @@
                   <span class="nav-link-text ml-0">Data Range Nilai</span>
                 </a>
               </li>
-              {{--
-              <li class="nav-item">
-                <a class="nav-link" href="{{ url('/akademik/master/datakuliah')}}">
-                  <span class="nav-link-text ml-0">Data Kuliah</span>
-                </a>
-              </li>
-              --}}
             </ul>
           </li>
           {{--
