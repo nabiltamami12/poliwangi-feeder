@@ -123,25 +123,34 @@ function change_status(id) {
     });
 }
 function change_semester(id,semester) {
-    $.ajax({
-        url: url_api+"/periode/change_semester/"+id+"/"+semester,
-        type: "put",
-        dataType: 'json',
-        data: {},
-        beforeSend: function(text) {
-            // loading func
-            console.log("loading")
-            loading('show');
-          },
-          success: function(res) {
-            if (res.status=="success") {
-              dt.ajax.reload();                
-            } else {
-              // alert gagal
-            }
-            loading('hide');
-        }
-    });
+  var periode = JSON.parse(localStorage.getItem('globalData'))['periode']
+  console.log(periode['semester'])
+  console.log(semester)
+  periode['semester'] = semester
+  console.log(periode['semester'])
+  console.log(periode)
+  console.log(JSON.parse(localStorage.getItem('globalData')))
+  
+
+    // $.ajax({
+    //     url: url_api+"/periode/change_semester/"+id+"/"+semester,
+    //     type: "put",
+    //     dataType: 'json',
+    //     data: {},
+    //     beforeSend: function(text) {
+    //         // loading func
+    //         console.log("loading")
+    //         loading('show');
+    //       },
+    //       success: function(res) {
+    //         if (res.status=="success") {
+    //           dt.ajax.reload();
+    //         } else {
+    //           // alert gagal
+    //         }
+    //         loading('hide');
+    //     }
+    // });
 }
 </script>
 @endsection

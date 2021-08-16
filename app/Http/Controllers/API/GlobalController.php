@@ -12,6 +12,7 @@ use App\Models\Status;
 use App\Models\Kelas;
 use App\Models\Matakuliah;
 use App\Models\Prodi;
+use App\Models\Periode;
 use Illuminate\Support\Facades\Validator;
 
 class GlobalController extends Controller
@@ -28,6 +29,7 @@ class GlobalController extends Controller
     
     public function index()
     {
+        $periode = Periode::select('tahun','semester')->where('status',1)->get();
         $jurusan = Jurusan::get();
         $program = Program::get();
         $matkul_jenis = MatakuliahJenis::get();
@@ -82,6 +84,7 @@ class GlobalController extends Controller
         $this->status = "success";
 
         $this->data = [
+            'periode'=>$periode[0],
             'program'=>$program,
             'jurusan'=>$jurusan,
             'dosen'=>$dosen,
