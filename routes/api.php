@@ -42,6 +42,7 @@ Route::prefix('v1')->group(function () {
     Route::delete('/jurusan/{id}', [Ctr\JurusanController::class, 'destroy']);
     // Kelas
     Route::get('/kelas', [Ctr\KelasController::class, 'index']);
+    Route::get('/kelas/dosen/{id}', [Ctr\KelasController::class, 'dosen']);
     Route::get('/kelas/{id}', [Ctr\KelasController::class, 'show']);
     Route::post('/kelas', [Ctr\KelasController::class, 'store']);
     Route::put('/kelas/{id}', [Ctr\KelasController::class, 'update']);
