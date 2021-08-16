@@ -138,6 +138,12 @@ Route::prefix('v1')->group(function () {
     Route::post('/inputnilai', '\App\Http\Controllers\API\InputNilaiController@store');
     Route::put('/inputnilai/{id}', '\App\Http\Controllers\API\InputNilaiController@update');
     Route::delete('/inputnilai/{id}', '\App\Http\Controllers\API\InputNilaiController@destroy');
+
+    //daftar matkul dosen pengampu
+    Route::get('/daftar/{id}', '\App\Http\Controllers\API\DaftarMatkulController@show');
+    Route::post('/daftar', '\App\Http\Controllers\API\DaftarMatkulController@store');
+    Route::put('/daftar/{id}', '\App\Http\Controllers\API\DaftarMatkulController@update');
+    Route::delete('/daftar/{id}', '\App\Http\Controllers\API\DaftarMatkulController@destroy');
 });
 Route::prefix('v1')->middleware('auth:api')->group(function () {
     Route::get('/user', function (Request $request) {
