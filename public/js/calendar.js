@@ -17,6 +17,7 @@
                     r++;
                 }
             }
+
             for (var cell = 0; cell < 42 - r; cell++) {
                 if (cell >= calMonthArray.length) {
                     calendar.datesBody.append('<div class="blank"></div>');
@@ -33,11 +34,11 @@
                             passed_month != today.getMonth()) &&
                         iter_date < today
                     ) {
-                        var m = "<div>";
+                        var m = `<div class="date">`;
                     } else {
                         var m = checkToday(iter_date)
                             ? '<div class="today">'
-                            : "<div>";
+                            : `<div class="date">`;
                     }
                     calendar.datesBody.append(m + shownDate + "</div>");
                 }
@@ -53,6 +54,7 @@
             // the calendar is generated
             var clicked = false;
             selectDates(selected);
+            checkBlank();
 
             clickedElement = calendar.datesBody.find("div");
             clickedElement.on("click", function () {
@@ -267,6 +269,14 @@
             nextYear = nextDates[1];
         }
 
+        function checkBlank() {
+            var blanks = $(".date:last").nextAll();
+            var numberOfblanks = blanks.length;
+            if (numberOfblanks > 6) {
+                $(".date:last").nextAll().slice(-7).css("display", "none");
+            }
+        }
+
         var e = 480;
 
         var today;
@@ -356,6 +366,8 @@
                 generateCalendars("next");
             }
             clickedElement = bothCals.find(".calendar_content").find("div");
+
+            checkBlank();
         });
 
         //  Click picking stuff
@@ -455,9 +467,5 @@
             }
             return selected;
         }
-
-        // alert($(".blank").length);
-
-        // let blank_berurutan = $('.countme').first().nextUntil(':not(.countme)').addBack().length
     });
 })(jQuery);

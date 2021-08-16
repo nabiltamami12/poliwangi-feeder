@@ -60,21 +60,21 @@ body {
             list-style: none;
 
             .nav-item-dropdown-content {
-                position: relative;
-                max-height: 0;
-                overflow: hidden;
-                transition: max-height 0.5s ease-out;
                 padding-left: 35px;
             }
 
-            &.showsubmenu .nav-item-dropdown-content {
-                max-height: 1000px;
-                transition: max-height 0.5s ease-in;
-            }
-
-            &.showsubmenu {
-                .nav-link {
-                    .arrow {
+            div.nav-link {
+                .nav-link-text::after {
+                    content: url("https://api.iconify.design/bx/bx-chevron-right.svg");
+                    margin: auto 0;
+                    position: absolute;
+                    right: 25px;
+                    transition: -webkit-transform 0.5s ease-in-out;
+                    -webkit-transition: -webkit-transform 0.5s ease-in-out;
+                    transform: rotate(0deg);
+                }
+                &.open {
+                    .nav-link-text::after {
                         transition: -webkit-transform 0.5s ease-in-out;
                         -webkit-transition: -webkit-transform 0.5s ease-in-out;
                         transform: rotate(90deg);
@@ -82,10 +82,13 @@ body {
                 }
             }
 
-            .nav-link {
+            .nav-link,
+            .nav-link-submenu {
                 position: relative;
+                cursor: pointer;
                 margin: 0 6px;
                 padding: 17px;
+
                 &.aktif {
                     background-color: #f6f9fc;
                     margin: 0 6px;
@@ -104,17 +107,8 @@ body {
                     @include mixintext(500, 0.875rem, 1.22em, $font-black);
                     margin-left: 1.28em;
                 }
-
-                .arrow {
-                    position: absolute;
-                    margin: auto 0;
-                    position: absolute;
-                    top: 0;
-                    bottom: 0;
-                    right: 25px;
-                    transition: -webkit-transform 0.5s ease-in-out;
-                    -webkit-transition: -webkit-transform 0.5s ease-in-out;
-                    transform: rotate(0deg);
+                .nav-link-dropdown-text {
+                    @include mixintext(500, 0.8125rem, 1.22em, $font-black);
                 }
             }
         }

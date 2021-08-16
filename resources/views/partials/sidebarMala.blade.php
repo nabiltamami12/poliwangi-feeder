@@ -45,18 +45,17 @@
           <li class="nav-item">
             <div class="nav-link {{($title === "mala-penilaian") ? 'aktif' : ''}}">
               <span class=" iconify" data-icon="bx:bx-book-bookmark"></span>
-              <span class="nav-link-text">Penilaian<img src="{{ url('images') }}/sidebar-right.png" class="arrow"
-                  alt=""></span>
+              <span class="nav-link-text">Penilaian</span>
             </div>
             <ul class="nav-item-dropdown-content">
               <li class="nav-item">
                 <a class="nav-link" href="/mahasiswalama/penilaian/nilaisemester">
-                  <span class="nav-link-text ml-0">NIlai Semester</span>
+                  <span class="nav-link-dropdown-text">NIlai Semester</span>
                 </a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="/mahasiswalama/penilaian/khs">
-                  <span class="nav-link-text ml-0">KHS</span>
+                  <span class="nav-link-dropdown-text">KHS</span>
                 </a>
               </li>
             </ul>
@@ -68,8 +67,6 @@
               <span class="nav-link-text">Form Cuti</span>
             </a>
           </li>
-
-
         </ul>
       </div>
     </div>

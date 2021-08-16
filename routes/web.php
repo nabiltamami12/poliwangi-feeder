@@ -136,14 +136,16 @@ Route::prefix('dosen')->group(function () {
 Route::prefix('akademik')->group(function () {
     Route::get('/dashboard', function () {
         return view('akademik.dashboardAkademik', [
-            "title" => "akademik-dashboard"
+            "title" => "akademik-dashboard",
+            "halamanAktif" => "dashboardakademik"
         ]);
     });
 
     Route::prefix('master')->group(function (){
         Route::get('/dataperiode', function () {
             return view('akademik.masterData/dataperiode', [
-                "title" => "akademik-master"
+                "title" => "akademik-master",
+                "halamanAktif" => "dataperiode"
             ]);
         });
         Route::get('/dataperiode/cu/', function () {
@@ -167,7 +169,8 @@ Route::prefix('akademik')->group(function () {
 
         Route::get('/datamahasiswa', function () {
             return view('akademik.masterData.datamahasiswa', [
-                "title" => "akademik-master"
+                "title" => "akademik-master",
+                "halamanAktif" => "datamahasiswa"
             ]);
         });
         Route::get('/datamahasiswa/cu/', function () {
@@ -221,7 +224,8 @@ Route::prefix('akademik')->group(function () {
 
         Route::get('/datakelas', function () {
             return view('akademik.masterData/datakelas', [
-                "title" => "akademik-master"
+                "title" => "akademik-master",
+                "halamanAktif" => "datakelas"
             ]);
         });
         Route::get('/datakelas/cu/', function () {
@@ -293,7 +297,8 @@ Route::prefix('akademik')->group(function () {
 
         Route::get('/datakuliah', function () {
             return view('akademik.masterData/datakuliah', [
-                "title" => "akademik-master"
+                "title" => "akademik-master",
+                "halamanAktif" => "datakuliah"
             ]);
         });
 
@@ -337,31 +342,36 @@ Route::prefix('akademik')->group(function () {
     Route::prefix('report')->group(function (){
         Route::get('/cuti', function () {
             return view('akademik.report.reportcuti', [
-                "title" => "akademik-report"
+                "title" => "akademik-report",
+                "halamanAktif" => "reportcuti"
             ]);
         });
     
         Route::get('/dropout', function () {
             return view('akademik.report.reportdo', [
-                "title" => "akademik-report"
+                "title" => "akademik-report",
+                "halamanAktif" => "reportdropout"
             ]);
         });
 
         Route::get('/melebihisemester', function () {
             return view('akademik.report.reportmelebihisemester', [
-                "title" => "akademik-report"
+                "title" => "akademik-report",
+                "halamanAktif" => "reportmelebihisemester"
             ]);
         });
 
         Route::get('/lulus', function () {
             return view('akademik.report.reportlulus', [
-                "title" => "akademik-report"
+                "title" => "akademik-report",
+                "halamanAktif" => "reportlulus"
             ]);
         });
 
         Route::get('/judultugasakhir', function () {
             return view('akademik.report.reportjudulta', [
-                "title" => "akademik-report"
+                "title" => "akademik-report",
+                "halamanAktif" => "reportjudulta"
             ]);
         });
     });
@@ -369,12 +379,14 @@ Route::prefix('akademik')->group(function () {
     Route::prefix('khs')->group(function (){
         Route::get('/khs', function () {
             return view('akademik.khs.khs', [
-                "title" => "akademik-khs"
+                "title" => "akademik-khs",
+                "halamanAktif" => "khs"
             ]);
         });
         Route::get('/khsmahasiswa', function () {
             return view('akademik.khs.khsmahasiswa', [
-                "title" => "akademik-khs"
+                "title" => "akademik-khs",
+                "halamanAktif" => "khsmahasiswa"
             ]);
         });
     });
@@ -382,22 +394,26 @@ Route::prefix('akademik')->group(function () {
     Route::prefix('kuliah')->group(function (){
         Route::get('/skmahasiswaaktif', function () {
             return view('akademik.kuliah.skmahasiswaaktif', [
-                "title" => "akademik-kuliah"
+                "title" => "akademik-kuliah",
+                "halamanAktif" => "skmahasiswaaktif"
             ]);
         });
         Route::get('/nilai', function () {
             return view('akademik.kuliah.nilai', [
-                "title" => "akademik-kuliah"
+                "title" => "akademik-kuliah",
+                "halamanAktif" => "nilai"
             ]);
         });
         Route::get('/nilaimahasiswa', function () {
             return view('akademik.kuliah.detailnilaimahasiswa', [
-                "title" => "akademik-kuliah"
+                "title" => "akademik-kuliah",
+                "halamanAktif" => "nilaimahasiswa"
             ]);
         });
         Route::get('/pelanggaran', function () {
             return view('akademik.kuliah.pelanggaran', [
-                "title" => "akademik-kuliah"
+                "title" => "akademik-kuliah",
+                "halamanAktif" => "pelanggaran"
             ]);
         });
     });

@@ -31,23 +31,22 @@
           <li class="nav-item">
             <div class="nav-link {{($title === "maba-mahasiswa") ? 'aktif' : ''}}">
               <span class="iconify" data-icon="bx:bx-user-pin"></span>
-              <span class="nav-link-text">Mahasiswa Baru<img src="{{ url('images') }}/sidebar-right.png" class="arrow"
-                  alt=""></span>
+              <span class="nav-link-text">Mahasiswa Baru</span>
             </div>
             <ul class="nav-item-dropdown-content">
               <li class="nav-item">
                 <a class="nav-link" href="/mahasiswabaru/verifikasidata">
-                  <span class="nav-link-text ml-0">Verifikasi Data</span>
+                  <span class="nav-link-dropdown-text">Verifikasi Data</span>
                 </a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="/mahasiswabaru/pembayaranva">
-                  <span class="nav-link-text ml-0">Generate VA Pembayaran</span>
+                  <span class="nav-link-dropdown-text">Generate VA Pembayaran</span>
                 </a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="/mahasiswabaru/daftarulang">
-                  <span class="nav-link-text ml-0">Daftar Ulang</span>
+                  <span class="nav-link-dropdown-text">Daftar Ulang</span>
                 </a>
               </li>
             </ul>

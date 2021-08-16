@@ -542,53 +542,56 @@ ul {
   list-style: none;
 }
 .sidenav#sidenav-main .navbar-nav .nav-item .nav-item-dropdown-content {
-  position: relative;
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.5s ease-out;
   padding-left: 35px;
 }
-.sidenav#sidenav-main .navbar-nav .nav-item.showsubmenu .nav-item-dropdown-content {
-  max-height: 1000px;
-  transition: max-height 0.5s ease-in;
+.sidenav#sidenav-main .navbar-nav .nav-item div.nav-link .nav-link-text::after {
+  content: url("https://api.iconify.design/bx/bx-chevron-right.svg");
+  margin: auto 0;
+  position: absolute;
+  right: 25px;
+  -webkit-transition: -webkit-transform 0.5s ease-in-out;
+  transform: rotate(0deg);
 }
-.sidenav#sidenav-main .navbar-nav .nav-item.showsubmenu .nav-link .arrow {
+.sidenav#sidenav-main .navbar-nav .nav-item div.nav-link.open .nav-link-text::after {
   -webkit-transition: -webkit-transform 0.5s ease-in-out;
   transform: rotate(90deg);
 }
-.sidenav#sidenav-main .navbar-nav .nav-item .nav-link {
+.sidenav#sidenav-main .navbar-nav .nav-item .nav-link,
+.sidenav#sidenav-main .navbar-nav .nav-item .nav-link-submenu {
   position: relative;
+  cursor: pointer;
   margin: 0 6px;
   padding: 17px;
 }
-.sidenav#sidenav-main .navbar-nav .nav-item .nav-link.aktif {
+.sidenav#sidenav-main .navbar-nav .nav-item .nav-link.aktif,
+.sidenav#sidenav-main .navbar-nav .nav-item .nav-link-submenu.aktif {
   background-color: #f6f9fc;
   margin: 0 6px;
   border-radius: 0.5rem;
 }
-.sidenav#sidenav-main .navbar-nav .nav-item .nav-link.aktif .iconify {
+.sidenav#sidenav-main .navbar-nav .nav-item .nav-link.aktif .iconify,
+.sidenav#sidenav-main .navbar-nav .nav-item .nav-link-submenu.aktif .iconify {
   color: #28a3eb;
 }
-.sidenav#sidenav-main .navbar-nav .nav-item .nav-link .iconify {
+.sidenav#sidenav-main .navbar-nav .nav-item .nav-link .iconify,
+.sidenav#sidenav-main .navbar-nav .nav-item .nav-link-submenu .iconify {
   color: #041f2f;
   font-size: 15px;
 }
-.sidenav#sidenav-main .navbar-nav .nav-item .nav-link .nav-link-text {
+.sidenav#sidenav-main .navbar-nav .nav-item .nav-link .nav-link-text,
+.sidenav#sidenav-main .navbar-nav .nav-item .nav-link-submenu .nav-link-text {
   font-weight: 500;
   font-size: 0.875rem;
   line-height: 1.22em;
   color: #041f2f;
   margin-left: 1.28em;
 }
-.sidenav#sidenav-main .navbar-nav .nav-item .nav-link .arrow {
-  position: absolute;
-  margin: auto 0;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 25px;
-  -webkit-transition: -webkit-transform 0.5s ease-in-out;
-  transform: rotate(0deg);
+.sidenav#sidenav-main .navbar-nav .nav-item .nav-link .nav-link-dropdown-text,
+.sidenav#sidenav-main .navbar-nav .nav-item .nav-link-submenu .nav-link-dropdown-text {
+  font-weight: 500;
+  font-size: 0.8125rem;
+  line-height: 1.22em;
+  color: #041f2f;
 }
 
 nav#navbar {

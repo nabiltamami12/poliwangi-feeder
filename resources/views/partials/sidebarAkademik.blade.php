@@ -35,23 +35,25 @@
           <li class="nav-item">
             <div class="nav-link {{($title === "akademik-master") ? 'aktif' : ''}}">
               <span class="iconify" data-icon="bx:bx-user-pin"></span>
-              <span class="nav-link-text">Master Data<img src="{{ url('images') }}/sidebar-right.png" class="arrow"
-                  alt=""></span>
+              <span class="nav-link-text">Master Data</span>
             </div>
             <ul class="nav-item-dropdown-content">
               <li class="nav-item">
                 <a class="nav-link" href="{{ url('/akademik/master/datamahasiswa')}}">
-                  <span class="nav-link-text ml-0">Data Mahasiswa</span>
+                  <span class="nav-link-dropdown-text {{($halamanAktif === "datamahasiswa") ? 'aktif' : ''}}">Data
+                    Mahasiswa</span>
                 </a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="{{ url('/akademik/master/datakelas')}}">
-                  <span class="nav-link-text ml-0">Data Kelas</span>
+                  <span class="nav-link-dropdown-text {{($halamanAktif === "datakelas") ? 'aktif' : ''}}">Data
+                    Kelas</span>
                 </a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="{{ url('/akademik/master/datakuliah')}}">
-                  <span class="nav-link-text ml-0">Data Kuliah</span>
+                  <span class="nav-link-dropdown-text {{($halamanAktif === "datakuliah") ? 'aktif' : ''}}">Data
+                    Kuliah</span>
                 </a>
               </li>
             </ul>
@@ -60,18 +62,18 @@
           <li class="nav-item">
             <div class="nav-link {{($title === "akademik-khs") ? 'aktif' : ''}}"">
               <span class=" iconify" data-icon="bx:bx-book-bookmark" data-inline="true"></span>
-              <span class=" nav-link-text">KHS<img src="{{ url('images') }}/sidebar-right.png" class="arrow"
-                  alt=""></span>
+              <span class=" nav-link-text">KHS</span>
             </div>
             <ul class="nav-item-dropdown-content">
               <li class="nav-item">
                 <a class="nav-link" href="/akademik/khs/khs">
-                  <span class="nav-link-text ml-0">KHS</span>
+                  <span class="nav-link-dropdown-text {{($halamanAktif === "khs") ? 'aktif' : ''}}">KHS</span>
                 </a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="/akademik/khs/khsmahasiswa">
-                  <span class="nav-link-text ml-0">KHS Mahasiswa</span>
+                  <span class="nav-link-dropdown-text {{($halamanAktif === "khsmahasiswa") ? 'aktif' : ''}}">KHS
+                    Mahasiswa</span>
                 </a>
               </li>
             </ul>
@@ -80,28 +82,30 @@
           <li class="nav-item">
             <div class="nav-link {{($title === "akademik-kuliah") ? 'aktif' : ''}}">
               <span class="iconify" data-icon="bx:bx-calendar-star"></span>
-              <span class="nav-link-text">Kuliah<img src="{{ url('images') }}/sidebar-right.png" class="arrow"
-                  alt=""></span>
+              <span class="nav-link-text">Kuliah</span>
             </div>
             <ul class="nav-item-dropdown-content">
               <li class="nav-item">
                 <a class="nav-link" href="/akademik/kuliah/skmahasiswaaktif">
-                  <span class="nav-link-text ml-0">SK Mahasiswa Aktif</span>
+                  <span class="nav-link-dropdown-text {{($halamanAktif === "skmahasiswaaktif") ? 'aktif' : ''}}">SK
+                    Mahasiswa Aktif</span>
                 </a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="/akademik/kuliah/nilai">
-                  <span class="nav-link-text ml-0">Nilai</span>
+                  <span class="nav-link-dropdown-text {{($halamanAktif === "nilai") ? 'aktif' : ''}}">Nilai</span>
                 </a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="/akademik/kuliah/nilaimahasiswa">
-                  <span class="nav-link-text ml-0">Nilai Mahasiswa</span>
+                  <span class="nav-link-dropdown-text {{($halamanAktif === "nilaimahasiswa") ? 'aktif' : ''}}">Nilai
+                    Mahasiswa</span>
                 </a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="/akademik/kuliah/pelanggaran">
-                  <span class="nav-link-text ml-0">Pelanggaran</span>
+                  <span
+                    class="nav-link-dropdown-text {{($halamanAktif === "pelanggaran") ? 'aktif' : ''}}">Pelanggaran</span>
                 </a>
               </li>
             </ul>
@@ -110,35 +114,41 @@
           <li class="nav-item">
             <div class="nav-link {{($title === "akademik-report") ? 'aktif' : ''}}">
               <span class="iconify" data-icon="bx:bx-file-blank"></span>
-              <span class="nav-link-text">Report<img src="{{ url('images') }}/sidebar-right.png" class="arrow"
-                  alt=""></span>
+              <span class="nav-link-text">Report</span>
             </div>
 
             <div class="nav-item-dropdown-content">
               <ul>
                 <li class="nav-item">
-                  <div class="nav-link">
-                    <span class="nav-link-text ml-0">Mahasiswa</span>
+                  <div class="nav-link-submenu">
+                    <span
+                      class="nav-link-dropdown-text {{($halamanAktif === "reportcuti" || $halamanAktif === "reportdropout" || $halamanAktif === "reportmelebihisemester" || $halamanAktif === "reportlulus") ? 'aktif' : ''}}">Mahasiswa</span>
                   </div>
+
                   <ul class="nav-item-dropdown-content">
                     <li class="nav-item">
                       <a class="nav-link" href="/akademik/report/cuti">
-                        <span class="nav-link-text ml-0">Cuti</span>
+                        <span
+                          class="nav-link-dropdown-text {{($halamanAktif === "reportcuti") ? 'aktif' : ''}}">Cuti</span>
                       </a>
                     </li>
                     <li class="nav-item">
                       <a class="nav-link" href="/akademik/report/dropout">
-                        <span class="nav-link-text ml-0">Drop Out</span>
+                        <span class="nav-link-dropdown-text {{($halamanAktif === "reportdropout") ? 'aktif' : ''}}">Drop
+                          Out</span>
                       </a>
                     </li>
                     <li class="nav-item">
                       <a class="nav-link" href="/akademik/report/melebihisemester">
-                        <span class="nav-link-text ml-0">Melebihi Semester</span>
+                        <span
+                          class="nav-link-dropdown-text {{($halamanAktif === "reportmelebihisemester") ? 'aktif' : ''}}">Melebihi
+                          Semester</span>
                       </a>
                     </li>
                     <li class="nav-item">
                       <a class="nav-link" href="/akademik/report/lulus">
-                        <span class="nav-link-text ml-0">Lulus</span>
+                        <span
+                          class="nav-link-dropdown-text {{($halamanAktif === "reportlulus") ? 'aktif' : ''}}">Lulus</span>
                       </a>
                     </li>
                   </ul>
@@ -146,12 +156,14 @@
 
                 <li class="nav-item">
                   <a class="nav-link" href="/akademik/report/judultugasakhir">
-                    <span class="nav-link-text ml-0">Judul Tugas Akhir</span>
+                    <span class="nav-link-dropdown-text {{($halamanAktif === "reportjudulta") ? 'aktif' : ''}}">Judul
+                      Tugas
+                      Akhir</span>
                   </a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="/akademik/report/wali">
-                    <span class="nav-link-text ml-0">Wali</span>
+                    <span class="nav-link-dropdown-text {{($halamanAktif === "reportwali") ? 'aktif' : ''}}">Wali</span>
                   </a>
                 </li>
               </ul>
