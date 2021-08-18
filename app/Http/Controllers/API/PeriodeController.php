@@ -146,6 +146,16 @@ class PeriodeController extends Controller
             'error' => ''
         ]);
     }
+    public function change_semester($id,$semester)
+    {
+        $periode = Periode::where('nomor',$id)->update(['semester'=>$semester]);
+
+        return response()->json([
+            'status' => 'success',
+            'data' => null,
+            'error' => ''
+        ]);
+    }
 
     /**
      * Remove the specified resource from storage.

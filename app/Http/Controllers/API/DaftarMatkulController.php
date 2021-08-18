@@ -5,10 +5,10 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use App\Models\InputNilai;
+use App\Models\DaftarMatkul;
 use DB;
 
-class InputNilaiController extends Controller
+class DaftarMatkulController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,16 +41,7 @@ class InputNilaiController extends Controller
         //
         $data = $request->all();
 
-        $validator = Validator::make($data, [
-            'nomor' => 'required|unique:PROGRAM_STUDI',
-            'program' => 'required',
-            'jurusan' => 'required',
-            'kepala' => 'required',
-            'kode_epsbed' => 'required',
-            'departemen' => 'required',
-            'gelar' => 'required',
-            'gelar_inggris' => 'required'
-        ]);
+        $validator = Validator::make($data, []);
 
         if ($validator->fails()) {
             return response(
@@ -62,12 +53,12 @@ class InputNilaiController extends Controller
             );
         }
 
-        $prodi = Prodi::create($data);
+        $matakuliah = DaftarMatkul::create($data);
 
         return response(
             [
                 'status' => "success",
-                'data' => $prodi,
+                'data' => $matakuliah,
                 'error' => ''
             ]
         );
@@ -79,45 +70,25 @@ class InputNilaiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($tahun, $mk, $kls, $prodi)
+    public function show($id)
     {
         //
-        $input = DB::table("NILAI")
+        $data = DB::table("DOSEN_PENGAMPU")
             ->select(
+                "DOSEN_PENGAMPU.NOMOR",
+                "DOSEN_PENGAMPU.DOSEN",
                 "MATAKULIAH.MATAKULIAH",
-                "MAHASISWA.NAMA",
-                "KULIAH.TAHUN",
-                "KELAS.KODE",
-                "NILAI.NOMOR",
-                "NILAI.KULIAH",
-                "NILAI.MAHASISWA",
-                "NILAI.QUIS1",
-                "NILAI.QUIS2",
-                "NILAI.TUGAS",
-                "NILAI.UJIAN",
-                "NILAI.NA",
-                "NILAI.HER",
-                "NILAI.NH",
-                "NILAI.KETERANGAN",
-                "NILAI.NHU",
-                "NILAI.NSP",
-                "NILAI.KUIS",
-                "NILAI.PRAKTIKUM"
+                "PROGRAM_STUDI.PROGRAM_STUDI"
 
             )
-            ->join("MAHASISWA", "MAHASISWA.NOMOR", "=", "NILAI.MAHASISWA")
-            ->join("KULIAH", "KULIAH.NOMOR", "=", "NILAI.KULIAH")
-            ->join("KELAS", "KELAS.NOMOR", "=", "MAHASISWA.KELAS")
-            ->join("MATAKULIAH", "MATAKULIAH.NOMOR", "=", "KULIAH.MATAKULIAH")
-            ->where('KULIAH.TAHUN', $tahun)
-            ->where('KULIAH.MATAKULIAH', $mk)
-            ->where('MAHASISWA.KELAS', $kls)
-            ->where('MATAKULIAH.PROGRAM', $prodi)
+            ->join("MATAKULIAH", "MATAKULIAH.NOMOR", "=", "DOSEN_PENGAMPU.MATAKULIAH")
+            ->join("PROGRAM_STUDI", "PROGRAM_STUDI.NOMOR", "=", "MATAKULIAH.PROGRAM_STUDI")
+            ->where("DOSEN_PENGAMPU.NOMOR", $id)
             ->get();
 
         return response()->json([
             'status' => 'berhasil',
-            'data' => $input,
+            'data' => $data,
             'error' => ''
         ]);
     }
@@ -143,28 +114,23 @@ class InputNilaiController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $prodi = Prodi::where('NOMOR', $id);
+        $matakuliah = DaftarMatkul::where('NOMOR', $id);
         $data = $request->all();
 
         $validate = Validator::make($data, [
-            'program' => 'required',
-            'jurusan' => 'required',
-            'kepala' => 'required',
-            'kode_epsbed' => 'required',
-            'departemen' => 'required',
-            'gelar' => 'required',
-            'gelar_inggris' => 'required'
+            'dosen' => 'required',
+            'matakuliah' => 'required'
         ]);
 
         if ($validate->fails()) {
             $this->status = "error";
             $this->err = $validate->errors();
-        } else if (!$prodi) {
+        } else if (!$matakuliah) {
             $this->status = "failed";
             $this->err = "Data not found";
         } else {
-            $prodi->update($data);
-            $this->data = $prodi->get();
+            $matakuliah->update($data);
+            $this->data = $matakuliah->get();
             $this->status = "success";
         }
 
@@ -183,5 +149,15 @@ class InputNilaiController extends Controller
      */
     public function destroy($id)
     {
+        $daftar = DaftarMatkul::where('nomor', $id);
+        $daftar->delete();
+
+        return response(
+            [
+                'status' => "success",
+                'data' => ["message" => "data berhasil di hapus"],
+                'erorr' => ''
+            ]
+        );
     }
 }

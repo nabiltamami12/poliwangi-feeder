@@ -42,6 +42,7 @@ Route::prefix('v1')->group(function () {
     Route::delete('/jurusan/{id}', [Ctr\JurusanController::class, 'destroy']);
     // Kelas
     Route::get('/kelas', [Ctr\KelasController::class, 'index']);
+    Route::get('/kelas/dosen/{id}', [Ctr\KelasController::class, 'dosen']);
     Route::get('/kelas/{id}', [Ctr\KelasController::class, 'show']);
     Route::post('/kelas', [Ctr\KelasController::class, 'store']);
     Route::put('/kelas/{id}', [Ctr\KelasController::class, 'update']);
@@ -92,6 +93,7 @@ Route::prefix('v1')->group(function () {
     //periode
     Route::get('/periode/', '\App\Http\Controllers\API\PeriodeController@index');
     Route::put('/periode/change_status/{id}', '\App\Http\Controllers\API\PeriodeController@change_status');
+    Route::put('/periode/change_semester/{id}/{semester}', '\App\Http\Controllers\API\PeriodeController@change_semester');
     Route::get('/periode/{id}', '\App\Http\Controllers\API\PeriodeController@show');
     Route::post('/periode', '\App\Http\Controllers\API\PeriodeController@store');
     Route::put('/periode/{id}', '\App\Http\Controllers\API\PeriodeController@update');
@@ -130,6 +132,18 @@ Route::prefix('v1')->group(function () {
     Route::post('/absensi', [Ctr\AbsensiController::class, 'store']);
     Route::put('/absensi/{id}', [Ctr\AbsensiController::class, 'update']);
     Route::delete('/absensi/{id}', [Ctr\AbsensiController::class, 'destroy']);
+
+    //INPUTNILAIDOSEN
+    Route::get('/inputnilai/{tahun}&{mk}&{kls}&{prodi}', '\App\Http\Controllers\API\InputNilaiController@show');
+    Route::post('/inputnilai', '\App\Http\Controllers\API\InputNilaiController@store');
+    Route::put('/inputnilai/{id}', '\App\Http\Controllers\API\InputNilaiController@update');
+    Route::delete('/inputnilai/{id}', '\App\Http\Controllers\API\InputNilaiController@destroy');
+
+    //daftar matkul dosen pengampu
+    Route::get('/daftar/{id}', '\App\Http\Controllers\API\DaftarMatkulController@show');
+    Route::post('/daftar', '\App\Http\Controllers\API\DaftarMatkulController@store');
+    Route::put('/daftar/{id}', '\App\Http\Controllers\API\DaftarMatkulController@update');
+    Route::delete('/daftar/{id}', '\App\Http\Controllers\API\DaftarMatkulController@destroy');
 });
 Route::prefix('v1')->middleware('auth:api')->group(function () {
     Route::get('/user', function (Request $request) {

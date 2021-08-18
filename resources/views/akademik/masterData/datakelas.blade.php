@@ -34,7 +34,6 @@
                 <th scope="col">Prodi</th>
                 <th scope="col" style="width: 30%">Nama</th>
                 <th scope="col" class="text-center">Kode</th>
-                <th scope="col" class="text-center">Wali Kelas</th>
                 <th scope="col" class="text-center">Aksi</th>
               </tr>
             </thead>
@@ -85,18 +84,12 @@
         "aTargets": [4],
         "mData": null,
         "mRender": function(data, type, full) {
-          res = data['wali_kelas'];
-          return res;
-        }
-      },{
-        "aTargets": [5],
-        "mData": null,
-        "mRender": function(data, type, full) {
           var id = data['nomor'];
           var text_hapus = data['kode'];
+          var btn_dosen = `<span class="iconify" data-icon="mdi:account-eye" onclick='window.location.href = window.location.href+"/dosen/${data['nomor']}"' data-icon="bx:bx-edit-alt" ></span>` 
           var btn_update = `<span class="iconify edit-icon" onclick='update_btn(${id})' data-icon="bx:bx-edit-alt" ></span>` 
           var btn_delete = `<span class="iconify delete-icon" data-icon="bx:bx-trash"  onclick='delete_btn(${id},"kelas","kelas","${text_hapus}")'></span>`; 
-          res = btn_update+" "+btn_delete;
+          res = btn_dosen+" "+btn_update+" "+btn_delete;
           return res;
         }
       },
