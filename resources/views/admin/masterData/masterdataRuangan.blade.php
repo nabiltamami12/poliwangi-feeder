@@ -38,7 +38,7 @@
             </div>
             <div class="col-12 col-md-6 text-center text-md-right mt-3 mt-md-0">
               <a class="btn btn-primary" href="/admin/masterdata/dataruangan/tambahdata" role="button">
-                <span class="iconify mr-1" data-icon="bx:bxs-plus-circle" data-inline="true"></span>
+                <span class="iconify mr-1" data-icon="bx:bxs-plus-circle" data-inline="false"></span>
                 Tambah
               </a>
             </div>
@@ -94,9 +94,9 @@
                 <td class="text-center text-lowercase">kelas besar</td>
                 <td class="text-center">
                   <a href="/admin/masterdata/dataruangan/updatedata"><span class="iconify edit-icon"
-                      data-icon="bx:bx-edit-alt" data-inline="true"></span></a>
+                      data-icon="bx:bx-edit-alt" data-inline="false"></span></a>
                   <span data-toggle="modal" data-target="#deleteRuanganModal" class="iconify delete-icon"
-                    data-icon="bx:bx-trash" data-inline="true"></span>
+                    data-icon="bx:bx-trash" data-inline="false"></span>
                 </td>
               </tr>
 
@@ -108,9 +108,9 @@
                 <td class="text-center text-lowercase">kelas besar</td>
                 <td class="text-center">
                   <a href="/admin/masterdata/dataruangan/updatedata"><span class="iconify edit-icon"
-                      data-icon="bx:bx-edit-alt" data-inline="true"></span></a>
+                      data-icon="bx:bx-edit-alt" data-inline="false"></span></a>
                   <span data-toggle="modal" data-target="#deleteRuanganModal" class="iconify delete-icon"
-                    data-icon="bx:bx-trash" data-inline="true"></span>
+                    data-icon="bx:bx-trash" data-inline="false"></span>
                 </td>
               </tr>
 
@@ -122,9 +122,9 @@
                 <td class="text-center text-lowercase">kelas besar</td>
                 <td class="text-center">
                   <a href="/admin/masterdata/dataruangan/updatedata"><span class="iconify edit-icon"
-                      data-icon="bx:bx-edit-alt" data-inline="true"></span></a>
+                      data-icon="bx:bx-edit-alt" data-inline="false"></span></a>
                   <span data-toggle="modal" data-target="#deleteRuanganModal" class="iconify delete-icon"
-                    data-icon="bx:bx-trash" data-inline="true"></span>
+                    data-icon="bx:bx-trash" data-inline="false"></span>
                 </td>
               </tr>
 
@@ -136,9 +136,9 @@
                 <td class="text-center text-lowercase">kelas besar</td>
                 <td class="text-center">
                   <a href="/admin/masterdata/dataruangan/updatedata"><span class="iconify edit-icon"
-                      data-icon="bx:bx-edit-alt" data-inline="true"></span></a>
+                      data-icon="bx:bx-edit-alt" data-inline="false"></span></a>
                   <span data-toggle="modal" data-target="#deleteRuanganModal" class="iconify delete-icon"
-                    data-icon="bx:bx-trash" data-inline="true"></span>
+                    data-icon="bx:bx-trash" data-inline="false"></span>
                 </td>
               </tr>
 
@@ -150,9 +150,9 @@
                 <td class="text-center text-lowercase">kelas besar</td>
                 <td class="text-center">
                   <a href="/admin/masterdata/dataruangan/updatedata"><span class="iconify edit-icon"
-                      data-icon="bx:bx-edit-alt" data-inline="true"></span></a>
+                      data-icon="bx:bx-edit-alt" data-inline="false"></span></a>
                   <span data-toggle="modal" data-target="#deleteRuanganModal" class="iconify delete-icon"
-                    data-icon="bx:bx-trash" data-inline="true"></span>
+                    data-icon="bx:bx-trash" data-inline="false"></span>
                 </td>
               </tr>
 
@@ -164,9 +164,9 @@
                 <td class="text-center text-lowercase">kelas besar</td>
                 <td class="text-center">
                   <a href="/admin/masterdata/dataruangan/updatedata"><span class="iconify edit-icon"
-                      data-icon="bx:bx-edit-alt" data-inline="true"></span></a>
+                      data-icon="bx:bx-edit-alt" data-inline="false"></span></a>
                   <span data-toggle="modal" data-target="#deleteRuanganModal" class="iconify delete-icon"
-                    data-icon="bx:bx-trash" data-inline="true"></span>
+                    data-icon="bx:bx-trash" data-inline="false"></span>
                 </td>
               </tr>
 
@@ -178,9 +178,9 @@
                 <td class="text-center text-lowercase">kelas besar</td>
                 <td class="text-center">
                   <a href="/admin/masterdata/dataruangan/updatedata"><span class="iconify edit-icon"
-                      data-icon="bx:bx-edit-alt" data-inline="true"></span></a>
+                      data-icon="bx:bx-edit-alt" data-inline="false"></span></a>
                   <span data-toggle="modal" data-target="#deleteRuanganModal" class="iconify delete-icon"
-                    data-icon="bx:bx-trash" data-inline="true"></span>
+                    data-icon="bx:bx-trash" data-inline="false"></span>
                 </td>
               </tr>
 
@@ -192,9 +192,9 @@
                 <td class="text-center text-lowercase">kelas besar</td>
                 <td class="text-center">
                   <a href="/admin/masterdata/dataruangan/updatedata"><span class="iconify edit-icon"
-                      data-icon="bx:bx-edit-alt" data-inline="true"></span></a>
+                      data-icon="bx:bx-edit-alt" data-inline="false"></span></a>
                   <span data-toggle="modal" data-target="#deleteRuanganModal" class="iconify delete-icon"
-                    data-icon="bx:bx-trash" data-inline="true"></span>
+                    data-icon="bx:bx-trash" data-inline="false"></span>
                 </td>
               </tr>
 
@@ -206,9 +206,9 @@
                 <td class="text-center text-lowercase">kelas besar</td>
                 <td class="text-center">
                   <a href="/admin/masterdata/dataruangan/updatedata"><span class="iconify edit-icon"
-                      data-icon="bx:bx-edit-alt" data-inline="true"></span></a>
+                      data-icon="bx:bx-edit-alt" data-inline="false"></span></a>
                   <span data-toggle="modal" data-target="#deleteRuanganModal" class="iconify delete-icon"
-                    data-icon="bx:bx-trash" data-inline="true"></span>
+                    data-icon="bx:bx-trash" data-inline="false"></span>
                 </td>
               </tr>
             </tbody>

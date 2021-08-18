@@ -152,10 +152,25 @@
                 }
             }
         }
-    
+
         .calendar_weekdays div,
         .calendar_content div {
             height: 4rem;
+        }
+    }
+}
+
+@media screen and (min-width: 350px) {
+    .jadwal_sehari {
+        .detail_waktu {
+            form {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            label:nth-child(2) {
+                margin: 0 1rem;
+            }
         }
     }
 }

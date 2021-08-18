@@ -623,6 +623,63 @@ Route::prefix('admin')->group(function () {
             ]);
         });
     });
+
+    Route::prefix('settingpmb')->group(function () {
+        Route::get('/settingjalurpenerimaan', function () {
+            return view('admin.pmb.settingJalurPenerimaan', [
+                "title" => "admin-settingpmb"
+            ]);
+        });
+        Route::get('/editjalurpenerimaan', function () {
+            return view('admin.pmb.editJalurPenerimaan', [
+                "title" => "admin-settingpmb"
+            ]);
+        });
+
+        Route::get('/settingjurusanpilihan', function () {
+            return view('admin.pmb.settingJurusanPilihan', [
+                "title" => "admin-settingpmb"
+            ]);
+        });
+        Route::get('/editjurusanpilihan', function () {
+            return view('admin.pmb.editJurusanPilihan', [
+                "title" => "admin-settingpmb"
+            ]);
+        });
+
+        Route::get('/settingjadwalseleksi', function () {
+            return view('admin.pmb.settingJadwalSeleksi', [
+                "title" => "admin-settingpmb"
+            ]);
+        });
+        Route::get('/editjadwalseleksi', function () {
+            return view('admin.pmb.editJadwalSeleksi', [
+                "title" => "admin-settingpmb"
+            ]);
+        });
+
+        Route::get('/settingjurusanasal', function () {
+            return view('admin.pmb.settingJurusanAsalPendaftar', [
+                "title" => "admin-settingpmb"
+            ]);
+        });
+        Route::get('/editjurusanasal', function () {
+            return view('admin.pmb.editJurusanAsalPendaftar', [
+                "title" => "admin-settingpmb"
+            ]);
+        });
+
+        Route::get('/settingjurusanlinear', function () {
+            return view('admin.pmb.settingJurusanLinear', [
+                "title" => "admin-settingpmb"
+            ]);
+        });
+        Route::get('/editjurusanlinear', function () {
+            return view('admin.pmb.editJurusanLinear', [
+                "title" => "admin-settingpmb"
+            ]);
+        });
+    });
 });
 
 Route::prefix('keuangan')->group(function () {

@@ -178,6 +178,11 @@
 .page-content__admin #nama_dosen option {
   text-align: center;
 }
+.page-content__admin .jadwal_sehari .jumlah_sesi select {
+  width: 55px;
+  background-position: calc(100% - 8px), calc(100% - 24px);
+  padding: 0.5rem;
+}
 
 #admin_masterdatadosenpengampu .table-body td {
   padding: 2rem 1.5rem;
@@ -266,4 +271,23 @@
 }
 #admin_masterdatahariaktif .selecton {
   border-color: #28a3eb;
+}
+
+#edit_jalurpenerimaanPMB h1 {
+  font-weight: 600;
+  font-size: 1.3125rem;
+  line-height: 1.22em;
+  color: #041f2f;
+}
+#edit_jalurpenerimaanPMB .input-group-prepend .input-group-text {
+  border-color: #c4c4c4;
+  border-radius: 0.5rem 0 0 0.5rem;
+  font-weight: 500;
+  font-size: 0.875rem !important;
+  line-height: 1.21em;
+  color: #041f2f;
+  padding-left: 1.5rem;
+}
+#edit_jalurpenerimaanPMB #biaya-pendaftaran {
+  border-left: 0;
 }

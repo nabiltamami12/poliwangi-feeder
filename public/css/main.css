@@ -70,9 +70,22 @@ h6,
   color: #f46a6a !important;
 }
 
+.text-black {
+  color: #041f2f;
+}
+
 .badge {
-  padding: 0.5rem 0.75rem;
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.22em;
+  padding: 0.5rem 1rem;
   border-radius: 0.5rem;
+  text-transform: none;
+}
+
+.badge-primary {
+  background-color: #28a3eb;
+  color: #ffffff;
 }
 
 .badge-success {
@@ -800,6 +813,26 @@ nav#navbar h1 {
   line-height: 1.21em;
   color: #041f2f;
 }
+.page-content input[type=time] {
+  position: relative;
+}
+.page-content input[type=time]::-webkit-calendar-picker-indicator {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: auto;
+  height: auto;
+  color: transparent;
+  background: transparent;
+}
+.page-content input[type=time]::-webkit-inner-spin-button {
+  z-index: 1;
+}
+.page-content input[type=time]::-webkit-clear-button {
+  z-index: 1;
+}
 .page-content .textarea_notresize {
   resize: none;
 }
@@ -838,11 +871,6 @@ nav#navbar h1 {
 }
 .page-content .table-responsive .table-body tr.bordered {
   border-bottom: 1px solid rgba(153, 153, 153, 0.5);
-}
-.page-content .table-responsive .table-body img,
-.page-content .table-responsive .table-body .iconify {
-  margin-right: 8px;
-  font-size: 16px;
 }
 .page-content .table-responsive .table-body span {
   font-weight: 500;

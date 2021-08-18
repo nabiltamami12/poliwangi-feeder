@@ -282,7 +282,6 @@ nav#navbar {
     select#status {
         option {
             box-shadow: 2px 2px 8px rgba(255, 0, 0, 0.15) !important;
-            // background-color: aqua;
             border: 0 !important;
         }
     }
@@ -305,6 +304,30 @@ nav#navbar {
 
     input[type="search"]::placeholder {
         @include mixintext(400, 0.75rem, 1.21em, $font-black);
+    }
+
+    input[type="time"] {
+        position: relative;
+    }
+
+    input[type="time"]::-webkit-calendar-picker-indicator {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: auto;
+        height: auto;
+        color: transparent;
+        background: transparent;
+    }
+
+    input[type="time"]::-webkit-inner-spin-button {
+        z-index: 1;
+    }
+
+    input[type="time"]::-webkit-clear-button {
+        z-index: 1;
     }
 
     .textarea_notresize {
@@ -343,11 +366,6 @@ nav#navbar {
             }
             tr.bordered {
                 border-bottom: 1px solid rgba(153, 153, 153, 0.5);
-            }
-            img,
-            .iconify {
-                margin-right: 8px;
-                font-size: 16px;
             }
             span {
                 @include mixintext(500, 0.8125rem, 1.2em, $font-black);

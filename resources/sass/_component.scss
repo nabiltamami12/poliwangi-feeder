@@ -61,10 +61,23 @@ h6,
     color: $danger !important;
 }
 
+.text-black {
+    color: $font-black;
+}
+
 //BADGE
 .badge {
-    padding: 0.5rem 0.75rem;
+    font-size: 1.125rem;
+    font-weight: 600;
+    line-height: 1.22em;
+    padding: 0.5rem 1rem;
     border-radius: 0.5rem;
+    text-transform: none;
+}
+
+.badge-primary {
+    background-color: $primary;
+    color: $font-white;
 }
 
 .badge-success {

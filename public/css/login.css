@@ -66,9 +66,22 @@ h6,
   color: #f46a6a !important;
 }
 
+.text-black {
+  color: #041f2f;
+}
+
 .badge {
-  padding: 0.5rem 0.75rem;
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.22em;
+  padding: 0.5rem 1rem;
   border-radius: 0.5rem;
+  text-transform: none;
+}
+
+.badge-primary {
+  background-color: #28a3eb;
+  color: #ffffff;
 }
 
 .badge-success {

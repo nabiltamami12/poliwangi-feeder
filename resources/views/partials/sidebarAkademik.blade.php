@@ -61,7 +61,7 @@
 
           <li class="nav-item">
             <div class="nav-link {{($title === "akademik-khs") ? 'aktif' : ''}}"">
-              <span class=" iconify" data-icon="bx:bx-book-bookmark" data-inline="true"></span>
+              <span class=" iconify" data-icon="bx:bx-book-bookmark" data-inline="false"></span>
               <span class=" nav-link-text">KHS</span>
             </div>
             <ul class="nav-item-dropdown-content">
