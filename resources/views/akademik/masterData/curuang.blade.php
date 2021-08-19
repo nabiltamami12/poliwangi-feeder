@@ -40,18 +40,6 @@
             </div>
             <div class="col-sm-6 col-12">
               <div class="form-group row mb-0">
-                <label>Homepage</label>
-                <input type="text" class="form-control" id="homepage" name="homepage">
-              </div>
-            </div>
-            <div class="col-sm-6 col-12">
-              <div class="form-group row mb-0">
-                <label>Email</label>
-                <input type="text" class="form-control" id="email" name="email">
-              </div>
-            </div>
-            <div class="col-sm-6 col-12">
-              <div class="form-group row mb-0">
                 <label>Kode *?</label>
                 <select class="form-control" id="kode" name="kode">
                   <option value="L">Laboratorium</option>
