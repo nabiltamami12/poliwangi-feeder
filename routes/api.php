@@ -143,6 +143,12 @@ Route::prefix('v1')->group(function () {
     Route::post('/daftar', '\App\Http\Controllers\API\DaftarMatkulController@store');
     Route::put('/daftar/{id}', '\App\Http\Controllers\API\DaftarMatkulController@update');
     Route::delete('/daftar/{id}', '\App\Http\Controllers\API\DaftarMatkulController@destroy');
+
+    //FILE UPLOAD HARI AKTIF 
+    Route::get('/filehari/{nama}', '\App\Http\Controllers\API\HariAktifController@show');
+    Route::post('/filehari', '\App\Http\Controllers\API\HariAktifController@store');
+    Route::put('/filehari/{nama}', '\App\Http\Controllers\API\HariAktifController@update');
+    Route::delete('/filehari/{nama}', '\App\Http\Controllers\API\HariAktifController@destroy');
 });
 Route::prefix('v1')->middleware('auth:api')->group(function () {
     Route::get('/user', function (Request $request) {
