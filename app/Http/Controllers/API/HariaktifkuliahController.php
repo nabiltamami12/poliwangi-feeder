@@ -24,9 +24,39 @@ class HariaktifkuliahController extends Controller
             "error" => ''
         ]);
     }
-    public function create()
+    
+    public function upload(Request $request)
     {
-        //
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'file' => 'required|mimes:doc,docx,pdf,txt|max:2048',
+            ]
+        );
+
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()], 401);
+        }
+
+
+        if ($files = $request->file('file')) {
+
+            //store file into document folder
+            $file = $files->storeAs('documents','sk_hari_aktif.pdf','public');
+
+            //store your file into database
+            // $document = new File();
+            // $document->nilai = $file;
+            // $document->nama = "file_sk_hari_aktif";
+            // $document->keterangan = $request->keterangan;
+            // $document->save();
+
+            return response()->json([
+                "status" => 'success',
+                // "data" => $document,
+                "error" => ''
+            ]);
+        }
     }
     public function store(Request $request)
     {
