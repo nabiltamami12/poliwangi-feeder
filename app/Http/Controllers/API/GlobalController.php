@@ -14,6 +14,7 @@ use App\Models\Matakuliah;
 use App\Models\Prodi;
 use App\Models\Periode;
 use Illuminate\Support\Facades\Validator;
+use DB;
 
 class GlobalController extends Controller
 {
@@ -27,7 +28,7 @@ class GlobalController extends Controller
     protected $err = null;
     protected $data = null;
     
-    public function index()
+    public function index($id=null)
     {
         $periode = Periode::select('tahun','semester')->where('status',1)->get();
         $jurusan = Jurusan::get();
@@ -80,8 +81,6 @@ class GlobalController extends Controller
         ->join('jurusan', 'jurusan.nomor', '=', 'program_studi.jurusan')
         ->join('matakuliah_jenis', 'matakuliah_jenis.nomor', '=', 'matakuliah.matakuliah_jenis')
         ->get();
-        
-        $this->status = "success";
 
         $this->data = [
             'periode'=>$periode[0],
@@ -93,8 +92,16 @@ class GlobalController extends Controller
             'status'=>$status,
             'prodi'=>$prodi,
             'matakuliah'=>$matakuliah,
+            'user'=>[]
         ];
 
+        if ($id!=null) {
+            $pegawai = DB::table('pegawai')->select('nomor','nama')->where('nomor',$id)->get();
+            array_push($this->data['user'],$pegawai[0]);
+        }else{
+
+        }
+        $this->status = "success";
        
         return response()->json([
             "status" => $this->status,

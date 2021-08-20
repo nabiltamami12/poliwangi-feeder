@@ -22,7 +22,8 @@ Route::get('warning', [Ctr\AuthController::class, 'warning'])->name('warning');
 
 Route::prefix('v1')->group(function () {
     // Global data
-    Route::get('/globaldata', [Ctr\GlobalController::class, 'index']);
+    Route::get('/globaldata/', [Ctr\GlobalController::class, 'index']);
+    Route::get('/globaldata/{id}', [Ctr\GlobalController::class, 'index']);
     // Program
     Route::get('/program', [Ctr\ProgramController::class, 'index']);
     // Program
@@ -75,6 +76,10 @@ Route::prefix('v1')->group(function () {
     Route::post('/dosen', [Ctr\DosenController::class, 'store']);
     Route::put('/dosen/{id}', [Ctr\DosenController::class, 'update']);
     Route::delete('dosen/{id}', [Ctr\DosenController::class, 'destroy']);
+    Route::get('dosen/program_studi/{id}', [Ctr\DosenController::class, 'program_studi']);
+    Route::get('dosen/matkul/{id}', [Ctr\DosenController::class, 'matkul']);
+    Route::get('dosen/kelas/{id}', [Ctr\DosenController::class, 'kelas_matkul']);
+
 
     //matakuliah
     Route::get('/matakuliah/', '\App\Http\Controllers\API\MatakuliahController@index');
