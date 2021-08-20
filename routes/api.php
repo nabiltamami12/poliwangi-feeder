@@ -126,7 +126,7 @@ Route::prefix('v1')->group(function () {
     Route::put('/inputnilai/{id}', '\App\Http\Controllers\API\InputNilaiController@update');
     Route::delete('/inputnilai/{id}', '\App\Http\Controllers\API\InputNilaiController@destroy');
 
-    // Absensi
+    // ABSENSI
     Route::get('/absensi', [Ctr\AbsensiController::class, 'index']);
     Route::get('/absensi/{id}', [Ctr\AbsensiController::class, 'show']);
     Route::get('/absensi/home/{id}', [Ctr\AbsensiController::class, 'one']);

@@ -23,7 +23,7 @@ class AbsensiController extends Controller
 
     public function index(Request $req)
     {
-        // Untuk mengambil seluruh data (Admin)
+        // Untuk mengambil seluruh data (Admin dan Dosen)
         set_time_limit(0);
 
         $table = DB::table('MAHASISWA');
