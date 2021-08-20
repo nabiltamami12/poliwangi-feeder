@@ -83,7 +83,7 @@ class DaftarMatkulController extends Controller
             )
             ->join("MATAKULIAH", "MATAKULIAH.NOMOR", "=", "DOSEN_PENGAMPU.MATAKULIAH")
             ->join("PROGRAM_STUDI", "PROGRAM_STUDI.NOMOR", "=", "MATAKULIAH.PROGRAM_STUDI")
-            ->where("DOSEN_PENGAMPU.NOMOR", $id)
+            ->where("DOSEN_PENGAMPU.DOSEN", $id)
             ->get();
 
         return response()->json([
@@ -114,7 +114,7 @@ class DaftarMatkulController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $matakuliah = DaftarMatkul::where('NOMOR', $id);
+        $matakuliah = DaftarMatkul::where('DOSEN', $id);
         $data = $request->all();
 
         $validate = Validator::make($data, [
