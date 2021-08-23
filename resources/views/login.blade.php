@@ -71,7 +71,7 @@
                   <div class="input-group input-group-merge input-group-alternative">
                     <div class="input-group-prepend">
                       <span class="input-group-text">
-                        <span class="iconify" data-icon="bx:bxs-envelope" data-inline="false"></span>
+                        <i class="iconify" data-icon="bx:bxs-envelope" data-inline="false"></i>
                       </span>
                     </div>
                     <input class="form-control" placeholder="Email" type="email" id="email" name="email"
@@ -82,7 +82,7 @@
                   <div class="input-group input-group-merge input-group-alternative">
                     <div class="input-group-prepend">
                       <span class="input-group-text">
-                        <span class="iconify" data-icon="bx:bxs-lock-open" data-inline="false"></span>
+                        <i class="iconify" data-icon="bx:bxs-lock-open" data-inline="false"></i>
                       </span>
                     </div>
                     <input class="form-control" placeholder="Password" type="password" name="password" id="password"

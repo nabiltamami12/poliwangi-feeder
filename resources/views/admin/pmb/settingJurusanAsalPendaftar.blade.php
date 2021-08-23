@@ -17,12 +17,13 @@
             </div>
             <div class="col-12 col-md-6 text-center text-md-right mt-3 mt-md-0">
               <a class="btn btn-primary" href="" role="button">
-                <span class="iconify-inline mr-1" data-icon="bx:bxs-plus-circle"></span>
-                <span>Tambah</span>
+                <i class="iconify-inline mr-1" data-icon="bx:bxs-plus-circle"></i>
+                Tambah
               </a>
-              <a class="btn btn-info ml-0 ml-md-2 text-primary" href="/admin/settingpmb/editjurusanasal" role="button">
-                <span class="iconify-inline mr-1" data-icon="bx:bx-edit-alt"></span>
-                <span>Edit Data</span>
+              <a class="btn btn-info_transparent ml-0 ml-md-2 text-primary" href="/admin/settingpmb/editjurusanasal"
+                role="button">
+                <i class="iconify-inline mr-1" data-icon="bx:bx-edit-alt"></i>
+                Edit Data
               </a>
             </div>
           </div>
@@ -43,14 +44,12 @@
             </form>
           </div>
           <div class="col-12 col-md-4 offset-md-2 offset-0 text-right p-0 mt-3 mt-md-0">
-            <div class="input-group">
-              <input type="search" class="form-control form-control-sm" id="searchdata" placeholder="Pencarian ...">
-              <div class="input-group-prepend">
-                <div class="input-group-text search-icon rounded-right">
-                  <span class="iconify" data-icon="fluent:search-32-regular"></span>
-                </div>
-              </div>
-            </div>
+            <form class="search_form" action="">
+              <input class="form-control form-control-sm" type="search" placeholder="Pencarian...">
+              <button type="submit">
+                <i class="iconify-inline" data-icon="bx:bx-search"></i>
+              </button>
+            </form>
           </div>
         </div>
 
@@ -69,7 +68,7 @@
                 <td class="text-center px-2">1</td>
                 <td class="font-weight-bold text-capitalize">Ilmu pengetahuan alam</td>
                 <td class="text-center">
-                  <span class="iconify-inline delete-icon text-primary" data-icon="bx:bx-trash"></span>
+                  <i class="iconify-inline delete-icon text-primary" data-icon="bx:bx-trash"></span>
                 </td>
               </tr>
 
@@ -77,7 +76,7 @@
                 <td class="text-center px-2">2</td>
                 <td class="font-weight-bold text-capitalize">Ilmu pengetahuan sosial</td>
                 <td class="text-center">
-                  <span class="iconify-inline delete-icon text-primary" data-icon="bx:bx-trash"></span>
+                  <i class="iconify-inline delete-icon text-primary" data-icon="bx:bx-trash"></span>
                 </td>
               </tr>
             </tbody>
@@ -86,7 +85,7 @@
 
         <div class="row justify-content-between align-items-center table-information">
           <h3>Menampilkan 1 sampai 2 dari 2 total data</h3>
-          <nav aria-label="pagination table">
+          <nav aria-label="Page navigation example">
             <ul class="pagination">
               <li class="page-item disabled" aria-label="Previous">
                 <a class="page-link" href="#" tabindex="-1">

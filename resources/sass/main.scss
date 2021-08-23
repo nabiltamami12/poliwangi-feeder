@@ -132,7 +132,8 @@ nav#navbar {
     background: #ffffff;
     border-radius: 0.25rem;
     box-shadow: none;
-    span.iconify {
+    i.iconify,
+    i.iconify-inline {
         font-size: 2rem;
     }
     span {
@@ -286,24 +287,54 @@ nav#navbar {
         }
     }
 
-    .search-icon {
-        background-color: $primary;
-        border: 0;
-        max-height: 2rem;
-        color: #fff;
-        border-radius: 0 0.5rem 0.5rem 0;
-    }
+    .search_form {
+        input {
+            border-radius: 0.5rem 0px 0px 0.5rem;
+            padding: 0.5rem 0.75rem;
+            border: 1px solid $primary;
+            float: left;
 
-    input[type="search"] {
-        border: 1px solid $primary;
-        border-right: 0;
-        border-radius: 0.5rem 0 0 0.5rem;
-        padding: 0 0.75rem;
-        max-height: 35px;
-    }
+            &::placeholder {
+                @include mixintext(400, 0.75rem, 1.21em, $font-placeholder);
+            }
+        }
 
-    input[type="search"]::placeholder {
-        @include mixintext(400, 0.75rem, 1.21em, $font-black);
+        button {
+            float: left;
+            border-radius: 0px 0.5rem 0.5rem 0px;
+            background-color: $primary;
+            color: white;
+            border: 1px solid $primary;
+            border-left: none;
+            cursor: pointer;
+            &:hover {
+                background: #0b7dda;
+            }
+        }
+
+        .form-control {
+            width: 85%;
+        }
+
+        .form-control-sm {
+            width: 90%;
+        }
+
+        .form-control + button {
+            height: calc(1.5em + 1.25rem + 2px);
+            width: 15%;
+        }
+
+        .form-control-sm + button {
+            height: calc(0.45em + 1.25rem + 4px);
+            width: 10%;
+        }
+
+        &::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
     }
 
     input[type="time"] {
@@ -337,7 +368,6 @@ nav#navbar {
     // Table
     .table-responsive {
         border-radius: 0 0 0.5rem 0.5rem;
-
         .table-header {
             background-color: #f6f9fc;
             th {
@@ -364,8 +394,24 @@ nav#navbar {
                     cursor: pointer;
                 }
             }
-            tr.bordered {
+            .iconify,
+            .iconify-inline {
+                font-size: 1rem;
+            }
+            .bordered {
                 border-bottom: 1px solid rgba(153, 153, 153, 0.5);
+            }
+            .bordered_sm {
+                position: relative;
+            }
+            .bordered_sm::after {
+                content: "";
+                background-color: rgba(153, 153, 153, 0.5);
+                position: absolute;
+                left: 0;
+                bottom: 0;
+                width: 85%;
+                height: 1px;
             }
             span {
                 @include mixintext(500, 0.8125rem, 1.2em, $font-black);

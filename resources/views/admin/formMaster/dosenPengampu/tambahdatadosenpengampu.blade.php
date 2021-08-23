@@ -43,7 +43,7 @@
               <label class="invisible">Hapus</label>
               <button class="btn btn-icon btn-danger d-block w-100" type="button">
                 <span class="btn-inner--icon">
-                  <span class="iconify" data-icon="bx:bx-trash"></span>
+                  <i class="iconify-inline" data-icon="bx:bx-trash"></i>
                 </span>
                 <span class="btn-inner--text">Hapus</span>
               </button>

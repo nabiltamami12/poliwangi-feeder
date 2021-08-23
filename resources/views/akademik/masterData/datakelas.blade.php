@@ -17,7 +17,7 @@
             </div>
             <div class="col text-right">
               <button type="button" class="btn btn-primary ">
-                <span class="iconify mr-2" onclick="add_btn()" data-icon="bx:bxs-plus-circle"></span>
+                <i class="iconify mr-2" onclick="add_btn()" data-icon="bx:bxs-plus-circle"></i>
                 Tambah
               </button>
             </div>
@@ -39,14 +39,12 @@
             </form>
           </div>
           <div class="col-12 col-md-4 offset-md-2 offset-0 text-right p-0 mt-3 mt-md-0">
-            <div class="input-group">
-              <input type="search" class="form-control form-control-sm" id="searchdata" placeholder="Pencarian ...">
-              <div class="input-group-prepend">
-                <div class="input-group-text search-icon rounded-right">
-                  <span class="iconify" data-icon="fluent:search-32-regular"></span>
-                </div>
-              </div>
-            </div>
+            <form class="search_form" action="">
+              <input class="form-control form-control-sm" type="search" placeholder="Pencarian...">
+              <button type="submit">
+                <i class="iconify-inline" data-icon="bx:bx-search"></i>
+              </button>
+            </form>
           </div>
         </div>
 
@@ -88,8 +86,8 @@
                   kelas besar
                 </td>
                 <td class="text-center">
-                  <span class="iconify edit-icon" data-icon="bx:bx-edit-alt" ></span>
-                  <span class="iconify delete-icon" data-icon="bx:bx-trash" ></span>
+                  <i class="iconify edit-icon" data-icon="bx:bx-edit-alt" ></span>
+                  <i class="iconify delete-icon" data-icon="bx:bx-trash" ></span>
                 </td>
               </tr>
 
@@ -113,8 +111,8 @@
                   kelas besar
                 </td>
                 <td class="text-center">
-                  <span class="iconify edit-icon" data-icon="bx:bx-edit-alt" ></span>
-                  <span class="iconify delete-icon" data-icon="bx:bx-trash" ></span>
+                  <i class="iconify edit-icon" data-icon="bx:bx-edit-alt" ></span>
+                  <i class="iconify delete-icon" data-icon="bx:bx-trash" ></span>
                 </td>
               </tr>
 
@@ -138,8 +136,8 @@
                   kelas besar
                 </td>
                 <td class="text-center">
-                  <span class="iconify edit-icon" data-icon="bx:bx-edit-alt" ></span>
-                  <span class="iconify delete-icon" data-icon="bx:bx-trash" ></span>
+                  <i class="iconify edit-icon" data-icon="bx:bx-edit-alt" ></span>
+                  <i class="iconify delete-icon" data-icon="bx:bx-trash" ></span>
                 </td>
               </tr>
 
@@ -163,8 +161,8 @@
                   kelas besar
                 </td>
                 <td class="text-center">
-                  <span class="iconify edit-icon" data-icon="bx:bx-edit-alt" ></span>
-                  <span class="iconify delete-icon" data-icon="bx:bx-trash" ></span>
+                  <i class="iconify edit-icon" data-icon="bx:bx-edit-alt" ></span>
+                  <i class="iconify delete-icon" data-icon="bx:bx-trash" ></span>
                 </td>
               </tr>
 
@@ -188,8 +186,8 @@
                   kelas besar
                 </td>
                 <td class="text-center">
-                  <span class="iconify edit-icon" data-icon="bx:bx-edit-alt" ></span>
-                  <span class="iconify delete-icon" data-icon="bx:bx-trash" ></span>
+                  <i class="iconify edit-icon" data-icon="bx:bx-edit-alt" ></span>
+                  <i class="iconify delete-icon" data-icon="bx:bx-trash" ></span>
                 </td>
               </tr>
 
@@ -213,8 +211,8 @@
                   kelas besar
                 </td>
                 <td class="text-center">
-                  <span class="iconify edit-icon" data-icon="bx:bx-edit-alt" ></span>
-                  <span class="iconify delete-icon" data-icon="bx:bx-trash" ></span>
+                  <i class="iconify edit-icon" data-icon="bx:bx-edit-alt" ></span>
+                  <i class="iconify delete-icon" data-icon="bx:bx-trash" ></span>
                 </td>
               </tr>
 
@@ -246,7 +244,7 @@
 
         <div class="row justify-content-between align-items-center table-information">
           <h3>Menampilkan 1 sampai 7 dari 7 total data</h3>
-          <nav aria-label="pagination table">
+          <nav aria-label="Page navigation example">
             <ul class="pagination">
               <li class="page-item disabled" aria-label="Previous">
                 <a class="page-link" href="#" tabindex="-1">
@@ -323,8 +321,8 @@ dt = $('#datatable').DataTable({
         "mRender": function(data, type, full) {
           var id = data['nomor'];
           var text_hapus = data['kode'];
-          var btn_update = `<span class="iconify edit-icon" onclick='update_btn(${id})' data-icon="bx:bx-edit-alt" ></span>` 
-          var btn_delete = `<span class="iconify delete-icon" data-icon="bx:bx-trash"  onclick='delete_btn(${id},"kelas","kelas","${text_hapus}")'></span>`; 
+          var btn_update = `<i class="iconify edit-icon" onclick='update_btn(${id})' data-icon="bx:bx-edit-alt" ></span>` 
+          var btn_delete = `<i class="iconify delete-icon" data-icon="bx:bx-trash"  onclick='delete_btn(${id},"kelas","kelas","${text_hapus}")'></span>`; 
           res = btn_update+" "+btn_delete;
           return res;
         }

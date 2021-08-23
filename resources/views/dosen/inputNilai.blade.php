@@ -17,16 +17,16 @@
             </div>
             <div class="col-12 col-md-9 text-center text-md-right">
               <button type="button" class="btn btn-icon btn-warning mt-3 mt-md-0">
-                <span class="btn-inner--icon"><span class="iconify" data-icon="bx:bx-printer"></span></span>
+                <span class="btn-inner--icon"><i class="iconify-inline" data-icon="bx:bx-printer"></i></span>
                 <span class="btn-inner--text">Cetak Data</span>
               </button>
               <button type="button" class="btn btn-icon btn-secondary mt-3 mt-md-0 ml-0 ml-md-3">
-                <span class="btn-inner--icon"><span class="iconify" data-icon="bx:bx-share-alt"></span></span>
+                <span class="btn-inner--icon"><i class="iconify-inline" data-icon="bx:bx-share-alt"></i></span>
                 <span class="btn-inner--text">Publish Nilai</span>
               </button>
               <button type="button" class="btn btn-icon btn-primary mt-3 mt-md-0 ml-0 ml-md-3">
                 <span class="btn-inner--icon">
-                  <span class="iconify" data-icon="bx:bx-save"></span>
+                  <i class="iconify-inline" data-icon="bx:bx-save"></i>
                 </span>
                 <span class="btn-inner--text">Simpan</span>
               </button>

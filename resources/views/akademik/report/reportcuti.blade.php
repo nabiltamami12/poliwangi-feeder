@@ -17,11 +17,11 @@
             </div>
             <div class="col-12 col-md-6 text-center text-md-right mt-3 mt-md-0">
               <button type="button" class="btn btn-primary">
-                <span class="iconify mr-2" data-icon="bx:bxs-plus-circle"></span>
+                <i class="iconify-inline mr-1" data-icon="bx:bxs-plus-circle"></i>
                 Tambah
               </button>
-              <button type="button" class="btn btn-warning ml-0 ml-md-3">
-                <span class="iconify mr-2" data-icon="bx:bx-download"></span>
+              <button type="button" class="btn btn-warning ml-0 ml-md-2">
+                <i class="iconify-inline mr-1" data-icon="bx:bx-cloud-download"></i>
                 Eksport
               </button>
             </div>
@@ -62,14 +62,12 @@
             </form>
           </div>
           <div class="col-12 col-md-4 offset-md-2 offset-0 text-right p-0 mt-3 mt-md-0">
-            <div class="input-group">
-              <input type="search" class="form-control form-control-sm" id="searchdata" placeholder="Pencarian ...">
-              <div class="input-group-prepend">
-                <div class="input-group-text search-icon rounded-right">
-                  <span class="iconify" data-icon="fluent:search-32-regular"></span>
-                </div>
-              </div>
-            </div>
+            <form class="search_form" action="">
+              <input class="form-control form-control-sm" type="search" placeholder="Pencarian...">
+              <button type="submit">
+                <i class="iconify-inline" data-icon="bx:bx-search"></i>
+              </button>
+            </form>
           </div>
         </div>
 
@@ -96,8 +94,8 @@
                 <td class="text-center">04/06/2002</td>
                 <td class="wordwrap text-lowercase">disini berisi alasan cuti yang diberikan mahasiswa</td>
                 <td class="text-center">
-                  <span class="iconify edit-icon" data-icon="bx:bx-edit-alt"></span>
-                  <span class="iconify delete-icon" data-icon="bx:bx-trash"></span>
+                  <i class="iconify edit-icon mr-2" data-icon="bx:bx-edit-alt"></i>
+                  <i class="iconify delete-icon" data-icon="bx:bx-trash"></i>
                 </td>
               </tr>
 
@@ -109,8 +107,8 @@
                 <td class="text-center">04/06/2002</td>
                 <td class="wordwrap text-lowercase">disini berisi alasan cuti yang diberikan mahasiswa</td>
                 <td class="text-center">
-                  <span class="iconify edit-icon" data-icon="bx:bx-edit-alt"></span>
-                  <span class="iconify delete-icon" data-icon="bx:bx-trash"></span>
+                  <i class="iconify edit-icon mr-2" data-icon="bx:bx-edit-alt"></i>
+                  <i class="iconify delete-icon" data-icon="bx:bx-trash"></i>
                 </td>
               </tr>
 
@@ -122,8 +120,8 @@
                 <td class="text-center">04/06/2002</td>
                 <td class="wordwrap text-lowercase">disini berisi alasan cuti yang diberikan mahasiswa</td>
                 <td class="text-center">
-                  <span class="iconify edit-icon" data-icon="bx:bx-edit-alt"></span>
-                  <span class="iconify delete-icon" data-icon="bx:bx-trash"></span>
+                  <i class="iconify edit-icon mr-2" data-icon="bx:bx-edit-alt"></i>
+                  <i class="iconify delete-icon" data-icon="bx:bx-trash"></i>
                 </td>
               </tr>
 
@@ -135,8 +133,8 @@
                 <td class="text-center">04/06/2002</td>
                 <td class="wordwrap text-lowercase">disini berisi alasan cuti yang diberikan mahasiswa</td>
                 <td class="text-center">
-                  <span class="iconify edit-icon" data-icon="bx:bx-edit-alt"></span>
-                  <span class="iconify delete-icon" data-icon="bx:bx-trash"></span>
+                  <i class="iconify edit-icon mr-2" data-icon="bx:bx-edit-alt"></i>
+                  <i class="iconify delete-icon" data-icon="bx:bx-trash"></i>
                 </td>
               </tr>
 
@@ -148,8 +146,8 @@
                 <td class="text-center">04/06/2002</td>
                 <td class="wordwrap text-lowercase">disini berisi alasan cuti yang diberikan mahasiswa</td>
                 <td class="text-center">
-                  <span class="iconify edit-icon" data-icon="bx:bx-edit-alt"></span>
-                  <span class="iconify delete-icon" data-icon="bx:bx-trash"></span>
+                  <i class="iconify edit-icon mr-2" data-icon="bx:bx-edit-alt"></i>
+                  <i class="iconify delete-icon" data-icon="bx:bx-trash"></i>
                 </td>
               </tr>
             </tbody>
@@ -159,7 +157,7 @@
 
         <div class="row justify-content-between align-items-center table-information">
           <h3>Menampilkan 1 sampai 5 dari 5 total data</h3>
-          <nav aria-label="pagination table">
+          <nav aria-label="Page navigation example">
             <ul class="pagination">
               <li class="page-item disabled" aria-label="Previous">
                 <a class="page-link" href="#" tabindex="-1">

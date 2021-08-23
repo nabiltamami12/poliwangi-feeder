@@ -17,7 +17,7 @@
             </div>
             <div class="col-12 col-md-6 text-center text-md-right mt-3 mt-md-0">
               <a class="btn btn-primary" href="/admin/masterdata/dataprodi/tambahdata" role="button">
-                <span class="iconify mr-1" data-icon="bx:bx-edit-alt"></span>
+                <i class="iconify mr-1" data-icon="bx:bx-edit-alt"></i>
                 Edit Data
               </a>
             </div>

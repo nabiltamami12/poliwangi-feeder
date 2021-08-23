@@ -9,34 +9,8 @@
   <div class="row">
     <div class="col">
       <div class="d-md-flex justify-content-between informasi_mahasiswa mt-4">
-        <p class="mb-0">Masa: <strong class="font-weight-bold">29 Januari 2021 - 29 Mei 2021</strong></p>
         <p class="mb-0 mt-2 mt-md-0">Status Mahasiswa: <span class="text-success">Aktif</span></p>
-      </div>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col">
-      <div id="pengumuman" class="carousel slide" data-ride="carousel">
-        <div class="carousel-inner shadow">
-          <div class="carousel-item active" data-interval="2000">
-            <img src="{{ url('images') }}/banner.png" alt="">
-          </div>
-          <div class="carousel-item" data-interval="2000">
-            <img src="{{ url('images') }}/banner.png" alt="">
-          </div>
-          <div class="carousel-item" data-interval="2000">
-            <img src="{{ url('images') }}/banner.png" alt="">
-          </div>
-        </div>
-        <a class="carousel-control-prev" href="#pengumuman" role="button" data-slide="prev">
-          <span class="iconify" data-icon="bx:bx-chevron-left" data-inline="false"></span>
-          <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#pengumuman" role="button" data-slide="next">
-          <span class="iconify" data-icon="bx:bx-chevron-right" data-inline="false"></span>
-          <span class="sr-only">Next</span>
-        </a>
+        <p class="mb-0">Masa: <strong class="font-weight-bold">29 Januari 2021 - 29 Mei 2021</strong></p>
       </div>
     </div>
   </div>

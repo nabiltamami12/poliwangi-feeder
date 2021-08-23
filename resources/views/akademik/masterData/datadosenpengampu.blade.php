@@ -126,7 +126,7 @@ dt = $('#datatable').DataTable({
         "mRender": function(data, type, full) {
           var id = data['nomor'];
           var text_hapus = data['jurusan'];
-          var btn_update = `<span class="iconify edit-icon" onclick='update_btn(${id})' data-icon="bx:bx-edit-alt" ></span>` 
+          var btn_update = `<i class="iconify edit-icon" onclick='update_btn(${id})' data-icon="bx:bx-edit-alt" ></span>` 
           res = btn_update;
           return res;
         }

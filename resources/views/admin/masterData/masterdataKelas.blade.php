@@ -38,11 +38,11 @@
             </div>
             <div class="col-12 col-md-6 text-center text-md-right mt-3 mt-md-0">
               <a class="btn btn-primary" href="/admin/masterdata/datakelas/tambahdata" role="button">
-                <span class="iconify mr-1" data-icon="bx:bxs-plus-circle"></span>
+                <i class="iconify-inline mr-1" data-icon="bx:bxs-plus-circle"></i>
                 Tambah
               </a>
-              <button type="button" class="btn btn-info text-primary ml-0 ml-md-2">
-                <span class="iconify mr-1" data-icon="bx:bx-download"></span>
+              <button type="button" class="btn btn-info_transparent text-primary ml-0 ml-md-2">
+                <i class="iconify-inline mr-1" data-icon="bx:bx-download"></i>
                 Import
               </button>
             </div>
@@ -65,14 +65,12 @@
             </form>
           </div>
           <div class="col-12 col-md-4 offset-md-2 offset-0 text-right p-0 mt-3 mt-md-0">
-            <div class="input-group">
-              <input type="search" class="form-control form-control-sm" id="searchdata" placeholder="Pencarian ...">
-              <div class="input-group-prepend">
-                <div class="input-group-text search-icon rounded-right">
-                  <span class="iconify" data-icon="fluent:search-32-regular"></span>
-                </div>
-              </div>
-            </div>
+            <form class="search_form" action="">
+              <input class="form-control form-control-sm" type="search" placeholder="Pencarian...">
+              <button type="submit">
+                <i class="iconify-inline" data-icon="bx:bx-search"></i>
+              </button>
+            </form>
           </div>
         </div>
 
@@ -95,8 +93,8 @@
                 <td class="text-center">G001</td>
                 <td class="text-center">24</td>
                 <td class="text-center">
-                  <a href="/admin/masterdata/datakelas/updatedata"><span class="iconify edit-icon"
-                      data-icon="bx:bx-edit-alt"></span></a>
+                  <a href="/admin/masterdata/datakelas/updatedata"><i class="iconify edit-icon mr-2"
+                      data-icon="bx:bx-edit-alt"></i></a>
                   <span data-toggle="modal" data-target="#deleteKelasModal" class="iconify delete-icon"
                     data-icon="bx:bx-trash"></span>
                 </td>
@@ -108,8 +106,8 @@
                 <td class="text-center">G002</td>
                 <td class="text-center">40</td>
                 <td class="text-center">
-                  <a href="/admin/masterdata/datakelas/updatedata"><span class="iconify edit-icon"
-                      data-icon="bx:bx-edit-alt"></span></a>
+                  <a href="/admin/masterdata/datakelas/updatedata"><i class="iconify edit-icon mr-2"
+                      data-icon="bx:bx-edit-alt"></i></a>
                   <span data-toggle="modal" data-target="#deleteKelasModal" class="iconify delete-icon"
                     data-icon="bx:bx-trash"></span>
                 </td>
@@ -121,8 +119,8 @@
                 <td class="text-center">G003</td>
                 <td class="text-center">24</td>
                 <td class="text-center">
-                  <a href="/admin/masterdata/datakelas/updatedata"><span class="iconify edit-icon"
-                      data-icon="bx:bx-edit-alt"></span></a>
+                  <a href="/admin/masterdata/datakelas/updatedata"><i class="iconify edit-icon mr-2"
+                      data-icon="bx:bx-edit-alt"></i></a>
                   <span data-toggle="modal" data-target="#deleteKelasModal" class="iconify delete-icon"
                     data-icon="bx:bx-trash"></span>
                 </td>
@@ -134,8 +132,8 @@
                 <td class="text-center">G004</td>
                 <td class="text-center">45</td>
                 <td class="text-center">
-                  <a href="/admin/masterdata/datakelas/updatedata"><span class="iconify edit-icon"
-                      data-icon="bx:bx-edit-alt"></span></a>
+                  <a href="/admin/masterdata/datakelas/updatedata"><i class="iconify edit-icon mr-2"
+                      data-icon="bx:bx-edit-alt"></i></a>
                   <span data-toggle="modal" data-target="#deleteKelasModal" class="iconify delete-icon"
                     data-icon="bx:bx-trash"></span>
                 </td>
@@ -147,8 +145,8 @@
                 <td class="text-center">G005</td>
                 <td class="text-center">35</td>
                 <td class="text-center">
-                  <a href="/admin/masterdata/datakelas/updatedata"><span class="iconify edit-icon"
-                      data-icon="bx:bx-edit-alt"></span></a>
+                  <a href="/admin/masterdata/datakelas/updatedata"><i class="iconify edit-icon mr-2"
+                      data-icon="bx:bx-edit-alt"></i></a>
                   <span data-toggle="modal" data-target="#deleteKelasModal" class="iconify delete-icon"
                     data-icon="bx:bx-trash"></span>
                 </td>
@@ -160,8 +158,8 @@
                 <td class="text-center">G006</td>
                 <td class="text-center">40</td>
                 <td class="text-center">
-                  <a href="/admin/masterdata/datakelas/updatedata"><span class="iconify edit-icon"
-                      data-icon="bx:bx-edit-alt"></span></a>
+                  <a href="/admin/masterdata/datakelas/updatedata"><i class="iconify edit-icon mr-2"
+                      data-icon="bx:bx-edit-alt"></i></a>
                   <span data-toggle="modal" data-target="#deleteKelasModal" class="iconify delete-icon"
                     data-icon="bx:bx-trash"></span>
                 </td>
@@ -173,8 +171,8 @@
                 <td class="text-center">G007</td>
                 <td class="text-center">50</td>
                 <td class="text-center">
-                  <a href="/admin/masterdata/datakelas/updatedata"><span class="iconify edit-icon"
-                      data-icon="bx:bx-edit-alt"></span></a>
+                  <a href="/admin/masterdata/datakelas/updatedata"><i class="iconify edit-icon mr-2"
+                      data-icon="bx:bx-edit-alt"></i></a>
                   <span data-toggle="modal" data-target="#deleteKelasModal" class="iconify delete-icon"
                     data-icon="bx:bx-trash"></span>
                 </td>
@@ -186,8 +184,8 @@
                 <td class="text-center">G008</td>
                 <td class="text-center">50</td>
                 <td class="text-center">
-                  <a href="/admin/masterdata/datakelas/updatedata"><span class="iconify edit-icon"
-                      data-icon="bx:bx-edit-alt"></span></a>
+                  <a href="/admin/masterdata/datakelas/updatedata"><i class="iconify edit-icon mr-2"
+                      data-icon="bx:bx-edit-alt"></i></a>
                   <span data-toggle="modal" data-target="#deleteKelasModal" class="iconify delete-icon"
                     data-icon="bx:bx-trash"></span>
                 </td>
@@ -199,8 +197,8 @@
                 <td class="text-center">G009</td>
                 <td class="text-center">50</td>
                 <td class="text-center">
-                  <a href="/admin/masterdata/datakelas/updatedata"><span class="iconify edit-icon"
-                      data-icon="bx:bx-edit-alt"></span></a>
+                  <a href="/admin/masterdata/datakelas/updatedata"><i class="iconify edit-icon mr-2"
+                      data-icon="bx:bx-edit-alt"></i></a>
                   <span data-toggle="modal" data-target="#deleteKelasModal" class="iconify delete-icon"
                     data-icon="bx:bx-trash"></span>
                 </td>
@@ -211,7 +209,7 @@
 
         <div class="row justify-content-between align-items-center table-information">
           <h3>Menampilkan 1 sampai 9 dari 9 total data</h3>
-          <nav aria-label="pagination table">
+          <nav aria-label="Page navigation example">
             <ul class="pagination">
               <li class="page-item disabled" aria-label="Previous">
                 <a class="page-link" href="#" tabindex="-1">

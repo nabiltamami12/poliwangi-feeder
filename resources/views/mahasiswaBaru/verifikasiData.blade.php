@@ -74,7 +74,7 @@
                     readonly />
                   <label class="input-group-btn" for="txtDate">
                     <span class="date_button">
-                      <span class="iconify" data-icon="bx:bx-calendar" data-inline="false"></span>
+                      <i class="iconify" data-icon="bx:bx-calendar" data-inline="false"></i>
                     </span>
                   </label>
                 </div>
@@ -174,7 +174,7 @@
                 <label>Foto Calon Peserta Didik</label>
                 <div class="input_file">
                   <label for="file-input-foto">
-                    <span class="iconify fileUpload-icon" data-icon="bx:bx-image-add"></span>
+                    <i class="iconify fileUpload-icon" data-icon="bx:bx-image-add"></i>
                   </label>
                 </div>
                 <input type="file" class="form-control-file" id="file-input-foto">
@@ -183,7 +183,7 @@
                 <label>Foto Ijazah</label>
                 <div class="input_file">
                   <label for="file-input-ijazah">
-                    <span class="iconify fileUpload-icon" data-icon="bx:bx-image-add"></span>
+                    <i class="iconify fileUpload-icon" data-icon="bx:bx-image-add"></i>
                   </label>
                 </div>
                 <input type="file" class="form-control-file" id="file-input-ijazah">
@@ -195,18 +195,16 @@
                 <label>Surat Pernyataan Taat Peraturan</label>
                 <div class="input_file">
                   <label for="file-input-peraturan">
-                    <span class="iconify fileUpload-icon" data-icon="bx:bx-image-add"></span>
+                    <i class="iconify fileUpload-icon" data-icon="bx:bx-image-add"></i>
                   </label>
                 </div>
                 <input type="file" class="form-control-file" id="file-input-peraturan">
               </div>
             </div>
             <div class="form_action mt-4">
-              <button class="btn button_sebelumnya">Sebelumnya</button>
+              <button class="btn btn-info text-primary font-weight-bold button_sebelumnya">Sebelumnya</button>
               <button type="submit" class="btn btn-primary">Submit</button>
             </div>
-
-
           </form>
         </div>
       </div>

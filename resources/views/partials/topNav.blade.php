@@ -39,7 +39,7 @@
                         <form method="POST">
                             @csrf
                             <a href="{{ url('/') }}" class="dropdown-item">
-                                <span class="iconify" data-icon="bx:bxs-exit" data-inline="false"></span>
+                                <i class="iconify" data-icon="bx:bxs-exit" data-inline="false"></i>
                                 <span>{{ __('Keluar') }}</span>
                             </a>
                         </form>

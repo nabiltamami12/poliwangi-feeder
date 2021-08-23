@@ -1,33 +1,31 @@
-@extends('layouts.mainAdmin')
+@extends('layouts.mainKeuangan')
 
 @section('content')
 <!-- Header -->
 <header class="header"></header>
 
 <!-- Page content -->
-<section class="page-content page-content__admin container-fluid" id="admin_masterdatadosenpengampu">
+<section class="page-content page-content__keuangan container-fluid">
   <div class="row">
     <div class="col-xl-12">
       <div class="card shadow padding--small">
-
         <div class="card-header p-0 m-0 border-0 ">
           <div class="row align-items-center">
             <div class="col-12 col-md-6">
-              <h2 class="mb-0 text-center text-md-left">Data Dosen</h2>
+              <h2 class="mb-0 text-center text-md-left">Data Pendaftar</h2>
             </div>
             <div class="col-12 col-md-6 text-center text-md-right mt-3 mt-md-0">
-              <a class="btn btn-primary" href="/admin/masterdata/datadosenpengampu/tambahdata" role="button">
-                <i class="iconify-inline mr-1" data-icon="bx:bxs-plus-circle"></i>
-                Tambah
-              </a>
+              <button type="button" class="btn btn-primary">
+                <i class="iconify-inline mr-2" data-icon="bx:bx-download"></i>
+                Import
+              </button>
               <button type="button" class="btn btn-warning ml-0 ml-md-2">
-                <i class="iconify-inline mr-1" data-icon="bx:bx-upload"></i>
+                <i class="iconify-inline" data-icon="bx:bx-upload"></i>
                 Eksport
               </button>
             </div>
           </div>
         </div>
-
         <hr class="mt-4">
 
         <div class="row align-items-center px-3 my-4">
@@ -57,72 +55,46 @@
           <table class="table align-items-center table-flush table-borderless table-hover">
             <thead class="table-header">
               <tr>
-                <th scope="col" class="text-center px-2">No</th>
-                <th scope="col" style="width: 70%">Nama Dosen</th>
-                <th scope="col" class="text-center">TOTAL MATA KULIAH</th>
-                <th scope="col" class="text-center">aksi</th>
+                <th scope="col" class="text-center">No</th>
+                <th scope="col" class="text-center">No. VA</th>
+                <th scope="col" style="width: 25%">Nama</th>
+                <th scope="col" class="text-right" style="width: 25%">Nominal</th>
+                <th scope="col" style="width: 25%">Status Bayar</th>
               </tr>
             </thead>
 
             <tbody class="table-body">
               <tr>
-                <td class="text-center px-2">1</td>
-                <td>Prof. Melani Yosephin, Ph.D</td>
                 <td class="text-center">1</td>
-                <td class="text-center">
-                  <a href="">
-                    <i class="iconify edit-icon mr-2" data-icon="bx:bx-edit-alt"></i>
-                  </a>
-                  <span data-toggle="modal" data-target="#deleteDosenModal" class="iconify delete-icon"
-                    data-icon="bx:bx-trash"></span>
-                </td>
+                <td class="text-center">1281928746273601</td>
+                <td class="font-weight-bold text-capitalize">Afkarina ferin verigia</td>
+                <td class="text-right">Rp. 100.000</td>
+                <td class="text-success text-uppercase font-weight-bold">lunas</td>
               </tr>
 
               <tr>
-                <td class="text-center px-2">2</td>
-                <td>Prof. Melani Yosephin, Ph.D</td>
-                <td class="text-center">1</td>
-                <td class="text-center">
-                  <a href="">
-                    <i class="iconify edit-icon mr-2" data-icon="bx:bx-edit-alt"></i>
-                  </a>
-                  <span data-toggle="modal" data-target="#deleteDosenModal" class="iconify delete-icon"
-                    data-icon="bx:bx-trash"></span>
-                </td>
-              </tr>
-
-              <tr>
-                <td class="text-center px-2">3</td>
-                <td>Prof. Melani Yosephin, Ph.D</td>
-                <td class="text-center">1</td>
-                <td class="text-center">
-                  <a href="">
-                    <i class="iconify edit-icon mr-2" data-icon="bx:bx-edit-alt"></i>
-                  </a>
-                  <span data-toggle="modal" data-target="#deleteDosenModal" class="iconify delete-icon"
-                    data-icon="bx:bx-trash"></span>
-                </td>
+                <td class="text-center">2</td>
+                <td class="text-center">1281928746273928</td>
+                <td class="font-weight-bold text-capitalize">Budi</td>
+                <td class="text-right">Rp. 100.000</td>
+                <td class="text-success text-uppercase font-weight-bold">lunas</td>
               </tr>
             </tbody>
           </table>
         </div>
 
         <div class="row justify-content-between align-items-center table-information">
-          <h3>Menampilkan 1 sampai 3 dari 3 total data</h3>
+          <h3>Menampilkan 1 sampai 2 dari 2 total data</h3>
           <nav aria-label="Page navigation example">
             <ul class="pagination">
               <li class="page-item disabled" aria-label="Previous">
-                <a class="page-link" href="#" tabindex="-1">
-                  Previous
-                </a>
+                <a class="page-link" href="#" tabindex="-1">Previous</a>
               </li>
               <li class="page-item active">
                 <a class="page-link" href="#">1<span class="sr-only">(current)</span></a>
               </li>
               <li class="page-item disabled" aria-label="Next">
-                <a class="page-link" href="#">
-                  Next
-                </a>
+                <a class="page-link" href="#">Next</a>
               </li>
             </ul>
           </nav>

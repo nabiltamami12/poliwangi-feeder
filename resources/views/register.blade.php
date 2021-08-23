@@ -99,7 +99,7 @@
                             placeholder="DD/MM/YYYY" readonly />
                           <label class="input-group-btn" for="txtDate">
                             <span class="date_button">
-                              <span class="iconify" data-icon="bx:bx-calendar" data-inline="false"></span>
+                              <i class="iconify" data-icon="bx:bx-calendar" data-inline="false"></i>
                             </span>
                           </label>
                         </div>
@@ -116,7 +116,7 @@
                       <label for="foto">Foto Calon Pendaftar<span>*</span></label>
                       <div class="input-foto-siswa">
                         <label for="file-input-foto">
-                          <span class="iconify fileUpload-icon" data-icon="bx:bx-image-add" data-inline="false"></span>
+                          <i class="iconify fileUpload-icon" data-icon="bx:bx-image-add" data-inline="false"></i>
                         </label>
                       </div>
                       <input type="file" class="form-control-file d-none">

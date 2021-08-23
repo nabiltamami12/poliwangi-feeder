@@ -14,7 +14,6 @@
   <link rel="stylesheet" href="{{ url('argon') }}/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css"
     type="text/css">
   <!-- Iconify -->
-  <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
   <script src="https://code.iconify.design/2/2.0.3/iconify.min.js"></script>
   <!-- Page plugins -->
   <!-- Argon CSS -->

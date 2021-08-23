@@ -12,11 +12,11 @@
         <div class="calendar calendar-first" id="calendar_first">
           <div class="calendar_header">
             <button class="switch-month switch-left">
-              <span class="iconify" data-icon="bx:bx-chevron-left"></span>
+              <i class="iconify" data-icon="bx:bx-chevron-left"></i>
             </button>
             <h2></h2>
             <button class="switch-month switch-right">
-              <span class="iconify" data-icon="bx:bx-chevron-right"></span>
+              <i class="iconify" data-icon="bx:bx-chevron-right"></i>
             </button>
           </div>
           <hr class="my-4">
@@ -27,7 +27,7 @@
     </div>
 
     <div class="col-12 col-md-4">
-      <div class="card shadow padding--small detailKalendaer">
+      <div class="card shadow padding--small detailKalender">
         <div class="detailKalender_header">
           <h2 class="mb-0">Detail Kalender</h2>
         </div>
@@ -49,8 +49,8 @@
           <div class="row">
             <div class="col text-right">
               <button type="submit" class="btn btn-primary mt-4">
-                <span class="iconify" data-icon="bx:bx-save"></span>
-                <span>Simpan</span>
+                <i class="iconify-inline mr-1" data-icon="bx:bx-save"></i>
+                Simpan
               </button>
             </div>
           </div>

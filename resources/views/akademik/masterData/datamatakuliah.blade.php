@@ -17,7 +17,7 @@
             </div>
             <div class="col text-right">
               <button type="button" class="btn-primary ">
-                <span class="iconify mr-2" onclick="add_btn()" data-icon="bx:bxs-plus-circle"></span>
+                <i class="iconify mr-2" onclick="add_btn()" data-icon="bx:bxs-plus-circle"></i>
                 Tambah
               </button>
             </div>
@@ -43,7 +43,7 @@
                 <input type="search" class="form-control form-control-sm" id="searchdata" placeholder="Pencarian ...">
                 <div class="input-group-prepend">
                   <div class="input-group-text search-icon">
-                    <span class="iconify" data-icon="fluent:search-32-regular"></span>
+                    <i class="iconify" data-icon="fluent:search-32-regular"></i>
                   </div>
                 </div>
               </div>
@@ -70,7 +70,7 @@
 
         <div class="row justify-content-between align-items-center table-information">
           <h3>Menampilkan 1 sampai 7 dari 7 total data</h3>
-          <nav aria-label="pagination table">
+          <nav aria-label="Page navigation example">
             <ul class="pagination">
               <li class="page-item disabled" aria-label="Previous">
                 <a class="page-link" href="#" tabindex="-1">
@@ -147,8 +147,8 @@ dt = $('#datatable').DataTable({
         "mRender": function(data, type, full) {
           var id = data['nomor'];
           var text_hapus = data['kode'];
-          var btn_update = `<span class="iconify edit-icon" onclick='update_btn(${id})' data-icon="bx:bx-edit-alt" ></span>` 
-          var btn_delete = `<span class="iconify delete-icon" data-icon="bx:bx-trash"  onclick='delete_btn(${id},"matakuliah","matakuliah","${text_hapus}")'></span>`; 
+          var btn_update = `<i class="iconify edit-icon" onclick='update_btn(${id})' data-icon="bx:bx-edit-alt" ></span>` 
+          var btn_delete = `<i class="iconify delete-icon" data-icon="bx:bx-trash"  onclick='delete_btn(${id},"matakuliah","matakuliah","${text_hapus}")'></span>`; 
           res = btn_update+" "+btn_delete;
           return res;
         }

@@ -50,7 +50,7 @@
                   readonly />
                 <label class="input-group-btn" for="txtDate">
                   <span class="date_button">
-                    <span class="iconify" data-icon="bx:bx-calendar" data-inline="false"></span>
+                    <i class="iconify" data-icon="bx:bx-calendar" data-inline="false"></i>
                   </span>
                 </label>
               </div>

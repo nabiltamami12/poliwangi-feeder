@@ -204,10 +204,6 @@
   -moz-column-gap: 0.5rem;
        column-gap: 0.5rem;
 }
-#tahapan .form_action .button_sebelumnya {
-  background-color: #b2def8;
-  color: #28a3eb;
-}
 
 #daftar_ulang .modal-title {
   font-weight: 600;

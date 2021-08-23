@@ -141,8 +141,8 @@ dt = $('#datatable').DataTable({
         "mRender": function(data, type, full) {
           var id = data['nomor'];
           var text_hapus = "";
-          var btn_update = `<span class="iconify edit-icon" onclick='update_btn(${id})' data-icon="bx:bx-edit-alt" ></span>` 
-          var btn_delete = `<span class="iconify delete-icon" data-icon="bx:bx-trash"  onclick='delete_btn(${id},"rangenilai","range nilai","${text_hapus}")'></span>`; 
+          var btn_update = `<i class="iconify edit-icon" onclick='update_btn(${id})' data-icon="bx:bx-edit-alt" ></span>` 
+          var btn_delete = `<i class="iconify delete-icon" data-icon="bx:bx-trash"  onclick='delete_btn(${id},"rangenilai","range nilai","${text_hapus}")'></span>`; 
           res = btn_update+" "+btn_delete;
           return res;
         }

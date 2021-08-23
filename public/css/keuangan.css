@@ -1,70 +1,88 @@
-.page-content__keuangan .btn_aksi {
-  padding: 8px 12px;
-  border-radius: 8px;
-  border: 0;
+@import url(https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap);
+.page-content__keuangan input::-moz-placeholder {
+  color: #041f2f;
 }
-.page-content__keuangan .modal .modal-header {
-  padding-top: 2.25rem;
-  padding-bottom: 2.25rem;
+.page-content__keuangan input:-ms-input-placeholder {
+  color: #041f2f;
 }
-.page-content__keuangan .modal .modal-header .modal-title {
+.page-content__keuangan input::placeholder {
+  color: #041f2f;
+}
+.page-content__keuangan .modal input::-moz-placeholder {
+  color: #adb5bd;
+}
+.page-content__keuangan .modal input:-ms-input-placeholder {
+  color: #adb5bd;
+}
+.page-content__keuangan .modal input::placeholder {
+  color: #adb5bd;
+}
+.page-content__keuangan .modal .modal-title {
   font-weight: 600;
   font-size: 1.25rem;
   line-height: 1.2em;
   color: #062e46;
 }
-.page-content__keuangan .modal .modal-body .detail_dokumen {
+.page-content__keuangan .detail_dokumen {
   width: 100%;
   border: 1px solid #c4c4c4;
-  border-radius: 8px;
+  border-radius: 0.5rem;
   padding: 1.5rem;
 }
-.page-content__keuangan .modal .modal-body .iconify {
+.page-content__keuangan .detail_dokumen .iconify {
   font-size: 1.7rem;
   color: #000;
 }
-.page-content__keuangan .modal .modal-body .iconify:last-child {
-  color: #28a3eb;
-}
-.page-content__keuangan .modal .modal-body .nama_dokumen {
+.page-content__keuangan .detail_dokumen .nama_dokumen {
   font-weight: 400;
   font-size: 1.125rem;
   line-height: 1.2em;
   color: #041f2f;
 }
-.page-content__keuangan .modal .modal-footer {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  -moz-column-gap: 1.5rem;
-       column-gap: 1.5rem;
+.page-content__keuangan .detail_dokumen #custom-btn {
+  background-color: transparent;
+  border: none;
+  outline: none;
 }
-.page-content__keuangan .modal .modal-footer .btn {
-  width: 100%;
-  border-radius: 4px;
-  font-weight: 600;
-  font-size: 1rem;
-  line-height: 1.22em;
+.page-content__keuangan .card-stats {
+  font-family: "Open Sans", sans-serif;
+  border-radius: 1rem;
+}
+.page-content__keuangan .card-stats .bg-blue {
+  background: linear-gradient(90deg, #3adff5 0%, #39b1f5 93.75%);
+}
+.page-content__keuangan .card-stats .bg-green {
+  background: linear-gradient(90deg, #1cea55 0%, #cafb40 93.75%);
+}
+.page-content__keuangan .card-stats .bg-orange {
+  background: linear-gradient(90deg, #ea7f1c 0%, #fb4b40 93.75%);
+}
+.page-content__keuangan .form-group_nominal {
+  position: relative;
+}
+.page-content__keuangan .form-group_nominal .input_field {
+  font: 14px Montserrat;
+}
+.page-content__keuangan .form-group_nominal .input_field::-moz-placeholder {
   color: #041f2f;
 }
-.page-content__keuangan .modal .modal-footer .btn-modal-kembali {
-  border: 2px solid #adb5bd;
-  color: #adb5bd;
-  padding: 10px;
+.page-content__keuangan .form-group_nominal .input_field:-ms-input-placeholder {
+  color: #041f2f;
 }
-.page-content__keuangan .modal .modal-footer .btn-modal-kembali:hover {
-  background-color: #adb5bd;
-  color: #fff;
+.page-content__keuangan .form-group_nominal .input_field::placeholder {
+  color: #041f2f;
 }
-.page-content__keuangan .modal .modal-footer .btn-modal-setujui {
-  color: #ffffff;
-  background-color: #34c38f;
-  padding: 12px 16px;
-  border-radius: 4px;
-  border: 0;
+.page-content__keuangan .form-group_nominal .input_prefix {
+  font-size: 14px;
+  font-weight: 600;
+  color: #041f2f;
+  position: absolute;
+  pointer-events: none;
+  right: 0;
+  bottom: 12px;
+  padding-right: 38px;
 }
-.page-content__keuangan .modal .modal-footer .btn-modal-setujui:hover {
-  background-color: #fff;
-  border: 2px solid #34c38f;
-  color: #34c38f;
-  padding: 10px;
+.page-content__keuangan .separate {
+  border-spacing: 1.5rem 0 !important;
+  border-collapse: separate !important;
 }

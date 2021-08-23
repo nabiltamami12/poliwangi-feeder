@@ -7,32 +7,6 @@
 <!-- Page content -->
 <section class="page-content container-fluid" id="dashboard_dosen">
   <div class="row">
-    <div class="col">
-      <div id="pengumuman" class="carousel slide" data-ride="carousel">
-        <div class="carousel-inner shadow">
-          <div class="carousel-item active" data-interval="2000">
-            <img src="{{ url('images') }}/banner.png" alt="">
-          </div>
-          <div class="carousel-item" data-interval="2000">
-            <img src="{{ url('images') }}/banner.png" alt="">
-          </div>
-          <div class="carousel-item" data-interval="2000">
-            <img src="{{ url('images') }}/banner.png" alt="">
-          </div>
-        </div>
-        <a class="carousel-control-prev" href="#pengumuman" role="button" data-slide="prev">
-          <span class="iconify" data-icon="bx:bx-chevron-left" data-inline="false"></span>
-          <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#pengumuman" role="button" data-slide="next">
-          <span class="iconify" data-icon="bx:bx-chevron-right" data-inline="false"></span>
-          <span class="sr-only">Next</span>
-        </a>
-      </div>
-    </div>
-  </div>
-
-  <div class="row">
     <div class="col-12 col-md-8">
       <!-- CARD -->
       <div class="card shadow padding--medium">

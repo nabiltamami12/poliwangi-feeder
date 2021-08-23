@@ -62,7 +62,7 @@
                   <h2>KHS Semester satu</h2>
                 </td>
                 <td class="text-center">
-                  <span class="iconify download-icon text-primary" data-icon="bx:bx-download"></span>
+                  <i class="iconify-inline mr-1 text-primary" data-icon="bx:bx-cloud-download"></i>
                   <span class="font-weight-bold text-primary">Unduh File PDF</span>
                 </td>
               </tr>
@@ -73,7 +73,7 @@
                   <h2>KHS Semester Dua</h2>
                 </td>
                 <td class="text-center">
-                  <span class="iconify download-icon text-primary" data-icon="bx:bx-download"></span>
+                  <i class="iconify-inline mr-1 text-primary" data-icon="bx:bx-cloud-download"></i>
                   <span class="font-weight-bold text-primary">Unduh File PDF</span>
                 </td>
               </tr>
@@ -84,7 +84,7 @@
                   <h2>KHS Semester Tiga</h2>
                 </td>
                 <td class="text-center">
-                  <span class="iconify download-icon text-primary" data-icon="bx:bx-download"></span>
+                  <i class="iconify-inline mr-1 text-primary" data-icon="bx:bx-cloud-download"></i>
                   <span class="font-weight-bold text-primary">Unduh File PDF</span>
                 </td>
               </tr>
@@ -94,7 +94,7 @@
                   <h2>KHS Semester Empat</h2>
                   </th>
                 <td class="text-center">
-                  <span class="iconify download-icon text-primary" data-icon="bx:bx-download"></span>
+                  <i class="iconify-inline mr-1 text-primary" data-icon="bx:bx-cloud-download"></i>
                   <span class="font-weight-bold text-primary">Unduh File PDF</span>
                 </td>
               </tr>

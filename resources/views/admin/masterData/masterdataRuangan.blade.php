@@ -38,7 +38,7 @@
             </div>
             <div class="col-12 col-md-6 text-center text-md-right mt-3 mt-md-0">
               <a class="btn btn-primary" href="/admin/masterdata/dataruangan/tambahdata" role="button">
-                <span class="iconify mr-1" data-icon="bx:bxs-plus-circle" data-inline="false"></span>
+                <i class="iconify-inline mr-1" data-icon="bx:bxs-plus-circle" data-inline="false"></i>
                 Tambah
               </a>
             </div>
@@ -61,14 +61,12 @@
             </form>
           </div>
           <div class="col-12 col-md-4 offset-md-2 offset-0 text-right p-0 mt-3 mt-md-0">
-            <div class="input-group">
-              <input type="search" class="form-control form-control-sm" id="searchdata" placeholder="Pencarian ...">
-              <div class="input-group-prepend">
-                <div class="input-group-text search-icon rounded-right">
-                  <span class="iconify" data-icon="fluent:search-32-regular"></span>
-                </div>
-              </div>
-            </div>
+            <form class="search_form" action="">
+              <input class="form-control form-control-sm" type="search" placeholder="Pencarian...">
+              <button type="submit">
+                <i class="iconify-inline" data-icon="bx:bx-search"></i>
+              </button>
+            </form>
           </div>
         </div>
 
@@ -93,10 +91,10 @@
                 <td class="text-center">24</td>
                 <td class="text-center text-lowercase">kelas besar</td>
                 <td class="text-center">
-                  <a href="/admin/masterdata/dataruangan/updatedata"><span class="iconify edit-icon"
-                      data-icon="bx:bx-edit-alt" data-inline="false"></span></a>
+                  <a href="/admin/masterdata/dataruangan/updatedata"><i class="iconify edit-icon mr-2"
+                      data-icon="bx:bx-edit-alt"></i></a>
                   <span data-toggle="modal" data-target="#deleteRuanganModal" class="iconify delete-icon"
-                    data-icon="bx:bx-trash" data-inline="false"></span>
+                    data-icon="bx:bx-trash"></span>
                 </td>
               </tr>
 
@@ -107,10 +105,10 @@
                 <td class="text-center">40</td>
                 <td class="text-center text-lowercase">kelas besar</td>
                 <td class="text-center">
-                  <a href="/admin/masterdata/dataruangan/updatedata"><span class="iconify edit-icon"
-                      data-icon="bx:bx-edit-alt" data-inline="false"></span></a>
+                  <a href="/admin/masterdata/dataruangan/updatedata"><i class="iconify edit-icon mr-2"
+                      data-icon="bx:bx-edit-alt"></i></a>
                   <span data-toggle="modal" data-target="#deleteRuanganModal" class="iconify delete-icon"
-                    data-icon="bx:bx-trash" data-inline="false"></span>
+                    data-icon="bx:bx-trash"></span>
                 </td>
               </tr>
 
@@ -121,10 +119,10 @@
                 <td class="text-center">25</td>
                 <td class="text-center text-lowercase">kelas besar</td>
                 <td class="text-center">
-                  <a href="/admin/masterdata/dataruangan/updatedata"><span class="iconify edit-icon"
-                      data-icon="bx:bx-edit-alt" data-inline="false"></span></a>
+                  <a href="/admin/masterdata/dataruangan/updatedata"><i class="iconify edit-icon mr-2"
+                      data-icon="bx:bx-edit-alt"></i></a>
                   <span data-toggle="modal" data-target="#deleteRuanganModal" class="iconify delete-icon"
-                    data-icon="bx:bx-trash" data-inline="false"></span>
+                    data-icon="bx:bx-trash"></span>
                 </td>
               </tr>
 
@@ -135,10 +133,10 @@
                 <td class="text-center">35</td>
                 <td class="text-center text-lowercase">kelas besar</td>
                 <td class="text-center">
-                  <a href="/admin/masterdata/dataruangan/updatedata"><span class="iconify edit-icon"
-                      data-icon="bx:bx-edit-alt" data-inline="false"></span></a>
+                  <a href="/admin/masterdata/dataruangan/updatedata"><i class="iconify edit-icon mr-2"
+                      data-icon="bx:bx-edit-alt"></i></a>
                   <span data-toggle="modal" data-target="#deleteRuanganModal" class="iconify delete-icon"
-                    data-icon="bx:bx-trash" data-inline="false"></span>
+                    data-icon="bx:bx-trash"></span>
                 </td>
               </tr>
 
@@ -149,10 +147,10 @@
                 <td class="text-center">40</td>
                 <td class="text-center text-lowercase">kelas besar</td>
                 <td class="text-center">
-                  <a href="/admin/masterdata/dataruangan/updatedata"><span class="iconify edit-icon"
-                      data-icon="bx:bx-edit-alt" data-inline="false"></span></a>
+                  <a href="/admin/masterdata/dataruangan/updatedata"><i class="iconify edit-icon mr-2"
+                      data-icon="bx:bx-edit-alt"></i></a>
                   <span data-toggle="modal" data-target="#deleteRuanganModal" class="iconify delete-icon"
-                    data-icon="bx:bx-trash" data-inline="false"></span>
+                    data-icon="bx:bx-trash"></span>
                 </td>
               </tr>
 
@@ -163,10 +161,10 @@
                 <td class="text-center">24</td>
                 <td class="text-center text-lowercase">kelas besar</td>
                 <td class="text-center">
-                  <a href="/admin/masterdata/dataruangan/updatedata"><span class="iconify edit-icon"
-                      data-icon="bx:bx-edit-alt" data-inline="false"></span></a>
+                  <a href="/admin/masterdata/dataruangan/updatedata"><i class="iconify edit-icon mr-2"
+                      data-icon="bx:bx-edit-alt"></i></a>
                   <span data-toggle="modal" data-target="#deleteRuanganModal" class="iconify delete-icon"
-                    data-icon="bx:bx-trash" data-inline="false"></span>
+                    data-icon="bx:bx-trash"></span>
                 </td>
               </tr>
 
@@ -177,10 +175,10 @@
                 <td class="text-center">50</td>
                 <td class="text-center text-lowercase">kelas besar</td>
                 <td class="text-center">
-                  <a href="/admin/masterdata/dataruangan/updatedata"><span class="iconify edit-icon"
-                      data-icon="bx:bx-edit-alt" data-inline="false"></span></a>
+                  <a href="/admin/masterdata/dataruangan/updatedata"><i class="iconify edit-icon mr-2"
+                      data-icon="bx:bx-edit-alt"></i></a>
                   <span data-toggle="modal" data-target="#deleteRuanganModal" class="iconify delete-icon"
-                    data-icon="bx:bx-trash" data-inline="false"></span>
+                    data-icon="bx:bx-trash"></span>
                 </td>
               </tr>
 
@@ -191,10 +189,10 @@
                 <td class="text-center">50</td>
                 <td class="text-center text-lowercase">kelas besar</td>
                 <td class="text-center">
-                  <a href="/admin/masterdata/dataruangan/updatedata"><span class="iconify edit-icon"
-                      data-icon="bx:bx-edit-alt" data-inline="false"></span></a>
+                  <a href="/admin/masterdata/dataruangan/updatedata"><i class="iconify edit-icon mr-2"
+                      data-icon="bx:bx-edit-alt"></i></a>
                   <span data-toggle="modal" data-target="#deleteRuanganModal" class="iconify delete-icon"
-                    data-icon="bx:bx-trash" data-inline="false"></span>
+                    data-icon="bx:bx-trash"></span>
                 </td>
               </tr>
 
@@ -205,10 +203,10 @@
                 <td class="text-center">50</td>
                 <td class="text-center text-lowercase">kelas besar</td>
                 <td class="text-center">
-                  <a href="/admin/masterdata/dataruangan/updatedata"><span class="iconify edit-icon"
-                      data-icon="bx:bx-edit-alt" data-inline="false"></span></a>
+                  <a href="/admin/masterdata/dataruangan/updatedata"><i class="iconify edit-icon mr-2"
+                      data-icon="bx:bx-edit-alt"></i></a>
                   <span data-toggle="modal" data-target="#deleteRuanganModal" class="iconify delete-icon"
-                    data-icon="bx:bx-trash" data-inline="false"></span>
+                    data-icon="bx:bx-trash"></span>
                 </td>
               </tr>
             </tbody>
@@ -217,7 +215,7 @@
 
         <div class="row justify-content-between align-items-center table-information">
           <h3>Menampilkan 1 sampai 9 dari 9 total data</h3>
-          <nav aria-label="pagination table">
+          <nav aria-label="Page navigation example">
             <ul class="pagination">
               <li class="page-item disabled" aria-label="Previous">
                 <a class="page-link" href="#" tabindex="-1">

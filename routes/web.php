@@ -685,26 +685,67 @@ Route::prefix('admin')->group(function () {
 Route::prefix('keuangan')->group(function () {
     Route::get('/dashboard', function () {
         return view('keuangan.dashboardKeuangan', [
-            "title" => "keuangan-dashboard"
+            "title" => "keuangan-dashboard",
+            "halamanAktif" => "dashboardKeuangan"
         ]);
     });
 
-    Route::get('/spimandiri', function () {
-        return view('keuangan.spiMandiri', [
-            "title" => "keuangan-dataSPI"
+    Route::get('/tarif', function () {
+        return view('keuangan.tarif_UKT_SPI', [
+            "title" => "keuangan-tarif",
+            "halamanAktif" => "tarifKeuangan"
+        ]);
+    });
+    Route::get('/tarif/UKTSPI', function () {
+        return view('keuangan.settingTarif_UKT_SPI', [
+            "title" => "keuangan-tarif",
+            "halamanAktif" => "tarifKeuangan"
         ]);
     });
 
-    Route::get('/databeasiswa', function () {
-        return view('keuangan.dataBeasiswa', [
-            "title" => "keuangan-dataBeasiswa"
-        ]);
-    });
+    Route::prefix('rekapitulasi')->group(function () {
+        Route::get('/datapendaftar', function () {
+            return view('keuangan.dataPendaftar', [
+                "title" => "keuangan-rekapitulasi",
+                "halamanAktif" => "datapendaftar"
+            ]);
+        });
+    
+        Route::get('/spi', function () {
+            return view('keuangan.spiMandiri', [
+                "title" => "keuangan-rekapitulasi",
+                "halamanAktif" => "spi"
+            ]);
+        });
 
-    Route::get('/piutangmahasiswa', function () {
-        return view('keuangan.piutangMahasiswa', [
-            "title" => "keuangan-piutang"
-        ]);
+        Route::get('/piutangmahasiswa', function () {
+            return view('keuangan.piutangMahasiswa', [
+                "title" => "keuangan-rekapitulasi",
+                "halamanAktif" => "piutangmahasiswa"
+            ]);
+        });
+
+        Route::get('/penyisihanpiutang', function () {
+            return view('keuangan.penyisihanPiutang', [
+                "title" => "keuangan-rekapitulasi",
+                "halamanAktif" => "penyisihanpiutang"
+            ]);
+        });
+
+        Route::get('/inputdatapembayaran', function () {
+            return view('keuangan.inputDataPembayaran', [
+                "title" => "keuangan-rekapitulasi",
+                "halamanAktif" => "inputdatapembayaran"
+            ]);
+        });
+
+        Route::get('/riwayatpembayaran', function () {
+            return view('keuangan.riwayatPembayaran', [
+                "title" => "keuangan-rekapitulasi",
+                "halamanAktif" => "riwayatpembayaran"
+            ]);
+        });
+
     });
 });
 

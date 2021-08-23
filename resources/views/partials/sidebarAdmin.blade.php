@@ -23,14 +23,14 @@
         <ul class="navbar-nav">
           <li class="nav-item">
             <a class="nav-link {{($title === "admin-dashboard") ? 'aktif' : ''}}" href="/admin/dashboard">
-              <span class="iconify" data-icon="bx-bx-home-circle"></span>
+              <i class="iconify" data-icon="bx-bx-home-circle"></i>
               <span class="nav-link-text">Dashboard</span>
             </a>
           </li>
 
           <li class="nav-item">
             <div class="nav-link {{($title === "admin-masterData") ? 'aktif' : ''}}">
-              <span class="iconify" data-icon="bx:bx-user-pin"></span>
+              <i class="iconify" data-icon="bx:bx-user-pin"></i>
               <span class="nav-link-text">Master Data</span>
             </div>
             <ul class="nav-item-dropdown-content">
@@ -117,7 +117,7 @@
 
           <li class="nav-item">
             <div class="nav-link {{($title === "admin-kuliah") ? 'aktif' : ''}}">
-              <span class="iconify" data-icon="bx:bx-file-blank"></span>
+              <i class="iconify" data-icon="bx:bx-file-blank"></i>
               <span class="nav-link-text">Kuliah</span>
             </div>
             <ul class="nav-item-dropdown-content">
@@ -141,7 +141,7 @@
 
           <li class="nav-item">
             <div class="nav-link {{($title === "admin-settingpmb") ? 'aktif' : ''}}">
-              <span class="iconify-inline" data-icon="ant-design:setting-outlined"></span>
+              <i class="iconify-inline" data-icon="ant-design:setting-outlined"></i>
               <span class="nav-link-text">Setting PMB</span>
             </div>
             <ul class="nav-item-dropdown-content">

@@ -17,11 +17,11 @@
             </div>
             <div class="col-12 col-md-6 text-center text-md-right mt-3 mt-md-0">
               <button type="button" class="btn btn-primary">
-                <span class="iconify" data-icon="bx:bxs-plus-circle"></span>
+                <i class="iconify-inline mr-1" data-icon="bx:bxs-plus-circle"></i>
                 Tambah
               </button>
-              <button type="button" class="btn btn-secondary ml-0 ml-md-3">
-                <span class="iconify" data-icon="bx:bx-download"></span>
+              <button type="button" class="btn btn-secondary ml-0 ml-md-2">
+                <i class="iconify-inline mr-1" data-icon="bx:bx-download"></i>
                 Unduh Data
               </button>
             </div>
@@ -74,8 +74,8 @@
                 <td class="text-center">15%</td>
                 <td class="text-center">90</td>
                 <td rowspan="6" class="text-center">
-                  <span class="iconify edit-icon" data-icon="bx:bx-edit-alt"></span>
-                  <span class="iconify delete-icon" data-icon="bx:bx-trash"></span>
+                  <i class="iconify edit-icon mr-2" data-icon="bx:bx-edit-alt"></i>
+                  <i class="iconify delete-icon" data-icon="bx:bx-trash"></i>
                 </td>
               </tr>
 
@@ -116,8 +116,8 @@
                 <td class="text-center">15%</td>
                 <td class="text-center">90</td>
                 <td rowspan="6" class="text-center">
-                  <span class="iconify edit-icon" data-icon="bx:bx-edit-alt"></span>
-                  <span class="iconify delete-icon" data-icon="bx:bx-trash"></span>
+                  <i class="iconify edit-icon mr-2" data-icon="bx:bx-edit-alt"></i>
+                  <i class="iconify delete-icon" data-icon="bx:bx-trash"></i>
                 </td>
               </tr>
 

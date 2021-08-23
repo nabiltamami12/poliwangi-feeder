@@ -15,13 +15,17 @@
         </div>
         <div class="modal-body mt-2">
           <div class="form-group">
-            <div class="input_file p-3">
-              <label for="input_file">
-                <span class="iconify" data-icon="bx:bx-cloud-upload" data-inline="false"></span>
-              </label>
-            </div>
-            <input type="file" class="form-control-file d-none" id="input_file">
+            <form class="d-none">
+              <i class="iconify mr-2" data-icon="bx:bxs-file-pdf" data-inline="false"></i>
+              <input type="file" id="file" hidden />
+              <span id="custom-text" class="nama_dokumen">tidak ada file dipilih</span>
+            </form>
+            <button type="button" id="custom-btn">
+              <i class="iconify text-primary" data-icon="bx:bx-cloud-upload" data-inline="false"></i>
+            </button>
           </div>
+
+
           <p class="mt-2 mb-0 font-italic">Upload Document dengan format .pdf (Max size 2MB)</p>
         </div>
         <div class="modal-footer pt-3">
@@ -60,11 +64,11 @@
                   <h2 class="mb-0">Ijazah SMA/SMK/MA/Sederajat</h2>
                 </td>
                 <td>
-                  <span class="iconify text-primary" data-icon="bx:bx-file-blank"></span>
+                  <i class="iconify-inline mr-1 text-primary" data-icon="bx:bx-file-blank"></i>
                   <span class="text-primary">dokumen terunggah</span>
                 </td>
                 <td class="text-center">
-                  <span class="iconify status-success" data-icon="fluent:clock-20-filled"></span>
+                  <i class="iconify status-success" data-icon="fluent:clock-20-filled"></i>
                 </td>
               </tr>
 
@@ -75,12 +79,12 @@
                 </td>
                 <td>
                   <span data-toggle="modal" data-target="#unggahDokumen" class="pointer">
-                    <span class="iconify text-primary" data-icon="bx:bx-upload"></span>
+                    <i class="iconify-inline mr-1 text-primary" data-icon="bx:bx-cloud-upload"></i>
                     <span class="text-primary">Unggah Dokumen</span>
                   </span>
                 </td>
                 <td class="text-center">
-                  <span class="iconify status-pending" data-icon="fluent:clock-20-filled"></span>
+                  <i class="iconify status-pending" data-icon="fluent:clock-20-filled"></i>
                 </td>
               </tr>
 
@@ -90,11 +94,11 @@
                   <h2 class="mb-0">Bukti Pembayaran Pendaftaran</h2>
                 </td>
                 <td>
-                  <span class="iconify text-primary" data-icon="bx:bx-file-blank"></span>
+                  <i class="iconify-inline mr-1 text-primary" data-icon="bx:bx-file-blank"></i>
                   <span class="text-primary">dokumen terunggah</span>
                 </td>
                 <td class="text-center">
-                  <span class="iconify status-success" data-icon="fluent:clock-20-filled"></span>
+                  <i class="iconify status-success" data-icon="fluent:clock-20-filled"></i>
                 </td>
               </tr>
 
@@ -105,12 +109,12 @@
                 </td>
                 <td>
                   <span data-toggle="modal" data-target="#unggahDokumen" class="pointer">
-                    <span class="iconify text-primary" data-icon="bx:bx-upload"></span>
+                    <i class="iconify-inline mr-1 text-primary" data-icon="bx:bx-cloud-upload"></i>
                     <span class="text-primary">Unggah Ulang Dokumen</span>
                   </span>
                 </td>
                 <td class="text-center">
-                  <span class="iconify status-rejected" data-icon="bi:x-circle-fill"></span>
+                  <i class="iconify status-rejected" data-icon="bi:x-circle-fill"></i>
                 </td>
               </tr>
 
@@ -121,12 +125,12 @@
                 </td>
                 <td>
                   <span data-toggle="modal" data-target="#unggahDokumen" class="pointer">
-                    <span class="iconify text-primary" data-icon="bx:bx-upload"></span>
+                    <i class="iconify-inline mr-1 text-primary" data-icon="bx:bx-cloud-upload"></i>
                     <span class="text-primary">Unggah Ulang Dokumen</span>
                   </span>
                 </td>
                 <td class="text-center">
-                  <span class="iconify status-rejected" data-icon="bi:x-circle-fill"></span>
+                  <i class="iconify status-rejected" data-icon="bi:x-circle-fill"></i>
                 </td>
               </tr>
 
@@ -137,12 +141,12 @@
                 </td>
                 <td>
                   <span data-toggle="modal" data-target="#unggahDokumen" class="pointer">
-                    <span class="iconify text-primary" data-icon="bx:bx-upload"></span>
+                    <i class="iconify-inline mr-1 text-primary" data-icon="bx:bx-cloud-upload"></i>
                     <span class="text-primary">Unggah Ulang Dokumen</span>
                   </span>
                 </td>
                 <td class="text-center">
-                  <span class="iconify status-rejected" data-icon="bi:x-circle-fill"></span>
+                  <i class="iconify status-rejected" data-icon="bi:x-circle-fill"></i>
                 </td>
               </tr>
 
@@ -155,12 +159,12 @@
                 </td>
                 <td>
                   <span data-toggle="modal" data-target="#unggahDokumen" class="pointer">
-                    <span class="iconify text-primary" data-icon="bx:bx-upload"></span>
+                    <i class="iconify-inline mr-1 text-primary" data-icon="bx:bx-cloud-upload"></i>
                     <span class="text-primary">Unggah Dokumen</span>
                   </span>
                 </td>
                 <td class="text-center">
-                  <span class="iconify status-pending" data-icon="fluent:clock-20-filled"></span>
+                  <i class="iconify status-pending" data-icon="fluent:clock-20-filled"></i>
                 </td>
               </tr>
             </tbody>
@@ -170,4 +174,26 @@
     </div>
   </div>
 </section>
+@endsection
+
+@section('js')
+<script>
+  const inputFile = document.getElementById("file");
+  const customBtn = document.getElementById("custom-btn");
+  const customText = document.getElementById("custom-text");
+
+  customBtn.addEventListener("click", function () {
+    inputFile.click();
+  });
+
+  inputFile.addEventListener("change", function () {
+    if (inputFile.value) {
+      let fileName = inputFile.value.match(/[0-9a-zA-Z\^\&\'\@\{\}\[\]\,\$\=\!\-\#\(\)\.\%\+\~\_ ]+$/)[0];
+      customText.innerHTML = fileName;
+    } else {
+      customText.innerHTML = "tidak ada file dipilih";
+    }
+  });
+
+</script>
 @endsection
