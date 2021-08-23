@@ -76,27 +76,6 @@
   color: #d10429;
 }
 
-#form_cuti .form-cuti ::-moz-placeholder {
-  font-weight: 400;
-  font-size: 0.875rem;
-  line-height: 1.21em;
-  color: #041f2f;
-}
-
-#form_cuti .form-cuti :-ms-input-placeholder {
-  font-weight: 400;
-  font-size: 0.875rem;
-  line-height: 1.21em;
-  color: #041f2f;
-}
-
-#form_cuti .form-cuti ::placeholder {
-  font-weight: 400;
-  font-size: 0.875rem;
-  line-height: 1.21em;
-  color: #041f2f;
-}
-
 #tahapan h2 {
   font-weight: 600;
   font-size: 1.125rem;

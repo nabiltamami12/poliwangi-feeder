@@ -15,9 +15,8 @@
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-12 col-md-8">
-      <!-- CARD -->
+  <div class="row equal-cols">
+    <div class="col-lg-8">
       <div class="card shadow padding--medium">
         <div class="card-header p-0 border-0">
           <div class="row align-items-center">
@@ -31,39 +30,35 @@
         </div>
         <hr class="my-4">
         <div class="table-responsive">
-          <!-- TABLE -->
           <table class="table align-items-center table-borderless table-flush table-hover">
             <thead class="table-header">
               <tr>
-                <th scope="col" class="border-0">Mata Kuliah</th>
-                <th scope="col" class="border-0">Dosen</th>
-                <th scope="col" class="border-0 text-center">Kelas</th>
-                <th scope="col" class="border-0 text-center">Jam Kuliah</th>
+                <th scope="col">Mata Kuliah</th>
+                <th scope="col">Dosen</th>
+                <th scope="col" class="text-center">Kelas</th>
+                <th scope="col" class="text-center">Jam Kuliah</th>
               </tr>
             </thead>
 
-            <tbody class="table-body table-body-lg">
+            <tbody class="table-body table-body-md">
               <tr>
                 <td class="font-weight-bold wordwrap">Pengantar perkuliahan II</td>
                 <td class="wordwrap">Prof.Seno Prasetya,drg.,SU.,Ph.D., Sp.KGA(K)</td>
                 <td class="text-center">KGA12</td>
                 <td class="text-center">08:00</td>
               </tr>
-
               <tr>
                 <td class="font-weight-bold wordwrap">Matematika Dasar</td>
                 <td class="wordwrap">Dr. Amin Suyitno, M.Pd</td>
                 <td class="text-center">MT001</td>
                 <td class="text-center">12:00</td>
               </tr>
-
               <tr>
                 <td class="font-weight-bold wordwrap">Bahasa Inggris</td>
                 <td class="wordwrap">Dr. Pradana Putra, M.Pd</td>
                 <td class="text-center">Lang02</td>
                 <td class="text-center">14:00</td>
               </tr>
-
               <tr>
                 <td class="font-weight-bold wordwrap">Pengantar perkuliahan II</td>
                 <td class="wordwrap">Prawati Nuraini,drg.M.Kes.,SpKGA(K)</td>
@@ -76,8 +71,8 @@
       </div>
     </div>
 
-    <div class="col-12 col-md-4">
-      <div class="card shadow padding--medium card_presensi mt-0 mt-md-4">
+    <div class="col-lg-4">
+      <div class="card shadow padding--medium card_presensi mt-0 mt-lg-4">
         <div class="card-header p-0 border-0">
           <div class="row align-items-center">
             <div class="col">

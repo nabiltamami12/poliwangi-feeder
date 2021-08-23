@@ -5,7 +5,7 @@
 <header class="header"></header>
 
 <!-- Page content -->
-<section class="page-content container-fluid" id="mala_pembayaran">
+<section class="page-content container-fluid">
   <div class="row">
     <div class="col-xl-12">
       <div class="card shadow padding--medium">

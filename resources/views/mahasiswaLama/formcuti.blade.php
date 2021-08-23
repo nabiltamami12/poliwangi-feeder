@@ -8,7 +8,7 @@
 </header>
 
 <!-- Page content -->
-<section class="page-content container-fluid" id="form_cuti">
+<section class="page-content container-fluid">
   <h1 class="page-content__title">Pengajuan Cuti Mahasiswa</h1>
 
   <div class="row">
@@ -24,8 +24,8 @@
         </div>
         <hr class="my-4">
 
-        <form class="form-cuti">
-          <div class="form-row position-relative px-3">
+        <form>
+          <div class="form-row px-3">
             <div class="col-12 col-md-6 form-group pr-0 pr-md-4">
               <label>Mulai</label>
               <div class="d-flex align-items-center date_picker">
@@ -52,12 +52,13 @@
               </div>
             </div>
           </div>
+          <hr class="calendar_separator d-none d-md-block">
 
-          <div class="form-row px-3">
-            <div class="col-12 form-group mt-3">
+          <div class="form-row px-3 mt-3">
+            <div class="col-12 form-group">
               <label for="keterangan">Alasan Mengambil Cuti</label>
               <input type="text" class="form-control" id="keterangan"
-                placeholder="Ada pekerjaan yang harus dikerjakan fulltime">
+                value="Ada pekerjaan yang harus dikerjakan fulltime">
             </div>
           </div>
           <button type="submit" class="btn btn-primary w-100 mt-4-5">Ajukan Cuti</button>

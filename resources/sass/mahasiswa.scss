@@ -61,14 +61,6 @@
     }
 }
 
-#form_cuti {
-    .form-cuti {
-        ::placeholder {
-            @include mixintext(400, 0.875rem, 1.21em, $font-black);
-        }
-    }
-}
-
 #tahapan {
     h2 {
         @include mixintext(600, 1.125rem, 1.22em, $font-black);

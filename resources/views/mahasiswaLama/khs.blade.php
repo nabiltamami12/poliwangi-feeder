@@ -5,7 +5,7 @@
 <header class="header"></header>
 
 <!-- Page content -->
-<section class="page-content container-fluid" id="khs">
+<section class="page-content container-fluid">
   <div class="row">
     <div class="col-xl-12">
       <div class="card shadow padding--small">
@@ -21,9 +21,9 @@
           <table class="table align-items-center table-borderless table-flush table-hover">
             <thead class="table-header">
               <tr>
-                <th scope="col" class="border-0 text-center px-2">No</th>
-                <th scope="col" class="border-0" style="width: 75%">Keterangan</th>
-                <th scope="col" class="border-0 text-center">File</th>
+                <th scope="col" class="text-center px-2">No</th>
+                <th scope="col" style="width: 75%">Keterangan</th>
+                <th scope="col" class="text-center">File</th>
               </tr>
             </thead>
 
@@ -34,7 +34,7 @@
                   <h2>KHS Semester Satu</h2>
                 </td>
                 <td class="text-center">
-                  <i class="iconify-inline text-primary" data-icon="bx:bx-cloud-download"></i>
+                  <i class="iconify-inline mr-1 text-primary" data-icon="bx:bx-cloud-download"></i>
                   <span class="font-weight-bold text-primary">Unduh File PDF</span>
                 </td>
               </tr>
@@ -45,7 +45,7 @@
                   <h2>KHS Semester Dua</h2>
                 </td>
                 <td class="text-center">
-                  <i class="iconify-inline text-primary" data-icon="bx:bx-cloud-download"></i>
+                  <i class="iconify-inline mr-1 text-primary" data-icon="bx:bx-cloud-download"></i>
                   <span class="font-weight-bold text-primary">Unduh File PDF</span>
                 </td>
               </tr>
@@ -56,7 +56,7 @@
                   <h2>KHS Semester Tiga</h2>
                 </td>
                 <td class="text-center">
-                  <i class="iconify-inline text-primary" data-icon="bx:bx-cloud-download"></i>
+                  <i class="iconify-inline mr-1 text-primary" data-icon="bx:bx-cloud-download"></i>
                   <span class="font-weight-bold text-primary">Unduh File PDF</span>
                 </td>
               </tr>
@@ -67,7 +67,7 @@
                   <h2>KHS Semester Empat</h2>
                 </td>
                 <td class="text-center">
-                  <i class="iconify-inline text-primary" data-icon="bx:bx-cloud-download"></i>
+                  <i class="iconify-inline mr-1 text-primary" data-icon="bx:bx-cloud-download"></i>
                   <span class="font-weight-bold text-primary">Unduh File PDF</span>
                 </td>
               </tr>

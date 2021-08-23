@@ -12,11 +12,11 @@
         <div class="card-header border-0 padding--big">
           <div class="row align-items-center">
 
-            <div class="col-12 col-md-6 form-group">
+            <div class="col-md-6 form-group">
               <div class="d-flex align-items-center date_picker">
-                <input type="text" class="form-control form-control-sm date-input cursor_default pl-2"
+                <input id="txtDate" type="text" class="form-control form-control-sm date-input cursor_default pl-2"
                   value="23 Jul 2021" readonly />
-                <label class="input-group-btn">
+                <label class="input-group-btn" for="txtDate">
                   <span class="date_button">
                     <i class="iconify" data-icon="bx:bx-calendar" data-inline="false"></i>
                   </span>
@@ -24,7 +24,7 @@
               </div>
             </div>
 
-            <div class="col-12 col-md-6 form-group">
+            <div class="col-md-6 form-group">
               <div class="custom_select mt-4 mt-md-0">
                 <select class="form-control form-control-sm" id="semester">
                   <option selected>Semester Ganjil</option>
@@ -39,11 +39,11 @@
           <table class="table align-items-center table-borderless table-flush table-hover">
             <thead class="table-header">
               <tr>
-                <th scope="col" class="border-0" style="width: 25%">Tanggal</th>
-                <th scope="col" class="border-0" style="width: 30%">Mata Kuliah</th>
-                <th scope="col" class="border-0 text-center">Kelas</th>
-                <th scope="col" class="border-0 text-center">JUMLAH KEHADIRAN</th>
-                <th scope="col" class="border-0 text-center">TIDAK HADIR</th>
+                <th scope="col" style="width: 25%">Tanggal</th>
+                <th scope="col" style="width: 30%">Mata Kuliah</th>
+                <th scope="col" class="text-center">Kelas</th>
+                <th scope="col" class="text-center">JUMLAH KEHADIRAN</th>
+                <th scope="col" class="text-center">TIDAK HADIR</th>
               </tr>
             </thead>
 

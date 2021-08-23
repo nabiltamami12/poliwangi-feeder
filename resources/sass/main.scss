@@ -171,6 +171,35 @@ nav#navbar {
         overflow-wrap: break-all !important;
     }
 
+    .row.equal-cols {
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-flex-wrap: wrap;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    }
+
+    .row.equal-cols:before,
+    .row.equal-cols:after {
+        display: block;
+    }
+
+    .row.equal-cols > [class*="col-"] {
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+        flex-direction: column;
+    }
+
+    .row.equal-cols > [class*="col-"] > * {
+        -webkit-flex: 1 1 auto;
+        -ms-flex: 1 1 auto;
+        flex: 1 1 auto;
+    }
+
     #pengumuman {
         margin-top: 1.5rem;
         border-radius: 1rem;
@@ -242,6 +271,16 @@ nav#navbar {
         height: 1px;
         border: 0;
         border-top: 1px solid rgba(153, 153, 153, 0.5);
+    }
+    hr.calendar_separator {
+        width: 3%;
+        height: 1px;
+        color: #000;
+        background-color: #000;
+        margin-left: auto;
+        margin-right: auto;
+        position: relative;
+        top: calc((1.5em + 1.25rem + 2px) / 2 * -1);
     }
 
     .card-header {
@@ -462,6 +501,22 @@ nav#navbar {
             tr:last-child {
                 td {
                     padding: 1.5rem 1.5rem 1rem 1.5rem !important;
+                }
+            }
+        }
+
+        .table-body-md {
+            td {
+                padding: 1.2rem !important;
+            }
+            tr:first-child {
+                td {
+                    padding: 1rem 1.2rem 1.2rem 1.2rem !important;
+                }
+            }
+            tr:last-child {
+                td {
+                    padding: 1.2rem 1.2rem 1rem 1.2rem !important;
                 }
             }
         }
