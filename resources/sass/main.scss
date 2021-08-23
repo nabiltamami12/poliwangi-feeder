@@ -449,6 +449,22 @@ nav#navbar {
                 }
             }
         }
+
+        .table-body-lg {
+            td {
+                padding: 1.5rem !important;
+            }
+            tr:first-child {
+                td {
+                    padding: 1rem 1.5rem 1.5rem 1.5rem !important;
+                }
+            }
+            tr:last-child {
+                td {
+                    padding: 1.5rem 1.5rem 1rem 1.5rem !important;
+                }
+            }
+        }
     }
 
     .table-information {
@@ -531,7 +547,6 @@ nav#navbar {
             border-radius: 0 0.5rem 0.5rem 0;
         }
         select {
-            height: 33px;
             border-radius: 0.5rem;
             padding-left: 0.75rem;
             border-color: #c4c4c4;
@@ -554,23 +569,34 @@ nav#navbar {
             @include mixintext(600, 1rem, 1.21em, $font-black);
         }
     }
-}
 
-#dashboard_mala,
-#daftar_ulang,
-#mala_presensi,
-#mala_nilai,
-#dashboard_dosen {
-    .table-body {
-        td {
-            padding: 1.5rem 1.5rem;
+    // MODAL
+    .modal-title {
+        @include mixintext(600, 1.25rem, 1.2em, $font-dark);
+    }
+    span[data-toggle="modal"] {
+        cursor: pointer;
+    }
+    .detail_dokumen {
+        width: 100%;
+        border: 1px solid #c4c4c4;
+        border-radius: 0.5rem;
+        padding: 1.5rem;
+
+        .iconify {
+            font-size: 1.7rem;
+            color: #000;
         }
-
-        tr:first-child,
-        tr:last-child {
-            td {
-                padding: 1rem 1.5rem;
-            }
+        .nama_dokumen {
+            @include mixintext(400, 1.125rem, 1.2em, $font-black);
+        }
+        #custom-btn {
+            background-color: transparent;
+            border: none;
+            outline: none;
+        }
+        & + .jenis_dokumen {
+            @include mixintext(400, 1rem, 1.21em, $font-black);
         }
     }
 }

@@ -5,17 +5,18 @@
 <header class="header"></header>
 
 <!-- Page content -->
-<section class="page-content container-fluid" id="daftar_ulang">
+<section class="page-content container-fluid">
   <!-- Modal -->
-  <div class="modal fade" id="unggahDokumen" tabindex="-1" aria-labelledby="unggahDokumenLabel" aria-hidden="true">
+  <div class="modal fade" id="daftarUlang_unggahDokumen" tabindex="-1" aria-labelledby="daftarUlang_unggahDokumenLabel"
+    aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
       <div class="modal-content p-0 padding--medium">
         <div class="modal-header">
-          <h5 class="modal-title mt-4 mx-auto">Upload Surat Keterangan Hasil Ujian</h5>
+          <h5 class="modal-title my-3 mx-auto">Upload Surat Keterangan Hasil Ujian</h5>
         </div>
-        <div class="modal-body mt-2">
-          <div class="form-group">
-            <form class="d-none">
+        <div class="modal-body">
+          <div class="form-group detail_dokumen d-flex justify-content-center align-items-center p-4">
+            <form class="d-none" onchange="showfilename()">
               <i class="iconify mr-2" data-icon="bx:bxs-file-pdf" data-inline="false"></i>
               <input type="file" id="file" hidden />
               <span id="custom-text" class="nama_dokumen">tidak ada file dipilih</span>
@@ -24,12 +25,10 @@
               <i class="iconify text-primary" data-icon="bx:bx-cloud-upload" data-inline="false"></i>
             </button>
           </div>
-
-
-          <p class="mt-2 mb-0 font-italic">Upload Document dengan format .pdf (Max size 2MB)</p>
+          <p class="mt-2 mb-0 font-italic jenis_dokumen">Upload Document dengan format .pdf (Max size 2MB)</p>
         </div>
         <div class="modal-footer pt-3">
-          <button type="button" class="btn btn-primary btn-modal-ok w-100">Upload</button>
+          <button type="button" class="btn btn-primary w-100 rounded-sm">Upload</button>
         </div>
       </div>
     </div>
@@ -57,7 +56,7 @@
               </tr>
             </thead>
 
-            <tbody class="table-body">
+            <tbody class="table-body table-body-lg">
               <tr>
                 <td class="text-center px-2">1</td>
                 <td>
@@ -78,7 +77,7 @@
                   <h2 class="mb-0">Surat Keterangan Hasil Ujian</h2>
                 </td>
                 <td>
-                  <span data-toggle="modal" data-target="#unggahDokumen" class="pointer">
+                  <span data-toggle="modal" data-target="#daftarUlang_unggahDokumen">
                     <i class="iconify-inline mr-1 text-primary" data-icon="bx:bx-cloud-upload"></i>
                     <span class="text-primary">Unggah Dokumen</span>
                   </span>
@@ -108,7 +107,7 @@
                   <h2 class="mb-0">Bukti Telah Diterima di Politeknik Negeri Banyuwangi</h2>
                 </td>
                 <td>
-                  <span data-toggle="modal" data-target="#unggahDokumen" class="pointer">
+                  <span data-toggle="modal" data-target="#daftarUlang_unggahDokumen">
                     <i class="iconify-inline mr-1 text-primary" data-icon="bx:bx-cloud-upload"></i>
                     <span class="text-primary">Unggah Ulang Dokumen</span>
                   </span>
@@ -124,7 +123,7 @@
                   <h2 class="mb-0">Surat Pernyataan Taat Peraturan</h2>
                 </td>
                 <td>
-                  <span data-toggle="modal" data-target="#unggahDokumen" class="pointer">
+                  <span data-toggle="modal" data-target="#daftarUlang_unggahDokumen">
                     <i class="iconify-inline mr-1 text-primary" data-icon="bx:bx-cloud-upload"></i>
                     <span class="text-primary">Unggah Ulang Dokumen</span>
                   </span>
@@ -140,7 +139,7 @@
                   <h2 class="mb-0">Upload Foto dengan Almamater</h2>
                 </td>
                 <td>
-                  <span data-toggle="modal" data-target="#unggahDokumen" class="pointer">
+                  <span data-toggle="modal" data-target="#daftarUlang_unggahDokumen">
                     <i class="iconify-inline mr-1 text-primary" data-icon="bx:bx-cloud-upload"></i>
                     <span class="text-primary">Unggah Ulang Dokumen</span>
                   </span>
@@ -158,7 +157,7 @@
                     </h2>
                 </td>
                 <td>
-                  <span data-toggle="modal" data-target="#unggahDokumen" class="pointer">
+                  <span data-toggle="modal" data-target="#daftarUlang_unggahDokumen">
                     <i class="iconify-inline mr-1 text-primary" data-icon="bx:bx-cloud-upload"></i>
                     <span class="text-primary">Unggah Dokumen</span>
                   </span>
@@ -194,6 +193,15 @@
       customText.innerHTML = "tidak ada file dipilih";
     }
   });
+
+
+  const formWrapper = document.querySelector('.detail_dokumen');
+  const formUpload = document.querySelector(".detail_dokumen form");
+  function showfilename(){
+    formUpload.classList.remove('d-none');
+    formWrapper.classList.remove('justify-content-center');
+    formWrapper.classList.add('justify-content-between');
+  }
 
 </script>
 @endsection

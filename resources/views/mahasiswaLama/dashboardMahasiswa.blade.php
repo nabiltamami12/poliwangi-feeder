@@ -5,7 +5,7 @@
 <header class="header"></header>
 
 <!-- Page content -->
-<section class="page-content container-fluid" id="dashboard_mala">
+<section class="page-content container-fluid">
   <div class="row">
     <div class="col">
       <div class="d-md-flex justify-content-between informasi_mahasiswa mt-4">
@@ -42,7 +42,7 @@
               </tr>
             </thead>
 
-            <tbody class="table-body">
+            <tbody class="table-body table-body-lg">
               <tr>
                 <td class="font-weight-bold wordwrap">Pengantar perkuliahan II</td>
                 <td class="wordwrap">Prof.Seno Prasetya,drg.,SU.,Ph.D., Sp.KGA(K)</td>

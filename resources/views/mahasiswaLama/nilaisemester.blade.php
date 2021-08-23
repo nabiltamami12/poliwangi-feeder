@@ -5,7 +5,7 @@
 <header class="header"></header>
 
 <!-- Page content -->
-<section class="page-content container-fluid" id="mala_nilai">
+<section class="page-content container-fluid">
   <div class="row">
     <div class="col-xl-12">
       <div class="card shadow padding--small">
@@ -29,7 +29,7 @@
               </tr>
             </thead>
 
-            <tbody class="table-body">
+            <tbody class="table-body table-body-lg">
               <tr>
                 <td class="pl-3">1</td>
                 <td class="font-weight-bold">Rekayasa Perangkat Lunak</td>

@@ -73,25 +73,27 @@
     h2 {
         @include mixintext(600, 1.125rem, 1.22em, $font-black);
     }
-    button {
-        border-radius: 0.25rem;
-    }
 
     .input-group {
         .input-group-text {
             font-size: 1.125rem;
-            color: $font-black;
-            background-color: #c4c4c4;
+            color: $font-white;
+            background-color: $placeholder;
             padding-left: 1.167em;
             padding-right: 1.167em;
             border-radius: 8px 0 0 8px;
-            border: 1px solid #c4c4c4;
+            border: 1px solid $placeholder;
             border-right: 0;
         }
         .form-control {
-            @include mixintext(400, 0.875rem, 1.21em, $font-black);
+            @include mixintext(
+                400,
+                0.875rem,
+                1.21em,
+                $font-placeholder !important
+            );
             background-color: #fff;
-            border: 2px solid #c4c4c4;
+            border: 1px solid $placeholder;
             border-left: 0;
             border-radius: 0 0.5rem 0.5rem 0;
         }
@@ -103,7 +105,7 @@
                 font-weight: 600;
             }
             .form-control {
-                border: 2px solid $primary;
+                border: 1px solid $primary;
                 background-color: $primary;
                 color: $font-white !important;
             }
@@ -136,12 +138,13 @@
 
     .card_step {
         position: relative;
-        input {
-            height: 49px;
-        }
         hr {
             position: relative;
             top: 1.5rem;
+            border: none;
+            height: 2px;
+            color: #c4c4c4;
+            background-color: #c4c4c4;
         }
     }
 
@@ -167,39 +170,5 @@
         display: grid;
         grid-template-columns: 1fr 1fr;
         column-gap: 0.5rem;
-    }
-}
-
-#daftar_ulang {
-    .modal-title {
-        @include mixintext(600, 1.25rem, 1.21em, $font-dark);
-    }
-    .modal-body {
-        .input_file {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid #c4c4c4;
-            border-radius: 0.5rem;
-        }
-        .iconify {
-            font-size: 2rem;
-            color: $primary;
-        }
-        i {
-            @include mixintext(400, 1rem, 1.21em, $font-dark);
-        }
-    }
-    .modal-footer {
-        button {
-            border-radius: 0.25rem;
-        }
-    }
-}
-
-#mala_presensi {
-    #txtDate {
-        height: 33px;
-        padding-left: 0.75rem;
     }
 }

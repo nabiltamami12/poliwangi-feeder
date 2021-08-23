@@ -11,29 +11,6 @@
         input::placeholder {
             color: $font-placeholder;
         }
-        .modal-title {
-            @include mixintext(600, 1.25rem, 1.2em, $font-dark);
-        }
-    }
-
-    .detail_dokumen {
-        width: 100%;
-        border: 1px solid #c4c4c4;
-        border-radius: 0.5rem;
-        padding: 1.5rem;
-
-        .iconify {
-            font-size: 1.7rem;
-            color: #000;
-        }
-        .nama_dokumen {
-            @include mixintext(400, 1.125rem, 1.2em, $font-black);
-        }
-        #custom-btn {
-            background-color: transparent;
-            border: none;
-            outline: none;
-        }
     }
 
     .card-stats {

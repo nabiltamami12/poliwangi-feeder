@@ -17,33 +17,6 @@
 .page-content__keuangan .modal input::placeholder {
   color: #adb5bd;
 }
-.page-content__keuangan .modal .modal-title {
-  font-weight: 600;
-  font-size: 1.25rem;
-  line-height: 1.2em;
-  color: #062e46;
-}
-.page-content__keuangan .detail_dokumen {
-  width: 100%;
-  border: 1px solid #c4c4c4;
-  border-radius: 0.5rem;
-  padding: 1.5rem;
-}
-.page-content__keuangan .detail_dokumen .iconify {
-  font-size: 1.7rem;
-  color: #000;
-}
-.page-content__keuangan .detail_dokumen .nama_dokumen {
-  font-weight: 400;
-  font-size: 1.125rem;
-  line-height: 1.2em;
-  color: #041f2f;
-}
-.page-content__keuangan .detail_dokumen #custom-btn {
-  background-color: transparent;
-  border: none;
-  outline: none;
-}
 .page-content__keuangan .card-stats {
   font-family: "Open Sans", sans-serif;
   border-radius: 1rem;

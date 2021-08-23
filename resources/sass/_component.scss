@@ -602,6 +602,11 @@ option {
 }
 
 // FORM
+.form-control[readonly] {
+    opacity: 1;
+    background-color: #ffff;
+}
+
 .form-group {
     margin-bottom: 0;
 }

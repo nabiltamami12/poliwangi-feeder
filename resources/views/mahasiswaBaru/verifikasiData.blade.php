@@ -11,8 +11,8 @@
       <div class="card shadow padding--small card_step">
         <h2>Tahapan</h2>
         <hr class="d-none d-md-block">
-        <div class="row tab-header">
-          <div class="col-12 col-md-6 mt-3 mt-md-0">
+        <div class="form-row tab-header">
+          <div class="col-12 col-md-6 mt-3 mt-md-0 pr-0 pr-md-2">
             <div class="input-group mb-2 active">
               <div class="input-group-prepend">
                 <div class="input-group-text">1</div>
@@ -21,7 +21,7 @@
             </div>
           </div>
 
-          <div class="col-12 col-md-6 mt-3 mt-md-0">
+          <div class="col-12 col-md-6 mt-3 mt-md-0 pl-0 pl-md-2">
             <div class="input-group mb-2">
               <div class="input-group-prepend">
                 <div class="input-group-text">2</div>
@@ -154,7 +154,8 @@
                 <input type="text" class="form-control" id="kode-pos" placeholder="65122">
               </div>
             </div>
-            <button type="submit" class="btn btn-success w-100 mt-4-5 button_selanjutnya">Selanjutnya</button>
+            <button type="submit"
+              class="btn btn-success w-100 mt-4-5 rounded-sm button_selanjutnya">Selanjutnya</button>
           </form>
         </div>
 
@@ -168,9 +169,10 @@
             </div>
           </div>
           <hr class="my-4">
+
           <form class="form-berkas">
             <div class="form-row">
-              <div class="col-md-6 form-group">
+              <div class="col-md-6 form-group pr-0 pr-md-2">
                 <label>Foto Calon Peserta Didik</label>
                 <div class="input_file">
                   <label for="file-input-foto">
@@ -179,7 +181,8 @@
                 </div>
                 <input type="file" class="form-control-file" id="file-input-foto">
               </div>
-              <div class="col-md-6 form-group mt-3 mt-md-0 pr-0 pr-md-1">
+
+              <div class="col-md-6 form-group mt-3 mt-md-0 pr-0 pr-md-1 pl-0 pl-md-2">
                 <label>Foto Ijazah</label>
                 <div class="input_file">
                   <label for="file-input-ijazah">
@@ -202,8 +205,9 @@
               </div>
             </div>
             <div class="form_action mt-4">
-              <button class="btn btn-info text-primary font-weight-bold button_sebelumnya">Sebelumnya</button>
-              <button type="submit" class="btn btn-primary">Submit</button>
+              <button
+                class="btn btn-info text-primary font-weight-bold button_sebelumnya rounded-sm">Sebelumnya</button>
+              <button type="submit" class="btn btn-primary rounded-sm">Submit</button>
             </div>
           </form>
         </div>

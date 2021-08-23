@@ -69,14 +69,33 @@
             <div class="card-body">
               <div class="card_inner">
                 <form>
-                  <div class="form-group">
+                  <div class="form-group mb-0">
                     <label for="jalur-seleksi" class="font-weight-bold">Pilih Jalur Seleksi</label>
                     <select class="form-control" id="jalur-seleksi">
                       <option selected="true" disabled="disabled">Jalur Seleksi</option>
                       <option>2</option>
                       <option>3</option>
-                      <option>4</option>
-                      <option>5</option>
+                    </select>
+                  </div>
+                </form>
+              </div>
+
+              <div class="card_inner mt-4">
+                <form>
+                  <div class="form-group mb-0">
+                    <label class="font-weight-bold">Pilih Jurusan</label>
+                    <select class="form-control">
+                      <option selected="true" disabled="disabled">Jurusan</option>
+                      <option>2</option>
+                      <option>3</option>
+                    </select>
+                  </div>
+                  <div class="form-group mb-0 mt-3">
+                    <label class="font-weight-bold">Pilih Prodi</label>
+                    <select class="form-control">
+                      <option selected="true" disabled="disabled">Prodi</option>
+                      <option>2</option>
+                      <option>3</option>
                     </select>
                   </div>
                 </form>

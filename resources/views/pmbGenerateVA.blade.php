@@ -68,7 +68,7 @@
                   <div class="alert alert-success alert-dismissible fade show" role="alert">
                     <h6 class="text-center mb-0">Pendaftaran Berhasil</h6>
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                      <span aria-hidden="true" class="text-success">&times;</span>
+                      <i aria-hidden="true" class="iconify text-success" data-icon="bx:bx-x"></i>
                     </button>
                   </div>
                 </div>

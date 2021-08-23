@@ -5,7 +5,7 @@
 <header class="header"></header>
 
 <!-- Page content -->
-<section class="page-content container-fluid" id="dashboard_dosen">
+<section class="page-content container-fluid">
   <div class="row">
     <div class="col-12 col-md-8">
       <!-- CARD -->
@@ -32,7 +32,7 @@
               </tr>
             </thead>
 
-            <tbody class="table-body">
+            <tbody class="table-body table-body-lg">
               <tr>
                 <td class="font-weight-bold">Pengantar perkuliahan II</td>
                 <td class="text-center">KGA12</td>

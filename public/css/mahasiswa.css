@@ -103,26 +103,23 @@
   line-height: 1.22em;
   color: #041f2f;
 }
-#tahapan button {
-  border-radius: 0.25rem;
-}
 #tahapan .input-group .input-group-text {
   font-size: 1.125rem;
-  color: #041f2f;
-  background-color: #c4c4c4;
+  color: #ffffff;
+  background-color: #adb5bd;
   padding-left: 1.167em;
   padding-right: 1.167em;
   border-radius: 8px 0 0 8px;
-  border: 1px solid #c4c4c4;
+  border: 1px solid #adb5bd;
   border-right: 0;
 }
 #tahapan .input-group .form-control {
   font-weight: 400;
   font-size: 0.875rem;
   line-height: 1.21em;
-  color: #041f2f;
+  color: #adb5bd !important;
   background-color: #fff;
-  border: 2px solid #c4c4c4;
+  border: 1px solid #adb5bd;
   border-left: 0;
   border-radius: 0 0.5rem 0.5rem 0;
 }
@@ -133,7 +130,7 @@
   font-weight: 600;
 }
 #tahapan .input-group.active .form-control {
-  border: 2px solid #28a3eb;
+  border: 1px solid #28a3eb;
   background-color: #28a3eb;
   color: #ffffff !important;
 }
@@ -173,12 +170,13 @@
 #tahapan .card_step {
   position: relative;
 }
-#tahapan .card_step input {
-  height: 49px;
-}
 #tahapan .card_step hr {
   position: relative;
   top: 1.5rem;
+  border: none;
+  height: 2px;
+  color: #c4c4c4;
+  background-color: #c4c4c4;
 }
 #tahapan .form-berkas input {
   display: none;
@@ -203,36 +201,4 @@
   grid-template-columns: 1fr 1fr;
   -moz-column-gap: 0.5rem;
        column-gap: 0.5rem;
-}
-
-#daftar_ulang .modal-title {
-  font-weight: 600;
-  font-size: 1.25rem;
-  line-height: 1.21em;
-  color: #062e46;
-}
-#daftar_ulang .modal-body .input_file {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid #c4c4c4;
-  border-radius: 0.5rem;
-}
-#daftar_ulang .modal-body .iconify {
-  font-size: 2rem;
-  color: #28a3eb;
-}
-#daftar_ulang .modal-body i {
-  font-weight: 400;
-  font-size: 1rem;
-  line-height: 1.21em;
-  color: #062e46;
-}
-#daftar_ulang .modal-footer button {
-  border-radius: 0.25rem;
-}
-
-#mala_presensi #txtDate {
-  height: 33px;
-  padding-left: 0.75rem;
 }

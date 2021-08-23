@@ -590,6 +590,11 @@ option[disabled] {
   box-shadow: 2px 2px 16px rgba(0, 0, 0, 0.1) !important;
 }
 
+.form-control[readonly] {
+  opacity: 1;
+  background-color: #ffff;
+}
+
 .form-group {
   margin-bottom: 0;
 }

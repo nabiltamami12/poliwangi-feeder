@@ -594,6 +594,11 @@ option[disabled] {
   box-shadow: 2px 2px 16px rgba(0, 0, 0, 0.1) !important;
 }
 
+.form-control[readonly] {
+  opacity: 1;
+  background-color: #ffff;
+}
+
 .form-group {
   margin-bottom: 0;
 }
@@ -1123,6 +1128,15 @@ nav#navbar h1 {
 .page-content .table-responsive .table-body input[type=text]:focus {
   border-color: #28a3eb;
 }
+.page-content .table-responsive .table-body-lg td {
+  padding: 1.5rem !important;
+}
+.page-content .table-responsive .table-body-lg tr:first-child td {
+  padding: 1rem 1.5rem 1.5rem 1.5rem !important;
+}
+.page-content .table-responsive .table-body-lg tr:last-child td {
+  padding: 1.5rem 1.5rem 1rem 1.5rem !important;
+}
 .page-content .table-information {
   margin-top: 1rem;
   padding: 0 1rem;
@@ -1205,7 +1219,6 @@ nav#navbar h1 {
   border-radius: 0 0.5rem 0.5rem 0;
 }
 .page-content .custom_select select {
-  height: 33px;
   border-radius: 0.5rem;
   padding-left: 0.75rem;
   border-color: #c4c4c4;
@@ -1230,25 +1243,41 @@ nav#navbar h1 {
   line-height: 1.21em;
   color: #041f2f;
 }
-
-#dashboard_mala .table-body td,
-#daftar_ulang .table-body td,
-#mala_presensi .table-body td,
-#mala_nilai .table-body td,
-#dashboard_dosen .table-body td {
-  padding: 1.5rem 1.5rem;
+.page-content .modal-title {
+  font-weight: 600;
+  font-size: 1.25rem;
+  line-height: 1.2em;
+  color: #062e46;
 }
-#dashboard_mala .table-body tr:first-child td,
-#dashboard_mala .table-body tr:last-child td,
-#daftar_ulang .table-body tr:first-child td,
-#daftar_ulang .table-body tr:last-child td,
-#mala_presensi .table-body tr:first-child td,
-#mala_presensi .table-body tr:last-child td,
-#mala_nilai .table-body tr:first-child td,
-#mala_nilai .table-body tr:last-child td,
-#dashboard_dosen .table-body tr:first-child td,
-#dashboard_dosen .table-body tr:last-child td {
-  padding: 1rem 1.5rem;
+.page-content span[data-toggle=modal] {
+  cursor: pointer;
+}
+.page-content .detail_dokumen {
+  width: 100%;
+  border: 1px solid #c4c4c4;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+}
+.page-content .detail_dokumen .iconify {
+  font-size: 1.7rem;
+  color: #000;
+}
+.page-content .detail_dokumen .nama_dokumen {
+  font-weight: 400;
+  font-size: 1.125rem;
+  line-height: 1.2em;
+  color: #041f2f;
+}
+.page-content .detail_dokumen #custom-btn {
+  background-color: transparent;
+  border: none;
+  outline: none;
+}
+.page-content .detail_dokumen + .jenis_dokumen {
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.21em;
+  color: #041f2f;
 }
 
 #akademik_dashboard .table-header {
