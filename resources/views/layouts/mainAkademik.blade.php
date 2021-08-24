@@ -54,6 +54,7 @@
     integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous">
   </script>
   <link rel="stylesheet" href="{{ asset('assets/core.css') }}">
+  @yield('style')
   <script>
     var url_api = "{{ url('/api/v1') }}";
     var url = "{{ base_path(); }}";
