@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', function () {
-    return view('login');
+    return view('halamanAwal.login');
 })->name('login');
 
 Route::get('/login', function () {

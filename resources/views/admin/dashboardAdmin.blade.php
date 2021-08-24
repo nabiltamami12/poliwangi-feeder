@@ -1,12 +1,11 @@
 @extends('layouts.mainAdmin')
 
 @section('content')
-
 <!-- Header -->
 <header class="header"></header>
 
 <!-- Page content -->
-<section class="page-content container-fluid" id="admin_dashboard">
+<section class="page-content container-fluid">
   <div id="piechart" class="shadow mt-4">
     <div class="data-piechart">
       <div class="data-item">
@@ -31,8 +30,8 @@
   <div id="barchart">
     <div class="row mt-4-5 mb-4">
       <div class="col-12">
-        <h1 class="page-heading">Mahasiswa Per Prodi</h1>
-        <canvas id="mahasiswa-per-prodi"></canvas>
+        <h1 class="page-heading">Mahasiswa Per tahun</h1>
+        <canvas id="mahasiswa-per-tahun"></canvas>
       </div>
     </div>
   </div>
@@ -40,7 +39,10 @@
 @endsection
 
 @section('js')
-<!-- Chart JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.4.1/chart.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.0.0-rc.1/chartjs-plugin-datalabels.min.js"
+  integrity="sha512-+UYTD5L/bU1sgAfWA0ELK5RlQ811q8wZIocqI7+K0Lhh8yVdIoAMEs96wJAIbgFvzynPm36ZCXtkydxu1cs27w=="
+  crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="{{ asset('js/chart.js') }}"></script>
 @endsection
