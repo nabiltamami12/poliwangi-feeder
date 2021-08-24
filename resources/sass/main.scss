@@ -200,6 +200,7 @@ nav#navbar {
         flex: 1 1 auto;
     }
 
+    // ===================== CAROUSEL =====================
     #pengumuman {
         margin-top: 1.5rem;
         border-radius: 1rem;
@@ -225,6 +226,7 @@ nav#navbar {
         }
     }
 
+    // ===================== CHART =====================
     #piechart {
         border-radius: 0.5rem;
         background-color: #fff;
@@ -254,17 +256,35 @@ nav#navbar {
         }
     }
 
+    // ===================== CARD =====================
     .card {
         margin-top: 1.5rem;
         border: 0;
         border-radius: 0.5rem;
     }
+    .card_presensi {
+        h6 {
+            @include mixintext(500, 0.875rem, 1.21em, $placeholder);
+        }
+        h5 {
+            @include mixintext(600, 1rem, 1.21em, $font-black);
+        }
+    }
+    .card-header {
+        border-radius: 0.5rem 0.5rem 0 0;
+        border: 0;
+        h2 {
+            @include mixintext(600, 1.125rem, 1.22em, $font-black);
+            text-transform: capitalize;
+        }
 
-    .fileUpload-icon {
-        font-size: 3rem;
-        color: $primary;
+        h3 {
+            @include mixintext(500, 1.125rem, 1.22em, $font-black);
+            text-transform: capitalize;
+        }
     }
 
+    // ===================== BREAK LINE =====================
     hr {
         padding: 0;
         margin: 0;
@@ -283,130 +303,7 @@ nav#navbar {
         top: calc((1.5em + 1.25rem + 2px) / 2 * -1);
     }
 
-    .card-header {
-        border-radius: 0.5rem 0.5rem 0 0;
-        border: 0;
-        h2 {
-            @include mixintext(600, 1.125rem, 1.22em, $font-black);
-            text-transform: capitalize;
-        }
-
-        h3 {
-            @include mixintext(500, 1.125rem, 1.22em, $font-black);
-            text-transform: capitalize;
-        }
-    }
-
-    select#dataperhalaman {
-        @include mixintext(400, 0.875rem, 1.21em, $font-black);
-        min-width: 65px;
-        max-width: 65px;
-        border: 1px solid #999999;
-        border-radius: 0.5rem;
-        padding: 0 12px;
-        background-image: url("https://api.iconify.design/bx/bx-chevron-down.svg?color=%23041F2F");
-        background-position: calc(100% - 10px), calc(100% - 10px);
-        background-repeat: no-repeat;
-        appearance: none;
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        box-shadow: none;
-        & + label {
-            @include mixintext(400, 0.875rem, 1.21em, $font-black);
-        }
-    }
-
-    select:focus,
-    input:focus {
-        border-color: $primary;
-    }
-
-    select#status {
-        option {
-            box-shadow: 2px 2px 8px rgba(255, 0, 0, 0.15) !important;
-            border: 0 !important;
-        }
-    }
-
-    .search_form {
-        input {
-            border-radius: 0.5rem 0px 0px 0.5rem;
-            padding: 0.5rem 0.75rem;
-            border: 1px solid $primary;
-            float: left;
-
-            &::placeholder {
-                @include mixintext(400, 0.75rem, 1.21em, $font-placeholder);
-            }
-        }
-
-        button {
-            float: left;
-            border-radius: 0px 0.5rem 0.5rem 0px;
-            background-color: $primary;
-            color: white;
-            border: 1px solid $primary;
-            border-left: none;
-            cursor: pointer;
-            &:hover {
-                background: #0b7dda;
-            }
-        }
-
-        .form-control {
-            width: 85%;
-        }
-
-        .form-control-sm {
-            width: 90%;
-        }
-
-        .form-control + button {
-            height: calc(1.5em + 1.25rem + 2px);
-            width: 15%;
-        }
-
-        .form-control-sm + button {
-            height: calc(0.45em + 1.25rem + 4px);
-            width: 10%;
-        }
-
-        &::after {
-            content: "";
-            clear: both;
-            display: table;
-        }
-    }
-
-    input[type="time"] {
-        position: relative;
-    }
-
-    input[type="time"]::-webkit-calendar-picker-indicator {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        width: auto;
-        height: auto;
-        color: transparent;
-        background: transparent;
-    }
-
-    input[type="time"]::-webkit-inner-spin-button {
-        z-index: 1;
-    }
-
-    input[type="time"]::-webkit-clear-button {
-        z-index: 1;
-    }
-
-    .textarea_notresize {
-        resize: none;
-    }
-
-    // Table
+    // ===================== Table =====================
     .table-responsive {
         border-radius: 0 0 0.5rem 0.5rem;
         .table-header {
@@ -550,6 +447,19 @@ nav#navbar {
         }
     }
 
+    .table_dashboardAkademik {
+        .table-header {
+            background-color: #d9e5f2;
+            th:first-child {
+                border-radius: 0.5rem 0 0 0;
+            }
+            th:last-child {
+                border-radius: 0 0.5rem 0 0;
+            }
+        }
+    }
+
+    // ===================== FORM =====================
     .form-input {
         background-color: #fff;
         border-radius: 0.5rem;
@@ -591,6 +501,11 @@ nav#navbar {
         }
     }
 
+    .fileUpload-icon {
+        font-size: 3rem;
+        color: $primary;
+    }
+
     .custom_select {
         position: relative;
         &::after {
@@ -622,16 +537,113 @@ nav#navbar {
         }
     }
 
-    .card_presensi {
-        h6 {
-            @include mixintext(500, 0.875rem, 1.21em, $placeholder);
-        }
-        h5 {
-            @include mixintext(600, 1rem, 1.21em, $font-black);
+    select#dataperhalaman {
+        @include mixintext(400, 0.875rem, 1.21em, $font-black);
+        min-width: 65px;
+        max-width: 65px;
+        border: 1px solid #999999;
+        border-radius: 0.5rem;
+        padding: 0 12px;
+        background-image: url("https://api.iconify.design/bx/bx-chevron-down.svg?color=%23041F2F");
+        background-position: calc(100% - 10px), calc(100% - 10px);
+        background-repeat: no-repeat;
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        box-shadow: none;
+        & + label {
+            @include mixintext(400, 0.875rem, 1.21em, $font-black);
         }
     }
 
-    // MODAL
+    select:focus,
+    input:focus {
+        border-color: $primary;
+    }
+
+    select#status {
+        option {
+            box-shadow: 2px 2px 8px rgba(255, 0, 0, 0.15) !important;
+            border: 0 !important;
+        }
+    }
+
+    .search_form {
+        input {
+            border-radius: 0.5rem 0px 0px 0.5rem;
+            padding: 0.5rem 0.75rem;
+            border: 1px solid $primary;
+            float: left;
+
+            &::placeholder {
+                @include mixintext(400, 0.75rem, 1.21em, $font-placeholder);
+            }
+        }
+
+        button {
+            float: left;
+            border-radius: 0px 0.5rem 0.5rem 0px;
+            background-color: $primary;
+            color: white;
+            border: 1px solid $primary;
+            border-left: none;
+            cursor: pointer;
+            &:hover {
+                background: #0b7dda;
+            }
+        }
+
+        .form-control {
+            width: 85%;
+        }
+
+        .form-control-sm {
+            width: 90%;
+        }
+
+        .form-control + button {
+            height: calc(1.5em + 1.25rem + 2px);
+            width: 15%;
+        }
+
+        .form-control-sm + button {
+            height: calc(0.45em + 1.25rem + 4px);
+            width: 10%;
+        }
+
+        &::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+    }
+
+    .textarea_notresize {
+        resize: none;
+    }
+
+    input[type="time"] {
+        position: relative;
+        &::-webkit-calendar-picker-indicator {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width: auto;
+            height: auto;
+            color: transparent;
+            background: transparent;
+        }
+        &::-webkit-inner-spin-button {
+            z-index: 1;
+        }
+        &::-webkit-clear-button {
+            z-index: 1;
+        }
+    }
+
+    // ===================== MODAL =====================
     .modal-title {
         @include mixintext(600, 1.25rem, 1.2em, $font-dark);
     }
@@ -658,18 +670,6 @@ nav#navbar {
         }
         & + .jenis_dokumen {
             @include mixintext(400, 1rem, 1.21em, $font-black);
-        }
-    }
-}
-
-#akademik_dashboard {
-    .table-header {
-        background-color: #d9e5f2;
-        th:first-child {
-            border-radius: 0.5rem 0 0 0;
-        }
-        th:last-child {
-            border-radius: 0 0.5rem 0 0;
         }
     }
 }

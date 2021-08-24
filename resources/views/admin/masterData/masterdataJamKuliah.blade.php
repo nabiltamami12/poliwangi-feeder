@@ -30,7 +30,7 @@
     <div class="col-xl-12">
       <div class="card shadow padding--small">
 
-        <div class="card-header p-0 m-0 border-0">
+        <div class="card-header p-0">
           <div class=" row align-items-center">
             <div class="col-12 col-md-6">
               <h2 class="mb-0 text-center text-md-left">Data Jam Kuliah</h2>

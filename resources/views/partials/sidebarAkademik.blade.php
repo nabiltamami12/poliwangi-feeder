@@ -23,7 +23,6 @@
 
         <!-- Nav items -->
         <ul class="navbar-nav">
-
           <li class="nav-item">
             <a class="nav-link {{($title === "akademik-dashboard") ? 'aktif' : ''}}"
               href="{{ url('/akademik/dashboard') }} ">
@@ -40,21 +39,17 @@
             <ul class="nav-item-dropdown-content">
               <li class="nav-item">
                 <a class="nav-link" href="{{ url('/akademik/master/datamahasiswa')}}">
-                  <span
-                    class="nav-link-dropdown-text {{($halamanAktif === "datamahasiswa") ? 'text-primary' : ''}}">Data
-                    Mahasiswa</span>
+                  <span class="nav-link-dropdown-text">Data Mahasiswa</span>
                 </a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="{{ url('/akademik/master/datakelas')}}">
-                  <span class="nav-link-dropdown-text {{($halamanAktif === "datakelas") ? 'text-primary' : ''}}">Data
-                    Kelas</span>
+                  <span class="nav-link-dropdown-text">Data Kelas</span>
                 </a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="{{ url('/akademik/master/datakuliah')}}">
-                  <span class="nav-link-dropdown-text {{($halamanAktif === "datakuliah") ? 'text-primary' : ''}}">Data
-                    Kuliah</span>
+                  <span class="nav-link-dropdown-text">Data Kuliah</span>
                 </a>
               </li>
             </ul>
@@ -68,13 +63,12 @@
             <ul class="nav-item-dropdown-content">
               <li class="nav-item">
                 <a class="nav-link" href="/akademik/khs/khs">
-                  <span class="nav-link-dropdown-text {{($halamanAktif === "khs") ? 'text-primary' : ''}}">KHS</span>
+                  <span class="nav-link-dropdown-text">KHS</span>
                 </a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="/akademik/khs/khsmahasiswa">
-                  <span class="nav-link-dropdown-text {{($halamanAktif === "khsmahasiswa") ? 'text-primary' : ''}}">KHS
-                    Mahasiswa</span>
+                  <span class="nav-link-dropdown-text">KHS Mahasiswa</span>
                 </a>
               </li>
             </ul>
@@ -88,28 +82,22 @@
             <ul class="nav-item-dropdown-content">
               <li class="nav-item">
                 <a class="nav-link" href="/akademik/kuliah/skmahasiswaaktif">
-                  <span
-                    class="nav-link-dropdown-text {{($halamanAktif === "skmahasiswaaktif") ? 'text-primary' : ''}}">SK
-                    Mahasiswa Aktif</span>
+                  <span class="nav-link-dropdown-text">SK Mahasiswa Aktif</span>
                 </a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="/akademik/kuliah/nilai">
-                  <span
-                    class="nav-link-dropdown-text {{($halamanAktif === "nilai") ? 'text-primary' : ''}}">Nilai</span>
+                  <span class="nav-link-dropdown-text">Nilai</span>
                 </a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="/akademik/kuliah/nilaimahasiswa">
-                  <span
-                    class="nav-link-dropdown-text {{($halamanAktif === "nilaimahasiswa") ? 'text-primary' : ''}}">Nilai
-                    Mahasiswa</span>
+                  <span class="nav-link-dropdown-text">Nilai Mahasiswa</span>
                 </a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="/akademik/kuliah/pelanggaran">
-                  <span
-                    class="nav-link-dropdown-text {{($halamanAktif === "pelanggaran") ? 'text-primary' : ''}}">Pelanggaran</span>
+                  <span class="nav-link-dropdown-text">Pelanggaran</span>
                 </a>
               </li>
             </ul>
@@ -125,35 +113,28 @@
               <ul>
                 <li class="nav-item">
                   <div class="nav-link-submenu">
-                    <span
-                      class="nav-link-dropdown-text {{($halamanAktif === "reportcuti" || $halamanAktif === "reportdropout" || $halamanAktif === "reportmelebihisemester" || $halamanAktif === "reportlulus") ? 'text-primary' : ''}}">Mahasiswa</span>
+                    <span class="nav-link-dropdown-text">Mahasiswa</span>
                   </div>
 
                   <ul class="nav-item-dropdown-content">
                     <li class="nav-item">
                       <a class="nav-link" href="/akademik/report/cuti">
-                        <span
-                          class="nav-link-dropdown-text {{($halamanAktif === "reportcuti") ? 'text-primary' : ''}}">Cuti</span>
+                        <span class="nav-link-dropdown-text">Cuti</span>
                       </a>
                     </li>
                     <li class="nav-item">
                       <a class="nav-link" href="/akademik/report/dropout">
-                        <span
-                          class="nav-link-dropdown-text {{($halamanAktif === "reportdropout") ? 'text-primary' : ''}}">Drop
-                          Out</span>
+                        <span class="nav-link-dropdown-text">DropOut</span>
                       </a>
                     </li>
                     <li class="nav-item">
                       <a class="nav-link" href="/akademik/report/melebihisemester">
-                        <span
-                          class="nav-link-dropdown-text {{($halamanAktif === "reportmelebihisemester") ? 'text-primary' : ''}}">Melebihi
-                          Semester</span>
+                        <span class="nav-link-dropdown-text">Melebihi Semester</span>
                       </a>
                     </li>
                     <li class="nav-item">
                       <a class="nav-link" href="/akademik/report/lulus">
-                        <span
-                          class="nav-link-dropdown-text {{($halamanAktif === "reportlulus") ? 'text-primary' : ''}}">Lulus</span>
+                        <span class="nav-link-dropdown-text">Lulus</span>
                       </a>
                     </li>
                   </ul>
@@ -161,16 +142,12 @@
 
                 <li class="nav-item">
                   <a class="nav-link" href="/akademik/report/judultugasakhir">
-                    <span
-                      class="nav-link-dropdown-text {{($halamanAktif === "reportjudulta") ? 'text-primary' : ''}}">Judul
-                      Tugas
-                      Akhir</span>
+                    <span class="nav-link-dropdown-text">JudulTugasAkhir</span>
                   </a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="/akademik/report/wali">
-                    <span
-                      class="nav-link-dropdown-text {{($halamanAktif === "reportwali") ? 'text-primary' : ''}}">Wali</span>
+                    <span class="nav-link-dropdown-text">Wali</span>
                   </a>
                 </li>
               </ul>

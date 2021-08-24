@@ -41,6 +41,19 @@
         font-size: 14px;
     }
 
+    .halaman_awal {
+        &.register_page {
+            .input-foto-siswa {
+                min-height: 130px;
+            }
+        }
+        .card {
+            .card-body {
+                padding: 1.5rem 1rem;
+            }
+        }
+    }
+
     .page-content {
         #pengumuman {
             .carousel-inner {
@@ -92,22 +105,6 @@
         }
     }
 
-    .register_page {
-        .input-foto-siswa {
-            min-height: 130px;
-        }
-    }
-
-    .login_page,
-    .register_page,
-    .pmbGenerateVA_page {
-        .card {
-            .card-body {
-                padding: 1.5rem 1rem;
-            }
-        }
-    }
-
     .page-content__keuangan {
         .setting_tarif_UKTSPI {
             #input_prefix {
@@ -143,6 +140,12 @@
     html {
         font-size: 12px;
     }
+    .halaman_awal {
+        .logo {
+            width: 20%;
+        }
+    }
+
     .page-content {
         .table-responsive {
             .table-body {
@@ -150,14 +153,6 @@
                     bottom: -1px;
                 }
             }
-        }
-    }
-
-    .login_page,
-    .register_page,
-    .pmbGenerateVA_page {
-        .logo {
-            width: 20%;
         }
     }
 

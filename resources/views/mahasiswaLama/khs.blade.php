@@ -9,7 +9,7 @@
   <div class="row">
     <div class="col-xl-12">
       <div class="card shadow padding--small">
-        <div class="card-header p-0 m-0 border-0">
+        <div class="card-header p-0">
           <div class="row align-items-center">
             <div class="col">
               <h3 class="mb-0">Unduh KHS</h3>

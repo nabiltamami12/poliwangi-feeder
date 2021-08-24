@@ -191,13 +191,13 @@
         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
           <div class="carousel-inner">
             <div class="carousel-item active">
-              <img class="card-img-top" src="{{ url('images') }}/banner.svg" alt="">
+              <img class="card-img-top" src="{{ url('images') }}/banner.png" alt="">
             </div>
             <div class="carousel-item">
-              <img class="card-img-top" src="{{ url('images') }}/banner.svg" alt="">
+              <img class="card-img-top" src="{{ url('images') }}/banner.png" alt="">
             </div>
             <div class="carousel-item">
-              <img class="card-img-top" src="{{ url('images') }}/banner.svg" alt="">
+              <img class="card-img-top" src="{{ url('images') }}/banner.png" alt="">
             </div>
           </div>
           <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">

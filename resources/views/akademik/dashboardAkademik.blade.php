@@ -19,7 +19,7 @@
 <header class="header"></header>
 
 <!-- Page content -->
-<section class="page-content container-fluid" id="akademik_dashboard">
+<section class="page-content container-fluid">
   <div id="piechart" class="shadow mt-4">
     <div class="data-piechart">
       <div class="data-item">
@@ -53,16 +53,16 @@
   <div class="row">
     <div class="col-xl-12">
       <div class="card shadow">
-        <div class="table-responsive">
+        <div class="table-responsive table_dashboardAkademik">
           <table class="table align-items-center table-borderless table-flush table-hover">
             <thead class="table-header">
               <tr>
-                <th scope="col" class="border-0 text-center px-2"></th>
-                <th scope="col" class="border-0">Kode</th>
-                <th scope="col" class="border-0">Mata Kuliah</th>
-                <th scope="col" class="border-0 text-center px-0">Laki-laki</th>
-                <th scope="col" class="border-0 text-center px-0">Perempuan</th>
-                <th scope="col" class="border-0 text-center px-2">Total</th>
+                <th scope="col" class="text-center px-2"></th>
+                <th scope="col">Kode</th>
+                <th scope="col">Mata Kuliah</th>
+                <th scope="col" class="text-center px-0">Laki-laki</th>
+                <th scope="col" class="text-center px-0">Perempuan</th>
+                <th scope="col" class="text-center px-2">Total</th>
               </tr>
             </thead>
             <tbody class="table-body">

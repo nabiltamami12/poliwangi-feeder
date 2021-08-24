@@ -23,7 +23,6 @@
 
         <!-- Nav items -->
         <ul class="navbar-nav">
-
           <li class="nav-item">
             <a class="nav-link {{($title === "keuangan-dashboard") ? 'aktif' : ''}}"
               href="{{ url('/keuangan/dashboard') }} ">
@@ -47,41 +46,32 @@
             <ul class="nav-item-dropdown-content">
               <li class="nav-item">
                 <a class="nav-link" href="{{ url('/keuangan/rekapitulasi/datapendaftar')}}">
-                  <span class="nav-link-dropdown-text {{($halamanAktif === "datapendaftar") ? 'text-primary' : ''}}">
-                    Data Pendaftar</span>
+                  <span class="nav-link-dropdown-text">Data Pendaftar</span>
                 </a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="{{ url('/keuangan/rekapitulasi/spi')}}">
-                  <span class="nav-link-dropdown-text {{($halamanAktif === "spi") ? 'text-primary' : ''}}">
-                    SPI</span>
+                  <span class="nav-link-dropdown-text">SPI</span>
                 </a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="{{ url('/keuangan/rekapitulasi/piutangmahasiswa')}}">
-                  <span class="nav-link-dropdown-text {{($halamanAktif === "piutangmahasiswa") ? 'text-primary' : ''}}">
-                    Piutang Mahasiswa</span>
+                  <span class="nav-link-dropdown-text">Piutang Mahasiswa</span>
                 </a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="{{ url('/keuangan/rekapitulasi/penyisihanpiutang')}}">
-                  <span
-                    class="nav-link-dropdown-text {{($halamanAktif === "penyisihanpiutang") ? 'text-primary' : ''}}">
-                    Penyisihan Piutang</span>
+                  <span class="nav-link-dropdown-text">Penyisihan Piutang</span>
                 </a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="{{ url('/keuangan/rekapitulasi/inputdatapembayaran')}}">
-                  <span
-                    class="nav-link-dropdown-text {{($halamanAktif === "inputdatapembayaran") ? 'text-primary' : ''}}">
-                    Input Data Pembayaran</span>
+                  <span class="nav-link-dropdown-text">Input Data Pembayaran</span>
                 </a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="{{ url('/keuangan/rekapitulasi/riwayatpembayaran')}}">
-                  <span
-                    class="nav-link-dropdown-text {{($halamanAktif === "riwayatpembayaran") ? 'text-primary' : ''}}">
-                    Riwayat pembayaran</span>
+                  <span class="nav-link-dropdown-text">Riwayat pembayaran</span>
                 </a>
               </li>
             </ul>

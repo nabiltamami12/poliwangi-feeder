@@ -19152,9 +19152,9 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/sass/prodi.scss":
+/***/ "./resources/sass/admin.scss":
 /*!***********************************!*\
-  !*** ./resources/sass/prodi.scss ***!
+  !*** ./resources/sass/admin.scss ***!
   \***********************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -19178,10 +19178,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/sass/login.scss":
-/*!***********************************!*\
-  !*** ./resources/sass/login.scss ***!
-  \***********************************/
+/***/ "./resources/sass/halamanAwal.scss":
+/*!*****************************************!*\
+  !*** ./resources/sass/halamanAwal.scss ***!
+  \*****************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -19496,10 +19496,10 @@ process.umask = function() { return 0; };
 /******/ 		// [resolve, reject, Promise] = chunk loading, 0 = chunk loaded
 /******/ 		var installedChunks = {
 /******/ 			"/js/app": 0,
-/******/ 			"css/login": 0,
+/******/ 			"css/halamanAwal": 0,
 /******/ 			"css/keuangan": 0,
 /******/ 			"css/main": 0,
-/******/ 			"css/prodi": 0,
+/******/ 			"css/admin": 0,
 /******/ 			"css/mahasiswa": 0,
 /******/ 			"css/app": 0,
 /******/ 			"css/responsive": 0,
@@ -19551,15 +19551,15 @@ process.umask = function() { return 0; };
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
-/******/ 	__webpack_require__.O(undefined, ["css/login","css/keuangan","css/main","css/prodi","css/mahasiswa","css/app","css/responsive","css/customComponent"], () => (__webpack_require__("./resources/js/app.js")))
-/******/ 	__webpack_require__.O(undefined, ["css/login","css/keuangan","css/main","css/prodi","css/mahasiswa","css/app","css/responsive","css/customComponent"], () => (__webpack_require__("./resources/sass/main.scss")))
-/******/ 	__webpack_require__.O(undefined, ["css/login","css/keuangan","css/main","css/prodi","css/mahasiswa","css/app","css/responsive","css/customComponent"], () => (__webpack_require__("./resources/sass/mahasiswa.scss")))
-/******/ 	__webpack_require__.O(undefined, ["css/login","css/keuangan","css/main","css/prodi","css/mahasiswa","css/app","css/responsive","css/customComponent"], () => (__webpack_require__("./resources/sass/prodi.scss")))
-/******/ 	__webpack_require__.O(undefined, ["css/login","css/keuangan","css/main","css/prodi","css/mahasiswa","css/app","css/responsive","css/customComponent"], () => (__webpack_require__("./resources/sass/keuangan.scss")))
-/******/ 	__webpack_require__.O(undefined, ["css/login","css/keuangan","css/main","css/prodi","css/mahasiswa","css/app","css/responsive","css/customComponent"], () => (__webpack_require__("./resources/sass/login.scss")))
-/******/ 	__webpack_require__.O(undefined, ["css/login","css/keuangan","css/main","css/prodi","css/mahasiswa","css/app","css/responsive","css/customComponent"], () => (__webpack_require__("./resources/sass/customComponent.scss")))
-/******/ 	__webpack_require__.O(undefined, ["css/login","css/keuangan","css/main","css/prodi","css/mahasiswa","css/app","css/responsive","css/customComponent"], () => (__webpack_require__("./resources/sass/responsive.scss")))
-/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/login","css/keuangan","css/main","css/prodi","css/mahasiswa","css/app","css/responsive","css/customComponent"], () => (__webpack_require__("./resources/css/app.css")))
+/******/ 	__webpack_require__.O(undefined, ["css/halamanAwal","css/keuangan","css/main","css/admin","css/mahasiswa","css/app","css/responsive","css/customComponent"], () => (__webpack_require__("./resources/js/app.js")))
+/******/ 	__webpack_require__.O(undefined, ["css/halamanAwal","css/keuangan","css/main","css/admin","css/mahasiswa","css/app","css/responsive","css/customComponent"], () => (__webpack_require__("./resources/sass/main.scss")))
+/******/ 	__webpack_require__.O(undefined, ["css/halamanAwal","css/keuangan","css/main","css/admin","css/mahasiswa","css/app","css/responsive","css/customComponent"], () => (__webpack_require__("./resources/sass/mahasiswa.scss")))
+/******/ 	__webpack_require__.O(undefined, ["css/halamanAwal","css/keuangan","css/main","css/admin","css/mahasiswa","css/app","css/responsive","css/customComponent"], () => (__webpack_require__("./resources/sass/admin.scss")))
+/******/ 	__webpack_require__.O(undefined, ["css/halamanAwal","css/keuangan","css/main","css/admin","css/mahasiswa","css/app","css/responsive","css/customComponent"], () => (__webpack_require__("./resources/sass/keuangan.scss")))
+/******/ 	__webpack_require__.O(undefined, ["css/halamanAwal","css/keuangan","css/main","css/admin","css/mahasiswa","css/app","css/responsive","css/customComponent"], () => (__webpack_require__("./resources/sass/halamanAwal.scss")))
+/******/ 	__webpack_require__.O(undefined, ["css/halamanAwal","css/keuangan","css/main","css/admin","css/mahasiswa","css/app","css/responsive","css/customComponent"], () => (__webpack_require__("./resources/sass/customComponent.scss")))
+/******/ 	__webpack_require__.O(undefined, ["css/halamanAwal","css/keuangan","css/main","css/admin","css/mahasiswa","css/app","css/responsive","css/customComponent"], () => (__webpack_require__("./resources/sass/responsive.scss")))
+/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/halamanAwal","css/keuangan","css/main","css/admin","css/mahasiswa","css/app","css/responsive","css/customComponent"], () => (__webpack_require__("./resources/css/app.css")))
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 	
 /******/ })()

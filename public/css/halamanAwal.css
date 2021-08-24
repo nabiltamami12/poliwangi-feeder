@@ -655,115 +655,85 @@ select {
   color: #fff;
 }
 
-.login_page .bg-default,
-.register_page .bg-default,
-.pmbGenerateVA_page .bg-default {
+.halaman_awal .bg-default {
   background-color: #172b4d !important;
 }
-.login_page .bg-secondary,
-.register_page .bg-secondary,
-.pmbGenerateVA_page .bg-secondary {
+.halaman_awal .bg-secondary {
   background-color: #f7fafc !important;
 }
-.login_page .bg-gradient-primary,
-.register_page .bg-gradient-primary,
-.pmbGenerateVA_page .bg-gradient-primary {
+.halaman_awal .bg-gradient-primary {
   background: linear-gradient(90.18deg, #b2def8 -4.39%, #6f7bf7 132.48%) !important;
 }
-.login_page .header-body h1,
-.register_page .header-body h1,
-.pmbGenerateVA_page .header-body h1 {
+.halaman_awal .header-body h1 {
   font-weight: 600;
   font-size: 1.625rem;
   line-height: 1.22em;
   color: #ffffff;
   margin-top: 1rem;
 }
-.login_page .header-body p,
-.register_page .header-body p,
-.pmbGenerateVA_page .header-body p {
+.halaman_awal .header-body p {
   font-weight: 600;
   font-size: 0.8125rem;
   line-height: 1.22em;
   color: #ffffff;
   margin-top: 0.5rem;
 }
-.login_page .card,
-.register_page .card,
-.pmbGenerateVA_page .card {
+.halaman_awal .card {
   border-radius: 4px;
   position: relative;
 }
-.login_page .card .card-body p,
-.register_page .card .card-body p,
-.pmbGenerateVA_page .card .card-body p {
+.halaman_awal .card .card-body p {
   font-weight: 500;
   font-size: 0.75rem;
   line-height: 1.25em;
   color: #adb5bd;
   margin-bottom: 2rem;
 }
-.login_page .card .card-body .form-control::-moz-placeholder, .register_page .card .card-body .form-control::-moz-placeholder, .pmbGenerateVA_page .card .card-body .form-control::-moz-placeholder {
+.halaman_awal .card .card-body .form-control::-moz-placeholder {
   font-weight: 500;
   font-size: 0.75rem;
   line-height: 1.22em;
   color: #adb5bd;
 }
-.login_page .card .card-body .form-control:-ms-input-placeholder, .register_page .card .card-body .form-control:-ms-input-placeholder, .pmbGenerateVA_page .card .card-body .form-control:-ms-input-placeholder {
+.halaman_awal .card .card-body .form-control:-ms-input-placeholder {
   font-weight: 500;
   font-size: 0.75rem;
   line-height: 1.22em;
   color: #adb5bd;
 }
-.login_page .card .card-body .form-control::placeholder,
-.register_page .card .card-body .form-control::placeholder,
-.pmbGenerateVA_page .card .card-body .form-control::placeholder {
+.halaman_awal .card .card-body .form-control::placeholder {
   font-weight: 500;
   font-size: 0.75rem;
   line-height: 1.22em;
   color: #adb5bd;
 }
-.login_page .card .card-body .form-group:first-child,
-.register_page .card .card-body .form-group:first-child,
-.pmbGenerateVA_page .card .card-body .form-group:first-child {
+.halaman_awal .card .card-body .form-group:first-child {
   margin-bottom: 1rem;
 }
-.login_page .card .card-body .input-group,
-.register_page .card .card-body .input-group,
-.pmbGenerateVA_page .card .card-body .input-group {
+.halaman_awal .card .card-body .input-group {
   box-shadow: 1px 2px 10px rgba(0, 0, 0, 0.1);
 }
-.login_page .custom-checkbox .custom-control-label::before,
-.register_page .custom-checkbox .custom-control-label::before,
-.pmbGenerateVA_page .custom-checkbox .custom-control-label::before {
+.halaman_awal .custom-checkbox .custom-control-label::before {
   border-radius: 0.25rem;
   border: 0;
   box-shadow: 1px 2px 10px rgba(0, 0, 0, 0.1);
 }
-.login_page .custom-control-label,
-.register_page .custom-control-label,
-.pmbGenerateVA_page .custom-control-label {
+.halaman_awal .custom-control-label {
   font-weight: 500;
   font-size: 0.75rem !important;
   line-height: 2;
   color: #adb5bd;
 }
-.login_page .register_account,
-.register_page .register_account,
-.pmbGenerateVA_page .register_account {
+.halaman_awal .register_account {
   margin-top: 3rem;
 }
-.login_page .register_account p,
-.register_page .register_account p,
-.pmbGenerateVA_page .register_account p {
+.halaman_awal .register_account p {
   font-weight: 600;
   font-size: 0.8125rem;
   line-height: 1.22em;
   color: #fff;
 }
-.login_page .register_account a,
-.register_page .register_account a,
-.pmbGenerateVA_page .register_account a {
+.halaman_awal .register_account a {
   text-decoration: underline;
 }
 

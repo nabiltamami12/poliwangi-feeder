@@ -11,9 +11,7 @@
 
 @import "./component";
 
-.login_page,
-.register_page,
-.pmbGenerateVA_page {
+.halaman_awal {
     .bg-default {
         background-color: #172b4d !important;
     }
@@ -113,31 +111,6 @@
     .form-group {
         margin-bottom: 0;
     }
-
-    // select {
-    //     border: 1px solid #c4c4c4;
-    //     border-radius: 8px;
-    //     padding-left: 1.5rem;
-    //     background-image: url("https://api.iconify.design/bx/bx-chevron-down.svg?color=#041F2F");
-    //     background-position: calc(100% - 1.2rem), calc(100% - 24px);
-    //     background-repeat: no-repeat;
-    //     appearance: none;
-    //     -webkit-appearance: none;
-    //     -moz-appearance: none;
-    //     color: #adb5bd;
-    //     option {
-    //         color: $font-black;
-    //     }
-    // }
-
-    // input {
-    //     border: 1px solid #c4c4c4;
-    //     border-radius: 8px;
-    //     padding-left: 1.5rem;
-    // }
-    // input::placeholder {
-    //     @include mixintext(600, 0.75rem, 1.22em, #8d8f91);
-    // }
 
     label {
         @include mixintext(500, 1rem, 1.22em, $font-black);

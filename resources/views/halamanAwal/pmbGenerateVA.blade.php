@@ -30,13 +30,13 @@
   <link rel="stylesheet" href="{{ url('argon') }}/assets/css/argon.css?v=1.2.0" type="text/css">
   <script src="{{ url('js/util.js') }}"></script>
   <!-- Custom CSS -->
-  <link href="{{ asset('css/login.css') }}" rel="stylesheet">
+  <link href="{{ asset('css/halamanAwal.css') }}" rel="stylesheet">
   <link href="{{ asset('css/responsive.css') }}" rel="stylesheet">
 </head>
 
 <body class="bg-default">
   <!-- Main content -->
-  <div class="main-content pmbGenerateVA_page">
+  <div class="main-content halaman_awal pmbGenerateVA_page">
     <!-- Header -->
     <div class="header bg-gradient-primary py-7">
       <div class="container">
