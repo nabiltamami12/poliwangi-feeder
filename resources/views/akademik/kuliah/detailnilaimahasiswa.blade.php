@@ -5,11 +5,10 @@
 <header class="header"></header>
 
 <!-- Page content -->
-<section class="page-content container-fluid" id="akademik_detailnilai">
+<section class="page-content container-fluid">
   <div class="row">
     <div class="col-xl-12">
       <div class="card shadow padding--small">
-
         <div class="card-header p-0 m-0 border-0 ">
           <div class="row align-items-center">
             <div class="col-12 col-md-6">
@@ -21,13 +20,12 @@
                 Tambah
               </button>
               <button type="button" class="btn btn-secondary ml-0 ml-md-2">
-                <i class="iconify-inline mr-1" data-icon="bx:bx-download"></i>
+                <i class="iconify-inline mr-1" data-icon="bx:bx-cloud-download"></i>
                 Unduh Data
               </button>
             </div>
           </div>
         </div>
-
         <hr class="my-4">
 
         <form class="form-input">
@@ -108,6 +106,7 @@
                 <td class="text-center">25%</td>
                 <td class="text-center">87</td>
               </tr>
+
 
               <tr>
                 <td rowspan="6" class="text-center px-2">2</td>

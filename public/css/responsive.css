@@ -68,6 +68,20 @@
   .page-content .form-select .form-group:nth-child(even) {
     padding: 0;
   }
+  .page-content .search_form .form-control-sm {
+    width: 95%;
+  }
+  .page-content .search_form .form-control + button {
+    height: calc(1.5em + 1.25rem + 4px);
+    position: relative;
+    top: -1px;
+  }
+  .page-content .search_form .form-control-sm + button {
+    height: calc(0.45em + 1.25rem + 5px);
+    width: 5%;
+    position: relative;
+    top: -1px;
+  }
 
   #tahapan .card-form .form-group:first-child, #tahapan .card-form .form-group:nth-child(2), #tahapan .card-form .form-group:last-child {
     padding: 0;
@@ -100,6 +114,12 @@
 
   .page-content .table-responsive .table-body .bordered_sm::after {
     bottom: -1px;
+  }
+  .page-content .search_form .form-control-sm {
+    width: 90%;
+  }
+  .page-content .search_form .form-control-sm + button {
+    width: 10%;
   }
 
   .page-content__admin .calendar_content div.blank {

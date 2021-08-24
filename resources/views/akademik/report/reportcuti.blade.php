@@ -5,11 +5,10 @@
 <header class="header"></header>
 
 <!-- Page content -->
-<section class="page-content container-fluid" id="akademik_reportcuti">
+<section class="page-content container-fluid">
   <div class="row">
     <div class="col-xl-12">
       <div class="card shadow padding--small">
-
         <div class="card-header p-0">
           <div class="row align-items-center">
             <div class="col-12 col-md-6">
@@ -21,7 +20,7 @@
                 Tambah
               </button>
               <button type="button" class="btn btn-warning ml-0 ml-md-2">
-                <i class="iconify-inline mr-1" data-icon="bx:bx-cloud-download"></i>
+                <span class="iconify-inline mr-1" data-icon="bx:bx-upload"></span>
                 Eksport
               </button>
             </div>
@@ -92,7 +91,7 @@
                 <td class="font-weight-bold text-capitalize">Dwi Rahmawati</td>
                 <td class="text-center">04/06/2001</td>
                 <td class="text-center">04/06/2002</td>
-                <td class="wordwrap text-lowercase">disini berisi alasan cuti yang diberikan mahasiswa</td>
+                <td class="text-wrap text-lowercase">disini berisi alasan cuti yang diberikan mahasiswa</td>
                 <td class="text-center">
                   <i class="iconify edit-icon mr-2" data-icon="bx:bx-edit-alt"></i>
                   <i class="iconify delete-icon" data-icon="bx:bx-trash"></i>
@@ -105,7 +104,7 @@
                 <td class="font-weight-bold text-capitalize">Dwi Rahmawati</td>
                 <td class="text-center">04/06/2001</td>
                 <td class="text-center">04/06/2002</td>
-                <td class="wordwrap text-lowercase">disini berisi alasan cuti yang diberikan mahasiswa</td>
+                <td class="text-wrap text-lowercase">disini berisi alasan cuti yang diberikan mahasiswa</td>
                 <td class="text-center">
                   <i class="iconify edit-icon mr-2" data-icon="bx:bx-edit-alt"></i>
                   <i class="iconify delete-icon" data-icon="bx:bx-trash"></i>
@@ -118,7 +117,7 @@
                 <td class="font-weight-bold text-capitalize">Dwi Rahmawati</td>
                 <td class="text-center">04/06/2001</td>
                 <td class="text-center">04/06/2002</td>
-                <td class="wordwrap text-lowercase">disini berisi alasan cuti yang diberikan mahasiswa</td>
+                <td class="text-wrap text-lowercase">disini berisi alasan cuti yang diberikan mahasiswa</td>
                 <td class="text-center">
                   <i class="iconify edit-icon mr-2" data-icon="bx:bx-edit-alt"></i>
                   <i class="iconify delete-icon" data-icon="bx:bx-trash"></i>
@@ -131,7 +130,7 @@
                 <td class="font-weight-bold text-capitalize">Dwi Rahmawati</td>
                 <td class="text-center">04/06/2001</td>
                 <td class="text-center">04/06/2002</td>
-                <td class="wordwrap text-lowercase">disini berisi alasan cuti yang diberikan mahasiswa</td>
+                <td class="text-wrap text-lowercase">disini berisi alasan cuti yang diberikan mahasiswa</td>
                 <td class="text-center">
                   <i class="iconify edit-icon mr-2" data-icon="bx:bx-edit-alt"></i>
                   <i class="iconify delete-icon" data-icon="bx:bx-trash"></i>
@@ -144,7 +143,7 @@
                 <td class="font-weight-bold text-capitalize">Dwi Rahmawati</td>
                 <td class="text-center">04/06/2001</td>
                 <td class="text-center">04/06/2002</td>
-                <td class="wordwrap text-lowercase">disini berisi alasan cuti yang diberikan mahasiswa</td>
+                <td class="text-wrap text-lowercase">disini berisi alasan cuti yang diberikan mahasiswa</td>
                 <td class="text-center">
                   <i class="iconify edit-icon mr-2" data-icon="bx:bx-edit-alt"></i>
                   <i class="iconify delete-icon" data-icon="bx:bx-trash"></i>
@@ -152,7 +151,6 @@
               </tr>
             </tbody>
           </table>
-
         </div>
 
         <div class="row justify-content-between align-items-center table-information">

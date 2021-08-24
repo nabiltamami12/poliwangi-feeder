@@ -562,10 +562,6 @@ option {
     &:first-child {
         margin-top: 0;
     }
-    &[disabled] {
-        font-weight: 700;
-        margin-left: 5px;
-    }
 }
 
 // TABLE

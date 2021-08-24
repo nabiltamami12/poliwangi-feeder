@@ -383,6 +383,32 @@ nav#navbar {
                 padding: 0;
                 text-align: center;
             }
+            input[type="checkbox"] {
+                -moz-appearance: none;
+                -webkit-appearance: none;
+                -o-appearance: none;
+                outline: none;
+                content: none;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin: 0 auto;
+            }
+
+            input[type="checkbox"]:before {
+                font-family: "FontAwesome";
+                content: "\f00c";
+                color: transparent;
+                display: block;
+                width: 14px;
+                height: 14px;
+                border: 1.5px solid #041f2f;
+                border-radius: 2px;
+            }
+
+            input[type="checkbox"]:checked:before {
+                color: black;
+            }
         }
 
         .table-body-lg {

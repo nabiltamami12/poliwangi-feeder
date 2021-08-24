@@ -5,19 +5,19 @@
 <header class="header"></header>
 
 <!-- Page content -->
-<section class="page-content  container-fluid" id="akademik_datakelas">
+<section class="page-content  container-fluid">
   <div class="row">
     <div class="col-xl-12">
       <div class="card shadow padding--small">
-        <div class="card-header p-0 m-0 border-0 ">
+        <div class="card-header p-0 m-0 border-0">
 
           <div class="row align-items-center">
             <div class="col">
               <h2 class="mb-0">Data Kelas</h2>
             </div>
             <div class="col text-right">
-              <button type="button" class="btn-primary ">
-                <i class="iconify mr-2" onclick="add_btn()" data-icon="bx:bxs-plus-circle"></i>
+              <button type="button" class="btn btn-primary">
+                <i class="iconify mr-1" onclick="add_btn()" data-icon="bx:bxs-plus-circle"></i>
                 Tambah
               </button>
             </div>

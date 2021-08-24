@@ -9,7 +9,6 @@
   <div class="row">
     <div class="col-xl-12">
       <div class="card shadow padding--small">
-
         <div class="card-header p-0 m-0 border-0 ">
           <div class="row align-items-center">
             <div class="col-12 col-md-6">
@@ -21,7 +20,7 @@
                 Tambah
               </button>
               <button type="button" class="btn btn-warning ml-0 ml-md-2">
-                <i class="iconify-inline mr-1" data-icon="bx:bx-cloud-download"></i>
+                <span class="iconify-inline mr-1" data-icon="bx:bx-upload"></span>
                 Eksport
               </button>
             </div>

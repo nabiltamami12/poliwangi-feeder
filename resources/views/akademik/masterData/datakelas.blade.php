@@ -5,7 +5,7 @@
 <header class="header"></header>
 
 <!-- Page content -->
-<section class="page-content container-fluid" id="akademik_datakelas">
+<section class="page-content container-fluid">
   <div class="row">
     <div class="col-xl-12">
       <div class="card shadow padding--small">
@@ -16,8 +16,8 @@
               <h2 class="mb-0">Data Kelas</h2>
             </div>
             <div class="col text-right">
-              <button type="button" class="btn btn-primary ">
-                <i class="iconify mr-2" onclick="add_btn()" data-icon="bx:bxs-plus-circle"></i>
+              <button type="button" class="btn btn-primary">
+                <i class="iconify-inline mr-1" onclick="add_btn()" data-icon="bx:bxs-plus-circle"></i>
                 Tambah
               </button>
             </div>

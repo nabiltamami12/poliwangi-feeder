@@ -15,10 +15,8 @@
     }
 </style>
 <!-- Header -->
-<header class="header">
-
-</header>
-<section class="page-content  container-fluid" id="akademik_datajurusan">
+<header class="header"></header>
+<section class="page-content container-fluid">
     <div class="row">
         <div class="col-xl-8">
             <div class="card padding--small">

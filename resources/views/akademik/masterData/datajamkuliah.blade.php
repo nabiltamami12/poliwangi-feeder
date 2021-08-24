@@ -3,12 +3,10 @@
 @section('content')
 
 <!-- Header -->
-<header class="header">
-
-</header>
+<header class="header"></header>
 
 <!-- Page content -->
-<section class="page-content  container-fluid" id="akademik_datajurusan">
+<section class="page-content container-fluid">
   <div class="row">
     <div class="col-xl-12">
       <div class="card padding--small">

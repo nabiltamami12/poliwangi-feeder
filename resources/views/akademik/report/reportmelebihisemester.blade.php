@@ -9,25 +9,23 @@
   <div class="row">
     <div class="col-xl-12">
       <div class="card shadow padding--small">
-
         <div class="card-header p-0 m-0 border-0 ">
           <div class="row align-items-center">
-            <div class="col-12 col-md-6">
-              <h2 class="mb-0 text-center text-md-left">Mahasiswa Drop Out</h2>
+            <div class="col-12 col-md-7">
+              <h2 class="mb-0 text-center text-md-left">Mahasiswa Telah Melebihi Semester yang Ditentukan</h2>
             </div>
-            <div class="col-12 col-md-6 text-center text-md-right mt-3 mt-md-0">
+            <div class="col-12 col-md-5 text-center text-md-right mt-3 mt-md-0">
               <button type="button" class="btn btn-primary">
                 <i class="iconify-inline mr-1" data-icon="bx:bxs-plus-circle"></i>
                 Tambah
               </button>
               <button type="button" class="btn btn-warning ml-0 ml-md-2">
-                <i class="iconify-inline mr-1" data-icon="bx:bx-cloud-download"></i>
+                <span class="iconify-inline mr-1" data-icon="bx:bx-upload"></span>
                 Eksport
               </button>
             </div>
           </div>
         </div>
-
         <hr class="my-4">
 
         <form class="form-select">
@@ -79,7 +77,7 @@
                 <th scope="col" class="border-0 text-center px-2">No</th>
                 <th scope="col" class="border-0 pr-0">NIM</th>
                 <th scope="col" class="border-0 px-1" style="width: 30%">Nama</th>
-                <th scope="col" class="border-0 text-center">tahun seharusnya lulus</th>
+                <th scope="col" class="border-0 text-center text-wrap">tahun seharusnya lulus</th>
                 <th scope="col" class="border-0 text-center">Aksi</th>
               </tr>
             </thead>

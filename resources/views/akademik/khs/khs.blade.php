@@ -5,11 +5,10 @@
 <header class="header"></header>
 
 <!-- Page content -->
-<section class="page-content  container-fluid" id="akademik_khs">
+<section class="page-content container-fluid">
   <div class="row">
     <div class="col-xl-12">
       <div class="card shadow padding--small">
-
         <div class="card-header p-0 m-0 border-0 ">
           <div class="row align-items-center">
             <div class="col-12 col-md-6">
@@ -27,7 +26,6 @@
             </div>
           </div>
         </div>
-
         <hr class="my-4">
 
         <form class="form-select">
@@ -103,7 +101,7 @@
 
             <tbody class="table-body">
               <tr>
-                <td class="text-center"><input type="checkbox" name="pilih1" id="pilih1"></td>
+                <td><input type="checkbox" name="pilih1"></td>
                 <td>4891203526</td>
                 <td class="font-weight-bold text-capitalize">dwi rahmawati</td>
                 <td class="text-center">3</td>
@@ -112,7 +110,7 @@
               </tr>
 
               <tr>
-                <td class="text-center"><input type="checkbox" name="pilih1" id="pilih1"></td>
+                <td><input type="checkbox" name="pilih1"></td>
                 <td>4891203526</td>
                 <td class="font-weight-bold text-capitalize">dwi rahmawati</td>
                 <td class="text-center">3</td>
@@ -121,7 +119,7 @@
               </tr>
 
               <tr>
-                <td class="text-center"><input type="checkbox" name="pilih1" id="pilih1"></td>
+                <td><input type="checkbox" name="pilih1"></td>
                 <td>4891203526</td>
                 <td class="font-weight-bold text-capitalize">dwi rahmawati</td>
                 <td class="text-center">1</td>
@@ -130,7 +128,7 @@
               </tr>
 
               <tr>
-                <td class="text-center"><input type="checkbox" name="pilih1" id="pilih1"></td>
+                <td><input type="checkbox" name="pilih1"></td>
                 <td>4891203526</td>
                 <td class="font-weight-bold text-capitalize">dwi rahmawati</td>
                 <td class="text-center">3</td>
@@ -139,7 +137,7 @@
               </tr>
 
               <tr>
-                <td class="text-center"><input type="checkbox" name="pilih1" id="pilih1"></td>
+                <td><input type="checkbox" name="pilih1"></td>
                 <td>4891203526</td>
                 <td class="font-weight-bold text-capitalize">dwi rahmawati</td>
                 <td class="text-center">1</td>

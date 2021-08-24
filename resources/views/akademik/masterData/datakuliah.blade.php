@@ -5,7 +5,7 @@
 <header class="header"></header>
 
 <!-- Page content -->
-<section class="page-content  container-fluid" id="akademik_datakuliah">
+<section class="page-content container-fluid">
 
 </section>
 @endsection

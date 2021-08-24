@@ -558,10 +558,6 @@ option {
 option:first-child {
   margin-top: 0;
 }
-option[disabled] {
-  font-weight: 700;
-  margin-left: 5px;
-}
 
 .table {
   color: #041f2f;

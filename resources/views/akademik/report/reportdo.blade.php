@@ -5,11 +5,10 @@
 <header class="header"></header>
 
 <!-- Page content -->
-<section class="page-content container-fluid" id="akademik_reportdo">
+<section class="page-content container-fluid">
   <div class="row">
     <div class="col-xl-12">
       <div class="card shadow padding--small">
-
         <div class="card-header p-0 m-0 border-0 ">
           <div class="row align-items-center">
             <div class="col-12 col-md-6">
@@ -21,7 +20,7 @@
                 Tambah
               </button>
               <button type="button" class="btn btn-warning ml-0 ml-md-2">
-                <i class="iconify-inline mr-1" data-icon="bx:bx-cloud-download"></i>
+                <span class="iconify-inline mr-1" data-icon="bx:bx-upload"></span>
                 Eksport
               </button>
             </div>
@@ -71,7 +70,6 @@
           </div>
         </div>
 
-
         <div class="table-responsive">
           <table class="table align-items-center table-borderless table-flush table-hover">
             <thead class="table-header">
@@ -80,7 +78,7 @@
                 <th scope="col">NIM</th>
                 <th scope="col" style="width: 35%">Nama</th>
                 <th scope="col" class="text-center">Tanggal drop out</th>
-                <th scope="col" style="width: 25%">Alasan Drop out</th>
+                <th scope="col" style="width: 30%">Alasan Drop out</th>
                 <th scope="col" class="text-center">Aksi</th>
               </tr>
             </thead>
@@ -91,7 +89,7 @@
                 <td>4891203526</td>
                 <td class="font-weight-bold text-capitalize">Dwi Rahmawati</td>
                 <td class="text-center">04/06/2021</td>
-                <td class="wordwrap text-lowercase">Disini berisi alasan mahasiswa didrop out</td>
+                <td class="text-wrap text-lowercase">Disini berisi alasan mahasiswa didrop out</td>
                 <td class="text-center">
                   <i class="iconify edit-icon mr-2" data-icon="bx:bx-edit-alt"></i>
                   <i class="iconify delete-icon" data-icon="bx:bx-trash"></i>
@@ -103,7 +101,7 @@
                 <td>4891203526</td>
                 <td class="font-weight-bold text-capitalize">Dwi Rahmawati</td>
                 <td class="text-center">04/06/2021</td>
-                <td class="wordwrap text-lowercase">Disini berisi alasan mahasiswa didrop out</td>
+                <td class="text-wrap text-lowercase">Disini berisi alasan mahasiswa didrop out</td>
                 <td class="text-center">
                   <i class="iconify edit-icon mr-2" data-icon="bx:bx-edit-alt"></i>
                   <i class="iconify delete-icon" data-icon="bx:bx-trash"></i>
@@ -115,7 +113,7 @@
                 <td>4891203526</td>
                 <td class="font-weight-bold text-capitalize">Dwi Rahmawati</td>
                 <td class="text-center">04/06/2021</td>
-                <td class="wordwrap text-lowercase">Disini berisi alasan mahasiswa didrop out</td>
+                <td class="text-wrap text-lowercase">Disini berisi alasan mahasiswa didrop out</td>
                 <td class="text-center">
                   <i class="iconify edit-icon mr-2" data-icon="bx:bx-edit-alt"></i>
                   <i class="iconify delete-icon" data-icon="bx:bx-trash"></i>
