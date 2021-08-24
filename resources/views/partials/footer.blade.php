@@ -21,7 +21,6 @@
 </div>
 
 <script>
-
     if (localStorage.getItem("globalData") === null) {
         getGlobalData();
     }
@@ -76,7 +75,7 @@
     // AMBIL DATA GLOBAL
     async function getGlobalData() {
         await $.ajax({
-            url: url_api+"/globaldata/",
+            url: url_api+"/globaldata/"+dosen,
             type: 'get',
             dataType: 'json',
             data: {},

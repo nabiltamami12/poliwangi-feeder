@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API as Ctr;
+use Illuminate\Support\Facades\Request;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -22,7 +23,8 @@ Route::get('warning', [Ctr\AuthController::class, 'warning'])->name('warning');
 
 Route::prefix('v1')->group(function () {
     // Global data
-    Route::get('/globaldata', [Ctr\GlobalController::class, 'index']);
+    Route::get('/globaldata/', [Ctr\GlobalController::class, 'index']);
+    Route::get('/globaldata/{id}', [Ctr\GlobalController::class, 'index']);
     // Program
     Route::get('/program', [Ctr\ProgramController::class, 'index']);
     // Program
@@ -75,6 +77,10 @@ Route::prefix('v1')->group(function () {
     Route::post('/dosen', [Ctr\DosenController::class, 'store']);
     Route::put('/dosen/{id}', [Ctr\DosenController::class, 'update']);
     Route::delete('dosen/{id}', [Ctr\DosenController::class, 'destroy']);
+    Route::get('dosen/program_studi/{id}', [Ctr\DosenController::class, 'program_studi']);
+    Route::get('dosen/matkul/{id}', [Ctr\DosenController::class, 'matkul']);
+    Route::get('dosen/kelas/{id}', [Ctr\DosenController::class, 'kelas_matkul']);
+
 
     //matakuliah
     Route::get('/matakuliah/', '\App\Http\Controllers\API\MatakuliahController@index');
@@ -103,6 +109,8 @@ Route::prefix('v1')->group(function () {
     Route::get('/hariaktifkuliah/', '\App\Http\Controllers\API\HariaktifkuliahController@index');
     Route::get('/hariaktifkuliah/{id}&{tahun}', '\App\Http\Controllers\API\HariaktifkuliahController@show');
     Route::post('/hariaktifkuliah', '\App\Http\Controllers\API\HariaktifkuliahController@store');
+    Route::post('/hariaktifkuliah/upload', '\App\Http\Controllers\API\HariaktifkuliahController@upload');
+
 
     // Mahasiswa
     Route::get('/mahasiswa', [Ctr\MahasiswaController::class, 'index']);
@@ -125,9 +133,10 @@ Route::prefix('v1')->group(function () {
     Route::put('/inputnilai/{id}', '\App\Http\Controllers\API\InputNilaiController@update');
     Route::delete('/inputnilai/{id}', '\App\Http\Controllers\API\InputNilaiController@destroy');
 
-    // Absensi
+    // ABSENSI
     Route::get('/absensi', [Ctr\AbsensiController::class, 'index']);
     Route::get('/absensi/{id}', [Ctr\AbsensiController::class, 'show']);
+    Route::get('/absensi/home/{id}', [Ctr\AbsensiController::class, 'one']);
     Route::get('/rekap/{id}', [Ctr\AbsensiController::class, 'rekap']);
     Route::post('/absensi', [Ctr\AbsensiController::class, 'store']);
     Route::put('/absensi/{id}', [Ctr\AbsensiController::class, 'update']);
@@ -144,6 +153,7 @@ Route::prefix('v1')->group(function () {
     Route::post('/daftar', '\App\Http\Controllers\API\DaftarMatkulController@store');
     Route::put('/daftar/{id}', '\App\Http\Controllers\API\DaftarMatkulController@update');
     Route::delete('/daftar/{id}', '\App\Http\Controllers\API\DaftarMatkulController@destroy');
+
 });
 Route::prefix('v1')->middleware('auth:api')->group(function () {
     Route::get('/user', function (Request $request) {
