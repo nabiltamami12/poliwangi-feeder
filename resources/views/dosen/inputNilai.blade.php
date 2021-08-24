@@ -5,26 +5,35 @@
 <header class="header"></header>
 
 <!-- Page content -->
-<section class="page-content container-fluid" id="dosen_inputnilai">
+<section class="page-content container-fluid">
   <div class="row">
     <div class="col-xl-12">
       <div class="card shadow padding--small">
 
-        <div class="card-header p-0 m-0 border-0">
+        <div class="card-header p-0 m-0">
           <div class="row align-items-center">
-            <div class="col-12 col-md-3">
-              <h3 class="mb-0 text-center text-md-left font-weight-bold">Nilai Mahasiswa</h3>
+            <div class="col-lg-5">
+              <h3 class="mb-0 text-center text-lg-left font-weight-bold">Nilai Mahasiswa</h3>
             </div>
-            <div class="col-12 col-md-9 text-center text-md-right">
-              <button type="button" class="btn btn-icon btn-warning mt-3 mt-md-0">
-                <span class="btn-inner--icon"><i class="iconify-inline" data-icon="bx:bx-printer"></i></span>
-                <span class="btn-inner--text">Cetak Data</span>
-              </button>
-              <button type="button" class="btn btn-icon btn-secondary mt-3 mt-md-0 ml-0 ml-md-3">
+            <div class="col-lg-7 text-center text-lg-right">
+              <div class="dropdown">
+                <button class="btn btn-icon btn-warning mt-3 mt-lg-0 dropdown-toggle" type="button"
+                  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="iconify-inline mr-1" data-icon="bx:bx-printer"></i>
+                  Cetak Data
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a class="dropdown-item" href="#">Action</a>
+                  <a class="dropdown-item" href="#">Another action</a>
+                  <a class="dropdown-item" href="#">Something else here</a>
+                </div>
+              </div>
+
+              <button type="button" class="btn btn-icon btn-secondary mt-3 mt-lg-0 ml-0 ml-lg-3">
                 <span class="btn-inner--icon"><i class="iconify-inline" data-icon="bx:bx-share-alt"></i></span>
                 <span class="btn-inner--text">Publish Nilai</span>
               </button>
-              <button type="button" class="btn btn-icon btn-primary mt-3 mt-md-0 ml-0 ml-md-3">
+              <button type="button" class="btn btn-icon btn-primary mt-3 mt-lg-0 ml-0 ml-lg-3">
                 <span class="btn-inner--icon">
                   <i class="iconify-inline" data-icon="bx:bx-save"></i>
                 </span>

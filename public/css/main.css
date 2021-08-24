@@ -932,6 +932,7 @@ nav#navbar h1 {
 }
 .page-content .card-header {
   border-radius: 0.5rem 0.5rem 0 0;
+  border: 0;
 }
 .page-content .card-header h2 {
   font-weight: 600;
@@ -971,7 +972,8 @@ nav#navbar h1 {
   line-height: 1.21em;
   color: #041f2f;
 }
-.page-content select:focus {
+.page-content select:focus,
+.page-content input:focus {
   border-color: #28a3eb;
 }
 .page-content select#status option {
@@ -1150,9 +1152,6 @@ nav#navbar h1 {
   padding: 0;
   text-align: center;
 }
-.page-content .table-responsive .table-body input[type=text]:focus {
-  border-color: #28a3eb;
-}
 .page-content .table-responsive .table-body-lg td {
   padding: 1.5rem !important;
 }
@@ -1234,6 +1233,10 @@ nav#navbar h1 {
   font-size: 0.875rem;
   line-height: 1.21em;
   color: #041f2f;
+}
+.page-content .form_presensiDosen select {
+  background-color: rgba(173, 181, 189, 0.2);
+  color: #adb5bd !important;
 }
 .page-content .custom_select {
   position: relative;

@@ -285,6 +285,7 @@ nav#navbar {
 
     .card-header {
         border-radius: 0.5rem 0.5rem 0 0;
+        border: 0;
         h2 {
             @include mixintext(600, 1.125rem, 1.22em, $font-black);
             text-transform: capitalize;
@@ -315,7 +316,8 @@ nav#navbar {
         }
     }
 
-    select:focus {
+    select:focus,
+    input:focus {
         border-color: $primary;
     }
 
@@ -483,9 +485,6 @@ nav#navbar {
                 width: 50px;
                 padding: 0;
                 text-align: center;
-                &:focus {
-                    border-color: $primary;
-                }
             }
         }
 
@@ -582,6 +581,13 @@ nav#navbar {
         select {
             padding-left: 1.5rem;
             @include mixintext(400, 0.875rem, 1.21em, $font-black);
+        }
+    }
+
+    .form_presensiDosen {
+        select {
+            background-color: rgba(173, 181, 189, 0.2);
+            color: $font-placeholder !important;
         }
     }
 

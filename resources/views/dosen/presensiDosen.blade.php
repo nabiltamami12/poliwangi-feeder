@@ -5,12 +5,11 @@
 <header class="header"></header>
 
 <!-- Page content -->
-<section class="page-content container-fluid" id="dosen_presensi">
+<section class="page-content container-fluid">
   <div class="row">
     <div class="col-xl-12">
       <div class="card shadow padding--small">
-
-        <form class="form-select ">
+        <form class="form-select form_presensiDosen">
           <div class="form-row">
             <div class="col-md-6 form-group">
               <label for="program-studi">Program Studi</label>
@@ -153,7 +152,7 @@
           </table>
         </div>
 
-        <div class="row">
+        <div class="row mt-4">
           <div class="col text-right">
             <button type="submit" class="btn btn-primary">Simpan</button>
           </div>

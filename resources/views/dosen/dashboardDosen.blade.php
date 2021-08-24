@@ -6,11 +6,10 @@
 
 <!-- Page content -->
 <section class="page-content container-fluid">
-  <div class="row">
-    <div class="col-12 col-md-8">
-      <!-- CARD -->
+  <div class="row equal-cols">
+    <div class="col-md-8">
       <div class="card shadow padding--medium">
-        <div class="card-header p-0 border-0">
+        <div class="card-header p-0">
           <div class="row align-items-center">
             <div class="col">
               <h3 class="mb-0">Jadwal Mengajar Hari Ini</h3>
@@ -22,7 +21,6 @@
         </div>
         <hr class="my-4">
         <div class="table-responsive">
-          <!-- TABLE -->
           <table class="table align-items-center table-borderless table-flush table-hover">
             <thead class="table-header">
               <tr>
@@ -62,9 +60,9 @@
       </div>
     </div>
 
-    <div class="col-12 col-md-4">
+    <div class="col-md-4">
       <div class="card shadow padding--medium card_presensi mt-0 mt-md-4">
-        <div class="card-header p-0 border-0">
+        <div class="card-header p-0">
           <div class="row align-items-center">
             <div class="col">
               <h3 class="mb-0">Mata Kuliah Saat Ini</h3>
