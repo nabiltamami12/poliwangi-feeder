@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API as Ctr;
+use Illuminate\Support\Facades\Request;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -22,7 +23,8 @@ Route::get('warning', [Ctr\AuthController::class, 'warning'])->name('warning');
 
 Route::prefix('v1')->group(function () {
     // Global data
-    Route::get('/globaldata', [Ctr\GlobalController::class, 'index']);
+    Route::get('/globaldata/', [Ctr\GlobalController::class, 'index']);
+    Route::get('/globaldata/{id}', [Ctr\GlobalController::class, 'index']);
     // Program
     Route::get('/program', [Ctr\ProgramController::class, 'index']);
     // Program
@@ -42,6 +44,7 @@ Route::prefix('v1')->group(function () {
     Route::delete('/jurusan/{id}', [Ctr\JurusanController::class, 'destroy']);
     // Kelas
     Route::get('/kelas', [Ctr\KelasController::class, 'index']);
+    Route::get('/kelas/dosen/{id}', [Ctr\KelasController::class, 'dosen']);
     Route::get('/kelas/{id}', [Ctr\KelasController::class, 'show']);
     Route::post('/kelas', [Ctr\KelasController::class, 'store']);
     Route::put('/kelas/{id}', [Ctr\KelasController::class, 'update']);
@@ -74,6 +77,8 @@ Route::prefix('v1')->group(function () {
     Route::post('/dosen', [Ctr\DosenController::class, 'store']);
     Route::put('/dosen/{id}', [Ctr\DosenController::class, 'update']);
     Route::delete('dosen/{id}', [Ctr\DosenController::class, 'destroy']);
+    Route::get('dosen/filter/{id}/{semester}', [Ctr\DosenController::class, 'filter']);
+
 
     //matakuliah
     Route::get('/matakuliah/', '\App\Http\Controllers\API\MatakuliahController@index');
@@ -102,6 +107,8 @@ Route::prefix('v1')->group(function () {
     Route::get('/hariaktifkuliah/', '\App\Http\Controllers\API\HariaktifkuliahController@index');
     Route::get('/hariaktifkuliah/{id}&{tahun}', '\App\Http\Controllers\API\HariaktifkuliahController@show');
     Route::post('/hariaktifkuliah', '\App\Http\Controllers\API\HariaktifkuliahController@store');
+    Route::post('/hariaktifkuliah/upload', '\App\Http\Controllers\API\HariaktifkuliahController@upload');
+
 
     // Mahasiswa
     Route::get('/mahasiswa', [Ctr\MahasiswaController::class, 'index']);
@@ -124,9 +131,10 @@ Route::prefix('v1')->group(function () {
     Route::put('/inputnilai/{id}', '\App\Http\Controllers\API\InputNilaiController@update');
     Route::delete('/inputnilai/{id}', '\App\Http\Controllers\API\InputNilaiController@destroy');
 
-    // Absensi
+    // ABSENSI
     Route::get('/absensi', [Ctr\AbsensiController::class, 'index']);
     Route::get('/absensi/{id}', [Ctr\AbsensiController::class, 'show']);
+    Route::get('/absensi/home/{id}', [Ctr\AbsensiController::class, 'one']);
     Route::get('/rekap/{id}', [Ctr\AbsensiController::class, 'rekap']);
     Route::post('/absensi', [Ctr\AbsensiController::class, 'store']);
     Route::put('/absensi/{id}', [Ctr\AbsensiController::class, 'update']);
@@ -144,6 +152,7 @@ Route::prefix('v1')->group(function () {
     Route::put('/daftar/{id}', '\App\Http\Controllers\API\DaftarMatkulController@update');
     Route::delete('/daftar/{id}', '\App\Http\Controllers\API\DaftarMatkulController@destroy');
 
+<<<<<<< HEAD
     //FILE UPLOAD HARI AKTIF 
     Route::get('/filehari/{nama}', '\App\Http\Controllers\API\HariAktifController@show');
     Route::post('/filehari', '\App\Http\Controllers\API\HariAktifController@store');
@@ -162,6 +171,8 @@ Route::prefix('v1')->group(function () {
     Route::post('/jurusanpilihan', '\App\Http\Controllers\API\JurusanpilihanController@store');
     Route::put('/jurusanpilihan/{id}', '\App\Http\Controllers\API\JurusanpilihanController@update');
     Route::delete('/jurusanpilihan/{id}', '\App\Http\Controllers\API\JurusanpilihanController@destroy');
+=======
+>>>>>>> 9fa83fdac27a3757f84e016e0cc36dddd757b697
 });
 Route::prefix('v1')->middleware('auth:api')->group(function () {
     Route::get('/user', function (Request $request) {

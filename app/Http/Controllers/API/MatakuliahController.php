@@ -25,7 +25,7 @@ class MatakuliahController extends Controller
                         )
                         ->join('kelas', 'kelas.nomor', '=', 'matakuliah.kelas')
                         ->join('program_studi', 'program_studi.nomor', '=', 'matakuliah.program_studi')
-                        ->join('matakuliah_jenis', 'matakuliah_jenis.nomor', '=', 'matakuliah.matakuliah_jenis')
+                        ->join('matakuliah_jenis', 'matakuliah_jenis.nomor', '=', 'matakuliah.matakuliah_jenis','left')
                         ->get();
         return response()->json([
             "status" => 'success ',

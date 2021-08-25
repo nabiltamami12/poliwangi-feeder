@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\DosenPengampu;
 use App\Models\Dosen;
+use App\Models\Kelas;
+use App\Models\Matakuliah;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Validator;
 
@@ -77,17 +79,9 @@ class DosenPengampuController extends Controller
             $this->data = $data;
             $this->status = "success";
         }
-        $data = DosenPengampu::select(
-            'dosen_pengampu.*',
-            'pegawai.nama',
-            'matakuliah.program_studi',
-            DB::raw('(select nomor from program_studi ps where ps.nomor = matakuliah.program_studi) as program_studi')
-        )
-        ->join("pegawai", "dosen_pengampu.dosen", "=", "pegawai.nomor",'right')
-        ->join("matakuliah", "dosen_pengampu.matakuliah", "=", "matakuliah.nomor",'right')
-        ->where("pegawai.staff", "=", 4)
-        ->where("dosen_pengampu.nomor",$this->data->id)
-        ->get();
+
+        $data = DosenPengampu::where("dosen_pengampu.nomor",$this->data->id)->get();
+
         return response()->json([
             'status' => $this->status,
             'data' => $data,
@@ -103,29 +97,29 @@ class DosenPengampuController extends Controller
      */
     public function show($id)
     {
-        DB::statement("SET SQL_MODE=''");
-        $data = DosenPengampu::select(
-            'dosen_pengampu.*',
-            'matakuliah.program_studi',
-            DB::raw('(select nomor from program_studi ps where ps.nomor = matakuliah.program_studi) as program_studi')
-        )
-        ->join("pegawai", "dosen_pengampu.dosen", "=", "pegawai.nomor",'right')
-        ->join("matakuliah", "dosen_pengampu.matakuliah", "=", "matakuliah.nomor",'right')
-        ->where("pegawai.staff", "=", 4)
-        ->where("pegawai.nomor",$id)
-        ->get();
-        $dosen = Dosen::select('nama')
-        ->where('nomor',$id)
-        ->get();
+        // DB::statement("SET SQL_MODE=''");
+        // $data = DosenPengampu::select(
+        //     'dosen_pengampu.*',
+        //     'matakuliah.program_studi',
+        //     DB::raw('(select nomor from program_studi ps where ps.nomor = matakuliah.program_studi) as program_studi')
+        // )
+        // ->join("pegawai", "dosen_pengampu.dosen", "=", "pegawai.nomor",'right')
+        // ->join("matakuliah", "dosen_pengampu.matakuliah", "=", "matakuliah.nomor",'right')
+        // ->where("pegawai.staff", "=", 4)
+        // ->where("pegawai.nomor",$id)
+        // ->get();
+        // $dosen = Dosen::select('nama')
+        // ->where('nomor',$id)
+        // ->get();
 
-        $this->data = [
-            'nama' => $dosen[0]['nama'],
-            'matkul' => $data
-        ];
+        // $this->data = [
+        //     'nama' => $dosen[0]['nama'],
+        //     'matkul' => $data
+        // ];
 
-        $this->status = "success";
+        // $this->status = "success";
+        
 
-       
         return response()->json([
             "status" => $this->status,
             "data" => $this->data,
@@ -174,17 +168,7 @@ class DosenPengampuController extends Controller
             $this->status = "success";
         }
 
-        $data = DosenPengampu::select(
-            'dosen_pengampu.*',
-            'pegawai.nama',
-            'matakuliah.program_studi',
-            DB::raw('(select nomor from program_studi ps where ps.nomor = matakuliah.program_studi) as program_studi')
-        )
-        ->join("pegawai", "dosen_pengampu.dosen", "=", "pegawai.nomor",'right')
-        ->join("matakuliah", "dosen_pengampu.matakuliah", "=", "matakuliah.nomor",'right')
-        ->where("pegawai.staff", "=", 4)
-        ->where("dosen_pengampu.nomor",$id)
-        ->get();
+        $data = DosenPengampu::where("dosen_pengampu.nomor",$id)->get();
         return response()->json([
             'status' => $this->status,
             'data' => $data,

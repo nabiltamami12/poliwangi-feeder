@@ -13,6 +13,12 @@
     .fc-libur {
         color: #F46A6A !important;
     }
+    .form-group {
+        padding-left: 0 !important;
+    }
+    .page-content .card {
+        margin-top: 0.5rem !important;
+    }
 </style>
 <!-- Header -->
 <header class="header">
@@ -26,36 +32,66 @@
             </div>
         </div>
         <div class="col-xl-4">
-            <div class="card padding--small">
-                <div class="card-header p-0 m-0 border-0 ">
-                    <div class="row align-items-center">
-                        <div class="col">
-                            <h2 class="mb-0">Detail Kalender</h2>
-                        </div>
-                    </div>
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="card padding--small">
+                        <div class="card-header p-0 m-0 border-0 ">
+                            <div class="row align-items-center">
+                                <div class="col">
+                                    <h2 class="mb-0">SK Kalender Akademik</h2>
+                                </div>
+                            </div>
 
-                    <hr class="my-4">
-                    <div class="row align-items-center ml-1 mb-3">
-                        <input type="hidden" id="tanggal">
-                        <div class="col-sm-12 col-12">
-                            <div class="form-group row mb-0">
-                                <span>Keterangan</span>
-                                <textarea class="form-control" id="keterangan"></textarea>
+                            <hr class="mt-3">
+                            <div class="row align-items-center ml-1 mb-3">
+                                <input type="hidden" id="tanggal">
+                                <div class="col-sm-12 col-12">
+                                    <div class="form-group row mb-0">
+                                        <input type="file" id="file">
+                                        <a href="{{asset('documents/sk_hari_aktif.pdf')}}" target="_blank">Preview </a>
+                                    </div>
+                                </div>
+                                
                             </div>
-                        </div>
-                        <div class="col-sm-12 col-12">
-                            <div class="form-group row mb-0">
-                                <span>Status</span>
-                                <select class="form-control" id="libur">
-                                    <option value="0">Hari aktif</option>
-                                    <option value="1">Hari libur</option>
-                                    <option value="3">Hari libur Nasional</option>
-                                </select>
+                            <div class="col text-right">
+                                <button type="button" class="btn btn-primary" id="upload">Upload</button>
                             </div>
                         </div>
                     </div>
-                    <div class="col text-right">
-                        <button type="button" class="btn btn-primary">Simpan</button>
+                </div>
+                <div class="col-xl-12">
+                    <div class="card padding--small">
+                        <div class="card-header p-0 m-0 border-0 ">
+                            <div class="row align-items-center">
+                                <div class="col">
+                                    <h2 class="mb-0">Detail Kalender</h2>
+                                </div>
+                            </div>
+
+                            <hr class="mt-3">
+                            <div class="row align-items-center ml-1 mb-3">
+                                <input type="hidden" id="tanggal">
+                                <div class="col-sm-12 col-12">
+                                    <div class="form-group row mb-0">
+                                        <span>Keterangan</span>
+                                        <textarea class="form-control" id="keterangan"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-12">
+                                    <div class="form-group row mb-0">
+                                        <span>Status</span>
+                                        <select class="form-control" id="libur">
+                                            <option value="0">Hari aktif</option>
+                                            <option value="1">Hari libur</option>
+                                            <option value="3">Hari libur Nasional</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col text-right">
+                                <button type="button" class="btn btn-primary" id="simpan">Simpan</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -86,7 +122,7 @@ $(document).ready(function () {
     });
 
     getData();
-    $('.').on('click',function (e) {
+    $('.simpan').on('click',function (e) {
         var tanggal = $('#tanggal').val();
         var keterangan = $('#keterangan').val();
         var libur = $('#libur').val();
@@ -121,6 +157,25 @@ $(document).ready(function () {
             }
         })
     })
+    $('#upload').on('click', function() {
+        var file_data = $('#file').prop('files')[0];   
+        var form_data = new FormData();                  
+        form_data.append('file', file_data);
+        console.log(file_data);                             
+        console.log(form_data);                             
+        $.ajax({
+            url: url_api+"/hariaktifkuliah/upload",
+            dataType: 'json',
+            cache: false,
+            contentType: false,
+            processData: false,
+            data: form_data,                         
+            type: 'post',
+            success: function(res){
+                location.reload()
+            }
+        });
+    });
 });
 function change_date(tanggal,status) {
     if (status=="1" || status=="3") {

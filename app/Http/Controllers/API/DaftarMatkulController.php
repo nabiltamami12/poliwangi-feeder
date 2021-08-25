@@ -73,17 +73,17 @@ class DaftarMatkulController extends Controller
     public function show($id)
     {
         //
-        $data = DB::table("DOSEN_PENGAMPU")
+        $data = DB::table("dosen_pengampu")
             ->select(
-                "DOSEN_PENGAMPU.NOMOR",
-                "DOSEN_PENGAMPU.DOSEN",
-                "MATAKULIAH.MATAKULIAH",
-                "PROGRAM_STUDI.PROGRAM_STUDI"
+                "dosen_pengampu.nomor",
+                "dosen_pengampu.dosen",
+                "matakuliah.matakuliah",
+                "program_studi.program_studi"
 
             )
-            ->join("MATAKULIAH", "MATAKULIAH.NOMOR", "=", "DOSEN_PENGAMPU.MATAKULIAH")
-            ->join("PROGRAM_STUDI", "PROGRAM_STUDI.NOMOR", "=", "MATAKULIAH.PROGRAM_STUDI")
-            ->where("DOSEN_PENGAMPU.DOSEN", $id)
+            ->join("matakuliah", "matakuliah.nomor", "=", "dosen_pengampu.matakuliah")
+            ->join("program_studi", "program_studi.nomor", "=", "matakuliah.program_studi")
+            ->where("dosen_pengampu.nomor", $id)
             ->get();
 
         return response()->json([
@@ -114,7 +114,7 @@ class DaftarMatkulController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $matakuliah = DaftarMatkul::where('DOSEN', $id);
+        $matakuliah = DaftarMatkul::where('nomor', $id);
         $data = $request->all();
 
         $validate = Validator::make($data, [

@@ -11,9 +11,8 @@ class Matakuliah extends Model
     public $timestamps = false;
     public $table = "matakuliah";
     protected $fillable = [
-        // 'nomor',
-        'program',
-        'jurusan',
+        'nomor',
+        'program_studi',
         'kelas',
         'semester',
         'kode',

@@ -56,7 +56,7 @@
             </div>
             <div class="col-sm-6 col-12">
               <div class="form-group row mb-0">
-                <label>Kepala</label>
+                <label>Kepala Program Studi</label>
                 <select class="form-control" id="kepala" name="kepala">
 
                 </select>

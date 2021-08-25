@@ -9,7 +9,7 @@ class Absensi extends Model
 {
     use HasFactory;
     public $timestamps = false;
-    public $table = "ABSENSI_MAHASISWA";
+    public $table = "absensi_mahasiswa";
 
     protected $fillable = [
         'kuliah',

@@ -25,6 +25,20 @@
   <!-- Custom CSS -->
   <link href="{{ asset('css/main.css') }}" rel="stylesheet">
   <link href="{{ asset('css/responsive.css') }}" rel="stylesheet">
+    <!-- JQUERY JS -->
+    <script src="{{ url('argon') }}/assets/vendor/jquery/dist/jquery.min.js"></script>
+  <!-- Datatable JS -->
+  <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.min.js"></script>
+  <!-- Bootstrap JS -->
+  <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js' type='text/javascript'></script>
+
+  <script>
+    var url_api = "{{ url('/api/v1') }}";
+    var url = "{{ base_path(); }}";
+    var dataGlobal = JSON.parse(localStorage.getItem('globalData')) 
+    var dataJurusan,dataDosen,dataProgram;
+  </script>
 </head>
 
 

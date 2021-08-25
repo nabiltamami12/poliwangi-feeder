@@ -65,11 +65,6 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{{ url('/akademik/master/datadosenpengampu')}}">
-                  <span class="nav-link-text ml-0">Data Dosen Pengampu</span>
-                </a>
-              </li>
-              <li class="nav-item">
                 <a class="nav-link" href="{{url('/akademik/master/datajurusan')}}">
                   <span class="nav-link-text ml-0">Data Jurusan</span>
                 </a>
@@ -94,37 +89,35 @@
                   <span class="nav-link-text ml-0">Data Range Nilai</span>
                 </a>
               </li>
-              {{--
               <li class="nav-item">
-                <a class="nav-link" href="{{ url('/akademik/master/datakuliah')}}">
-                  <span class="nav-link-text ml-0">Data Kuliah</span>
+                <a class="nav-link" href="{{url('/akademik/master/settingkuliah')}}">
+                  <span class="nav-link-text ml-0">Setting Kuliah (FE)</span>
                 </a>
               </li>
-              --}}
+
             </ul>
           </li>
           {{--
           <li class="nav-item">
             <div class="nav-link {{($title === "akademik-khs") ? 'aktif' : ''}}"">
-              <span class=" iconify" data-icon="bx:bx-book-bookmark" data-inline="true"></span>
-              <span class=" nav-link-text">KHS<img src="{{ url('images') }}/sidebar-right.png" class="arrow"
-                  alt=""></span>
-            </div>
-            <ul class="nav-item-dropdown-content">
-              <li class="nav-item">
-                <a class="nav-link" href="/akademik/khs/khs">
-                  <span class="nav-link-text ml-0">KHS</span>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/akademik/khs/khsmahasiswa">
-                  <span class="nav-link-text ml-0">KHS Mahasiswa</span>
-                </a>
-              </li>
-            </ul>
-          </li> -->
+          <span class=" iconify" data-icon="bx:bx-book-bookmark" data-inline="true"></span>
+          <span class=" nav-link-text">KHS<img src="{{ url('images') }}/sidebar-right.png" class="arrow" alt=""></span>
+      </div>
+      <ul class="nav-item-dropdown-content">
+        <li class="nav-item">
+          <a class="nav-link" href="/akademik/khs/khs">
+            <span class="nav-link-text ml-0">KHS</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/akademik/khs/khsmahasiswa">
+            <span class="nav-link-text ml-0">KHS Mahasiswa</span>
+          </a>
+        </li>
+      </ul>
+      </li> -->
 
-          <!-- <li class="nav-item">
+      <!-- <li class="nav-item">
             <div class="nav-link {{($title === "akademik-kuliah") ? 'aktif' : ''}}">
               <span class="iconify" data-icon="bx:bx-calendar-star"></span>
               <span class="nav-link-text">Kuliah<img src="{{ url('images') }}/sidebar-right.png" class="arrow"
@@ -154,7 +147,7 @@
             </ul>
           </li> -->
 
-          <!-- <li class="nav-item">
+      <!-- <li class="nav-item">
             <div class="nav-link {{($title === "akademik-report") ? 'aktif' : ''}}">
               <span class="iconify" data-icon="bx:bx-file-blank"></span>
               <span class="nav-link-text">Report<img src="{{ url('images') }}/sidebar-right.png" class="arrow"

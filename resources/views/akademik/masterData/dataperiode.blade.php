@@ -30,6 +30,7 @@
               <tr>
                 <th scope="col">NO</th>
                 <th scope="col">Periode</th>
+                <th scope="col">Semester</th>
                 <th scope="col">Status</th>
                 <th scope="col">AKSI</th>
               </tr>
@@ -70,13 +71,22 @@ dt_opt = {
       "targets": [2],
       "data": null,
       "render": function(data, type, full) {
+        var ganjil = (data['semester']==1)?'<span>ganjil</span>' : `<span style="color:#28a3eb;cursor:pointer;" onclick="change_semester(${data['nomor']},1)">ganjil</span>`
+        var genap = (data['semester']==2)?'<span>genap</span>' : `<span style="color:#28a3eb;cursor:pointer;" onclick="change_semester(${data['nomor']},2)">Genap</span>`
+        res = (data['status']=="1")? ganjil+" || "+genap:"-";
+        return res;
+      }
+    },{
+      "targets": [3],
+      "data": null,
+      "render": function(data, type, full) {
         var aktif = "<span>aktif</span>"
         var non_aktif = `<button class="btn btn-primary" onclick="change_status(${data['nomor']})">aktifkan</button>`
         res = (data['status']=="1")?aktif:non_aktif;
         return res;
       }
     },{
-      "targets": [3],
+      "targets": [4],
       "data": null,
       "render": function(data, type, full) {
         var id = data['nomor'];
@@ -104,6 +114,33 @@ function change_status(id) {
           success: function(res) {
             if (res.status=="success") {
               dt.ajax.reload();                
+            } else {
+              // alert gagal
+            }
+            loading('hide');
+        }
+    });
+}
+function change_semester(id,semester) {
+  var globalData = JSON.parse(localStorage.getItem('globalData'))
+  var periode = globalData['periode']
+  periode['semester'] = semester
+  
+  localStorage.setItem('globalData', JSON.stringify(globalData));
+  
+    $.ajax({
+        url: url_api+"/periode/change_semester/"+id+"/"+semester,
+        type: "put",
+        dataType: 'json',
+        data: {},
+        beforeSend: function(text) {
+            // loading func
+            console.log("loading")
+            loading('show');
+          },
+          success: function(res) {
+            if (res.status=="success") {
+              dt.ajax.reload();
             } else {
               // alert gagal
             }

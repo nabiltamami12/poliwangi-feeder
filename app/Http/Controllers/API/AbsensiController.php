@@ -23,13 +23,14 @@ class AbsensiController extends Controller
 
     public function index(Request $req)
     {
-        // Untuk mengambil seluruh data (Admin)
-        $table = DB::table('MAHASISWA');
-        date_default_timezone_set('Europe/Moscow');
+        // Untuk mengambil seluruh data (Admin dan Dosen)
+        set_time_limit(0);
+
+        $table = DB::table('mahasiswa');
+        date_default_timezone_set('Asia/Jakarta');
         Carbon::setLocale('id');
-        DB::enableQueryLog();
+
         
-        $array = [];
         $now = Carbon::now()->format('H:i');
         $int = (int) str_replace(':', '', $now);
         if ($int >= 1000 && $int <= 1140 ) {
@@ -39,6 +40,8 @@ class AbsensiController extends Controller
         }
         $day = Carbon::now()->isoformat('dddd');
 
+        $date = Carbon::now()->format('Y-m-d');
+        $array = [];
         $jenjang = $req->jenjang;
         $prodi = $req->prodi;
         $matkul = $req->matkul;
@@ -46,38 +49,47 @@ class AbsensiController extends Controller
         
         
         try {
-            $data = $table->distinct()->select(
-                'MAHASISWA.nomor',
-                'MAHASISWA.nrp',
-                'MAHASISWA.nama',
-                'MATAKULIAH.matakuliah',
-                'HARI.hari',
-                'JAM.jam',
-                'PROGRAM.program AS jenjang',
-                'JURUSAN.jurusan')
-            ->join("KULIAH", "KULIAH.kelas", "=", "MAHASISWA.kelas")
-            ->join("MATAKULIAH", "MATAKULIAH.nomor", "=", "KULIAH.matakuliah")
-            ->join("HARI", "HARI.nomor", "=", "KULIAH.hari")
-            ->join("JAM", "JAM.nomor", "=", "KULIAH.jam")
-            ->join("PROGRAM_STUDI", 'PROGRAM_STUDI.nomor', '=', 'MATAKULIAH.program')
-            ->join("PROGRAM", "PROGRAM.nomor", "=", "PROGRAM_STUDI.program")
-            ->join('JURUSAN', 'JURUSAN.nomor', '=', 'MATAKULIAH.jurusan')
-            ->where("HARI.hari", $day)
+            $data = $table->select(
+                'mahasiswa.nomor',
+                'mahasiswa.nrp',
+                'mahasiswa.nama',
+                'matakuliah.matakuliah',
+                'hari.hari',
+                'jam.jam',
+                'program.program AS jenjang',
+                'jurusan.jurusan',
+                'kuliah.nomor as kuliah'
+                )
+            ->join("kuliah", "kuliah.kelas", "=", "mahasiswa.kelas")
+            ->join("matakuliah", "matakuliah.nomor", "=", "KULIAH.matakuliah")
+            ->join("hari", "hari.nomor", "=", "kuliah.hari")
+            ->join("jam", "jam.nomor", "=", "kuliah.jam")
+            ->join("program_studi", 'program_studi.nomor', '=', 'matakuliah.program_studi')
+            ->join("program", "program.nomor", "=", "program_studi.program")
+            ->join('jurusan', 'jurusan.nomor', '=', 'program_studi.jurusan')
+            ->where("hari.hari", $day)
             ->when($matkul, function($query, $matkul) {
-                return $query->where('MATAKULIAH.nomor', $matkul);
+                return $query->where('matakuliah.nomor', $matkul);
             })
             ->when($jenjang, function ($query, $jenjang) {
-                return $query->where('PROGRAM.program', $jenjang);
+                return $query->where('program.program', $jenjang);
             })
             ->when($prodi, function($query, $prodi) {
-                return $query->where('JURUSAN.jurusan', $prodi);
+                return $query->where('jurusan.jurusan', $prodi);
             })
-            ->whereBetween('JAM.jam', [$now, $limit])
-            ->orderBy('JAM.jam', 'asc')
-            ->get();
-
+            ->whereBetween('jam.jam', [$now, $limit])
+            ->orderBy('mahasiswa.nama', 'asc')
+            ->paginate(10);
+                
             foreach ($data as $key=>$value) {
                 $batas[$key] = Carbon::parse($data[$key]->jam)->addMinutes(15)->format('H:i');
+                $check[$key] = Abs::whereDate('tanggal', $date)->where('kuliah',  $data[$key]->kuliah)->first();
+
+                if ($check[$key]) {
+                    $baru[$key] = $check[$key]->status;
+                } else {
+                    $baru[$key] = "Belum Presensi";
+                };
                 array_push($array, [
                     "nomor" => $data[$key]->nomor,
                     "nrp" => $data[$key]->nrp,
@@ -87,7 +99,8 @@ class AbsensiController extends Controller
                     "jam" => $data[$key]->jam,
                     "batas" => $batas[$key],
                     "jenjang" => $data[$key]->jenjang,
-                    "jurusan" => $data[$key]->jurusan
+                    "jurusan" => $data[$key]->jurusan,
+                    'status' => $baru[$key]
                 ]);
             }
             $this->data = $array;
@@ -103,9 +116,6 @@ class AbsensiController extends Controller
             "status" =>$this->status,
             "data" => $this->data,
             "error" => $this->err,
-            'now' => $now,
-            'limit' => $limit,
-            'query' => DB::getQueryLog()
         ]);
 
     }
@@ -128,11 +138,13 @@ class AbsensiController extends Controller
      */
     public function store(Request $request)
     {
+        $date = Carbon::now()->format('Y-m-d h:i:s');
+        $request->merge(["tanggal" => $date]);
         $data = $request->all();
+        
         $validated = Validator::make($data, [
             'kuliah' => 'required',
             'mahasiswa' => 'required',
-            'tanggal' => 'required',
             'status' => 'required',
             'minggu' => 'required'
         ]);
@@ -161,12 +173,13 @@ class AbsensiController extends Controller
     public function show($id)
     {
         // Untuk mengambil hanya per mahasiswa.
-        $table = DB::table('MAHASISWA');
+        $table = DB::table('mahasiswa');
         date_default_timezone_set('Asia/Jakarta');
         Carbon::setLocale('id');
         
 
         $now = Carbon::now()->format('H:i');
+        $date = Carbon::now()->format('Y-m-d');
         $int = (int) str_replace(':', '', $now);
 
         if ($int >= 1000 && $int <= 1140 ) {
@@ -176,22 +189,126 @@ class AbsensiController extends Controller
         }
 
         $day = Carbon::now()->isoformat('dddd');
+        $array = [];
         
         try {
-            $this->data = $table->distinct()->select(
-                'MAHASISWA.nomor',
-                'MATAKULIAH.matakuliah',
-                'HARI.hari',
-                'JAM.jam')
-            ->join("KULIAH", "KULIAH.kelas", "=", "MAHASISWA.kelas")
-            ->join("MATAKULIAH", "MATAKULIAH.nomor", "=", "KULIAH.matakuliah")
-            ->join("HARI", "HARI.nomor", "=", "KULIAH.hari")
-            ->join("JAM", "JAM.nomor", "=", "KULIAH.jam")
-            ->where('MAHASISWA.nomor', '=', $id)
-            ->where("HARI.hari", $day)
-            ->whereBetween('JAM.jam', [$now, $limit])
-            ->orderBy('JAM.jam', 'asc')
+            $data = $table->distinct()->select(
+                'mahasiswa.nomor',
+                'matakuliah.matakuliah',
+                'hari.hari',
+                'jam.jam',
+                'kuliah.nomor as kuliah')
+            ->join("kuliah", "kuliah.kelas", "=", "mahasiswa.kelas")
+            ->join("matakuliah", "matakuliah.nomor", "=", "kuliah.matakuliah")
+            ->join("hari", "hari.nomor", "=", "kuliah.hari")
+            ->join("jam", "jam.nomor", "=", "kuliah.jam")
+            ->where('mahasiswa.nomor', '=', $id)
+            ->where("hari.hari", $day)
+            ->whereBetween('jam.jam', [$now, $limit])
+            ->orderBy('jam.jam', 'asc')
             ->get();
+
+            
+
+            foreach ($data as $key=>$value) {
+                $check[$key] = Abs::whereDate('tanggal', $date)->where('kuliah',  $data[$key]->kuliah)->first();
+
+                if ($check[$key]) {
+                    $baru[$key] = $check[$key]->status;
+                } else {
+                    $baru[$key] = "Belum Presensi";
+                };
+                array_push($array, [
+                    "nomor_mahasiswa" => $data[$key]->nomor,
+                    "matakuliah" => $data[$key]->matakuliah,
+                    "hari" => $data[$key]->hari,
+                    "jam" => $data[$key]->jam,
+                    'status' => $baru[$key],
+                    'kuliah' => $data[$key]->kuliah
+                ]);
+            }
+
+            $this->data = $array;
+            $this->status = "success";
+        } catch (QueryException $e) {
+            $this->status = "failed";
+            $this->err = $e;
+        }
+        
+        
+
+        return response()->json([
+            "status" =>$this->status,
+            "data" => $this->data,
+            "error" => $this->err,
+        ]);
+    }
+
+    public function one($id) {
+        $table = DB::table('mahasiswa');
+        date_default_timezone_set('Asia/Jakarta');
+        Carbon::setLocale('id');
+        
+
+        $now = Carbon::now()->format('H:i');
+        $date = Carbon::now()->format('Y-m-d');
+        $int = (int) str_replace(':', '', $now);
+        $day = Carbon::now()->isoformat('dddd');
+        $array = [];
+
+        if ($int >= 1000 && $int <= 1140 ) {
+            $limit = Carbon::now()->addMinutes(50)->format('H:i');
+        } else {
+            $limit = Carbon::now()->addMinutes(90)->format('H:i');
+        };
+        echo $now;
+        echo " - ";
+        echo $limit;
+       die();
+        try {
+            $data = $table->distinct()->select(
+                'mahasiswa.nomor',
+                'matakuliah.matakuliah',
+                'hari.hari',
+                'pegawai.nama as dosen_pengampu',
+                'jam.jam',
+                'kuliah.nomor as kuliah')
+            ->join("kuliah", "kuliah.kelas", "=", "mahasiswa.kelas")
+            ->join("matakuliah", "matakuliah.nomor", "=", "kuliah.matakuliah")
+            ->join("hari", "hari.nomor", "=", "kuliah.hari")
+            ->join("jam", "jam.nomor", "=", "kuliah.jam")
+            ->join('pegawai', 'pegawai.nomor', 'kuliah.dosen')
+            ->where('mahasiswa.nomor', '=', $id)
+            ->where("hari.hari", $day)
+            ->whereBetween('jam.jam', [$now, $limit])
+            ->orderBy('jam.jam', 'asc')
+            ->take(1)
+            ->get();
+
+            if (!$data->isEmpty()) {
+                $check = Abs::whereDate('tanggal', $date)->where('kuliah',  $data[0]->kuliah)->first();
+
+                if ($check) {
+                    $baru = "Sudah Presensi";
+                } else {
+                    $baru = "Belum Presensi";
+                };
+    
+                foreach ($data as $key=>$value) {
+                    array_push($array, [
+                        "nomor_mahasiswa" => $data[$key]->nomor,
+                        "matakuliah" => $data[$key]->matakuliah,
+                        "hari" => $data[$key]->hari,
+                        "jam" => $data[$key]->jam,
+                        "dosen_pengampu" => $data[$key]->dosen_pengampu,
+                        'kode_kuliah' => $data[$key]->kuliah,
+                        'status' => $baru
+                    ]);
+                }
+                $this->data = $array;
+            } else {
+                $this->status = 'success';
+            }
             $this->status = "success";
         } catch (QueryException $e) {
             $this->status = "failed";
@@ -224,16 +341,16 @@ class AbsensiController extends Controller
         DB::statement("SET SQL_MODE=''");
         
         $this->data = Abs::select(
-            'ABSENSI_MAHASISWA.tanggal',
-            'MATAKULIAH.kode',
-            'MATAKULIAH.matakuliah',
-            DB::raw('COUNT(CASE WHEN ABSENSI_MAHASISWA.STATUS = "H" THEN 1 END) AS HADIR,COUNT(CASE WHEN ABSENSI_MAHASISWA.STATUS = "S" OR ABSENSI_MAHASISWA.STATUS = "A" THEN 1 END) AS TIDAK_HADIR')
-        )->join('KULIAH', 'ABSENSI_MAHASISWA.kuliah', '=', 'KULIAH.nomor')
-        ->join('MATAKULIAH', 'KULIAH.matakuliah', '=', 'MATAKULIAH.nomor')
-        ->join('KELAS', 'KULIAH.kelas', '=', 'KELAS.nomor')
-        ->join('MAHASISWA', 'ABSENSI_MAHASISWA.mahasiswa', '=', 'MAHASISWA.nomor')
-        ->where('ABSENSI_MAHASISWA.mahasiswa', $id)
-        ->groupBy('MATAKULIAH.matakuliah')
+            'absensi_mahasiswa.tanggal',
+            'matakuliah.kode',
+            'matakuliah.matakuliah',
+            DB::raw('COUNT(CASE WHEN absensi_mahasiswa.status = "H" THEN 1 END) AS HADIR,COUNT(CASE WHEN absensi_mahasiswa.status = "S" OR absensi_mahasiswa.status = "A" THEN 1 END) AS TIDAK_HADIR')
+        )->join('kuliah', 'absensi_mahasiswa.kuliah', '=', 'kuliah.nomor')
+        ->join('matakuliah', 'kuliah.matakuliah', '=', 'matakuliah.nomor')
+        ->join('kelas', 'kuliah.kelas', '=', 'kelas.nomor')
+        ->join('mahasiswa', 'absensi_mahasiswa.mahasiswa', '=', 'mahasiswa.nomor')
+        ->where('absensi_mahasiswa.mahasiswa', $id)
+        ->groupBy('matakuliah.matakuliah')
         ->get();
 
         $this->status = "success";
@@ -254,7 +371,7 @@ class AbsensiController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $check = Abs::where('NOMOR', $id);
+        $check = Abs::where('nomor', $id);
         $data = $request->all();
         $validated = Validator::make($data, [
             'status' => 'required',
@@ -288,7 +405,7 @@ class AbsensiController extends Controller
      */
     public function destroy($id)
     {
-        $check = Abs::where('NOMOR', $id);
+        $check = Abs::where('nomor', $id);
 
         if ($check) {
             $this->status = "success";
