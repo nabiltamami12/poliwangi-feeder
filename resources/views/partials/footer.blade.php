@@ -22,7 +22,7 @@
 
 <script>
     if (localStorage.getItem("globalData") === null) {
-        getGlobalData();
+        getGlobalData(1);
     }
 
     function update_btn(id) {
@@ -73,9 +73,10 @@
     }
 
     // AMBIL DATA GLOBAL
-    async function getGlobalData() {
+    async function getGlobalData(id) {
+        console.log(id)
         await $.ajax({
-            url: url_api+"/globaldata/"+dosen,
+            url: url_api+"/globaldata/"+id,
             type: 'get',
             dataType: 'json',
             data: {},

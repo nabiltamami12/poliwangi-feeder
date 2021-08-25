@@ -9,6 +9,8 @@ use App\Models\MatakuliahJenis;
 use App\Models\Jurusan;
 use App\Models\Dosen;
 use App\Models\Status;
+use App\Models\Agama;
+use App\Models\Goldarah;
 use App\Models\Kelas;
 use App\Models\Matakuliah;
 use App\Models\Prodi;
@@ -32,6 +34,8 @@ class GlobalController extends Controller
     {
         $periode = Periode::select('tahun','semester')->where('status',1)->get();
         $jurusan = Jurusan::get();
+        $agama = Agama::get();
+        $goldarah = Goldarah::get();
         $program = Program::get();
         $matkul_jenis = MatakuliahJenis::get();
         $status = Status::get();
@@ -92,12 +96,14 @@ class GlobalController extends Controller
             'status'=>$status,
             'prodi'=>$prodi,
             'matakuliah'=>$matakuliah,
+            'agama'=>$agama,
+            'goldarah'=>$goldarah,
             'user'=>[]
         ];
 
         if ($id!=null) {
             $pegawai = DB::table('pegawai')->select('nomor','nama')->where('nomor',$id)->get();
-            array_push($this->data['user'],$pegawai[0]);
+            $this->data['user'] = $pegawai[0];
         }else{
 
         }
