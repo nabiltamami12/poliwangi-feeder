@@ -510,14 +510,6 @@ async function getData(id) {
     })
     $('#program_studi').append(optProdi)
 
-    var kelas = $.grep(dataGlobal['kelas'], function(e){ return e.program_studi == $('#program_studi').val(); });
-    $('#kelas').html('')
-    var optKelas = `<option value=""> - </option>`;
-    $.each(kelas,function (key,row) {
-      optKelas += `<option value="${row.nomor}">${row.kode}</option>`
-    })
-    $('#kelas').append(optKelas); 
-
     var optStatus = `<option value=""> - </option>`;
     $.each(dataGlobal['status'],function (key,row) {
         optStatus += `<option value="${row.kode}">${row.status}</option>`
@@ -559,6 +551,14 @@ async function getData(id) {
                     $.each(data,function (key,row) {
                         $('#'+key).val(row);
                     })                
+                    var kelas = $.grep(dataGlobal['kelas'], function(e){ return e.program_studi == data.program_studi; });
+                    $('#kelas').html('')
+                    var optKelas = `<option value=""> - </option>`;
+                    $.each(kelas,function (key,row) {
+                    optKelas += `<option value="${row.nomor}">${row.kode}</option>`
+                    })
+                    $('#kelas').append(optKelas); 
+                    $('#kelas').val(data.kelas)
                 } else {
                     // alert gagal
                 }

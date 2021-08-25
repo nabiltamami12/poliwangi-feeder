@@ -49,8 +49,6 @@
                                     <div class="form-group row mb-0">
                                         <input type="file" id="file">
                                         <a href="{{asset('documents/sk_hari_aktif.pdf')}}" target="_blank">Preview </a>
-                                        
-                                        <!-- <textarea class="form-control" id="keterangan"></textarea> -->
                                     </div>
                                 </div>
                                 
@@ -174,7 +172,7 @@ $(document).ready(function () {
             data: form_data,                         
             type: 'post',
             success: function(res){
-                console.log(res)
+                location.reload()
             }
         });
     });

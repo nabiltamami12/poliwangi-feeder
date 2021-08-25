@@ -12,8 +12,7 @@ class Kelas extends Model
     public $table = "kelas";
     protected $fillable = [
         'nomor',
-        'program',
-        'jurusan',
+        'program_studi',
         'kelas',
         'pararel',
         'kode',

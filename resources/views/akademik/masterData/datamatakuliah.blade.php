@@ -16,8 +16,8 @@
               <h2 class="mb-0">Data Matakuliah</h2>
             </div>
             <div class="col text-right">
-              <button type="button" class="btn btn-primary">
-                <span class="iconify mr-2" onclick="add_btn()" data-icon="bx:bxs-plus-circle"></span>
+              <button type="button" onclick="add_btn()" class="btn btn-primary">
+                <span class="iconify mr-2" data-icon="bx:bxs-plus-circle"></span>
                 Tambah
               </button>
             </div>

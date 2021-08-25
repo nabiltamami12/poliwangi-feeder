@@ -47,7 +47,7 @@
             <div class="col-sm-6 col-12">
               <div class="form-group row mb-0">
                 <label>Kode</label>
-                <input type="text" class="form-control" id="kode" name="kode" readonly>
+                <input type="text" class="form-control" id="kode" name="kode" >
               </div>
             </div>
             <div class="col-sm-6 col-12">
@@ -111,6 +111,7 @@
         } else {
             var type = "post";
         }
+        console.log(data)
         $.ajax({
             url: url_api+"/kelas/"+id,
             type: type,
@@ -123,7 +124,7 @@
             },
             success: function(res) {
                 if (res.status=="success") {
-                    window.location.href = "{{url('/akademik/master/datakelas')}}";                    
+                    // window.location.href = "{{url('/akademik/master/datakelas')}}";                    
                 } else {
                     // alert gagal
                 }
@@ -133,12 +134,12 @@
     });
 
     $('#kelas').on('keyup',function (e) {
-        var alias = $('#jurusan :selected').data('alias');
+        var alias = $('#program_studi :selected').data('alias');
         $('#kode').val($(this).val()+""+alias+""+$('#pararel').val());
     })
 
     $('#pararel').on('keyup',function (e) {
-        var alias = $('#jurusan :selected').data('alias');
+        var alias = $('#program_studi :selected').data('alias');
         $('#kode').val($('#kelas').val()+""+alias+""+$(this).val());
     })
 } );
@@ -148,7 +149,7 @@ async function getData(id) {
 
     var optProdi = `<option value=""> - </option>`;
     $.each(dataGlobal['prodi'],function (key,row) {
-        optProdi += `<option value="${row.nomor}">${row.nama_program} ${row.program_studi}</option>`
+        optProdi += `<option value="${row.nomor}" data-alias="${row.alias}">${row.nama_program} ${row.program_studi}</option>`
     })
     $('#program_studi').append(optProdi)
 
