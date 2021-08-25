@@ -77,9 +77,7 @@ Route::prefix('v1')->group(function () {
     Route::post('/dosen', [Ctr\DosenController::class, 'store']);
     Route::put('/dosen/{id}', [Ctr\DosenController::class, 'update']);
     Route::delete('dosen/{id}', [Ctr\DosenController::class, 'destroy']);
-    Route::get('dosen/program_studi/{id}', [Ctr\DosenController::class, 'program_studi']);
-    Route::get('dosen/matkul/{id}', [Ctr\DosenController::class, 'matkul']);
-    Route::get('dosen/kelas/{id}', [Ctr\DosenController::class, 'kelas_matkul']);
+    Route::get('dosen/filter/{id}/{semester}', [Ctr\DosenController::class, 'filter']);
 
 
     //matakuliah

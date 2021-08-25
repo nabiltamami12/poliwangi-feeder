@@ -35,25 +35,22 @@
           <div class="form-row">
             <div class="col-md-6 form-group">
               <label for="program-studi">Program Studi</label>
-              <select class="form-control" id="program-studi">
-                <option selected>D3 Teknik Informatika</option>
-                <option>Ilmu Kedokteran Gigi Anak</option>
+              <select class="form-control" id="prodi">
               </select>
             </div>
             <div class="col-md-6 form-group mt-3 mt-md-0">
               <label for="jenjang">Jenjang</label>
-              <select class="form-control" id="jenjang">
-                <option>Semester 1</option>
-                <option selected>Semester 2</option>
+              <select class="form-control" id="semester">
+                <option value="1">Semester 1</option>
+                <option value="2">Semester 2</option>
               </select>
             </div>
           </div>
           <div class="form-row">
             <div class="col-md-6 form-group">
               <label for="matakuliah">Mata Kuliah</label>
-              <select class="form-control" id="matakuliah">
-                <option selected>Rekayasa Perangkat Lunak</option>
-                <option>Human Computer Interaction</option>
+              <select class="form-control" id="matkul">
+                
               </select>
             </div>
             <div class="col-md-6 form-group mt-3 mt-md-0">
@@ -327,4 +324,56 @@
     </div>
   </div>
 </section>
+<script>
+$(document).ready(function() {
+  var id = dataGlobal['user']['nomor'];
+  var semester = dataGlobal['periode']['semester'];
+  var dataFilter
+  getFilter(id,semester);
+
+  $('#prodi').on('change',function (e) {
+    var program_studi = $(this).val()
+    var matkul = $.grep(dataFilter['matkul'], function(e){ return e.program_studi == program_studi; });
+    
+    $('#prodi').html('')              
+    var optProdi = `<option value=""> - </option>`;
+    $.each(dataFilter['matkul'],function (key,row) {
+      optProdi += `<option value="${row.nomor}" data-alias="${row.alias}">${row.program_studi}</option>`
+    })
+    $('#prodi').append(optProdi)
+  })
+  $('#semester').on('change',function (e) {
+
+  })
+} );
+async function getFilter(id,semester) {
+  $.ajax({
+    url: url_api+"/dosen/filter/"+id+"/"+semester,
+    type: 'get',
+    dataType: 'json',
+    data: {},
+    beforeSend: function(text) {
+            // loading func
+            console.log("loading")
+            loading('show')
+    },
+    success: function(res) {
+        if (res.status=="success") {
+            var data = res['data'];
+            dataFilter = data;
+            console.log(dataFilter)
+            $('#prodi').html('')              
+            var optProdi = `<option value=""> - </option>`;
+            $.each(data['prodi'],function (key,row) {
+              optProdi += `<option value="${row.nomor}">${row.program_studi}</option>`
+            })
+            $('#prodi').append(optProdi)
+        } else {
+            // alert gagal
+        }
+        loading('hide')
+    }
+  });
+}
+</script>
 @endsection
