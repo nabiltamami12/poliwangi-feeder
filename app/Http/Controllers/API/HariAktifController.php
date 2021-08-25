@@ -62,7 +62,7 @@ class HariAktifController extends Controller
             $document->nilai = $file;
             $document->nama = "file_sk_hari_aktif";
             $document->keterangan = $request->keterangan;
-            $document->save();
+            $document->save;
 
             return response()->json([
                 "success" => true,

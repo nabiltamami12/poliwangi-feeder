@@ -149,6 +149,19 @@ Route::prefix('v1')->group(function () {
     Route::post('/filehari', '\App\Http\Controllers\API\HariAktifController@store');
     Route::put('/filehari/{nama}', '\App\Http\Controllers\API\HariAktifController@update');
     Route::delete('/filehari/{nama}', '\App\Http\Controllers\API\HariAktifController@destroy');
+
+    //Jalur Pmb
+    Route::get('/jalurpmb/{id}', '\App\Http\Controllers\API\JalurpmbController@show');
+    Route::post('/jalurpmb', '\App\Http\Controllers\API\JalurpmbController@store');
+    Route::put('/jalurpmb/{pmb}', '\App\Http\Controllers\API\JalurpmbController@update');
+    Route::delete('/jalurpmb/{id}', '\App\Http\Controllers\API\JalurpmbController@destroy');
+
+    //JURUSAN PILIHAN
+    Route::get('/jurusanpilihan/{id}', '\App\Http\Controllers\API\JurusanpilihanController@show');
+    Route::get('/jurusanpilihan', '\App\Http\Controllers\API\JurusanpilihanController@index');
+    Route::post('/jurusanpilihan', '\App\Http\Controllers\API\JurusanpilihanController@store');
+    Route::put('/jurusanpilihan/{id}', '\App\Http\Controllers\API\JurusanpilihanController@update');
+    Route::delete('/jurusanpilihan/{id}', '\App\Http\Controllers\API\JurusanpilihanController@destroy');
 });
 Route::prefix('v1')->middleware('auth:api')->group(function () {
     Route::get('/user', function (Request $request) {
