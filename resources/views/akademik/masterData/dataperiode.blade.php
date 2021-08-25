@@ -71,18 +71,18 @@ dt_opt = {
       "targets": [2],
       "data": null,
       "render": function(data, type, full) {
-        var aktif = "<span>aktif</span>"
-        var non_aktif = `<button class="btn btn-primary" onclick="change_status(${data['nomor']})">aktifkan</button>`
-        res = (data['status']=="1")?aktif:non_aktif;
+        var ganjil = (data['semester']==1)?'<span>ganjil</span>' : `<span style="color:#28a3eb;cursor:pointer;" onclick="change_semester(${data['nomor']},1)">ganjil</span>`
+        var genap = (data['semester']==2)?'<span>genap</span>' : `<span style="color:#28a3eb;cursor:pointer;" onclick="change_semester(${data['nomor']},2)">Genap</span>`
+        res = (data['status']=="1")? ganjil+" || "+genap:"-";
         return res;
       }
     },{
       "targets": [3],
       "data": null,
       "render": function(data, type, full) {
-        var ganjil = (data['semester']==1)?'<span>ganjil</span>' : `<span style="color:#28a3eb;cursor:pointer;" onclick="change_semester(${data['nomor']},1)">ganjil</span>`
-        var genap = (data['semester']==2)?'<span>genap</span>' : `<span style="color:#28a3eb;cursor:pointer;" onclick="change_semester(${data['nomor']},2)">Genap</span>`
-        res = (data['status']=="1")? ganjil+" || "+genap:"-";
+        var aktif = "<span>aktif</span>"
+        var non_aktif = `<button class="btn btn-primary" onclick="change_status(${data['nomor']})">aktifkan</button>`
+        res = (data['status']=="1")?aktif:non_aktif;
         return res;
       }
     },{
