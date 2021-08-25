@@ -29,7 +29,7 @@ class AbsensiController extends Controller
         $table = DB::table('mahasiswa');
         date_default_timezone_set('Asia/Jakarta');
         Carbon::setLocale('id');
-        DB::enableQueryLog();
+
         
         $now = Carbon::now()->format('H:i');
         $int = (int) str_replace(':', '', $now);
@@ -61,7 +61,7 @@ class AbsensiController extends Controller
                 'kuliah.nomor as kuliah'
                 )
             ->join("kuliah", "kuliah.kelas", "=", "mahasiswa.kelas")
-            ->join("matakuliah", "matakuliah.nomor", "=", "kuliah.matakuliah")
+            ->join("matakuliah", "matakuliah.nomor", "=", "KULIAH.matakuliah")
             ->join("hari", "hari.nomor", "=", "kuliah.hari")
             ->join("jam", "jam.nomor", "=", "kuliah.jam")
             ->join("program_studi", 'program_studi.nomor', '=', 'matakuliah.program_studi')
@@ -116,10 +116,6 @@ class AbsensiController extends Controller
             "status" =>$this->status,
             "data" => $this->data,
             "error" => $this->err,
-            'now' => $now,
-            'limit' => $limit,
-            'query' => DB::getQueryLog(),
-            'day' => $day
         ]);
 
     }
@@ -348,10 +344,10 @@ class AbsensiController extends Controller
             'absensi_mahasiswa.tanggal',
             'matakuliah.kode',
             'matakuliah.matakuliah',
-            DB::raw('COUNT(CASE WHEN absensi_mahasiswa.STATUS = "H" THEN 1 END) AS HADIR,COUNT(CASE WHEN absensi_mahasiswa.STATUS = "S" OR absensi_mahasiswa.STATUS = "A" THEN 1 END) AS TIDAK_HADIR')
+            DB::raw('COUNT(CASE WHEN absensi_mahasiswa.status = "H" THEN 1 END) AS HADIR,COUNT(CASE WHEN absensi_mahasiswa.status = "S" OR absensi_mahasiswa.status = "A" THEN 1 END) AS TIDAK_HADIR')
         )->join('kuliah', 'absensi_mahasiswa.kuliah', '=', 'kuliah.nomor')
         ->join('matakuliah', 'kuliah.matakuliah', '=', 'matakuliah.nomor')
-        ->join('KELAS', 'kuliah.kelas', '=', 'KELAS.nomor')
+        ->join('kelas', 'kuliah.kelas', '=', 'kelas.nomor')
         ->join('mahasiswa', 'absensi_mahasiswa.mahasiswa', '=', 'mahasiswa.nomor')
         ->where('absensi_mahasiswa.mahasiswa', $id)
         ->groupBy('matakuliah.matakuliah')

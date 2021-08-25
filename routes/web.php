@@ -338,6 +338,12 @@ Route::prefix('akademik')->group(function () {
                 "title" => "akademik-master"
             ]);
         });
+        Route::get('/settingkuliah', function () {
+            return view('akademik.masterData/fe_settingKuliah', [
+                "title" => "akademik-master"
+            ]);
+        });
+
     });
 
     Route::prefix('report')->group(function (){
