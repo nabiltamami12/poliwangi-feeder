@@ -9,7 +9,7 @@
   <div class="row">
     <div class="col-xl-12">
       <div class="card shadow padding--medium">
-        <div class="card-header border-0 p-0 pt-3">
+        <div class="card-header p-0 pt-3">
           <div class="row">
             <div class="col">
               <h3 class="mb-0 font-weight-bold">Pembayaran</h3>

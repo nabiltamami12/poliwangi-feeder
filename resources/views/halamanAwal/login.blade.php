@@ -31,7 +31,6 @@
   <script src="{{ url('js/util.js') }}"></script>
   <!-- Custom CSS -->
   <link href="{{ asset('css/halamanAwal.css') }}" rel="stylesheet">
-  <link href="{{ asset('css/responsive.css') }}" rel="stylesheet">
 </head>
 
 <body class="bg-default">

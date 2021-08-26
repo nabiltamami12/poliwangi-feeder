@@ -39,7 +39,7 @@
       <div class="tab-body">
         {{-- DATA CALON PESERTA DIDIK --}}
         <div class="card shadow mt-0 padding--big card-form active">
-          <div class="card-header p-0 m-0  border-0">
+          <div class="card-header p-0">
             <div class="row align-items-center">
               <div class="col">
                 <h2 class="mb-0 mt-0">Identitas Calon Pendaftar</h2>
@@ -70,8 +70,7 @@
               <div class="col-md-4 form-group mt-3">
                 <label>Tanggal Lahir</label>
                 <div class="d-flex align-items-center date_picker">
-                  <input id="txtDate" type="text" class="form-control date-input cursor_default" value="23 Jul 2021"
-                    readonly />
+                  <input id="txtDate" type="text" class="form-control date-input " value="23 Jul 2021" readonly />
                   <label class="input-group-btn" for="txtDate">
                     <span class="date_button">
                       <i class="iconify" data-icon="bx:bx-calendar" data-inline="false"></i>
@@ -112,7 +111,7 @@
             </div>
           </form>
 
-          <div class="card-header p-0 m-0  border-0">
+          <div class="card-header p-0">
             <div class="row align-items-center">
               <div class="col">
                 <h2 class="mb-0 mt-4-5">Alamat Calon Peserta Didik</h2>
@@ -161,7 +160,7 @@
 
         {{-- UNGGAH BERKAS --}}
         <div class="card shadow mt-0 padding--big card-form">
-          <div class="card-header p-0 m-0  border-0">
+          <div class="card-header p-0">
             <div class="row align-items-center">
               <div class="col">
                 <h2 class="mb-0 mt-0">Foto Data Diri</h2>

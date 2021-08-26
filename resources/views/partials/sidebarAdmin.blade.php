@@ -94,22 +94,9 @@
                   <span class="nav-link-dropdown-text">Range Nilai</span>
                 </a>
               </li>
-
-              <li class="nav-item">
-                <a class="nav-link" href="/admin/masterdata/datafakultas">
-                  <span class="nav-link-dropdown-text">Fakultas</span>
-                </a>
-              </li>
-
               <li class="nav-item">
                 <a class="nav-link" href="/admin/masterdata/dataprogram">
                   <span class="nav-link-dropdown-text">Program</span>
-                </a>
-              </li>
-
-              <li class="nav-item">
-                <a class="nav-link" href="/admin/masterdata/hariaktif">
-                  <span class="nav-link-dropdown-text">Hari Aktif</span>
                 </a>
               </li>
             </ul>

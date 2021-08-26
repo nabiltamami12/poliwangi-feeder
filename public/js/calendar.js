@@ -55,6 +55,7 @@
             var clicked = false;
             selectDates(selected);
             checkBlank();
+            checkSunday();
 
             clickedElement = calendar.datesBody.find("div");
             clickedElement.on("click", function () {
@@ -277,6 +278,11 @@
             }
         }
 
+        function checkSunday() {
+            $(".calendar_weekdays div").eq(6).css("color", "#F46A6A");
+            $(".calendar_content div:nth-child(7n)").addClass("libur");
+        }
+
         var e = 480;
 
         var today;
@@ -368,6 +374,7 @@
             clickedElement = bothCals.find(".calendar_content").find("div");
 
             checkBlank();
+            checkSunday();
         });
 
         //  Click picking stuff

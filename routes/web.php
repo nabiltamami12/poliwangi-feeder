@@ -411,6 +411,18 @@ Route::prefix('admin')->group(function () {
     });
     
     Route::prefix('masterdata')->group(function () {
+        Route::get('/dataperiode', function () {
+            return view('admin.masterData.masterdataPeriode', [
+                "title" => "admin-masterData"
+            ]);
+        });
+
+        Route::get('/datasettingkuliah', function () {
+            return view('admin.masterData.masterdataSettingKuliah', [
+                "title" => "admin-masterData"
+            ]);
+        });
+
         Route::get('/datamahasiswa', function () {
             return view('admin.masterData.masterdataMahasiswa', [
                 "title" => "admin-masterData"
@@ -524,23 +536,6 @@ Route::prefix('admin')->group(function () {
             ]);
         });
 
-
-        Route::get('/datafakultas', function () {
-            return view('admin.masterData.masterdataFakultas', [
-                "title" => "admin-masterData"
-            ]);
-        });
-        Route::get('/datafakultas/tambahdata', function () {
-            return view('admin.formMaster.fakultas.tambahdatafakultas', [
-                "title" => "admin-masterData"
-            ]);
-        });
-        Route::get('/datafakultas/updatedata', function () {
-            return view('admin.formMaster.fakultas.updatedatafakultas', [
-                "title" => "admin-masterData"
-            ]);
-        });
-
         Route::get('/dataprodi', function () {
             return view('admin.masterData.masterdataProdi', [
                 "title" => "admin-masterData"
@@ -577,12 +572,6 @@ Route::prefix('admin')->group(function () {
 
         Route::get('/dataprogram', function () {
             return view('admin.masterData.masterdataProgram', [
-                "title" => "admin-masterData"
-            ]);
-        });
-
-        Route::get('/hariaktif', function () {
-            return view('admin.masterData.masterdataHariAktif', [
                 "title" => "admin-masterData"
             ]);
         });

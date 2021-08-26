@@ -25,7 +25,6 @@
   <!-- Custom CSS -->
   <link href="{{ asset('css/main.css') }}" rel="stylesheet">
   <link href="{{ asset('css/keuangan.css') }}" rel="stylesheet">
-  <link href="{{ asset('css/responsive.css') }}" rel="stylesheet">
 </head>
 
 <body>

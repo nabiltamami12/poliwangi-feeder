@@ -148,7 +148,7 @@ h6,
 .btn {
   font-family: "Montserrat", sans-serif;
   font-size: 1rem;
-  font-weight: 400 !important;
+  font-weight: 500;
   line-height: 1.21em;
   padding: 0.625rem 1rem;
   border-radius: 0.5rem;
@@ -293,6 +293,18 @@ h6,
   color: #ffffff;
   border-color: #b2def8;
   background-color: #b2def8;
+}
+
+.btn-info_transparent2 {
+  color: #ffffff;
+  border-color: transparent;
+  background-color: rgba(178, 222, 248, 0.2);
+  box-shadow: none;
+}
+.btn-info_transparent2:hover {
+  color: #ffffff;
+  border-color: rgba(178, 222, 248, 0.4);
+  background-color: rgba(178, 222, 248, 0.4);
 }
 
 .btn-info:focus,
@@ -1071,6 +1083,9 @@ nav#navbar h1 {
 .page-content .table-responsive .table-body input[type=checkbox]:checked:before {
   color: black;
 }
+.page-content .table-responsive .table-body-xl td {
+  padding: 2rem 1.5rem !important;
+}
 .page-content .table-responsive .table-body-lg td {
   padding: 1.5rem !important;
 }
@@ -1345,4 +1360,323 @@ nav#navbar h1 {
   font-size: 1rem;
   line-height: 1.21em;
   color: #041f2f;
+}
+
+.informasi_mahasiswa {
+  background-color: #fff;
+  border-radius: 0.5rem;
+  padding: 0.75rem 1.5rem;
+}
+.informasi_mahasiswa p {
+  font-weight: 400;
+  font-size: 1.25rem;
+  line-height: 1.21em;
+  color: #041f2f;
+}
+
+.va_aktif label {
+  font-weight: 500;
+  font-size: 1rem;
+  line-height: 1.21em;
+  color: #000;
+}
+.va_aktif .field_kode {
+  position: relative;
+}
+.va_aktif input:-moz-read-only {
+  background-color: #fff;
+  font-weight: 400;
+  font-size: 1.5rem;
+  line-height: 1.21em;
+  color: #000;
+  max-height: 50px;
+}
+.va_aktif input:read-only {
+  background-color: #fff;
+  font-weight: 400;
+  font-size: 1.5rem;
+  line-height: 1.21em;
+  color: #000;
+  max-height: 50px;
+}
+.va_aktif button.salin_kode:hover {
+  background-color: rgba(178, 222, 248, 0.2);
+  border-color: #28a3eb;
+  color: #28a3eb;
+}
+.va_aktif .salin_kode {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 0 0.5rem 0.5rem 0;
+  border-left: 1px solid #c4c4c4;
+}
+
+.rincian_pembayaran label {
+  font-weight: 500;
+  font-size: 1rem;
+  line-height: 1.21em;
+  color: #000;
+}
+.rincian_pembayaran input[type=text] {
+  background-color: rgba(173, 181, 189, 0.2);
+  color: #adb5bd !important;
+}
+
+.informasi_pembayaran {
+  margin-left: 0.625rem;
+}
+.informasi_pembayaran ul {
+  list-style: "- ";
+}
+.informasi_pembayaran li {
+  font-weight: 400;
+  font-size: 0.875rem;
+  line-height: 1.5em;
+  color: #adb5bd;
+}
+.informasi_pembayaran h6 {
+  font-weight: 600;
+  font-size: 0.75rem;
+  line-height: 1.5em;
+  color: #d10429;
+}
+
+#tahapan h2 {
+  font-weight: 600;
+  font-size: 1.125rem;
+  line-height: 1.22em;
+  color: #041f2f;
+}
+#tahapan .input-group .input-group-text {
+  font-size: 1.125rem;
+  color: #ffffff;
+  background-color: #adb5bd;
+  padding-left: 1.167em;
+  padding-right: 1.167em;
+  border-radius: 8px 0 0 8px;
+  border: 1px solid #adb5bd;
+  border-right: 0;
+}
+#tahapan .input-group .form-control {
+  font-weight: 400;
+  font-size: 0.875rem;
+  line-height: 1.21em;
+  color: #adb5bd !important;
+  background-color: #fff;
+  border: 1px solid #adb5bd;
+  border-left: 0;
+  border-radius: 0 0.5rem 0.5rem 0;
+}
+#tahapan .input-group.active .input-group-text {
+  background-color: #f0f8fe;
+  border: 1px solid #28a3eb;
+  color: #28a3eb;
+  font-weight: 600;
+}
+#tahapan .input-group.active .form-control {
+  border: 1px solid #28a3eb;
+  background-color: #28a3eb;
+  color: #ffffff !important;
+}
+#tahapan .tab-body > div {
+  display: none;
+}
+#tahapan .tab-body > div.active {
+  display: block;
+}
+#tahapan .card-form .form-group:first-child {
+  padding-right: 1.5rem;
+}
+#tahapan .card-form .form-group:nth-child(2) {
+  padding: 0 1.5rem;
+}
+#tahapan .card-form .form-group:last-child {
+  padding-left: 1.5rem;
+}
+#tahapan .card-form ::-moz-placeholder {
+  font-weight: 400;
+  font-size: 0.875rem;
+  line-height: 1.21em;
+  color: #041f2f;
+}
+#tahapan .card-form :-ms-input-placeholder {
+  font-weight: 400;
+  font-size: 0.875rem;
+  line-height: 1.21em;
+  color: #041f2f;
+}
+#tahapan .card-form ::placeholder {
+  font-weight: 400;
+  font-size: 0.875rem;
+  line-height: 1.21em;
+  color: #041f2f;
+}
+#tahapan .card_step {
+  position: relative;
+}
+#tahapan .card_step hr {
+  position: relative;
+  top: 1.5rem;
+  border: none;
+  height: 2px;
+  color: #c4c4c4;
+  background-color: #c4c4c4;
+}
+#tahapan .form-berkas input {
+  display: none;
+}
+#tahapan .form-berkas .input_file {
+  min-height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #c4c4c4;
+  border-radius: 0.5rem;
+}
+#tahapan .form-berkas p {
+  font-weight: 500;
+  font-size: 0.875rem;
+  line-height: 1.21em;
+  color: #f46a6a;
+  font-style: italic;
+}
+#tahapan .form_action {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  -moz-column-gap: 0.5rem;
+       column-gap: 0.5rem;
+}
+
+@media (min-width: 991.98px) {
+  .modal-lg,
+.modal-xl {
+    max-width: 630px;
+  }
+
+  .g-sidenav-pinned .sidenav#sidenav-main {
+    min-width: 288px;
+    max-width: 288px;
+  }
+  .g-sidenav-pinned .main-content#panel {
+    margin-left: 288px;
+  }
+
+  select#dataperhalaman {
+    max-height: 1.5rem;
+  }
+}
+@media screen and (max-width: 991.98px) {
+  header.header {
+    max-height: 150px;
+    min-height: 150px;
+  }
+
+  .page-content {
+    margin-top: -150px;
+  }
+  .page-content .padding--big,
+.page-content .padding--small,
+.page-content .padding--medium {
+    padding: 1.5rem 1rem;
+  }
+}
+@media screen and (max-width: 767.98px) {
+  html {
+    font-size: 14px;
+  }
+
+  .page-content #pengumuman .carousel-inner img {
+    min-height: 150px;
+  }
+  .page-content .form-input .form-group {
+    padding: 0;
+  }
+  .page-content .form-input .form-group:nth-child(odd) {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .page-content .form-input .form-group:nth-child(even) {
+    padding-left: 0;
+    padding-right: 0;
+    margin-top: 1rem;
+  }
+  .page-content input[type=date]::-webkit-inner-spin-button,
+.page-content input[type=date]::-webkit-calendar-picker-indicator {
+    width: 38px;
+  }
+  .page-content .form-select .form-group:nth-child(odd) {
+    padding: 0;
+  }
+  .page-content .form-select .form-group:nth-child(even) {
+    padding: 0;
+  }
+  .page-content .search_form .form-control-sm {
+    width: 95%;
+  }
+  .page-content .search_form .form-control + button {
+    height: calc(1.5em + 1.25rem + 4px);
+    position: relative;
+    top: -1px;
+  }
+  .page-content .search_form .form-control-sm + button {
+    height: calc(0.45em + 1.25rem + 5px);
+    width: 5%;
+    position: relative;
+    top: -1px;
+  }
+
+  #tahapan .card-form .form-group:first-child, #tahapan .card-form .form-group:nth-child(2), #tahapan .card-form .form-group:last-child {
+    padding: 0;
+  }
+
+  .page-content__keuangan .setting_tarif_UKTSPI #input_prefix {
+    bottom: 10px;
+  }
+}
+@media screen and (max-width: 750px) {
+  .page-content #pengumuman .carousel-inner img {
+    min-height: 120px;
+  }
+  .page-content #piechart h1 {
+    margin-bottom: 0;
+  }
+  .page-content #piechart .data-piechart {
+    grid-template-columns: repeat(2, 1fr);
+    grid-row-gap: 24px;
+  }
+}
+@media screen and (max-width: 575.98px) {
+  html {
+    font-size: 12px;
+  }
+
+  .page-content .table-responsive .table-body .bordered_sm::after {
+    bottom: -1px;
+  }
+  .page-content .search_form .form-control-sm {
+    width: 90%;
+  }
+  .page-content .search_form .form-control-sm + button {
+    width: 10%;
+  }
+
+  .page-content__admin .calendar_content div.blank {
+    height: 4rem;
+  }
+  .page-content__admin .calendar_weekdays div,
+.page-content__admin .calendar_content div {
+    height: 4rem;
+  }
+}
+@media screen and (min-width: 350px) {
+  .jadwal_sehari .detail_waktu form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .jadwal_sehari .detail_waktu label:nth-child(2) {
+    margin: 0 1rem;
+  }
 }

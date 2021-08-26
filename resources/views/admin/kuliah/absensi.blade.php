@@ -5,12 +5,11 @@
 <header class="header"></header>
 
 <!-- Page content -->
-<section class="page-content page-content__admin container-fluid" id="admin_absensimahasiswa">
+<section class="page-content page-content__admin container-fluid">
   <div class="row">
     <div class="col-xl-12">
       <div class="card shadow padding--small">
-
-        <div class="card-header p-0 m-0 border-0 ">
+        <div class="card-header p-0">
           <div class="row align-items-center">
             <div class="col-12 col-md-6">
               <h2 class="mb-0 text-center text-md-left">Absensi Mahasiswa</h2>
@@ -23,34 +22,47 @@
             </div>
           </div>
         </div>
-
         <hr class="my-4">
-        <form class="form-select">
+
+        <form>
           <div class="form-row">
-            <div class="col-md-6 form-group">
+            <div class="col-12 form-group">
+              <label>Tanggal</label>
+              <div class="d-flex align-items-center date_picker">
+                <input id="txtDate" type="text" class="form-control date-input" placeholder="DD/MM/YYYY" readonly />
+                <label class="input-group-btn" for="txtDate">
+                  <span class="date_button">
+                    <i class="iconify" data-icon="bx:bx-calendar" data-inline="false"></i>
+                  </span>
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="form-row mt-3">
+            <div class="col-md-6 form-group pr-0 pr-md-4">
               <label for="program-studi">Program Studi</label>
               <select class="form-control" id="program-studi">
                 <option>Ilmu Kedokteran Gigi Anak</option>
                 <option>Ilmu Kedokteran Gigi Anak</option>
               </select>
             </div>
-            <div class="col-md-6 form-group mt-3 mt-md-0">
-              <label for="tahun">Tahun</label>
+            <div class="col-md-6 form-group mt-3 mt-md-0 pl-0 pl-md-4">
+              <label for=" tahun">Tahun</label>
               <select class="form-control" id="tahun">
                 <option>2020</option>
                 <option>2021</option>
               </select>
             </div>
           </div>
-          <div class="form-row">
-            <div class="col-md-6 form-group">
+          <div class="form-row mt-3">
+            <div class="col-md-6 form-group pr-0 pr-md-4">
               <label for="semester">Semester</label>
               <select class="form-control" id="semester">
                 <option>Semua</option>
                 <option>Semester 1</option>
               </select>
             </div>
-            <div class="col-md-6 form-group mt-3 mt-md-0">
+            <div class="col-md-6 form-group mt-3 mt-md-0 pl-0 pl-md-4">
               <label for="jenjang">Jenjang</label>
               <select class="form-control" id="jenjang">
                 <option>Semua</option>
@@ -91,95 +103,101 @@
                 <th scope="col" class="text-center">tanggal</th>
                 <th scope="col">NIM</th>
                 <th scope="col" style="width: 25%">Nama</th>
-                <th scope="col" class="text-center" style="width: 15%">Mata Kuliah</th>
+                <th scope="col" class="text-center">Kelas</th>
                 <th scope="col" class="text-center">Jam absensi</th>
                 <th scope="col" class="text-center">batas absensi</th>
-                <th scope="col" class="text-center">Aksi</th>
+                <th scope="col" class="text-center">Status</th>
               </tr>
             </thead>
 
             <tbody class="table-body">
               <tr>
-                <td class="text-center">13 Juli 2021</td>
-                <td>4891203526</td>
-                <td class="font-weight-bold text-capitalize">Dwi Rahmawati</td>
-                <td class="text-center">Ilmu gigi</td>
-                <td class="text-center">12:14</td>
-                <td class="text-center">13:00</td>
-                <td class="text-center">
-                  <i class="iconify delete-icon" data-icon="bx:bx-trash"></i>
+                <td class="text-center">02/07/2021</td>
+                <td>345245345</td>
+                <td class="font-weight-bold text-capitalize">Jessica Wijaya</td>
+                <td class="text-center">MT001</td>
+                <td class="text-center">12:00</td>
+                <td class="text-center">12:15</td>
+                <td class="text-center status_absensi">
+                  <span class="badge badge-success">
+                    <i class="iconify-inline mr-1" data-icon="akar-icons:circle-check-fill"></i>
+                    <span class="text-capitalize">Hadir</span>
+                  </span>
                 </td>
               </tr>
 
               <tr>
-                <td class="text-center">13 Juli 2021</td>
-                <td>4891203526</td>
-                <td class="font-weight-bold text-capitalize">Dwi Rahmawati</td>
-                <td class="text-center">Ilmu gigi</td>
-                <td class="text-center">12:14</td>
-                <td class="text-center">13:00</td>
-                <td class="text-center">
-                  <i class="iconify delete-icon" data-icon="bx:bx-trash"></i>
+                <td class="text-center">02/07/2021</td>
+                <td>345245345</td>
+                <td class="font-weight-bold text-capitalize">Jessica Wijaya</td>
+                <td class="text-center">MT001</td>
+                <td class="text-center">12:00</td>
+                <td class="text-center">12:15</td>
+                <td class="text-center status_absensi">
+                  <span class="badge badge-success">
+                    <i class="iconify-inline mr-1" data-icon="akar-icons:circle-check-fill"></i>
+                    <span class="text-capitalize">Hadir</span>
+                  </span>
                 </td>
               </tr>
 
               <tr>
-                <td class="text-center">13 Juli 2021</td>
-                <td>4891203526</td>
-                <td class="font-weight-bold text-capitalize">indah pratiwi</td>
-                <td class="text-center">Ilmu gigi</td>
-                <td class="text-center">12:17</td>
-                <td class="text-center">13:00</td>
-                <td class="text-center">
-                  <i class="iconify delete-icon" data-icon="bx:bx-trash"></i>
+                <td class="text-center">02/07/2021</td>
+                <td>345245345</td>
+                <td class="font-weight-bold text-capitalize">Jessica Wijaya</td>
+                <td class="text-center">MT001</td>
+                <td class="text-center">12:00</td>
+                <td class="text-center">12:15</td>
+                <td class="text-center status_absensi">
+                  <span class="badge badge-success">
+                    <i class="iconify-inline mr-1" data-icon="akar-icons:circle-check-fill"></i>
+                    <span class="text-capitalize">Hadir</span>
+                  </span>
                 </td>
               </tr>
 
               <tr>
-                <td class="text-center">13 Juli 2021</td>
-                <td>4891203526</td>
-                <td class="font-weight-bold text-capitalize">indah pratiwi</td>
-                <td class="text-center">Ilmu gigi</td>
-                <td class="text-center">12:17</td>
-                <td class="text-center">13:00</td>
-                <td class="text-center">
-                  <i class="iconify delete-icon" data-icon="bx:bx-trash"></i>
+                <td class="text-center">02/07/2021</td>
+                <td>345245345</td>
+                <td class="font-weight-bold text-capitalize">Jessica Wijaya</td>
+                <td class="text-center">MT001</td>
+                <td class="text-center">12:00</td>
+                <td class="text-center">12:15</td>
+                <td class="text-center status_absensi">
+                  <span class="badge badge-danger">
+                    <i class="iconify-inline mr-1" data-icon="bi:x-circle-fill"></i>
+                    <span class="text-capitalize">Tidak Hadir</span>
+                  </span>
                 </td>
               </tr>
 
               <tr>
-                <td class="text-center">13 Juli 2021</td>
-                <td>4891203526</td>
-                <td class="font-weight-bold text-capitalize">indah pratiwi</td>
-                <td class="text-center">Ilmu gigi</td>
-                <td class="text-center">12:17</td>
-                <td class="text-center">13:00</td>
-                <td class="text-center">
-                  <i class="iconify delete-icon" data-icon="bx:bx-trash"></i>
+                <td class="text-center">02/07/2021</td>
+                <td>345245345</td>
+                <td class="font-weight-bold text-capitalize">Jessica Wijaya</td>
+                <td class="text-center">MT001</td>
+                <td class="text-center">12:00</td>
+                <td class="text-center">12:15</td>
+                <td class="text-center status_absensi">
+                  <span class="badge badge-success">
+                    <i class="iconify-inline mr-1" data-icon="akar-icons:circle-check-fill"></i>
+                    <span class="text-capitalize">Hadir</span>
+                  </span>
                 </td>
               </tr>
 
               <tr>
-                <td class="text-center">13 Juli 2021</td>
-                <td>4891203526</td>
-                <td class="font-weight-bold text-capitalize">indah pratiwi</td>
-                <td class="text-center">Ilmu gigi</td>
-                <td class="text-center">12:17</td>
-                <td class="text-center">13:00</td>
-                <td class="text-center">
-                  <i class="iconify delete-icon" data-icon="bx:bx-trash"></i>
-                </td>
-              </tr>
-
-              <tr>
-                <td class="text-center">13 Juli 2021</td>
-                <td>4891203526</td>
-                <td class="font-weight-bold text-capitalize">indah pratiwi</td>
-                <td class="text-center">Ilmu gigi</td>
-                <td class="text-center">12:17</td>
-                <td class="text-center">13:00</td>
-                <td class="text-center">
-                  <i class="iconify delete-icon" data-icon="bx:bx-trash"></i>
+                <td class="text-center">02/07/2021</td>
+                <td>345245345</td>
+                <td class="font-weight-bold text-capitalize">Jessica Wijaya</td>
+                <td class="text-center">MT001</td>
+                <td class="text-center">12:00</td>
+                <td class="text-center">12:15</td>
+                <td class="text-center status_absensi">
+                  <span class="badge badge-success">
+                    <i class="iconify-inline mr-1" data-icon="akar-icons:circle-check-fill"></i>
+                    <span class="text-capitalize">Hadir</span>
+                  </span>
                 </td>
               </tr>
             </tbody>
@@ -191,17 +209,13 @@
           <nav aria-label="Page navigation example">
             <ul class="pagination">
               <li class="page-item disabled" aria-label="Previous">
-                <a class="page-link" href="#" tabindex="-1">
-                  Previous
-                </a>
+                <a class="page-link" href="#" tabindex="-1">Previous</a>
               </li>
               <li class="page-item active">
                 <a class="page-link" href="#">1<span class="sr-only">(current)</span></a>
               </li>
               <li class="page-item disabled" aria-label="Next">
-                <a class="page-link" href="#">
-                  Next
-                </a>
+                <a class="page-link" href="#">Next</a>
               </li>
             </ul>
           </nav>
@@ -210,4 +224,14 @@
     </div>
   </div>
 </section>
+@endsection
+
+@section('js')
+<script>
+  $(function () {
+    $("#txtDate").datepicker({
+        format: "dd MM yyyy",
+    });
+  });
+</script>
 @endsection

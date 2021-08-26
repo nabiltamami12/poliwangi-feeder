@@ -9,7 +9,7 @@
   <div class="row">
     <div class="col-xl-12">
       <div class="card shadow padding--small">
-        <div class="card-header border-0 p-0">
+        <div class="card-header p-0">
           <div class="row align-items-center">
             <div class="col">
               <h3 class="mb-0">Nilai Semester Saat Ini</h3>

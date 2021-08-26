@@ -9,12 +9,12 @@
   <div class="row">
     <div class="col-xl-12">
       <div class="card shadow">
-        <div class="card-header border-0 padding--big">
+        <div class="card-header padding--big">
           <div class="row align-items-center">
 
             <div class="col-md-6 form-group">
               <div class="d-flex align-items-center date_picker">
-                <input id="txtDate" type="text" class="form-control form-control-sm date-input cursor_default pl-2"
+                <input id="txtDate" type="text" class="form-control form-control-sm date-input  pl-2"
                   value="23 Jul 2021" readonly />
                 <label class="input-group-btn" for="txtDate">
                   <span class="date_button">

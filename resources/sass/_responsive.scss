@@ -1,6 +1,3 @@
-@import "./variable";
-@import "./mixin";
-
 @media (min-width: 991.98px) {
     .modal-lg,
     .modal-xl {
@@ -39,19 +36,6 @@
 @media screen and (max-width: 767.98px) {
     html {
         font-size: 14px;
-    }
-
-    .halaman_awal {
-        &.register_page {
-            .input-foto-siswa {
-                min-height: 130px;
-            }
-        }
-        .card {
-            .card-body {
-                padding: 1.5rem 1rem;
-            }
-        }
     }
 
     .page-content {
@@ -158,11 +142,6 @@
 @media screen and (max-width: 575.98px) {
     html {
         font-size: 12px;
-    }
-    .halaman_awal {
-        .logo {
-            width: 20%;
-        }
     }
 
     .page-content {

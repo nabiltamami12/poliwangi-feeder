@@ -179,8 +179,9 @@
     }
 
     .informasi_pembayaran {
+        margin-left: 0.625rem;
         ul {
-            list-style: none;
+            list-style: "- ";
         }
         li {
             @include mixintext(400, 0.875rem, 1.5em, $placeholder);
@@ -199,3 +200,5 @@
         }
     }
 }
+
+@import "./responsiveHalamanAwal";

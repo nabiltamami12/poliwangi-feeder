@@ -18,7 +18,7 @@
   <div class="row equal-cols">
     <div class="col-lg-8">
       <div class="card shadow padding--medium">
-        <div class="card-header p-0 border-0">
+        <div class="card-header p-0">
           <div class="row align-items-center">
             <div class="col">
               <h3 class="mb-0">Jadwal Kuliah Hari Ini</h3>
@@ -73,7 +73,7 @@
 
     <div class="col-lg-4">
       <div class="card shadow padding--medium card_presensi mt-0 mt-lg-4">
-        <div class="card-header p-0 border-0">
+        <div class="card-header p-0">
           <div class="row align-items-center">
             <div class="col">
               <h3 class="mb-0">Presensi sekarang Yuk!</h3>

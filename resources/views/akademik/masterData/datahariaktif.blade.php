@@ -25,7 +25,7 @@
         </div>
         <div class="col-xl-4">
             <div class="card padding--small">
-                <div class="card-header p-0 m-0 border-0 ">
+                <div class="card-header p-0">
                     <div class="row align-items-center">
                         <div class="col">
                             <h2 class="mb-0">Detail Kalender</h2>

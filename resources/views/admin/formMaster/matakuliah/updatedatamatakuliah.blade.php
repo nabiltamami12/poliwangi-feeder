@@ -5,7 +5,7 @@
 <header class="header"></header>
 
 <!-- Page content -->
-<section class="page-content page-content__admin container-fluid" id="update_data">
+<section class="page-content page-content__admin container-fluid">
   <div class="row">
     <div class="col-xl-12">
       <div class="card shadow padding--small">

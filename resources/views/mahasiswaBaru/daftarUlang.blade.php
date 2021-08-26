@@ -37,7 +37,7 @@
   <div class="row">
     <div class="col-xl-12">
       <div class="card shadow padding--medium">
-        <div class="card-header p-0 border-0">
+        <div class="card-header p-0">
           <div class="row">
             <div class="col">
               <h3 class="mb-0">Persyaratan Daftar Ulang</h3>
@@ -49,10 +49,10 @@
           <table class="table align-items-center table-borderless table-flush table-hover">
             <thead class="table-header">
               <tr>
-                <th scope="col" class="border-0 text-center px-2">No</th>
-                <th scope="col" class="border-0" style="width: 58%">Keterangan</th>
-                <th scope="col" class="border-0">File</th>
-                <th scope="col" class="border-0 text-center">Status</th>
+                <th scope="col" class="text-center px-2">No</th>
+                <th scope="col" style="width: 58%">Keterangan</th>
+                <th scope="col">File</th>
+                <th scope="col" class="text-center">Status</th>
               </tr>
             </thead>
 

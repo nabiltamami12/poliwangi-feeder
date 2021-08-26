@@ -19,7 +19,7 @@
                 <i class="iconify-inline mr-1" data-icon="bx:bxs-plus-circle"></i>
                 Tambah
               </button>
-              <button type="button" class="btn btn-secondary ml-0 ml-md-2">
+              <button type="button" class="btn btn-secondary ml-md-2">
                 <i class="iconify-inline mr-1" data-icon="bx:bx-cloud-download"></i>
                 Unduh Data
               </button>
@@ -108,17 +108,13 @@
           <nav aria-label="Page navigation example">
             <ul class="pagination">
               <li class="page-item disabled" aria-label="Previous">
-                <a class="page-link" href="#" tabindex="-1">
-                  Previous
-                </a>
+                <a class="page-link" href="#" tabindex="-1">Previous</a>
               </li>
               <li class="page-item active">
                 <a class="page-link" href="#">1<span class="sr-only">(current)</span></a>
               </li>
               <li class="page-item disabled" aria-label="Next">
-                <a class="page-link" href="#">
-                  Next
-                </a>
+                <a class="page-link" href="#">Next</a>
               </li>
             </ul>
           </nav>

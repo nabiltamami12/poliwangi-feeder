@@ -2,41 +2,73 @@
 @import "./mixin";
 
 .page-content__admin {
+    h1 {
+        @include mixintext(600, 1.3125rem, 1.22em, $font-black);
+    }
+
+    .form-group.focused {
+        .input-group-prepend {
+            .input-group-text {
+                border-color: $primary;
+            }
+        }
+    }
+
+    .input-group-prepend {
+        .input-group-text {
+            border-color: #c4c4c4;
+            border-radius: 0.5rem 0 0 0.5rem;
+            @include mixintext(500, 0.875rem !important, 1.21em, $font-black);
+            padding-left: 1.5rem;
+        }
+        + input {
+            border-left: 0;
+        }
+    }
+
+    // ===================== CALENDAR =====================
     .calendar {
         margin: auto;
+    }
+    .calendar_content,
+    .calendar_weekdays,
+    .calendar_header {
+        position: relative;
+        overflow: hidden;
+    }
+    .calendar_weekdays div,
+    .calendar_content div {
+        width: calc(100% / 7);
+        overflow: hidden;
+        padding: 0.5rem;
+        background-color: transparent;
+        @include mixintext(500, 1.125rem, 1.22em, $font-black);
     }
 
     .calendar_header {
         width: 100%;
         text-align: center;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
         h2 {
             @include mixintext(600, 1.3125rem, 1.22em, $font-black);
         }
         .switch-month {
             border: 0;
+            outline: 0;
             background-color: transparent;
             .iconify {
                 font-size: 2rem;
-            }
-            &:focus {
-                outline: 0;
             }
         }
     }
 
     .calendar_content {
-        background: #fff;
         border: 1px solid rgba(153, 153, 153, 1);
-
         div {
             border: 1px solid rgba(153, 153, 153, 1);
             float: left;
             position: relative;
             z-index: 0;
-
+            height: 5rem;
             &.blank {
                 border: 1px solid rgba(153, 153, 153, 1);
                 width: calc(100% / 7);
@@ -47,19 +79,21 @@
 
         div.today {
             color: #fff;
-
-            padding: 0.6rem 0.8rem;
             &:after {
                 position: absolute;
                 top: 0.3rem;
                 left: 0.3rem;
                 content: "";
-                width: 28px;
-                height: 28px;
+                width: 1.75rem;
+                height: 1.75rem;
                 border-radius: 50%;
                 background: #28a3eb;
                 z-index: -1;
             }
+        }
+
+        div.libur {
+            color: #f46a6a;
         }
     }
 
@@ -67,122 +101,42 @@
         @include mixintext(600, 1.125rem, 1.21em, $primary);
         div {
             display: inline-block;
-            vertical-align: top;
-            height: 40px;
         }
     }
 
-    .calendar_content,
-    .calendar_weekdays,
-    .calendar_header {
-        position: relative;
-        overflow: hidden;
+    // ===================== HARI AKTIF ASIDE =====================
+    h2.aside_title {
+        @include mixintext(600, 1.125rem, 1.5em, $font-black);
     }
 
-    .calendar_weekdays div,
-    .calendar_content div {
-        width: calc(100% / 7);
-        height: 5rem;
-        overflow: hidden;
-        padding: 0.5rem;
+    .uploadSuratKeputusan {
+        border: 1px solid #c4c4c4;
+        .iconify {
+            font-size: 1.5rem;
+            color: #000;
+        }
+    }
+
+    #custom-btn {
         background-color: transparent;
-        @include mixintext(500, 1.125rem, 1.22em, $font-black);
+        border: none;
+        outline: none;
     }
 
-    .detailKalender_header {
-        h2 {
-            @include mixintext(600, 1.125rem, 1.22em, $font-black);
-        }
+    .nama_dokumen {
+        @include mixintext(400, 1.125rem, 1.22em, $font-black);
     }
 
     ::placeholder {
         @include mixintext(400, 0.875rem, 1.21em, $font-black);
     }
-    .modal {
-        .modal-header {
-            h5 {
-                @include mixintext(600, 1.25rem, 1.2em, $warning);
-                background: rgba(241, 180, 76, 0.2);
-                border-radius: 0.5rem;
-                width: 100%;
-                padding: 12px;
-            }
-        }
-        .modal-body {
-            p {
-                @include mixintext(600, 1rem, 1.21em, $font-black);
-            }
-            h2 {
-                @include mixintext(700, 1.375rem, 1.22em, $font-black);
-            }
-        }
-        .modal-footer {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            column-gap: 1.5rem;
-            .btn-modal-cancel {
-                border: 2px solid $danger;
-                color: $danger;
-                padding: 10px;
-            }
-            .btn-modal-cancel:hover {
-                background-color: $danger;
-                color: $white;
-            }
-            .btn-modal-ok:hover {
-                background-color: $white;
-                border: 2px solid $primary;
-                color: $primary;
-                padding: 10px;
-            }
-        }
+
+    .customSelect {
+        position: relative;
+        display: inline-block;
+        width: 100%;
     }
 
-    .form_rangenilai {
-        span {
-            @include mixintext(500, 1.125rem, 1.22em, $font-black);
-        }
-        .grade_nilai {
-            @include mixintext(600, 1.125rem, 1.22em, $font-white);
-            min-width: 3rem;
-            max-width: 3.125rem;
-            height: 100%;
-            border-radius: 0.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-    }
-
-    #nama_dosen {
-        text-align: center;
-        text-align-last: center;
-        -moz-text-align-last: center;
-        option {
-            text-align: center;
-        }
-    }
-
-    .jadwal_sehari {
-        .jumlah_sesi {
-            select {
-                width: 55px;
-                background-position: calc(100% - 8px), calc(100% - 24px);
-                padding: 0.5rem;
-            }
-        }
-    }
-}
-
-#admin_masterdatadosenpengampu {
-    .table-body {
-        td {
-            padding: 2rem 1.5rem;
-        }
-    }
-}
-
-#admin_masterdatahariaktif {
     .customSelect-wrapper {
         position: relative;
         display: inline-block;
@@ -193,20 +147,9 @@
         }
     }
 
-    .customSelect {
-        position: relative;
-        display: inline-block;
-        width: 100%;
-    }
-
     .customSelect-trigger {
-        font-size: 14px;
-        font-weight: 500;
-        line-height: 17px;
-        color: #000;
+        @include mixintext(500, 0.875rem, 1.21em, #000);
         padding: 0.5rem 0.75rem;
-
-        background-color: #fff;
         position: relative;
         display: block;
         border-radius: 0.25rem;
@@ -252,13 +195,10 @@
     }
 
     .custom-option {
+        @include mixintext(400, 0.875rem, 1.21em, #000);
         position: relative;
         display: block;
         padding: 0.5rem;
-        font-size: 14px;
-        font-weight: 400;
-        line-height: 17px;
-        color: #000;
         cursor: pointer;
         &:hover {
             background: rgba(40, 163, 235, 0.5);
@@ -271,21 +211,60 @@
     .selecton {
         border-color: $primary;
     }
-}
 
-#edit_jalurpenerimaanPMB {
-    h1 {
-        @include mixintext(600, 1.3125rem, 1.22em, $font-black);
-    }
-    .input-group-prepend {
-        .input-group-text {
-            border-color: #c4c4c4;
-            border-radius: 0.5rem 0 0 0.5rem;
-            @include mixintext(500, 0.875rem !important, 1.21em, $font-black);
-            padding-left: 1.5rem;
+    // ===================== MODAL =====================
+    .modal {
+        .modal-title {
+            @include mixintext(600, 1.25rem, 1.2em, $warning);
+            background: rgba(241, 180, 76, 0.2);
+            border-radius: 0.5rem;
+            width: 100%;
+            padding: 12px;
+        }
+
+        .modal-body {
+            p {
+                @include mixintext(600, 1rem, 1.21em, $font-black);
+            }
+            h2 {
+                @include mixintext(700, 1.375rem, 1.22em, $font-black);
+            }
+        }
+
+        .modal-footer {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            column-gap: 1.5rem;
+            .btn {
+                font-weight: 600 !important;
+                border-radius: 0.25rem;
+            }
         }
     }
-    #biaya-pendaftaran {
-        border-left: 0;
+
+    .form_rangenilai {
+        span {
+            @include mixintext(500, 1.125rem, 1.22em, $font-black);
+        }
+        .grade_nilai {
+            @include mixintext(600, 1.125rem, 1.22em, $font-white);
+            min-width: 3rem;
+            max-width: 3.125rem;
+            height: 100%;
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+
+    .jadwal_sehari {
+        .jumlah_sesi {
+            select {
+                width: 55px;
+                background-position: calc(100% - 8px), calc(100% - 24px);
+                padding: 0.5rem;
+            }
+        }
     }
 }

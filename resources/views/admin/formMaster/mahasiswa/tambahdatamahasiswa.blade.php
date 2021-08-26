@@ -5,7 +5,7 @@
 <header class="header"></header>
 
 <!-- Page content -->
-<section class="page-content page-content__admin container-fluid" id="tambah_data">
+<section class="page-content page-content__admin container-fluid">
   <div class="row">
     <div class="col-xl-12">
       <div class="card shadow padding--small">
@@ -46,8 +46,7 @@
             <div class="col-md-6 form-group">
               <label>Tanggal Lahir</label>
               <div class="d-flex align-items-center date_picker">
-                <input id="txtDate" type="text" class="form-control date-input cursor_default" value="23 Jul 2021"
-                  readonly />
+                <input id="txtDate" type="text" class="form-control date-input " value="23 Jul 2021" readonly />
                 <label class="input-group-btn" for="txtDate">
                   <span class="date_button">
                     <i class="iconify" data-icon="bx:bx-calendar" data-inline="false"></i>

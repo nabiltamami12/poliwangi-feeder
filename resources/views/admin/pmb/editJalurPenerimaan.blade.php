@@ -5,24 +5,23 @@
 <header class="header"></header>
 
 <!-- Page content -->
-<section class="page-content page-content__admin container-fluid" id="edit_jalurpenerimaanPMB">
+<section class="page-content page-content__admin container-fluid">
   <div class="row">
     <div class="col-xl-12">
       <div class="card shadow">
-        <div class="card-header padding--medium m-0 border-0">
+        <div class="card-header padding--medium">
           <div class="row align-items-center">
-            <div class="col">
-              <h2 class="mb-0">Jalur Penerimaan PMB</h2>
+            <div class="col-12 col-sm-6">
+              <h2 class="mb-0 text-center text-sm-left">Jalur Penerimaan PMB</h2>
             </div>
-            <div class="col text-right">
+            <div class="col-12 col-sm-6 text-center text-sm-right mt-3 mt-md-0">
               <button type="submit" class="btn btn-primary">Simpan</button>
             </div>
           </div>
         </div>
-
         <hr>
 
-        <form class="form-input padding--medium">
+        <form class="form-input padding--medium ">
           <div class="keterangan_jalur">
             <h1 class="d-inline mr-4">Nama: </h1>
             <span class="badge badge-primary">Jalur Mandiri</span>
@@ -66,7 +65,6 @@
               <input type="text" class="form-control text-center" id="kuota" value="100">
             </div>
           </div>
-
         </form>
       </div>
     </div>

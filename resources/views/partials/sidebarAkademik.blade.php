@@ -142,7 +142,7 @@
 
                 <li class="nav-item">
                   <a class="nav-link" href="/akademik/report/judultugasakhir">
-                    <span class="nav-link-dropdown-text">JudulTugasAkhir</span>
+                    <span class="nav-link-dropdown-text">Judul Tugas Akhir</span>
                   </a>
                 </li>
                 <li class="nav-item">

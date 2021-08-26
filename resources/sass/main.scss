@@ -411,6 +411,12 @@ nav#navbar {
             }
         }
 
+        .table-body-xl {
+            td {
+                padding: 2rem 1.5rem !important;
+            }
+        }
+
         .table-body-lg {
             td {
                 padding: 1.5rem !important;
@@ -699,3 +705,5 @@ nav#navbar {
         }
     }
 }
+@import "./mahasiswa";
+@import "./responsive";

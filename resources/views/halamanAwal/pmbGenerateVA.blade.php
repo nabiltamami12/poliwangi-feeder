@@ -31,7 +31,6 @@
   <script src="{{ url('js/util.js') }}"></script>
   <!-- Custom CSS -->
   <link href="{{ asset('css/halamanAwal.css') }}" rel="stylesheet">
-  <link href="{{ asset('css/responsive.css') }}" rel="stylesheet">
 </head>
 
 <body class="bg-default">
@@ -88,7 +87,7 @@
               <div class="total_tagihan">
                 <div class="row mt-4">
                   <div class="col d-flex justify-content-between">
-                    <p class="mb-0">Total Tagihan</p>
+                    <p class="mb-0 text-dark">Total Tagihan</p>
                     <h1 class="mb-0">Rp 201.000</h1>
                   </div>
                 </div>
@@ -97,11 +96,10 @@
               <div class="informasi_pembayaran">
                 <div class="instruksi_pembayaran mt-4">
                   <ul>
-                    <li>- Pilih Transaksi Lain > Pembayaran > Lainnya > Virtual Account BNI</li>
-                    <li>- Masukkan Nomor VA 128 1281928746273601 kemudian pilih Benar</li>
-                    <li>- Periksa informasi yang tertera di layar. Pastikan Merchant adalah Politeknik Negeri
-                      Banyuwangi,</li>
-                    <li>&nbsp Total tagihan sudah benar dan username. Jika benar, pilih Ya.</li>
+                    <li>Pilih Transaksi Lain > Pembayaran > Lainnya > Virtual Account BNI</li>
+                    <li>Masukkan Nomor VA 128 1281928746273601 kemudian pilih Benar</li>
+                    <li>Periksa informasi yang tertera di layar. Pastikan Merchant adalah Politeknik Negeri
+                      Banyuwangi, <br> Total tagihan sudah benar dan username. Jika benar, pilih Ya.</li>
                   </ul>
                 </div>
                 <h6 class="mb-0 font-italic mt-3">Konfirmasi Pembayaran akan dicek secara otomatis 10 menit setelah

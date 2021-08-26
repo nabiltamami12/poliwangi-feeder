@@ -5,29 +5,27 @@
 <header class="header"></header>
 
 <!-- Page content -->
-<section class="page-content page-content__admin container-fluid" id="admin_masterdatadosenpengampu">
+<section class="page-content page-content__admin container-fluid">
   <div class="row">
     <div class="col-xl-12">
       <div class="card shadow padding--small">
-
-        <div class="card-header p-0 m-0 border-0 ">
+        <div class="card-header p-0">
           <div class="row align-items-center">
             <div class="col-12 col-md-6">
-              <h2 class="mb-0 text-center text-md-left">Data Dosen</h2>
+              <h2 class="mb-0 text-center text-md-left">Pengampu Dosen</h2>
             </div>
             <div class="col-12 col-md-6 text-center text-md-right mt-3 mt-md-0">
               <a class="btn btn-primary" href="/admin/masterdata/datadosenpengampu/tambahdata" role="button">
                 <i class="iconify-inline mr-1" data-icon="bx:bxs-plus-circle"></i>
                 Tambah
               </a>
-              <button type="button" class="btn btn-warning ml-0 ml-md-2">
+              <button type="button" class="btn btn-warning ml-md-2">
                 <i class="iconify-inline mr-1" data-icon="bx:bx-upload"></i>
                 Eksport
               </button>
             </div>
           </div>
         </div>
-
         <hr class="mt-4">
 
         <div class="row align-items-center px-3 my-4">
@@ -64,7 +62,7 @@
               </tr>
             </thead>
 
-            <tbody class="table-body">
+            <tbody class="table-body table-body-xl">
               <tr>
                 <td class="text-center px-2">1</td>
                 <td>Prof. Melani Yosephin, Ph.D</td>
@@ -112,17 +110,13 @@
           <nav aria-label="Page navigation example">
             <ul class="pagination">
               <li class="page-item disabled" aria-label="Previous">
-                <a class="page-link" href="#" tabindex="-1">
-                  Previous
-                </a>
+                <a class="page-link" href="#" tabindex="-1">Previous</a>
               </li>
               <li class="page-item active">
                 <a class="page-link" href="#">1<span class="sr-only">(current)</span></a>
               </li>
               <li class="page-item disabled" aria-label="Next">
-                <a class="page-link" href="#">
-                  Next
-                </a>
+                <a class="page-link" href="#">Next</a>
               </li>
             </ul>
           </nav>

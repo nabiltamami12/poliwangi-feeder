@@ -9,7 +9,7 @@
   <div class="row">
     <div class="col-xl-12">
       <div class="card shadow padding--small">
-        <div class="card-header p-0 m-0 border-0 ">
+        <div class="card-header p-0">
           <div class="row align-items-center">
             <div class="col">
               <h2 class="mb-0 text-center text-md-left">Input Data Pembayaran</h2>
@@ -23,8 +23,7 @@
             <div class="form-group col-md-6 pr-md-2">
               <label>Tanggal Pembayaran</label>
               <div class="d-flex align-items-center date_picker">
-                <input id="txtDate" type="text" class="form-control date-input cursor_default" value="13 Jul 2021"
-                  readonly />
+                <input id="txtDate" type="text" class="form-control date-input " value="13 Jul 2021" readonly />
                 <label class="input-group-btn" for="txtDate">
                   <span class="date_button">
                     <i class="iconify" data-icon="bx:bx-calendar" data-inline="false"></i>

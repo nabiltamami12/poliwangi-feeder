@@ -201,7 +201,7 @@
   <div class="row">
     <div class="col-xl-12">
       <div class="card shadow padding--small">
-        <div class="card-header p-0 m-0 border-0 ">
+        <div class="card-header p-0">
           <div class="row align-items-center">
             <div class="col-12 col-md-3">
               <h2 class="mb-0 text-center text-md-left">Piutang Mahasiswa</h2>
@@ -402,17 +402,13 @@
           <nav aria-label="Page navigation example">
             <ul class="pagination">
               <li class="page-item disabled" aria-label="Previous">
-                <a class="page-link" href="#" tabindex="-1">
-                  Previous
-                </a>
+                <a class="page-link" href="#" tabindex="-1">Previous</a>
               </li>
               <li class="page-item active">
                 <a class="page-link" href="#">1<span class="sr-only">(current)</span></a>
               </li>
               <li class="page-item disabled" aria-label="Next">
-                <a class="page-link" href="#">
-                  Next
-                </a>
+                <a class="page-link" href="#">Next</a>
               </li>
             </ul>
           </nav>

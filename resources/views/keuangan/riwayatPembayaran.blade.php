@@ -25,7 +25,7 @@
   <div class="row">
     <div class="col-xl-12">
       <div class="card shadow padding--small">
-        <div class="card-header p-0 m-0 border-0 ">
+        <div class="card-header p-0">
           <div class="row align-items-center">
             <div class="col-12 col-md-4">
               <h2 class="mb-0 text-center text-md-left">Riwayat Pembayaran</h2>
@@ -35,12 +35,12 @@
                 <i class="iconify-inline mr-1" data-icon="bx:bx-filter-alt"></i>
                 Filter
               </button>
-              <button type="button" class="btn btn-info_transparent mt-3 mt-md-0 ml-0 ml-md-2 text-primary">
+              <button type="button" class="btn btn-info_transparent mt-3 mt-md-0 ml-md-2 text-primary">
                 <i class="iconify-inline mr-1" data-icon="bx:bx-download"></i>
                 Import
               </button>
               <div class="dropdown">
-                <button class="btn btn-primary dropdown-toggle mt-3 mt-md-0 ml-0 ml-md-2" type="button"
+                <button class="btn btn-primary dropdown-toggle mt-3 mt-md-0 ml-md-2" type="button"
                   id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <i class="iconify-inline mr-1" data-icon="bx:bx-printer"></i>
                   <span class="mr-1">Cetak Rekap Pembayaran</span>

@@ -143,7 +143,7 @@ h6,
 .btn {
   font-family: "Montserrat", sans-serif;
   font-size: 1rem;
-  font-weight: 400 !important;
+  font-weight: 500;
   line-height: 1.21em;
   padding: 0.625rem 1rem;
   border-radius: 0.5rem;
@@ -288,6 +288,18 @@ h6,
   color: #ffffff;
   border-color: #b2def8;
   background-color: #b2def8;
+}
+
+.btn-info_transparent2 {
+  color: #ffffff;
+  border-color: transparent;
+  background-color: rgba(178, 222, 248, 0.2);
+  box-shadow: none;
+}
+.btn-info_transparent2:hover {
+  color: #ffffff;
+  border-color: rgba(178, 222, 248, 0.4);
+  background-color: rgba(178, 222, 248, 0.4);
 }
 
 .btn-info:focus,
@@ -834,8 +846,11 @@ select {
   border-radius: 0 0.5rem 0.5rem 0;
   border-left: 1px solid #c4c4c4;
 }
+.pmbGenerateVA_page .informasi_pembayaran {
+  margin-left: 0.625rem;
+}
 .pmbGenerateVA_page .informasi_pembayaran ul {
-  list-style: none;
+  list-style: "- ";
 }
 .pmbGenerateVA_page .informasi_pembayaran li {
   font-weight: 400;
@@ -860,4 +875,26 @@ select {
   font-size: 1.375rem;
   line-height: 0.8em;
   color: #28a3eb;
+}
+
+@media screen and (max-width: 767.98px) {
+  html {
+    font-size: 14px;
+  }
+
+  .halaman_awal.register_page .input-foto-siswa {
+    min-height: 130px;
+  }
+  .halaman_awal .card .card-body {
+    padding: 1.5rem 1rem;
+  }
+}
+@media screen and (max-width: 575.98px) {
+  html {
+    font-size: 12px;
+  }
+
+  .halaman_awal .logo {
+    width: 20%;
+  }
 }

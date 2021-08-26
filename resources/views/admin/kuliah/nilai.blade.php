@@ -10,21 +10,21 @@
     <div class="col-xl-12">
       <div class="card shadow padding--small">
 
-        <div class="card-header p-0 m-0 border-0 ">
+        <div class="card-header p-0">
           <div class="row align-items-center">
             <div class="col-12 col-md-6">
-              <h2 class="mb-0 text-center text-md-left">Data Mahasiswa</h2>
+              <h2 class="mb-0 text-center text-md-left">Nilai Mahasiswa</h2>
             </div>
             <div class="col-12 col-md-6 text-center text-md-right">
               <button type="button" class="btn btn-primary mt-3 mt-md-0">
                 <i class="iconify-inline mr-1" data-icon="bx:bxs-plus-circle"></i>
                 Tambah
               </button>
-              <button type="button" class="btn btn-info_transparent mt-3 mt-md-0 ml-0 ml-md-2 text-primary">
+              <button type="button" class="btn btn-info_transparent mt-3 mt-md-0 ml-md-2 text-primary">
                 <i class="iconify-inline mr-1" data-icon="bx:bx-download"></i>
                 Import
               </button>
-              <button type="button" class="btn btn-warning mt-3 mt-md-0 ml-0 ml-md-2">
+              <button type="button" class="btn btn-warning mt-3 mt-md-0 ml-md-2">
                 <i class="iconify-inline mr-1" data-icon="bx:bx-upload"></i>
                 Eksport
               </button>
@@ -38,14 +38,14 @@
             <div class="col-md-6 form-group">
               <label for="program-studi">Program Studi</label>
               <select class="form-control" id="program-studi">
-                <option>Ilmu Kedokteran Gigi Anak</option>
+                <option selected>Ilmu Kedokteran Gigi Anak</option>
                 <option>Ilmu Kedokteran Gigi Anak</option>
               </select>
             </div>
             <div class="col-md-6 form-group mt-3 mt-md-0">
               <label for="tahun">Tahun</label>
               <select class="form-control" id="tahun">
-                <option>2020</option>
+                <option selected>2020</option>
                 <option>2021</option>
               </select>
             </div>
@@ -54,15 +54,15 @@
             <div class="col-md-6 form-group">
               <label for="semester">Semester</label>
               <select class="form-control" id="semester">
-                <option>Semua</option>
+                <option selected>Semua</option>
                 <option>Semester 1</option>
               </select>
             </div>
             <div class="col-md-6 form-group mt-3 mt-md-0">
-              <label for="kelas">Kelas</label>
-              <select class="form-control" id="kelas">
-                <option>Semua</option>
-                <option>Kelas 1</option>
+              <label for="jenjang">Jenjang</label>
+              <select class="form-control" id="jenjang">
+                <option selected>Semua</option>
+                <option>jenjang</option>
               </select>
             </div>
           </div>
@@ -221,17 +221,13 @@
           <nav aria-label="Page navigation example">
             <ul class="pagination">
               <li class="page-item disabled" aria-label="Previous">
-                <a class="page-link" href="#" tabindex="-1">
-                  Previous
-                </a>
+                <a class="page-link" href="#" tabindex="-1">Previous</a>
               </li>
               <li class="page-item active">
                 <a class="page-link" href="#">1<span class="sr-only">(current)</span></a>
               </li>
               <li class="page-item disabled" aria-label="Next">
-                <a class="page-link" href="#">
-                  Next
-                </a>
+                <a class="page-link" href="#">Next</a>
               </li>
             </ul>
           </nav>

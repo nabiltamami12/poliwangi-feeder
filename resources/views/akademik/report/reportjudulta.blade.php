@@ -9,7 +9,7 @@
   <div class="row">
     <div class="col-xl-12">
       <div class="card shadow padding--small">
-        <div class="card-header p-0 m-0 border-0 ">
+        <div class="card-header p-0">
           <div class="row align-items-center">
             <div class="col-12 col-md-6">
               <h2 class="mb-0 text-center text-md-left">Judul Tugas Akhir Mahasiswa</h2>
@@ -19,7 +19,7 @@
                 <i class="iconify-inline mr-1" data-icon="bx:bxs-plus-circle"></i>
                 Tambah
               </button>
-              <button type="button" class="btn btn-warning ml-0 ml-md-2">
+              <button type="button" class="btn btn-warning ml-md-2">
                 <span class="iconify-inline mr-1" data-icon="bx:bx-upload"></span>
                 Eksport
               </button>
@@ -74,11 +74,11 @@
           <table class="table align-items-center table-borderless table-flush table-hover">
             <thead class="table-header">
               <tr>
-                <th scope="col" class="border-0 text-center px-1">No</th>
-                <th scope="col" class="border-0 pr-0">NIM</th>
-                <th scope="col" class="border-0">Nama</th>
-                <th scope="col" class="border-0">Judul Ta</th>
-                <th scope="col" class="border-0">keterangan</th>
+                <th scope="col" class="text-center px-1">No</th>
+                <th scope="col" class="pr-0">NIM</th>
+                <th scope="col">Nama</th>
+                <th scope="col">Judul Ta</th>
+                <th scope="col">keterangan</th>
               </tr>
             </thead>
             <tbody class="table-body">

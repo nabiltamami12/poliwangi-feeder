@@ -35,7 +35,6 @@
   <script src="{{ url('js/util.js') }}"></script>
   <!-- Custom CSS -->
   <link href="{{ asset('css/halamanAwal.css') }}" rel="stylesheet">
-  <link href="{{ asset('css/responsive.css') }}" rel="stylesheet">
 </head>
 
 <body class="bg-default">
@@ -64,8 +63,8 @@
     <!-- Page content -->
     <div class="container mt--9 pb-7">
       <div class="row justify-content-center">
-        <div class="col-lg-9 col-md-8">
-          <div class="card bg-secondary mt-5 border-0 mb-0">
+        <div class="col-lg-9">
+          <div class="card bg-secondary mt-5 border-0 mb-0 rounded">
             <div class="card-body">
               <div class="card_inner">
                 <form>
@@ -114,8 +113,8 @@
                       <div class="form-group mt-3">
                         <label>Tanggal Lahir<span>*</span></label>
                         <div class="d-flex align-items-center date_picker">
-                          <input id="txtDate" type="text" class="form-control date-input cursor_default"
-                            placeholder="DD/MM/YYYY" readonly />
+                          <input id="txtDate" type="text" class="form-control date-input " placeholder="DD/MM/YYYY"
+                            readonly />
                           <label class="input-group-btn" for="txtDate">
                             <span class="date_button">
                               <i class="iconify" data-icon="bx:bx-calendar" data-inline="false"></i>

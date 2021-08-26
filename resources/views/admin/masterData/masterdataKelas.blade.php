@@ -5,7 +5,7 @@
 <header class="header"></header>
 
 <!-- Page content -->
-<section class="page-content page-content__admin container-fluid" id="admin_masterdatakelas">
+<section class="page-content page-content__admin container-fluid">
   <!-- Modal -->
   <div class="modal fade" id="deleteKelasModal" tabindex="-1" aria-labelledby="deleteKelasModalLabel"
     aria-hidden="true">
@@ -20,8 +20,8 @@
           <h2 class="text-center">Kode : KGA001</h2>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-modal-cancel" data-dismiss="modal">Batal</button>
-          <button type="button" class="btn btn-primary btn-modal-ok">Hapus data</button>
+          <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Batal</button>
+          <button type="button" class="btn btn-primary">Hapus data</button>
         </div>
       </div>
     </div>
@@ -41,7 +41,7 @@
                 <i class="iconify-inline mr-1" data-icon="bx:bxs-plus-circle"></i>
                 Tambah
               </a>
-              <button type="button" class="btn btn-info_transparent text-primary ml-0 ml-md-2">
+              <button type="button" class="btn btn-info_transparent text-primary ml-md-2">
                 <i class="iconify-inline mr-1" data-icon="bx:bx-download"></i>
                 Import
               </button>
@@ -79,7 +79,7 @@
             <thead class="table-header">
               <tr>
                 <th scope="col" class="text-center px-2">No</th>
-                <th scope="col" style="width: 60%">Kelas</th>
+                <th scope="col" style="width: 50%">Kelas</th>
                 <th scope="col" class="text-center">Kode</th>
                 <th scope="col" class="text-center">kapasitas</th>
                 <th scope="col" class="text-center">aksi</th>
@@ -89,10 +89,11 @@
             <tbody class="table-body">
               <tr>
                 <td class="text-center px-2">1</td>
-                <td class="font-weight-bold text-capitalize">Ilmu gigi I</td>
+                <td class="font-weight-bold text-capitalize">RPL1</td>
                 <td class="text-center">G001</td>
                 <td class="text-center">24</td>
                 <td class="text-center">
+                  <button class="btn btn-primary mr-2">Pilih Dosen</button>
                   <a href="/admin/masterdata/datakelas/updatedata"><i class="iconify edit-icon mr-2"
                       data-icon="bx:bx-edit-alt"></i></a>
                   <span data-toggle="modal" data-target="#deleteKelasModal" class="iconify delete-icon"
@@ -102,10 +103,11 @@
 
               <tr>
                 <td class="text-center px-2">2</td>
-                <td class="font-weight-bold text-capitalize">Ilmu gigi I</td>
+                <td class="font-weight-bold text-capitalize">RPL2</td>
                 <td class="text-center">G002</td>
                 <td class="text-center">40</td>
                 <td class="text-center">
+                  <button class="btn btn-primary mr-2">Pilih Dosen</button>
                   <a href="/admin/masterdata/datakelas/updatedata"><i class="iconify edit-icon mr-2"
                       data-icon="bx:bx-edit-alt"></i></a>
                   <span data-toggle="modal" data-target="#deleteKelasModal" class="iconify delete-icon"
@@ -115,10 +117,11 @@
 
               <tr>
                 <td class="text-center px-2">3</td>
-                <td class="font-weight-bold text-capitalize">Ilmu gigi I</td>
+                <td class="font-weight-bold text-capitalize">RPL3</td>
                 <td class="text-center">G003</td>
-                <td class="text-center">24</td>
+                <td class="text-center">45</td>
                 <td class="text-center">
+                  <button class="btn btn-primary mr-2">Pilih Dosen</button>
                   <a href="/admin/masterdata/datakelas/updatedata"><i class="iconify edit-icon mr-2"
                       data-icon="bx:bx-edit-alt"></i></a>
                   <span data-toggle="modal" data-target="#deleteKelasModal" class="iconify delete-icon"
@@ -128,10 +131,11 @@
 
               <tr>
                 <td class="text-center px-2">4</td>
-                <td class="font-weight-bold text-capitalize">Ilmu gigi I</td>
+                <td class="font-weight-bold text-capitalize">RPL4</td>
                 <td class="text-center">G004</td>
-                <td class="text-center">45</td>
+                <td class="text-center">25</td>
                 <td class="text-center">
+                  <button class="btn btn-primary mr-2">Pilih Dosen</button>
                   <a href="/admin/masterdata/datakelas/updatedata"><i class="iconify edit-icon mr-2"
                       data-icon="bx:bx-edit-alt"></i></a>
                   <span data-toggle="modal" data-target="#deleteKelasModal" class="iconify delete-icon"
@@ -141,10 +145,11 @@
 
               <tr>
                 <td class="text-center px-2">5</td>
-                <td class="font-weight-bold text-capitalize">Ilmu gigi I</td>
+                <td class="font-weight-bold text-capitalize">Siskom1</td>
                 <td class="text-center">G005</td>
                 <td class="text-center">35</td>
                 <td class="text-center">
+                  <button class="btn btn-primary mr-2">Pilih Dosen</button>
                   <a href="/admin/masterdata/datakelas/updatedata"><i class="iconify edit-icon mr-2"
                       data-icon="bx:bx-edit-alt"></i></a>
                   <span data-toggle="modal" data-target="#deleteKelasModal" class="iconify delete-icon"
@@ -154,10 +159,11 @@
 
               <tr>
                 <td class="text-center px-2">6</td>
-                <td class="font-weight-bold text-capitalize">Ilmu gigi I</td>
+                <td class="font-weight-bold text-capitalize">Siskom2</td>
                 <td class="text-center">G006</td>
                 <td class="text-center">40</td>
                 <td class="text-center">
+                  <button class="btn btn-primary mr-2">Pilih Dosen</button>
                   <a href="/admin/masterdata/datakelas/updatedata"><i class="iconify edit-icon mr-2"
                       data-icon="bx:bx-edit-alt"></i></a>
                   <span data-toggle="modal" data-target="#deleteKelasModal" class="iconify delete-icon"
@@ -167,10 +173,11 @@
 
               <tr>
                 <td class="text-center px-2">7</td>
-                <td class="font-weight-bold text-capitalize">Ilmu gigi I</td>
+                <td class="font-weight-bold text-capitalize">Siskom3</td>
                 <td class="text-center">G007</td>
                 <td class="text-center">50</td>
                 <td class="text-center">
+                  <button class="btn btn-primary mr-2">Pilih Dosen</button>
                   <a href="/admin/masterdata/datakelas/updatedata"><i class="iconify edit-icon mr-2"
                       data-icon="bx:bx-edit-alt"></i></a>
                   <span data-toggle="modal" data-target="#deleteKelasModal" class="iconify delete-icon"
@@ -180,10 +187,11 @@
 
               <tr>
                 <td class="text-center px-2">8</td>
-                <td class="font-weight-bold text-capitalize">Ilmu gigi I</td>
+                <td class="font-weight-bold text-capitalize">Siskom4</td>
                 <td class="text-center">G008</td>
                 <td class="text-center">50</td>
                 <td class="text-center">
+                  <button class="btn btn-primary mr-2">Pilih Dosen</button>
                   <a href="/admin/masterdata/datakelas/updatedata"><i class="iconify edit-icon mr-2"
                       data-icon="bx:bx-edit-alt"></i></a>
                   <span data-toggle="modal" data-target="#deleteKelasModal" class="iconify delete-icon"
@@ -193,10 +201,11 @@
 
               <tr>
                 <td class="text-center px-2">9</td>
-                <td class="font-weight-bold text-capitalize">Ilmu gigi I</td>
+                <td class="font-weight-bold text-capitalize">HCI02</td>
                 <td class="text-center">G009</td>
                 <td class="text-center">50</td>
                 <td class="text-center">
+                  <button class="btn btn-primary mr-2">Pilih Dosen</button>
                   <a href="/admin/masterdata/datakelas/updatedata"><i class="iconify edit-icon mr-2"
                       data-icon="bx:bx-edit-alt"></i></a>
                   <span data-toggle="modal" data-target="#deleteKelasModal" class="iconify delete-icon"
@@ -212,17 +221,13 @@
           <nav aria-label="Page navigation example">
             <ul class="pagination">
               <li class="page-item disabled" aria-label="Previous">
-                <a class="page-link" href="#" tabindex="-1">
-                  Previous
-                </a>
+                <a class="page-link" href="#" tabindex="-1">Previous</a>
               </li>
               <li class="page-item active">
                 <a class="page-link" href="#">1<span class="sr-only">(current)</span></a>
               </li>
               <li class="page-item disabled" aria-label="Next">
-                <a class="page-link" href="#">
-                  Next
-                </a>
+                <a class="page-link" href="#">Next</a>
               </li>
             </ul>
           </nav>

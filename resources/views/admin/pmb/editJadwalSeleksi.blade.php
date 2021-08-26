@@ -9,13 +9,12 @@
   <div class="row">
     <div class="col-xl-12">
       <div class="card shadow">
-
-        <div class="card-header padding--medium m-0 border-0">
+        <div class="card-header padding--medium">
           <div class="row align-items-center">
-            <div class="col">
-              <h2 class="mb-0">Jadwal Seleksi</h2>
+            <div class="col-12 col-sm-6">
+              <h2 class="mb-0 text-center text-sm-left">Jadwal Seleksi</h2>
             </div>
-            <div class="col text-right">
+            <div class="col-12 col-sm-6 text-center text-sm-right mt-3 mt-md-0">
               <button type="submit" class="btn btn-primary">Simpan</button>
             </div>
           </div>

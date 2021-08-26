@@ -5,12 +5,11 @@
 <header class="header"></header>
 
 <!-- Page content -->
-<section class="page-content page-content__admin container-fluid" id="admin_masterdatarangenilai">
+<section class="page-content page-content__admin container-fluid">
   <div class="row">
     <div class="col-xl-12">
       <div class="card shadow padding--medium">
-
-        <div class="card-header p-0 m-0 border-0 ">
+        <div class="card-header p-0">
           <div class="row align-items-center">
             <div class="col-12 col-md-6">
               <h2 class="mb-0 text-center text-md-left">Range Nilai</h2>
@@ -23,8 +22,8 @@
             </div>
           </div>
         </div>
-
         <hr class="my-4">
+
         <form class="form_rangenilai">
           <div class="row">
             <div class="col d-flex align-items-center">

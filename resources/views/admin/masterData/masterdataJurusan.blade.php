@@ -5,7 +5,7 @@
 <header class="header"></header>
 
 <!-- Page content -->
-<section class="page-content page-content__admin container-fluid" id="admin_masterdatajurusan">
+<section class="page-content page-content__admin container-fluid">
   <!-- Modal -->
   <div class="modal fade" id="deleteJurusanModal" tabindex="-1" aria-labelledby="deleteJurusanModalLabel"
     aria-hidden="true">
@@ -19,8 +19,8 @@
           <h2 class="text-center">Jurusan 1</h2>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-modal-cancel" data-dismiss="modal">Batal</button>
-          <button type="button" class="btn btn-primary btn-modal-ok">Hapus data</button>
+          <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Batal</button>
+          <button type="button" class="btn btn-primary">Hapus data</button>
         </div>
       </div>
     </div>
@@ -29,7 +29,6 @@
   <div class="row">
     <div class="col-xl-12">
       <div class="card shadow padding--small">
-
         <div class="card-header p-0">
           <div class=" row align-items-center">
             <div class="col-12 col-md-6">
@@ -40,14 +39,13 @@
                 <i class="iconify-inline mr-1" data-icon="bx:bxs-plus-circle"></i>
                 Tambah
               </a>
-              <button type="button" class="btn btn-warning ml-0 ml-md-2">
+              <button type="button" class="btn btn-warning ml-md-2">
                 <i class="iconify-inline mr-1" data-icon="bx:bx-upload"></i>
                 Eksport
               </button>
             </div>
           </div>
         </div>
-
         <hr class="mt-4">
 
         <div class="row align-items-center px-3 my-4">
@@ -86,7 +84,7 @@
             <tbody class="table-body">
               <tr>
                 <td class="text-center px-2">1</td>
-                <td class="font-weight-bold text-capitalize">jurusan 1</td>
+                <td class="font-weight-bold text-capitalize">Teknik Informatika</td>
                 <td class="text-center">
                   <a href="/admin/masterdata/datajurusan/updatedata"><i class="iconify edit-icon mr-2"
                       data-icon="bx:bx-edit-alt"></i></a>
@@ -97,7 +95,7 @@
 
               <tr>
                 <td class="text-center px-2">2</td>
-                <td class="font-weight-bold text-capitalize">jurusan 2</td>
+                <td class="font-weight-bold text-capitalize">Teknik Mesin</td>
                 <td class="text-center">
                   <a href="/prodi/masterdata/datajurusan/updatedata"><i class="iconify edit-icon mr-2"
                       data-icon="bx:bx-edit-alt"></i></a>
@@ -108,7 +106,7 @@
 
               <tr>
                 <td class="text-center px-2">3</td>
-                <td class="font-weight-bold text-capitalize">jurusan 3</td>
+                <td class="font-weight-bold text-capitalize">Teknik Sipil</td>
                 <td class="text-center">
                   <a href="/prodi/masterdata/datajurusan/updatedata"><i class="iconify edit-icon mr-2"
                       data-icon="bx:bx-edit-alt"></i></a>
@@ -119,7 +117,7 @@
 
               <tr>
                 <td class="text-center px-2">4</td>
-                <td class="font-weight-bold text-capitalize">jurusan 4</td>
+                <td class="font-weight-bold text-capitalize">Manajemen Bisnis Pariwisata</td>
                 <td class="text-center">
                   <a href="/admin/masterdata/datajurusan/updatedata"><i class="iconify edit-icon mr-2"
                       data-icon="bx:bx-edit-alt"></i></a>
@@ -130,7 +128,7 @@
 
               <tr>
                 <td class="text-center px-2">5</td>
-                <td class="font-weight-bold text-capitalize">jurursan 5</td>
+                <td class="font-weight-bold text-capitalize">Teknik Pengolahan Hasil Ternak</td>
                 <td class="text-center">
                   <a href="/prodi/masterdata/datajurusan/updatedata"><i class="iconify edit-icon mr-2"
                       data-icon="bx:bx-edit-alt"></i></a>
@@ -141,7 +139,7 @@
 
               <tr>
                 <td class="text-center px-2">6</td>
-                <td class="font-weight-bold text-capitalize">jurusan 6</td>
+                <td class="font-weight-bold text-capitalize">Teknik Manufaktur Kapal</td>
                 <td class="text-center">
                   <a href="/admin/masterdata/datajurusan/updatedata"><i class="iconify edit-icon mr-2"
                       data-icon="bx:bx-edit-alt"></i></a>
@@ -152,29 +150,7 @@
 
               <tr>
                 <td class="text-center px-2">7</td>
-                <td class="font-weight-bold text-capitalize">jurusan 7</td>
-                <td class="text-center">
-                  <a href="/admin/masterdata/datajurusan/updatedata"><i class="iconify edit-icon mr-2"
-                      data-icon="bx:bx-edit-alt"></i></a>
-                  <span data-toggle="modal" data-target="#deleteJurusanModal" class="iconify delete-icon"
-                    data-icon="bx:bx-trash"></span>
-                </td>
-              </tr>
-
-              <tr>
-                <td class="text-center px-2">8</td>
-                <td class="font-weight-bold text-capitalize">jurusan 8</td>
-                <td class="text-center">
-                  <a href="/admin/masterdata/datajurusan/updatedata"><i class="iconify edit-icon mr-2"
-                      data-icon="bx:bx-edit-alt"></i></a>
-                  <span data-toggle="modal" data-target="#deleteJurusanModal" class="iconify delete-icon"
-                    data-icon="bx:bx-trash"></span>
-                </td>
-              </tr>
-
-              <tr>
-                <td class="text-center px-2">9</td>
-                <td class="font-weight-bold text-capitalize">jurusan 9</td>
+                <td class="font-weight-bold text-capitalize">Agribisnis</td>
                 <td class="text-center">
                   <a href="/admin/masterdata/datajurusan/updatedata"><i class="iconify edit-icon mr-2"
                       data-icon="bx:bx-edit-alt"></i></a>
@@ -187,21 +163,17 @@
         </div>
 
         <div class="row justify-content-between align-items-center table-information">
-          <h3>Menampilkan 1 sampai 9 dari 9 total data</h3>
+          <h3>Menampilkan 1 sampai 7 dari 7 total data</h3>
           <nav aria-label="Page navigation example">
             <ul class="pagination">
               <li class="page-item disabled" aria-label="Previous">
-                <a class="page-link" href="#" tabindex="-1">
-                  Previous
-                </a>
+                <a class="page-link" href="#" tabindex="-1">Previous</a>
               </li>
               <li class="page-item active">
                 <a class="page-link" href="#">1<span class="sr-only">(current)</span></a>
               </li>
               <li class="page-item disabled" aria-label="Next">
-                <a class="page-link" href="#">
-                  Next
-                </a>
+                <a class="page-link" href="#">Next</a>
               </li>
             </ul>
           </nav>

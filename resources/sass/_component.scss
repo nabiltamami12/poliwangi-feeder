@@ -141,7 +141,7 @@ h6,
 .btn {
     font-family: "Montserrat", sans-serif;
     font-size: 1rem;
-    font-weight: 400 !important;
+    font-weight: 500;
     line-height: 1.21em;
     padding: 0.625rem 1rem;
     border-radius: 0.5rem;
@@ -277,6 +277,18 @@ h6,
         background-color: $info;
     }
 }
+.btn-info_transparent2 {
+    color: $font-white;
+    border-color: transparent;
+    background-color: rgba(178, 222, 248, 0.2);
+    box-shadow: none;
+    &:hover {
+        color: $font-white;
+        border-color: rgba(178, 222, 248, 0.4);
+        background-color: rgba(178, 222, 248, 0.4);
+    }
+}
+
 .btn-info:focus,
 .btn-info.focus {
     box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08),
