@@ -606,9 +606,8 @@ nav#navbar {
             padding: 0.5rem 0.75rem;
             border: 1px solid $primary;
             float: left;
-
             &::placeholder {
-                @include mixintext(400, 0.75rem, 1.21em, $font-placeholder);
+                @include mixintext(400, 0.875rem, 1.21em, $font-placeholder);
             }
         }
 
@@ -626,20 +625,22 @@ nav#navbar {
         }
 
         .form-control {
+            height: 2.5rem;
             width: 85%;
         }
 
         .form-control-sm {
+            height: 2.0625rem;
             width: 90%;
         }
 
         .form-control + button {
-            height: calc(1.5em + 1.25rem + 2px);
+            height: 2.5rem;
             width: 15%;
         }
 
         .form-control-sm + button {
-            height: calc(0.45em + 1.25rem + 4px);
+            height: 2.0625rem;
             width: 10%;
         }
 
@@ -706,4 +707,5 @@ nav#navbar {
     }
 }
 @import "./mahasiswa";
+@import "./keuangan";
 @import "./responsive";

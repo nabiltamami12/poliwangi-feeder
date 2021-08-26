@@ -86,12 +86,17 @@
 
   for(let i=0 ; i<prefixElements.length; i++){
     inputElements[i].addEventListener("input", updateSuffix);
-
     updateSuffix();
 
     function updateSuffix() {
-      const width = getTextWidth(inputElements[i].value, "14px Montserrat");
-      prefixElements[i].style.right = width + "px";
+      if(window.innerWidth > 768){
+        const width = getTextWidth(inputElements[i].value, "14px Montserrat");
+        prefixElements[i].style.right = width + "px";
+      }
+      else{
+        const width = getTextWidth(inputElements[i].value, "12px Montserrat");
+        prefixElements[i].style.right = width + "px";
+      }
     }
 
     function getTextWidth(text, font) {

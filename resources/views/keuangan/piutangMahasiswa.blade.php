@@ -32,14 +32,13 @@
           </div>
         </div>
         <div class="modal_button mt-4-5 d-flex justify-content-between">
-          <button type="button" class="btn btn-outline-placeholder rounded-sm font-weight-bold w-100 mr-2 mr-md-3"
+          <button type="button" class="btn btn-outline-placeholder rounded-sm w-100 mr-2 mr-md-3"
             data-dismiss="modal">Kembali</button>
-          <button type="button" class="btn btn-success rounded-sm font-weight-bold w-100 ml-2 ml-md-3">Setujui</button>
+          <button type="button" class="btn btn-success rounded-sm w-100 ml-2 ml-md-3">Setujui</button>
         </div>
       </div>
     </div>
   </div>
-
 
   <div class="modal fade" id="uploadPerjanjianModal" tabindex="-1" aria-labelledby="uploadPerjanjianModalLabel"
     aria-hidden="true">
@@ -90,9 +89,9 @@
               <div class="col-md-6 pr-0 pr-md-2">
                 <label for="bulan_kedua">Bulan Cicilan Ke-2</label>
                 <select class="form-control" id="bulan_kedua">
-                  <option selected>Januari</option>
+                  <option>Januari</option>
                   <option>Februari</option>
-                  <option>Maret</option>
+                  <option selected>Maret</option>
                   <option>April</option>
                   <option>Mei</option>
                 </select>
@@ -106,11 +105,11 @@
               <div class="col-md-6 pr-0 pr-md-2">
                 <label for="bulan_ketiga">Bulan Cicilan Ke-3</label>
                 <select class="form-control" id="bulan_ketiga">
-                  <option selected>Januari</option>
+                  <option>Januari</option>
                   <option>Februari</option>
                   <option>Maret</option>
                   <option>April</option>
-                  <option>Mei</option>
+                  <option selected>Mei</option>
                 </select>
               </div>
               <div class="col-md-6 pl-0 pl-md-2">
@@ -121,15 +120,15 @@
           </form>
         </div>
         <div class="modal_button mt-4-5 d-flex justify-content-between">
-          <button type="button" class="btn btn-outline-danger rounded-sm font-weight-bold w-100 mr-2 mr-md-3"
+          <button type="button" class="btn btn-outline-danger rounded-sm w-100 mr-2 mr-md-3"
             data-dismiss="modal">Batal</button>
-          <button type="button" class="btn btn-success rounded-sm font-weight-bold w-100 ml-2 ml-md-3">Submit</button>
+          <button type="button" class="btn btn-success rounded-sm w-100 ml-2 ml-md-3">Submit</button>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="row">
+  <div class="row equal-cols">
     <div class="col-sm-6 col-lg-4">
       <div class="card card-stats mb-0">
         <div class="card-body">
@@ -195,7 +194,6 @@
         </div>
       </div>
     </div>
-
   </div>
 
   <div class="row">
@@ -235,7 +233,7 @@
         <hr class="mt-4">
 
         <div class="row align-items-center px-3 my-4">
-          <div class="col-12 col-md-8 d-flex justify-content-between">
+          <div class="col-12 col-sm-6 col-md-4">
             <form class="form-inline">
               <div class="form-group row">
                 <select class="form-control form-control-sm" id="dataperhalaman">
@@ -246,11 +244,12 @@
                 <label for="dataperhalaman" class="ml-3 mt-2 mt-sm-0">Data per Halaman</label>
               </div>
             </form>
-
+          </div>
+          <div class="col-12 col-sm-6 col-md-4 p-0 pr-md-3 text-sm-right mt-3 mt-md-0">
             <div class="btn-group">
-              <button type="button" class="btn btn-info_transparent dropdown-toggle text-primary" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
-                Mahasiswa Baru
+              <button type="button" class="btn btn-info_transparent2 dropdown-toggle text-primary"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="mr-2">Mahasiswa Baru</span>
               </button>
               <div class="dropdown-menu">
                 <a class="dropdown-item" href="#">Action</a>
@@ -392,7 +391,6 @@
                   </button>
                 </td>
               </tr>
-
             </tbody>
           </table>
         </div>

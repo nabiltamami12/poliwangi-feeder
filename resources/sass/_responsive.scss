@@ -75,25 +75,6 @@
                 padding: 0;
             }
         }
-
-        .search_form {
-            .form-control-sm {
-                width: 95%;
-            }
-
-            .form-control + button {
-                height: calc(1.5em + 1.25rem + 4px);
-                position: relative;
-                top: -1px;
-            }
-
-            .form-control-sm + button {
-                height: calc(0.45em + 1.25rem + 5px);
-                width: 5%;
-                position: relative;
-                top: -1px;
-            }
-        }
     }
 
     #tahapan {
@@ -109,8 +90,12 @@
     }
 
     .page-content__keuangan {
-        .setting_tarif_UKTSPI {
-            #input_prefix {
+        .form-group_nominal {
+            .input_field {
+                font: 12px Montserrat;
+            }
+            .input_prefix {
+                font-size: 12px;
                 bottom: 10px;
             }
         }
@@ -142,25 +127,6 @@
 @media screen and (max-width: 575.98px) {
     html {
         font-size: 12px;
-    }
-
-    .page-content {
-        .table-responsive {
-            .table-body {
-                .bordered_sm::after {
-                    bottom: -1px;
-                }
-            }
-        }
-        .search_form {
-            .form-control-sm {
-                width: 90%;
-            }
-
-            .form-control-sm + button {
-                width: 10%;
-            }
-        }
     }
 
     .page-content__admin {

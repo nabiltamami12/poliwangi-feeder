@@ -1,4 +1,5 @@
 @import url(https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap);
+@import url(https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap);
 @charset "UTF-8";
 * {
   padding: 0;
@@ -1255,19 +1256,19 @@ nav#navbar h1 {
 }
 .page-content .search_form input::-moz-placeholder {
   font-weight: 400;
-  font-size: 0.75rem;
+  font-size: 0.875rem;
   line-height: 1.21em;
   color: #adb5bd;
 }
 .page-content .search_form input:-ms-input-placeholder {
   font-weight: 400;
-  font-size: 0.75rem;
+  font-size: 0.875rem;
   line-height: 1.21em;
   color: #adb5bd;
 }
 .page-content .search_form input::placeholder {
   font-weight: 400;
-  font-size: 0.75rem;
+  font-size: 0.875rem;
   line-height: 1.21em;
   color: #adb5bd;
 }
@@ -1284,17 +1285,19 @@ nav#navbar h1 {
   background: #0b7dda;
 }
 .page-content .search_form .form-control {
+  height: 2.5rem;
   width: 85%;
 }
 .page-content .search_form .form-control-sm {
+  height: 2.0625rem;
   width: 90%;
 }
 .page-content .search_form .form-control + button {
-  height: calc(1.5em + 1.25rem + 2px);
+  height: 2.5rem;
   width: 15%;
 }
 .page-content .search_form .form-control-sm + button {
-  height: calc(0.45em + 1.25rem + 4px);
+  height: 2.0625rem;
   width: 10%;
 }
 .page-content .search_form::after {
@@ -1549,6 +1552,69 @@ nav#navbar h1 {
        column-gap: 0.5rem;
 }
 
+.page-content__keuangan input::-moz-placeholder {
+  color: #041f2f;
+}
+
+.page-content__keuangan input:-ms-input-placeholder {
+  color: #041f2f;
+}
+
+.page-content__keuangan input::placeholder {
+  color: #041f2f;
+}
+.page-content__keuangan .modal input::-moz-placeholder {
+  color: #adb5bd;
+}
+.page-content__keuangan .modal input:-ms-input-placeholder {
+  color: #adb5bd;
+}
+.page-content__keuangan .modal input::placeholder {
+  color: #adb5bd;
+}
+.page-content__keuangan .card-stats {
+  font-family: "Open Sans", sans-serif;
+  border-radius: 1rem;
+}
+.page-content__keuangan .card-stats .bg-blue {
+  background: linear-gradient(90deg, #3adff5 0%, #39b1f5 93.75%);
+}
+.page-content__keuangan .card-stats .bg-green {
+  background: linear-gradient(90deg, #1cea55 0%, #cafb40 93.75%);
+}
+.page-content__keuangan .card-stats .bg-orange {
+  background: linear-gradient(90deg, #ea7f1c 0%, #fb4b40 93.75%);
+}
+.page-content__keuangan .form-group_nominal {
+  position: relative;
+}
+.page-content__keuangan .form-group_nominal .input_field {
+  font: 14px Montserrat;
+}
+.page-content__keuangan .form-group_nominal .input_field::-moz-placeholder {
+  color: #041f2f;
+}
+.page-content__keuangan .form-group_nominal .input_field:-ms-input-placeholder {
+  color: #041f2f;
+}
+.page-content__keuangan .form-group_nominal .input_field::placeholder {
+  color: #041f2f;
+}
+.page-content__keuangan .form-group_nominal .input_prefix {
+  font-size: 14px;
+  font-weight: 600;
+  color: #041f2f;
+  position: absolute;
+  pointer-events: none;
+  right: 0;
+  bottom: 12px;
+  padding-right: 38px;
+}
+.page-content__keuangan .separate {
+  border-spacing: 1.5rem 0 !important;
+  border-collapse: separate !important;
+}
+
 @media (min-width: 991.98px) {
   .modal-lg,
 .modal-xl {
@@ -1612,26 +1678,16 @@ nav#navbar h1 {
   .page-content .form-select .form-group:nth-child(even) {
     padding: 0;
   }
-  .page-content .search_form .form-control-sm {
-    width: 95%;
-  }
-  .page-content .search_form .form-control + button {
-    height: calc(1.5em + 1.25rem + 4px);
-    position: relative;
-    top: -1px;
-  }
-  .page-content .search_form .form-control-sm + button {
-    height: calc(0.45em + 1.25rem + 5px);
-    width: 5%;
-    position: relative;
-    top: -1px;
-  }
 
   #tahapan .card-form .form-group:first-child, #tahapan .card-form .form-group:nth-child(2), #tahapan .card-form .form-group:last-child {
     padding: 0;
   }
 
-  .page-content__keuangan .setting_tarif_UKTSPI #input_prefix {
+  .page-content__keuangan .form-group_nominal .input_field {
+    font: 12px Montserrat;
+  }
+  .page-content__keuangan .form-group_nominal .input_prefix {
+    font-size: 12px;
     bottom: 10px;
   }
 }
@@ -1650,16 +1706,6 @@ nav#navbar h1 {
 @media screen and (max-width: 575.98px) {
   html {
     font-size: 12px;
-  }
-
-  .page-content .table-responsive .table-body .bordered_sm::after {
-    bottom: -1px;
-  }
-  .page-content .search_form .form-control-sm {
-    width: 90%;
-  }
-  .page-content .search_form .form-control-sm + button {
-    width: 10%;
   }
 
   .page-content__admin .calendar_content div.blank {
