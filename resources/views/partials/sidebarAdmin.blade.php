@@ -50,6 +50,11 @@
                 </a>
               </li>
               <li class="nav-item">
+                <a class="nav-link" href="/admin/masterdata/datamahasiswadetail">
+                  <span class="nav-link-dropdown-text">Mahasiswa Detail</span>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a class="nav-link" href="/admin/masterdata/datamatakuliah">
                   <span class="nav-link-dropdown-text">Matakuliah</span>
                 </a>

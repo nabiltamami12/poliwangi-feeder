@@ -36,6 +36,55 @@ body {
   margin-left: 2rem !important;
 }
 
+.p-4-5 {
+  padding: 2rem !important;
+}
+
+.pt-4-5,
+.py-4-5 {
+  padding-top: 2rem !important;
+}
+
+.pr-4-5,
+.px-4-5 {
+  padding-right: 2rem !important;
+}
+
+.pb-4-5,
+.py-4-5 {
+  padding-bottom: 2rem !important;
+}
+
+.pl-4-5,
+.px-4-5 {
+  padding-left: 2rem !important;
+}
+
+@media (min-width: 768px) {
+  .p-md-4-5 {
+    padding: 2rem !important;
+  }
+
+  .pt-md-4-5,
+.py-md-4-5 {
+    padding-top: 2rem !important;
+  }
+
+  .pr-md-4-5,
+.px-md-4-5 {
+    padding-right: 2rem !important;
+  }
+
+  .pb-md-4-5,
+.py-md-4-5 {
+    padding-bottom: 2rem !important;
+  }
+
+  .pl-md-4-5,
+.px-md-4-5 {
+    padding-left: 2rem !important;
+  }
+}
 h1,
 h2,
 h3,
@@ -1185,6 +1234,7 @@ nav#navbar h1 {
 .page-content .fileUpload-icon {
   font-size: 3rem;
   color: #28a3eb;
+  cursor: pointer;
 }
 .page-content .custom_select {
   position: relative;
@@ -1446,13 +1496,26 @@ nav#navbar h1 {
   color: #d10429;
 }
 
-#tahapan h2 {
+.card_step h2,
+.card_form h2 {
   font-weight: 600;
   font-size: 1.125rem;
   line-height: 1.22em;
   color: #041f2f;
 }
-#tahapan .input-group .input-group-text {
+
+.card_step {
+  position: relative;
+}
+.card_step hr {
+  position: relative;
+  top: 1.5rem;
+  border: none;
+  height: 2px;
+  color: #c4c4c4;
+  background-color: #c4c4c4;
+}
+.card_step .input-group .input-group-text {
   font-size: 1.125rem;
   color: #ffffff;
   background-color: #adb5bd;
@@ -1462,7 +1525,7 @@ nav#navbar h1 {
   border: 1px solid #adb5bd;
   border-right: 0;
 }
-#tahapan .input-group .form-control {
+.card_step .input-group .form-control {
   font-weight: 400;
   font-size: 0.875rem;
   line-height: 1.21em;
@@ -1472,65 +1535,27 @@ nav#navbar h1 {
   border-left: 0;
   border-radius: 0 0.5rem 0.5rem 0;
 }
-#tahapan .input-group.active .input-group-text {
+.card_step .input-group.active .input-group-text {
   background-color: #f0f8fe;
   border: 1px solid #28a3eb;
   color: #28a3eb;
   font-weight: 600;
 }
-#tahapan .input-group.active .form-control {
+.card_step .input-group.active .form-control {
   border: 1px solid #28a3eb;
   background-color: #28a3eb;
   color: #ffffff !important;
 }
-#tahapan .tab-body > div {
+
+.tab-body > div {
   display: none;
 }
-#tahapan .tab-body > div.active {
+
+.tab-body > div.active {
   display: block;
 }
-#tahapan .card-form .form-group:first-child {
-  padding-right: 1.5rem;
-}
-#tahapan .card-form .form-group:nth-child(2) {
-  padding: 0 1.5rem;
-}
-#tahapan .card-form .form-group:last-child {
-  padding-left: 1.5rem;
-}
-#tahapan .card-form ::-moz-placeholder {
-  font-weight: 400;
-  font-size: 0.875rem;
-  line-height: 1.21em;
-  color: #041f2f;
-}
-#tahapan .card-form :-ms-input-placeholder {
-  font-weight: 400;
-  font-size: 0.875rem;
-  line-height: 1.21em;
-  color: #041f2f;
-}
-#tahapan .card-form ::placeholder {
-  font-weight: 400;
-  font-size: 0.875rem;
-  line-height: 1.21em;
-  color: #041f2f;
-}
-#tahapan .card_step {
-  position: relative;
-}
-#tahapan .card_step hr {
-  position: relative;
-  top: 1.5rem;
-  border: none;
-  height: 2px;
-  color: #c4c4c4;
-  background-color: #c4c4c4;
-}
-#tahapan .form-berkas input {
-  display: none;
-}
-#tahapan .form-berkas .input_file {
+
+.form_data .input_file {
   min-height: 160px;
   display: flex;
   align-items: center;
@@ -1538,14 +1563,40 @@ nav#navbar h1 {
   border: 1px solid #c4c4c4;
   border-radius: 0.5rem;
 }
-#tahapan .form-berkas p {
-  font-weight: 500;
+.form_data .form-row .col-md-4.form-group:first-child {
+  padding-right: 2rem;
+}
+.form_data .form-row .col-md-4.form-group:nth-child(2) {
+  padding: 0 1rem;
+}
+.form_data .form-row .col-md-4.form-group:last-child {
+  padding-left: 2rem;
+}
+.form_data .form-row .col-md-6.form-group:first-child {
+  padding-right: 1.5rem;
+}
+.form_data .form-row .col-md-6.form-group:last-child {
+  padding-left: 1.5rem;
+}
+.form_data .form-row ::-moz-placeholder {
+  font-weight: 400;
   font-size: 0.875rem;
   line-height: 1.21em;
-  color: #f46a6a;
-  font-style: italic;
+  color: #041f2f;
 }
-#tahapan .form_action {
+.form_data .form-row :-ms-input-placeholder {
+  font-weight: 400;
+  font-size: 0.875rem;
+  line-height: 1.21em;
+  color: #041f2f;
+}
+.form_data .form-row ::placeholder {
+  font-weight: 400;
+  font-size: 0.875rem;
+  line-height: 1.21em;
+  color: #041f2f;
+}
+.form_data .form_action {
   display: grid;
   grid-template-columns: 1fr 1fr;
   -moz-column-gap: 0.5rem;
@@ -1679,7 +1730,10 @@ nav#navbar h1 {
     padding: 0;
   }
 
-  #tahapan .card-form .form-group:first-child, #tahapan .card-form .form-group:nth-child(2), #tahapan .card-form .form-group:last-child {
+  .form_data .form-row .col-md-4.form-group:first-child, .form_data .form-row .col-md-4.form-group:nth-child(2), .form_data .form-row .col-md-4.form-group:last-child,
+.form_data .form-row .col-md-6.form-group:first-child,
+.form_data .form-row .col-md-6.form-group:nth-child(2),
+.form_data .form-row .col-md-6.form-group:last-child {
     padding: 0;
   }
 
@@ -1706,6 +1760,11 @@ nav#navbar h1 {
 @media screen and (max-width: 575.98px) {
   html {
     font-size: 12px;
+  }
+
+  .page-content .table-responsive .table-body .bordered_sm::after {
+    bottom: -1px;
+    height: 1px;
   }
 
   .page-content__admin .calendar_content div.blank {

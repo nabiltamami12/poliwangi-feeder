@@ -30,6 +30,55 @@
   margin-left: 2rem !important;
 }
 
+.p-4-5 {
+  padding: 2rem !important;
+}
+
+.pt-4-5,
+.py-4-5 {
+  padding-top: 2rem !important;
+}
+
+.pr-4-5,
+.px-4-5 {
+  padding-right: 2rem !important;
+}
+
+.pb-4-5,
+.py-4-5 {
+  padding-bottom: 2rem !important;
+}
+
+.pl-4-5,
+.px-4-5 {
+  padding-left: 2rem !important;
+}
+
+@media (min-width: 768px) {
+  .p-md-4-5 {
+    padding: 2rem !important;
+  }
+
+  .pt-md-4-5,
+.py-md-4-5 {
+    padding-top: 2rem !important;
+  }
+
+  .pr-md-4-5,
+.px-md-4-5 {
+    padding-right: 2rem !important;
+  }
+
+  .pb-md-4-5,
+.py-md-4-5 {
+    padding-bottom: 2rem !important;
+  }
+
+  .pl-md-4-5,
+.px-md-4-5 {
+    padding-left: 2rem !important;
+  }
+}
 h1,
 h2,
 h3,
@@ -785,6 +834,7 @@ select {
 .register_page .fileUpload-icon {
   font-size: 3rem;
   color: #28a3eb;
+  cursor: pointer;
 }
 .register_page .input-foto-siswa {
   min-height: 230px;

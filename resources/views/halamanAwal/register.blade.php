@@ -131,13 +131,13 @@
                   </div>
                   <div class="col-12 col-lg-6">
                     <div class="form-group mt-3 mt-lg-0">
-                      <label for="foto">Foto Calon Pendaftar<span>*</span></label>
+                      <label>Foto Calon Pendaftar<span>*</span></label>
                       <div class="input-foto-siswa">
                         <label for="file-input-foto">
-                          <i class="iconify fileUpload-icon" data-icon="bx:bx-image-add" data-inline="false"></i>
+                          <i class="iconify fileUpload-icon" data-icon="bx:bx-image-add"></i>
                         </label>
                       </div>
-                      <input type="file" class="form-control-file d-none">
+                      <input type="file" class="form-control-file" id="file-input-foto" hidden>
                     </div>
                   </div>
                 </div>

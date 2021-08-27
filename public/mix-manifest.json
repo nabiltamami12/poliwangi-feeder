@@ -1,9 +1,8 @@
 {
     "/js/app.js": "/js/app.js",
-    "/css/halamanAwal.css": "/css/halamanAwal.css",
-    "/css/keuangan.css": "/css/keuangan.css",
     "/css/main.css": "/css/main.css",
+    "/css/halamanAwal.css": "/css/halamanAwal.css",
+    "/css/app.css": "/css/app.css",
     "/css/customComponent.css": "/css/customComponent.css",
-    "/css/admin.css": "/css/admin.css",
-    "/css/app.css": "/css/app.css"
+    "/css/admin.css": "/css/admin.css"
 }

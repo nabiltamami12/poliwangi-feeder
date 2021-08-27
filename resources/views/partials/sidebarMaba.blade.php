@@ -49,6 +49,11 @@
                   <span class="nav-link-dropdown-text">Daftar Ulang</span>
                 </a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/mahasiswabaru/editdatamahasiswa">
+                  <span class="nav-link-dropdown-text">Edit Data Mahasiswa</span>
+                </a>
+              </li>
             </ul>
           </li>
         </ul>

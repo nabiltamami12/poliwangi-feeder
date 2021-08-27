@@ -21,6 +21,5 @@ mix.js("resources/js/app.js", "public/js").postCss(
 
 mix.sass("resources/sass/main.scss", "public/css")
     .sass("resources/sass/admin.scss", "public/css")
-    .sass("resources/sass/keuangan.scss", "public/css")
     .sass("resources/sass/halamanAwal.scss", "public/css")
     .sass("resources/sass/customComponent.scss", "public/css");

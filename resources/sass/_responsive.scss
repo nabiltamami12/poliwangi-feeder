@@ -77,9 +77,10 @@
         }
     }
 
-    #tahapan {
-        .card-form {
-            .form-group {
+    .form_data {
+        .form-row {
+            .col-md-4.form-group,
+            .col-md-6.form-group {
                 &:first-child,
                 &:nth-child(2),
                 &:last-child {
@@ -127,6 +128,17 @@
 @media screen and (max-width: 575.98px) {
     html {
         font-size: 12px;
+    }
+
+    .page-content {
+        .table-responsive {
+            .table-body {
+                .bordered_sm::after {
+                    bottom: -1px;
+                    height: 1px;
+                }
+            }
+        }
     }
 
     .page-content__admin {

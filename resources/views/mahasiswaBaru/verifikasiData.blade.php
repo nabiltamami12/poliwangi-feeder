@@ -5,14 +5,14 @@
 <header class="header"></header>
 
 <!-- Page content -->
-<section class="page-content container-fluid" id="tahapan">
+<section class="page-content container-fluid">
   <div class="row">
     <div class="col-xl-12">
       <div class="card shadow padding--small card_step">
         <h2>Tahapan</h2>
         <hr class="d-none d-md-block">
         <div class="form-row tab-header">
-          <div class="col-12 col-md-6 mt-3 mt-md-0 pr-0 pr-md-2">
+          <div class="col-md-6 pr-md-2">
             <div class="input-group mb-2 active">
               <div class="input-group-prepend">
                 <div class="input-group-text">1</div>
@@ -21,7 +21,7 @@
             </div>
           </div>
 
-          <div class="col-12 col-md-6 mt-3 mt-md-0 pl-0 pl-md-2">
+          <div class="col-md-6 mt-3 mt-md-0 pl-md-2">
             <div class="input-group mb-2">
               <div class="input-group-prepend">
                 <div class="input-group-text">2</div>
@@ -38,7 +38,7 @@
     <div class="col-xl-12">
       <div class="tab-body">
         {{-- DATA CALON PESERTA DIDIK --}}
-        <div class="card shadow mt-0 padding--big card-form active">
+        <div class="card shadow mt-0 padding--big card_form active">
           <div class="card-header p-0">
             <div class="row align-items-center">
               <div class="col">
@@ -47,14 +47,14 @@
             </div>
           </div>
           <hr class="my-4">
-          <form class="form-identitas">
+          <form class="form_data">
             <div class="form-row">
               <div class="col-md-4 form-group">
                 <label for="nama-siswa">Nama Siswa</label>
                 <input type="text" class="form-control" id="nama-siswa" placeholder="Nama Siswa">
               </div>
               <div class="col-md-4 form-group mt-3 mt-md-0">
-                <label for="nik">Nomor Induk Kependudukan</label>
+                <label for="nik" class="text-nowrap">Nomor Induk Kependudukan</label>
                 <input type="text" class="form-control" id="nik" placeholder="NIK">
               </div>
               <div class="col-md-4 form-group mt-3 mt-md-0">
@@ -106,7 +106,7 @@
               </div>
               <div class="col-md-6 form-group mt-3 pr-0 pr-md-1">
                 <label for="asal-sekolah">Asal Sekolah</label>
-                <input type="text" class="form-control" id="asal-sekolah" placeholder="2">
+                <input type="text" class="form-control" id="asal-sekolah" placeholder="SMKN 1 GLAGAH">
               </div>
             </div>
           </form>
@@ -119,7 +119,7 @@
             </div>
           </div>
           <hr class="my-4">
-          <form class="form-identitas">
+          <form class="form_data">
             <div class="form-row">
               <div class="col-12 p-0 form-group">
                 <label for="alamat">Alamat Lengkap</label>
@@ -159,7 +159,7 @@
         </div>
 
         {{-- UNGGAH BERKAS --}}
-        <div class="card shadow mt-0 padding--big card-form">
+        <div class="card shadow mt-0 padding--big card_form">
           <div class="card-header p-0">
             <div class="row align-items-center">
               <div class="col">
@@ -169,26 +169,26 @@
           </div>
           <hr class="my-4">
 
-          <form class="form-berkas">
+          <form class="form_data">
             <div class="form-row">
-              <div class="col-md-6 form-group pr-0 pr-md-2">
+              <div class="col-md-6 form-group pr-md-2">
                 <label>Foto Calon Peserta Didik</label>
                 <div class="input_file">
                   <label for="file-input-foto">
                     <i class="iconify fileUpload-icon" data-icon="bx:bx-image-add"></i>
                   </label>
                 </div>
-                <input type="file" class="form-control-file" id="file-input-foto">
+                <input type="file" class="form-control-file" id="file-input-foto" hidden>
               </div>
 
-              <div class="col-md-6 form-group mt-3 mt-md-0 pr-0 pr-md-1 pl-0 pl-md-2">
+              <div class="col-md-6 form-group mt-3 mt-md-0 pr-0 pr-md-1 pl-md-2">
                 <label>Foto Ijazah</label>
                 <div class="input_file">
                   <label for="file-input-ijazah">
                     <i class="iconify fileUpload-icon" data-icon="bx:bx-image-add"></i>
                   </label>
                 </div>
-                <input type="file" class="form-control-file" id="file-input-ijazah">
+                <input type="file" class="form-control-file" id="file-input-ijazah" hidden>
               </div>
             </div>
 
@@ -200,7 +200,7 @@
                     <i class="iconify fileUpload-icon" data-icon="bx:bx-image-add"></i>
                   </label>
                 </div>
-                <input type="file" class="form-control-file" id="file-input-peraturan">
+                <input type="file" class="form-control-file" id="file-input-peraturan" hidden>
               </div>
             </div>
             <div class="form_action mt-4">
@@ -245,7 +245,7 @@
 
   const buttonSelanjutnya = document.querySelector('.button_selanjutnya');
   const buttonSebelumnya = document.querySelector('.button_sebelumnya');
-  const card = document.getElementsByClassName('card-form');
+  const card = document.getElementsByClassName('card_form');
 
   buttonSelanjutnya.addEventListener("click", function(e){
     e.preventDefault();

@@ -59,11 +59,23 @@
     }
 }
 
-#tahapan {
+.card_step,
+.card_form {
     h2 {
         @include mixintext(600, 1.125rem, 1.22em, $font-black);
     }
+}
 
+.card_step {
+    position: relative;
+    hr {
+        position: relative;
+        top: 1.5rem;
+        border: none;
+        height: 2px;
+        color: #c4c4c4;
+        background-color: #c4c4c4;
+    }
     .input-group {
         .input-group-text {
             font-size: 1.125rem;
@@ -101,21 +113,39 @@
             }
         }
     }
+}
 
-    .tab-body > div {
-        display: none;
-    }
-    .tab-body > div.active {
-        display: block;
-    }
+.tab-body > div {
+    display: none;
+}
+.tab-body > div.active {
+    display: block;
+}
 
-    .card-form {
-        .form-group {
+.form_data {
+    .input_file {
+        min-height: 160px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid #c4c4c4;
+        border-radius: 0.5rem;
+    }
+    .form-row {
+        .col-md-4.form-group {
             &:first-child {
-                padding-right: 1.5rem;
+                padding-right: 2rem;
             }
             &:nth-child(2) {
-                padding: 0 1.5rem;
+                padding: 0 1rem;
+            }
+            &:last-child {
+                padding-left: 2rem;
+            }
+        }
+        .col-md-6.form-group {
+            &:first-child {
+                padding-right: 1.5rem;
             }
             &:last-child {
                 padding-left: 1.5rem;
@@ -125,37 +155,6 @@
             @include mixintext(400, 0.875rem, 1.21em, $font-black);
         }
     }
-
-    .card_step {
-        position: relative;
-        hr {
-            position: relative;
-            top: 1.5rem;
-            border: none;
-            height: 2px;
-            color: #c4c4c4;
-            background-color: #c4c4c4;
-        }
-    }
-
-    .form-berkas {
-        input {
-            display: none;
-        }
-        .input_file {
-            min-height: 160px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid #c4c4c4;
-            border-radius: 0.5rem;
-        }
-        p {
-            @include mixintext(500, 0.875rem, 1.21em, $danger);
-            font-style: italic;
-        }
-    }
-
     .form_action {
         display: grid;
         grid-template-columns: 1fr 1fr;

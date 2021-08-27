@@ -70,6 +70,11 @@ Route::prefix('mahasiswabaru')->group(function () {
             "title" => "maba-mahasiswa"
         ]);
     });
+    Route::get('/editdatamahasiswa', function () {
+        return view('mahasiswaBaru.editDataMahasiswa', [
+            "title" => "maba-mahasiswa"
+        ]);
+    });
 });
 
 Route::prefix('mahasiswalama')->group(function () {
@@ -423,6 +428,12 @@ Route::prefix('admin')->group(function () {
             ]);
         });
 
+        Route::get('/datamahasiswadetail', function () {
+            return view('admin.masterData.masterdataMahasiswaDetail', [
+                "title" => "admin-masterData"
+            ]);
+        });
+
         Route::get('/datamahasiswa', function () {
             return view('admin.masterData.masterdataMahasiswa', [
                 "title" => "admin-masterData"
@@ -723,4 +734,8 @@ Route::get('/loading', function () {
 
 Route::get('/loading2', function () {
     return view('testingKomponen.testloading2');
+});
+
+Route::get('/document', function () {
+    return view('testingKomponen.document');
 });
