@@ -152,7 +152,6 @@ Route::prefix('v1')->group(function () {
     Route::put('/daftar/{id}', '\App\Http\Controllers\API\DaftarMatkulController@update');
     Route::delete('/daftar/{id}', '\App\Http\Controllers\API\DaftarMatkulController@destroy');
 
-<<<<<<< HEAD
     //FILE UPLOAD HARI AKTIF 
     Route::get('/filehari/{nama}', '\App\Http\Controllers\API\HariAktifController@show');
     Route::post('/filehari', '\App\Http\Controllers\API\HariAktifController@store');
@@ -171,8 +170,14 @@ Route::prefix('v1')->group(function () {
     Route::post('/jurusanpilihan', '\App\Http\Controllers\API\JurusanpilihanController@store');
     Route::put('/jurusanpilihan/{id}', '\App\Http\Controllers\API\JurusanpilihanController@update');
     Route::delete('/jurusanpilihan/{id}', '\App\Http\Controllers\API\JurusanpilihanController@destroy');
-=======
->>>>>>> 9fa83fdac27a3757f84e016e0cc36dddd757b697
+
+    // Rekap Tarif UKT
+    Route::get('/keuangan/rekap_ukt', [Ctr\UktController::class, 'index']);
+    Route::post('/keuangan/rekap_ukt', [Ctr\UktController::class, 'store']);
+    Route::get('/keuangan/rekap_ukt/{id}', [Ctr\UktController::class, 'show']);
+    Route::put('/keuangan/rekap_ukt/{id}', [Ctr\UktController::class, 'update']);
+    Route::delete('/keuangan/rekap_ukt/{id}', [Ctr\UktController::class, 'destroy']);
+    
 });
 Route::prefix('v1')->middleware('auth:api')->group(function () {
     Route::get('/user', function (Request $request) {
