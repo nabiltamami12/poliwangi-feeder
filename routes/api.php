@@ -177,6 +177,17 @@ Route::prefix('v1')->group(function () {
     Route::get('/keuangan/rekap_ukt/{id}', [Ctr\UktController::class, 'show']);
     Route::put('/keuangan/rekap_ukt/{id}', [Ctr\UktController::class, 'update']);
     Route::delete('/keuangan/rekap_ukt/{id}', [Ctr\UktController::class, 'destroy']);
+
+
+    // SPI Mandiri
+    Route::post('/keuangan/spi/import', [Ctr\SpiController::class, 'import']);
+    Route::get('/keuangan/spi/export', [Ctr\SpiController::class, 'export']);
+    Route::get('/keuangan/spi', [Ctr\SpiController::class, 'index']);
+    Route::get('/keuangan/spi/{id}', [Ctr\SpiController::class, 'show']);
+
+
+
+
     
 });
 Route::prefix('v1')->middleware('auth:api')->group(function () {
