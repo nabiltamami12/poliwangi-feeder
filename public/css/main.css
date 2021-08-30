@@ -1231,6 +1231,68 @@ nav#navbar h1 {
   background-color: rgba(173, 181, 189, 0.2);
   color: #adb5bd !important;
 }
+.page-content .form_data .input_file {
+  min-height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #c4c4c4;
+  border-radius: 0.5rem;
+}
+.page-content .form_data .input_penghasilan {
+  position: relative;
+}
+.page-content .form_data .input_penghasilan > span {
+  font-weight: 400;
+  font-size: 0.875rem;
+  line-height: 1.22em;
+  color: #041f2f;
+  position: absolute;
+  left: 3.5rem;
+  bottom: calc((1.5em + 1.25rem + 2px) / 3);
+}
+.page-content .form_data .input_penghasilan > input {
+  text-align: right;
+}
+.page-content .form_data .form-row .col-md-4.form-group:first-child {
+  padding-right: 2rem;
+}
+.page-content .form_data .form-row .col-md-4.form-group:nth-child(2) {
+  padding: 0 1rem;
+}
+.page-content .form_data .form-row .col-md-4.form-group:last-child {
+  padding-left: 2rem;
+}
+.page-content .form_data .form-row .col-md-6.form-group:first-child {
+  padding-right: 1.5rem;
+}
+.page-content .form_data .form-row .col-md-6.form-group:last-child {
+  padding-left: 1.5rem;
+}
+.page-content .form_data .form-row ::-moz-placeholder {
+  font-weight: 400;
+  font-size: 0.875rem;
+  line-height: 1.21em;
+  color: #041f2f;
+}
+.page-content .form_data .form-row :-ms-input-placeholder {
+  font-weight: 400;
+  font-size: 0.875rem;
+  line-height: 1.21em;
+  color: #041f2f;
+}
+.page-content .form_data .form-row ::placeholder {
+  font-weight: 400;
+  font-size: 0.875rem;
+  line-height: 1.21em;
+  color: #041f2f;
+}
+.page-content .form_data .form_action {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  -moz-column-gap: 0.5rem;
+       column-gap: 0.5rem;
+}
 .page-content .fileUpload-icon {
   font-size: 3rem;
   color: #28a3eb;
@@ -1415,6 +1477,57 @@ nav#navbar h1 {
   color: #041f2f;
 }
 
+#pills-tab .nav-item .nav-link {
+  position: relative;
+  box-shadow: none;
+  border: 1px solid #adb5bd;
+  border-radius: 0.5rem;
+  border-left: 0;
+  font-weight: 400;
+  font-size: 0.875rem;
+  line-height: 1.21em;
+  color: #adb5bd;
+  padding-left: calc(49px + 1.5rem);
+}
+#pills-tab .nav-item .nav-link.active {
+  border-color: #28a3eb;
+  background-color: #28a3eb;
+  color: #ffffff;
+}
+#pills-tab .nav-item .nav-link.active::before {
+  background-color: #f0f8fe;
+  color: #28a3eb;
+  border-color: #28a3eb;
+}
+#pills-tab .nav-item .nav-link::before {
+  position: absolute;
+  font-weight: 400;
+  font-size: 1.125rem;
+  line-height: 1.22em;
+  color: #ffffff;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #adb5bd;
+  width: 49px;
+  height: 100%;
+  border-radius: 0.45rem 0 0 0.45rem;
+  border: 1px solid #adb5bd;
+  border-top: 0;
+  border-bottom: 0;
+}
+#pills-tab .nav-item:first-child .nav-link::before {
+  content: "1";
+}
+#pills-tab .nav-item:nth-child(2) .nav-link::before {
+  content: "2";
+}
+#pills-tab .nav-item:nth-child(3) .nav-link::before {
+  content: "3";
+}
+
 .informasi_mahasiswa {
   background-color: #fff;
   border-radius: 0.5rem;
@@ -1555,54 +1668,6 @@ nav#navbar h1 {
   display: block;
 }
 
-.form_data .input_file {
-  min-height: 160px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid #c4c4c4;
-  border-radius: 0.5rem;
-}
-.form_data .form-row .col-md-4.form-group:first-child {
-  padding-right: 2rem;
-}
-.form_data .form-row .col-md-4.form-group:nth-child(2) {
-  padding: 0 1rem;
-}
-.form_data .form-row .col-md-4.form-group:last-child {
-  padding-left: 2rem;
-}
-.form_data .form-row .col-md-6.form-group:first-child {
-  padding-right: 1.5rem;
-}
-.form_data .form-row .col-md-6.form-group:last-child {
-  padding-left: 1.5rem;
-}
-.form_data .form-row ::-moz-placeholder {
-  font-weight: 400;
-  font-size: 0.875rem;
-  line-height: 1.21em;
-  color: #041f2f;
-}
-.form_data .form-row :-ms-input-placeholder {
-  font-weight: 400;
-  font-size: 0.875rem;
-  line-height: 1.21em;
-  color: #041f2f;
-}
-.form_data .form-row ::placeholder {
-  font-weight: 400;
-  font-size: 0.875rem;
-  line-height: 1.21em;
-  color: #041f2f;
-}
-.form_data .form_action {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  -moz-column-gap: 0.5rem;
-       column-gap: 0.5rem;
-}
-
 .page-content__keuangan input::-moz-placeholder {
   color: #041f2f;
 }
@@ -1719,6 +1784,15 @@ nav#navbar h1 {
     padding-right: 0;
     margin-top: 1rem;
   }
+  .page-content .form_data .form-row .col-md-4.form-group:first-child, .page-content .form_data .form-row .col-md-4.form-group:nth-child(2), .page-content .form_data .form-row .col-md-4.form-group:last-child,
+.page-content .form_data .form-row .col-md-6.form-group:first-child,
+.page-content .form_data .form-row .col-md-6.form-group:nth-child(2),
+.page-content .form_data .form-row .col-md-6.form-group:last-child {
+    padding: 0;
+  }
+  .page-content .form_data .input_penghasilan > span {
+    left: 1.5rem !important;
+  }
   .page-content input[type=date]::-webkit-inner-spin-button,
 .page-content input[type=date]::-webkit-calendar-picker-indicator {
     width: 38px;
@@ -1727,13 +1801,6 @@ nav#navbar h1 {
     padding: 0;
   }
   .page-content .form-select .form-group:nth-child(even) {
-    padding: 0;
-  }
-
-  .form_data .form-row .col-md-4.form-group:first-child, .form_data .form-row .col-md-4.form-group:nth-child(2), .form_data .form-row .col-md-4.form-group:last-child,
-.form_data .form-row .col-md-6.form-group:first-child,
-.form_data .form-row .col-md-6.form-group:nth-child(2),
-.form_data .form-row .col-md-6.form-group:last-child {
     padding: 0;
   }
 

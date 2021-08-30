@@ -267,4 +267,12 @@
             }
         }
     }
+
+    a.btn-info {
+        text-decoration: none;
+        color: $primary;
+        &:hover {
+            color: $primary !important;
+        }
+    }
 }

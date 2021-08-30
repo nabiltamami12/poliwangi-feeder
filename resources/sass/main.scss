@@ -533,6 +533,58 @@ nav#navbar {
         }
     }
 
+    .form_data {
+        .input_file {
+            min-height: 160px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #c4c4c4;
+            border-radius: 0.5rem;
+        }
+        .input_penghasilan {
+            position: relative;
+            & > span {
+                @include mixintext(400, 0.875rem, 1.22em, $font-black);
+                position: absolute;
+                left: 3.5rem;
+                bottom: calc((1.5em + 1.25rem + 2px) / 3);
+            }
+            & > input {
+                text-align: right;
+            }
+        }
+        .form-row {
+            .col-md-4.form-group {
+                &:first-child {
+                    padding-right: 2rem;
+                }
+                &:nth-child(2) {
+                    padding: 0 1rem;
+                }
+                &:last-child {
+                    padding-left: 2rem;
+                }
+            }
+            .col-md-6.form-group {
+                &:first-child {
+                    padding-right: 1.5rem;
+                }
+                &:last-child {
+                    padding-left: 1.5rem;
+                }
+            }
+            ::placeholder {
+                @include mixintext(400, 0.875rem, 1.21em, $font-black);
+            }
+        }
+        .form_action {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            column-gap: 0.5rem;
+        }
+    }
+
     .fileUpload-icon {
         font-size: 3rem;
         color: $primary;
@@ -707,6 +759,69 @@ nav#navbar {
         }
     }
 }
+
+#pills-tab {
+    .nav-item {
+        .nav-link {
+            position: relative;
+            box-shadow: none;
+            border: 1px solid $placeholder;
+            border-radius: 0.5rem;
+            border-left: 0;
+            @include mixintext(400, 0.875rem, 1.21em, $font-placeholder);
+            padding-left: calc(49px + 1.5rem);
+            &.active {
+                border-color: $primary;
+                background-color: $primary;
+                color: $font-white;
+
+                &::before {
+                    background-color: #f0f8fe;
+                    color: $primary;
+                    border-color: $primary;
+                }
+            }
+            &::before {
+                position: absolute;
+                @include mixintext(400, 1.125rem, 1.22em, $font-white);
+                top: 0;
+                left: 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background-color: $placeholder;
+                width: 49px;
+                height: 100%;
+                border-radius: 0.45rem 0 0 0.45rem;
+                border: 1px solid $placeholder;
+                border-top: 0;
+                border-bottom: 0;
+            }
+        }
+    }
+    .nav-item:first-child {
+        .nav-link {
+            &::before {
+                content: "1";
+            }
+        }
+    }
+    .nav-item:nth-child(2) {
+        .nav-link {
+            &::before {
+                content: "2";
+            }
+        }
+    }
+    .nav-item:nth-child(3) {
+        .nav-link {
+            &::before {
+                content: "3";
+            }
+        }
+    }
+}
+
 @import "./mahasiswa";
 @import "./keuangan";
 @import "./responsive";

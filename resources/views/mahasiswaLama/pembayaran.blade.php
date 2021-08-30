@@ -50,11 +50,10 @@
           <div class="informasi_pembayaran">
             <div class="instruksi_pembayaran mt-4-5">
               <ul>
-                <li>- Pilih Transaksi Lain > Pembayaran > Lainnya > Virtual Account BNI</li>
-                <li>- Masukkan Nomor VA 128 1281928746273601 kemudian pilih Benar</li>
-                <li>- Periksa informasi yang tertera di layar. Pastikan Merchant adalah Politeknik Negeri
-                  Banyuwangi,</li>
-                <li>&nbsp Total tagihan sudah benar dan username. Jika benar, pilih Ya.</li>
+                <li>Pilih Transaksi Lain > Pembayaran > Lainnya > Virtual Account BNI</li>
+                <li>Masukkan Nomor VA 128 1281928746273601 kemudian pilih Benar</li>
+                <li>Periksa informasi yang tertera di layar. Pastikan Merchant adalah Politeknik Negeri
+                  Banyuwangi, <br> Total tagihan sudah benar dan username. Jika benar, pilih Ya.</li>
               </ul>
             </div>
             <h6 class="mb-0 font-italic mt-3">Konfirmasi Pembayaran akan dicek secara otomatis 10 menit setelah

@@ -280,3 +280,10 @@
   background-position: calc(100% - 8px), calc(100% - 24px);
   padding: 0.5rem;
 }
+.page-content__admin a.btn-info {
+  text-decoration: none;
+  color: #28a3eb;
+}
+.page-content__admin a.btn-info:hover {
+  color: #28a3eb !important;
+}

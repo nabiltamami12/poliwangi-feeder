@@ -144,7 +144,7 @@
               <label>Foto Calon Peserta Didik</label>
               <input type="file" class="form-control form-control-lg">
             </div>
-            <div class="form-group col-md-6 mt-3 pl-md-2">
+            <div class="form-group col-md-6 mt-3 mt-md-4 pl-md-2">
               <label>Foto Ijazah</label>
               <input type="file" class="form-control form-control-lg">
             </div>

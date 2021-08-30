@@ -1,36 +1,43 @@
+// prettier-ignore
 var piechartMhs = document.getElementById("piechart-mahasiswa").getContext("2d");
+// prettier-ignore
 var piechartAlumni = document.getElementById("piechart-alumni").getContext("2d");
+// prettier-ignore
 var piechartDosen = document.getElementById("piechart-dosen").getContext("2d");
+// prettier-ignore
 var piechartPegawai = document.getElementById("piechart-pegawai").getContext("2d");
 
 var optionObj = {
-    plugins:{
-        legend:{
+    plugins: {
+        legend: {
             display: false,
         },
-        datalabels:{
-            color: 'white',
-            textAlign: 'center',
-            font:{
+        datalabels: {
+            color: "white",
+            textAlign: "center",
+            font: {
                 weight: 600,
                 lineHeight: 1.5,
-                family: "Montserrat"
+                family: "Montserrat",
             },
-            formatter: function(value, context) {
-              let sum = 0;
-              let dataArr = context.chart.data.datasets[0].data;
-              dataArr.map(data => {
-                  sum += data;
-              });
-              let percentage = Math.round(value*100 / sum)+"% \n" + context.chart.data.labels[context.dataIndex];
-              return percentage;
-            }
-          }
+            formatter: function (value, context) {
+                let sum = 0;
+                let dataArr = context.chart.data.datasets[0].data;
+                dataArr.map((data) => {
+                    sum += data;
+                });
+                let percentage =
+                    Math.round((value * 100) / sum) +
+                    "% \n" +
+                    context.chart.data.labels[context.dataIndex];
+                return percentage;
+            },
+        },
     },
     elements: {
         arc: {
             borderWidth: 0,
-        }
+        },
     },
     rotation: 90,
     tooltips: {
@@ -40,12 +47,12 @@ var optionObj = {
             },
         },
     },
-}
+};
 
 var chartMhs = new Chart(piechartMhs, {
     type: "pie",
     data: {
-        labels: ['laki-laki', 'perempuan'],
+        labels: ["laki-laki", "perempuan"],
         datasets: [
             {
                 backgroundColor: ["#73C3F2", "#F27373"],
@@ -60,7 +67,7 @@ var chartMhs = new Chart(piechartMhs, {
 var chartAlumni = new Chart(piechartAlumni, {
     type: "pie",
     data: {
-        labels: ['laki-laki', 'perempuan'],
+        labels: ["laki-laki", "perempuan"],
         datasets: [
             {
                 label: "Data Alumni",
@@ -76,7 +83,7 @@ var chartAlumni = new Chart(piechartAlumni, {
 var chartDosen = new Chart(piechartDosen, {
     type: "pie",
     data: {
-        labels: ['laki-laki', 'perempuan'],
+        labels: ["laki-laki", "perempuan"],
         datasets: [
             {
                 label: "Data Dosen",
@@ -92,7 +99,7 @@ var chartDosen = new Chart(piechartDosen, {
 var chartPegawai = new Chart(piechartPegawai, {
     type: "pie",
     data: {
-        labels: ['laki-laki', 'perempuan'],
+        labels: ["laki-laki", "perempuan"],
         datasets: [
             {
                 label: "Data Pegawai",
@@ -133,9 +140,21 @@ var mahasiswaData = {
 };
 
 var mahasiswaTahun = {
-    labels: ["2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020"],
+    labels: [
+        "2010",
+        "2011",
+        "2012",
+        "2013",
+        "2014",
+        "2015",
+        "2016",
+        "2017",
+        "2018",
+        "2019",
+        "2020",
+    ],
     datasets: [laki, perempuan],
-}
+};
 
 var barChart = new Chart(mahasiswaPerProdi, {
     type: "bar",
@@ -160,7 +179,6 @@ var barChart = new Chart(mahasiswaPerProdi, {
     },
 });
 
-
 var barChart = new Chart(mahasiswaPerTahun, {
     type: "bar",
     data: mahasiswaTahun,
@@ -183,6 +201,3 @@ var barChart = new Chart(mahasiswaPerTahun, {
         },
     },
 });
-
-
-
