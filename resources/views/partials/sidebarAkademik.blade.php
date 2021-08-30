@@ -97,6 +97,25 @@
 
             </ul>
           </li>
+          <li class="nav-item">
+            <div class="nav-link {{($title === "akademik-master") ? 'aktif' : ''}}">
+            <span class=" iconify" data-icon="bx:bx-book-bookmark"></span>
+              <span class="nav-link-text">Kuliah<img src="{{ url('images') }}/sidebar-right.png" class="arrow"
+                  alt=""></span>
+            </div>
+            <ul class="nav-item-dropdown-content">
+              <li class="nav-item">
+                <a class="nav-link {{($title === "dosen-penilaian") ? 'aktif' : ''}}" href="{{url('akademik/kuliah/penilaian')}}">
+                  <span class="nav-link-text ml-0">Penilaian</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link {{($title === "rekap-nilai") ? 'aktif' : ''}}" href="{{url('akademik/kuliah/rekap-nilai')}}">
+                  <span class="nav-link-text ml-0">Rekap Nilai</span>
+                </a>
+              </li>
+            </ul>
+          </li>
           {{--
           <li class="nav-item">
             <div class="nav-link {{($title === "akademik-khs") ? 'aktif' : ''}}"">

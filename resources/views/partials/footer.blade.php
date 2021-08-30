@@ -87,6 +87,7 @@
             },
             success: function(res) {
                 if (res.status=="success") {
+                    // return res['data'];
                     localStorage.setItem('globalData', JSON.stringify(res['data']));
                 } else {
                     // alert gagal

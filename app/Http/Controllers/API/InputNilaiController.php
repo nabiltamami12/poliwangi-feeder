@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\InputNilai;
 use DB;
+use Illuminate\Support\Carbon;
 use App\Http\Requests\ImportNilai;
 
 class InputNilaiController extends Controller
@@ -16,9 +17,58 @@ class InputNilaiController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
+        $input = DB::table("mahasiswa as m")
+            ->select(
+                "m.nomor as id_mahasiswa",
+                "m.nama",
+                "m.nrp as nim",
+                "kl.nomor as id_kuliah",
+                "n.*"
+            )
+            ->join("kelas as k", "k.nomor", "=", "m.kelas")
+            ->join("kuliah as kl", "kl.kelas", "=", "k.nomor")
+            ->join("nilai as n", "n.kuliah", "=", "kl.nomor",'left')
+            ->where('kl.tahun', $request->tahun)
+            ->where('kl.kelas', $request->kelas)
+            ->where('kl.matakuliah', $request->matakuliah)
+            ->get();
+
+            $data=[];
+        foreach ($input as $key => $value) {
+            $arr = [
+                'id_kuliah' => $value->id_kuliah,
+                'id_mahasiswa' => $value->id_mahasiswa,
+                'is_published' => $value->is_published,
+                'publisher' => $value->publisher,
+                'tgl_publish' => $value->tgl_publish,
+                'nim' => $value->nim,
+                'nama' => $value->nama,
+                'nomor' => ($value->nomor==null)?0:$value->nomor,
+                'kuliah' => ($value->nomor==null)?0:$value->nomor,
+                'mahasiswa' => ($value->mahasiswa==null)?0:$value->mahasiswa,
+                'quis1' => ($value->quis1==null)?0:$value->quis1,
+                'quis2' => ($value->quis2==null)?0:$value->quis2,
+                'tugas' => ($value->tugas==null)?0:$value->tugas,
+                'ujian' => ($value->ujian==null)?0:$value->ujian,
+                'na' => ($value->na==null)?0:$value->na,
+                'her' => ($value->her==null)?0:$value->her,
+                'nh' => ($value->nh==null)?"":$value->nh,
+                'keterangan' => ($value->keterangan==null)?"":$value->keterangan,
+                'nhu' => ($value->nhu==null)?"":$value->nhu,
+                'nsp' => ($value->nsp==null)?0:$value->nsp,
+                'kuis' => ($value->kuis==null)?0:$value->kuis,
+                'praktikum' => ($value->praktikum==null)?0:$value->praktikum,
+            ];
+            array_push($data,$arr);
+        }
+        return response()->json([
+            'status' => 'success',
+            'data' => $data,
+            'error' => ''
+        ]);
     }
 
     /**
@@ -26,9 +76,27 @@ class InputNilaiController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function rekap(Request $request)
     {
-        //
+        if ($request->nim) {
+            $data = DB::table('mahasiswa as m')
+                        ->select('m.nrp','m.nama','mk.kode','mk.matakuliah','m.jumlah_sks' ,'n.nh','n.na')
+                        ->join('kelas as k','k.nomor','=','m.kelas')
+                        ->join('kuliah as kl','kl.kelas','=','k.nomor')
+                        ->join('matakuliah as mk','mk.nomor','=','kl.matakuliah')
+                        ->join('nilai as n','n.kuliah','=','kl.nomor')
+                        ->where('m.nrp',$request->nim)
+                        ->where('mk.semester',$request->semester)
+                        ->where('kl.tahun',$request->tahun)
+                        ->get();
+        }else{
+            $data = [];
+        }
+        return response()->json([
+            'status' => 'success',
+            'data' => $data,
+            'error' => ''
+        ]);
     }
 
     /**
@@ -37,13 +105,19 @@ class InputNilaiController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ImportNilai $request)
+    public function store(Request $request)
     {
         //
-        $data = $request->all();
+        $data = $request->data;
         $result = [];
         foreach ($data as $d) {
-            $result[] = InputNilai::create($d);
+            if ($d['nomor']==0) {
+                $result[] = Inputnilai::create($d);
+            }else{
+                $query = Inputnilai::where('nomor',$d['nomor']);
+                $nilai = $query->update($d);
+                $result[] = $query->get();
+            }
         }
         return response()->json([
             "status" => 'success',
@@ -61,37 +135,37 @@ class InputNilaiController extends Controller
     public function show($tahun, $mk, $kls, $prodi)
     {
         //
-        $input = DB::table("NILAI")
+        $input = DB::table("nilai")
             ->select(
-                "MATAKULIAH.MATAKULIAH",
-                "MAHASISWA.NAMA",
-                "KULIAH.TAHUN",
-                "KELAS.KODE",
-                "NILAI.NOMOR",
-                "NILAI.KULIAH",
-                "NILAI.MAHASISWA",
-                "NILAI.QUIS1",
-                "NILAI.QUIS2",
-                "NILAI.TUGAS",
-                "NILAI.UJIAN",
-                "NILAI.NA",
-                "NILAI.HER",
-                "NILAI.NH",
-                "NILAI.KETERANGAN",
-                "NILAI.NHU",
-                "NILAI.NSP",
-                "NILAI.KUIS",
-                "NILAI.PRAKTIKUM"
+                "matakuliah.matakuliah",
+                "mahasiswa.nama",
+                "kuliah.tahun",
+                "kelas.kode",
+                "nilai.nomor",
+                "nilai.kuliah",
+                "nilai.mahasiswa",
+                "nilai.quis1",
+                "nilai.quis2",
+                "nilai.tugas",
+                "nilai.ujian",
+                "nilai.na",
+                "nilai.her",
+                "nilai.nh",
+                "nilai.keterangan",
+                "nilai.nhu",
+                "nilai.nsp",
+                "nilai.kuis",
+                "nilai.praktikum"
 
             )
-            ->join("MAHASISWA", "MAHASISWA.NOMOR", "=", "NILAI.MAHASISWA")
-            ->join("KULIAH", "KULIAH.NOMOR", "=", "NILAI.KULIAH")
-            ->join("KELAS", "KELAS.NOMOR", "=", "MAHASISWA.KELAS")
-            ->join("MATAKULIAH", "MATAKULIAH.NOMOR", "=", "KULIAH.MATAKULIAH")
-            ->where('KULIAH.TAHUN', $tahun)
-            ->where('KULIAH.MATAKULIAH', $mk)
-            ->where('MAHASISWA.KELAS', $kls)
-            ->where('MATAKULIAH.PROGRAM', $prodi)
+            ->join("mahasiswa", "mahasiswa.nomor", "=", "nilai.mahasiswa")
+            ->join("kuliah", "kuliah.nomor", "=", "nilai.kuliah")
+            ->join("kelas", "kelas.nomor", "=", "mahasiswa.kelas")
+            ->join("matakuliah", "matakuliah.nomor", "=", "kuliah.matakuliah")
+            ->where('kuliah.tahun', $tahun)
+            ->where('kuliah.matakuliah', $mk)
+            ->where('mahasiswa.kelas', $kls)
+            ->where('matakuliah.program', $prodi)
             ->get();
 
         return response()->json([
@@ -119,38 +193,25 @@ class InputNilaiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function publish(Request $request)
     {
-        //
-        $prodi = Prodi::where('NOMOR', $id);
-        $data = $request->all();
+        $data = $request->data;
+        date_default_timezone_set('Asia/Jakarta');
+        Carbon::setLocale('id');
 
-        $validate = Validator::make($data, [
-            'program' => 'required',
-            'jurusan' => 'required',
-            'kepala' => 'required',
-            'kode_epsbed' => 'required',
-            'departemen' => 'required',
-            'gelar' => 'required',
-            'gelar_inggris' => 'required'
-        ]);
+        $date_now = Carbon::now();
 
-        if ($validate->fails()) {
-            $this->status = "error";
-            $this->err = $validate->errors();
-        } else if (!$prodi) {
-            $this->status = "failed";
-            $this->err = "Data not found";
-        } else {
-            $prodi->update($data);
-            $this->data = $prodi->get();
-            $this->status = "success";
+        $result = [];
+        foreach ($data as $d) {
+            $d['tgl_publish'] = $date_now->toDateTimeString();
+            $query = Inputnilai::where('nomor',$d['nomor']);
+            $nilai = $query->update($d);
+            $result[] = $query->get();
         }
-
         return response()->json([
-            'status' => $this->status,
-            'data' => $data,
-            'error' => ''
+            "status" => 'success',
+            "data" => $result,
+            "error" => ''
         ]);
     }
 

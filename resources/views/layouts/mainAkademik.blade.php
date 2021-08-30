@@ -117,6 +117,7 @@
     $(document).ready(function() {
       // datatable
       if (dt_init) {
+        console.log(dt_url)
         dt = $('#datatable').DataTable({
           "processing": true,
           "ajax": {

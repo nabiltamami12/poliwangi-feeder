@@ -126,9 +126,11 @@ Route::prefix('v1')->group(function () {
     Route::delete('dosenpengampu/{id}', [Ctr\DosenPengampuController::class, 'destroy']);
 
     //INPUTNILAIDOSEN
+    Route::get('/inputnilai/', '\App\Http\Controllers\API\InputNilaiController@index');
+    Route::get('/inputnilai/rekap', '\App\Http\Controllers\API\InputNilaiController@rekap');
     Route::get('/inputnilai/{tahun}&{mk}&{kls}&{prodi}', '\App\Http\Controllers\API\InputNilaiController@show');
     Route::post('/inputnilai', '\App\Http\Controllers\API\InputNilaiController@store');
-    Route::put('/inputnilai/{id}', '\App\Http\Controllers\API\InputNilaiController@update');
+    Route::put('/inputnilai/publish', '\App\Http\Controllers\API\InputNilaiController@publish');
     Route::delete('/inputnilai/{id}', '\App\Http\Controllers\API\InputNilaiController@destroy');
 
     // ABSENSI
@@ -139,12 +141,6 @@ Route::prefix('v1')->group(function () {
     Route::post('/absensi', [Ctr\AbsensiController::class, 'store']);
     Route::put('/absensi/{id}', [Ctr\AbsensiController::class, 'update']);
     Route::delete('/absensi/{id}', [Ctr\AbsensiController::class, 'destroy']);
-
-    //INPUTNILAIDOSEN
-    Route::get('/inputnilai/{tahun}&{mk}&{kls}&{prodi}', '\App\Http\Controllers\API\InputNilaiController@show');
-    Route::post('/inputnilai', '\App\Http\Controllers\API\InputNilaiController@store');
-    Route::put('/inputnilai/{id}', '\App\Http\Controllers\API\InputNilaiController@update');
-    Route::delete('/inputnilai/{id}', '\App\Http\Controllers\API\InputNilaiController@destroy');
 
     //daftar matkul dosen pengampu
     Route::get('/daftar/{id}', '\App\Http\Controllers\API\DaftarMatkulController@show');

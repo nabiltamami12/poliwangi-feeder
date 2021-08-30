@@ -22,14 +22,15 @@ class DosenController extends Controller
     public function filter($id,$semester)
     {
         $prodi = DB::table('program_studi as ps')
-                        ->select('ps.nomor','ps.program_studi')
+                        ->select('ps.nomor','ps.program_studi','p.program as nama_program')
+                        ->join('program as p','p.nomor','=','ps.program')
                         ->join('matakuliah as m','m.program_studi','=','ps.nomor')
                         ->join('dosen_pengampu as dp','dp.matakuliah','=','m.nomor')
                         ->where('dp.dosen',$id)
                         ->groupBy('ps.nomor')
                         ->get();
         $kelas = DB::table('kelas as k')
-                        ->select( 'm.nomor', 'm.matakuliah','k.nomor' , 'k.kelas', 'k.pararel' , 'k.kode', 'm.program_studi')
+                        ->select( 'm.nomor as matakuliah','k.nomor' , 'k.kelas', 'k.pararel' , 'k.kode', 'm.program_studi')
                         ->join('matakuliah as m','m.kelas','=','k.nomor')
                         ->join('dosen_pengampu as dp','dp.matakuliah','=','m.nomor')
                         ->where('dp.dosen',$id)
