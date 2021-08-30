@@ -1476,8 +1476,7 @@ nav#navbar h1 {
   line-height: 1.21em;
   color: #041f2f;
 }
-
-#pills-tab .nav-item .nav-link {
+.page-content #pills-tab .nav-item .nav-link {
   position: relative;
   box-shadow: none;
   border: 1px solid #adb5bd;
@@ -1489,17 +1488,17 @@ nav#navbar h1 {
   color: #adb5bd;
   padding-left: calc(49px + 1.5rem);
 }
-#pills-tab .nav-item .nav-link.active {
+.page-content #pills-tab .nav-item .nav-link.active {
   border-color: #28a3eb;
   background-color: #28a3eb;
   color: #ffffff;
 }
-#pills-tab .nav-item .nav-link.active::before {
+.page-content #pills-tab .nav-item .nav-link.active::before {
   background-color: #f0f8fe;
   color: #28a3eb;
   border-color: #28a3eb;
 }
-#pills-tab .nav-item .nav-link::before {
+.page-content #pills-tab .nav-item .nav-link::before {
   position: absolute;
   font-weight: 400;
   font-size: 1.125rem;
@@ -1518,14 +1517,26 @@ nav#navbar h1 {
   border-top: 0;
   border-bottom: 0;
 }
-#pills-tab .nav-item:first-child .nav-link::before {
+.page-content #pills-tab .nav-item:first-child .nav-link::before {
   content: "1";
 }
-#pills-tab .nav-item:nth-child(2) .nav-link::before {
+.page-content #pills-tab .nav-item:nth-child(2) .nav-link::before {
   content: "2";
 }
-#pills-tab .nav-item:nth-child(3) .nav-link::before {
+.page-content #pills-tab .nav-item:nth-child(3) .nav-link::before {
   content: "3";
+}
+.page-content .btnNext,
+.page-content .btnPrevious {
+  text-decoration: none;
+  color: #28a3eb;
+}
+.page-content .btnNext:hover,
+.page-content .btnPrevious:hover {
+  color: #28a3eb !important;
+}
+.page-content .btnNext.btn-success:hover {
+  color: #ffffff !important;
 }
 
 .informasi_mahasiswa {

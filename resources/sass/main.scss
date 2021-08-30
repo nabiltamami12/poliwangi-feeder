@@ -758,66 +758,82 @@ nav#navbar {
             @include mixintext(400, 1rem, 1.21em, $font-black);
         }
     }
-}
 
-#pills-tab {
-    .nav-item {
-        .nav-link {
-            position: relative;
-            box-shadow: none;
-            border: 1px solid $placeholder;
-            border-radius: 0.5rem;
-            border-left: 0;
-            @include mixintext(400, 0.875rem, 1.21em, $font-placeholder);
-            padding-left: calc(49px + 1.5rem);
-            &.active {
-                border-color: $primary;
-                background-color: $primary;
-                color: $font-white;
-
-                &::before {
-                    background-color: #f0f8fe;
-                    color: $primary;
+    // ===================== TABS =====================
+    #pills-tab {
+        .nav-item {
+            .nav-link {
+                position: relative;
+                box-shadow: none;
+                border: 1px solid $placeholder;
+                border-radius: 0.5rem;
+                border-left: 0;
+                @include mixintext(400, 0.875rem, 1.21em, $font-placeholder);
+                padding-left: calc(49px + 1.5rem);
+                &.active {
                     border-color: $primary;
+                    background-color: $primary;
+                    color: $font-white;
+
+                    &::before {
+                        background-color: #f0f8fe;
+                        color: $primary;
+                        border-color: $primary;
+                    }
+                }
+                &::before {
+                    position: absolute;
+                    @include mixintext(400, 1.125rem, 1.22em, $font-white);
+                    top: 0;
+                    left: 0;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    background-color: $placeholder;
+                    width: 49px;
+                    height: 100%;
+                    border-radius: 0.45rem 0 0 0.45rem;
+                    border: 1px solid $placeholder;
+                    border-top: 0;
+                    border-bottom: 0;
                 }
             }
-            &::before {
-                position: absolute;
-                @include mixintext(400, 1.125rem, 1.22em, $font-white);
-                top: 0;
-                left: 0;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                background-color: $placeholder;
-                width: 49px;
-                height: 100%;
-                border-radius: 0.45rem 0 0 0.45rem;
-                border: 1px solid $placeholder;
-                border-top: 0;
-                border-bottom: 0;
+        }
+        .nav-item:first-child {
+            .nav-link {
+                &::before {
+                    content: "1";
+                }
+            }
+        }
+        .nav-item:nth-child(2) {
+            .nav-link {
+                &::before {
+                    content: "2";
+                }
+            }
+        }
+        .nav-item:nth-child(3) {
+            .nav-link {
+                &::before {
+                    content: "3";
+                }
             }
         }
     }
-    .nav-item:first-child {
-        .nav-link {
-            &::before {
-                content: "1";
-            }
+
+    .btnNext,
+    .btnPrevious {
+        text-decoration: none;
+        color: $primary;
+        &:hover {
+            color: $primary !important;
         }
     }
-    .nav-item:nth-child(2) {
-        .nav-link {
-            &::before {
-                content: "2";
-            }
-        }
-    }
-    .nav-item:nth-child(3) {
-        .nav-link {
-            &::before {
-                content: "3";
-            }
+
+    .btnNext.btn-success {
+        &:hover {
+            color: $font-white !important;
         }
     }
 }
