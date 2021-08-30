@@ -148,6 +148,43 @@ Route::prefix('v1')->group(function () {
     Route::put('/daftar/{id}', '\App\Http\Controllers\API\DaftarMatkulController@update');
     Route::delete('/daftar/{id}', '\App\Http\Controllers\API\DaftarMatkulController@destroy');
 
+    //FILE UPLOAD HARI AKTIF 
+    Route::get('/filehari/{nama}', '\App\Http\Controllers\API\HariAktifController@show');
+    Route::post('/filehari', '\App\Http\Controllers\API\HariAktifController@store');
+    Route::put('/filehari/{nama}', '\App\Http\Controllers\API\HariAktifController@update');
+    Route::delete('/filehari/{nama}', '\App\Http\Controllers\API\HariAktifController@destroy');
+
+    //Jalur Pmb
+    Route::get('/jalurpmb/{id}', '\App\Http\Controllers\API\JalurpmbController@show');
+    Route::post('/jalurpmb', '\App\Http\Controllers\API\JalurpmbController@store');
+    Route::put('/jalurpmb/{pmb}', '\App\Http\Controllers\API\JalurpmbController@update');
+    Route::delete('/jalurpmb/{id}', '\App\Http\Controllers\API\JalurpmbController@destroy');
+
+    //JURUSAN PILIHAN
+    Route::get('/jurusanpilihan/{id}', '\App\Http\Controllers\API\JurusanpilihanController@show');
+    Route::get('/jurusanpilihan', '\App\Http\Controllers\API\JurusanpilihanController@index');
+    Route::post('/jurusanpilihan', '\App\Http\Controllers\API\JurusanpilihanController@store');
+    Route::put('/jurusanpilihan/{id}', '\App\Http\Controllers\API\JurusanpilihanController@update');
+    Route::delete('/jurusanpilihan/{id}', '\App\Http\Controllers\API\JurusanpilihanController@destroy');
+
+    // Rekap Tarif UKT
+    Route::get('/keuangan/rekap_ukt', [Ctr\UktController::class, 'index']);
+    Route::post('/keuangan/rekap_ukt', [Ctr\UktController::class, 'store']);
+    Route::get('/keuangan/rekap_ukt/{id}', [Ctr\UktController::class, 'show']);
+    Route::put('/keuangan/rekap_ukt/{id}', [Ctr\UktController::class, 'update']);
+    Route::delete('/keuangan/rekap_ukt/{id}', [Ctr\UktController::class, 'destroy']);
+
+
+    // SPI Mandiri
+    Route::post('/keuangan/spi/import', [Ctr\SpiController::class, 'import']);
+    Route::get('/keuangan/spi/export', [Ctr\SpiController::class, 'export']);
+    Route::get('/keuangan/spi', [Ctr\SpiController::class, 'index']);
+    Route::get('/keuangan/spi/{id}', [Ctr\SpiController::class, 'show']);
+
+
+
+
+    
 });
 Route::prefix('v1')->middleware('auth:api')->group(function () {
     Route::get('/user', function (Request $request) {
