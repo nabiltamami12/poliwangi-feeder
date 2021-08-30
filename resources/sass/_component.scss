@@ -672,7 +672,7 @@ option {
 }
 
 .form-control {
-    @include mixintext(400, 0.875rem, 1.21em, $font-black !important);
+    @include mixintext(400, 0.875rem, 1.21em, $font-black);
     display: block;
     padding-left: 1.5rem;
     padding-right: 1.5rem;

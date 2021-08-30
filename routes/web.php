@@ -697,6 +697,12 @@ Route::prefix('keuangan')->group(function () {
             ]);
         });
 
+        Route::get('/spi/detail', function () {
+            return view('keuangan.detailSPI', [
+                "title" => "keuangan-rekapitulasi",
+            ]);
+        });
+
         Route::get('/piutangmahasiswa', function () {
             return view('keuangan.piutangMahasiswa', [
                 "title" => "keuangan-rekapitulasi",

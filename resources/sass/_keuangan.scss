@@ -49,4 +49,42 @@
         border-spacing: 1.5rem 0 !important;
         border-collapse: separate !important;
     }
+
+    .form_detailSPI {
+        .form-control {
+            @include mixintext(400, 1.125rem, 1.22em, $font-placeholder);
+        }
+    }
+
+    .table_detailSPI {
+        .table-header {
+            background-color: transparent;
+            th {
+                padding-top: 0;
+                padding-bottom: 0.5rem;
+                @include mixintext(500, 1rem, 1.22em, $font-black);
+                text-transform: capitalize;
+                letter-spacing: normal;
+                &:first-child {
+                    padding-left: 0;
+                }
+            }
+        }
+        .table-body {
+            td {
+                @include mixintext(400, 0.875rem, 1.22em, $font-black);
+                &:first-child {
+                    padding-left: 0;
+                }
+            }
+        }
+        .col_cicilan {
+            position: relative;
+            &::before {
+                content: "Rp.";
+                position: absolute;
+                left: 1.5rem;
+            }
+        }
+    }
 }

@@ -38,30 +38,39 @@
         <div class="filter_data">
           <form>
             <div class="row">
-              <div class="col-md-4">
+              <div class="col-md-3">
                 <div class="form-group">
-                  <label>Program Studi</label>
-                  <select class="form-control">
+                  <label for="program_studi">Program Studi</label>
+                  <select class="form-control" id="program_studi">
                     <option selected>Teknik Informatika</option>
                     <option>Teknik Sipil</option>
                   </select>
                 </div>
               </div>
-              <div class="col-md-4 mt-3 mt-md-0">
+              <div class="col-md-3 mt-3 mt-md-0">
                 <div class="form-group">
-                  <label>Jenjang</label>
-                  <select class="form-control">
+                  <label for="jenjang">Jenjang</label>
+                  <select class="form-control" id="jenjang">
                     <option selected>D3</option>
                     <option>D4</option>
                   </select>
                 </div>
               </div>
-              <div class="col-md-4 mt-3 mt-md-0">
+              <div class="col-md-3 mt-3 mt-md-0">
                 <div class="form-group">
-                  <label>Jenis Piutang</label>
-                  <select class="form-control">
+                  <label for="jenis_piutang">Jenis Piutang</label>
+                  <select class="form-control" id="jenis_piutang">
                     <option selected>Piutang Pendidikan</option>
                     <option>Piutang Lainnya</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-3 mt-3 mt-md-0">
+                <div class="form-group">
+                  <label for="semester">Semester</label>
+                  <select class="form-control" id="semester">
+                    <option>Ganjil</option>
+                    <option selected>Genap</option>
                   </select>
                 </div>
               </div>
@@ -93,7 +102,7 @@
         </div>
 
         <div class="table-responsive">
-          <table class="table align-items-center table-flush table-borderless table-hover table_separateborder">
+          <table class="table align-items-center table-flush table-borderless">
             <thead class="table-header">
               <tr>
                 <th scope="col" style="width: 25%">Nama</th>

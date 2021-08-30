@@ -57,11 +57,12 @@
               <tr>
                 <th scope="col" class="text-center pr-0">No</th>
                 <th scope="col" class="text-center">NIM</th>
-                <th scope="col" style="width: 30%">Nama</th>
+                <th scope="col">Nama</th>
                 <th scope="col" class="text-center">Tanggal</th>
                 <th scope="col" class="text-right">Tarif spi</th>
                 <th scope="col" class="text-right">Pembayaran spi</th>
                 <th scope="col" class="text-right">Piutang</th>
+                <th scope="col" class="text-center">Aksi</th>
               </tr>
             </thead>
 
@@ -74,6 +75,10 @@
                 <td class="font-weight-bold text-right">Rp. 5.000.000</td>
                 <td class="font-weight-bold text-right">Rp. 3.000.000</td>
                 <td class="font-weight-bold text-right">Rp. 2.000.000</td>
+                <td class="text-center">
+                  <a href="/keuangan/rekapitulasi/spi/detail" class="font-weight-bold text-primary text-underline">Lihat
+                    Detail</a>
+                </td>
               </tr>
 
               <tr>
@@ -84,6 +89,10 @@
                 <td class="font-weight-bold text-right">Rp. 5.000.000</td>
                 <td class="font-weight-bold text-right">Rp. 3.500.000</td>
                 <td class="font-weight-bold text-right">Rp. 1.500.000</td>
+                <td class="text-center">
+                  <a href="/keuangan/rekapitulasi/spi/detail" class="font-weight-bold text-primary text-underline">Lihat
+                    Detail</a>
+                </td>
               </tr>
             </tbody>
           </table>

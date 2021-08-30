@@ -80,9 +80,9 @@
                   <option>Mei</option>
                 </select>
               </div>
-              <div class="col-md-6 pl-0 pl-md-2">
+              <div class="col-md-6 pl-0 pl-md-2 mt-3 mt-md-0">
                 <label for="nominal_pertama">Nominal Cicilan Ke-1</label>
-                <input type="text" class="form-control text-right" value="Rp. 1.500.000">
+                <input type="text" class="form-control text-right" id="nominal_pertama" value="Rp. 1.500.000">
               </div>
             </div>
             <div class="form-row mt-4-5">
@@ -96,9 +96,9 @@
                   <option>Mei</option>
                 </select>
               </div>
-              <div class="col-md-6 pl-0 pl-md-2">
+              <div class="col-md-6 pl-0 pl-md-2 mt-3 mt-md-0">
                 <label for="nominal_kedua">Nominal Cicilan Ke-2</label>
-                <input type="text" class="form-control text-right" value="Rp. 1.500.000">
+                <input type="text" class="form-control text-right" id="nominal_kedua" value="Rp. 1.500.000">
               </div>
             </div>
             <div class="form-row mt-4-5">
@@ -112,9 +112,9 @@
                   <option selected>Mei</option>
                 </select>
               </div>
-              <div class="col-md-6 pl-0 pl-md-2">
+              <div class="col-md-6 pl-0 pl-md-2 mt-3 mt-md-0">
                 <label for="nominal_ketiga">Nominal Cicilan Ke-3</label>
-                <input type="text" class="form-control text-right" value="Rp. 1.500.000">
+                <input type="text" class="form-control text-right" id="nominal_ketiga" value="Rp. 1.500.000">
               </div>
             </div>
           </form>
@@ -294,7 +294,7 @@
                 <td class="text-center pl-2">Rp. 2,000,000</td>
                 <td class="text-center pl-2">-</td>
                 <td class="text-center pl-2">Rp. 2,000,000</td>
-                <td class="text-center text-success pl-2">Lancar</td>
+                <td class="text-center text-success pl-2 font-weight-500">Lancar</td>
                 <td class="text-center pl-2">
                   <button type="button" class="btn btn-info" data-toggle="modal" data-target="#dokumenPiutangModal">
                     <i class="iconify mr-1 text-black" data-icon="bx:bx-spreadsheet"></i>
@@ -315,7 +315,7 @@
                 <td class="text-center pl-2">Rp. 1,000,000</td>
                 <td class="text-center pl-2">Rp. 1,000,000</td>
                 <td class="text-center pl-2">Rp. 3,000,000</td>
-                <td class="text-center text-success pl-2">Lancar</td>
+                <td class="text-center text-success pl-2 font-weight-500">Lancar</td>
                 <td class="text-center pl-2">
                   <button type="button" class="btn btn-info" data-toggle="modal" data-target="#dokumenPiutangModal">
                     <i class="iconify mr-1 text-black" data-icon="bx:bx-spreadsheet"></i>
@@ -336,7 +336,7 @@
                 <td class="text-center pl-2">Rp. 1,500,000</td>
                 <td class="text-center pl-2">-</td>
                 <td class="text-center pl-2">Rp. 1,500,000</td>
-                <td class="text-center text-success pl-2">Lancar</td>
+                <td class="text-center text-success pl-2 font-weight-500">Lancar</td>
                 <td class="text-center pl-2">
                   <button type="button" class="btn btn-info" data-toggle="modal" data-target="#dokumenPiutangModal">
                     <i class="iconify mr-1 text-black" data-icon="bx:bx-spreadsheet"></i>
@@ -357,7 +357,7 @@
                 <td class="text-center pl-2">-</td>
                 <td class="text-center pl-2">Rp. 1,500,000</td>
                 <td class="text-center pl-2">Rp. 1,500,000</td>
-                <td class="text-center text-success pl-2">Lancar</td>
+                <td class="text-center text-success pl-2 font-weight-500">Lancar</td>
                 <td class="text-center pl-2">
                   <button type="button" class="btn btn-info" data-toggle="modal" data-target="#dokumenPiutangModal">
                     <i class="iconify mr-1 text-black" data-icon="bx:bx-spreadsheet"></i>
@@ -378,7 +378,7 @@
                 <td class="text-center pl-2">Rp. 2,000,000</td>
                 <td class="text-center pl-2">-</td>
                 <td class="text-center pl-2">Rp. 2,000,000</td>
-                <td class="text-center text-success pl-2">Lancar</td>
+                <td class="text-center text-success pl-2 font-weight-500">Lancar</td>
                 <td class="text-center pl-2">
                   <button type="button" class="btn btn-info" data-toggle="modal" data-target="#dokumenPiutangModal">
                     <i class="iconify mr-1 text-black" data-icon="bx:bx-spreadsheet"></i>

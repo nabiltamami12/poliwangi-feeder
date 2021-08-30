@@ -262,6 +262,11 @@ nav#navbar {
         border: 0;
         border-radius: 0.5rem;
     }
+    .card_title {
+        @include mixintext(600, 1.125rem, 1.22em, $font-black);
+        text-transform: capitalize;
+        margin-bottom: 0;
+    }
     .card_presensi {
         h6 {
             @include mixintext(500, 0.875rem, 1.21em, $placeholder);

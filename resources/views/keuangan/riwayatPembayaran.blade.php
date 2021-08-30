@@ -99,7 +99,7 @@
                 <td class="text-capitalize">fatimah azzahra</td>
                 <td class="font-weight-bold text-right">Rp. 2.500.000</td>
                 <td class="text-center">UKT</td>
-                <td class="text-center">Cicilan ke-2</td>
+                <td class="text-right">Cicilan ke-2</td>
                 <td class="text-center">
                   <i class="iconify edit-icon mr-2" data-icon="bx:bx-edit-alt"></i>
                   <i class="iconify delete-icon" data-icon="bx:bx-trash"></i>
@@ -111,7 +111,7 @@
                 <td class="text-capitalize">Kierra Stanton</td>
                 <td class="font-weight-bold text-right">Rp. 2.500.000</td>
                 <td class="text-center">UKT</td>
-                <td class="text-center">Cicilan ke-2</td>
+                <td class="text-right">Cicilan ke-1</td>
                 <td class="text-center">
                   <i class="iconify edit-icon mr-2" data-icon="bx:bx-edit-alt"></i>
                   <i class="iconify delete-icon" data-icon="bx:bx-trash"></i>
@@ -123,7 +123,7 @@
                 <td class="text-capitalize">Skylar Lipshutz</td>
                 <td class="font-weight-bold text-right">Rp. 2.500.000</td>
                 <td class="text-center">SPI</td>
-                <td class="text-center">Cicilan ke-2</td>
+                <td class="text-right">-</td>
                 <td class="text-center">
                   <i class="iconify edit-icon mr-2" data-icon="bx:bx-edit-alt"></i>
                   <i class="iconify delete-icon" data-icon="bx:bx-trash"></i>
@@ -135,7 +135,7 @@
                 <td class="text-capitalize">Abram Mango</td>
                 <td class="font-weight-bold text-right">Rp. 2.500.000</td>
                 <td class="text-center">SPI</td>
-                <td class="text-center">Cicilan ke-2</td>
+                <td class="text-right">-</td>
                 <td class="text-center">
                   <i class="iconify edit-icon mr-2" data-icon="bx:bx-edit-alt"></i>
                   <i class="iconify delete-icon" data-icon="bx:bx-trash"></i>
@@ -147,7 +147,7 @@
                 <td class="text-capitalize">Cooper Franci</td>
                 <td class="font-weight-bold text-right">Rp. 2.500.000</td>
                 <td class="text-center">UKT</td>
-                <td class="text-center">Cicilan ke-2</td>
+                <td class="text-right">Cicilan ke-3</td>
                 <td class="text-center">
                   <i class="iconify edit-icon mr-2" data-icon="bx:bx-edit-alt"></i>
                   <i class="iconify delete-icon" data-icon="bx:bx-trash"></i>
@@ -159,7 +159,7 @@
                 <td class="text-capitalize">Aspen Philips</td>
                 <td class="font-weight-bold text-right">Rp. 2.500.000</td>
                 <td class="text-center">UKT</td>
-                <td class="text-center">Cicilan ke-2</td>
+                <td class="text-right">Cicilan ke-1</td>
                 <td class="text-center">
                   <i class="iconify edit-icon mr-2" data-icon="bx:bx-edit-alt"></i>
                   <i class="iconify delete-icon" data-icon="bx:bx-trash"></i>
@@ -171,7 +171,7 @@
                 <td class="text-capitalize">Carla Levin</td>
                 <td class="font-weight-bold text-right">Rp. 2.500.000</td>
                 <td class="text-center">SPI</td>
-                <td class="text-center">Cicilan ke-2</td>
+                <td class="text-right">-</td>
                 <td class="text-center">
                   <i class="iconify edit-icon mr-2" data-icon="bx:bx-edit-alt"></i>
                   <i class="iconify delete-icon" data-icon="bx:bx-trash"></i>
