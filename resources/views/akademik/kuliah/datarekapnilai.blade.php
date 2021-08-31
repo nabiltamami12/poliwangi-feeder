@@ -68,14 +68,15 @@
 <script>
   var tahun = dataGlobal['periode']['tahun']
   var semester = dataGlobal['periode']['semester']
-  console.log(tahun)
-  console.log(semester)
   $(document).ready(function() {
-    $('#nim').on('change',function (e) {
-      var url = `${url_api}/inputnilai/rekap?nim=${$(this).val()}&tahun=${tahun}&semester=${semester}`;
+    $('#nim ').on('change',function (e) {
+      var url = `${url_api}/inputnilai/rekap?nim=${$('#nim').val()}&tahun=${tahun}&semester=${semester}`;
       dt.ajax.url(url).load();
-
-    })
+    })  
+    $('select').on('change',function (e) {
+      var url = `${url_api}/inputnilai/rekap?nim=${$('#nim').val()}&tahun=${tahun}&semester=${semester}`;
+      dt.ajax.url(url).load();
+    })  
     set_datatable($(this).val())
   });
 
@@ -131,10 +132,10 @@ dt_opt = {
           "mData": null,
           "mRender": function(data, type, full) {
             var id = data['nomor'];
-            var text_hapus = data['nama'];
-            var btn_update = `<span class="iconify edit-icon" onclick='update_btn(${id})' data-icon="bx:bx-edit-alt" ></span>` 
-            var btn_delete = `<span class="iconify delete-icon" data-icon="bx:bx-trash"  onclick='delete_btn(${id},"mahasiswa","mahasiswa","${text_hapus}")'></span>`; 
-            res = btn_update+" "+btn_delete;
+            var text_hapus = data['kode']+" - "+data['matakuliah'];
+            // var btn_update = `<span class="iconify edit-icon" onclick='update_btn(${id})' data-icon="bx:bx-edit-alt" ></span>` 
+            var btn_delete = `<span class="iconify delete-icon" data-icon="bx:bx-trash"  onclick='delete_btn(${id},"inputnilai","nilai matakuliah ","${text_hapus}")'></span>`; 
+            res = (id==null)?'': btn_delete;
             return res;
           }
         },

@@ -80,11 +80,11 @@ class InputNilaiController extends Controller
     {
         if ($request->nim) {
             $data = DB::table('mahasiswa as m')
-                        ->select('m.nrp','m.nama','mk.kode','mk.matakuliah','m.jumlah_sks' ,'n.nh','n.na')
+                        ->select('m.nrp','m.nama','mk.kode','mk.matakuliah','m.jumlah_sks','n.nomor' ,'n.nh','n.na')
                         ->join('kelas as k','k.nomor','=','m.kelas')
                         ->join('kuliah as kl','kl.kelas','=','k.nomor')
                         ->join('matakuliah as mk','mk.nomor','=','kl.matakuliah')
-                        ->join('nilai as n','n.kuliah','=','kl.nomor')
+                        ->join('nilai as n','n.kuliah','=','kl.nomor','left')
                         ->where('m.nrp',$request->nim)
                         ->where('mk.semester',$request->semester)
                         ->where('kl.tahun',$request->tahun)
@@ -223,5 +223,22 @@ class InputNilaiController extends Controller
      */
     public function destroy($id)
     {
+        $check = Inputnilai::where('nomor', $id);
+
+        if ($check) {
+            $this->status = "success";
+            $this->data = $check->get();
+            $this->err = '';
+            $check->delete();
+        } else {
+            $this->status = "failed";
+            $this->err = "data tidak ada";
+        }
+
+        return response()->json([
+            'status' => $this->status,
+            'data' => $this->data,
+            'error' => $this->err
+        ]);
     }
 }
