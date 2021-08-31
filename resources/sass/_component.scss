@@ -113,8 +113,12 @@ h6,
     color: $danger !important;
 }
 
+.text-placeholder {
+    color: $placeholder !important;
+}
+
 .text-black {
-    color: $font-black;
+    color: $font-black !important;
 }
 
 //BADGE
@@ -700,7 +704,7 @@ select {
     position: relative;
 }
 
-#txtDate {
+.date-input {
     background-color: #fff;
     cursor: default;
 }

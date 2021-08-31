@@ -29,7 +29,7 @@
             <div class="col-12 col-md-6 form-group pr-0 pr-md-4">
               <label>Mulai</label>
               <div class="d-flex align-items-center date_picker">
-                <input id="txtDate" type="text" class="txtDateMulai form-control date-input " value="21 Sept 2021"
+                <input id="txtDate" type="text" class="txtDateMulai form-control date-input" value="21 Sept 2021"
                   readonly />
                 <label class="input-group-btn" for="txtDate">
                   <span class="date_button">
@@ -42,7 +42,7 @@
             <div class="col-12 col-md-6 form-group pl-0 pl-md-4 mt-3 mt-md-0">
               <label>Hingga</label>
               <div class="d-flex align-items-center date_picker">
-                <input id="txtDate" type="text" class="txtDateSelesai form-control date-input " value="21 Sept 2022"
+                <input id="txtDate" type="text" class="txtDateSelesai form-control date-input" value="21 Sept 2022"
                   readonly />
                 <label class="input-group-btn" for="txtDate">
                   <span class="date_button">

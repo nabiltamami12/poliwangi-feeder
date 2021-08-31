@@ -256,11 +256,10 @@
   font-weight: 600 !important;
   border-radius: 0.25rem;
 }
-.page-content__admin .form_rangenilai span {
-  font-weight: 500;
-  font-size: 1.125rem;
-  line-height: 1.22em;
-  color: #041f2f;
+.page-content__admin .form_rangenilai label {
+  margin-bottom: 0;
+  margin-right: 1.5rem;
+  margin-left: 0.25rem;
 }
 .page-content__admin .form_rangenilai .grade_nilai {
   font-weight: 600;
@@ -274,9 +273,36 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-right: 1.5rem;
+}
+.page-content__admin .form_rangenilai .grade_nilai ~ input {
+  margin-right: 1.25rem;
 }
 .page-content__admin .jadwal_sehari .jumlah_sesi select {
   width: 55px;
   background-position: calc(100% - 8px), calc(100% - 24px);
   padding: 0.5rem;
+}
+.page-content__admin .jalurPMB_pendaftaran p {
+  font-weight: 600;
+  font-size: 0.875rem;
+  line-height: 1.22em;
+  color: #041f2f;
+  margin-bottom: 0;
+}
+.page-content__admin .jalurPMB_pendaftaran .date-input {
+  padding-left: 1rem;
+}
+.page-content__admin .jalurPMB_pendaftaran .biaya_pendaftaran {
+  position: relative;
+}
+.page-content__admin .jalurPMB_pendaftaran .biaya_pendaftaran::after {
+  content: "Rp.";
+  font-weight: 500;
+  font-size: 0.875rem;
+  line-height: 1.22em;
+  color: #041f2f;
+  position: absolute;
+  left: 1.5rem;
+  bottom: calc((1.5em + 1.25rem + 2px) / 3);
 }

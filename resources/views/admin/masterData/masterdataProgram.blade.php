@@ -25,8 +25,8 @@
               </button>
             </div>
           </div>
+          <hr class="mt-4">
         </div>
-        <hr class="mt-4">
 
         <div class="row align-items-center px-3 my-4">
           <div class="col-12 col-md-6">
@@ -66,7 +66,7 @@
 
             <tbody class="table-body">
               <tr>
-                <td class="text-center px-2 font-weight-bold">D1</td>
+                <td class="text-center px-2 font-weight-500">D1</td>
                 <td class="text-capitalize">pendidikan diploma satu</td>
                 <td class="text-center">1</td>
                 <td class="text-capitalize">ahli pratama (A.P.)</td>
@@ -81,7 +81,7 @@
               </tr>
 
               <tr>
-                <td class="text-center px-2 font-weight-bold">D2</td>
+                <td class="text-center px-2 font-weight-500">D2</td>
                 <td class=text-capitalize">pendidikan diploma dua</td>
                 <td class="text-center">2</td>
                 <td class="text-capitalize">ahli muda (A.Ma.)</td>
@@ -96,7 +96,7 @@
               </tr>
 
               <tr>
-                <td class="text-center px-2 font-weight-bold">D3</td>
+                <td class="text-center px-2 font-weight-500">D3</td>
                 <td class="text-capitalize">akademik program diploma</td>
                 <td class="text-center">3</td>
                 <td class="text-capitalize">ahli madya (A.Md.)</td>
@@ -111,7 +111,7 @@
               </tr>
 
               <tr>
-                <td class="text-center px-2 font-weight-bold">D4</td>
+                <td class="text-center px-2 font-weight-500">D4</td>
                 <td class="text-capitalize">akademik program diploma</td>
                 <td class="text-center">4</td>
                 <td class="text-capitalize">Sarjana terapan (S.Tr.)</td>
@@ -126,7 +126,7 @@
               </tr>
 
               <tr>
-                <td class="text-center px-2 font-weight-bold">D4LJ</td>
+                <td class="text-center px-2 font-weight-500">D4LJ</td>
                 <td class="text-capitalize">akademik sarjana terapan</td>
                 <td class="text-center">4</td>
                 <td class="text-capitalize">Sarjana terapan (S.Tr.)</td>
@@ -141,7 +141,7 @@
               </tr>
 
               <tr>
-                <td class="text-center px-2 font-weight-bold">S2</td>
+                <td class="text-center px-2 font-weight-500">S2</td>
                 <td class="text-capitalize">program pasca sarjana</td>
                 <td class="text-center">2</td>
                 <td class="text-capitalize">magister sains terapan</td>
@@ -156,7 +156,7 @@
               </tr>
 
               <tr>
-                <td class="text-center px-2 font-weight-bold">D3LJ</td>
+                <td class="text-center px-2 font-weight-500">D3LJ</td>
                 <td class="text-capitalize">pendidikan diploma tiga</td>
                 <td class="text-center">2</td>
                 <td class="text-capitalize">ahli madya (A.Md.)</td>
@@ -171,7 +171,7 @@
               </tr>
 
               <tr>
-                <td class="text-center px-2 font-weight-bold">S3</td>
+                <td class="text-center px-2 font-weight-500">S3</td>
                 <td class="text-capitalize">S3</td>
                 <td class="text-center">2</td>
                 <td class="text-capitalize">-</td>

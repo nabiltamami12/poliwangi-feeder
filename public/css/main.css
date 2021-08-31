@@ -121,8 +121,12 @@ h6,
   color: #f46a6a !important;
 }
 
+.text-placeholder {
+  color: #adb5bd !important;
+}
+
 .text-black {
-  color: #041f2f;
+  color: #041f2f !important;
 }
 
 .badge {
@@ -696,7 +700,7 @@ select {
   position: relative;
 }
 
-#txtDate {
+.date-input {
   background-color: #fff;
   cursor: default;
 }
@@ -1898,6 +1902,10 @@ nav#navbar h1 {
   .page-content__admin .calendar_weekdays div,
 .page-content__admin .calendar_content div {
     height: 4rem;
+  }
+  .page-content__admin .form_rangenilai .grade_nilai ~ input {
+    margin-right: 0 !important;
+    margin-left: 1.2rem;
   }
 }
 @media screen and (min-width: 350px) {

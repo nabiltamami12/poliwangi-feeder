@@ -115,8 +115,12 @@ h6,
   color: #f46a6a !important;
 }
 
+.text-placeholder {
+  color: #adb5bd !important;
+}
+
 .text-black {
-  color: #041f2f;
+  color: #041f2f !important;
 }
 
 .badge {
@@ -690,7 +694,7 @@ select {
   position: relative;
 }
 
-#txtDate {
+.date-input {
   background-color: #fff;
   cursor: default;
 }

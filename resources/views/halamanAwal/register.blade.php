@@ -113,7 +113,7 @@
                       <div class="form-group mt-3">
                         <label>Tanggal Lahir<span>*</span></label>
                         <div class="d-flex align-items-center date_picker">
-                          <input id="txtDate" type="text" class="form-control date-input " placeholder="DD/MM/YYYY"
+                          <input id="txtDate" type="text" class="form-control date-input" placeholder="DD/MM/YYYY"
                             readonly />
                           <label class="input-group-btn" for="txtDate">
                             <span class="date_button">
