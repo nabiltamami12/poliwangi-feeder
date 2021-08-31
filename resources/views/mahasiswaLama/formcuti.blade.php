@@ -29,9 +29,8 @@
             <div class="col-12 col-md-6 form-group pr-0 pr-md-4">
               <label>Mulai</label>
               <div class="d-flex align-items-center date_picker">
-                <input id="txtDate" type="text" class="txtDateMulai form-control date-input" value="21 Sept 2021"
-                  readonly />
-                <label class="input-group-btn" for="txtDate">
+                <input id="txtDate1" type="text" class="form-control date-input" value="21 Sept 2021" readonly />
+                <label class="input-group-btn" for="txtDate1">
                   <span class="date_button">
                     <i class="iconify" data-icon="bx:bx-calendar" data-inline="false"></i>
                   </span>
@@ -42,9 +41,8 @@
             <div class="col-12 col-md-6 form-group pl-0 pl-md-4 mt-3 mt-md-0">
               <label>Hingga</label>
               <div class="d-flex align-items-center date_picker">
-                <input id="txtDate" type="text" class="txtDateSelesai form-control date-input" value="21 Sept 2022"
-                  readonly />
-                <label class="input-group-btn" for="txtDate">
+                <input id="txtDate2" type="text" class="form-control date-input" value="21 Sept 2022" readonly />
+                <label class="input-group-btn" for="txtDate2">
                   <span class="date_button">
                     <i class="iconify" data-icon="bx:bx-calendar" data-inline="false"></i>
                   </span>
@@ -72,10 +70,7 @@
 @section('js')
 <script>
   $(function () {
-    $(".txtDateMulai").datepicker({
-        format: "dd MM yyyy",
-    });
-    $(".txtDateSelesai").datepicker({
+    $(".date-input").datepicker({
         format: "dd MM yyyy",
     });
   });
