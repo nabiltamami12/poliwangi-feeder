@@ -549,14 +549,15 @@ nav#navbar {
         }
         .input_penghasilan {
             position: relative;
-            & > span {
+            & > input {
+                text-align: right;
+            }
+            &::before {
+                content: "Rp.";
                 @include mixintext(400, 0.875rem, 1.22em, $font-black);
                 position: absolute;
                 left: 3.5rem;
                 bottom: calc((1.5em + 1.25rem + 2px) / 3);
-            }
-            & > input {
-                text-align: right;
             }
         }
         .form-row {
@@ -845,4 +846,5 @@ nav#navbar {
 
 @import "./mahasiswa";
 @import "./keuangan";
+@import "./admin";
 @import "./responsive";

@@ -1,6 +1,3 @@
-@import "./variable";
-@import "./mixin";
-
 .page-content__admin {
     h1 {
         @include mixintext(600, 1.3125rem, 1.22em, $font-black);

@@ -295,7 +295,6 @@
                     </div>
                     <div class="col-md-4 form-group mt-3 mt-md-0 input_penghasilan">
                       <label>Penghasilan Ayah</label>
-                      <span>Rp.</span>
                       <input type="text" class="form-control" value="150.000">
                     </div>
                   </div>
@@ -332,7 +331,6 @@
                     </div>
                     <div class="col-md-4 form-group mt-3 input_penghasilan">
                       <label>Penghasilan Ibu</label>
-                      <span>Rp.</span>
                       <input type="text" class="form-control" value="0">
                     </div>
                   </div>

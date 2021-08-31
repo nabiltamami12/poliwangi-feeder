@@ -73,7 +73,7 @@
                 }
             }
             .input_penghasilan {
-                & > span {
+                &::before {
                     left: 1.5rem !important;
                 }
             }

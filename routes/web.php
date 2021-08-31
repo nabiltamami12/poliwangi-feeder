@@ -296,12 +296,6 @@ Route::prefix('akademik')->group(function () {
             ]);
         });
 
-        Route::get('/datakuliah', function () {
-            return view('akademik.masterData/datakuliah', [
-                "title" => "akademik-master",
-            ]);
-        });
-
         Route::get('/dataprodi', function () {
             return view('akademik.masterData/dataprodi', [
                 "title" => "akademik-master"

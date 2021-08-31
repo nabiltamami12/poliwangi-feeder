@@ -24,7 +24,6 @@
   <link rel="stylesheet" href="{{ url('argon') }}/assets/css/argon.css?v=1.2.0" type="text/css">
   <!-- Custom CSS -->
   <link href="{{ asset('css/main.css') }}" rel="stylesheet">
-  <link href="{{ asset('css/admin.css') }}" rel="stylesheet">
 </head>
 
 <body>

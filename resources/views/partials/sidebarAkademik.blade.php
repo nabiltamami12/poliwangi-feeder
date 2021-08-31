@@ -47,11 +47,6 @@
                   <span class="nav-link-dropdown-text">Data Kelas</span>
                 </a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{{ url('/akademik/master/datakuliah')}}">
-                  <span class="nav-link-dropdown-text">Data Kuliah</span>
-                </a>
-              </li>
             </ul>
           </li>
 
