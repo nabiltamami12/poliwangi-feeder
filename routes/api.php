@@ -152,7 +152,6 @@ Route::prefix('v1')->group(function () {
     Route::put('/daftar/{id}', '\App\Http\Controllers\API\DaftarMatkulController@update');
     Route::delete('/daftar/{id}', '\App\Http\Controllers\API\DaftarMatkulController@destroy');
 
-<<<<<<< HEAD
     //FILE UPLOAD HARI AKTIF 
     Route::get('/filehari/{nama}', '\App\Http\Controllers\API\HariAktifController@show');
     Route::post('/filehari', '\App\Http\Controllers\API\HariAktifController@store');
@@ -171,8 +170,18 @@ Route::prefix('v1')->group(function () {
     Route::post('/jurusanpilihan', '\App\Http\Controllers\API\JurusanpilihanController@store');
     Route::put('/jurusanpilihan/{id}', '\App\Http\Controllers\API\JurusanpilihanController@update');
     Route::delete('/jurusanpilihan/{id}', '\App\Http\Controllers\API\JurusanpilihanController@destroy');
-=======
->>>>>>> 9fa83fdac27a3757f84e016e0cc36dddd757b697
+
+    //syarat
+    Route::get('/syarat/{id}', '\App\Http\Controllers\API\SyaratController@show');
+    Route::post('/syarat', '\App\Http\Controllers\API\SyaratController@store');
+    Route::put('/syarat/{id}', '\App\Http\Controllers\API\SyaratController@update');
+    Route::delete('/syarat/{id}', '\App\Http\Controllers\API\SyaratController@destroy');
+
+    //jalur_pendaftar
+    Route::get('/daftar/{id}', '\App\Http\Controllers\API\JalurpendaftarController@show');
+    Route::post('/daftar', '\App\Http\Controllers\API\JalurpendaftarController@store');
+    Route::put('/daftar/{id}', '\App\Http\Controllers\API\JalurpendaftarController@update');
+    Route::delete('/daftar/{id}', '\App\Http\Controllers\API\JalurpendaftarController@destroy');
 });
 Route::prefix('v1')->middleware('auth:api')->group(function () {
     Route::get('/user', function (Request $request) {
