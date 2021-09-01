@@ -27,6 +27,13 @@
   <script src="https://code.iconify.design/2/2.0.3/iconify.min.js"></script>
   <!-- Custom CSS -->
   <link href="{{ asset('css/main.css') }}" rel="stylesheet">
+  <link href="{{ asset('css/responsive.css') }}" rel="stylesheet">
+  <script>
+    var url_api = "{{ url('/api/v1') }}";
+    var url = "{{ base_path(); }}";
+    var dataGlobal = JSON.parse(localStorage.getItem('globalDataDosen')) 
+    var dataJurusan,dataDosen,dataProgram;
+  </script>
 </head>
 
 

@@ -5,14 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class DosenPengampu extends Model
+class File extends Model
 {
     use HasFactory;
     public $timestamps = false;
-    public $table = "dosen_pengampu";
-    protected $fillable = [
-        'nomor',
-        'dosen',
-        'matakuliah'
-    ];
+    public $table = "SETTING";
 }

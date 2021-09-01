@@ -14,7 +14,7 @@
         <div class="card-header p-0">
           <div class="row align-items-center">
             <div class="col">
-              <h2 class="mb-0">{{ ($id==null)?"TAMBAH":"UBAH" }} DATA JURUSAN</h2>
+              <h2 class="mb-0">{{ ($id==null)?"TAMBAH":"UBAH" }} DATA RUANGAN</h2>
             </div>
           </div>
         </div>
@@ -34,18 +34,6 @@
               <div class="form-group row mb-0">
                 <label>Keterangan</label>
                 <input type="text" class="form-control" id="keterangan" name="keterangan">
-              </div>
-            </div>
-            <div class="col-sm-6 col-12">
-              <div class="form-group row mb-0">
-                <label>Homepage</label>
-                <input type="text" class="form-control" id="homepage" name="homepage">
-              </div>
-            </div>
-            <div class="col-sm-6 col-12">
-              <div class="form-group row mb-0">
-                <label>Email</label>
-                <input type="text" class="form-control" id="email" name="email">
               </div>
             </div>
             <div class="col-sm-6 col-12">
@@ -107,8 +95,7 @@
           </div>
           <hr class="my-4">
 
-          <button type="submit" class="btn-primary w-100 simpanData-btn ">{{ ($id==null)?"Tambah":"Ubah" }}
-            Data</button>
+          <button type="submit" class="btn btn-primary w-100 simpanData-btn ">{{ ($id==null)?"Tambah":"Ubah" }} Data</button>
         </form>
 
       </div>
@@ -137,6 +124,7 @@
             beforeSend: function(text) {
                 // loading func
                 console.log("loading")
+                loading('show')
             },
             success: function(res) {
                 if (res.status=="success") {
@@ -144,6 +132,7 @@
                 } else {
                     // alert gagal
                 }
+                loading('hide')
             }
         });
     });
@@ -160,7 +149,7 @@
 } );
 
 async function getData(id) {
-    await getGlobalData();
+    
 
     var optJurusan = `<option value=""> - </option>`;
     $.each(dataGlobal['jurusan'],function (key,row) {
@@ -185,6 +174,7 @@ async function getData(id) {
             beforeSend: function(text) {
                     // loading func
                     console.log("loading")
+                    loading('show')
             },
             success: function(res) {
                 if (res.status=="success") {
@@ -200,6 +190,7 @@ async function getData(id) {
                 } else {
                     // alert gagal
                 }
+                loading('hide')
             }
         });
     }

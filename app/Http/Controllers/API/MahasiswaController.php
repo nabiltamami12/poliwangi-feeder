@@ -15,23 +15,23 @@ class MahasiswaController extends Controller
     {
         $data = $request->all();
         $where = [];
-        if (isset($request->program) ) {
-            array_push($where,['k.program','=',$request->program]);
-        } 
-        if (isset($request->jurusan) ) {
-            array_push($where,['k.jurusan','=',$request->jurusan]);
-        } 
-        if (isset($request->program) ) {
-            array_push($where,['m.kelas','=',$request->kelas]);
-        } 
+        if ( $request->program_studi != null ||  !isset($request->program_studi) ) {
+            array_push($where,['m.program_studi','=',$request->program_studi]);
+        }
+        // // if ($request->jurusan != "null" || !isset($request->jurusan) ) {
+        // //     array_push($where,['k.jurusan','=',$request->jurusan]);
+        // // }
+        // if ($request->kelas != "null" || !isset($request->kelas) ) {
+        //     array_push($where,['m.kelas','=',$request->kelas]);
+        // } 
+        array_push($where,['m.status','=',$request->status]);
         $data = DB::table('mahasiswa as m')
                     ->select('m.nomor','m.nrp','m.nama','m.tgllahir','m.notelp','m.email',)
-                    ->join('kelas as k','m.kelas','=','k.nomor')
-                    ->join('program as p','p.nomor','=','k.program')
-                    ->join('jurusan as j','j.nomor','=','k.jurusan')
+                    ->join('kelas as k','m.kelas','=','k.nomor','left')
+                    ->join('program_studi as ps','ps.nomor','=','m.program_studi')
+                    // ->join('jurusan as j','j.nomor','=','k.jurusan')
                     ->where($where)
                     ->get();
-        
         return response()->json([
             "status" => 'success',
             "data" => $data,

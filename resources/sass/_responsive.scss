@@ -173,4 +173,29 @@
             }
         }
     }
+    .calendar_content {
+        div {
+            &.blank {
+                height: 4rem !important;
+            }
+        }
+    }
+
+    .calendar_weekdays div,
+    .calendar_content div {
+        height: 4rem !important;
+    }
+}
+
+@media screen and (max-width: 350px) {
+    .calendar_content {
+        div.blank {
+            height: 3rem !important;
+        }
+    }
+
+    .calendar_weekdays div,
+    .calendar_content div {
+        height: 3rem !important;
+    }
 }

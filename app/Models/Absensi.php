@@ -5,18 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Prodi extends Model
+class Absensi extends Model
 {
     use HasFactory;
     public $timestamps = false;
-    public $table = "program_studi";
+    public $table = "absensi_mahasiswa";
+
     protected $fillable = [
-        'nomor',
-        'program',
-        'program_studi',
-        'kepala',
-        'kode_epsbed',
-        'jurusan',
-        'alias'
+        'kuliah',
+        'mahasiswa',
+        'tanggal',
+        'status',
+        'minggu'
     ];
 }

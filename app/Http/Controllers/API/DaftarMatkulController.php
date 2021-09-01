@@ -3,14 +3,13 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use App\Models\Periode;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use App\Models\DaftarMatkul;
 use DB;
 
-class PeriodeController extends Controller
+class DaftarMatkulController extends Controller
 {
-    //
     /**
      * Display a listing of the resource.
      *
@@ -18,12 +17,7 @@ class PeriodeController extends Controller
      */
     public function index()
     {
-        $periode = Periode::get();
-            return response()->json([
-                "status" => 'success',
-                "data" => $periode,
-                "error" => ''
-            ]);
+        //
     }
 
     /**
@@ -47,10 +41,7 @@ class PeriodeController extends Controller
         //
         $data = $request->all();
 
-        $validator = Validator::make($data, [
-            'tahun' => 'required',
-            'status' => 'required'
-        ]);
+        $validator = Validator::make($data, []);
 
         if ($validator->fails()) {
             return response(
@@ -62,12 +53,12 @@ class PeriodeController extends Controller
             );
         }
 
-        $periode = Periode::create($data);
+        $matakuliah = DaftarMatkul::create($data);
 
         return response(
             [
                 'status' => "success",
-                'data' => $periode,
+                'data' => $matakuliah,
                 'error' => ''
             ]
         );
@@ -81,11 +72,24 @@ class PeriodeController extends Controller
      */
     public function show($id)
     {
-        $periode = Periode::where('nomor', $id)->get();
+        //
+        $data = DB::table("dosen_pengampu")
+            ->select(
+                "dosen_pengampu.nomor",
+                "dosen_pengampu.dosen",
+                "matakuliah.matakuliah",
+                "program_studi.program_studi"
+
+            )
+            ->join("matakuliah", "matakuliah.nomor", "=", "dosen_pengampu.matakuliah")
+            ->join("program_studi", "program_studi.nomor", "=", "matakuliah.program_studi")
+            ->where("dosen_pengampu.nomor", $id)
+            ->get();
+
         return response()->json([
-            "status" => 'success',
-            "data" => $periode,
-            "error" => ''
+            'status' => 'berhasil',
+            'data' => $data,
+            'error' => ''
         ]);
     }
 
@@ -110,49 +114,29 @@ class PeriodeController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $periode = Periode::where('nomor', $id);
+        $matakuliah = DaftarMatkul::where('nomor', $id);
         $data = $request->all();
 
         $validate = Validator::make($data, [
+            'dosen' => 'required',
+            'matakuliah' => 'required'
         ]);
 
         if ($validate->fails()) {
             $this->status = "error";
             $this->err = $validate->errors();
-        } else if (!$periode) {
+        } else if (!$matakuliah) {
             $this->status = "failed";
             $this->err = "Data not found";
         } else {
-            $periode->update($data);
-            $this->data = $periode->get();
+            $matakuliah->update($data);
+            $this->data = $matakuliah->get();
             $this->status = "success";
         }
 
         return response()->json([
             'status' => $this->status,
             'data' => $data,
-            'error' => ''
-        ]);
-    }
-
-    public function change_status($id)
-    {
-        $periode = DB::table('periode')->update(['status'=>0]);
-        $periode = Periode::where('nomor',$id)->update(['status'=>1]);
-
-        return response()->json([
-            'status' => 'success',
-            'data' => null,
-            'error' => ''
-        ]);
-    }
-    public function change_semester($id,$semester)
-    {
-        $periode = Periode::where('nomor',$id)->update(['semester'=>$semester]);
-
-        return response()->json([
-            'status' => 'success',
-            'data' => null,
             'error' => ''
         ]);
     }
@@ -165,9 +149,8 @@ class PeriodeController extends Controller
      */
     public function destroy($id)
     {
-        //
-        $periode = Periode::where('nomor', $id);
-        $periode->delete();
+        $daftar = DaftarMatkul::where('nomor', $id);
+        $daftar->delete();
 
         return response(
             [

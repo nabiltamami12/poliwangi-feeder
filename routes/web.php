@@ -241,6 +241,12 @@ Route::prefix('akademik')->group(function () {
                 "title" => "akademik-master"
             ]);
         });
+        Route::get('/datakelas/dosen/{id}', function ($id) {
+            return view('akademik.masterData/cukelasdosen', [
+                "id" => $id,
+                "title" => "akademik-master"
+            ]);
+        });
     
         Route::get('/dataruangan', function () {
             return view('akademik.masterData/dataruangan', [
@@ -331,6 +337,12 @@ Route::prefix('akademik')->group(function () {
                 "title" => "akademik-master"
             ]);
         });
+        Route::get('/settingkuliah', function () {
+            return view('akademik.masterData/fe_settingKuliah', [
+                "title" => "akademik-master"
+            ]);
+        });
+
     });
 
     Route::prefix('report')->group(function (){

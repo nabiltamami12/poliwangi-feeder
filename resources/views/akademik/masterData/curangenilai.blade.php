@@ -14,7 +14,7 @@
         <div class="card-header p-0">
           <div class="row align-items-center">
             <div class="col">
-              <h2 class="mb-0">{{ ($id==null)?"TAMBAH":"UBAH" }} DATA JURUSAN</h2>
+              <h2 class="mb-0">{{ ($id==null)?"TAMBAH":"UBAH" }} DATA RANGE NILAI</h2>
             </div>
           </div>
         </div>
@@ -51,8 +51,7 @@
           </div>
           <hr class="my-4">
 
-          <button type="submit" class="btn-primary w-100 simpanData-btn ">{{ ($id==null)?"Tambah":"Ubah" }}
-            Data</button>
+          <button type="submit" class="btn btn-primary w-100 simpanData-btn ">{{ ($id==null)?"Tambah":"Ubah" }} Data</button>
         </form>
 
       </div>
@@ -83,6 +82,7 @@
             beforeSend: function(text) {
                 // loading func
                 console.log("loading")
+                loading('show')
             },
             success: function(res) {
                 if (res.status=="success") {
@@ -90,6 +90,7 @@
                 } else {
                     // alert gagal
                 }
+                loading('hide')
             }
         });
     });
@@ -104,6 +105,7 @@ function getData(id) {
         beforeSend: function(text) {
                 // loading func
                 console.log("loading")
+                loading('show')
         },
         success: function(res) {
             if (res.status=="success") {
@@ -114,6 +116,7 @@ function getData(id) {
             } else {
                 // alert gagal
             }
+            loading('hide')
         }
     });
 }

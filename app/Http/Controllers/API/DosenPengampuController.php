@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\DosenPengampu;
+use App\Models\Dosen;
+use App\Models\Kelas;
+use App\Models\Matakuliah;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Validator;
 
@@ -22,8 +25,17 @@ class DosenPengampuController extends Controller
     
     public function index()
     {
-        $this->data = DosenPengampu::get();
-
+        
+        $this->data = DosenPengampu::select(
+            'pegawai.nama',
+            'pegawai.nomor',
+            DB::raw('count(DISTINCT dosen_pengampu.matakuliah) as jumlah_matkul'),
+        )
+        ->join("pegawai", "dosen_pengampu.dosen", "=", "pegawai.nomor",'right')
+        ->join("staff", "pegawai.staff", "=", "staff.nomor")
+        ->where("pegawai.staff", "=", 4)
+        ->groupBy('pegawai.nomor', 'pegawai.nama')
+        ->get();
         $this->status = "success";
 
        
@@ -53,85 +65,27 @@ class DosenPengampuController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        
-        /* Mengambil nilai 'NOMOR' awal dari request untuk di-increment. */
-        $nomor = $data['nomor'];
-        $finalArr = array();
-        
-        /* Validasi nilai yang didapat dari requests */
         $validated = Validator::make($data, [
-            'nomor' => 'required|integer',
-            'semester' => 'required|integer',
-            'dosen' => 'required|integer',
-            /* Tipe diubah menjadi 'string' agar bisa memiliki lebih dari satu nilai yang nantinya akan dipisah dengan koma. */
-            'matakuliah' => 'required|string',
             
         ]);
-        /* Mengambil data matkul yang dipilih menggunkan koma (,) untuk memisah. */
-        $listMatkul = explode(',', $data['matakuliah']);
-        /* Convert string array $listMatkul menjadi array integer agar dapat diproses di DB. */
-        $intArray = array_map(function($value) { return (int)$value; },$listMatkul);
 
-        $intHapus = null;
-        if (isset($data['hapus'])) {
-            $listHapus = explode(',', $data['hapus']);
-            $intHapus = array_map(function($value) { return (int)$value; },$listHapus);
-        }   
-        /* Convert string array $listHapus menjadi array integer agar dapat diproses di DB. */
         
-        
-        /* Menghitung jumlah record yang perlu dimasukkan ke DB. */
-        $count = count($listMatkul);
-        
-        /* Mengisi array finalArray dengan data yang didapat dari request. */
-        for ($x = 0; $x < $count; $x++) {
-            $finalArr[$x] = $request->except('hapus');
-            /* Increment value untuk field 'NOMOR' karena di DB tidak AI */
-            $finalArr[$x]['nomor'] = (int) $nomor++; 
-            $finalArr[$x]['semester'] = $data['semester'];
-            $finalArr[$x]['dosen'] = $data['dosen'];
-            $finalArr[$x]['matakuliah'] = $intArray[$x];
-        };
 
-        /* Skenario jika sukses atau gagal validasi. */
         if ($validated->fails()) {
-            $this->status = 'failed';
-            $this->data = "Tidak ada data";
+            $this->status = 'error';
             $this->err = $validated->errors();
         } else {
-            /* Mengecek proses input ke database dan melaporkan jika ada error. */
-            try {
-                for ($y = 0; $y < $count; $y++) {
-                    $check = Kuliah::where('NOMOR','=',$finalArr[$y]['nomor']);
-                    if(!$check->get()->isEmpty()) {
-                        $check->update($finalArr[$y]);
-                        $this->status = "success updating";
-                        if ($intHapus) {
-                            $model = Kuliah::whereIn('nomor', $intHapus)->delete();
-                            $this->status = "success";
-                            break;
-                        } else {
-                            $this->status = "Kosong";
-                            break;
-                        };
-                    } else {
-                        Kuliah::insert($finalArr);
-                        $this->status = "success";
-                        break;
-                    }
-                };
-                $this->data = $finalArr;
-            } catch(QueryException $e) {
-                $this->status = 'failed';
-                $this->data = "Tidak ada data";
-                $this->err = $e;
-            }
+            $data = DosenPengampu::create($data);
+            $this->data = $data;
+            $this->status = "success";
         }
+
+        $data = DosenPengampu::where("dosen_pengampu.nomor",$this->data->id)->get();
+
         return response()->json([
             'status' => $this->status,
-            'data' => $this->data,
-            'error' => $this->err,
-            'hapus' => $intHapus
+            'data' => $data,
+            'error' => $this->err
         ]);
     }
 
@@ -143,39 +97,29 @@ class DosenPengampuController extends Controller
      */
     public function show($id)
     {
-        DB::statement("SET SQL_MODE=''");
+        // DB::statement("SET SQL_MODE=''");
+        // $data = DosenPengampu::select(
+        //     'dosen_pengampu.*',
+        //     'matakuliah.program_studi',
+        //     DB::raw('(select nomor from program_studi ps where ps.nomor = matakuliah.program_studi) as program_studi')
+        // )
+        // ->join("pegawai", "dosen_pengampu.dosen", "=", "pegawai.nomor",'right')
+        // ->join("matakuliah", "dosen_pengampu.matakuliah", "=", "matakuliah.nomor",'right')
+        // ->where("pegawai.staff", "=", 4)
+        // ->where("pegawai.nomor",$id)
+        // ->get();
+        // $dosen = Dosen::select('nama')
+        // ->where('nomor',$id)
+        // ->get();
+
+        // $this->data = [
+        //     'nama' => $dosen[0]['nama'],
+        //     'matkul' => $data
+        // ];
+
+        // $this->status = "success";
         
-        $data = Kuliah::select(
-            'matakuliah.nomor AS id_matakuliah',
-            'kuliah.semester',
-            'pegawai.nama',
-            'pegawai.nomor',
-            'matakuliah.matakuliah')
-        ->join('matakuliah', 'kuliah.matakuliah', '=', 'matakuliah.nomor')
-        ->join("pegawai", "kuliah.dosen", "=", "pegawai.nomor")
-        ->join("staff", "pegawai.staff", "=", "staff.nomor")
-        ->where("pegawai.staff", "=", 4)
-        ->where('kuliah.dosen', '=', $id)
-        ->groupBy('matakuliah.kode')
-        ->get();
 
-        $array = [];
-
-        foreach ($data as $key=>$value) {
-            array_push($array, [
-                "semester" => $data[$key]['semester'],
-                "matakuliah" => [
-                    'id_matakuliah'=> $data[$key]['id_matakuliah'],
-                    'matakuliah'   => $data[$key]['matakuliah']]
-            ]);
-        }
-        $this->data = [
-            'nama' => $data[0]['nama'],
-            'data' => $array
-        ];
-        $this->status = "success";
-
-       
         return response()->json([
             "status" => $this->status,
             "data" => $this->data,
@@ -203,14 +147,11 @@ class DosenPengampuController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $check = Kuliah::where('NOMOR', $id);
+        $check = DosenPengampu::where('nomor', $id);
         $data = $request->all();
         
         $validated = Validator::make($data, [
-            'tahun' => 'required|integer',
-            'semester' => 'required|integer',
-            'dosen' => 'required|integer',
-            'matakuliah' => 'required|integer',
+            
         ]);
         
 
@@ -226,9 +167,11 @@ class DosenPengampuController extends Controller
             $this->data = $data;
             $this->status = "success";
         }
+
+        $data = DosenPengampu::where("dosen_pengampu.nomor",$id)->get();
         return response()->json([
             'status' => $this->status,
-            'data' => $this->data,
+            'data' => $data,
             'error' => $this->err
         ]);
     }
@@ -241,7 +184,7 @@ class DosenPengampuController extends Controller
      */
     public function destroy($id)
     {
-        $check = Kuliah::where('NOMOR', $id);
+        $check = DosenPengampu::where('NOMOR', $id);
 
         if ($check) {
             $this->status = "success";

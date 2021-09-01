@@ -4,14 +4,17 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Departemen;
 use App\Models\Program;
 use App\Models\MatakuliahJenis;
 use App\Models\Jurusan;
 use App\Models\Dosen;
 use App\Models\Status;
 use App\Models\Kelas;
+use App\Models\Matakuliah;
+use App\Models\Prodi;
+use App\Models\Periode;
 use Illuminate\Support\Facades\Validator;
+use DB;
 
 class GlobalController extends Controller
 {
@@ -25,9 +28,9 @@ class GlobalController extends Controller
     protected $err = null;
     protected $data = null;
     
-    public function index()
+    public function index($id=null)
     {
-        $departemen = Departemen::get();
+        $periode = Periode::select('tahun','semester')->where('status',1)->get();
         $jurusan = Jurusan::get();
         $program = Program::get();
         $matkul_jenis = MatakuliahJenis::get();
@@ -46,28 +49,59 @@ class GlobalController extends Controller
         ->get();
         $kelas = Kelas::select(
             'kelas.*',
-            'jurusan.jurusan as nama_jurusan',
-            'program.program as nama_program',
+            'pegawai.nama as wali_kelas',
             'pegawai.nomor as id_wali_kelas',
             'pegawai.nama as wali_kelas',
+            'program_studi.program_studi as nama_prodi',
+            'program.program as nama_program',
         )
-        ->join('jurusan', 'jurusan.nomor', '=', 'kelas.jurusan')
-        ->join('program', 'program.nomor', '=', 'kelas.program')
+        ->join('program_studi', 'program_studi.nomor', '=', 'kelas.program_studi')
+        ->join('program', 'program.nomor', '=', 'program_studi.program')
+        ->join('jurusan', 'jurusan.nomor', '=', 'program_studi.jurusan')
         ->join('pegawai', 'pegawai.nomor', '=', 'kelas.wali_kelas','left')
         ->get();
-        
-        $this->status = "success";
+        $prodi = Prodi::select(
+            "program_studi.*",
+            "program.program as nama_program",
+            "jurusan.jurusan as nama_jurusan",
+            "program_studi.alias",
+        )
+        ->join("program", "program_studi.program", "=", "program.NOMOR")
+        ->join("jurusan", "program_studi.jurusan", "=", "jurusan.NOMOR")
+        ->get();
+
+        $matakuliah = Matakuliah::select(
+            'matakuliah.*',
+            'kelas.kode as kode_kelas',
+            'program_studi.program_studi as nama_program',
+            'matakuliah_jenis.matakuliah_jenis as nama_mk_jenis',
+        )
+        ->join('kelas', 'kelas.nomor', '=', 'matakuliah.kelas')
+        ->join('program_studi', 'program_studi.nomor', '=', 'matakuliah.program_studi')
+        ->join('jurusan', 'jurusan.nomor', '=', 'program_studi.jurusan')
+        ->join('matakuliah_jenis', 'matakuliah_jenis.nomor', '=', 'matakuliah.matakuliah_jenis')
+        ->get();
 
         $this->data = [
+            'periode'=>$periode[0],
             'program'=>$program,
             'jurusan'=>$jurusan,
-            'departemen'=>$departemen,
             'dosen'=>$dosen,
             'kelas'=>$kelas,
             'mk_jenis'=>$matkul_jenis,
             'status'=>$status,
+            'prodi'=>$prodi,
+            'matakuliah'=>$matakuliah,
+            'user'=>[]
         ];
 
+        if ($id!=null) {
+            $pegawai = DB::table('pegawai')->select('nomor','nama')->where('nomor',$id)->get();
+            array_push($this->data['user'],$pegawai[0]);
+        }else{
+
+        }
+        $this->status = "success";
        
         return response()->json([
             "status" => $this->status,

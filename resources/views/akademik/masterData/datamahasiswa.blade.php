@@ -26,66 +26,32 @@
             </div>
           </div>
         </div>
-
-        <hr class="my-4">
-
-        <form class="form-select ">
+        <hr class="my-4 mt">
+        <form class="form-select rounded-0">
           <div class="form-row">
-            <div class="col-md-6 form-group">
+            <div class="col-md-4 form-group">
               <label for="jenjang-pendidikan">Jenjang Pendidikan</label>
-              <select class="form-control" id="program" name="program">
-
+              <select class="form-control" id="program_studi" name="program_studi">
+                
               </select>
             </div>
-            <div class="col-md-6 form-group mt-3 mt-md-0">
+            <div class="col-md-4 form-group">
+              <label for="kelas">Kelas</label>
+              <select class="form-control" id="kelas" name="kelas">
+                
+              </select>
+            </div>
+            <div class="col-md-4 form-group mt-3 mt-md-0">
               <label for="status-mahasiswa">Status Mahasiswa</label>
               <select class="form-control" id="status" name="status">
 
               </select>
             </div>
           </div>
-          <div class="form-row">
-            <div class="col-md-6 form-group">
-              <label for="program-studi">Program Studi</label>
-              <select class="form-control" id="jurusan" name="jurusan">
-
-              </select>
-            </div>
-            <div class="col-md-6 form-group mt-3 mt-md-0">
-              <label for="kelas">Kelas</label>
-              <select class="form-control" id="kelas" name="kelas">
-
-              </select>
-            </div>
-          </div>
         </form>
-
-        <div class="row align-items-center px-3 my-4">
-          <div class="col-12 col-md-6">
-            <form class="form-inline">
-              <div class="form-group row">
-                <select class="form-control form-control-sm" id="dataperhalaman">
-                  <option>10</option>
-                  <option>20</option>
-                  <option>30</option>
-                </select>
-                <label for="dataperhalaman" class="ml-3 mt-2 mt-sm-0">Data per Halaman</label>
-              </div>
-            </form>
-          </div>
-          <div class="col-12 col-md-4 offset-md-2 offset-0 text-right p-0 mt-3 mt-md-0">
-            <form class="search_form" action="">
-              <input class="form-control form-control-sm" type="search" placeholder="Pencarian...">
-              <button type="submit">
-                <i class="iconify-inline" data-icon="bx:bx-search"></i>
-              </button>
-            </form>
-          </div>
-        </div>
-
-
+        <hr class="mt">
         <div class="table-responsive">
-          <table id="datatable" class="table align-items-center table-borderless table-flush table-hover">
+          <table id="datatable" class="table align-items-center table-flush table-borderless table-hover">
             <thead class="table-header">
               <tr>
                 <th scope="col" class="text-center px-2">No</th>
@@ -97,27 +63,8 @@
                 <th scope="col" class="text-center">Aksi</th>
               </tr>
             </thead>
-            <tbody>
-
-            </tbody>
+            <tbody></tbody>
           </table>
-        </div>
-
-        <div class="row justify-content-between align-items-center table-information">
-          <h3>Menampilkan 1 sampai 5 dari 5 total data</h3>
-          <nav aria-label="Page navigation example">
-            <ul class="pagination">
-              <li class="page-item disabled" aria-label="Previous">
-                <a class="page-link" href="#" tabindex="-1">Previous</a>
-              </li>
-              <li class="page-item active">
-                <a class="page-link" href="#">1<span class="sr-only">(current)</span></a>
-              </li>
-              <li class="page-item disabled" aria-label="Next">
-                <a class="page-link" href="#">Next</a>
-              </li>
-            </ul>
-          </nav>
         </div>
       </div>
     </div>
@@ -126,34 +73,40 @@
 <script>
   $(document).ready(function() {
   getData();
-  console.log($("#program").val())
 
   $('#searchdata').on('keyup', function() {
     dt.search(this.value).draw();
   });
+  $('#program_studi').on('change',function (e) {
+    var program_studi = $(this).val()
+    var kelas = $.grep(dataGlobal['kelas'], function(e){ return e.program_studi == program_studi; });
+    $('#kelas').html('')
+    var optKelas = `<option value=""> - </option>`;
+    $.each(kelas,function (key,row) {
+      optKelas += `<option value="${row.nomor}">${row.kode}</option>`
+    })
+    $('#kelas').append(optKelas); 
+  })
   $('select').on('change',function (e) {
-    var url = `${url_api}/mahasiswa?program=${$('#program').val()}&jurusan=${$('#jurusan').val()}&status=${$('#status').val()}&kelas=${$('#kelas').val()}`;
+    var url = `${url_api}/mahasiswa?program_studi=${$('#program_studi').val()}&status=${$('#status').val()}&kelas=${$('#kelas').val()}`;
     dt.ajax.url(url).load();
-
   })
 } );
 async function getData() {
-  await getGlobalData();
+  
     var optProgram,optJurusan,optKelas,optStatus;
-    $.each(dataGlobal['program'],function (key,row) {
-        optProgram += `<option value="${row.nomor}">${row.program}</option>`
+    $.each(dataGlobal['prodi'],function (key,row) {
+        optProgram += `<option value="${row.nomor}">${row.nama_program} ${row.program_studi}</option>`
     })
-    $('#program').append(optProgram)
-    
-    $.each(dataGlobal['jurusan'],function (key,row) {
-        optJurusan += `<option value="${row.nomor}" data-alias="${row.alias}">${row.jurusan}</option>`
-    })
-    $('#jurusan').append(optJurusan)
+    $('#program_studi').append(optProgram)
 
-    $.each(dataGlobal['kelas'],function (key,row) {
-        optKelas += `<option value="${row.nomor}">${row.kode}</option>`
+    var kelas = $.grep(dataGlobal['kelas'], function(e){ return e.program_studi == $('#program_studi').val(); });
+    $('#kelas').html('')
+    var optKelas = `<option value=""> - </option>`;
+    $.each(kelas,function (key,row) {
+      optKelas += `<option value="${row.nomor}">${row.kode}</option>`
     })
-    $('#kelas').append(optKelas)
+    $('#kelas').append(optKelas); 
 
     $.each(dataGlobal['status'],function (key,row) {
         optStatus += `<option value="${row.kode}">${row.status}</option>`
@@ -163,18 +116,9 @@ async function getData() {
 }
 function setDatatable() {
   var nomor = 1;
-
-  dt = $('#datatable').DataTable({
-      "processing": true,
-      "ajax": {
-        url: `${url_api}/mahasiswa?program=${$('#program').val()}&jurusan=${$('#jurusan').val()}&status=${$('#status').val()}&kelas=${$('#kelas').val()}`,
-        type: 'GET',
-        data: {},
-        headers: {
-          "Authorization": window.localStorage.getItem('token')
-        },
-      },
-      "aoColumnDefs": [
+  dt_url = `${url_api}/mahasiswa?program_studi=${$('#program_studi').val()}&status=${$('#status').val()}&kelas=${$('#kelas').val()}`;
+dt_opt = {
+  "columnDefs": [
         {
           "aTargets": [0],
           "mData": null,
@@ -223,32 +167,13 @@ function setDatatable() {
           "mRender": function(data, type, full) {
             var id = data['nomor'];
             var text_hapus = data['nama'];
-            var btn_update = `<i class="iconify edit-icon" onclick='update_btn(${id})' data-icon="bx:bx-edit-alt" ></span>` 
-            var btn_delete = `<i class="iconify delete-icon" data-icon="bx:bx-trash"  onclick='delete_btn(${id},"mahasiswa","mahasiswa","${text_hapus}")'></span>`; 
+            var btn_update = `<i class="iconify edit-icon" onclick='update_btn(${id})' data-icon="bx:bx-edit-alt" ></i>` 
+            var btn_delete = `<i class="iconify delete-icon" data-icon="bx:bx-trash"  onclick='delete_btn(${id},"mahasiswa","mahasiswa","${text_hapus}")'></i>`; 
             res = btn_update+" "+btn_delete;
             return res;
           }
         },
-      ],
-      "sDom": 'lrtip',
-      "lengthChange": false,
-      "info": false,
-      "language": {
-        "paginate": {
-          "next": '&gt;',
-          "previous": '&lt;'
-        },
-        "processing": "Loading ..."
-      }
-    })
-    dt.on('order.dt search.dt', function() {
-      dt.column(0, {
-        search: 'applied',
-        order: 'applied'
-      }).nodes().each(function(cell, i) {
-        cell.innerHTML = i + 1;
-      });
-    }).draw();
+      ]}
 }
 </script>
 @endsection

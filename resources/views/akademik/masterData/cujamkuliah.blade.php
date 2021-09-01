@@ -75,7 +75,7 @@
             </div>
           </div>
           <hr class="my-4">
-          <button type="submit" class="btn-primary w-100 simpanData-btn ">{{ ($id==null)?"Tambah":"Ubah" }}
+          <button type="submit" class="btn btn-primary w-100 simpanData-btn ">{{ ($id==null)?"Tambah":"Ubah" }}
             Data</button>
         </form>
 
@@ -105,6 +105,7 @@
             beforeSend: function(text) {
                 // loading func
                 console.log("loading")
+                loading('show')
             },
             success: function(res) {
                 if (res.status=="success") {
@@ -112,13 +113,14 @@
                 } else {
                     // alert gagal
                 }
+                loading('hide')
             }
         });
     });
 } );
 
 async function getData(id) {
-    await getGlobalData();
+    
 
     var optProgram = `<option value=""> - </option>`;
     $.each(dataGlobal['program'],function (key,row) {
@@ -135,6 +137,7 @@ async function getData(id) {
             beforeSend: function(text) {
                     // loading func
                     console.log("loading")
+                    loading('show')
             },
             success: function(res) {
                 if (res.status=="success") {
@@ -145,6 +148,7 @@ async function getData(id) {
                 } else {
                     // alert gagal
                 }
+                loading('hide')
             }
         });
     }

@@ -4,9 +4,10 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\kelas as Kls;
+use App\Models\Kelas;
+use App\Models\Matakuliah;
 use Illuminate\Support\Facades\Validator;
-
+use DB;
 class kelasController extends Controller
 {
     /**
@@ -26,7 +27,7 @@ class kelasController extends Controller
 
         // if ($check) {
         //     $this->status = "success";
-        //     $this->data = Kls::select(
+        //     $this->data = Kelas::select(
         //         'KULIAH.nomor',
         //         'jurusan.jurusan',
         //         'MATAKULIAH.kode', 'RUANG.kapasitas_mahasiswa',
@@ -39,7 +40,7 @@ class kelasController extends Controller
         //     ->get();
         // } else {
         //     $this->status = 'success';
-        //     $this->data = Kls::select(
+        //     $this->data = Kelas::select(
         //         'KULIAH.nomor',
         //         'jurusan.jurusan',
         //         'kelas.kode', 'RUANG.kapasitas_mahasiswa',
@@ -52,15 +53,17 @@ class kelasController extends Controller
         // }
         
         $this->status = "success";
-        $this->data = Kls::select(
+        $this->data = Kelas::select(
             'kelas.*',
-            'jurusan.jurusan as nama_jurusan',
-            'program.program as nama_program',
+            'pegawai.nama as wali_kelas',
             'pegawai.nomor as id_wali_kelas',
             'pegawai.nama as wali_kelas',
+            'program_studi.program_studi as nama_prodi',
+            'program.program as nama_program',
         )
-        ->join('jurusan', 'jurusan.nomor', '=', 'kelas.jurusan')
-        ->join('program', 'program.nomor', '=', 'kelas.program')
+        ->join('program_studi', 'program_studi.nomor', '=', 'kelas.program_studi')
+        ->join('program', 'program.nomor', '=', 'program_studi.program')
+        ->join('jurusan', 'jurusan.nomor', '=', 'program_studi.jurusan')
         ->join('pegawai', 'pegawai.nomor', '=', 'kelas.wali_kelas','left')
         ->get();
        
@@ -71,7 +74,43 @@ class kelasController extends Controller
         ]);
     }
 
-    
+    public function dosen($id_kelas)
+    {
+        // DB::enableQueryLog();
+        $kelas = Kelas::select(
+            'kelas.*',
+            'program_studi.program_studi as nama_prodi',
+            'program.program as nama_program')
+            ->join('program_studi','program_studi.nomor','=','kelas.program_studi')
+            ->join('program','program.nomor','=','program_studi.program')
+            ->where('kelas.nomor',$id_kelas)
+            ->get();
+
+        $data_matkul = Matakuliah::select(
+                'matakuliah.nomor as id_matkul',
+                'matakuliah.matakuliah as matkul',
+                'dosen_pengampu.*'
+            )
+            ->join('dosen_pengampu','dosen_pengampu.matakuliah','=','matakuliah.nomor','left')
+            ->where('matakuliah.kelas',$id_kelas)
+            ->where('matakuliah.semester',1)
+            ->where('matakuliah.program_studi',$kelas[0]['program_studi'])
+            ->get();
+        // echo json_encode(DB::getQueryLog());
+        // die();
+
+        $this->data = [
+            'program_studi' => $kelas[0]['nama_program']." ".$kelas[0]['nama_prodi'],
+            'kelas' => $kelas[0]['kelas'].$kelas[0]['pararel'],
+            'matkul' => $data_matkul
+        ];
+        $this->status = "success";
+        return response()->json([
+            "status" => $this->status,
+            "data" => $this->data,
+            "error" => $this->err
+        ]);
+    }    
 
     /**
      * Show the form for creating a new resource.
@@ -106,7 +145,7 @@ class kelasController extends Controller
             $this->data = "Tidak ada data";
             $this->err = $validated->errors();
         } else {
-            $data = Kls::create($data);
+            $data = Kelas::create($data);
             $this->data = $data;
             $this->status = "success";
         }
@@ -128,7 +167,7 @@ class kelasController extends Controller
     public function show($id)
     {
               
-        // $this->data = Kls::select(
+        // $this->data = Kelas::select(
         //     'KULIAH.nomor',
         //     'MATAKULIAH.matakuliah AS nama_kelas',
         //     'MATAKULIAH.kode', 'RUANG.kapasitas_mahasiswa',
@@ -140,18 +179,20 @@ class kelasController extends Controller
         // ->get();
         // $this->status = "success";
         $this->status = "success";
-        $this->data = Kls::select(
+        $this->data = Kelas::select(
             'kelas.*',
-            'jurusan.jurusan as nama_jurusan',
-            'program.program as nama_program',
+            'pegawai.nama as wali_kelas',
             'pegawai.nomor as id_wali_kelas',
             'pegawai.nama as wali_kelas',
+            'program_studi.program_studi as nama_prodi',
+            'program.program as nama_program',
         )
-        ->join('jurusan', 'jurusan.nomor', '=', 'kelas.jurusan')
-        ->join('program', 'program.nomor', '=', 'kelas.program')
-        ->join('pegawai', 'pegawai.nomor', '=', 'kelas.wali_kelas')
-        ->where('kelas.nomor', '=', $id)
+        ->join('program_studi', 'program_studi.nomor', '=', 'kelas.program_studi')
+        ->join('program', 'program.nomor', '=', 'program_studi.program')
+        ->join('jurusan', 'jurusan.nomor', '=', 'program_studi.jurusan')
+        ->join('pegawai', 'pegawai.nomor', '=', 'kelas.wali_kelas','left')
         ->get();
+       
 
         return response()->json([
             "status" => $this->status,
@@ -180,7 +221,7 @@ class kelasController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $check = Kls::where('NOMOR', $id);
+        $check = Kelas::where('NOMOR', $id);
         $data = $request->all();
 
         $validate = Validator::make($data, [
@@ -214,7 +255,7 @@ class kelasController extends Controller
      */
     public function destroy($id)
     {
-        $check = Kls::where('NOMOR', $id);
+        $check = Kelas::where('NOMOR', $id);
 
         if ($check) {
             $this->status = "success";
