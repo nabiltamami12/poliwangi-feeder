@@ -60,21 +60,21 @@ body {
             list-style: none;
 
             .nav-item-dropdown-content {
-                position: relative;
-                max-height: 0;
-                overflow: hidden;
-                transition: max-height 0.5s ease-out;
                 padding-left: 35px;
             }
 
-            &.showsubmenu .nav-item-dropdown-content {
-                max-height: 1000px;
-                transition: max-height 0.5s ease-in;
-            }
-
-            &.showsubmenu {
-                .nav-link {
-                    .arrow {
+            div.nav-link {
+                .nav-link-text::after {
+                    content: url("https://api.iconify.design/bx/bx-chevron-right.svg");
+                    margin: auto 0;
+                    position: absolute;
+                    right: 25px;
+                    transition: -webkit-transform 0.5s ease-in-out;
+                    -webkit-transition: -webkit-transform 0.5s ease-in-out;
+                    transform: rotate(0deg);
+                }
+                &.open {
+                    .nav-link-text::after {
                         transition: -webkit-transform 0.5s ease-in-out;
                         -webkit-transition: -webkit-transform 0.5s ease-in-out;
                         transform: rotate(90deg);
@@ -82,10 +82,13 @@ body {
                 }
             }
 
-            .nav-link {
+            .nav-link,
+            .nav-link-submenu {
                 position: relative;
+                cursor: pointer;
                 margin: 0 6px;
                 padding: 17px;
+
                 &.aktif {
                     background-color: #f6f9fc;
                     margin: 0 6px;
@@ -104,17 +107,8 @@ body {
                     @include mixintext(500, 0.875rem, 1.22em, $font-black);
                     margin-left: 1.28em;
                 }
-
-                .arrow {
-                    position: absolute;
-                    margin: auto 0;
-                    position: absolute;
-                    top: 0;
-                    bottom: 0;
-                    right: 25px;
-                    transition: -webkit-transform 0.5s ease-in-out;
-                    -webkit-transition: -webkit-transform 0.5s ease-in-out;
-                    transform: rotate(0deg);
+                .nav-link-dropdown-text {
+                    @include mixintext(500, 0.8125rem, 1.22em, $font-black);
                 }
             }
         }
@@ -138,7 +132,8 @@ nav#navbar {
     background: #ffffff;
     border-radius: 0.25rem;
     box-shadow: none;
-    span.iconify {
+    i.iconify,
+    i.iconify-inline {
         font-size: 2rem;
     }
     span {
@@ -176,6 +171,36 @@ nav#navbar {
         overflow-wrap: break-all !important;
     }
 
+    .row.equal-cols {
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-flex-wrap: wrap;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    }
+
+    .row.equal-cols:before,
+    .row.equal-cols:after {
+        display: block;
+    }
+
+    .row.equal-cols > [class*="col-"] {
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+        flex-direction: column;
+    }
+
+    .row.equal-cols > [class*="col-"] > * {
+        -webkit-flex: 1 1 auto;
+        -ms-flex: 1 1 auto;
+        flex: 1 1 auto;
+    }
+
+    // ===================== CAROUSEL =====================
     #pengumuman {
         margin-top: 1.5rem;
         border-radius: 1rem;
@@ -201,6 +226,7 @@ nav#navbar {
         }
     }
 
+    // ===================== CHART =====================
     #piechart {
         border-radius: 0.5rem;
         background-color: #fff;
@@ -230,27 +256,28 @@ nav#navbar {
         }
     }
 
+    // ===================== CARD =====================
     .card {
         margin-top: 1.5rem;
         border: 0;
         border-radius: 0.5rem;
     }
-
-    .fileUpload-icon {
-        font-size: 3rem;
-        color: $primary;
+    .card_title {
+        @include mixintext(600, 1.125rem, 1.22em, $font-black);
+        text-transform: capitalize;
+        margin-bottom: 0;
     }
-
-    hr {
-        padding: 0;
-        margin: 0;
-        height: 1px;
-        border: 0;
-        border-top: 1px solid rgba(153, 153, 153, 0.5);
+    .card_presensi {
+        h6 {
+            @include mixintext(500, 0.875rem, 1.21em, $placeholder);
+        }
+        h5 {
+            @include mixintext(600, 1rem, 1.21em, $font-black);
+        }
     }
-
     .card-header {
         border-radius: 0.5rem 0.5rem 0 0;
+        border: 0;
         h2 {
             @include mixintext(600, 1.125rem, 1.22em, $font-black);
             text-transform: capitalize;
@@ -262,50 +289,28 @@ nav#navbar {
         }
     }
 
-    select#dataperhalaman {
-        @include mixintext(400, 0.875rem, 1.21em, $font-black);
-        min-width: 65px;
-        max-width: 65px;
-        max-height: 25px;
-        border: 1px solid #999999;
-        border-radius: 0.5rem;
-        padding: 0 12px;
-        background-image: url("https://api.iconify.design/bx/bx-chevron-down.svg?color=%23041F2F");
-        background-position: calc(100% - 10px), calc(100% - 10px);
-        background-repeat: no-repeat;
-        appearance: none;
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        box-shadow: none;
-        & + label {
-            @include mixintext(400, 0.875rem, 1.21em, $font-black);
-        }
-    }
-
-    .search-icon {
-        background-color: $primary;
+    // ===================== BREAK LINE =====================
+    hr {
+        padding: 0;
+        margin: 0;
+        height: 1px;
         border: 0;
-        max-height: 35px;
-        color: #fff;
-        border-radius: 0 0.5rem 0.5rem 0;
+        border-top: 1px solid rgba(153, 153, 153, 0.5);
+    }
+    hr.calendar_separator {
+        width: 3%;
+        height: 1px;
+        color: #000;
+        background-color: #000;
+        margin-left: auto;
+        margin-right: auto;
+        position: relative;
+        top: calc((1.5em + 1.25rem + 2px) / 2 * -1);
     }
 
-    input[type="search"] {
-        border: 1px solid $primary;
-        border-right: 0;
-        border-radius: 0.5rem 0 0 0.5rem;
-        padding: 0 0.75rem;
-        max-height: 35px;
-    }
-
-    input[type="search"]::placeholder {
-        @include mixintext(400, 0.75rem, 1.21em, $font-black);
-    }
-
-    // Table
+    // ===================== Table =====================
     .table-responsive {
         border-radius: 0 0 0.5rem 0.5rem;
-
         .table-header {
             background-color: #f6f9fc;
             th {
@@ -332,13 +337,24 @@ nav#navbar {
                     cursor: pointer;
                 }
             }
-            tr.bordered {
+            .iconify,
+            .iconify-inline {
+                font-size: 1rem;
+            }
+            .bordered {
                 border-bottom: 1px solid rgba(153, 153, 153, 0.5);
             }
-            img,
-            .iconify {
-                margin-right: 8px;
-                font-size: 16px;
+            .bordered_sm {
+                position: relative;
+            }
+            .bordered_sm::after {
+                content: "";
+                background-color: rgba(153, 153, 153, 0.5);
+                position: absolute;
+                left: 0;
+                bottom: 0;
+                width: 85%;
+                height: 1px;
             }
             span {
                 @include mixintext(500, 0.8125rem, 1.2em, $font-black);
@@ -371,8 +387,69 @@ nav#navbar {
                 width: 50px;
                 padding: 0;
                 text-align: center;
-                &:focus {
-                    border-color: $primary;
+            }
+            input[type="checkbox"] {
+                -moz-appearance: none;
+                -webkit-appearance: none;
+                -o-appearance: none;
+                outline: none;
+                content: none;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin: 0 auto;
+            }
+
+            input[type="checkbox"]:before {
+                font-family: "FontAwesome";
+                content: "\f00c";
+                color: transparent;
+                display: block;
+                width: 14px;
+                height: 14px;
+                border: 1.5px solid #041f2f;
+                border-radius: 2px;
+            }
+
+            input[type="checkbox"]:checked:before {
+                color: black;
+            }
+        }
+
+        .table-body-xl {
+            td {
+                padding: 2rem 1.5rem !important;
+            }
+        }
+
+        .table-body-lg {
+            td {
+                padding: 1.5rem !important;
+            }
+            tr:first-child {
+                td {
+                    padding: 1rem 1.5rem 1.5rem 1.5rem !important;
+                }
+            }
+            tr:last-child {
+                td {
+                    padding: 1.5rem 1.5rem 1rem 1.5rem !important;
+                }
+            }
+        }
+
+        .table-body-md {
+            td {
+                padding: 1.2rem !important;
+            }
+            tr:first-child {
+                td {
+                    padding: 1rem 1.2rem 1.2rem 1.2rem !important;
+                }
+            }
+            tr:last-child {
+                td {
+                    padding: 1.2rem 1.2rem 1rem 1.2rem !important;
                 }
             }
         }
@@ -407,6 +484,19 @@ nav#navbar {
         }
     }
 
+    .table_dashboardAkademik {
+        .table-header {
+            background-color: #d9e5f2;
+            th:first-child {
+                border-radius: 0.5rem 0 0 0;
+            }
+            th:last-child {
+                border-radius: 0 0.5rem 0 0;
+            }
+        }
+    }
+
+    // ===================== FORM =====================
     .form-input {
         background-color: #fff;
         border-radius: 0.5rem;
@@ -441,6 +531,72 @@ nav#navbar {
         }
     }
 
+    .form_presensiDosen {
+        select {
+            background-color: rgba(173, 181, 189, 0.2);
+            color: $font-placeholder !important;
+        }
+    }
+
+    .form_data {
+        .input_file {
+            min-height: 160px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #c4c4c4;
+            border-radius: 0.5rem;
+        }
+        .input_penghasilan {
+            position: relative;
+            & > input {
+                text-align: right;
+            }
+            &::before {
+                content: "Rp.";
+                @include mixintext(400, 0.875rem, 1.22em, $font-black);
+                position: absolute;
+                left: 3.5rem;
+                bottom: calc((1.5em + 1.25rem + 2px) / 3);
+            }
+        }
+        .form-row {
+            .col-md-4.form-group {
+                &:first-child {
+                    padding-right: 2rem;
+                }
+                &:nth-child(2) {
+                    padding: 0 1rem;
+                }
+                &:last-child {
+                    padding-left: 2rem;
+                }
+            }
+            .col-md-6.form-group {
+                &:first-child {
+                    padding-right: 1.5rem;
+                }
+                &:last-child {
+                    padding-left: 1.5rem;
+                }
+            }
+            ::placeholder {
+                @include mixintext(400, 0.875rem, 1.21em, $font-black);
+            }
+        }
+        .form_action {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            column-gap: 0.5rem;
+        }
+    }
+
+    .fileUpload-icon {
+        font-size: 3rem;
+        color: $primary;
+        cursor: pointer;
+    }
+
     .custom_select {
         position: relative;
         &::after {
@@ -458,6 +614,8 @@ nav#navbar {
             border-radius: 0 0.5rem 0.5rem 0;
         }
         select {
+            border-radius: 0.5rem;
+            padding-left: 0.75rem;
             border-color: #c4c4c4;
             -webkit-appearance: none;
             -moz-appearance: none;
@@ -470,43 +628,292 @@ nav#navbar {
         }
     }
 
-    .card_presensi {
-        h6 {
-            @include mixintext(500, 0.875rem, 1.21em, $placeholder);
-        }
-        h5 {
-            @include mixintext(600, 1rem, 1.21em, $font-black);
+    select#dataperhalaman {
+        @include mixintext(400, 0.875rem, 1.21em, $font-black);
+        min-width: 65px;
+        max-width: 65px;
+        border: 1px solid #999999;
+        border-radius: 0.5rem;
+        padding: 0 12px;
+        background-image: url("https://api.iconify.design/bx/bx-chevron-down.svg?color=%23041F2F");
+        background-position: calc(100% - 10px), calc(100% - 10px);
+        background-repeat: no-repeat;
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        box-shadow: none;
+        & + label {
+            @include mixintext(400, 0.875rem, 1.21em, $font-black);
         }
     }
-}
 
-#dashboard_mala,
-#daftar_ulang,
-#mala_presensi,
-#mala_nilai,
-#dashboard_dosen {
-    .table-body {
-        td {
-            padding: 1.5rem 1.5rem;
+    select:focus,
+    input:focus {
+        border-color: $primary;
+    }
+
+    select#status {
+        option {
+            box-shadow: 2px 2px 8px rgba(255, 0, 0, 0.15) !important;
+            border: 0 !important;
+        }
+    }
+
+    .search_form {
+        input {
+            border-radius: 0.5rem 0px 0px 0.5rem;
+            padding: 0.5rem 0.75rem;
+            border: 1px solid $primary;
+            float: left;
+            &::placeholder {
+                @include mixintext(400, 0.875rem, 1.21em, $font-placeholder);
+            }
         }
 
-        tr:first-child,
-        tr:last-child {
-            td {
-                padding: 1rem 1.5rem;
+        button {
+            float: left;
+            border-radius: 0px 0.5rem 0.5rem 0px;
+            background-color: $primary;
+            color: white;
+            border: 1px solid $primary;
+            border-left: none;
+            cursor: pointer;
+            &:hover {
+                background: #0b7dda;
+            }
+        }
+
+        .form-control {
+            height: 2.5rem;
+            width: 85%;
+        }
+
+        .form-control-sm {
+            height: 2.0625rem;
+            width: 90%;
+        }
+
+        .form-control + button {
+            height: 2.5rem;
+            width: 15%;
+        }
+
+        .form-control-sm + button {
+            height: 2.0625rem;
+            width: 10%;
+        }
+
+        &::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+    }
+
+    .textarea_notresize {
+        resize: none;
+    }
+
+    input[type="time"] {
+        position: relative;
+        &::-webkit-calendar-picker-indicator {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width: auto;
+            height: auto;
+            color: transparent;
+            background: transparent;
+        }
+        &::-webkit-inner-spin-button {
+            z-index: 1;
+        }
+        &::-webkit-clear-button {
+            z-index: 1;
+        }
+    }
+
+    // ===================== MODAL =====================
+    .modal-title {
+        @include mixintext(600, 1.25rem, 1.2em, $font-dark);
+    }
+    span[data-toggle="modal"] {
+        cursor: pointer;
+    }
+    .detail_dokumen {
+        width: 100%;
+        border: 1px solid #c4c4c4;
+        border-radius: 0.5rem;
+        padding: 1.5rem;
+
+        .iconify {
+            font-size: 1.7rem;
+            color: #000;
+        }
+        .nama_dokumen {
+            @include mixintext(400, 1.125rem, 1.2em, $font-black);
+        }
+        #custom-btn {
+            background-color: transparent;
+            border: none;
+            outline: none;
+        }
+        & + .jenis_dokumen {
+            @include mixintext(400, 1rem, 1.21em, $font-black);
+        }
+    }
+
+    // ===================== TABS =====================
+    #pills-tab {
+        .nav-item {
+            .nav-link {
+                position: relative;
+                box-shadow: none;
+                border: 1px solid $placeholder;
+                border-radius: 0.5rem;
+                border-left: 0;
+                @include mixintext(400, 0.875rem, 1.21em, $font-placeholder);
+                padding-left: calc(49px + 1.5rem);
+                &.active {
+                    border-color: $primary;
+                    background-color: $primary;
+                    color: $font-white;
+
+                    &::before {
+                        background-color: #f0f8fe;
+                        color: $primary;
+                        border-color: $primary;
+                    }
+                }
+                &::before {
+                    position: absolute;
+                    @include mixintext(400, 1.125rem, 1.22em, $font-white);
+                    top: 0;
+                    left: 0;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    background-color: $placeholder;
+                    width: 49px;
+                    height: 100%;
+                    border-radius: 0.45rem 0 0 0.45rem;
+                    border: 1px solid $placeholder;
+                    border-top: 0;
+                    border-bottom: 0;
+                }
+            }
+        }
+        .nav-item:first-child {
+            .nav-link {
+                &::before {
+                    content: "1";
+                }
+            }
+        }
+        .nav-item:nth-child(2) {
+            .nav-link {
+                &::before {
+                    content: "2";
+                }
+            }
+        }
+        .nav-item:nth-child(3) {
+            .nav-link {
+                &::before {
+                    content: "3";
+                }
             }
         }
     }
-}
 
-#akademik_dashboard {
-    .table-header {
-        background-color: #d9e5f2;
-        th:first-child {
-            border-radius: 0.5rem 0 0 0;
+    .btnNext,
+    .btnPrevious {
+        text-decoration: none;
+        color: $primary;
+        &:hover {
+            color: $primary !important;
         }
-        th:last-child {
-            border-radius: 0 0.5rem 0 0;
+    }
+
+    .btnNext.btn-success {
+        &:hover {
+            color: $font-white !important;
         }
     }
 }
+
+// ===================== SELECT2 =====================
+.select2-container--default .select2-selection--single::after {
+    content: url("https://api.iconify.design/bx/bx-chevron-down.svg?color=%23041F2F");
+    position: absolute;
+    top: 50%;
+    transform: translateY(-40%);
+    right: 1.5rem;
+}
+
+.select2-container--open .select2-selection--single::after {
+    content: url("https://api.iconify.design/bx/bx-chevron-up.svg?color=%23041F2F");
+}
+
+.select2.select2-container {
+    width: 100% !important;
+}
+
+.select2.select2-container .select2-selection {
+    border: 1px solid #c4c4c4;
+    border-radius: 0.5rem;
+    height: calc(1.5em + 1.25rem + 2px);
+    outline: none !important;
+    transition: all 0.15s ease-in-out;
+    padding: 0 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.select2.select2-container .select2-selection .select2-selection__rendered {
+    @include mixintext(400, 0.875rem, 1.22em, $font-black);
+    padding: 0;
+}
+
+.select2.select2-container.select2-container--open
+    .select2-selection.select2-selection--single {
+    background: #f8f8f8;
+    border-radius: 0.5rem !important;
+    border-color: $primary;
+}
+
+.select2-container .select2-dropdown {
+    background-color: #fff;
+    border: 1px solid #c4c4c4;
+    padding: 0;
+}
+
+.select2-container .select2-dropdown .select2-search input {
+    outline: none !important;
+    border: 1px solid #c4c4c4 !important;
+    padding: 0.5rem 1.5rem !important;
+}
+
+.select2-container
+    .select2-dropdown
+    .select2-results
+    ul
+    .select2-results__option {
+    padding-left: 1.5rem;
+}
+
+.select2-container
+    .select2-dropdown
+    .select2-results
+    ul
+    .select2-results__option--highlighted[aria-selected] {
+    background-color: $primary;
+}
+
+@import "./mahasiswa";
+@import "./keuangan";
+@import "./admin";
+@import "./responsive";

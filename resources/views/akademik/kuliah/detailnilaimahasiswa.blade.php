@@ -5,29 +5,27 @@
 <header class="header"></header>
 
 <!-- Page content -->
-<section class="page-content container-fluid" id="akademik_detailnilai">
+<section class="page-content container-fluid">
   <div class="row">
     <div class="col-xl-12">
       <div class="card shadow padding--small">
-
-        <div class="card-header p-0 m-0 border-0 ">
+        <div class="card-header p-0">
           <div class="row align-items-center">
             <div class="col-12 col-md-6">
               <h2 class="mb-0 text-center text-md-left">Nilai</h2>
             </div>
             <div class="col-12 col-md-6 text-center text-md-right mt-3 mt-md-0">
               <button type="button" class="btn btn-primary">
-                <span class="iconify" data-icon="bx:bxs-plus-circle"></span>
+                <i class="iconify-inline mr-1" data-icon="bx:bxs-plus-circle"></i>
                 Tambah
               </button>
-              <button type="button" class="btn btn-secondary ml-0 ml-md-3">
-                <span class="iconify" data-icon="bx:bx-download"></span>
+              <button type="button" class="btn btn-secondary ml-md-2">
+                <i class="iconify-inline mr-1" data-icon="bx:bx-cloud-download"></i>
                 Unduh Data
               </button>
             </div>
           </div>
         </div>
-
         <hr class="my-4">
 
         <form class="form-input">
@@ -57,12 +55,12 @@
           <table class="table align-items-center table-borderless table-flush mt-4">
             <thead class="table-header">
               <tr>
-                <th scope="col" class="border-0 text-center px-2">No</th>
-                <th scope="col" class="border-0" style="width: 50%">Mata Kuliah</th>
-                <th scope="col" class="border-0 text-center">Keterangan</th>
-                <th scope="col" class="border-0 text-center">presentase</th>
-                <th scope="col" class="border-0 text-center">Nilai</th>
-                <th scope="col" class="border-0 text-center">Aksi</th>
+                <th scope="col" class="text-center px-2">No</th>
+                <th scope="col" style="width: 50%">Mata Kuliah</th>
+                <th scope="col" class="text-center">Keterangan</th>
+                <th scope="col" class="text-center">presentase</th>
+                <th scope="col" class="text-center">Nilai</th>
+                <th scope="col" class="text-center">Aksi</th>
               </tr>
             </thead>
 
@@ -74,8 +72,8 @@
                 <td class="text-center">15%</td>
                 <td class="text-center">90</td>
                 <td rowspan="6" class="text-center">
-                  <span class="iconify edit-icon" data-icon="bx:bx-edit-alt"></span>
-                  <span class="iconify delete-icon" data-icon="bx:bx-trash"></span>
+                  <i class="iconify edit-icon mr-2" data-icon="bx:bx-edit-alt"></i>
+                  <i class="iconify delete-icon" data-icon="bx:bx-trash"></i>
                 </td>
               </tr>
 
@@ -109,6 +107,7 @@
                 <td class="text-center">87</td>
               </tr>
 
+
               <tr>
                 <td rowspan="6" class="text-center px-2">2</td>
                 <td rowspan="6" class="font-weight-bold text-capitalize">Ilmu Gigi</td>
@@ -116,8 +115,8 @@
                 <td class="text-center">15%</td>
                 <td class="text-center">90</td>
                 <td rowspan="6" class="text-center">
-                  <span class="iconify edit-icon" data-icon="bx:bx-edit-alt"></span>
-                  <span class="iconify delete-icon" data-icon="bx:bx-trash"></span>
+                  <i class="iconify edit-icon mr-2" data-icon="bx:bx-edit-alt"></i>
+                  <i class="iconify delete-icon" data-icon="bx:bx-trash"></i>
                 </td>
               </tr>
 

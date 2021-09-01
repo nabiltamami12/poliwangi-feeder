@@ -14,7 +14,11 @@
   <link rel="stylesheet" href="{{ url('argon') }}/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css"
     type="text/css">
   <!-- Iconify -->
-  <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
+  <script src="https://code.iconify.design/2/2.0.3/iconify.min.js"></script>
+  <!-- Bootstrap Datepicker -->
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css"
+    type="text/css" />
   <!-- Page plugins -->
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
@@ -23,15 +27,10 @@
   <link rel="stylesheet" href="{{ url('argon') }}/assets/css/argon.css?v=1.2.0" type="text/css">
   <!-- Custom CSS -->
   <link href="{{ asset('css/main.css') }}" rel="stylesheet">
-  <link href="{{ asset('css/responsive.css') }}" rel="stylesheet">
   <!-- Datatable CSS -->
   <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap4.min.css">
   <!-- Bootstrap CSS -->
   <!-- <link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' rel='stylesheet' type='text/css'> -->
-  <!-- Bootstrap Datepicker -->
-  <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css"
-    type="text/css" />
   <!-- Font Awesome -->
   <script src="https://kit.fontawesome.com/fd5eab281a.js" crossorigin="anonymous"></script>
   <!-- JQUERY JS -->
@@ -63,17 +62,6 @@
   </script>
 </head>
 
-<div class="loaderScreen-wrapper" style="display: none;">
-  <div class="spinner-grow text-warning" role="status">
-    <span class="sr-only">Loading...</span>
-  </div>
-  <div class="spinner-grow text-info" role="status">
-    <span class="sr-only">Loading...</span>
-  </div>
-  <div class="spinner-grow text-light" role="status">
-    <span class="sr-only">Loading...</span>
-  </div>
-</div>
 <body>
   @include('partials.sidebarAkademik')
 
@@ -90,6 +78,7 @@
 
   <!-- Argon Scripts -->
   <!-- Core -->
+  <script src="{{ url('argon') }}/assets/vendor/jquery/dist/jquery.min.js"></script>
   <script src="{{ url('argon') }}/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   <script src="{{ url('argon') }}/assets/vendor/js-cookie/js.cookie.js"></script>
   <script src="{{ url('argon') }}/assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js"></script>
@@ -97,10 +86,6 @@
   <!-- Optional JS -->
   <script src="{{ url('argon') }}/assets/vendor/chart.js/dist/Chart.min.js"></script>
   <script src="{{ url('argon') }}/assets/vendor/chart.js/dist/Chart.extension.js"></script>
-  <!-- Bootstrap JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous">
-  </script>
   <!-- Argon JS -->
   <script src="{{ url('argon') }}/assets/js/argon.js?v=1.2.0"></script>
   <script src="{{ url('js/util.js') }}"></script>

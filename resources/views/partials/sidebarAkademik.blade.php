@@ -23,20 +23,18 @@
 
         <!-- Nav items -->
         <ul class="navbar-nav">
-
           <li class="nav-item">
             <a class="nav-link {{($title === "akademik-dashboard") ? 'aktif' : ''}}"
               href="{{ url('/akademik/dashboard') }} ">
-              <span class="iconify" data-icon="bx-bx-home-circle"></span>
+              <i class="iconify" data-icon="bx-bx-home-circle"></i>
               <span class="nav-link-text">Dashboard</span>
             </a>
           </li>
 
           <li class="nav-item">
             <div class="nav-link {{($title === "akademik-master") ? 'aktif' : ''}}">
-              <span class="iconify" data-icon="bx:bx-user-pin"></span>
-              <span class="nav-link-text">Master Data<img src="{{ url('images') }}/sidebar-right.png" class="arrow"
-                  alt=""></span>
+              <i class="iconify" data-icon="bx:bx-user-pin"></i>
+              <span class="nav-link-text">Master Data</span>
             </div>
             <ul class="nav-item-dropdown-content">
               <li class="nav-item">
@@ -51,7 +49,7 @@
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="{{ url('/akademik/master/datamahasiswa')}}">
-                  <span class="nav-link-text ml-0">Data Mahasiswa</span>
+                  <span class="nav-link-dropdown-text">Data Mahasiswa</span>
                 </a>
               </li>
               <li class="nav-item">
@@ -119,29 +117,28 @@
 
       <!-- <li class="nav-item">
             <div class="nav-link {{($title === "akademik-kuliah") ? 'aktif' : ''}}">
-              <span class="iconify" data-icon="bx:bx-calendar-star"></span>
-              <span class="nav-link-text">Kuliah<img src="{{ url('images') }}/sidebar-right.png" class="arrow"
-                  alt=""></span>
+              <i class="iconify" data-icon="bx:bx-calendar-star"></i>
+              <span class="nav-link-text">Kuliah</span>
             </div>
             <ul class="nav-item-dropdown-content">
               <li class="nav-item">
                 <a class="nav-link" href="/akademik/kuliah/skmahasiswaaktif">
-                  <span class="nav-link-text ml-0">SK Mahasiswa Aktif</span>
+                  <span class="nav-link-dropdown-text">SK Mahasiswa Aktif</span>
                 </a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="/akademik/kuliah/nilai">
-                  <span class="nav-link-text ml-0">Nilai</span>
+                  <span class="nav-link-dropdown-text">Nilai</span>
                 </a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="/akademik/kuliah/nilaimahasiswa">
-                  <span class="nav-link-text ml-0">Nilai Mahasiswa</span>
+                  <span class="nav-link-dropdown-text">Nilai Mahasiswa</span>
                 </a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="/akademik/kuliah/pelanggaran">
-                  <span class="nav-link-text ml-0">Pelanggaran</span>
+                  <span class="nav-link-dropdown-text">Pelanggaran</span>
                 </a>
               </li>
             </ul>
@@ -149,36 +146,36 @@
 
       <!-- <li class="nav-item">
             <div class="nav-link {{($title === "akademik-report") ? 'aktif' : ''}}">
-              <span class="iconify" data-icon="bx:bx-file-blank"></span>
-              <span class="nav-link-text">Report<img src="{{ url('images') }}/sidebar-right.png" class="arrow"
-                  alt=""></span>
+              <i class="iconify" data-icon="bx:bx-file-blank"></i>
+              <span class="nav-link-text">Report</span>
             </div>
 
             <div class="nav-item-dropdown-content">
               <ul>
                 <li class="nav-item">
-                  <div class="nav-link">
-                    <span class="nav-link-text ml-0">Mahasiswa</span>
+                  <div class="nav-link-submenu">
+                    <span class="nav-link-dropdown-text">Mahasiswa</span>
                   </div>
+
                   <ul class="nav-item-dropdown-content">
                     <li class="nav-item">
                       <a class="nav-link" href="/akademik/report/cuti">
-                        <span class="nav-link-text ml-0">Cuti</span>
+                        <span class="nav-link-dropdown-text">Cuti</span>
                       </a>
                     </li>
                     <li class="nav-item">
                       <a class="nav-link" href="/akademik/report/dropout">
-                        <span class="nav-link-text ml-0">Drop Out</span>
+                        <span class="nav-link-dropdown-text">DropOut</span>
                       </a>
                     </li>
                     <li class="nav-item">
                       <a class="nav-link" href="/akademik/report/melebihisemester">
-                        <span class="nav-link-text ml-0">Melebihi Semester</span>
+                        <span class="nav-link-dropdown-text">Melebihi Semester</span>
                       </a>
                     </li>
                     <li class="nav-item">
                       <a class="nav-link" href="/akademik/report/lulus">
-                        <span class="nav-link-text ml-0">Lulus</span>
+                        <span class="nav-link-dropdown-text">Lulus</span>
                       </a>
                     </li>
                   </ul>
@@ -186,12 +183,12 @@
 
                 <li class="nav-item">
                   <a class="nav-link" href="/akademik/report/judultugasakhir">
-                    <span class="nav-link-text ml-0">Judul Tugas Akhir</span>
+                    <span class="nav-link-dropdown-text">Judul Tugas Akhir</span>
                   </a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="/akademik/report/wali">
-                    <span class="nav-link-text ml-0">Wali</span>
+                    <span class="nav-link-dropdown-text">Wali</span>
                   </a>
                 </li>
               </ul>

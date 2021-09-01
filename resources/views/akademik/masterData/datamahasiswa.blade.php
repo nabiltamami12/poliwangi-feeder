@@ -5,23 +5,22 @@
 <header class="header"></header>
 
 <!-- Page content -->
-<section class="page-content container-fluid" id="akademik_datamahasiswa">
+<section class="page-content container-fluid">
   <div class="row">
     <div class="col-xl-12">
       <div class="card shadow padding--small">
-
-        <div class="card-header p-0 m-0 border-0">
+        <div class="card-header p-0">
           <div class="row align-items-center">
             <div class="col-12 col-md-6">
               <h2 class="mb-0 text-center text-md-left">Data Mahasiswa</h2>
             </div>
             <div class="col-12 col-md-6 text-center text-md-right mt-3 mt-md-0">
               <button type="button" onclick="add_btn()" class="btn btn-primary">
-                <span class="iconify mr-2" data-icon="bx:bxs-plus-circle"></span>
+                <i class="iconify-inline mr-1" data-icon="bx:bxs-plus-circle"></i>
                 Tambah
               </button>
-              <button type="button" class="btn btn-secondary ml-0 ml-md-3">
-                <span class="iconify mr-2" data-icon="bx:bx-download"></span>
+              <button type="button" class="btn btn-secondary ml-md-2">
+                <i class="iconify-inline mr-1" data-icon="bx:bx-cloud-download"></i>
                 Unduh Data
               </button>
             </div>
@@ -45,7 +44,7 @@
             <div class="col-md-4 form-group mt-3 mt-md-0">
               <label for="status-mahasiswa">Status Mahasiswa</label>
               <select class="form-control" id="status" name="status">
-                
+
               </select>
             </div>
           </div>
@@ -168,8 +167,8 @@ dt_opt = {
           "mRender": function(data, type, full) {
             var id = data['nomor'];
             var text_hapus = data['nama'];
-            var btn_update = `<span class="iconify edit-icon" onclick='update_btn(${id})' data-icon="bx:bx-edit-alt" ></span>` 
-            var btn_delete = `<span class="iconify delete-icon" data-icon="bx:bx-trash"  onclick='delete_btn(${id},"mahasiswa","mahasiswa","${text_hapus}")'></span>`; 
+            var btn_update = `<i class="iconify edit-icon" onclick='update_btn(${id})' data-icon="bx:bx-edit-alt" ></span>` 
+            var btn_delete = `<i class="iconify delete-icon" data-icon="bx:bx-trash"  onclick='delete_btn(${id},"mahasiswa","mahasiswa","${text_hapus}")'></span>`; 
             res = btn_update+" "+btn_delete;
             return res;
           }

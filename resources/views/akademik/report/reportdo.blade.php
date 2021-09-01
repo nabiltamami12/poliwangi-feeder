@@ -5,23 +5,22 @@
 <header class="header"></header>
 
 <!-- Page content -->
-<section class="page-content container-fluid" id="akademik_reportdo">
+<section class="page-content container-fluid">
   <div class="row">
     <div class="col-xl-12">
       <div class="card shadow padding--small">
-
-        <div class="card-header p-0 m-0 border-0 ">
+        <div class="card-header p-0">
           <div class="row align-items-center">
             <div class="col-12 col-md-6">
               <h2 class="mb-0 text-center text-md-left">Mahasiswa Drop Out</h2>
             </div>
             <div class="col-12 col-md-6 text-center text-md-right mt-3 mt-md-0">
               <button type="button" class="btn btn-primary">
-                <span class="iconify mr-2" data-icon="bx:bxs-plus-circle"></span>
+                <i class="iconify-inline mr-1" data-icon="bx:bxs-plus-circle"></i>
                 Tambah
               </button>
-              <button type="button" class="btn btn-warning ml-0 ml-md-3">
-                <span class="iconify mr-2" data-icon="bx:bx-download"></span>
+              <button type="button" class="btn btn-warning ml-md-2">
+                <span class="iconify-inline mr-1" data-icon="bx:bx-upload"></span>
                 Eksport
               </button>
             </div>
@@ -52,7 +51,7 @@
           <div class="col-12 col-md-6">
             <form class="form-inline">
               <div class="form-group row">
-                <select class="form-control" id="dataperhalaman">
+                <select class="form-control form-control-sm" id="dataperhalaman">
                   <option>10</option>
                   <option>20</option>
                   <option>30</option>
@@ -62,17 +61,14 @@
             </form>
           </div>
           <div class="col-12 col-md-4 offset-md-2 offset-0 text-right p-0 mt-3 mt-md-0">
-            <div class="input-group">
-              <input type="search" class="form-control" id="searchdata" placeholder="Pencarian ...">
-              <div class="input-group-prepend">
-                <div class="input-group-text search-icon rounded-right">
-                  <span class="iconify" data-icon="fluent:search-32-regular"></span>
-                </div>
-              </div>
-            </div>
+            <form class="search_form" action="">
+              <input class="form-control form-control-sm" type="search" placeholder="Pencarian...">
+              <button type="submit">
+                <i class="iconify-inline" data-icon="bx:bx-search"></i>
+              </button>
+            </form>
           </div>
         </div>
-
 
         <div class="table-responsive">
           <table class="table align-items-center table-borderless table-flush table-hover">
@@ -82,7 +78,7 @@
                 <th scope="col">NIM</th>
                 <th scope="col" style="width: 35%">Nama</th>
                 <th scope="col" class="text-center">Tanggal drop out</th>
-                <th scope="col" style="width: 25%">Alasan Drop out</th>
+                <th scope="col" style="width: 30%">Alasan Drop out</th>
                 <th scope="col" class="text-center">Aksi</th>
               </tr>
             </thead>
@@ -93,10 +89,10 @@
                 <td>4891203526</td>
                 <td class="font-weight-bold text-capitalize">Dwi Rahmawati</td>
                 <td class="text-center">04/06/2021</td>
-                <td class="wordwrap text-lowercase">Disini berisi alasan mahasiswa didrop out</td>
+                <td class="text-wrap text-lowercase">Disini berisi alasan mahasiswa didrop out</td>
                 <td class="text-center">
-                  <span class="iconify edit-icon" data-icon="bx:bx-edit-alt"></span>
-                  <span class="iconify delete-icon" data-icon="bx:bx-trash"></span>
+                  <i class="iconify edit-icon mr-2" data-icon="bx:bx-edit-alt"></i>
+                  <i class="iconify delete-icon" data-icon="bx:bx-trash"></i>
                 </td>
               </tr>
 
@@ -105,10 +101,10 @@
                 <td>4891203526</td>
                 <td class="font-weight-bold text-capitalize">Dwi Rahmawati</td>
                 <td class="text-center">04/06/2021</td>
-                <td class="wordwrap text-lowercase">Disini berisi alasan mahasiswa didrop out</td>
+                <td class="text-wrap text-lowercase">Disini berisi alasan mahasiswa didrop out</td>
                 <td class="text-center">
-                  <span class="iconify edit-icon" data-icon="bx:bx-edit-alt"></span>
-                  <span class="iconify delete-icon" data-icon="bx:bx-trash"></span>
+                  <i class="iconify edit-icon mr-2" data-icon="bx:bx-edit-alt"></i>
+                  <i class="iconify delete-icon" data-icon="bx:bx-trash"></i>
                 </td>
               </tr>
 
@@ -117,10 +113,10 @@
                 <td>4891203526</td>
                 <td class="font-weight-bold text-capitalize">Dwi Rahmawati</td>
                 <td class="text-center">04/06/2021</td>
-                <td class="wordwrap text-lowercase">Disini berisi alasan mahasiswa didrop out</td>
+                <td class="text-wrap text-lowercase">Disini berisi alasan mahasiswa didrop out</td>
                 <td class="text-center">
-                  <span class="iconify edit-icon" data-icon="bx:bx-edit-alt"></span>
-                  <span class="iconify delete-icon" data-icon="bx:bx-trash"></span>
+                  <i class="iconify edit-icon mr-2" data-icon="bx:bx-edit-alt"></i>
+                  <i class="iconify delete-icon" data-icon="bx:bx-trash"></i>
                 </td>
               </tr>
             </tbody>
@@ -129,20 +125,16 @@
 
         <div class="row justify-content-between align-items-center table-information">
           <h3>Menampilkan 1 sampai 3 dari 3 total data</h3>
-          <nav aria-label="pagination table">
+          <nav aria-label="Page navigation example">
             <ul class="pagination">
               <li class="page-item disabled" aria-label="Previous">
-                <a class="page-link" href="#" tabindex="-1">
-                  Previous
-                </a>
+                <a class="page-link" href="#" tabindex="-1">Previous</a>
               </li>
               <li class="page-item active">
                 <a class="page-link" href="#">1<span class="sr-only">(current)</span></a>
               </li>
               <li class="page-item disabled" aria-label="Next">
-                <a class="page-link" href="#">
-                  Next
-                </a>
+                <a class="page-link" href="#">Next</a>
               </li>
             </ul>
           </nav>

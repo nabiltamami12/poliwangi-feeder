@@ -3,12 +3,10 @@
 @section('content')
 
 <!-- Header -->
-<header class="header">
-
-</header>
+<header class="header"></header>
 
 <!-- Page content -->
-<section class="page-content  container-fluid" id="akademik_dataruangan">
+<section class="page-content container-fluid">
   <div class="row">
     <div class="col-xl-12">
       <div class="card padding--small">
@@ -92,8 +90,8 @@ dt_opt = {
         "mRender": function(data, type, full) {
           var id = data['nomor'];
           var text_hapus = data['ruang'];
-          var btn_update = `<span class="iconify edit-icon" onclick='update_btn(${id})' data-icon="bx:bx-edit-alt" ></span>` 
-          var btn_delete = `<span class="iconify delete-icon" data-icon="bx:bx-trash"  onclick='delete_btn(${id},"ruangan","ruangan","${text_hapus}")'></span>`; 
+          var btn_update = `<i class="iconify edit-icon" onclick='update_btn(${id})' data-icon="bx:bx-edit-alt" ></i>` 
+          var btn_delete = `<i class="iconify delete-icon" data-icon="bx:bx-trash"  onclick='delete_btn(${id},"ruangan","ruangan","${text_hapus}")'></i>`; 
           res = btn_update+" "+btn_delete;
           return res;
 
