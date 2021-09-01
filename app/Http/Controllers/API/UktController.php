@@ -4,77 +4,34 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Dosen;
+use App\Models\Ukt;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
-use DB;
 
-class DosenController extends Controller
+class UktController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+
     protected $status = null;
     protected $err = null;
     protected $data = null;
 
-    public function filter($id,$semester)
-    {
-        $prodi = DB::table('program_studi as ps')
-                        ->select('ps.nomor','ps.program_studi','p.program as nama_program')
-                        ->join('program as p','p.nomor','=','ps.program')
-                        ->join('matakuliah as m','m.program_studi','=','ps.nomor')
-                        ->join('dosen_pengampu as dp','dp.matakuliah','=','m.nomor')
-                        ->where('dp.dosen',$id)
-                        ->groupBy('ps.nomor')
-                        ->get();
-        $kelas = DB::table('kelas as k')
-                        ->select( 'm.nomor as matakuliah','k.nomor' , 'k.kelas', 'k.pararel' , 'k.kode', 'm.program_studi')
-                        ->join('matakuliah as m','m.kelas','=','k.nomor')
-                        ->join('dosen_pengampu as dp','dp.matakuliah','=','m.nomor')
-                        ->where('dp.dosen',$id)
-                        ->get();
-        $matkul = DB::table('matakuliah as m')
-                        ->select('m.nomor','m.matakuliah','m.semester','m.program_studi')
-                        ->join('program_studi as ps','m.program_studi','=','ps.nomor')
-                        ->join('dosen_pengampu as dp','dp.matakuliah','=','m.nomor')
-                        ->where('m.semester',$semester)
-                        ->where('dp.dosen',$id)
-                        ->get();
-        $this->status = "success";
-
-        $this->data = [
-            'prodi'=>$prodi,
-            'kelas'=>$kelas,
-            'matakuliah'=>$matkul,
-        ];
-
-        return response()->json([
-            "status" => $this->status,
-            "data" => $this->data,
-            "error" => $this->err
-        ]);
-    }
-
     public function index()
     {
-        //
-        $this->data = Dosen::select(
-            'PEGAWAI.nomor',
-            'PEGAWAI.nip',
-            'PEGAWAI.nama',
-            'PEGAWAI.tgllahir',
-            'PEGAWAI.notelp',
-            'PEGAWAI.email',
-            "STAFF.staff"
+        $this->data = Ukt::select(
+            'tarif_kelompok.*',
+            DB::raw("CONCAT(program.program, ' ', program_studi.program_studi) AS prodi")
         )
-        ->join("STAFF", "STAFF.nomor", "=", "PEGAWAI.staff")
-        ->where("PEGAWAI.staff", "=", 4)
+        ->join('program_studi', 'tarif_kelompok.program_studi', '=', 'program_studi.nomor')
+        ->join('program', 'program_studi.program', '=', 'program.nomor')
         ->get();
-        $this->status = "success";
 
-       
+        $this->status = "success";
+        
         return response()->json([
             "status" => $this->status,
             "data" => $this->data,
@@ -102,20 +59,14 @@ class DosenController extends Controller
     {
         $data = $request->all();
         $validated = Validator::make($data, [
-            'nomor' => 'required|integer|unique:PEGAWAI',
-            'nip' => 'required|integer|unique:PEGAWAI',
-            'nama' => 'required|string|unique:PEGAWAI',
-            'tgllahir' => 'required|date',
-            'notelp' => 'required|string|unique:PEGAWAI',
-            'email' => 'required|string|unique:PEGAWAI',
-            'staff' => 'required|integer|required'
+            'program_studi' => 'required'
         ]);
 
         if ($validated->fails()) {
             $this->status = 'error';
             $this->err = $validated->errors();
         } else {
-            $data = Dosen::create($data);
+            $data = Ukt::create($data);
             $this->data = $data;
             $this->status = "success";
         }
@@ -134,20 +85,16 @@ class DosenController extends Controller
      */
     public function show($id)
     {
-        $this->data = Dosen::select(
-            'PEGAWAI.nip',
-            'PEGAWAI.nama',
-            'PEGAWAI.tgllahir',
-            'PEGAWAI.notelp',
-            'PEGAWAI.email',
-            "STAFF.staff"
+        $this->data = Ukt::select(
+            'tarif_kelompok.*',
+            DB::raw("CONCAT(program.program, ' ', program_studi.program_studi) AS prodi")
         )
-        ->join("STAFF", "STAFF.nomor", "=", "PEGAWAI.staff")
-        ->where("PEGAWAI.staff", "=", 4)
-        ->where("PEGAWAI.nomor", "=", $id)
+        ->join('program_studi', 'tarif_kelompok.program_studi', '=', 'program_studi.nomor')
+        ->join('program', 'program_studi.program', '=', 'program.nomor')
+        ->where('tarif_kelompok.id', $id)
         ->get();
-        $this->status = "success";
 
+        $this->status = "success";
         
         return response()->json([
             "status" => $this->status,
@@ -176,16 +123,11 @@ class DosenController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $check = Dosen::where('NOMOR', $id);
+        $check = Ukt::where('id', $id);
         $data = $request->all();
 
         $validate = Validator::make($data, [
-            'nip' => 'integer|unique:PEGAWAI',
-            'nama' => 'required|string|unique:PEGAWAI',
-            'tgllahir' => 'date',
-            'notelp' => 'string|unique:PEGAWAI',
-            'email' => 'string|unique:PEGAWAI',
-            'staff' => 'integer'
+            
         ]);
 
         if ($validate->fails()) {
@@ -216,7 +158,7 @@ class DosenController extends Controller
      */
     public function destroy($id)
     {
-        $check = Dosen::where('NOMOR', $id);
+        $check = Ukt::where('id', $id);
 
         if ($check) {
             $this->status = "success";

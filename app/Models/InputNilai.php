@@ -9,7 +9,7 @@ class InputNilai extends Model
 {
     use HasFactory;
     public $timestamps = false;
-    public $table = "NILAI";
+    public $table = "nilai";
     protected $fillable = [
         'nomor',
         'kuliah',

@@ -31,13 +31,13 @@ class ImportNilai extends FormRequest
             'data.*.quis1' => 'required|numeric',
             'data.*.quis2' => 'required|numeric',
             'data.*.tugas' => 'required|numeric',
-            'data.*.ujian' => 'required|numeric',
+            // 'data.*.ujian' => 'required|numeric',
             'data.*.na' => 'required|numeric',
-            'data.*.her' => 'required|numeric',
+            // 'data.*.her' => 'required|numeric',
             'data.*.nh' => 'required|string',
             'data.*.keterangan' => 'required|string',
             'data.*.nhu' => 'required|string',
-            'data.*.nsp' => 'required|numeric',
+            // 'data.*.nsp' => 'required|numeric',
             'data.*.kuis' => 'required|numeric',
             'data.*.praktikum' => 'required|numeric'
 

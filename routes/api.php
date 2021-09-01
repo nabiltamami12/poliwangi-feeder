@@ -126,9 +126,11 @@ Route::prefix('v1')->group(function () {
     Route::delete('dosenpengampu/{id}', [Ctr\DosenPengampuController::class, 'destroy']);
 
     //INPUTNILAIDOSEN
+    Route::get('/inputnilai/', '\App\Http\Controllers\API\InputNilaiController@index');
+    Route::get('/inputnilai/rekap', '\App\Http\Controllers\API\InputNilaiController@rekap');
     Route::get('/inputnilai/{tahun}&{mk}&{kls}&{prodi}', '\App\Http\Controllers\API\InputNilaiController@show');
     Route::post('/inputnilai', '\App\Http\Controllers\API\InputNilaiController@store');
-    Route::put('/inputnilai/{id}', '\App\Http\Controllers\API\InputNilaiController@update');
+    Route::put('/inputnilai/publish', '\App\Http\Controllers\API\InputNilaiController@publish');
     Route::delete('/inputnilai/{id}', '\App\Http\Controllers\API\InputNilaiController@destroy');
 
     // ABSENSI
@@ -139,12 +141,6 @@ Route::prefix('v1')->group(function () {
     Route::post('/absensi', [Ctr\AbsensiController::class, 'store']);
     Route::put('/absensi/{id}', [Ctr\AbsensiController::class, 'update']);
     Route::delete('/absensi/{id}', [Ctr\AbsensiController::class, 'destroy']);
-
-    //INPUTNILAIDOSEN
-    Route::get('/inputnilai/{tahun}&{mk}&{kls}&{prodi}', '\App\Http\Controllers\API\InputNilaiController@show');
-    Route::post('/inputnilai', '\App\Http\Controllers\API\InputNilaiController@store');
-    Route::put('/inputnilai/{id}', '\App\Http\Controllers\API\InputNilaiController@update');
-    Route::delete('/inputnilai/{id}', '\App\Http\Controllers\API\InputNilaiController@destroy');
 
     //daftar matkul dosen pengampu
     Route::get('/daftar/{id}', '\App\Http\Controllers\API\DaftarMatkulController@show');
@@ -171,6 +167,7 @@ Route::prefix('v1')->group(function () {
     Route::put('/jurusanpilihan/{id}', '\App\Http\Controllers\API\JurusanpilihanController@update');
     Route::delete('/jurusanpilihan/{id}', '\App\Http\Controllers\API\JurusanpilihanController@destroy');
 
+<<<<<<< HEAD
     //syarat
     Route::get('/syarat/{id}', '\App\Http\Controllers\API\SyaratController@show');
     Route::post('/syarat', '\App\Http\Controllers\API\SyaratController@store');
@@ -182,6 +179,26 @@ Route::prefix('v1')->group(function () {
     Route::post('/daftar', '\App\Http\Controllers\API\JalurpendaftarController@store');
     Route::put('/daftar/{id}', '\App\Http\Controllers\API\JalurpendaftarController@update');
     Route::delete('/daftar/{id}', '\App\Http\Controllers\API\JalurpendaftarController@destroy');
+=======
+    // Rekap Tarif UKT
+    Route::get('/keuangan/rekap_ukt', [Ctr\UktController::class, 'index']);
+    Route::post('/keuangan/rekap_ukt', [Ctr\UktController::class, 'store']);
+    Route::get('/keuangan/rekap_ukt/{id}', [Ctr\UktController::class, 'show']);
+    Route::put('/keuangan/rekap_ukt/{id}', [Ctr\UktController::class, 'update']);
+    Route::delete('/keuangan/rekap_ukt/{id}', [Ctr\UktController::class, 'destroy']);
+
+
+    // SPI Mandiri
+    Route::post('/keuangan/spi/import', [Ctr\SpiController::class, 'import']);
+    Route::get('/keuangan/spi/export', [Ctr\SpiController::class, 'export']);
+    Route::get('/keuangan/spi', [Ctr\SpiController::class, 'index']);
+    Route::get('/keuangan/spi/{id}', [Ctr\SpiController::class, 'show']);
+
+
+
+
+    
+>>>>>>> 55242d61ccac7ce912f1769c1ae97fec76a53022
 });
 Route::prefix('v1')->middleware('auth:api')->group(function () {
     Route::get('/user', function (Request $request) {

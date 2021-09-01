@@ -124,12 +124,6 @@ Route::prefix('dosen')->group(function () {
             "title" => "dosen-presensi"
         ]);
     });
-
-    Route::get('/penilaian', function () {
-        return view('dosen.inputNilai', [
-            "title" => "dosen-penilaian"
-        ]);
-    });
 });
 
 
@@ -344,6 +338,20 @@ Route::prefix('akademik')->group(function () {
             ]);
         });
 
+    });
+
+
+    Route::prefix('kuliah')->group(function (){
+        Route::get('/penilaian', function () {
+            return view('dosen.inputNilai', [
+                "title" => "dosen-penilaian"
+            ]);
+        });
+        Route::get('/rekap-nilai', function () {
+            return view('akademik.kuliah/datarekapnilai', [
+                "title" => "rekap-nilai"
+            ]);
+        });
     });
 
     Route::prefix('report')->group(function (){

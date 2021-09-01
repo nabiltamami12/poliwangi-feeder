@@ -34,13 +34,6 @@
               <span class="nav-link-text">Presensi</span>
             </a>
           </li>
-
-          <li class="nav-item">
-            <a class="nav-link {{($title === "dosen-penilaian") ? 'aktif' : ''}}" href="/dosen/penilaian">
-              <span class=" iconify" data-icon="bx:bx-book-bookmark"></span>
-              <span class="nav-link-text">Penilaian</span>
-            </a>
-          </li>
         </ul>
       </div>
     </div>
