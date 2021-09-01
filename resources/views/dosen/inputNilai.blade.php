@@ -158,7 +158,7 @@ $(document).ready(function() {
       'dosen' : nama,
     }
     localStorage.setItem('cetak-eval', JSON.stringify(arr));
-    window.location.href = "{{url('akademik/kuliah/cetak-evaluasi-nilai/')}}";
+    window.open("{{url('akademik/kuliah/cetak-evaluasi-nilai/')}}",'_blank');
   })
 
   $('#btn_publish').on('click',function (e) {
