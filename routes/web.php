@@ -366,6 +366,18 @@ Route::prefix('akademik')->group(function () {
                 "title" => "keuangan-tarif",
             ]);
         });
+        Route::get('/tarif/cu/', function () {
+            return view('keuangan.cutarifspi', [
+                "id" => null,
+                "title" => "keuangan-tarif"
+            ]);
+        });
+        Route::get('/tarif/cu/{id}', function ($id) {
+            return view('keuangan.cutarifspi', [
+                "id" => $id,
+                "title" => "keuangan-tarif"
+            ]);
+        });
         
         Route::get('/spi', function () {
             return view('keuangan.spiMandiri', [
