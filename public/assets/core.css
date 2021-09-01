@@ -64,18 +64,15 @@ table tr td .iconify:hover{
 .sub-aktif{
   color: #28a3eb !important;
 }
-
 .page-content hr.mt {
   margin: 1rem 0;
 }
 .page-content input[type="search"]{
   border-radius: .5rem;
 }
-
 .nav-item-dropdown-content {
   display: none;
 }
-
 .showsubmenu .nav-item-dropdown-content{
   display: inherit;
 }

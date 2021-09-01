@@ -103,48 +103,48 @@
       </div>
       <ul class="nav-item-dropdown-content">
         <li class="nav-item">
-          <a class="nav-link" href="/akademik/khs/khs">
+          <a class="nav-link" href="{{ url('/akademik/khs/khs')}}">
             <span class="nav-link-text ml-0">KHS</span>
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/akademik/khs/khsmahasiswa">
+          <a class="nav-link" href="{{ url('/akademik/khs/khsmahasiswa')}}">
             <span class="nav-link-text ml-0">KHS Mahasiswa</span>
           </a>
         </li>
       </ul>
-      </li> -->
+      </li> --}}
 
-      <!-- <li class="nav-item">
+    {{--  <li class="nav-item">
             <div class="nav-link {{($title === "akademik-kuliah") ? 'aktif' : ''}}">
               <i class="iconify" data-icon="bx:bx-calendar-star"></i>
               <span class="nav-link-text">Kuliah</span>
             </div>
             <ul class="nav-item-dropdown-content">
               <li class="nav-item">
-                <a class="nav-link" href="/akademik/kuliah/skmahasiswaaktif">
+                <a class="nav-link" href="{{ url('/akademik/kuliah/skmahasiswaaktif')}}">
                   <span class="nav-link-dropdown-text">SK Mahasiswa Aktif</span>
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/akademik/kuliah/nilai">
+                <a class="nav-link" href="{{ url('/akademik/kuliah/nilai')}}">
                   <span class="nav-link-dropdown-text">Nilai</span>
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/akademik/kuliah/nilaimahasiswa">
+                <a class="nav-link" href="{{ url('/akademik/kuliah/nilaimahasiswa')}}">
                   <span class="nav-link-dropdown-text">Nilai Mahasiswa</span>
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/akademik/kuliah/pelanggaran">
+                <a class="nav-link" href="{{ url('/akademik/kuliah/pelanggaran')}}">
                   <span class="nav-link-dropdown-text">Pelanggaran</span>
                 </a>
               </li>
             </ul>
-          </li> -->
+          </li> --}}
 
-      <!-- <li class="nav-item">
+      {{-- <li class="nav-item">
             <div class="nav-link {{($title === "akademik-report") ? 'aktif' : ''}}">
               <i class="iconify" data-icon="bx:bx-file-blank"></i>
               <span class="nav-link-text">Report</span>
@@ -159,22 +159,22 @@
 
                   <ul class="nav-item-dropdown-content">
                     <li class="nav-item">
-                      <a class="nav-link" href="/akademik/report/cuti">
+                      <a class="nav-link" href="{{ url('/akademik/report/cuti">
                         <span class="nav-link-dropdown-text">Cuti</span>
                       </a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" href="/akademik/report/dropout">
+                      <a class="nav-link" href="{{ url('/akademik/report/dropout">
                         <span class="nav-link-dropdown-text">DropOut</span>
                       </a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" href="/akademik/report/melebihisemester">
+                      <a class="nav-link" href="{{ url('/akademik/report/melebihisemester">
                         <span class="nav-link-dropdown-text">Melebihi Semester</span>
                       </a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" href="/akademik/report/lulus">
+                      <a class="nav-link" href="{{ url('/akademik/report/lulus">
                         <span class="nav-link-dropdown-text">Lulus</span>
                       </a>
                     </li>
@@ -182,12 +182,12 @@
                 </li>
 
                 <li class="nav-item">
-                  <a class="nav-link" href="/akademik/report/judultugasakhir">
+                  <a class="nav-link" href="{{ url('/akademik/report/judultugasakhir">
                     <span class="nav-link-dropdown-text">Judul Tugas Akhir</span>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="/akademik/report/wali">
+                  <a class="nav-link" href="{{ url('/akademik/report/wali">
                     <span class="nav-link-dropdown-text">Wali</span>
                   </a>
                 </li>
