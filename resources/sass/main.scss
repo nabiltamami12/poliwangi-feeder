@@ -20,10 +20,6 @@ body {
     cursor: pointer;
 }
 
-.page-heading {
-    @include mixintext(600, 1.125rem, 1.22em, $font-black);
-}
-
 .form-row {
     display: flex;
     margin-right: 0;
@@ -223,36 +219,6 @@ nav#navbar {
                 background: rgba(6, 46, 70, 0.25);
                 border-radius: 0.25rem;
             }
-        }
-    }
-
-    // ===================== CHART =====================
-    #piechart {
-        border-radius: 0.5rem;
-        background-color: #fff;
-        padding: 1.875rem 1.5625rem;
-        .page-heading {
-            text-align: center;
-            margin-bottom: 1.125rem;
-        }
-
-        .data-piechart {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            grid-column-gap: 1.5rem;
-        }
-
-        .data-item {
-            max-width: 100%;
-            canvas {
-                max-width: 100%;
-            }
-        }
-    }
-
-    #barchart {
-        .page-heading {
-            margin-bottom: 1.25rem;
         }
     }
 

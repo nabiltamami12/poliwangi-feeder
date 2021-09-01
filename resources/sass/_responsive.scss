@@ -116,16 +116,6 @@
                 }
             }
         }
-
-        #piechart {
-            h1 {
-                margin-bottom: 0;
-            }
-            .data-piechart {
-                grid-template-columns: repeat(2, 1fr);
-                grid-row-gap: 24px;
-            }
-        }
     }
 }
 

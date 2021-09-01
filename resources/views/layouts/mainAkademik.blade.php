@@ -15,53 +15,23 @@
     type="text/css">
   <!-- Iconify -->
   <script src="https://code.iconify.design/2/2.0.3/iconify.min.js"></script>
+  <!-- Page plugins -->
   <!-- Bootstrap Datepicker -->
   <link rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css"
     type="text/css" />
-  <!-- Page plugins -->
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
-    integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
   <!-- Argon CSS -->
   <link rel="stylesheet" href="{{ url('argon') }}/assets/css/argon.css?v=1.2.0" type="text/css">
   <!-- Custom CSS -->
   <link href="{{ asset('css/main.css') }}" rel="stylesheet">
   <!-- Datatable CSS -->
   <link href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css" rel="stylesheet">
-  <!-- Bootstrap CSS -->
-  <!-- <link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' rel='stylesheet' type='text/css'> -->
-  <!-- Font Awesome -->
-  <script src="https://kit.fontawesome.com/fd5eab281a.js" crossorigin="anonymous"></script>
-  <!-- JQUERY JS -->
-  <script src="{{ url('argon') }}/assets/vendor/jquery/dist/jquery.min.js"></script>
-  <!-- Datatable JS -->
-  <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
-  <!-- Bootstrap JS -->
-  <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js' type='text/javascript'></script>
-  <!-- Font Awesome JS -->
-  <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
-    integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous">
-  </script>
-  <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"
-    integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous">
-  </script>
+
   <script>
     var url_api = "http://127.0.0.1:8000/api/v1";
     var url = "{{ base_path(); }}";
     var dataJurusan,dataDosen,dataProgram;
   </script>
-  {{-- <style type="text/css">
-    .form-group {
-      padding-left: 1.5rem !important;
-      padding-right: 1.3rem !important;
-      margin-top: 16px !important;
-    }
-
-    form button {
-      height: 49px;
-    }
-  </style> --}}
 </head>
 
 <body>
@@ -96,6 +66,8 @@
   <!-- Bootstrap Datepicker -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.js"
     type="text/javascript"></script>
+  <!-- Datatable JS -->
+  <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
   @yield('js')
 </body>
 
