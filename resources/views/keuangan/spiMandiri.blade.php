@@ -1,4 +1,4 @@
-@extends('layouts.mainKeuangan')
+@extends('layouts.mainAkademik')
 
 @section('content')
 <!-- Header -->
@@ -76,7 +76,7 @@
                 <td class="font-weight-bold text-right">Rp. 3.000.000</td>
                 <td class="font-weight-bold text-right">Rp. 2.000.000</td>
                 <td class="text-center">
-                  <a href="/keuangan/rekapitulasi/spi/detail" class="font-weight-bold text-primary text-underline">Lihat
+                  <a href="{{ url('akademik/keuangan/spi/detail') }}" class="font-weight-bold text-primary text-underline">Lihat
                     Detail</a>
                 </td>
               </tr>
@@ -90,7 +90,7 @@
                 <td class="font-weight-bold text-right">Rp. 3.500.000</td>
                 <td class="font-weight-bold text-right">Rp. 1.500.000</td>
                 <td class="text-center">
-                  <a href="/keuangan/rekapitulasi/spi/detail" class="font-weight-bold text-primary text-underline">Lihat
+                  <a href="{{ url('akademik/keuangan/spi') }}" class="font-weight-bold text-primary text-underline">Lihat
                     Detail</a>
                 </td>
               </tr>

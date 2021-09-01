@@ -1,4 +1,4 @@
-@extends('layouts.mainKeuangan')
+@extends('layouts.mainAkademik')
 
 @section('content')
 <!-- Header -->
@@ -14,18 +14,8 @@
             <div class="col-12 col-md-6">
               <h2 class="mb-0 text-center text-md-left">Tarif SPI & UKT</h2>
             </div>
-            <div class="col-12 col-md-6 text-center text-md-right mt-3 mt-md-0">
-              <div class="dropdown">
-                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton"
-                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i class="iconify-inline mr-1" data-icon="bx:bx-cog"></i>
-                  <span class="mr-1">Setting Tarif & Kelompok</span>
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <a class="dropdown-item" href="/keuangan/tarif/UKTSPI">UKT & SPI</a>
-                  <a class="dropdown-item" href="#">Biaya Admin</a>
-                </div>
-              </div>
+            <div class="col text-right">
+              <button type="button" onclick="add_btn()" class="btn btn-primary "><img src="/images/add-icon--white.png" alt="">Tambah</button>
             </div>
           </div>
         </div>

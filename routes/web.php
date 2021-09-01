@@ -360,6 +360,26 @@ Route::prefix('akademik')->group(function () {
         });
     });
 
+    Route::prefix('keuangan')->group(function (){
+        Route::get('/tarif', function () {
+            return view('keuangan.tarif_UKT_SPI', [
+                "title" => "keuangan-tarif",
+            ]);
+        });
+        
+        Route::get('/spi', function () {
+            return view('keuangan.spiMandiri', [
+                "title" => "keuangan-rekapitulasi",
+            ]);
+        });
+
+        Route::get('/spi/detail', function () {
+            return view('keuangan.detailSPI', [
+                "title" => "keuangan-rekapitulasi",
+            ]);
+        });
+    });
+
     Route::prefix('report')->group(function (){
         Route::get('/cuti', function () {
             return view('akademik.report.reportcuti', [

@@ -1,4 +1,4 @@
-@extends('layouts.mainKeuangan')
+@extends('layouts.mainAkademik')
 
 @section('content')
 <!-- Header -->

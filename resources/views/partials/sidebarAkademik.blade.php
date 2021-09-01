@@ -96,7 +96,7 @@
             </ul>
           </li>
           <li class="nav-item">
-            <div class="nav-link {{($title === "akademik-master") ? 'aktif' : ''}}">
+            <div class="nav-link {{($title === "akademik-kuliah") ? 'aktif' : ''}}">
             <span class=" iconify" data-icon="bx:bx-book-bookmark"></span>
               <span class="nav-link-text">Kuliah<img src="{{ url('images') }}/sidebar-right.png" class="arrow"
                   alt=""></span>
@@ -112,6 +112,27 @@
                   <span class="nav-link-text ml-0">Rekap Nilai</span>
                 </a>
               </li>
+            </ul>
+          </li>
+          
+          <li class="nav-item">
+            <div class="nav-link {{($title === "akademik-keuangan") ? 'aktif' : ''}}">
+            <span class=" iconify" data-icon="bx:bx-book-bookmark"></span>
+              <span class="nav-link-text">Keuangan<img src="{{ url('images') }}/sidebar-right.png" class="arrow"
+                  alt=""></span>
+            </div>
+            <ul class="nav-item-dropdown-content">
+              <li class="nav-item">
+                <a class="nav-link {{($title === "keuangan-tarif") ? 'aktif' : ''}}" href="{{ url('akademik/keuangan/tarif') }} ">
+                  <span class="nav-link-text">Tarif UKT & SPI</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link {{($title === "keuangan-rekapitulasi") ? 'aktif' : ''}}" href="{{ url('akademik/keuangan/spi') }} ">
+                  <span class="nav-link-text">SPI</span>
+                </a>
+              </li>
+             
             </ul>
           </li>
           {{--
