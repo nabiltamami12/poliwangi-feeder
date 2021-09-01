@@ -112,6 +112,11 @@
                   <span class="nav-link-text ml-0">Rekap Nilai</span>
                 </a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link {{($title === "rekap-nilai") ? 'aktif' : ''}}" href="{{url('akademik/kuliah/absensi/dashboard-mahasiswa')}}">
+                  <span class="nav-link-text ml-0">Abasensi Mahasiswa (Dashboard)</span>
+                </a>
+              </li>
             </ul>
           </li>
           
@@ -132,7 +137,6 @@
                   <span class="nav-link-text">SPI</span>
                 </a>
               </li>
-             
             </ul>
           </li>
           {{--

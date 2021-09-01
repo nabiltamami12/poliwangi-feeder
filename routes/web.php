@@ -358,6 +358,12 @@ Route::prefix('akademik')->group(function () {
                 "title" => "rekap-nilai"
             ]);
         });
+
+        Route::get('/absensi/dashboard-mahasiswa', function () {
+            return view('mahasiswaLama.dashboardMahasiswa', [
+                "title" => "mala-dashboard"
+            ]);
+        });
     });
 
     Route::prefix('keuangan')->group(function (){

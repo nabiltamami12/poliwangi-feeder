@@ -138,15 +138,19 @@ class AbsensiController extends Controller
      */
     public function store(Request $request)
     {
-        $date = Carbon::now()->format('Y-m-d h:i:s');
+        date_default_timezone_set('Asia/Jakarta');
+        Carbon::setLocale('id');
+
+        $date = Carbon::now()->format('Y-m-d H:i:s');
         $request->merge(["tanggal" => $date]);
+        $request['status'] = "H";
+        $request['minggu'] = 1;
         $data = $request->all();
-        
         $validated = Validator::make($data, [
-            'kuliah' => 'required',
-            'mahasiswa' => 'required',
-            'status' => 'required',
-            'minggu' => 'required'
+            // 'kuliah' => 'required',
+            // 'mahasiswa' => 'required',
+            // 'status' => 'required',
+            // 'minggu' => 'required'
         ]);
 
         if ($validated->fails()) {
@@ -172,6 +176,7 @@ class AbsensiController extends Controller
      */
     public function show($id)
     {
+        DB::enableQueryLog();
         // Untuk mengambil hanya per mahasiswa.
         $table = DB::table('mahasiswa');
         date_default_timezone_set('Asia/Jakarta');
@@ -193,37 +198,53 @@ class AbsensiController extends Controller
         
         try {
             $data = $table->distinct()->select(
-                'mahasiswa.nomor',
                 'matakuliah.matakuliah',
+                'pegawai.nama as dosen',
+                'kelas.kode as kelas',
                 'hari.hari',
                 'jam.jam',
                 'kuliah.nomor as kuliah')
             ->join("kuliah", "kuliah.kelas", "=", "mahasiswa.kelas")
+            ->join("kelas", "kelas.nomor", "=", "kuliah.kelas")
             ->join("matakuliah", "matakuliah.nomor", "=", "kuliah.matakuliah")
+            ->join("dosen_pengampu", "dosen_pengampu.matakuliah", "=", "matakuliah.nomor")
+            ->join("pegawai", "pegawai.nomor", "=", "dosen_pengampu.dosen")
             ->join("hari", "hari.nomor", "=", "kuliah.hari")
             ->join("jam", "jam.nomor", "=", "kuliah.jam")
             ->where('mahasiswa.nomor', '=', $id)
             ->where("hari.hari", $day)
-            ->whereBetween('jam.jam', [$now, $limit])
+            // ->whereBetween('jam.jam', [$now, $limit])
             ->orderBy('jam.jam', 'asc')
             ->get();
 
-            
+            // die(json_encode(DB::getQueryLog()));
 
             foreach ($data as $key=>$value) {
                 $check[$key] = Abs::whereDate('tanggal', $date)->where('kuliah',  $data[$key]->kuliah)->first();
 
                 if ($check[$key]) {
-                    $baru[$key] = $check[$key]->status;
+                    if ($check[$key]->status=='H') {
+                        $baru[$key] = "Hadir";
+                    } elseif ($check[$key]->status=='I') {
+                        $baru[$key] = "Izin";
+                    } elseif ($check[$key]->status=='S') {
+                        $baru[$key] = "Sakit";
+                    } else{
+                        $baru[$key] = "Unknown";
+                    }
+                    $status = $check[$key]->status;
                 } else {
+                    $status = null;
                     $baru[$key] = "Belum Presensi";
                 };
                 array_push($array, [
-                    "nomor_mahasiswa" => $data[$key]->nomor,
                     "matakuliah" => $data[$key]->matakuliah,
+                    "dosen" => $data[$key]->dosen,
+                    "kelas" => $data[$key]->kelas,
                     "hari" => $data[$key]->hari,
                     "jam" => $data[$key]->jam,
-                    'status' => $baru[$key],
+                    'status' => $status,
+                    'status_text' => $baru[$key],
                     'kuliah' => $data[$key]->kuliah
                 ]);
             }
