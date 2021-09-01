@@ -347,6 +347,13 @@ Route::prefix('akademik')->group(function () {
                 "title" => "dosen-penilaian"
             ]);
         });
+        
+        Route::get('/cetak-evaluasi-nilai', function () {
+            return view('cetak.evaluasinilai', [
+                "title" => "dosen-penilaian"
+            ]);
+        });
+        
         Route::get('/rekap-nilai', function () {
             return view('akademik.kuliah/datarekapnilai', [
                 "title" => "rekap-nilai"

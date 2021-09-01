@@ -16,7 +16,7 @@
               <h3 class="mb-0 text-center text-md-left font-weight-bold">Nilai Mahasiswa</h3>
             </div>
             <div class="col-12 col-md-9 text-center text-md-right">
-              <button type="button" class="btn btn-icon btn-warning mt-3 mt-md-0">
+              <button type="button" id="btn_cetak" class="btn btn-icon btn-warning mt-3 mt-md-0">
                 <span class="btn-inner--icon"><span class="iconify" data-icon="bx:bx-printer"></span></span>
                 <span class="btn-inner--text">Cetak Data</span>
               </button>
@@ -82,6 +82,7 @@ var countData
 
 $(document).ready(function() {
   var id = dataGlobal['user']['nomor'];
+  var nama = dataGlobal['user']['nama'];
   var semester = dataGlobal['periode']['semester'];
   var tahun = dataGlobal['periode']['tahun'];
   getFilter(id,semester);
@@ -142,6 +143,25 @@ $(document).ready(function() {
       }
     })
   })
+
+  $('#btn_cetak').on('click',function (e) {
+    var id_kelas = $('#kelas').val()
+    var matakuliah = $('#matkul').val()
+    
+    var arr = {
+      'tahun' : tahun,
+      'semester' : $('#semester').val(),
+      'prodi' : $('#prodi :selected').text(),
+      'kelas' : $('#kelas :selected').text(),
+      'id_kelas' : id_kelas,
+      'matakuliah' : $('#matkul :selected').text(),
+      'id_matakuliah' : matakuliah,
+      'dosen' : nama,
+    }
+    localStorage.setItem('cetak-eval', JSON.stringify(arr));
+    window.location.href = "{{url('akademik/kuliah/cetak-evaluasi-nilai/')}}";
+  })
+
   $('#btn_publish').on('click',function (e) {
     var dataSimpan = [];
     for (let index = 1; index <= countData; index++) {
