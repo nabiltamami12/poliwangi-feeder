@@ -78,7 +78,6 @@
 
   <!-- Argon Scripts -->
   <!-- Core -->
-  <script src="{{ url('argon') }}/assets/vendor/jquery/dist/jquery.min.js"></script>
   <script src="{{ url('argon') }}/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   <script src="{{ url('argon') }}/assets/vendor/js-cookie/js.cookie.js"></script>
   <script src="{{ url('argon') }}/assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js"></script>
