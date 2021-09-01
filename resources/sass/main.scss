@@ -844,6 +844,75 @@ nav#navbar {
     }
 }
 
+// ===================== SELECT2 =====================
+.select2-container--default .select2-selection--single::after {
+    content: url("https://api.iconify.design/bx/bx-chevron-down.svg?color=%23041F2F");
+    position: absolute;
+    top: 50%;
+    transform: translateY(-40%);
+    right: 1.5rem;
+}
+
+.select2-container--open .select2-selection--single::after {
+    content: url("https://api.iconify.design/bx/bx-chevron-up.svg?color=%23041F2F");
+}
+
+.select2.select2-container {
+    width: 100% !important;
+}
+
+.select2.select2-container .select2-selection {
+    border: 1px solid #c4c4c4;
+    border-radius: 0.5rem;
+    height: calc(1.5em + 1.25rem + 2px);
+    outline: none !important;
+    transition: all 0.15s ease-in-out;
+    padding: 0 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.select2.select2-container .select2-selection .select2-selection__rendered {
+    @include mixintext(400, 0.875rem, 1.22em, $font-black);
+    padding: 0;
+}
+
+.select2.select2-container.select2-container--open
+    .select2-selection.select2-selection--single {
+    background: #f8f8f8;
+    border-radius: 0.5rem !important;
+    border-color: $primary;
+}
+
+.select2-container .select2-dropdown {
+    background-color: #fff;
+    border: 1px solid #c4c4c4;
+    padding: 0;
+}
+
+.select2-container .select2-dropdown .select2-search input {
+    outline: none !important;
+    border: 1px solid #c4c4c4 !important;
+    padding: 0.5rem 1.5rem !important;
+}
+
+.select2-container
+    .select2-dropdown
+    .select2-results
+    ul
+    .select2-results__option {
+    padding-left: 1.5rem;
+}
+
+.select2-container
+    .select2-dropdown
+    .select2-results
+    ul
+    .select2-results__option--highlighted[aria-selected] {
+    background-color: $primary;
+}
+
 @import "./mahasiswa";
 @import "./keuangan";
 @import "./admin";

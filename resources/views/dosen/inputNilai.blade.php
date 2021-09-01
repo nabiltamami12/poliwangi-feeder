@@ -9,7 +9,6 @@
   <div class="row">
     <div class="col-xl-12">
       <div class="card shadow padding--small">
-
         <div class="card-header p-0 m-0">
           <div class="row align-items-center">
             <div class="col-lg-5">
@@ -64,9 +63,19 @@
           <div class="form-row">
             <div class="col-md-6 form-group">
               <label for="matakuliah">Mata Kuliah</label>
-              <select class="form-control" id="matakuliah">
-                <option selected>Rekayasa Perangkat Lunak</option>
-                <option>Human Computer Interaction</option>
+              <select id="matakuliah">
+                <option value="RPL">Rekayasa Perangkat Lunak</option>
+                <option value="HCI">Human Computer Interaction</option>
+                <option value="B001">Bahasa Indonesia</option>
+                <option value="B002">Bahasa Inggris</option>
+                <option value="P001">Pengantar perkuliahan I</option>
+                <option value="P002">Pengantar perkuliahan II</option>
+                <option value="MTK01">Matematika Dasar</option>
+                <option value="MTK02">Matematika Lanjutan</option>
+                <option value="G004" selected="selected">Ilmu Kedokteran Gigi Anak</option>
+                <option value="G001">ilmu gigi I</option>
+                <option value="G002">ilmu gigi II</option>
+                <option value="G003">ilmu gigi III</option>
               </select>
             </div>
             <div class="col-md-6 form-group mt-3 mt-md-0">
@@ -340,4 +349,12 @@
     </div>
   </div>
 </section>
+@endsection
+
+@section('js')
+<script>
+  $(document).ready(function () {
+    $("#matakuliah").select2();
+  });
+</script>
 @endsection
