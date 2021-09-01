@@ -26,33 +26,55 @@
           <li class="nav-item">
             <a class="nav-link {{($title === "keuangan-dashboard") ? 'aktif' : ''}}"
               href="{{ url('/keuangan/dashboard') }} ">
-              <span class="iconify" data-icon="bx-bx-home-circle"></span>
+              <i class="iconify" data-icon="bx-bx-home-circle"></i>
               <span class="nav-link-text">Dashboard</span>
             </a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link {{($title === "keuangan-dataSPI") ? 'aktif' : ''}}"
-              href="{{ url('/keuangan/spimandiri') }} ">
-              <span class="iconify" data-icon="bx:bx-user-pin"></span>
-              <span class="nav-link-text">Data SPI</span>
+            <a class="nav-link {{($title === "keuangan-tarif") ? 'aktif' : ''}}" href="{{ url('/keuangan/tarif') }} ">
+              <i class="iconify" data-icon="bx:bx-cog"></i>
+              <span class="nav-link-text">Tarif UKT & SPI</span>
             </a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link {{($title === "keuangan-dataBeasiswa") ? 'aktif' : ''}}"
-              href="{{ url('/keuangan/databeasiswa') }} ">
-              <span class="iconify" data-icon="bx:bx-book-bookmark"></span>
-              <span class="nav-link-text">Data Beasiswa</span>
-            </a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link {{($title === "keuangan-piutang") ? 'aktif' : ''}}"
-              href="{{ url('/keuangan/piutangmahasiswa') }} ">
-              <span class="iconify" data-icon="bx:bx-file-blank"></span>
-              <span class="nav-link-text">Piutang Mahasiswa</span>
-            </a>
+            <div class="nav-link {{($title === "keuangan-rekapitulasi") ? 'aktif' : ''}}">
+              <i class="iconify" data-icon="bx:bx-user-pin"></i>
+              <span class="nav-link-text">Rekapitulasi</span>
+            </div>
+            <ul class="nav-item-dropdown-content">
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url('/keuangan/rekapitulasi/datapendaftar')}}">
+                  <span class="nav-link-dropdown-text">Data Pendaftar</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url('/keuangan/rekapitulasi/spi')}}">
+                  <span class="nav-link-dropdown-text">SPI</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url('/keuangan/rekapitulasi/piutangmahasiswa')}}">
+                  <span class="nav-link-dropdown-text">Piutang Mahasiswa</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url('/keuangan/rekapitulasi/penyisihanpiutang')}}">
+                  <span class="nav-link-dropdown-text">Penyisihan Piutang</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url('/keuangan/rekapitulasi/inputdatapembayaran')}}">
+                  <span class="nav-link-dropdown-text">Input Data Pembayaran</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url('/keuangan/rekapitulasi/riwayatpembayaran')}}">
+                  <span class="nav-link-dropdown-text">Riwayat pembayaran</span>
+                </a>
+              </li>
+            </ul>
           </li>
         </ul>
       </div>

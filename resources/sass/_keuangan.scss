@@ -1,0 +1,90 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap");
+
+.page-content__keuangan {
+    input::placeholder {
+        color: $font-black;
+    }
+
+    .modal {
+        input::placeholder {
+            color: $font-placeholder;
+        }
+    }
+
+    .card-stats {
+        font-family: "Open Sans", sans-serif;
+        border-radius: 1rem;
+        .bg-blue {
+            background: linear-gradient(90deg, #3adff5 0%, #39b1f5 93.75%);
+        }
+        .bg-green {
+            background: linear-gradient(90deg, #1cea55 0%, #cafb40 93.75%);
+        }
+        .bg-orange {
+            background: linear-gradient(90deg, #ea7f1c 0%, #fb4b40 93.75%);
+        }
+    }
+
+    .form-group_nominal {
+        position: relative;
+        .input_field {
+            font: 14px Montserrat;
+            &::placeholder {
+                color: $font-black;
+            }
+        }
+        .input_prefix {
+            font-size: 14px;
+            font-weight: 600;
+            color: $font-black;
+            position: absolute;
+            pointer-events: none;
+            right: 0;
+            bottom: 12px;
+            padding-right: 38px;
+        }
+    }
+
+    .separate {
+        border-spacing: 1.5rem 0 !important;
+        border-collapse: separate !important;
+    }
+
+    .form_detailSPI {
+        .form-control {
+            @include mixintext(400, 1.125rem, 1.22em, $font-placeholder);
+        }
+    }
+
+    .table_detailSPI {
+        .table-header {
+            background-color: transparent;
+            th {
+                padding-top: 0;
+                padding-bottom: 0.5rem;
+                @include mixintext(500, 1rem, 1.22em, $font-black);
+                text-transform: capitalize;
+                letter-spacing: normal;
+                &:first-child {
+                    padding-left: 0;
+                }
+            }
+        }
+        .table-body {
+            td {
+                @include mixintext(400, 0.875rem, 1.22em, $font-black);
+                &:first-child {
+                    padding-left: 0;
+                }
+            }
+        }
+        .col_cicilan {
+            position: relative;
+            &::before {
+                content: "Rp.";
+                position: absolute;
+                left: 1.5rem;
+            }
+        }
+    }
+}

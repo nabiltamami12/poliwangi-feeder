@@ -5,12 +5,11 @@
 <header class="header"></header>
 
 <!-- Page content -->
-<section class="page-content container-fluid" id="dosen_presensi">
+<section class="page-content container-fluid">
   <div class="row">
     <div class="col-xl-12">
       <div class="card shadow padding--small">
-
-        <form class="form-select ">
+        <form class="form-select form_presensiDosen">
           <div class="form-row">
             <div class="col-md-6 form-group">
               <label for="program-studi">Program Studi</label>
@@ -69,7 +68,7 @@
                 <td class="text-center">12:15</td>
                 <td class="text-center status_absensi">
                   <span class="badge badge-success">
-                    <span class="iconify" data-icon="akar-icons:circle-check-fill"></span>
+                    <i class="iconify-inline mr-1" data-icon="akar-icons:circle-check-fill"></i>
                     <span class="text-capitalize">Hadir</span>
                   </span>
                 </td>
@@ -84,7 +83,7 @@
                 <td class="text-center">12:15</td>
                 <td class="text-center status_absensi">
                   <span class="badge badge-success">
-                    <span class="iconify" data-icon="akar-icons:circle-check-fill"></span>
+                    <i class="iconify-inline mr-1" data-icon="akar-icons:circle-check-fill"></i>
                     <span class="text-capitalize">Hadir</span>
                   </span>
                 </td>
@@ -99,7 +98,7 @@
                 <td class="text-center">12:15</td>
                 <td class="text-center status_absensi">
                   <span class="badge badge-success">
-                    <span class="iconify" data-icon="akar-icons:circle-check-fill"></span>
+                    <i class="iconify-inline mr-1" data-icon="akar-icons:circle-check-fill"></i>
                     <span class="text-capitalize">Hadir</span>
                   </span>
                 </td>
@@ -114,7 +113,7 @@
                 <td class="text-center">12:15</td>
                 <td class="text-center status_absensi">
                   <span class="badge badge-danger">
-                    <span class="iconify" data-icon="bi:x-circle-fill"></span>
+                    <i class="iconify-inline mr-1" data-icon="bi:x-circle-fill"></i>
                     <span class="text-capitalize">Tidak Hadir</span>
                   </span>
                 </td>
@@ -129,7 +128,7 @@
                 <td class="text-center">12:15</td>
                 <td class="text-center status_absensi">
                   <span class="badge badge-success">
-                    <span class="iconify" data-icon="akar-icons:circle-check-fill"></span>
+                    <i class="iconify-inline mr-1" data-icon="akar-icons:circle-check-fill"></i>
                     <span class="text-capitalize">Hadir</span>
                   </span>
                 </td>
@@ -144,7 +143,7 @@
                 <td class="text-center">12:15</td>
                 <td class="text-center status_absensi">
                   <span class="badge badge-success">
-                    <span class="iconify" data-icon="akar-icons:circle-check-fill"></span>
+                    <i class="iconify-inline mr-1" data-icon="akar-icons:circle-check-fill"></i>
                     <span class="text-capitalize">Hadir</span>
                   </span>
                 </td>
@@ -153,7 +152,7 @@
           </table>
         </div>
 
-        <div class="row">
+        <div class="row mt-4">
           <div class="col text-right">
             <button type="submit" class="btn btn-primary">Simpan</button>
           </div>

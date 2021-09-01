@@ -5,17 +5,16 @@
 <header class="header"></header>
 
 <!-- Page content -->
-<section class="page-content container-fluid" id="dosen_inputnilai">
+<section class="page-content container-fluid">
   <div class="row">
     <div class="col-xl-12">
       <div class="card shadow padding--small">
-
-        <div class="card-header p-0 m-0 border-0">
+        <div class="card-header p-0 m-0">
           <div class="row align-items-center">
-            <div class="col-12 col-md-3">
-              <h3 class="mb-0 text-center text-md-left font-weight-bold">Nilai Mahasiswa</h3>
+            <div class="col-lg-5">
+              <h3 class="mb-0 text-center text-lg-left font-weight-bold">Nilai Mahasiswa</h3>
             </div>
-            <div class="col-12 col-md-9 text-center text-md-right">
+            <div class="col-12 col-lg-7 text-center text-md-right">
               <button type="button" id="btn_cetak" class="btn btn-icon btn-warning mt-3 mt-md-0">
                 <span class="btn-inner--icon"><span class="iconify" data-icon="bx:bx-printer"></span></span>
                 <span class="btn-inner--text">Cetak Data</span>

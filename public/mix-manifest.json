@@ -1,11 +1,7 @@
 {
     "/js/app.js": "/js/app.js",
-    "/css/login.css": "/css/login.css",
     "/css/main.css": "/css/main.css",
-    "/css/keuangan.css": "/css/keuangan.css",
-    "/css/prodi.css": "/css/prodi.css",
-    "/css/mahasiswa.css": "/css/mahasiswa.css",
+    "/css/halamanAwal.css": "/css/halamanAwal.css",
     "/css/app.css": "/css/app.css",
-    "/css/responsive.css": "/css/responsive.css",
     "/css/customComponent.css": "/css/customComponent.css"
 }
