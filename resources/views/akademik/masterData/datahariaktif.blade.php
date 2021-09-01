@@ -353,7 +353,6 @@
 @endsection
 
 @section('js')
-<script src="{{ asset('js/script.js') }}"></script>
 <script>
 var calendar;
 
@@ -469,8 +468,8 @@ function change_date(tanggal,status) {
     }
     
 }
-async function getData(){
-    await $.ajax({
+function getData(){
+    $.ajax({
         url: url_api+"/hariaktifkuliah/",
         type: 'get',
         dataType: 'json',
