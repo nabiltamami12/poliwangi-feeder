@@ -49,7 +49,7 @@
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="{{ url('/akademik/master/datamahasiswa')}}">
-                  <span class="nav-link-dropdown-text">Data Mahasiswa</span>
+                  <span class="nav-link-text ml-0">Data Mahasiswa</span>
                 </a>
               </li>
               <li class="nav-item">

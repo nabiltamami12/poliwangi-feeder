@@ -1,6 +1,6 @@
 // SIDEBAR - submenu
 jQuery(function ($) {
-    $(".nav-item-dropdown-content").css("display", "none");
+    // $(".nav-item-dropdown-content").css("display", "none");
     $(".nav-link").click(function () {
         $(".nav-link").not(this).removeClass("open");
         $(".nav-link").not(this).next().slideUp(300);

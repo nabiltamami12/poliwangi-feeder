@@ -75,7 +75,6 @@
     <!-- Footer -->
     @include('partials.footer')
   </main>
-
   <!-- Argon Scripts -->
   <!-- Core -->
   <script src="{{ url('argon') }}/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
@@ -90,15 +89,14 @@
   <script src="{{ url('js/util.js') }}"></script>
   <script src="{{ asset('js/script.js') }}"></script>
   <script type="text/javascript">
-    // set menu active
+    var dt, dt_url, dt_opt;
+    var dt_init = document.getElementById("datatable");
+     // set menu active
     var tagMenu = document.querySelector(`[href="{{ url(Request::segment(1).'/'.Request::segment(2).'/'.Request::segment(3)) }}"]`);
     if (tagMenu) {
       tagMenu.childNodes[1].classList.add('sub-aktif');
       tagMenu.parentNode.parentNode.parentNode.classList.add('showsubmenu');
     }
-
-    var dt, dt_url, dt_opt;
-    var dt_init = document.getElementById("datatable");
     $(document).ready(function() {
       // datatable
       if (dt_init) {
