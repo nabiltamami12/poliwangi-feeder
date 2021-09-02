@@ -61,7 +61,7 @@ class AbsensiController extends Controller
                 'kuliah.nomor as kuliah'
                 )
             ->join("kuliah", "kuliah.kelas", "=", "mahasiswa.kelas")
-            ->join("matakuliah", "matakuliah.nomor", "=", "KULIAH.matakuliah")
+            ->join("matakuliah", "matakuliah.nomor", "=", "kuliah.matakuliah")
             ->join("hari", "hari.nomor", "=", "kuliah.hari")
             ->join("jam", "jam.nomor", "=", "kuliah.jam")
             ->join("program_studi", 'program_studi.nomor', '=', 'matakuliah.program_studi')
@@ -258,6 +258,97 @@ class AbsensiController extends Controller
         
         
 
+        return response()->json([
+            "status" =>$this->status,
+            "data" => $this->data,
+            "error" => $this->err,
+        ]);
+    }
+    public function show_dosen($id)
+    {
+        DB::enableQueryLog();
+        // Untuk mengambil hanya per mahasiswa.
+        $table = DB::table('mahasiswa');
+        date_default_timezone_set('Asia/Jakarta');
+        Carbon::setLocale('id');
+        
+
+        $now = Carbon::now()->format('H:i');
+        $date = Carbon::now()->format('Y-m-d');
+        $int = (int) str_replace(':', '', $now);
+
+        $day = Carbon::now()->isoformat('dddd');
+        $array = [];
+        
+        try {
+            $data = $table->distinct()->select(
+                'matakuliah.matakuliah',
+                'pegawai.nama as dosen',
+                'kelas.kode as kelas',
+                'hari.hari',
+                'jam.jam',
+                'kuliah.nomor as kuliah')
+            ->join("kuliah", "kuliah.kelas", "=", "mahasiswa.kelas")
+            ->join("kelas", "kelas.nomor", "=", "kuliah.kelas")
+            ->join("matakuliah", "matakuliah.nomor", "=", "kuliah.matakuliah")
+            ->join("dosen_pengampu", "dosen_pengampu.matakuliah", "=", "matakuliah.nomor")
+            ->join("pegawai", "pegawai.nomor", "=", "dosen_pengampu.dosen")
+            ->join("hari", "hari.nomor", "=", "kuliah.hari")
+            ->join("jam", "jam.nomor", "=", "kuliah.jam")
+            ->where('kuliah.dosen', '=', $id)
+            ->where("hari.hari", $day)
+            // ->whereBetween('jam.jam', [$now, $limit])
+            ->orderBy('jam.jam', 'asc')
+            ->get();
+
+            foreach ($data as $key=>$value) {
+                $awal_kelas = $value->jam;
+                $akhir_kelas = Carbon::parse($awal_kelas)->addMinutes(120)->format('H:i');
+                if ($now>=$awal_kelas && $now<=$akhir_kelas) {
+                    $status_kelas = "true";
+                }else{
+                    $status_kelas = "false";
+                }
+                echo 'jam : '.$now.' - '.$awal_kelas.' - '.$akhir_kelas.' - '.$status_kelas.' \n ';
+                // $check[$key] = Abs::whereDate('tanggal', $date)->where('kuliah',  $data[$key]->kuliah)->first();
+
+                // if ($check[$key]) {
+                //     if ($check[$key]->status=='H') {
+                //         $baru[$key] = "Hadir";
+                //     } elseif ($check[$key]->status=='I') {
+                //         $baru[$key] = "Izin";
+                //     } elseif ($check[$key]->status=='S') {
+                //         $baru[$key] = "Sakit";
+                //     } else{
+                //         $baru[$key] = "Unknown";
+                //     }
+                //     $status = $check[$key]->status;
+                // } else {
+                //     $status = null;
+                //     $baru[$key] = "Belum Presensi";
+                // };
+                // array_push($array, [
+                //     "matakuliah" => $data[$key]->matakuliah,
+                //     "dosen" => $data[$key]->dosen,
+                //     "kelas" => $data[$key]->kelas,
+                //     "hari" => $data[$key]->hari,
+                //     "jam" => $data[$key]->jam,
+                //     'status' => $status,
+                //     'status_text' => $baru[$key],
+                //     'kuliah' => $data[$key]->kuliah
+                // ]);
+            }
+
+            $this->data = $array;
+            $this->status = "success";
+        } catch (QueryException $e) {
+            $this->status = "failed";
+            $this->err = $e;
+            echo $e;
+        }
+        
+        
+        die();
         return response()->json([
             "status" =>$this->status,
             "data" => $this->data,

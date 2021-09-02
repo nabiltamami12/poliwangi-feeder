@@ -9,7 +9,7 @@
   <div class="row">
     <div class="col">
       <div class="d-md-flex justify-content-between informasi_mahasiswa mt-4">
-        <p class="mb-0 mt-2 mt-md-0">Status Mahasiswa: <span class="text-success">Aktif</span></p>
+        <p class="mb-0 mt-2 mt-md-0">Status Mahasiswa: <span class="text-success" id="status_mahasiswa"></span></p>
         <p class="mb-0">Masa: <strong class="font-weight-bold">29 Januari 2021 - 29 Mei 2021</strong></p>
       </div>
     </div>
@@ -24,7 +24,7 @@
               <h3 class="mb-0">Jadwal Kuliah Hari Ini</h3>
             </div>
             <div class="col text-right">
-              <h3 class="mb-0">12 Juli 2021</h3>
+              <h3 class="mb-0" id="tanggal_sekarang"></h3>
             </div>
           </div>
           <hr class="my-4">
@@ -76,9 +76,14 @@
 </section>
 <script>
 var id_mahasiswa = 31570;
-
+var status_mahasiswa = "Aktif";
+var bulan = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
 var dt = new Date();
 var jam_sekarang = dt.getHours() +":"+dt.getMinutes();
+var tanggal_sekarang = ((dt.getDate().toString().length==1)?"0"+dt.getDate():dt.getDate())+" "+bulan[dt.getMonth()]+" "+dt.getFullYear();
+$('#tanggal_sekarang').html(tanggal_sekarang)
+$('#status_mahasiswa').html(status_mahasiswa)
+$('#btn_absen').css('display','none')
 
 getJadwal()
 
