@@ -282,9 +282,11 @@ class AbsensiController extends Controller
         
         try {
             $data = $table->distinct()->select(
+                'matakuliah.nomor as id_matakuliah',
                 'matakuliah.matakuliah',
                 'pegawai.nama as dosen',
                 'kelas.kode as kelas',
+                'kelas.nomor as id_kelas',
                 'hari.hari',
                 'jam.jam',
                 'kuliah.nomor as kuliah')
@@ -300,43 +302,56 @@ class AbsensiController extends Controller
             // ->whereBetween('jam.jam', [$now, $limit])
             ->orderBy('jam.jam', 'asc')
             ->get();
-
+            $arr=[];
             foreach ($data as $key=>$value) {
                 $awal_kelas = $value->jam;
                 $akhir_kelas = Carbon::parse($awal_kelas)->addMinutes(120)->format('H:i');
                 if ($now>=$awal_kelas && $now<=$akhir_kelas) {
-                    $status_kelas = "true";
+                    $status_kelas = true;
                 }else{
-                    $status_kelas = "false";
+                    $status_kelas = false;
                 }
-                echo 'jam : '.$now.' - '.$awal_kelas.' - '.$akhir_kelas.' - '.$status_kelas.' \n ';
-                // $check[$key] = Abs::whereDate('tanggal', $date)->where('kuliah',  $data[$key]->kuliah)->first();
-
-                // if ($check[$key]) {
-                //     if ($check[$key]->status=='H') {
-                //         $baru[$key] = "Hadir";
-                //     } elseif ($check[$key]->status=='I') {
-                //         $baru[$key] = "Izin";
-                //     } elseif ($check[$key]->status=='S') {
-                //         $baru[$key] = "Sakit";
-                //     } else{
-                //         $baru[$key] = "Unknown";
-                //     }
-                //     $status = $check[$key]->status;
-                // } else {
-                //     $status = null;
-                //     $baru[$key] = "Belum Presensi";
-                // };
-                // array_push($array, [
-                //     "matakuliah" => $data[$key]->matakuliah,
-                //     "dosen" => $data[$key]->dosen,
-                //     "kelas" => $data[$key]->kelas,
-                //     "hari" => $data[$key]->hari,
-                //     "jam" => $data[$key]->jam,
-                //     'status' => $status,
-                //     'status_text' => $baru[$key],
-                //     'kuliah' => $data[$key]->kuliah
-                // ]);
+                // echo 'jam : '.$now.' - '.$awal_kelas.' - '.$akhir_kelas.' - '.$status_kelas.' - '.$value->kelas.' \n ';
+                
+                $mahasiswa = DB::table("mahasiswa as m")
+                            ->select(
+                                "m.nomor as id_mahasiswa",
+                                "m.nama",
+                                "kl.nomor"
+                            )
+                            ->join("kelas as k", "k.nomor", "=", "m.kelas")
+                            ->join("kuliah as kl", "kl.kelas", "=", "k.nomor")
+                            ->join("nilai as n", "n.kuliah", "=", "kl.nomor",'left')
+                            ->where('kl.tahun', 2021)
+                            ->where('kl.kelas', $value->id_kelas)
+                            ->where('kl.matakuliah', $value->id_matakuliah)
+                            ->get();
+                if ($status_kelas) {
+                    foreach ($mahasiswa as $key => $value) {
+                        $check[$key] = Abs::whereDate('tanggal', $date)->where(['kuliah' => $value->kuliah,'mahasiswa' => $value->id_mahasiswa])->first();
+                        if ($check[$key]) {
+                            if ($check[$key]->status=='H') {
+                                $baru[$key] = "Hadir";
+                            } elseif ($check[$key]->status=='I') {
+                                $baru[$key] = "Izin";
+                            } elseif ($check[$key]->status=='S') {
+                                $baru[$key] = "Sakit";
+                            } else{
+                                $baru[$key] = "Unknown";
+                            }
+                            $status = $check[$key]->status;
+                        } else {
+                            $status = null;
+                            $baru[$key] = "Belum Presensi";
+                        };
+                        array_push($array, [
+                            "id_mahasiswa" => $value->matakuliah,
+                            "mahasiswa" => $value->nama,
+                            'status' => $status,
+                            'status_text' => $baru[$key],
+                        ]);
+                    }
+                }
             }
 
             $this->data = $array;
@@ -347,8 +362,6 @@ class AbsensiController extends Controller
             echo $e;
         }
         
-        
-        die();
         return response()->json([
             "status" =>$this->status,
             "data" => $this->data,
