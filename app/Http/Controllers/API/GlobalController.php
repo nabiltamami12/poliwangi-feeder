@@ -16,7 +16,7 @@ use App\Models\Matakuliah;
 use App\Models\Prodi;
 use App\Models\Periode;
 use Illuminate\Support\Facades\Validator;
-use DB;
+use Illuminate\Support\Facades\DB;
 
 class GlobalController extends Controller
 {
@@ -87,7 +87,7 @@ class GlobalController extends Controller
         ->get();
 
         $this->data = [
-            'periode'=>$periode[0],
+            'periode'=>$periode,
             'program'=>$program,
             'jurusan'=>$jurusan,
             'dosen'=>$dosen,

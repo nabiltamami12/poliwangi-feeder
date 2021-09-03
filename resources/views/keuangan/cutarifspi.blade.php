@@ -22,12 +22,12 @@
         <hr class="my-4">
 
         <form id="form_cu" class="form-input">
-          <input type="hidden" id="nomor" name="nomor">
+          <input type="hidden" id="id" name="id">
           <div class="form-row">
             <div class="col-sm-6 col-12">
               <div class="form-group row mb-0">
                 <label for="kajur">Program Studi</label>
-                <select class="form-control" id="prodi" name="prodi" >
+                <select class="form-control" id="program_studi" name="program_studi" >
                 </select>
               </div>
             </div>
@@ -99,10 +99,10 @@
   $(document).ready(function() {
     var id = "{{$id}}";
     var optDosen = `<option value=""> - </option>`;
-    $.each(dataGlobal['dosen'],function (key,row) {
-        optDosen += `<option value="${row.nomor}">${row.nama}</option>`
+    $.each(dataGlobal['prodi'],function (key,row) {
+        optDosen += `<option value="${row.nomor}">${row.program_studi}</option>`
     })
-    $('#kepala').append(optDosen)
+    $('#program_studi').append(optDosen)
 
     if (id!="") {
         getData(id);        
@@ -118,7 +118,7 @@
             var type = "post";
         }
         $.ajax({
-            url: url_api+"/jurusan/"+id,
+            url: url_api+"/keuangan/rekap_ukt/"+id,
             type: type,
             dataType: 'json',
             data: data,
@@ -129,12 +129,11 @@
             },
             success: function(res) {
                 if (res.status=="success") {
-                    window.location.href = "{{url('/akademik/master/datajurusan')}}";                    
+                    window.location.href = "{{url('/akademik/keuangan/tarif')}}";                    
                 } else {
-                    // alert gagal
+                    console.log("Gagal");
                 }
                 loading('hide')
-
             }
         });
     });
@@ -143,7 +142,7 @@
 function getData(id) {
     
     $.ajax({
-        url: url_api+"/jurusan/"+id,
+        url: url_api+"/keuangan/rekap_ukt/"+id,
         type: 'get',
         dataType: 'json',
         data: {},
@@ -151,7 +150,6 @@ function getData(id) {
                 // loading func
                 console.log("loading")
                 loading('show')
-
         },
         success: function(res) {
             if (res.status=="success") {
