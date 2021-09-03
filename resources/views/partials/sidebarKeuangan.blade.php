@@ -76,6 +76,26 @@
               </li>
             </ul>
           </li>
+
+
+          <li class="nav-item">
+            <div class="nav-link {{($title === "keuangan-buktipembayaran") ? 'aktif' : ''}}">
+              <i class="iconify" data-icon="bx:bx-dollar-circle"></i>
+              <span class="nav-link-text">Bukti Pembayaran</span>
+            </div>
+            <ul class="nav-item-dropdown-content">
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url('/keuangan/buktipembayaran/email')}}">
+                  <span class="nav-link-dropdown-text">Email</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url('/keuangan/buktipembayaran/kwitansi')}}">
+                  <span class="nav-link-dropdown-text">Kwitansi</span>
+                </a>
+              </li>
+            </ul>
+          </li>
         </ul>
       </div>
     </div>

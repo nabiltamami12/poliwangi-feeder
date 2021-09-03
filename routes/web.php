@@ -732,7 +732,20 @@ Route::prefix('keuangan')->group(function () {
                 "title" => "keuangan-rekapitulasi",
             ]);
         });
+    });
 
+    Route::prefix('buktipembayaran')->group(function () {
+        Route::get('/email', function () {
+            return view('keuangan.buktiPembayaran.email', [
+                "title" => "keuangan-buktipembayaran",
+            ]);
+        });
+
+        Route::get('/kwitansi', function () {
+            return view('keuangan.buktiPembayaran.kwitansi', [
+                "title" => "keuangan-buktipembayaran",
+            ]);
+        });
     });
 });
 
