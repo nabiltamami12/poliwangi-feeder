@@ -506,8 +506,9 @@ class AbsensiController extends Controller
         
     }
 
-    public function rekap($id) {
-
+    public function rekap_matkul(Request $request) {
+        die('wkwkk');
+        DB::enableQueryLog();
         // Rekap absensi per matakuliah
         DB::statement("SET SQL_MODE=''");
         
@@ -520,10 +521,11 @@ class AbsensiController extends Controller
         ->join('matakuliah', 'kuliah.matakuliah', '=', 'matakuliah.nomor')
         ->join('kelas', 'kuliah.kelas', '=', 'kelas.nomor')
         ->join('mahasiswa', 'absensi_mahasiswa.mahasiswa', '=', 'mahasiswa.nomor')
-        ->where('absensi_mahasiswa.mahasiswa', $id)
+        ->where('absensi_mahasiswa.mahasiswa', $request->mahasiswa)
+        ->where('kuliah.tahun', $request->tahun)
         ->groupBy('matakuliah.matakuliah')
         ->get();
-
+        die(json_encode(DB::getQueryLog()));
         $this->status = "success";
 
         return response()->json([

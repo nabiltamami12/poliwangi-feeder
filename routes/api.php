@@ -138,7 +138,9 @@ Route::prefix('v1')->group(function () {
     Route::get('/absensi/{id}', [Ctr\AbsensiController::class, 'show']);
     Route::get('/absensi/dosen/{id}', [Ctr\AbsensiController::class, 'show_dosen']);
     Route::get('/absensi/home/{id}', [Ctr\AbsensiController::class, 'one']);
-    Route::get('/rekap/{id}', [Ctr\AbsensiController::class, 'rekap']);
+    Route::get('/absensi/rekap-matkul', [function () {
+        return "wkwkw";
+    }]);
     Route::post('/absensi', [Ctr\AbsensiController::class, 'store']);
     Route::post('/absensi/dosen', [Ctr\AbsensiController::class, 'absensi_dosen']);
     Route::put('/absensi/{id}', [Ctr\AbsensiController::class, 'update']);

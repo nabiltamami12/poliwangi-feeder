@@ -118,6 +118,11 @@
                 </a>
               </li>
               <li class="nav-item">
+                <a class="nav-link {{($title === "rekap-absensi-mahasiswa") ? 'aktif' : ''}}" href="{{url('akademik/kuliah/absensi/rekap-mahasiswa')}}">
+                  <span class="nav-link-text ml-0">Rekap Abasensi Mahasiswa</span>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a class="nav-link {{($title === "absensi-dosen") ? 'aktif' : ''}}" href="{{url('akademik/kuliah/absensi/kelas-dosen')}}">
                   <span class="nav-link-text ml-0">Absensi Dosen</span>
                 </a>
@@ -125,7 +130,7 @@
             </ul>
           </li>
           
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <div class="nav-link {{($title === "akademik-keuangan") ? 'aktif' : ''}}">
             <span class=" iconify" data-icon="bx:bx-book-bookmark"></span>
               <span class="nav-link-text">Keuangan<img src="{{ url('images') }}/sidebar-right.png" class="arrow"
@@ -143,7 +148,7 @@
                 </a>
               </li>
             </ul>
-          </li>
+          </li> -->
           {{--
           <li class="nav-item">
             <div class="nav-link {{($title === "akademik-khs") ? 'aktif' : ''}}"">
