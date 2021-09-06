@@ -87,11 +87,11 @@
                   <span class="nav-link-text ml-0">Data Range Nilai</span>
                 </a>
               </li>
-              <li class="nav-item">
+              <!-- <li class="nav-item">
                 <a class="nav-link" href="{{url('/akademik/master/settingkuliah')}}">
                   <span class="nav-link-text ml-0">Setting Kuliah (FE)</span>
                 </a>
-              </li>
+              </li> -->
 
             </ul>
           </li>
