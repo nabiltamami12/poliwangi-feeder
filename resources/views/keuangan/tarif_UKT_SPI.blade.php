@@ -21,31 +21,10 @@
         </div>
         <hr class="mt-4">
 
-        <div class="row align-items-center px-3 my-4">
-          <div class="col-12 col-md-6">
-            <form class="form-inline">
-              <div class="form-group row">
-                <select class="form-control form-control-sm" id="dataperhalaman">
-                  <option>10</option>
-                  <option>20</option>
-                  <option>30</option>
-                </select>
-                <label for="dataperhalaman" class="ml-3 mt-2 mt-sm-0">Data per Halaman</label>
-              </div>
-            </form>
-          </div>
-          <div class="col-12 col-md-4 offset-md-2 offset-0 text-right p-0 mt-3 mt-md-0">
-            <form class="search_form" action="">
-              <input class="form-control form-control-sm" type="search" placeholder="Pencarian...">
-              <button type="submit">
-                <i class="iconify-inline" data-icon="bx:bx-search"></i>
-              </button>
-            </form>
-          </div>
-        </div>
+       
 
         <div class="table-responsive">
-          <table class="table align-items-center table-flush table-borderless table-hover">
+          <table class="table align-items-center table-flush table-borderless table-hover" id="datatable">
             <thead class="table-header">
               <tr>
                 <th rowspan="2" scope="col" class="text-center px-2">No</th>
@@ -66,126 +45,121 @@
             </thead>
 
             <tbody class="table-body">
-              <tr>
-                <td class="text-center px-2">1</td>
-                <td class="font-weight-bold text-capitalize px-2">D3 Teknik informatika</td>
-                <td class="text-center px-2">Rp. 5.000.000</td>
-                <td class="text-center px-2">Rp. 500.000</td>
-                <td class="text-center px-2">Rp. 1.000.000</td>
-                <td class="text-center px-2">Rp. 2.400.000</td>
-                <td class="text-center px-2">Rp. 3.000.000</td>
-                <td class="text-center px-2">Rp. 3.500.000</td>
-                <td class="text-center px-2">Rp. 4.000.000</td>
-                <td class="text-center px-2">Rp. 4.500.000</td>
-                <td class="text-center px-2">Rp. 5.000.000</td>
-              </tr>
-
-              <tr>
-                <td class="text-center px-2">2</td>
-                <td class="font-weight-bold text-capitalize px-2">D3 Teknik mesin</td>
-                <td class="text-center px-2">Rp. 5.000.000</td>
-                <td class="text-center px-2">Rp. 500.000</td>
-                <td class="text-center px-2">Rp. 1.000.000</td>
-                <td class="text-center px-2">Rp. 2.400.000</td>
-                <td class="text-center px-2">Rp. 3.000.000</td>
-                <td class="text-center px-2">Rp. 3.500.000</td>
-                <td class="text-center px-2">Rp. 4.000.000</td>
-                <td class="text-center px-2">Rp. 4.500.000</td>
-                <td class="text-center px-2">Rp. 5.000.000</td>
-              </tr>
-
-              <tr>
-                <td class="text-center px-2">3</td>
-                <td class="font-weight-bold text-capitalize px-2">D3 Teknik sipil</td>
-                <td class="text-center px-2">Rp. 5.000.000</td>
-                <td class="text-center px-2">Rp. 500.000</td>
-                <td class="text-center px-2">Rp. 1.000.000</td>
-                <td class="text-center px-2">Rp. 2.400.000</td>
-                <td class="text-center px-2">Rp. 3.000.000</td>
-                <td class="text-center px-2">Rp. 3.500.000</td>
-                <td class="text-center px-2">Rp. 4.000.000</td>
-                <td class="text-center px-2">Rp. 4.500.000</td>
-                <td class="text-center px-2">Rp. 5.000.000</td>
-              </tr>
-
-              <tr>
-                <td class="text-center px-2">4</td>
-                <td class="font-weight-bold text-capitalize px-2">d4 agribisnis</td>
-                <td class="text-center px-2">Rp. 5.000.000</td>
-                <td class="text-center px-2">Rp. 500.000</td>
-                <td class="text-center px-2">Rp. 1.000.000</td>
-                <td class="text-center px-2">Rp. 2.400.000</td>
-                <td class="text-center px-2">Rp. 3.000.000</td>
-                <td class="text-center px-2">Rp. 3.500.000</td>
-                <td class="text-center px-2">Rp. 4.000.000</td>
-                <td class="text-center px-2">Rp. 4.500.000</td>
-                <td class="text-center px-2">Rp. 5.000.000</td>
-              </tr>
-
-              <tr>
-                <td class="text-center px-2">5</td>
-                <td class="font-weight-bold text-capitalize px-2">d4 manajemen bisnis pariwisata</td>
-                <td class="text-center px-2">Rp. 5.000.000</td>
-                <td class="text-center px-2">Rp. 500.000</td>
-                <td class="text-center px-2">Rp. 1.000.000</td>
-                <td class="text-center px-2">Rp. 2.400.000</td>
-                <td class="text-center px-2">Rp. 3.000.000</td>
-                <td class="text-center px-2">Rp. 3.500.000</td>
-                <td class="text-center px-2">Rp. 4.000.000</td>
-                <td class="text-center px-2">Rp. 4.500.000</td>
-                <td class="text-center px-2">Rp. 5.000.000</td>
-              </tr>
-
-              <tr>
-                <td class="text-center px-2">6</td>
-                <td class="font-weight-bold text-capitalize px-2">d4 teknologi pengolahan hasil ternak</td>
-                <td class="text-center px-2">Rp. 5.000.000</td>
-                <td class="text-center px-2">Rp. 500.000</td>
-                <td class="text-center px-2">Rp. 1.000.000</td>
-                <td class="text-center px-2">Rp. 2.400.000</td>
-                <td class="text-center px-2">Rp. 3.000.000</td>
-                <td class="text-center px-2">Rp. 3.500.000</td>
-                <td class="text-center px-2">Rp. 4.000.000</td>
-                <td class="text-center px-2">Rp. 4.500.000</td>
-                <td class="text-center px-2">Rp. 5.000.000</td>
-              </tr>
-
-              <tr>
-                <td class="text-center px-2">7</td>
-                <td class="font-weight-bold text-capitalize px-2">d4 teknik manufaktur kapal</td>
-                <td class="text-center px-2">Rp. 5.000.000</td>
-                <td class="text-center px-2">Rp. 500.000</td>
-                <td class="text-center px-2">Rp. 1.000.000</td>
-                <td class="text-center px-2">Rp. 2.400.000</td>
-                <td class="text-center px-2">Rp. 3.000.000</td>
-                <td class="text-center px-2">Rp. 3.500.000</td>
-                <td class="text-center px-2">Rp. 4.000.000</td>
-                <td class="text-center px-2">Rp. 4.500.000</td>
-                <td class="text-center px-2">Rp. 5.000.000</td>
-              </tr>
-
+             
             </tbody>
           </table>
         </div>
 
-        <div class="row justify-content-between align-items-center table-information">
-          <h3>Menampilkan 1 sampai 7 dari 7 total data</h3>
-          <nav aria-label="Page navigation example">
-            <ul class="pagination">
-              <li class="page-item disabled" aria-label="Previous">
-                <a class="page-link" href="#" tabindex="-1">Previous</a>
-              </li>
-              <li class="page-item active">
-                <a class="page-link" href="#">1<span class="sr-only">(current)</span></a>
-              </li>
-              <li class="page-item disabled" aria-label="Next">
-                <a class="page-link" href="#">Next</a>
-              </li>
-            </ul>
-          </nav>
-        </div>
+        
       </div>
     </div>
   </div>
 </section>
+<script>
+const toCurrency = (number) => 
+      Intl.NumberFormat("id-ID", { style : 'currency', currency:'IDR', minimumFractionDigits: 0 }).format(number);
+  
+$(document).ready(function() {
+
+  
+  var nomor = 1;
+  dt_url = `${url_api}/keuangan/rekap_ukt`;
+  dt_opt = {
+  "columnDefs": [
+      {
+        "aTargets": [0],
+        "mData": null,
+        "className": 'text-center px-2',
+        "mRender": function(data, type, full) {
+          res = nomor++;
+          return res;
+        }
+      },{
+        "aTargets": [1],
+        "mData": null,
+        "className": 'font-weight-bold text-capitalize px-2',
+        "mRender": function(data, type, full) {
+          res = data['prodi'];
+          return res;
+        }
+      },{
+        "aTargets": [2],
+        "mData": null,
+        "className": 'text-center px-2',
+        "mRender": function(data, type, full) {
+          res = toCurrency(data['spi']);
+          return res;
+        }
+      },{
+        "aTargets": [3],
+        "mData": null,
+        "className": 'text-center px-2',
+        "mRender": function(data, type, full) {
+          res = toCurrency(data['kelompok_1']);
+          return res;
+        }
+      },{
+        "aTargets": [4],
+        "mData": null,
+        "className": 'text-center px-2',
+        "mRender": function(data, type, full) {
+          res = toCurrency(data['kelompok_2']);
+          return res;
+        }
+      },{
+        "aTargets": [5],
+        "mData": null,
+        "className": 'text-center px-2',
+        "mRender": function(data, type, full) {
+          res = toCurrency(data['kelompok_3']);
+          return res;
+        }
+      },{
+        "aTargets": [6],
+        "mData": null,
+        "className": 'text-center px-2',
+        "mRender": function(data, type, full) {
+          res = toCurrency(data['kelompok_4']);
+          return res;
+        }
+      },{
+        "aTargets": [7],
+        "mData": null,
+        "className": 'text-center px-2',
+        "mRender": function(data, type, full) {
+          res = toCurrency(data['kelompok_5']);
+          return res;
+        }
+      },{
+        "aTargets": [8],
+        "mData": null,
+        "className": 'text-center px-2',
+        "mRender": function(data, type, full) {
+          res = toCurrency(data['kelompok_6']);
+          return res;
+        }
+      },{
+        "aTargets": [9],
+        "mData": null,
+        "className": 'text-center px-2',
+        "mRender": function(data, type, full) {
+          res = toCurrency(data['kelompok_7']);
+          return res;
+        }
+      },{
+        "aTargets": [10],
+        "mData": null,
+        "className": 'text-center px-2',
+        "mRender": function(data, type, full) {
+          res = toCurrency(data['kelompok_8']);
+          return res;
+        }
+      }
+    ]}
+  } 
+);
+
+
+
+</script>
 @endsection

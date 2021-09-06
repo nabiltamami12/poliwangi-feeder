@@ -115,8 +115,8 @@
           // "dom": 'lfrtip',
           "language": {
             "paginate": {
-              "next": 'Lanjut',
-              "previous": 'Kembali'
+              "next": 'Next',
+              "previous": 'Previous'
             },
             "processing": "Proses ...",
             "emptyTable": "Tidak ada data dalam tabel",

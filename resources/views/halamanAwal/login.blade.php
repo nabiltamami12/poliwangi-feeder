@@ -73,8 +73,7 @@
                         <i class="iconify" data-icon="bx:bxs-envelope" data-inline="false"></i>
                       </span>
                     </div>
-                    <input class="form-control" placeholder="Email" type="email" id="email" name="email"
-                      :value="old('email')" required autofocus>
+                    <input class="form-control" placeholder="Email" type="email" id="email" name="email" :value="old('email')" autofocus>
                   </div>
                 </div>
                 <div class="form-group">
@@ -84,8 +83,7 @@
                         <i class="iconify" data-icon="bx:bxs-lock-open" data-inline="false"></i>
                       </span>
                     </div>
-                    <input class="form-control" placeholder="Password" type="password" name="password" id="password"
-                      required autocomplete="current-password">
+                    <input class="form-control" placeholder="Password" type="password" name="password" id="password" autocomplete="current-password">
                   </div>
                 </div>
 
