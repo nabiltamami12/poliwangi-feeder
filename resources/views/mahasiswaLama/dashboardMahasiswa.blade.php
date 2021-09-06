@@ -10,7 +10,7 @@
     <div class="col">
       <div class="d-md-flex justify-content-between informasi_mahasiswa mt-4">
         <p class="mb-0 mt-2 mt-md-0">Status Mahasiswa: <span class="text-success" id="status_mahasiswa"></span></p>
-        <p class="mb-0">Masa: <strong class="font-weight-bold">29 Januari 2021 - 29 Mei 2021</strong></p>
+        <!-- <p class="mb-0">Masa: <strong class="font-weight-bold">29 Januari 2021 - 29 Mei 2021</strong></p> -->
       </div>
     </div>
   </div>
@@ -75,11 +75,11 @@
   </div>
 </section>
 <script>
-var id_mahasiswa = 31570;
+var id_mahasiswa = 1;
 var status_mahasiswa = "Aktif";
 var bulan = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
 var dt = new Date();
-var jam_sekarang = dt.getHours() +":"+dt.getMinutes();
+var jam_sekarang = ((dt.getHours().toString().length==1)?"0"+dt.getHours():dt.getHours()) +":"+dt.getMinutes();
 var tanggal_sekarang = ((dt.getDate().toString().length==1)?"0"+dt.getDate():dt.getDate())+" "+bulan[dt.getMonth()]+" "+dt.getFullYear();
 $('#tanggal_sekarang').html(tanggal_sekarang)
 $('#status_mahasiswa').html(status_mahasiswa)
@@ -130,30 +130,22 @@ function getJadwal() {
             console.log(`masih kuliah : ${status}`)
             console.log("==============================")
 
-            if (status) {
+            if (status==true) {
+              console.log(status)
               $('#kuliah_saat_ini').val(row.kuliah);
               $('#matkul_saat_ini').html(row.matakuliah);
               $('#dosen_saat_ini').html(row.dosen);
               $('#status_saat_ini').html(row.status_text);
               $('#btn_absen').attr('disabled',false);
-              if (row.status!=null) {
-
-                $('#status_saat_ini').removeClass('text-danger');
-                $('#status_saat_ini').addClass('text-success');
-                $('#btn_absen').css('display','none')
-              }else{
+              if (row.status==null) {
                 $('#status_saat_ini').removeClass('text-success');
                 $('#status_saat_ini').addClass('text-danger');
                 $('#btn_absen').css('display','block')
+              }else{
+                $('#status_saat_ini').removeClass('text-danger');
+                $('#status_saat_ini').addClass('text-success');
+                $('#btn_absen').css('display','none')
               }
-            }else{
-              $('#kuliah_saat_ini').val(0);
-              $('#matkul_saat_ini').html('-');
-              $('#dosen_saat_ini').html('-');
-              $('#status_saat_ini').html('-');
-              $('#status_saat_ini').removeClass('text-danger');
-              $('#status_saat_ini').removeClass('text-success');
-              $('#btn_absen').css('display',"none");
             }
           })
           $('#btn_absen').on('click',function (e) {

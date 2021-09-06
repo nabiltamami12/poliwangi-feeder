@@ -140,6 +140,7 @@ Route::prefix('v1')->group(function () {
     Route::get('/absensi/home/{id}', [Ctr\AbsensiController::class, 'one']);
     Route::get('/rekap/{id}', [Ctr\AbsensiController::class, 'rekap']);
     Route::post('/absensi', [Ctr\AbsensiController::class, 'store']);
+    Route::post('/absensi/dosen', [Ctr\AbsensiController::class, 'absensi_dosen']);
     Route::put('/absensi/{id}', [Ctr\AbsensiController::class, 'update']);
     Route::delete('/absensi/{id}', [Ctr\AbsensiController::class, 'destroy']);
 
