@@ -16,9 +16,9 @@
               <h2 class="mb-0 text-center text-md-left">Data Mahasiswa</h2>
             </div>
             <div class="col-12 col-md-6 text-center text-md-right mt-3 mt-md-0">
-              <button type="button" onclick="add_btn()" class="btn btn-primary">
-                <span class="iconify mr-2" data-icon="bx:bxs-plus-circle"></span>
-                Tambah
+              <button type="button" onclick="cetak()" class="btn btn-warning">
+                <span class="iconify mr-2" data-icon="bx:bx-printer"></span>
+                Cetak 
               </button>
             </div>
           </div>
@@ -174,6 +174,15 @@ dt_opt = {
 }
 function detail_btn(id) {
     window.location.href = window.location.href+"/detail/"+id+"/"+$('#kelas').val()+"/"+$('#matakuliah').val();
+}
+function cetak() {
+    console.log($('#kelas').val())
+    console.log($('#matakuliah').val())
+    if (($('#kelas').val()==null || $('#kelas').val()=="") || ($('#matakuliah').val()==null || $('#matakuliah').val()=="") ) {
+        alert('Pilih kelas terlebih dahulu!')
+    } else {
+        window.open("{{url('akademik/kuliah/cetak-absensi-kelas/')}}",'_blank');
+    }
 }
 </script>
 @endsection
