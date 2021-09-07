@@ -539,6 +539,76 @@ class AbsensiController extends Controller
         ]);
     }
 
+    public function rekap_kelas(Request $request) {
+        DB::enableQueryLog();
+        // Rekap absensi per matakuliah
+        DB::statement("SET SQL_MODE=''");
+        
+        $this->data = Abs::select(
+            'mahasiswa.nrp as nim',
+            'mahasiswa.nama',
+            'absensi_mahasiswa.tanggal',
+            'matakuliah.kode',
+            'matakuliah.matakuliah',
+            DB::raw('COUNT(CASE WHEN absensi_mahasiswa.status = "H" THEN 1 END) AS HADIR,COUNT(CASE WHEN absensi_mahasiswa.status = "S" OR absensi_mahasiswa.status = "A" THEN 1 END) AS TIDAK_HADIR')
+        )->join('kuliah', 'absensi_mahasiswa.kuliah', '=', 'kuliah.nomor')
+        ->join('matakuliah', 'kuliah.matakuliah', '=', 'matakuliah.nomor')
+        ->join('kelas', 'kuliah.kelas', '=', 'kelas.nomor')
+        ->join('mahasiswa', 'absensi_mahasiswa.mahasiswa', '=', 'mahasiswa.nomor')
+        ->where('kelas.nomor', $request->kelas)
+        ->where('matakuliah.nomor', $request->matakuliah)
+        ->where('kuliah.semester', $request->semester)
+        ->where('kuliah.tahun', $request->tahun)
+        ->groupBy('matakuliah.matakuliah')
+        ->get();
+
+        
+        $this->status = "success";
+
+        return response()->json([
+            "status7" =>$this->status,
+            "data" => $this->data,
+            "error" => $this->err,
+        ]);
+    }
+
+    public function detail_rekap_absensi(Request $request)
+    {
+        $this->data = DB::table("mahasiswa as m")
+                            ->select(
+                                "m.nomor as id_mahasiswa",
+                                "m.nama",
+                                "m.nrp as nim",
+                                "kl.nomor",
+                                "kl.semester",
+                                "mk.matakuliah",
+                                DB::raw("CONCAT(p.program,' ',ps.program_studi) as prodi"),
+                                "am.nomor as absensi",
+                                "am.tanggal",
+                                "am.status",
+                                "am.minggu",
+                            )
+                            ->join("kelas as k", "k.nomor", "=", "m.kelas")
+                            ->join("kuliah as kl", "kl.kelas", "=", "k.nomor")
+                            ->join("absensi_mahasiswa as am", "am.kuliah", "=", "kl.nomor")
+                            ->join("matakuliah as mk", "kl.matakuliah", "=", "mk.nomor")
+                            ->join("program_studi as ps","ps.nomor", "=", "m.program_studi")
+                            ->join("program as p","p.nomor", "=", "ps.program")
+                            ->where('m.nomor', $request->mahasiswa)
+                            ->where('kl.tahun', $request->tahun)
+                            ->where('kl.kelas', $request->kelas)
+                            ->where('kl.matakuliah', $request->matakuliah)
+                            ->get();
+
+        $this->status = "success";
+
+        return response()->json([
+            "status7" =>$this->status,
+            "data" => $this->data,
+            "error" => $this->err,
+        ]);
+    }
+
     /**
      * Update the specified resource in storage.
      *

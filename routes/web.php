@@ -365,15 +365,21 @@ Route::prefix('akademik')->group(function () {
             ]);
         });
         
-        Route::get('/absensi/rekap-mahasiswa', function () {
+        Route::get('/absensi/mahasiswa/rekap', function () {
             return view('mahasiswaLama.presensi', [
                 "title" => "rekap-absensi-mahasiswa"
             ]);
         });
-
+        
         Route::get('/absensi/kelas-dosen', function () {
             return view('dosen.presensiDosen', [
                 "title" => "absensi-dosen"
+            ]);
+        });
+
+        Route::get('/absensi/rekap', function () {
+            return view('akademik.kuliah.rekapabsensimahasiswa', [
+                "title" => "rekap-absensi-mahasiswa"
             ]);
         });
     });
