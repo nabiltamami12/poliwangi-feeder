@@ -24,10 +24,14 @@ class SpiController extends Controller
     public function index()
     {
         $first = Spi::select('id_mahasiswa')->distinct()->get();
+        $final = [];
         foreach ($first as $key=>$value) {
             $second[$key] = Spi::select(
             'mahasiswa.nama',
-            'spi.tarif',   
+            'spi.id',
+            'spi.tarif',
+            'spi.id_mahasiswa',
+            'spi.tanggal_pembayaran',
             DB::raw("SUM(spi.pembayaran) as nom_pembayaran"),
             DB::raw("spi.tarif - SUM(spi.pembayaran) as piutang"))
             ->where('spi.id_mahasiswa', $first[$key]->id_mahasiswa)
@@ -35,14 +39,19 @@ class SpiController extends Controller
             ->get();
         }
 
-        $this->data = $second;
+        foreach ($second as $key=>$value) {
+            array_push($final, $second[$key][0]);
+        }
+
+
+        $this->data = $final;
         $this->status = "success";
 
 
         return response()->json([
             "status" => $this->status,
             "data" => $this->data,
-            "error" => $this->err
+            "error" => $this->err,
         ]);
     }
 
@@ -126,7 +135,6 @@ class SpiController extends Controller
             'spi.keterangan')
             ->where('id_mahasiswa', $id)
             ->join('mahasiswa', 'spi.id_mahasiswa', '=', 'mahasiswa.nrp')
-            ->groupBy('mahasiswa.nama')
             ->get();
         
         $this->status = "success";

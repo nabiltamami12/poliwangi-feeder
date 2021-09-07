@@ -409,8 +409,10 @@ Route::prefix('akademik')->group(function () {
             ]);
         });
 
-        Route::get('/spi/detail', function () {
+        Route::get('/spi/detail/{id}/{nama}', function ($id, $nama) {
             return view('keuangan.detailSPI', [
+                "id" => $id,
+                'nama' => $nama,
                 "title" => "keuangan-rekapitulasi",
             ]);
         });
