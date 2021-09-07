@@ -5,23 +5,20 @@
 <header class="header"></header>
 
 <!-- Page content -->
-<section class="page-content container-fluid">
+<section class="page-content container-fluid" id="akademik_datamahasiswa">
   <div class="row">
     <div class="col-xl-12">
       <div class="card shadow padding--small">
-        <div class="card-header p-0">
+
+        <div class="card-header p-0 m-0 border-0">
           <div class="row align-items-center">
             <div class="col-12 col-md-6">
               <h2 class="mb-0 text-center text-md-left">Data Mahasiswa</h2>
             </div>
             <div class="col-12 col-md-6 text-center text-md-right mt-3 mt-md-0">
               <button type="button" onclick="add_btn()" class="btn btn-primary">
-                <i class="iconify-inline mr-1" data-icon="bx:bxs-plus-circle"></i>
+                <span class="iconify mr-2" data-icon="bx:bxs-plus-circle"></span>
                 Tambah
-              </button>
-              <button type="button" class="btn btn-secondary ml-md-2">
-                <i class="iconify-inline mr-1" data-icon="bx:bx-cloud-download"></i>
-                Unduh Data
               </button>
             </div>
           </div>
@@ -44,7 +41,7 @@
             <div class="col-md-4 form-group mt-3 mt-md-0">
               <label for="status-mahasiswa">Status Mahasiswa</label>
               <select class="form-control" id="status" name="status">
-
+                
               </select>
             </div>
           </div>
@@ -93,7 +90,7 @@
   })
 } );
 async function getData() {
-  
+    var dataGlobal =  getDataGlobal()
     var optProgram,optJurusan,optKelas,optStatus;
     $.each(dataGlobal['prodi'],function (key,row) {
         optProgram += `<option value="${row.nomor}">${row.nama_program} ${row.program_studi}</option>`
@@ -116,7 +113,7 @@ async function getData() {
 }
 function setDatatable() {
   var nomor = 1;
-  dt_url = `${url_api}/mahasiswa?program_studi=${$('#program_studi').val()}&status=${$('#status').val()}&kelas=${$('#kelas').val()}`;
+  dt_url = `${url_api}/mahasiswa?program=${$('#program').val()}&jurusan=${$('#jurusan').val()}&status=${$('#status').val()}&kelas=${$('#kelas').val()}`;
 dt_opt = {
   "columnDefs": [
         {
@@ -167,8 +164,8 @@ dt_opt = {
           "mRender": function(data, type, full) {
             var id = data['nomor'];
             var text_hapus = data['nama'];
-            var btn_update = `<i class="iconify edit-icon" onclick='update_btn(${id})' data-icon="bx:bx-edit-alt" ></i>` 
-            var btn_delete = `<i class="iconify delete-icon" data-icon="bx:bx-trash"  onclick='delete_btn(${id},"mahasiswa","mahasiswa","${text_hapus}")'></i>`; 
+            var btn_update = `<span class="iconify edit-icon" onclick='update_btn(${id})' data-icon="bx:bx-edit-alt" ></span>` 
+            var btn_delete = `<span class="iconify delete-icon" data-icon="bx:bx-trash"  onclick='delete_btn(${id},"mahasiswa","mahasiswa","${text_hapus}")'></span>`; 
             res = btn_update+" "+btn_delete;
             return res;
           }

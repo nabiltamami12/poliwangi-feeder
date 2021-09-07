@@ -135,12 +135,10 @@ Route::prefix('v1')->group(function () {
 
     // ABSENSI
     Route::get('/absensi', [Ctr\AbsensiController::class, 'index']);
-    Route::get('/absensi/{id}', [Ctr\AbsensiController::class, 'show']);
+    Route::get('/absensi/rekap-matkul', [Ctr\AbsensiController::class, 'rekap_matkul']);
     Route::get('/absensi/dosen/{id}', [Ctr\AbsensiController::class, 'show_dosen']);
     Route::get('/absensi/home/{id}', [Ctr\AbsensiController::class, 'one']);
-    Route::get('/absensi/rekap-matkul', [function () {
-        return "wkwkw";
-    }]);
+    Route::get('/absensi/{id}', [Ctr\AbsensiController::class, 'show']);
     Route::post('/absensi', [Ctr\AbsensiController::class, 'store']);
     Route::post('/absensi/dosen', [Ctr\AbsensiController::class, 'absensi_dosen']);
     Route::put('/absensi/{id}', [Ctr\AbsensiController::class, 'update']);

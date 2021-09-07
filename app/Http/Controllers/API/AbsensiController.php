@@ -113,7 +113,7 @@ class AbsensiController extends Controller
         
 
         return response()->json([
-            "status" =>$this->status,
+            "status1" =>$this->status,
             "data" => $this->data,
             "error" => $this->err,
         ]);
@@ -162,7 +162,7 @@ class AbsensiController extends Controller
             $this->status = "success";
         }
         return response()->json([
-            'status' => $this->status,
+            'status2' => $this->status,
             'data' => $this->data,
             'error' => $this->err
         ]);
@@ -195,7 +195,7 @@ class AbsensiController extends Controller
         $this->status = "success";
         
         return response()->json([
-            'status' => $this->status,
+            'status3' => $this->status,
             'data' => $this->data,
             'error' => $this->err
         ]);
@@ -291,7 +291,7 @@ class AbsensiController extends Controller
         
 
         return response()->json([
-            "status" =>$this->status,
+            "status4" =>$this->status,
             "data" => $this->data,
             "error" => $this->err,
         ]);
@@ -409,7 +409,7 @@ class AbsensiController extends Controller
             echo $e;
         }
         return response()->json([
-            "status" =>$this->status,
+            "status5" =>$this->status,
             "data" => ['info'=>$arr,'mahasiswa'=>$this->data],
             "error" => $this->err,
         ]);
@@ -489,7 +489,7 @@ class AbsensiController extends Controller
         
 
         return response()->json([
-            "status" =>$this->status,
+            "status6" =>$this->status,
             "data" => $this->data,
             "error" => $this->err,
         ]);
@@ -507,12 +507,11 @@ class AbsensiController extends Controller
     }
 
     public function rekap_matkul(Request $request) {
-        die('wkwkk');
         DB::enableQueryLog();
         // Rekap absensi per matakuliah
         DB::statement("SET SQL_MODE=''");
         
-        $this->data = Abs::select(
+        $query = Abs::select(
             'absensi_mahasiswa.tanggal',
             'matakuliah.kode',
             'matakuliah.matakuliah',
@@ -522,14 +521,19 @@ class AbsensiController extends Controller
         ->join('kelas', 'kuliah.kelas', '=', 'kelas.nomor')
         ->join('mahasiswa', 'absensi_mahasiswa.mahasiswa', '=', 'mahasiswa.nomor')
         ->where('absensi_mahasiswa.mahasiswa', $request->mahasiswa)
-        ->where('kuliah.tahun', $request->tahun)
-        ->groupBy('matakuliah.matakuliah')
-        ->get();
-        die(json_encode(DB::getQueryLog()));
+        ->where('kuliah.semester', $request->semester)
+        ->where('kuliah.tahun', $request->tahun);
+
+        if ($request->tanggal) {
+            $query = $query->whereDate('tanggal',$request->tanggal);
+        }
+
+        $this->data = $query->groupBy('matakuliah.matakuliah')->get(); 
+
         $this->status = "success";
 
         return response()->json([
-            "status" =>$this->status,
+            "status7" =>$this->status,
             "data" => $this->data,
             "error" => $this->err,
         ]);
@@ -564,7 +568,7 @@ class AbsensiController extends Controller
         }
 
         return response()->json([
-            'status' => $this->status,
+            'status8' => $this->status,
             'data' => $this->data,
             'error' => $this->err
         ]);
@@ -589,7 +593,7 @@ class AbsensiController extends Controller
         }
 
         return response()->json([
-            'status' => $this->status,
+            'status9' => $this->status,
             'data' => $this->data,
             'error' => $this->err
         ]);
