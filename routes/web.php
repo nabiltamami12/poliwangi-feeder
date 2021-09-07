@@ -764,3 +764,7 @@ Route::get('/loading2', function () {
 Route::get('/document', function () {
     return view('testingKomponen.document');
 });
+
+Route::get('/absensiperkuliahan', function () {
+    return view('testingKomponen.documentAbsensiPerkuliahan');
+});
