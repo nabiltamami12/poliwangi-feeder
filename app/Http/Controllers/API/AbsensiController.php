@@ -113,7 +113,7 @@ class AbsensiController extends Controller
         
 
         return response()->json([
-            "status1" =>$this->status,
+            "status" =>$this->status,
             "data" => $this->data,
             "error" => $this->err,
         ]);
@@ -162,7 +162,7 @@ class AbsensiController extends Controller
             $this->status = "success";
         }
         return response()->json([
-            'status2' => $this->status,
+            'status' => $this->status,
             'data' => $this->data,
             'error' => $this->err
         ]);
@@ -195,7 +195,36 @@ class AbsensiController extends Controller
         $this->status = "success";
         
         return response()->json([
-            'status3' => $this->status,
+            'status' => $this->status,
+            'data' => $this->data,
+            'error' => $this->err
+        ]);
+    }
+
+    public function absensi_admin(Request $request)
+    {
+        date_default_timezone_set('Asia/Jakarta');
+        Carbon::setLocale('id');
+
+        $date = Carbon::now()->format('Y-m-d H:i:s');
+        
+        foreach ($request->data as $key => $value) {
+            $id_absensi = $value['nomor'];
+            unset($value['nomor']);
+            $value["tanggal_entry"] = $date;
+            $dosen = $value['dosen'];
+
+            if ($value['status']==null) {
+                $value['status'] = "A";
+            }
+            $data = Abs::where('nomor', $id_absensi)->update($value);
+        }
+        
+        $this->data = $data;
+        $this->status = "success";
+        
+        return response()->json([
+            'status' => $this->status,
             'data' => $this->data,
             'error' => $this->err
         ]);
@@ -291,7 +320,7 @@ class AbsensiController extends Controller
         
 
         return response()->json([
-            "status4" =>$this->status,
+            "status" =>$this->status,
             "data" => $this->data,
             "error" => $this->err,
         ]);
@@ -409,7 +438,7 @@ class AbsensiController extends Controller
             echo $e;
         }
         return response()->json([
-            "status5" =>$this->status,
+            "status" =>$this->status,
             "data" => ['info'=>$arr,'mahasiswa'=>$this->data],
             "error" => $this->err,
         ]);
@@ -489,7 +518,7 @@ class AbsensiController extends Controller
         
 
         return response()->json([
-            "status6" =>$this->status,
+            "status" =>$this->status,
             "data" => $this->data,
             "error" => $this->err,
         ]);
@@ -533,7 +562,7 @@ class AbsensiController extends Controller
         $this->status = "success";
 
         return response()->json([
-            "status7" =>$this->status,
+            "status" =>$this->status,
             "data" => $this->data,
             "error" => $this->err,
         ]);
@@ -545,6 +574,7 @@ class AbsensiController extends Controller
         DB::statement("SET SQL_MODE=''");
         
         $this->data = Abs::select(
+            'mahasiswa.nomor as mahasiswa',
             'mahasiswa.nrp as nim',
             'mahasiswa.nama',
             'absensi_mahasiswa.tanggal',
@@ -566,7 +596,7 @@ class AbsensiController extends Controller
         $this->status = "success";
 
         return response()->json([
-            "status7" =>$this->status,
+            "status" =>$this->status,
             "data" => $this->data,
             "error" => $this->err,
         ]);
@@ -574,14 +604,17 @@ class AbsensiController extends Controller
 
     public function detail_rekap_absensi(Request $request)
     {
-        $this->data = DB::table("mahasiswa as m")
+        
+        $mahasiswa = DB::table("mahasiswa as m")
                             ->select(
                                 "m.nomor as id_mahasiswa",
                                 "m.nama",
                                 "m.nrp as nim",
-                                "kl.nomor",
+                                "kl.nomor as kuliah",
                                 "kl.semester",
                                 "mk.matakuliah",
+                                "k.kode as kelas",
+                                "j.jam",
                                 DB::raw("CONCAT(p.program,' ',ps.program_studi) as prodi"),
                                 "am.nomor as absensi",
                                 "am.tanggal",
@@ -590,6 +623,7 @@ class AbsensiController extends Controller
                             )
                             ->join("kelas as k", "k.nomor", "=", "m.kelas")
                             ->join("kuliah as kl", "kl.kelas", "=", "k.nomor")
+                            ->join("jam as j", "kl.jam", "=", "j.nomor")
                             ->join("absensi_mahasiswa as am", "am.kuliah", "=", "kl.nomor")
                             ->join("matakuliah as mk", "kl.matakuliah", "=", "mk.nomor")
                             ->join("program_studi as ps","ps.nomor", "=", "m.program_studi")
@@ -599,11 +633,21 @@ class AbsensiController extends Controller
                             ->where('kl.kelas', $request->kelas)
                             ->where('kl.matakuliah', $request->matakuliah)
                             ->get();
-
+        
+        if(count($mahasiswa)>0){
+            foreach ($mahasiswa as $key => $value) {
+                $batas = Carbon::parse($value->jam)->addMinutes(15)->format('H:i');
+                $mahasiswa[$key]->batas = $batas;
+            }
+            $this->data = $mahasiswa;
+        }else{
+            $this->data = null;
+        }
+        
         $this->status = "success";
 
         return response()->json([
-            "status7" =>$this->status,
+            "status" =>$this->status,
             "data" => $this->data,
             "error" => $this->err,
         ]);
@@ -638,7 +682,7 @@ class AbsensiController extends Controller
         }
 
         return response()->json([
-            'status8' => $this->status,
+            'status' => $this->status,
             'data' => $this->data,
             'error' => $this->err
         ]);
@@ -663,7 +707,7 @@ class AbsensiController extends Controller
         }
 
         return response()->json([
-            'status9' => $this->status,
+            'status' => $this->status,
             'data' => $this->data,
             'error' => $this->err
         ]);

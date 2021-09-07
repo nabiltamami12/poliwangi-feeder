@@ -54,8 +54,8 @@
                 <th scope="col" class="text-center px-2">No</th>
                 <th scope="col">NIM</th>
                 <th scope="col">Nama</th>
-                <th scope="col" class="text-center">Jam Presensi</th>
-                <th scope="col" class="text-center">Jumlah Kehadiran</th>
+                <th scope="col" class="text-center">Kehadiran</th>
+                <th scope="col" class="text-center">Tidak Hadir</th>
                 <th scope="col" class="text-center">Ketentuan Kehadiran</th>
                 <th scope="col" class="text-center">Aksi</th>
               </tr>
@@ -144,36 +144,36 @@ dt_opt = {
           "aTargets": [3],
           "mData": null,
           "mRender": function(data, type, full) {
-            res = "-";
+            res = data['hadir'];
             return (res==null)?"-":res;
           }
         },{
           "aTargets": [4],
           "mData": null,
           "mRender": function(data, type, full) {
-            res = data['hadir'];
+            res = data['tidak_hadir'];
             return (res==null)?"-":res;
           }
         },{
           "aTargets": [5],
           "mData": null,
           "mRender": function(data, type, full) {
-            res = data['tidak_hadir'];
+            res = 16;
             return (res==null)?"-":res;
           }
         },{
           "aTargets": [6],
           "mData": null,
           "mRender": function(data, type, full) {
-            var btn_detail = `<span class="iconify" onclick='detail_btn(${})' data-icon="bx:bx-group" ></span>` 
+            var btn_detail = `<span class="iconify" onclick='detail_btn(${data['mahasiswa']})' data-icon="bx:bx-group" ></span>` 
             res = btn_detail;
             return res;
           }
         },
       ]}
 }
-function detail_btn() {
-    window.location.href = window.location.href+"/detail/"+id;
+function detail_btn(id) {
+    window.location.href = window.location.href+"/detail/"+id+"/"+$('#kelas').val()+"/"+$('#matakuliah').val();
 }
 </script>
 @endsection

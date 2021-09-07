@@ -382,6 +382,11 @@ Route::prefix('akademik')->group(function () {
                 "title" => "rekap-absensi-mahasiswa"
             ]);
         });
+        Route::get('/absensi/rekap/detail/{id}/{kelas}/{matkul}', function () {
+            return view('akademik.kuliah.detailrekapabsensi', [
+                "title" => "rekap-absensi-mahasiswa"
+            ]);
+        });
     });
 
     Route::prefix('keuangan')->group(function (){

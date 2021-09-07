@@ -37,18 +37,6 @@
               <input type="text" class="form-control" id="matakuliah" readonly>
             </div>
           </div>
-          <div class="form-row">
-            <div class="col-md-6 form-group">
-              <label for="matakuliah">Mata Kuliah</label>
-              <input type="text" class="form-control" id="matakuliah" readonly>
-
-            </div>
-            <div class="col-md-6 form-group mt-3 mt-md-0">
-              <label for="kelas">Kelas</label>
-              <input type="text" class="form-control" id="kelas" readonly>
-
-            </div>
-          </div>
         </form>
         <hr class="my-4">
         <div class="table-responsive">
@@ -145,6 +133,11 @@
   </div>
 </section>
 <script>
+var url = $(location).attr('href')
+parts = url.split("/")
+var matkul = parts[parts.length-1]
+var kelas = parts[parts.length-2]
+var mahasiswa = parts[parts.length-3]
 var dataFilter
 var countData
 var arr_mhs = []
@@ -155,13 +148,13 @@ var semester = dataGlobal['periode']['semester'];
 var tahun = dataGlobal['periode']['tahun'];
 
 $(document).ready(function() {
-  getFilter(id,semester);
+  getFilter();
 
   $('#btn_simpan').on('click',function (e) {
     console.log(arr_mhs)
     $.ajax({
-      url: url_api+"/absensi/dosen",
-      type: 'post',
+      url: url_api+"/absensi/admin",
+      type: 'put',
       dataType: 'json',
       data: {data:arr_mhs},
       beforeSend: function(text) {
@@ -189,33 +182,33 @@ function setSiswa(data) {
   $('.table-body').html('')
   $('.table-header').append(`<tr>
                 <th scope="col" class="text-center">tanggal</th>
-                <th scope="col">NIM</th>
-                <th scope="col" style="width: 25%">Nama</th>
+                <th scope="col">Pertemuan ke-</th>
                 <th scope="col" class="text-center">Jam absensi</th>
                 <th scope="col" class="text-center">batas absensi</th>
                 <th scope="col" class="text-center">Status</th>
               </tr>`)
   var i = 0;
   $.each(data,function (key,row) {
-    // if (row.nomor==null) {
-    //   var id_nilai = 0;
-    // }else{
-    //   var id_nilai = row.nomor;
-    // }
-    arr_mhs.push({'mahasiswa':row.id_mahasiswa,'kuliah':row.kuliah,'status':row.status,'dosen':id})
+    console.log(row)
+    $('#nim').val(row.nim)
+    $('#nama').val(row.nama)
+    $('#program_studi').val(row.prodi)
+    $('#kelas').val(row.kelas)
+    $('#matakuliah').val(row.matakuliah)
+
+    arr_mhs.push({'nomor':row.absensi,'mahasiswa':row.id_mahasiswa,'kuliah':row.kuliah,'status':row.status,'dosen':id})
     console.log(arr_mhs)
-    var status_alpa = `<span id="btn_absensi_${row.id_mahasiswa}" data-id="${row.id_mahasiswa}" class="badge badge-danger">
+    var status_alpa = `<span data-id="${row.absensi}" class="btn-absensi badge badge-danger">
                     <i class="iconify-inline mr-1" data-icon="bi:x-circle-fill"></i>
                     <span class="text-capitalize">Tidak Hadir</span>
                   </span>`
-    var status_hadir = `<span id="btn_absensi_${row.id_mahasiswa}" data-id="${row.id_mahasiswa}" class="badge badge-success">
+    var status_hadir = `<span data-id="${row.absensi}" class="btn-absensi badge badge-success">
                     <i class="iconify-inline mr-1" data-icon="akar-icons:circle-check-fill"></i>
                     <span class="text-capitalize">Hadir</span>
                   </span>`
     html = `<tr>
                 <td class="text-center">02/07/2021</td>
-                <td>${row.nim}</td>
-                <td class="font-weight-bold text-capitalize">${row.mahasiswa}</td>
+                <td>${row.minggu}</td>
                 <td class="text-center">${row.jam}</td>
                 <td class="text-center">${row.batas}</td>
                 <td class="text-center status_absensi">
@@ -223,10 +216,17 @@ function setSiswa(data) {
                 </td>
               </tr>`
     $('.table-body').append(html)
-    $('#btn_absensi_'+row.id_mahasiswa).on('click',function (e) {
-      var id_mahasiswa = $(this).data('id');
-      var mahasiswa = $.grep(arr_mhs, function(e){ return e.mahasiswa == id_mahasiswa; });
+    
+    i++;
+
+  })
+  $('.btn-absensi').on('click',function (e) {
+        var id_absensi = $(this).data('id');
+        console.log(id_absensi)
+      var mahasiswa = $.grep(arr_mhs, function(e){ return e.nomor == id_absensi; });
+      console.log(mahasiswa)
       if ($(this).hasClass('badge-danger')) {
+          console.log("hadir")
         $(this).html('');
         $(this).removeClass('badge-danger')
         $(this).addClass('badge-success')
@@ -234,6 +234,7 @@ function setSiswa(data) {
                     <span class="text-capitalize">Hadir</span>`);
         mahasiswa[0]['status'] = 'H';
       }else{
+          console.log("tidak hadir")
         $(this).html('');
         $(this).removeClass('badge-success')
         $(this).addClass('badge-danger')
@@ -242,15 +243,12 @@ function setSiswa(data) {
         mahasiswa[0]['status'] = 'A';
       }
     })
-    i++;
-
-  })
   countData = i;
 }
 
-async function getFilter(id,semester) {
+async function getFilter() {
   $.ajax({
-    url: url_api+"/absensi/dosen/"+id,
+    url: `${url_api}/absensi/rekap/detail?mahasiswa=${mahasiswa}&kelas=${kelas}&tahun=${tahun}&semester=${semester}&matakuliah=${matkul}`,
     type: 'get',
     dataType: 'json',
     data: {},
@@ -261,11 +259,7 @@ async function getFilter(id,semester) {
     },
     success: function(res) {
         if (res.status=="success") {
-            $('#program_studi').val(res.data.info.prodi)
-            $('#semester').val(res.data.info.semester)
-            $('#matakuliah').val(res.data.info.matakuliah)
-            $('#kelas').val(res.data.info.kelas)
-            setSiswa(res.data.mahasiswa)
+            setSiswa(res.data)
         } else {
             // alert gagal
         }
