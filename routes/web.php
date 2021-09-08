@@ -352,6 +352,11 @@ Route::prefix('akademik')->group(function () {
                 "title" => "dosen-penilaian"
             ]);
         });
+        Route::get('/cetak-absensi-kelas', function () {
+            return view('cetak.cetakabsensikelas', [
+                "title" => "dosen-penilaian"
+            ]);
+        });
         
         Route::get('/rekap-nilai', function () {
             return view('akademik.kuliah/datarekapnilai', [
