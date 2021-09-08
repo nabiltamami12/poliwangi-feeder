@@ -22,21 +22,21 @@
         <!-- Nav items -->
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link {{($title === "dosen-dashboard") ? 'aktif' : ''}}" href="/dosen/dashboard">
+            <a class="nav-link {{($title === "dosen-dashboard") ? 'aktif' : ''}}" href="{{ url('/dosen/dashboard')}}">
               <i class="iconify" data-icon="bx-bx-home-circle"></i>
               <span class="nav-link-text">Dashboard</span>
             </a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link {{($title === "dosen-presensi") ? 'aktif' : ''}}" href="/dosen/presensi">
+            <a class="nav-link {{($title === "dosen-presensi") ? 'aktif' : ''}}" href="{{ url('/dosen/presensi')}}">
               <i class="iconify" data-icon="bx:bx-badge-check"></i>
               <span class="nav-link-text">Presensi</span>
             </a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link {{($title === "dosen-penilaian") ? 'aktif' : ''}}" href="/dosen/penilaian">
+            <a class="nav-link {{($title === "dosen-penilaian") ? 'aktif' : ''}}" href="{{ url('/dosen/penilaian')}}">
               <span class=" iconify" data-icon="bx:bx-book-bookmark"></span>
               <span class="nav-link-text">Penilaian</span>
             </a>
