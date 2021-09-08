@@ -6,10 +6,15 @@ use App\Http\Controllers\Controller;
 use App\Models\Jamkuliah;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Database\QueryException;
 use App\Http\Resources\JamkuliahResource;
 
 class JamkuliahController extends Controller
 {
+    protected $status = null;
+    protected $error = null;
+    protected $data = null;
+
     /**
      * Display a listing  of the resource.
      *
@@ -17,29 +22,26 @@ class JamkuliahController extends Controller
      */
     public function index()
     {
-        $jamkuliah = Jamkuliah::select(
-                                'jam.*',
-                                'hari.hari as nama_hari',
-                                'program.program as nama_program'
-                            )
-                            ->join('hari', 'hari.nomor', '=', 'jam.hari')
-                            ->join('program', 'program.nomor', '=', 'jam.program')
-                            ->get();
+        try {
+            $jamkuliah = Jamkuliah::select(
+                'jam.*',
+                'hari.hari as nama_hari',
+                'program.program as nama_program'
+            )
+            ->join('hari', 'hari.nomor', '=', 'jam.hari')
+            ->join('program', 'program.nomor', '=', 'jam.program')
+            ->get();
+            $this->data = $jamkuliah;
+            $this->status = "success";
+        } catch (QueryException $e) {
+            $this->status = "failed";
+            $this->error = $e;
+        }
         return response()->json([
-            "status" => 'success',
-            "data" => $jamkuliah,
-            "error" => ''
+            "status" => $this->status,
+            "data" => $this->data,
+            "error" => $this->error->errorInfo
         ]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -66,16 +68,19 @@ class JamkuliahController extends Controller
                 ]
             );
         }
-
-        $jamkuliah = Jamkuliah::create($data);
-
-        return response(
-            [
-                'status' => "success",
-                'data' => $jamkuliah,
-                'error' => ''
-            ]
-        );
+        try {
+            $jamkuliah = Jamkuliah::create($data);
+            $this->data = $jamkuliah;
+            $this->status = "success";
+        } catch (QueryException $e) {
+            $this->status = "failed";
+            $this->error = $e;
+        }
+        return response()->json([
+            "status" => $this->status,
+            "data" => $this->data,
+            "error" => $this->error->errorInfo
+        ]);
     }
 
     /**
@@ -87,31 +92,27 @@ class JamkuliahController extends Controller
     public function show($id)
     {
         //
-        $jamkuliah = Jamkuliah::select(
-            'jam.*',
-            'hari.hari as nama_hari',
-            'program.program as nama_program'
-        )
-        ->join('hari', 'hari.nomor', '=', 'jam.hari')
-        ->join('program', 'program.nomor', '=', 'jam.program')
-        ->where('jam.nomor', $id)
-        ->get();
+        try {
+            $jamkuliah = Jamkuliah::select(
+                'jam.*',
+                'hari.hari as nama_hari',
+                'program.program as nama_program'
+            )
+            ->join('hari', 'hari.nomor', '=', 'jam.hari')
+            ->join('program', 'program.nomor', '=', 'jam.program')
+            ->where('jam.nomor', $id)
+            ->get();
+            $this->data = $jamkuliah;
+            $this->status = "success";
+        } catch (QueryException $e) {
+            $this->status = "failed";
+            $this->error = $e;
+        }
         return response()->json([
-            "status" => 'success',
-            "data" => $jamkuliah,
-            "error" => ''
+            "status" => $this->status,
+            "data" => $this->data,
+            "error" => $this->error->errorInfo
         ]);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
     }
 
     /**
@@ -133,20 +134,24 @@ class JamkuliahController extends Controller
 
         if ($validate->fails()) {
             $this->status = "error";
-            $this->err = $validate->errors();
+            $this->error = $validate->errors();
         } else if (!$jamkuliah) {
             $this->status = "failed";
-            $this->err = "Data not found";
+            $this->error = "Data not found";
         } else {
-            $jamkuliah->update($data);
-            $this->data = $jamkuliah->get();
-            $this->status = "success";
+            try {
+                $jamkuliah->update($data);
+                $this->data = $jamkuliah->get();
+                $this->status = "success";
+            } catch (QueryException $e) {
+                $this->status = "failed";
+                $this->error = $e;
+            }
         }
-
         return response()->json([
-            'status' => $this->status,
-            'data' => $data,
-            'error' => ''
+            "status" => $this->status,
+            "data" => $this->data,
+            "error" => $this->error->errorInfo
         ]);
     }
 
@@ -159,15 +164,19 @@ class JamkuliahController extends Controller
     public function destroy($id, Jamkuliah $jamkuliah)
     {
         //
-        $jamkuliah = Jamkuliah::where('nomor', $id);
-        $jamkuliah->delete();
-
-        return response(
-            [
-                'status' => "success",
-                'data' => ["message" => "data berhasil di hapus"],
-                'erorr' => ''
-            ]
-        );
+        try {
+            $jamkuliah = Jamkuliah::where('nomor', $id);
+            $jamkuliah->delete();
+            $this->data = $jamkuliah;
+            $this->status = "success";
+        } catch (QueryException $e) {
+            $this->status = "failed";
+            $this->error = $e;
+        }
+        return response()->json([
+            "status" => $this->status,
+            "data" => $this->data,
+            "error" => $this->error->errorInfo
+        ]);
     }
 }

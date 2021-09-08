@@ -7,9 +7,14 @@ use App\Models\Matakuliah;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use DB;
+use Illuminate\Database\QueryException;
 
 class MatakuliahController extends Controller
 {
+    protected $status = null;
+    protected $error = null;
+    protected $data = null;
+
     /**
      * Display a listing of the resource.
      *
@@ -17,31 +22,28 @@ class MatakuliahController extends Controller
      */
     public function index()
     {
-        $matakuliah = Matakuliah::select(
-                            'matakuliah.*',
-                            'kelas.kode as kode_kelas',
-                            'program_studi.program_studi as nama_program',
-                            'matakuliah_jenis.matakuliah_jenis as nama_mk_jenis',
-                        )
-                        ->join('kelas', 'kelas.nomor', '=', 'matakuliah.kelas')
-                        ->join('program_studi', 'program_studi.nomor', '=', 'matakuliah.program_studi')
-                        ->join('matakuliah_jenis', 'matakuliah_jenis.nomor', '=', 'matakuliah.matakuliah_jenis','left')
-                        ->get();
+        try {
+            $matakuliah = Matakuliah::select(
+                                'matakuliah.*',
+                                'kelas.kode as kode_kelas',
+                                'program_studi.program_studi as nama_program',
+                                'matakuliah_jenis.matakuliah_jenis as nama_mk_jenis',
+                            )
+                            ->join('kelas', 'kelas.nomor', '=', 'matakuliah.kelas')
+                            ->join('program_studi', 'program_studi.nomor', '=', 'matakuliah.program_studi')
+                            ->join('matakuliah_jenis', 'matakuliah_jenis.nomor', '=', 'matakuliah.matakuliah_jenis','left')
+                            ->get();
+            $this->data = $matakuliah;
+            $this->status = "success";
+        } catch (QueryException $e) {
+            $this->status = "failed";
+            $this->error = $e;
+        }
         return response()->json([
-            "status" => 'success ',
-            "data" => $matakuliah,
-            "error" => ''
+            "status" => $this->status,
+            "data" => $this->data,
+            "error" => $this->error->errorInfo
         ]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -86,15 +88,19 @@ class MatakuliahController extends Controller
             );
         }
 
-        $matakuliah = Matakuliah::create($data);
-
-        return response(
-            [
-                'status' => "success",
-                'data' => $matakuliah,
-                'error' => ''
-            ]
-        );
+        try {
+            $matakuliah = Matakuliah::create($data);
+            $this->data = $matakuliah;
+            $this->status = "success";
+        } catch (QueryException $e) {
+            $this->status = "failed";
+            $this->error = $e;
+        }
+        return response()->json([
+            "status" => $this->status,
+            "data" => $this->data,
+            "error" => $this->error->errorInfo
+        ]);
     }
 
     /**
@@ -107,11 +113,18 @@ class MatakuliahController extends Controller
     {
         //
         if ($id) {
-            $matakuliah = Matakuliah::where('nomor', $id)->get();
+            try {
+                $matakuliah = Matakuliah::where('nomor', $id)->get();
+                $this->data = $matakuliah;
+                $this->status = "success";
+            } catch (QueryException $e) {
+                $this->status = "failed";
+                $this->error = $e;
+            }
             return response()->json([
-                "status" => 'success',
-                "data" => $matakuliah,
-                "error" => ''
+                "status" => $this->status,
+                "data" => $this->data,
+                "error" => $this->error->errorInfo
             ]);
         } else {
             return response()->json([
@@ -120,17 +133,6 @@ class MatakuliahController extends Controller
                 "error" => 'id required'
             ]);
         }
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
     }
 
     /**
@@ -168,20 +170,24 @@ class MatakuliahController extends Controller
 
         if ($validate->fails()) {
             $this->status = "error";
-            $this->err = $validate->errors();
+            $this->error = $validate->errors();
         } else if (!$matakuliah) {
             $this->status = "failed";
-            $this->err = "Data not found";
+            $this->error = "Data not found";
         } else {
-            $matakuliah->update($data);
-            $this->data = $matakuliah->get();
-            $this->status = "success";
+            try {
+                $matakuliah->update($data);
+                $this->data = $matakuliah->get();
+                $this->status = "success";
+            } catch (QueryException $e) {
+                $this->status = "failed";
+                $this->error = $e;
+            }
         }
-
         return response()->json([
-            'status' => $this->status,
-            'data' => $data,
-            'error' => ''
+            "status" => $this->status,
+            "data" => $this->data,
+            "error" => $this->error->errorInfo
         ]);
     }
 
@@ -194,15 +200,19 @@ class MatakuliahController extends Controller
     public function destroy($id)
     {
         //
-        $matakuliah = Matakuliah::where('nomor', $id);
-        $matakuliah->delete();
-
-        return response(
-            [
-                'status' => "success",
-                'data' => ["message" => "data berhasil di hapus"],
-                'erorr' => ''
-            ]
-        );
+        try {
+            $matakuliah = Matakuliah::where('nomor', $id);
+            $matakuliah->delete();
+            $this->data = $matakuliah;
+            $this->status = "success";
+        } catch (QueryException $e) {
+            $this->status = "failed";
+            $this->error = $e;
+        }
+        return response()->json([
+            "status" => $this->status,
+            "data" => $this->data,
+            "error" => $this->error->errorInfo
+        ]);
     }
 }

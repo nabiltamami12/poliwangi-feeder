@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Prodi;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Resources\ProdiResource;
+use Illuminate\Database\QueryException;
 use DB;
 
 class ProdiController extends Controller
@@ -17,38 +18,33 @@ class ProdiController extends Controller
      * @return \Illuminate\Http\Response
      */
     protected $status = null;
-    protected $err = null;
+    protected $error = null;
     protected $data = null;
 
     public function index()
     {
-        $this->data = Prodi::select(
-            "program_studi.*",
-            "program.program as nama_program",
-            "jurusan.jurusan as nama_jurusan",
-            "pegawai.nama as kaprodi"
-        )
-
+        try {
+            $prodi = Prodi::select(
+                "program_studi.*",
+                "program.program as nama_program",
+                "jurusan.jurusan as nama_jurusan",
+                "pegawai.nama as kaprodi"
+            )
             ->join("program", "program_studi.program", "=", "program.nomor")
             ->join("jurusan", "program_studi.jurusan", "=", "jurusan.nomor")
             ->join("pegawai", "program_studi.kepala", "=", "pegawai.nomor",'LEFT')
             ->get();
-       
+            $this->data = $prodi;
+            $this->status = "success";
+        } catch (QueryException $e) {
+            $this->status = "failed";
+            $this->error = $e;
+        }
         return response()->json([
-            "status" => true,
+            "status" => $this->status,
             "data" => $this->data,
-            "error" => ''
+            "error" => $this->error->errorInfo
         ]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -82,15 +78,19 @@ class ProdiController extends Controller
             );
         }
 
-        $prodi = Prodi::create($data);
-
-        return response(
-            [
-                'status' => "success",
-                'data' => new ProdiResource($prodi),
-                'error' => ''
-            ]
-        );
+        try {
+            $prodi = Prodi::create($data);
+            $this->data = $prodi;
+            $this->status = "success";
+        } catch (QueryException $e) {
+            $this->status = "failed";
+            $this->error = $e;
+        }
+        return response()->json([
+            "status" => $this->status,
+            "data" => $this->data,
+            "error" => $this->error->errorInfo
+        ]);
     }
 
     /**
@@ -101,36 +101,28 @@ class ProdiController extends Controller
      */
     public function show($id)
     {
-        //
-        $prodi = Prodi::select(
-
-            "program_studi.*",
-            "program.program as nama_program",
-            "jurusan.jurusan as nama_jurusan",
-
-
-        )
-
+        try {
+            $prodi = Prodi::select(
+    
+                "program_studi.*",
+                "program.program as nama_program",
+                "jurusan.jurusan as nama_jurusan",
+            )
             ->join("program", "program_studi.program", "=", "program.nomor")
             ->join("jurusan", "program_studi.jurusan", "=", "jurusan.nomor")
             ->where('program_studi.nomor', $id)
             ->get();
-            return response()->json([
-                "status" => 'success',
-                "data" => $prodi,
-                "error" => ''
-            ]);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+            $this->data = $prodi;
+            $this->status = "success";
+        } catch (QueryException $e) {
+            $this->status = "failed";
+            $this->error = $e;
+        }
+        return response()->json([
+            "status" => $this->status,
+            "data" => $this->data,
+            "error" => $this->error->errorInfo
+        ]);
     }
 
     /**
@@ -147,18 +139,22 @@ class ProdiController extends Controller
 
         if(!$check){
             $this->status = "failed";
-            $this->err = "Data not found";
+            $this->error = "Data not found";
         }
         else {
-            $check->update($data);
-            $this->data = $check->get();
-            $this->status = "success";
+            try {
+                $check->update($data);
+                $this->data = $check->get();
+                $this->status = "success";
+            } catch (QueryException $e) {
+                $this->status = "failed";
+                $this->error = $e;
+            }
         }
-
         return response()->json([
-            'status' => $this->status,
-            'data' => $this->data,
-            'error' => $this->err
+            "status" => $this->status,
+            "data" => $this->data,
+            "error" => $this->error->errorInfo
         ]);
     }
 
@@ -170,20 +166,25 @@ class ProdiController extends Controller
      */
     public function destroy($id)
     {
-        $check = Prodi::where('nomor', $id);
-
-        if ($check) {
-            $this->status = "success";
-            $this->data = $check->get();
-            $check->delete();
-        } else {
+        try {
+            $check = Prodi::where('nomor', $id);
+    
+            if ($check) {
+                $this->status = "success";
+                $this->data = $check->get();
+                $check->delete();
+            } else {
+                $this->status = "failed";
+            }
+        } catch (QueryException $e) {
             $this->status = "failed";
+            $this->error = $e;
         }
-
         return response()->json([
-            'status' => $this->status,
-            'data' => $this->data,
-            'error' => $this->err
+            "status" => $this->status,
+            "data" => $this->data,
+            "error" => $this->error->errorInfo
         ]);
+
     }
 }

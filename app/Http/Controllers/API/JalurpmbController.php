@@ -33,23 +33,18 @@ class JalurpmbController extends Controller
 
     public function index()
     {
-        $this->data = Jalurpmb::get();
-
+        try {
+            $this->data = Jalurpmb::get();
+            $this->status = "success";
+        } catch (QueryException $e) {
+            $this->status = "failed";
+            $this->error = $e;
+        }
         return response()->json([
-            "status" => true,
+            "status" => $this->status,
             "data" => $this->data,
-            "error" => ''
+            "error" => $this->error->errorInfo
         ]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -84,29 +79,34 @@ class JalurpmbController extends Controller
         //         'message' => 'Data Gagal Ditambah',
         //     ], 409);
         // }
-
-        $jalur = new Jalurpmb;
-        $jalur->jalur_daftar = $request->jalur_daftar;
-        $jalur->biaya = $request->biaya;
-        $jalur->is_active = $request->is_active;
-        $jalur->tahun = $request->tahun;
-        $jalur->kuota = $request->kuota;
-        $jalur->tanggal_tes = $request->tanggal_tes;
-        $jalur->tanggal_awal = $request->tanggal_awal;
-        $jalur->tanggal_akhir = $request->tanggal_akhir;
-        $jalur->save();
-        foreach ($request->syarat as $key => $value) {
-            $score = array(
-                'id_jalur' => $jalur->id,
-                'id_syarat' => $value['id_syarat']
-            );
-            $scores = Jalursyarat::Create($score);
+        try {
+            $jalur = new Jalurpmb;
+            $jalur->jalur_daftar = $request->jalur_daftar;
+            $jalur->biaya = $request->biaya;
+            $jalur->is_active = $request->is_active;
+            $jalur->tahun = $request->tahun;
+            $jalur->kuota = $request->kuota;
+            $jalur->tanggal_tes = $request->tanggal_tes;
+            $jalur->tanggal_awal = $request->tanggal_awal;
+            $jalur->tanggal_akhir = $request->tanggal_akhir;
+            $jalur->save();
+            foreach ($request->syarat as $key => $value) {
+                $score = array(
+                    'id_jalur' => $jalur->id,
+                    'id_syarat' => $value['id_syarat']
+                );
+                $scores = Jalursyarat::Create($score);
+            }
+            $this->data = $jalur;
+            $this->status = "success";
+        } catch (QueryException $e) {
+            $this->status = "failed";
+            $this->error = $e;
         }
-
         return response()->json([
-            'status' => 'berhasil',
-            'data' => $jalur,
-            'error' => ''
+            "status" => $this->status,
+            "data" => $this->data,
+            "error" => $this->error->errorInfo
         ]);
     }
 
@@ -119,32 +119,23 @@ class JalurpmbController extends Controller
     public function show($id)
     {
         //
-        if ($id) {
-            $pmb = Jalurpmb::with('jalur_syarat')->where('id', $id)->first();
-            return response()->json([
-                "status" => 'success',
-                "data" => $pmb,
-                "error" => ''
-            ]);
-        } else {
-            $pmb = Jalurpmb::get();
-            return response()->json([
-                "status" => 'failed',
-                "data" => ["message" => "id required"],
-                "error" => ''
-            ]);
+        try {
+            if ($id) {
+                $pmb = Jalurpmb::with('jalur_syarat')->where('id', $id)->first();
+            } else {
+                $pmb = Jalurpmb::get();
+            }
+            $this->data = $pmb;
+            $this->status = "success";
+        } catch (QueryException $e) {
+            $this->status = "failed";
+            $this->error = $e;
         }
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        return response()->json([
+            "status" => $this->status,
+            "data" => $this->data,
+            "error" => $this->error->errorInfo
+        ]);
     }
 
     /**
@@ -156,47 +147,38 @@ class JalurpmbController extends Controller
      */
     public function update(Request $request, $pmb)
     {
-        //
-        $jalur = Jalurpmb::where('id', $pmb)->first();
-        // $data = $request->all();
-        $jalur->update([
-            'jalur_daftar' => $request->jalur_daftar,
-            'biaya' => $request->biaya,
-            'is_active' => $request->is_active,
-            'tahun' => $request->tahun,
-            'kuota' => $request->kuota,
-            'tanggal_tes' => $request->tanggal_tes,
-            'tanggal_awal' => $request->tanggal_awal,
-            'tanggal_akhir' => $request->tanggal_akhir,
-        ]);
-
-        Jalursyarat::where('id_jalur', $pmb)->delete();
-        foreach ($request->syarat as $key => $value) {
-            $score = array(
-                'id_jalur' => $jalur->id,
-                'id_syarat' => $value['id_syarat']
-            );
-            $scores = Jalursyarat::Create($score);
+        try {
+            $jalur = Jalurpmb::where('id', $pmb)->first();
+            // $data = $request->all();
+            $jalur->update([
+                'jalur_daftar' => $request->jalur_daftar,
+                'biaya' => $request->biaya,
+                'is_active' => $request->is_active,
+                'tahun' => $request->tahun,
+                'kuota' => $request->kuota,
+                'tanggal_tes' => $request->tanggal_tes,
+                'tanggal_awal' => $request->tanggal_awal,
+                'tanggal_akhir' => $request->tanggal_akhir,
+            ]);
+    
+            Jalursyarat::where('id_jalur', $pmb)->delete();
+            foreach ($request->syarat as $key => $value) {
+                $score = array(
+                    'id_jalur' => $jalur->id,
+                    'id_syarat' => $value['id_syarat']
+                );
+                $scores = Jalursyarat::Create($score);
+            }
+            $this->data = $jalur;
+            $this->status = "success";
+        } catch (QueryException $e) {
+            $this->status = "failed";
+            $this->error = $e;
         }
-
-        // $validate = Validator::make($data, []);
-
-        // if ($validate->fails()) {
-        //     $this->status = "error";
-        //     $this->err = $validate->errors();
-        // } else if (!$jalur) {
-        //     $this->status = "failed";
-        //     $this->err = "Data not found";
-        // } else {
-        //     $jalur->update($data);
-        //     $this->data = $jalur->get();
-        //     $this->status = "success";
-        // }
-
         return response()->json([
-            'status' => 'succes',
-            'data' => $jalur,
-            'error' => ''
+            "status" => $this->status,
+            "data" => $this->data,
+            "error" => $this->error->errorInfo
         ]);
     }
 
@@ -208,17 +190,20 @@ class JalurpmbController extends Controller
      */
     public function destroy($id)
     {
-        //
-        $pmb = Jalursyarat::where('id_jalur', $id);
-        $pmb->delete();
-        Jalurpmb::where('id', $id)->delete();
-
-        return response(
-            [
-                'status' => "success",
-                'data' => ["message" => "data berhasil di hapus"],
-                'erorr' => ''
-            ]
-        );
+        try {
+            $pmb = Jalursyarat::where('id_jalur', $id);
+            $pmb->delete();
+            Jalurpmb::where('id', $id)->delete();
+            $this->data = "";
+            $this->status = "success";
+        } catch (QueryException $e) {
+            $this->status = "failed";
+            $this->error = $e;
+        }
+        return response()->json([
+            "status" => $this->status,
+            "data" => $this->data,
+            "error" => $this->error->errorInfo
+        ]);
     }
 }

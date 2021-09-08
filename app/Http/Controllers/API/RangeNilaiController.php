@@ -6,42 +6,33 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\RangeNilai;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Database\QueryException;
 
 class RangeNilaiController extends Controller
 {
+    protected $status = null;
+    protected $error = null;
+    protected $data = null;
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-
-    protected $status = null;
-    protected $err = null;
-    protected $data = null;
-    
     public function index()
     {
-        $this->data = RangeNilai::get();
-        $this->status = "success";
-
-       
+        try {
+            $rangenilai = RangeNilai::get();
+            $this->data = $rangenilai;
+            $this->status = "success";
+        } catch (QueryException $e) {
+            $this->status = "failed";
+            $this->error = $e;
+        }
         return response()->json([
             "status" => $this->status,
             "data" => $this->data,
-            "error" => $this->err
+            "error" => $this->error->errorInfo
         ]);
-    }
-
-    
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -58,19 +49,22 @@ class RangeNilaiController extends Controller
 
         if ($validated->fails()) {
             $this->status = 'error';
-            $this->err = $validated->errors();
+            $this->error = $validated->errors();
         } else {
-            $data = RangeNilai::create($data);
-            $this->data = $data;
-            $this->status = "success";
+            try {
+                $data = RangeNilai::create($data);
+                $this->data = $data;
+                $this->status = "success";
+            } catch (QueryException $e) {
+                $this->status = "failed";
+                $this->error = $e;
+            }
         }
         return response()->json([
-            'status' => $this->status,
-            'data' => $this->data,
-            'error' => $this->err
+            "status" => $this->status,
+            "data" => $this->data,
+            "error" => $this->error->errorInfo
         ]);
-
-        
     }
 
     /**
@@ -81,26 +75,19 @@ class RangeNilaiController extends Controller
      */
     public function show($id)
     {
-        $this->data = RangeNilai::where("nomor", $id)->get();
-        $this->status = "success";
-
-        
+        try {
+            $rangenilai = RangeNilai::where("nomor", $id)->get();
+            $this->data = $rangenilai;
+            $this->status = "success";
+        } catch (QueryException $e) {
+            $this->status = "failed";
+            $this->error = $e;
+        }
         return response()->json([
             "status" => $this->status,
             "data" => $this->data,
-            "error" => $this->err
+            "error" => $this->error->errorInfo
         ]);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
     }
 
     /**
@@ -129,21 +116,25 @@ class RangeNilaiController extends Controller
 
         if ($validate->fails()) {
             $this->status = "error";
-            $this->err = $validate->errors();
+            $this->error = $validate->errors();
         } else if(!$check){
             $this->status = "failed";
-            $this->err = "Data not found";
+            $this->error = "Data not found";
         }
         else {
-            $check->update($data);
-            $this->data = $check->get();
-            $this->status = "success";
+            try {
+                $check->update($data);
+                $this->data = $check->get();
+                $this->status = "success";
+            } catch (QueryException $e) {
+                $this->status = "failed";
+                $this->error = $e;
+            }
         }
-
         return response()->json([
-            'status' => $this->status,
-            'data' => $this->data,
-            'error' => $this->err
+            "status" => $this->status,
+            "data" => $this->data,
+            "error" => $this->error->errorInfo
         ]);
     }
 
@@ -155,20 +146,24 @@ class RangeNilaiController extends Controller
      */
     public function destroy($id)
     {
-        $check = RangeNilai::where('NOMOR', $id);
-
-        if ($check) {
-            $this->status = "success";
-            $this->data = $check->get();
-            $check->delete();
-        } else {
+        try {
+            $check = RangeNilai::where('NOMOR', $id);
+    
+            if ($check) {
+                $this->status = "success";
+                $this->data = $check->get();
+                $check->delete();
+            } else {
+                $this->status = "failed";
+            }
+        } catch (QueryException $e) {
             $this->status = "failed";
+            $this->error = $e;
         }
-
         return response()->json([
-            'status' => $this->status,
-            'data' => $this->data,
-            'error' => $this->err
+            "status" => $this->status,
+            "data" => $this->data,
+            "error" => $this->error->errorInfo
         ]);
     }
 }

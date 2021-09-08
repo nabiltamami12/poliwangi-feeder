@@ -20,42 +20,35 @@ class DosenPengampuController extends Controller
      * @return \Illuminate\Http\Response
      */
     protected $status = null;
-    protected $err = null;
+    protected $error = null;
     protected $data = null;
     
     public function index()
     {
-        
-        $this->data = DosenPengampu::select(
-            'pegawai.nama',
-            'pegawai.nomor',
-            DB::raw('count(DISTINCT dosen_pengampu.matakuliah) as jumlah_matkul'),
-        )
-        ->join("pegawai", "dosen_pengampu.dosen", "=", "pegawai.nomor",'right')
-        ->join("staff", "pegawai.staff", "=", "staff.nomor")
-        ->where("pegawai.staff", "=", 4)
-        ->groupBy('pegawai.nomor', 'pegawai.nama')
-        ->get();
-        $this->status = "success";
-
-       
+        try {
+            $dosenpengampu = DosenPengampu::select(
+                'pegawai.nama',
+                'pegawai.nomor',
+                DB::raw('count(DISTINCT dosen_pengampu.matakuliah) as jumlah_matkul'),
+            )
+            ->join("pegawai", "dosen_pengampu.dosen", "=", "pegawai.nomor",'right')
+            ->join("staff", "pegawai.staff", "=", "staff.nomor")
+            ->where("pegawai.staff", "=", 4)
+            ->groupBy('pegawai.nomor', 'pegawai.nama')
+            ->get();
+            $this->data = $dosenpengampu;
+            $this->status = "success";
+        } catch (QueryException $e) {
+            $this->status = "failed";
+            $this->error = $e;
+        }
         return response()->json([
             "status" => $this->status,
             "data" => $this->data,
-            "error" => $this->err,
+            "error" => $this->error->errorInfo
         ]);
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
+    
     /**
      * Store a newly created resource in storage.
      *
@@ -73,19 +66,22 @@ class DosenPengampuController extends Controller
 
         if ($validated->fails()) {
             $this->status = 'error';
-            $this->err = $validated->errors();
+            $this->error = $validated->errors();
         } else {
-            $data = DosenPengampu::create($data);
-            $this->data = $data;
-            $this->status = "success";
+            try {
+                $input = DosenPengampu::create($data);
+                $data = DosenPengampu::where("dosen_pengampu.nomor",$this->data->id)->get();
+                $this->data = $data;
+                $this->status = "success";
+            } catch (QueryException $e) {
+                $this->status = "failed";
+                $this->error = $e;
+            }
         }
-
-        $data = DosenPengampu::where("dosen_pengampu.nomor",$this->data->id)->get();
-
         return response()->json([
-            'status' => $this->status,
-            'data' => $data,
-            'error' => $this->err
+            "status" => $this->status,
+            "data" => $this->data,
+            "error" => $this->error->errorInfo
         ]);
     }
 
@@ -128,17 +124,6 @@ class DosenPengampuController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -158,21 +143,25 @@ class DosenPengampuController extends Controller
         if ($validated->fails()) {
             $this->status = 'failed';
             $this->data = "Tidak ada data";
-            $this->err = $validated->errors();
+            $this->error = $validated->errors();
         } else if (!$check){
             $this->status = "failed";
-            $this->err = "Data not found";
+            $this->error = "Data not found";
         } else {
-            $check->update($data);
-            $this->data = $data;
-            $this->status = "success";
+            try {
+                $check->update($data);
+                $data = DosenPengampu::where("dosen_pengampu.nomor",$id)->get();
+                $this->data = $data;
+                $this->status = "success";
+            } catch (QueryException $e) {
+                $this->status = "failed";
+                $this->error = $e;
+            }
         }
-
-        $data = DosenPengampu::where("dosen_pengampu.nomor",$id)->get();
         return response()->json([
-            'status' => $this->status,
-            'data' => $data,
-            'error' => $this->err
+            "status" => $this->status,
+            "data" => $this->data,
+            "error" => $this->error->errorInfo
         ]);
     }
 
@@ -184,20 +173,24 @@ class DosenPengampuController extends Controller
      */
     public function destroy($id)
     {
-        $check = DosenPengampu::where('NOMOR', $id);
-
-        if ($check) {
-            $this->status = "success";
-            $this->data = $check->get();
-            $check->delete();
-        } else {
+        try {
+            $check = DosenPengampu::where('NOMOR', $id);
+    
+            if ($check) {
+                $this->status = "success";
+                $this->data = $check->get();
+                $check->delete();
+            } else {
+                $this->status = "failed";
+            }
+        } catch (QueryException $e) {
             $this->status = "failed";
+            $this->error = $e;
         }
-
         return response()->json([
-            'status' => $this->status,
-            'data' => $this->data,
-            'error' => $this->err
+            "status" => $this->status,
+            "data" => $this->data,
+            "error" => $this->error->errorInfo
         ]);
     }
 }

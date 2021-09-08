@@ -122,7 +122,7 @@ $(document).ready(function() {
     var id_kelas = $(this).val()
     var matakuliah = $('#matkul').val()
     $.ajax({
-      url: url_api+"/inputnilai?tahun="+tahun+"&kelas="+id_kelas+"&matakuliah="+matakuliah,
+      url: url_api+"/nilai?tahun="+tahun+"&kelas="+id_kelas+"&matakuliah="+matakuliah,
       type: 'get',
       dataType: 'json',
       data: {},
@@ -173,7 +173,7 @@ $(document).ready(function() {
     }
     console.log(dataSimpan)
     $.ajax({
-      url: url_api+"/inputnilai/publish",
+      url: url_api+"/nilai/publish",
       type: 'put',
       dataType: 'json',
       data: {"data":dataSimpan},
@@ -216,7 +216,7 @@ $(document).ready(function() {
     }
     console.log(dataSimpan)
     $.ajax({
-      url: url_api+"/inputnilai",
+      url: url_api+"/nilai",
       type: 'post',
       dataType: 'json',
       data: {"data":dataSimpan},

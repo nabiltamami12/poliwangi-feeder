@@ -109,7 +109,7 @@
             data: {},
             headers: {
               "Authorization": window.localStorage.getItem('token')
-            },
+            }
           },
           ...dt_opt,
           // "dom": 'lfrtip',
