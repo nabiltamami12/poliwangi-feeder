@@ -187,6 +187,12 @@ Route::prefix('v1')->group(function () {
     Route::get('/keuangan/spi', [Ctr\SpiController::class, 'index']);
     Route::get('/keuangan/spi/{id}', [Ctr\SpiController::class, 'show']);
 
+    // Generate Nomor VA <!-- Gunakan route Post --!>
+    Route::get('/nomor_va', [Ctr\NovaController::class, 'index']);
+    Route::post('/nomor_va', [Ctr\NovaController::class, 'store']);
+
+
+
 
 
 
