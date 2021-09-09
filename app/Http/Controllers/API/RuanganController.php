@@ -7,9 +7,14 @@ use Illuminate\Http\Request;
 use App\Models\Ruangan;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Resources\RuanganResource;
+use Illuminate\Database\QueryException;
 
 class RuanganController extends Controller
 {
+    protected $status = null;
+    protected $error = null;
+    protected $data = null;
+
     /**
      * Display a listing of the resource.
      *
@@ -17,24 +22,19 @@ class RuanganController extends Controller
      */
     public function index()
     {
-        $this->data = Ruangan::get();
-       
+        try {
+            $ruangan = Ruangan::get();
+            $this->data = $ruangan;
+            $this->status = "success";
+        } catch (QueryException $e) {
+            $this->status = "failed";
+            $this->error = $e;
+        }
         return response()->json([
-            "status" => true,
+            "status" => $this->status,
             "data" => $this->data,
-            "error" => ''
+            "error" => $this->error
         ]);
-
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -81,15 +81,19 @@ class RuanganController extends Controller
             );
         }
 
-        $ruangan = Ruangan::create($data);
-
-        return response(
-            [
-                'status' => "success",
-                'data' => new RuanganResource($ruangan),
-                'error' => ''
-            ]
-        );
+        try {
+            $ruangan = Ruangan::create($data);
+            $this->data = $ruangan;
+            $this->status = "success";
+        } catch (QueryException $e) {
+            $this->status = "failed";
+            $this->error = $e;
+        }
+        return response()->json([
+            "status" => $this->status,
+            "data" => $this->data,
+            "error" => $this->error
+        ]);
     }
 
     /**
@@ -101,32 +105,23 @@ class RuanganController extends Controller
     public function show($id)
     {
         //
-        if ($id) {
-            $ruangan = Ruangan::where('nomor', $id)->get();
-            return response()->json([
-                "status" => 'success',
-                "data" => $ruangan,
-                "error" => ''
-            ]);
-        } else {
-            $ruangan = Ruangan::get();
-            return response()->json([
-                "status" => 'failed',
-                "data" => ["message" => "id required"],
-                "error" => ''
-            ]);
+        try {
+            if ($id) {
+                $ruangan = Ruangan::where('nomor', $id)->get();
+            } else {
+                $ruangan = Ruangan::get();
+            }
+            $this->data = $ruangan;
+            $this->status = "success";
+        } catch (QueryException $e) {
+            $this->status = "failed";
+            $this->error = $e;
         }
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        return response()->json([
+            "status" => $this->status,
+            "data" => $this->data,
+            "error" => $this->error
+        ]);
     }
 
     /**
@@ -166,20 +161,24 @@ class RuanganController extends Controller
 
         if ($validate->fails()) {
             $this->status = "error";
-            $this->err = $validate->errors();
+            $this->error = $validate->errors();
         } else if (!$ruangan) {
             $this->status = "failed";
-            $this->err = "Data not found";
+            $this->error = "Data not found";
         } else {
-            $ruangan->update($data);
-            $this->data = $ruangan->get();
-            $this->status = "success";
+            try {
+                $ruangan->update($data);
+                $this->data = $ruangan->get();
+                $this->status = "success";
+            } catch (QueryException $e) {
+                $this->status = "failed";
+                $this->error = $e;
+            }
         }
-
         return response()->json([
-            'status' => $this->status,
-            'data' => $data,
-            'error' => ''
+            "status" => $this->status,
+            "data" => $this->data,
+            "error" => $this->error
         ]);
     }
 
@@ -192,15 +191,19 @@ class RuanganController extends Controller
     public function destroy($id)
     {
         //
-        $ruangan = Ruangan::where('nomor', $id);
-        $ruangan->delete();
-
-        return response(
-            [
-                'status' => "success",
-                'data' => ["message" => "data berhasil di hapus"],
-                'erorr' => ''
-            ]
-        );
+        try {
+            $ruangan = Ruangan::where('nomor', $id);
+            $ruangan->delete();
+            $this->data = $ruangan;
+            $this->status = "success";
+        } catch (QueryException $e) {
+            $this->status = "failed";
+            $this->error = $e;
+        }
+        return response()->json([
+            "status" => $this->status,
+            "data" => $this->data,
+            "error" => $this->error
+        ]);
     }
 }

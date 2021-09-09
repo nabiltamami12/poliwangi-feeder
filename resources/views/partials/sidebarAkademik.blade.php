@@ -118,13 +118,18 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link {{($title === "rekap-absensi-mahasiswa") ? 'aktif' : ''}}" href="{{url('akademik/kuliah/absensi/rekap-mahasiswa')}}">
+                <a class="nav-link {{($title === "rekap-absensi-mahasiswa") ? 'aktif' : ''}}" href="{{url('akademik/kuliah/absensi/mahasiswa/rekap')}}">
                   <span class="nav-link-text ml-0">Rekap Abasensi Mahasiswa</span>
                 </a>
               </li>
               <li class="nav-item">
                 <a class="nav-link {{($title === "absensi-dosen") ? 'aktif' : ''}}" href="{{url('akademik/kuliah/absensi/kelas-dosen')}}">
                   <span class="nav-link-text ml-0">Absensi Dosen</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link {{($title === "rekap-absensi-mahasiswa") ? 'aktif' : ''}}" href="{{url('akademik/kuliah/absensi/rekap')}}">
+                  <span class="nav-link-text ml-0">Rekap Abasensi Mahasiswa(Admin)</span>
                 </a>
               </li>
             </ul>

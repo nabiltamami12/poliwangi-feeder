@@ -7,9 +7,14 @@ use Illuminate\Http\Request;
 use App\Models\Jalurpendaftar;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Resources\JalurpendaftarResource;
+use Illuminate\Database\QueryException;
 
 class JalurpendaftarController extends Controller
 {
+    protected $status = null;
+    protected $error = null;
+    protected $data = null;
+
     /**
      * Display a listing of the resource.
      *
@@ -17,23 +22,18 @@ class JalurpendaftarController extends Controller
      */
     public function index()
     {
-        $this->data = Jalurpendaftar::get();
-
+        try {
+            $this->data = Jalurpendaftar::get();
+            $this->status = "success";
+        } catch (QueryException $e) {
+            $this->status = "failed";
+            $this->error = $e;
+        }
         return response()->json([
-            "status" => true,
+            "status" => $this->status,
             "data" => $this->data,
-            "error" => ''
+            "error" => $this->error
         ]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -59,15 +59,19 @@ class JalurpendaftarController extends Controller
             );
         }
 
-        $jalurpendaftar = Jalurpendaftar::create($data);
-
-        return response(
-            [
-                'status' => "success",
-                'data' => new JalurPendaftarResource($jalurpendaftar),
-                'error' => ''
-            ]
-        );
+        try {
+            $jalurpendaftar = Jalurpendaftar::create($data);
+            $this->data = $jalurpendaftar;
+            $this->status = "success";
+        } catch (QueryException $e) {
+            $this->status = "failed";
+            $this->error = $e;
+        }
+        return response()->json([
+            "status" => $this->status,
+            "data" => $this->data,
+            "error" => $this->error
+        ]);
     }
 
     /**
@@ -78,33 +82,23 @@ class JalurpendaftarController extends Controller
      */
     public function show($id)
     {
-        //
-        if ($id) {
-            $jalurpendaftar = Jalurpendaftar::where('nomor', $id)->get();
-            return response()->json([
-                "status" => 'success',
-                "data" => $jalurpendaftar,
-                "error" => ''
-            ]);
-        } else {
-            $jalurpendaftar = Jalurpendaftar::get();
-            return response()->json([
-                "status" => 'failed',
-                "data" => ["message" => "id required"],
-                "error" => ''
-            ]);
+        try {
+            if ($id) {
+                $jalurpendaftar = Jalurpendaftar::where('nomor', $id)->get();
+            } else {
+                $jalurpendaftar = Jalurpendaftar::get();
+            }
+            $this->data = $jalurpendaftar;
+            $this->status = "success";
+        } catch (QueryException $e) {
+            $this->status = "failed";
+            $this->error = $e;
         }
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        return response()->json([
+            "status" => $this->status,
+            "data" => $this->data,
+            "error" => $this->error
+        ]);
     }
 
     /**
@@ -124,20 +118,24 @@ class JalurpendaftarController extends Controller
 
         if ($validate->fails()) {
             $this->status = "error";
-            $this->err = $validate->errors();
+            $this->error = $validate->errors();
         } else if (!$jalurpendaftar) {
             $this->status = "failed";
-            $this->err = "Data not found";
+            $this->error = "Data not found";
         } else {
-            $jalurpendaftar->update($data);
-            $this->data = $jalurpendaftar->get();
-            $this->status = "success";
+            try {
+                $jalurpendaftar->update($data);
+                $this->data = $jalurpendaftar->get();
+                $this->status = "success";
+            } catch (QueryException $e) {
+                $this->status = "failed";
+                $this->error = $e;
+            }
         }
-
         return response()->json([
-            'status' => $this->status,
-            'data' => $data,
-            'error' => ''
+            "status" => $this->status,
+            "data" => $this->data,
+            "error" => $this->error
         ]);
     }
 
@@ -149,16 +147,19 @@ class JalurpendaftarController extends Controller
      */
     public function destroy($id)
     {
-        //
-        $jalurpendaftar = Jalurpendaftar::where('nomor', $id);
-        $jalurpendaftar->delete();
-
-        return response(
-            [
-                'status' => "success",
-                'data' => ["message" => "data berhasil di hapus"],
-                'erorr' => ''
-            ]
-        );
+        try {
+            $jalurpendaftar = Jalurpendaftar::where('nomor', $id);
+            $jalurpendaftar->delete();
+            $this->data = $jalurpendaftar;
+            $this->status = "success";
+        } catch (QueryException $e) {
+            $this->status = "failed";
+            $this->error = $e;
+        }
+        return response()->json([
+            "status" => $this->status,
+            "data" => $this->data,
+            "error" => $this->error
+        ]);
     }
 }

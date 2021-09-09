@@ -6,230 +6,58 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Dosen;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Database\QueryException;
 use DB;
 
 class DosenController extends Controller
 {
+    protected $status = null;
+    protected $error = null;
+    protected $data = null;
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    protected $status = null;
-    protected $err = null;
-    protected $data = null;
-
     public function filter($id,$semester)
     {
-        $prodi = DB::table('program_studi as ps')
-                        ->select('ps.nomor','ps.program_studi','p.program as nama_program')
-                        ->join('program as p','p.nomor','=','ps.program')
-                        ->join('matakuliah as m','m.program_studi','=','ps.nomor')
-                        ->join('dosen_pengampu as dp','dp.matakuliah','=','m.nomor')
-                        ->where('dp.dosen',$id)
-                        ->groupBy('ps.nomor')
-                        ->get();
-        $kelas = DB::table('kelas as k')
-                        ->select( 'm.nomor as matakuliah','k.nomor' , 'k.kelas', 'k.pararel' , 'k.kode', 'm.program_studi')
-                        ->join('matakuliah as m','m.kelas','=','k.nomor')
-                        ->join('dosen_pengampu as dp','dp.matakuliah','=','m.nomor')
-                        ->where('dp.dosen',$id)
-                        ->get();
-        $matkul = DB::table('matakuliah as m')
-                        ->select('m.nomor','m.matakuliah','m.semester','m.program_studi')
-                        ->join('program_studi as ps','m.program_studi','=','ps.nomor')
-                        ->join('dosen_pengampu as dp','dp.matakuliah','=','m.nomor')
-                        ->where('m.semester',$semester)
-                        ->where('dp.dosen',$id)
-                        ->get();
-        $this->status = "success";
-
-        $this->data = [
-            'prodi'=>$prodi,
-            'kelas'=>$kelas,
-            'matakuliah'=>$matkul,
-        ];
-
-        return response()->json([
-            "status" => $this->status,
-            "data" => $this->data,
-            "error" => $this->err
-        ]);
-    }
-
-    public function index()
-    {
-        //
-        $this->data = Dosen::select(
-            'PEGAWAI.nomor',
-            'PEGAWAI.nip',
-            'PEGAWAI.nama',
-            'PEGAWAI.tgllahir',
-            'PEGAWAI.notelp',
-            'PEGAWAI.email',
-            "STAFF.staff"
-        )
-        ->join("STAFF", "STAFF.nomor", "=", "PEGAWAI.staff")
-        ->where("PEGAWAI.staff", "=", 4)
-        ->get();
-        $this->status = "success";
-
-       
-        return response()->json([
-            "status" => $this->status,
-            "data" => $this->data,
-            "error" => $this->err
-        ]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        $data = $request->all();
-        $validated = Validator::make($data, [
-            'nomor' => 'required|integer|unique:PEGAWAI',
-            'nip' => 'required|integer|unique:PEGAWAI',
-            'nama' => 'required|string|unique:PEGAWAI',
-            'tgllahir' => 'required|date',
-            'notelp' => 'required|string|unique:PEGAWAI',
-            'email' => 'required|string|unique:PEGAWAI',
-            'staff' => 'required|integer|required'
-        ]);
-
-        if ($validated->fails()) {
-            $this->status = 'error';
-            $this->err = $validated->errors();
-        } else {
-            $data = Dosen::create($data);
-            $this->data = $data;
+        try {
+            $prodi = DB::table('program_studi as ps')
+                            ->select('ps.nomor','ps.program_studi','p.program as nama_program')
+                            ->join('program as p','p.nomor','=','ps.program')
+                            ->join('matakuliah as m','m.program_studi','=','ps.nomor')
+                            ->join('dosen_pengampu as dp','dp.matakuliah','=','m.nomor')
+                            ->where('dp.dosen',$id)
+                            ->groupBy('ps.nomor')
+                            ->get();
+            $kelas = DB::table('kelas as k')
+                            ->select( 'm.nomor as matakuliah','k.nomor' , 'k.kelas', 'k.pararel' , 'k.kode', 'm.program_studi')
+                            ->join('matakuliah as m','m.kelas','=','k.nomor')
+                            ->join('dosen_pengampu as dp','dp.matakuliah','=','m.nomor')
+                            ->where('dp.dosen',$id)
+                            ->get();
+            $matkul = DB::table('matakuliah as m')
+                            ->select('m.nomor','m.matakuliah','m.semester','m.program_studi')
+                            ->join('program_studi as ps','m.program_studi','=','ps.nomor')
+                            ->join('dosen_pengampu as dp','dp.matakuliah','=','m.nomor')
+                            ->where('m.semester',$semester)
+                            ->where('dp.dosen',$id)
+                            ->get();
             $this->status = "success";
-        }
-        return response()->json([
-            'status' => $this->status,
-            'data' => $this->data,
-            'error' => $this->err
-        ]);
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        $this->data = Dosen::select(
-            'PEGAWAI.nip',
-            'PEGAWAI.nama',
-            'PEGAWAI.tgllahir',
-            'PEGAWAI.notelp',
-            'PEGAWAI.email',
-            "STAFF.staff"
-        )
-        ->join("STAFF", "STAFF.nomor", "=", "PEGAWAI.staff")
-        ->where("PEGAWAI.staff", "=", 4)
-        ->where("PEGAWAI.nomor", "=", $id)
-        ->get();
-        $this->status = "success";
-
-        
-        return response()->json([
-            "status" => $this->status,
-            "data" => $this->data,
-            "error" => $this->err
-        ]);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        $check = Dosen::where('NOMOR', $id);
-        $data = $request->all();
-
-        $validate = Validator::make($data, [
-            'nip' => 'integer|unique:PEGAWAI',
-            'nama' => 'required|string|unique:PEGAWAI',
-            'tgllahir' => 'date',
-            'notelp' => 'string|unique:PEGAWAI',
-            'email' => 'string|unique:PEGAWAI',
-            'staff' => 'integer'
-        ]);
-
-        if ($validate->fails()) {
-            $this->status = "error";
-            $this->err = $validate->errors();
-        } else if(!$check){
+            $this->data = [
+                'prodi'=>$prodi,
+                'kelas'=>$kelas,
+                'matakuliah'=>$matkul,
+            ];
+        } catch (QueryException $e) {
             $this->status = "failed";
-            $this->err = "Data not found";
+            $this->error = $e;
         }
-        else {
-            $check->update($data);
-            $this->data = $check->get();
-            $this->status = "success";
-        }
-
         return response()->json([
-            'status' => $this->status,
-            'data' => $this->data,
-            'error' => $this->err
-        ]);
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        $check = Dosen::where('NOMOR', $id);
-
-        if ($check) {
-            $this->status = "success";
-            $this->data = $check->get();
-            $check->delete();
-        } else {
-            $this->status = "failed";
-        }
-
-        return response()->json([
-            'status' => $this->status,
-            'data' => $this->data,
-            'error' => $this->err
+            "status" => $this->status,
+            "data" => $this->data,
+            "error" => $this->error
         ]);
     }
 }

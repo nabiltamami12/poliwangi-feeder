@@ -70,11 +70,11 @@
   var semester = dataGlobal['periode']['semester']
   $(document).ready(function() {
     $('#nim ').on('change',function (e) {
-      var url = `${url_api}/inputnilai/rekap?nim=${$('#nim').val()}&tahun=${tahun}&semester=${semester}`;
+      var url = `${url_api}/nilai/rekap?nim=${$('#nim').val()}&tahun=${tahun}&semester=${semester}`;
       dt.ajax.url(url).load();
     })  
     $('select').on('change',function (e) {
-      var url = `${url_api}/inputnilai/rekap?nim=${$('#nim').val()}&tahun=${tahun}&semester=${semester}`;
+      var url = `${url_api}/nilai/rekap?nim=${$('#nim').val()}&tahun=${tahun}&semester=${semester}`;
       dt.ajax.url(url).load();
     })  
     set_datatable($(this).val())
@@ -82,7 +82,7 @@
 
 function set_datatable(nim) {
   var nomor = 1;
-  dt_url = `${url_api}/inputnilai/rekap?nim=${nim}&tahun=${tahun}&semester=${semester}`;
+  dt_url = `${url_api}/nilai/rekap?nim=${nim}&tahun=${tahun}&semester=${semester}`;
 dt_opt = {
   "columnDefs": [
         {
@@ -134,7 +134,7 @@ dt_opt = {
             var id = data['nomor'];
             var text_hapus = data['kode']+" - "+data['matakuliah'];
             // var btn_update = `<span class="iconify edit-icon" onclick='update_btn(${id})' data-icon="bx:bx-edit-alt" ></span>` 
-            var btn_delete = `<span class="iconify delete-icon" data-icon="bx:bx-trash"  onclick='delete_btn(${id},"inputnilai","nilai matakuliah ","${text_hapus}")'></span>`; 
+            var btn_delete = `<span class="iconify delete-icon" data-icon="bx:bx-trash"  onclick='delete_btn(${id},"nilai","nilai matakuliah ","${text_hapus}")'></span>`; 
             res = (id==null)?'': btn_delete;
             return res;
           }

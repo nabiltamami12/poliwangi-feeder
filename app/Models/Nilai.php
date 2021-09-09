@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class InputNilai extends Model
+class Nilai extends Model
 {
     use HasFactory;
     public $timestamps = false;
-    public $table = "nilai";
+public $table = "nilai";
     protected $fillable = [
         'nomor',
         'kuliah',

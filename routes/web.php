@@ -352,6 +352,11 @@ Route::prefix('akademik')->group(function () {
                 "title" => "dosen-penilaian"
             ]);
         });
+        Route::get('/cetak-absensi-kelas', function () {
+            return view('cetak.cetakabsensikelas', [
+                "title" => "dosen-penilaian"
+            ]);
+        });
         
         Route::get('/rekap-nilai', function () {
             return view('akademik.kuliah/datarekapnilai', [
@@ -365,15 +370,26 @@ Route::prefix('akademik')->group(function () {
             ]);
         });
         
-        Route::get('/absensi/rekap-mahasiswa', function () {
+        Route::get('/absensi/mahasiswa/rekap', function () {
             return view('mahasiswaLama.presensi', [
                 "title" => "rekap-absensi-mahasiswa"
             ]);
         });
-
+        
         Route::get('/absensi/kelas-dosen', function () {
             return view('dosen.presensiDosen', [
                 "title" => "absensi-dosen"
+            ]);
+        });
+
+        Route::get('/absensi/rekap', function () {
+            return view('akademik.kuliah.rekapabsensimahasiswa', [
+                "title" => "rekap-absensi-mahasiswa"
+            ]);
+        });
+        Route::get('/absensi/rekap/detail/{id}/{kelas}/{matkul}', function () {
+            return view('akademik.kuliah.detailrekapabsensi', [
+                "title" => "rekap-absensi-mahasiswa"
             ]);
         });
     });
@@ -403,8 +419,10 @@ Route::prefix('akademik')->group(function () {
             ]);
         });
 
-        Route::get('/spi/detail', function () {
+        Route::get('/spi/detail/{id}/{nama}', function ($id, $nama) {
             return view('keuangan.detailSPI', [
+                "id" => $id,
+                'nama' => $nama,
                 "title" => "keuangan-rekapitulasi",
             ]);
         });

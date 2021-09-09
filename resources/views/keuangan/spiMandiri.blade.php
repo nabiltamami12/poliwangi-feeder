@@ -15,11 +15,18 @@
               <h2 class="mb-0 text-center text-md-left">Data Sumbangan Pengembangan Institusi</h2>
             </div>
             <div class="col-12 col-md-6 text-center text-md-right mt-3 mt-md-0">
-              <button type="button" class="btn btn-primary">
+              <form id="form_cu" enctype="multipart/form-data">
+                @csrf
+              <input type="file" name="file" id="file" onchange="clickButton()" hidden>
+              <input type="submit" value="submit" id="submit" hidden>
+              </form>
+              
+              <button type="button" class="btn btn-primary" onclick="importFile()">
                 <i class="iconify-inline mr-1" data-icon="bx:bx-download"></i>
                 Import
               </button>
-              <button type="button" class="btn btn-warning ml-md-2">
+              
+              <button type="button" class="btn btn-warning ml-md-2" onclick="window.location.href=`${url_api}/keuangan/spi/export`">
                 <i class="iconify-inline mr-1" data-icon="bx:bx-upload"></i>
                 Eksport
               </button>
@@ -28,31 +35,10 @@
         </div>
         <hr class="mt-4">
 
-        <div class="row align-items-center px-3 my-4">
-          <div class="col-12 col-md-6">
-            <form class="form-inline">
-              <div class="form-group row">
-                <select class="form-control form-control-sm" id="dataperhalaman">
-                  <option>10</option>
-                  <option>20</option>
-                  <option>30</option>
-                </select>
-                <label for="dataperhalaman" class="ml-3 mt-2 mt-sm-0">Data per Halaman</label>
-              </div>
-            </form>
-          </div>
-          <div class="col-12 col-md-4 offset-md-2 offset-0 text-right p-0 mt-3 mt-md-0">
-            <form class="search_form" action="">
-              <input class="form-control form-control-sm" type="search" placeholder="Pencarian...">
-              <button type="submit">
-                <i class="iconify-inline" data-icon="bx:bx-search"></i>
-              </button>
-            </form>
-          </div>
-        </div>
+        
 
         <div class="table-responsive">
-          <table class="table align-items-center table-flush table-borderless table-hover">
+          <table class="table align-items-center table-flush table-borderless table-hover" id="datatable">
             <thead class="table-header">
               <tr>
                 <th scope="col" class="text-center pr-0">No</th>
@@ -67,55 +53,133 @@
             </thead>
 
             <tbody class="table-body">
-              <tr>
-                <td class="text-center pr-0">1</td>
-                <td class="text-center">362155401054</td>
-                <td class="font-weight-bold text-capitalize">Afkarina ferin verigia</td>
-                <td class="text-center text-capitalize">23 april 2021</td>
-                <td class="font-weight-bold text-right">Rp. 5.000.000</td>
-                <td class="font-weight-bold text-right">Rp. 3.000.000</td>
-                <td class="font-weight-bold text-right">Rp. 2.000.000</td>
-                <td class="text-center">
-                  <a href="{{ url('akademik/keuangan/spi/detail') }}" class="font-weight-bold text-primary text-underline">Lihat
-                    Detail</a>
-                </td>
-              </tr>
-
-              <tr>
-                <td class="text-center pr-0">2</td>
-                <td class="text-center">3621554001094</td>
-                <td class="font-weight-bold text-capitalize">Budi</td>
-                <td class="text-center text-capitalize">23 mei 2021</td>
-                <td class="font-weight-bold text-right">Rp. 5.000.000</td>
-                <td class="font-weight-bold text-right">Rp. 3.500.000</td>
-                <td class="font-weight-bold text-right">Rp. 1.500.000</td>
-                <td class="text-center">
-                  <a href="{{ url('akademik/keuangan/spi') }}" class="font-weight-bold text-primary text-underline">Lihat
-                    Detail</a>
-                </td>
-              </tr>
+              
             </tbody>
           </table>
         </div>
 
-        <div class="row justify-content-between align-items-center table-information">
-          <h3>Menampilkan 1 sampai 2 dari 2 total data</h3>
-          <nav aria-label="Page navigation example">
-            <ul class="pagination">
-              <li class="page-item disabled" aria-label="Previous">
-                <a class="page-link" href="#" tabindex="-1">Previous</a>
-              </li>
-              <li class="page-item active">
-                <a class="page-link" href="#">1<span class="sr-only">(current)</span></a>
-              </li>
-              <li class="page-item disabled" aria-label="Next">
-                <a class="page-link" href="#">Next</a>
-              </li>
-            </ul>
-          </nav>
-        </div>
+        
       </div>
     </div>
   </div>
 </section>
+<script>
+const toCurrency = (number) => 
+      Intl.NumberFormat("id-ID", { style : 'currency', currency:'IDR', minimumFractionDigits: 0 }).format(number);
+
+
+function importFile() {
+  $("#file").click()
+}
+
+function clickButton() {
+  $("#submit").click();
+}
+$(document).ready(function() {
+
+var nomor = 1;
+dt_url = `${url_api}/keuangan/spi`;
+dt_opt = {
+"columnDefs": [
+    {
+      "aTargets": [0],
+      "mData": null,
+      "className": 'text-center pr-0',
+      "mRender": function(data, type, full) {
+        res = nomor++;
+        return res;
+      }
+    },{
+      "aTargets": [1],
+      "mData": null,
+      "className": 'text-center',
+      "mRender": function(data, type, full) {
+        res = data['id_mahasiswa'];
+        return res;
+      }
+    },{
+      "aTargets": [2],
+      "mData": null,
+      "className": 'font-weight-bold text-capitalize',
+      "mRender": function(data, type, full) {
+        res = data['nama'];
+        return res;
+      }
+    },{
+      "aTargets": [3],
+      "mData": null,
+      "className": 'text-center',
+      "mRender": function(data, type, full) {
+        res = data['tanggal_pembayaran'];
+        return res;
+      }
+    },{
+      "aTargets": [4],
+      "mData": null,
+      "className": 'font-weight-bold text-right',
+      "mRender": function(data, type, full) {
+        res = toCurrency(data['tarif']);
+        return res;
+      }
+    },{
+      "aTargets": [5],
+      "mData": null,
+      "className": 'font-weight-bold text-right',
+      "mRender": function(data, type, full) {
+        res = toCurrency(data['nom_pembayaran']);
+        return res;
+      }
+    },{
+      "aTargets": [6],
+      "mData": null,
+      "className": 'font-weight-bold text-right',
+      "mRender": function(data, type, full) {
+        res = toCurrency(data['piutang']);
+        return res;
+      }
+    },{
+      "aTargets": [7],
+      "mData": null,
+      "className": 'font-weight-bold text-right',
+      "mRender": function(data, type, full) {
+        var id = data['id_mahasiswa'];
+        var test =  data['nama'];
+        var detail = `<a href="{{ url('akademik/keuangan/spi/detail/${id}/${test}') }}" class="font-weight-bold text-primary text-underline">Lihat Detail</a>`
+        res = detail;
+        return res;
+      }
+    },
+  ]}
+
+  $("#form_cu").submit(function(e) {
+        e.preventDefault();
+        $.ajax({
+            url: url_api+"/keuangan/spi/import",
+            type: "post",
+            dataType: 'json',
+            data: new FormData(this),
+            contentType: false,
+            cache: false,
+            processData: false,
+            beforeSend: function(text) {
+                // loading func
+                console.log("loading")
+                loading('show')
+            },
+            success: function(res) {
+                if (res.status=="success") {
+                    window.location.href = "{{url('/akademik/keuangan/spi')}}";                    
+                } else {
+                    console.log("Gagal");
+                }
+                loading('hide')
+            }
+        });
+    });
+
+
+}
+ 
+);
+</script>
 @endsection

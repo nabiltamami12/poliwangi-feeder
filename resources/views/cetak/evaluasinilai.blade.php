@@ -181,7 +181,7 @@
     $('#matakuliah').html(arr_cetak['matakuliah'])
     $('#dosen').html(arr_cetak['dosen'])
     $.ajax({
-      url: "{{url('/api/v1/inputnilai')}}?tahun="+arr_cetak['tahun']+"&kelas="+arr_cetak['id_kelas']+"&matakuliah="+arr_cetak['id_matakuliah'],
+      url: "{{url('/api/v1/nilai')}}?tahun="+arr_cetak['tahun']+"&kelas="+arr_cetak['id_kelas']+"&matakuliah="+arr_cetak['id_matakuliah'],
       type: 'get',
       dataType: 'json',
       data: {},
