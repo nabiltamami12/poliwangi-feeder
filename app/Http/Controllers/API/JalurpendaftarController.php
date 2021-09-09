@@ -32,7 +32,7 @@ class JalurpendaftarController extends Controller
         return response()->json([
             "status" => $this->status,
             "data" => $this->data,
-            "error" => $this->error->errorInfo
+            "error" => $this->error
         ]);
     }
 
@@ -70,7 +70,7 @@ class JalurpendaftarController extends Controller
         return response()->json([
             "status" => $this->status,
             "data" => $this->data,
-            "error" => $this->error->errorInfo
+            "error" => $this->error
         ]);
     }
 
@@ -97,7 +97,7 @@ class JalurpendaftarController extends Controller
         return response()->json([
             "status" => $this->status,
             "data" => $this->data,
-            "error" => $this->error->errorInfo
+            "error" => $this->error
         ]);
     }
 
@@ -135,7 +135,7 @@ class JalurpendaftarController extends Controller
         return response()->json([
             "status" => $this->status,
             "data" => $this->data,
-            "error" => $this->error->errorInfo
+            "error" => $this->error
         ]);
     }
 
@@ -159,7 +159,7 @@ class JalurpendaftarController extends Controller
         return response()->json([
             "status" => $this->status,
             "data" => $this->data,
-            "error" => $this->error->errorInfo
+            "error" => $this->error
         ]);
     }
 }
