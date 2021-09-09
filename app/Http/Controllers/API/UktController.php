@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Ukt;
 use Illuminate\Support\Facades\DB;
+use App\Models\Prodi;
 use Illuminate\Support\Facades\Validator;
 
 class UktController extends Controller
@@ -22,6 +23,17 @@ class UktController extends Controller
 
     public function index()
     {
+        $list = Prodi::pluck('nomor');
+        $arr = $list->toArray();
+        foreach ($list as $key=>$value) {
+            $data = Ukt::where('program_studi', $list[$key])->first();
+            if ($data == null) {
+                $this->status = "Data not found, creating entry. Index: $key";
+                $created = Ukt::insert(['program_studi' => $arr[$key]]);
+            }  else {
+                $this->status = "Data found, skipping entry.";
+            }
+        }
         $this->data = Ukt::select(
             'tarif_kelompok.*',
             DB::raw("CONCAT(program.program, ' ', program_studi.program_studi) AS prodi")
@@ -30,12 +42,11 @@ class UktController extends Controller
         ->join('program', 'program_studi.program', '=', 'program.nomor')
         ->get();
 
-        $this->status = "success";
         
         return response()->json([
             "status" => $this->status,
             "data" => $this->data,
-            "error" => $this->err
+            "error" => $this->error
         ]);
     }
 
