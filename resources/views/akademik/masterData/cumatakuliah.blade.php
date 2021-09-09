@@ -172,10 +172,10 @@
         e.preventDefault();
         var data = $('#form_cu').serialize();
         if (id!="") {
-            var url = url_api+"/periode/"+id;
+            var url = url_api+"/matakuliah/"+id;
             var type = "put";
         } else {
-            var url = url_api+"/periode";
+            var url = url_api+"/matakuliah";
             var type = "post";
         }
         $.ajax({
