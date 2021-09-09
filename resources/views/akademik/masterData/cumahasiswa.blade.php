@@ -467,12 +467,14 @@
         e.preventDefault();
         var data = $('#form_cu').serialize();
         if (id!="") {
+            var url = url_api+"/mahasiswa/"+id;
             var type = "put";
         } else {
+            var url = url_api+"/mahasiswa";
             var type = "post";
         }
         $.ajax({
-            url: url_api+"/mahasiswa/"+id,
+            url: url,
             type: type,
             dataType: 'json',
             data: data,

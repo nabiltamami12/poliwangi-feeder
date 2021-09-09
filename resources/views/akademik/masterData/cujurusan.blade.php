@@ -71,12 +71,14 @@
         e.preventDefault();
         var data = $('#form_cu').serialize();
         if (id!="") {
+            var url = url_api+"/jurusan/"+id;
             var type = "put";
         } else {
+            var url = url_api+"/jurusan";
             var type = "post";
         }
         $.ajax({
-            url: url_api+"/jurusan/"+id,
+            url: url,
             type: type,
             dataType: 'json',
             data: data,

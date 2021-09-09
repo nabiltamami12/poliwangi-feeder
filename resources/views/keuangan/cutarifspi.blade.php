@@ -113,12 +113,14 @@
         e.preventDefault();
         var data = $('#form_cu').serialize();
         if (id!="") {
+            var url = url_api+"/keuangan/rekap_ukt/"+id;
             var type = "put";
         } else {
+            var url = url_api+"/keuangan/rekap_ukt";
             var type = "post";
         }
         $.ajax({
-            url: url_api+"/keuangan/rekap_ukt/"+id,
+            url: url,
             type: type,
             dataType: 'json',
             data: data,

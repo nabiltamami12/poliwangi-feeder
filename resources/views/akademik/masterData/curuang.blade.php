@@ -112,12 +112,14 @@
         e.preventDefault();
         var data = $('#form_cu').serialize();
         if (id!="") {
+            var url = url_api+"/ruangan/"+id;
             var type = "put";
         } else {
+            var url = url_api+"/ruangan";
             var type = "post";
         }
         $.ajax({
-            url: url_api+"/ruangan/"+id,
+            url: url,
             type: type,
             dataType: 'json',
             data: data,
