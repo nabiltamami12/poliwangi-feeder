@@ -52,7 +52,7 @@
               <div class="form-group row mb-0">
                 <label>Semester</label>
                 <select class="form-control" id="semester" name="semester" required>
-                  <option value="1">Ganjil</option>
+                  <option value="1">Gasal</option>
                   <option value="2">Genap</option>
                 </select>
               </div>

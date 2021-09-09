@@ -175,7 +175,7 @@
     var matakuliah = url[8];
     var arr_cetak = JSON.parse(localStorage.getItem('cetak-eval'))
     $('#tahun').html(arr_cetak['tahun']+"/"+(arr_cetak['tahun']+1))
-    $('#semester').html((arr_cetak['semester']==1)?"Ganjil":"Genap")
+    $('#semester').html((arr_cetak['semester']==1)?"Gasal":"Genap")
     $('#program_studi').html(arr_cetak['prodi'])
     $('#kelas').html(arr_cetak['kelas'])
     $('#matakuliah').html(arr_cetak['matakuliah'])
