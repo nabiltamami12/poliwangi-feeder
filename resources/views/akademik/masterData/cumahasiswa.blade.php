@@ -89,13 +89,27 @@
                         <div class="col-sm-4 col-12">
                             <div class="form-group row mb-0">
                                 <label for="sekjur">Tanggal Lahir</label>
-                                <input type="text" class="form-control" id="tgllahir" name="tgllahir" >
+                                <div class="d-flex align-items-center date_picker">
+                                    <input id="tgllahir" name="tgllahir" type="text" class="form-control date-input" placeholder="Pilih Tanggal" readonly />
+                                    <label class="input-group-btn" for="tgllahir">
+                                    <span class="date_button">
+                                        <i class="iconify" data-icon="bx:bx-calendar" data-inline="false"></i>
+                                    </span>
+                                    </label>
+                                </div>
                             </div>
                         </div>
                         <div class="col-sm-4 col-12">
                             <div class="form-group row mb-0">
                                 <label for="sekjur">Tanggal Masuk</label>
-                                <input type="text" class="form-control" id="tglmasuk" name="tglmasuk" >
+                                <div class="d-flex align-items-center date_picker">
+                                    <input id="tglmasuk" name="tglmasuk" type="text" class="form-control date-input" placeholder="Pilih Tanggal" readonly />
+                                    <label class="input-group-btn" for="tglmasuk">
+                                    <span class="date_button">
+                                        <i class="iconify" data-icon="bx:bx-calendar" data-inline="false"></i>
+                                    </span>
+                                    </label>
+                                </div>
                             </div>
                         </div>
                         <div class="col-sm-6 col-12">
@@ -275,7 +289,14 @@
                         <div class="col-sm-4 col-12">
                             <div class="form-group row mb-0">
                                 <label for="jurusan">Tanggal Lahir Ayah</label>
-                                <input type="text" class="form-control" id="tanggal_lahir_ayah" name="tanggal_lahir_ayah" >
+                                <div class="d-flex align-items-center date_picker">
+                                    <input id="tanggal_lahir_ayah" name="tanggal_lahir_ayah" type="text" class="form-control date-input" placeholder="Pilih Tanggal" readonly />
+                                    <label class="input-group-btn" for="tanggal_lahir_ayah">
+                                    <span class="date_button">
+                                        <i class="iconify" data-icon="bx:bx-calendar" data-inline="false"></i>
+                                    </span>
+                                    </label>
+                                </div>
                             </div>
                         </div>
                         <div class="col-sm-4 col-12">
@@ -312,7 +333,14 @@
                         <div class="col-sm-4 col-12">
                             <div class="form-group row mb-0">
                                 <label for="jurusan">Tanggal Lahir Ibu</label>
-                                <input type="text" class="form-control" id="tanggal_lahir_ibu" name="tanggal_lahir_ibu" >
+                                <div class="d-flex align-items-center date_picker">
+                                    <input id="tanggal_lahir_ibu" name="tanggal_lahir_ibu" type="text" class="form-control date-input" placeholder="Pilih Tanggal" readonly />
+                                    <label class="input-group-btn" for="tanggal_lahir_ibu">
+                                    <span class="date_button">
+                                        <i class="iconify" data-icon="bx:bx-calendar" data-inline="false"></i>
+                                    </span>
+                                    </label>
+                                </div>
                             </div>
                         </div>
                         <div class="col-sm-4 col-12">
@@ -420,7 +448,14 @@
                         <div class="col-sm-4 col-12">
                             <div class="form-group row mb-0">
                                 <label for="jurusan">Tanggal Lulus</label>
-                                <input type="text" class="form-control" id="tgllulus" name="tgllulus" >
+                                <div class="d-flex align-items-center date_picker">
+                                    <input id="tgllulus" name="tgllulus" type="text" class="form-control date-input" placeholder="Pilih Tanggal" readonly />
+                                    <label class="input-group-btn" for="tgllulus">
+                                    <span class="date_button">
+                                        <i class="iconify" data-icon="bx:bx-calendar" data-inline="false"></i>
+                                    </span>
+                                    </label>
+                                </div>
                             </div>
                         </div>
                         <div class="col-sm-4 col-12">

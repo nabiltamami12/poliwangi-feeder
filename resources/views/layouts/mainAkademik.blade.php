@@ -98,6 +98,10 @@
       tagMenu.parentNode.parentNode.parentNode.classList.add('showsubmenu');
     }
     $(document).ready(function() {
+      $(".date-input").datepicker({
+        format: "dd MM yyyy",
+        autoclose: true
+      });
       // datatable
       if (dt_init) {
         console.log(dt_url)
