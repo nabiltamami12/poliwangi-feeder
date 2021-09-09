@@ -159,7 +159,7 @@ class AbsensiController extends Controller
         return response()->json([
             "status" => $this->status,
             "data" => $this->data,
-            "error" => $this->error->errorInfo
+            "error" => $this->error
         ]);
     }
     
@@ -196,7 +196,7 @@ class AbsensiController extends Controller
         return response()->json([
             "status" => $this->status,
             "data" => $this->data,
-            "error" => $this->error->errorInfo
+            "error" => $this->error
         ]);
     }
 
@@ -228,7 +228,7 @@ class AbsensiController extends Controller
         return response()->json([
             "status" => $this->status,
             "data" => $this->data,
-            "error" => $this->error->errorInfo
+            "error" => $this->error
         ]);
     }
 
@@ -552,7 +552,7 @@ class AbsensiController extends Controller
         return response()->json([
             "status" => $this->status,
             "data" => $this->data,
-            "error" => $this->error->errorInfo
+            "error" => $this->error
         ]);
     }
 
@@ -589,10 +589,11 @@ class AbsensiController extends Controller
         return response()->json([
             "status" => $this->status,
             "data" => $this->data,
-            "error" => $this->error->errorInfo
+            "error" => $this->error
         ]);
     }
     public function cetak_kelas(Request $request) {
+        
         DB::enableQueryLog();
         // Rekap absensi per matakuliah
         DB::statement("SET SQL_MODE=''");
@@ -601,13 +602,8 @@ class AbsensiController extends Controller
             'mahasiswa.nomor as mahasiswa',
             'mahasiswa.nrp as nim',
             'mahasiswa.nama',
-            'absensi_mahasiswa.tanggal',
-            'matakuliah.nomor as id_matakuliah',
-            'kuliah.nomor as id_kuliah',
-            'matakuliah.kode',
-            'matakuliah.matakuliah',
-            'absensi_mahasiswa.tanggal',
-            'absensi_mahasiswa.status',
+            DB::raw("GROUP_CONCAT(absensi_mahasiswa.minggu) as minggu"),
+            DB::raw("GROUP_CONCAT(absensi_mahasiswa.status) as status"),
         )->join('kuliah', 'absensi_mahasiswa.kuliah', '=', 'kuliah.nomor')
         ->join('matakuliah', 'kuliah.matakuliah', '=', 'matakuliah.nomor')
         ->join('kelas', 'kuliah.kelas', '=', 'kelas.nomor')
@@ -616,33 +612,53 @@ class AbsensiController extends Controller
         ->where('matakuliah.nomor', $request->matakuliah)
         ->where('kuliah.semester', $request->semester)
         ->where('kuliah.tahun', $request->tahun)
+        ->groupBy('mahasiswa.nomor')
+        ->orderBy('mahasiswa')
+        ->orderBy('nama')
+        ->orderBy('minggu')
         ->get();
+        // die(json_encode(DB::getQueryLog()));
         $id_kuliah="";
         $id_mahasiswa="";
         $data = [];
+        $arr_pertemuan = [];
+        $arr_minggu = [];
+        $arr_status = [];
         foreach ($mhs as $key => $value) {
+            $arr_minggu = explode(",",$value->minggu);
+            $arr_status = explode(',',$value->status);
+            $data_minggu = [];
+            $x = 0;
+            $persentase = 0;
+            for ($i=1; $i <= 16 ; $i++) { 
+                $data_minggu[$i] = "";
+                if (in_array($i,$arr_minggu)) {
+                    $k = array_search($i,$arr_minggu); 
+                    $data_minggu[$i] = $arr_status[$k];
+                    if($arr_status[$k]=="H"){
+                        $x++;
+                    }
+                }
+            }
+
+            $persentase = ($x/16)*100;
+
             $arr = [
                 'nim' => $value->nim,
                 'nama' => $value->nama,
-                'pertemuan' => [],
-                'persentase' => ""
+                'pertemuan' => $data_minggu,
+                'persentase' => round($persentase)."%"
             ];
-            echo $id_kuliah." = ".$value->id_kuliah;
-            echo $id_mahasiswa." = ".$value->mahasiswa;
-            // if ($id_kuliah==$value->id_kuliah && $id_mahasiswa==$value->mahasiswa) {
                 
-            // }else{
-            //     array_push($data,$arr);
-            // }
+            array_push($data,$arr);
         }
-        // echo json_encode($data);
-        die();
+        $this->data = $data;
         $this->status = "success";
 
         return response()->json([
             "status" =>$this->status,
             "data" => $this->data,
-            "error" => $this->err,
+            "error" => $this->error,
         ]);
     }
 
@@ -695,7 +711,7 @@ class AbsensiController extends Controller
         return response()->json([
             "status" => $this->status,
             "data" => $this->data,
-            "error" => $this->error->errorInfo
+            "error" => $this->error
         ]);
     }
 
@@ -734,7 +750,7 @@ class AbsensiController extends Controller
         return response()->json([
             "status" => $this->status,
             "data" => $this->data,
-            "error" => $this->error->errorInfo
+            "error" => $this->error
         ]);
     }
 
@@ -763,7 +779,7 @@ class AbsensiController extends Controller
         return response()->json([
             "status" => $this->status,
             "data" => $this->data,
-            "error" => $this->error->errorInfo
+            "error" => $this->error
         ]);
     }
 }

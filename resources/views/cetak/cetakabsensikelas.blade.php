@@ -1,4 +1,3 @@
-@@ -0,0 +1,578 @@
 <!DOCTYPE html>
 <html lang="en">
 
@@ -120,8 +119,8 @@
 
 <body>
   <header>
-    <p class="tanggal-waktu">9/6/21, 1:21 PM</p>
-    <p class="text-center">Absensi Perkuliahan</p>
+    <!-- <p class="tanggal-waktu">9/6/21, 1:21 PM</p>
+    <p class="text-center">Absensi Perkuliahan</p> -->
   </header>
 
   <table class="table-header">
@@ -133,31 +132,27 @@
     <tbody>
       <tr>
         <td>Tahun ajaran :</td>
-        <td>2020/2021</td>
+        <td><span id="tahun"></span></td>
       </tr>
       <tr>
         <td>Semester :</td>
-        <td>Ganjil</td>
+        <td><span id="semester"></span></td>
       </tr>
       <tr>
         <td>Program Studi - Konsentrasi :</td>
-        <td>Teknik Informatika</td>
-      </tr>
-      <tr>
-        <td>Jenjang :</td>
-        <td>D3</td>
+        <td><span id="prodi"></span></td>
       </tr>
       <tr>
         <td>Tingkat - Pararel :</td>
-        <td>1 (Satu) - A</td>
+        <td><span id="kelas"></span></td>
       </tr>
       <tr>
         <td>Mata Kuliah :</td>
-        <td>Pendidikan Agama</td>
+        <td><span id="matakuliah"></span></td>
       </tr>
       <tr>
         <td>Dosen :</td>
-        <td>M. Karimullah</td>
+        <td><span id="dosen"></span></td>
       </tr>
     </tbody>
   </table>
@@ -191,337 +186,8 @@
           <th colspan="1">16</th>
         </tr>
       </thead>
-      <tbody>
-        <tr>
-          <td>1</td>
-          <td>362055401002</td>
-          <td>Egi Sabta Hiro</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>100%</td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>362055401003</td>
-          <td>Sarifatun Nadia</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>100%</td>
-        </tr>
-        <tr>
-          <td>3</td>
-          <td>362055401004</td>
-          <td>Aldi Rizky Gunawan</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>100%</td>
-        </tr>
-        <tr>
-          <td>4</td>
-          <td>362055401005</td>
-          <td>Febriyansah Pratama Putra</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>100%</td>
-        </tr>
-        <tr>
-          <td>5</td>
-          <td>362055401006</td>
-          <td>Hsp Watulintang Arumdanie</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>100%</td>
-        </tr>
-        <tr>
-          <td>6</td>
-          <td>362055401007</td>
-          <td>Chindi Fidaro'Aini</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>100%</td>
-        </tr>
-        <tr>
-          <td>7</td>
-          <td>362055401008</td>
-          <td>Devi Oktaviani</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>100%</td>
-        </tr>
-        <tr>
-          <td>8</td>
-          <td>362055401009</td>
-          <td>Aulia Miftahul Zanah</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>100%</td>
-        </tr>
-        <tr>
-          <td>9</td>
-          <td>362055401010</td>
-          <td>Dia Lilis Karlina</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>100%</td>
-        </tr>
-        <tr>
-          <td>10</td>
-          <td>362055401011</td>
-          <td>Avi Julia Rahma</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>100%</td>
-        </tr>
-        <tr>
-          <td>11</td>
-          <td>362055401012</td>
-          <td>Aida Andinar Maulidiana</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>100%</td>
-        </tr>
-        <tr>
-          <td>12</td>
-          <td>362055401013</td>
-          <td>Wendy Mei Ika Nur Ainni</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>100%</td>
-        </tr>
-        <tr>
-          <td>13</td>
-          <td>362055401014</td>
-          <td>Mirza Dwiyan Saputra</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>100%</td>
-        </tr>
-        <tr>
-          <td>14</td>
-          <td>362055401015</td>
-          <td>Dhicky Mahesya TegarSurya Pramana</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>100%</td>
-        </tr>
-        <tr>
-          <td>15</td>
-          <td>362055401016</td>
-          <td>Rikiansyah Aris Kurniawan</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>S</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>H</td>
-          <td>94%</td>
-        </tr>
+      <tbody id="tbody_absensi">
+        
       </tbody>
     </table>
   </div>
@@ -555,7 +221,7 @@
   </div>
 
   <div class="penutup-dokumen">
-    <p>Banyuwangi, 06-Sep-2021</p>
+    <p>Banyuwangi, <span id="tgl"></span></p>
     <p>Kasubag Akademik</p>
     <p class="nip">NIP.</p>
   </div>
@@ -565,16 +231,80 @@
       <tr>
         <td>
           <p>
-            https://sim.poliwangi.ac.id/jurusan/absensi/CRmahasiswa.php?ht_tahun=2020&program=3&jurusan=1&kelas=1&amp;paralel=A&semester=1&MK=28491
+            <!-- https://sim.poliwangi.ac.id/jurusan/absensi/CRmahasiswa.php?ht_tahun=2020&program=3&jurusan=1&kelas=1&amp;paralel=A&semester=1&MK=28491 -->
           </p>
         </td>
         <td>
-          <p class="nomor-halaman">1/2</p>
+          <!-- <p class="nomor-halaman">1/2</p> -->
         </td>
       </tr>
     </table>
   </footer>
+  <script src="{{ url('argon') }}/assets/vendor/jquery/dist/jquery.min.js"></script>
+
+  <script>
+    var bulan = ['','Januari','Februari','Mei','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember']
+    var dt = new Date();
+    var jam_sekarang = ((dt.getDate().toString().length==1)?"0"+dt.getDate():dt.getDate())+" "+bulan[dt.getMonth()+1]+" "+dt.getFullYear();
+    $('#tgl').html(jam_sekarang)
+    var arr_cetak = JSON.parse(localStorage.getItem('cetak-absen'))
+    $('#tahun').html(arr_cetak['tahun']+"/"+(arr_cetak['tahun']+1))
+    $('#semester').html((arr_cetak['semester']==1)?"Ganjil":"Genap")
+    $('#prodi').html(arr_cetak['prodi'])
+    $('#kelas').html(arr_cetak['kelas'])
+    $('#matakuliah').html(arr_cetak['matakuliah'])
+    $('#dosen').html(arr_cetak['dosen'])
+    $.ajax({
+      url: `{{url('/api/v1')}}/absensi/cetak-kelas?kelas=${arr_cetak['id_kelas']}&tahun=${arr_cetak['tahun']}&semester=${arr_cetak['semester']}&matakuliah=${arr_cetak['id_matakuliah']}`,
+      type: 'get',
+      dataType: 'json',
+      data: {},
+      beforeSend: function(text) {
+              // loading func
+      },
+      success: function(res) {
+        var data = res.data;
+        console.log(data)
+        if (res.status=="success") {
+            setSiswa(data)
+        } else {
+            // alert gagal
+        }
+      }
+    })
+    function setSiswa(data) {
+        var html = '';
+        var i = 0;
+        $.each(data,function (key,row) {
+            i++;
+            html = `<tr>
+                      <td>${i}</td>
+                      <td>${row.nim}</td>
+                      <td>${row.nama}</td>
+                      <td>${(row.pertemuan[1]=="")?"-":row.pertemuan[1]}</td>
+                      <td>${(row.pertemuan[2]=="")?"-":row.pertemuan[2]}</td>
+                      <td>${(row.pertemuan[3]=="")?"-":row.pertemuan[3]}</td>
+                      <td>${(row.pertemuan[4]=="")?"-":row.pertemuan[4]}</td>
+                      <td>${(row.pertemuan[5]=="")?"-":row.pertemuan[5]}</td>
+                      <td>${(row.pertemuan[6]=="")?"-":row.pertemuan[6]}</td>
+                      <td>${(row.pertemuan[7]=="")?"-":row.pertemuan[7]}</td>
+                      <td>${(row.pertemuan[8]=="")?"-":row.pertemuan[8]}</td>
+                      <td>${(row.pertemuan[9]=="")?"-":row.pertemuan[9]}</td>
+                      <td>${(row.pertemuan[10]=="")?"-":row.pertemuan[10]}</td>
+                      <td>${(row.pertemuan[11]=="")?"-":row.pertemuan[11]}</td>
+                      <td>${(row.pertemuan[12]=="")?"-":row.pertemuan[12]}</td>
+                      <td>${(row.pertemuan[13]=="")?"-":row.pertemuan[13]}</td>
+                      <td>${(row.pertemuan[14]=="")?"-":row.pertemuan[14]}</td>
+                      <td>${(row.pertemuan[15]=="")?"-":row.pertemuan[15]}</td>
+                      <td>${(row.pertemuan[16]=="")?"-":row.pertemuan[16]}</td>
+                      <td>${row.persentase}</td>
+                    </tr>`
+            console.log(html)
+            $('#tbody_absensi').append(html)
+        })
+        countData = i;
+    }
+  </script>
 </body>
 
 </html>
-No newline at end of file

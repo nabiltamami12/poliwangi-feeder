@@ -181,6 +181,22 @@ function cetak() {
     if (($('#kelas').val()==null || $('#kelas').val()=="") || ($('#matakuliah').val()==null || $('#matakuliah').val()=="") ) {
         alert('Pilih kelas terlebih dahulu!')
     } else {
+      var id_kelas = $('#kelas').val()
+      var matakuliah = $('#matakuliah').val()
+      
+      var arr = {
+        'tahun' : dataGlobal['periode']['tahun'],
+        'semester' : dataGlobal['periode']['semester'],
+        'prodi' : $('#program_studi :selected').text(),
+        'kelas' : $('#kelas :selected').text(),
+        'id_kelas' : id_kelas,
+        'matakuliah' : $('#matakuliah :selected').text(),
+        'id_matakuliah' : matakuliah,
+        'dosen' : '',
+      }
+      console.log(arr)
+      localStorage.setItem('cetak-absen', JSON.stringify(arr));
+      
         window.open("{{url('akademik/kuliah/cetak-absensi-kelas/')}}",'_blank');
     }
 }
