@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Ukt;
 use Illuminate\Support\Facades\DB;
 use App\Models\Prodi;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Validator;
 
 class UktController extends Controller
@@ -24,29 +25,34 @@ class UktController extends Controller
     public function index()
     {
         $list = Prodi::pluck('nomor');
+        $year = Carbon::now()->format('Y');
         $arr = $list->toArray();
         foreach ($list as $key=>$value) {
-            $data = Ukt::where('program_studi', $list[$key])->first();
+            $data = Ukt::where([['program_studi', '=',$list[$key]],
+                                ['tahun', $year]])
+            ->first();
             if ($data == null) {
-                $this->status = "Data not found, creating entry. Index: $key";
-                $created = Ukt::insert(['program_studi' => $arr[$key]]);
+                $created = Ukt::insert([
+                    ['program_studi' => $arr[$key], "tahun" => $year] 
+                ]);
+                $this->status = "Data not found, creating entry.";
             }  else {
                 $this->status = "Data found, skipping entry.";
             }
         }
         $this->data = Ukt::select(
             'tarif_kelompok.*',
-            DB::raw("CONCAT(program.program, ' ', program_studi.program_studi) AS prodi")
-        )
+            DB::raw("CONCAT(program.program, ' ', program_studi.program_studi) AS prodi"))
         ->join('program_studi', 'tarif_kelompok.program_studi', '=', 'program_studi.nomor')
         ->join('program', 'program_studi.program', '=', 'program.nomor')
         ->get();
 
-        
+        $this->status = "success";
+
         return response()->json([
             "status" => $this->status,
             "data" => $this->data,
-            "error" => $this->error
+            "error" => $this->err,
         ]);
     }
 
