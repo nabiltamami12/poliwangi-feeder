@@ -161,7 +161,10 @@ Route::prefix('v1')->group(function () {
     Route::post('/jurusanpilihan', '\App\Http\Controllers\API\JurusanpilihanController@store');
     Route::put('/jurusanpilihan/{id}', '\App\Http\Controllers\API\JurusanpilihanController@update');
     Route::delete('/jurusanpilihan/{id}', '\App\Http\Controllers\API\JurusanpilihanController@destroy');
+<<<<<<< HEAD
+=======
 
+>>>>>>> 040a0a099f1bf58e441b304470870e32c9000c27
     //syarat
     Route::get('/syarat/{id}', '\App\Http\Controllers\API\SyaratController@show');
     Route::post('/syarat', '\App\Http\Controllers\API\SyaratController@store');
@@ -173,6 +176,10 @@ Route::prefix('v1')->group(function () {
     Route::post('/daftar', '\App\Http\Controllers\API\JalurpendaftarController@store');
     Route::put('/daftar/{id}', '\App\Http\Controllers\API\JalurpendaftarController@update');
     Route::delete('/daftar/{id}', '\App\Http\Controllers\API\JalurpendaftarController@destroy');
+<<<<<<< HEAD
+
+=======
+>>>>>>> 040a0a099f1bf58e441b304470870e32c9000c27
     // Rekap Tarif UKT
     Route::get('/keuangan/rekap_ukt', [Ctr\UktController::class, 'index']);
     Route::post('/keuangan/rekap_ukt', [Ctr\UktController::class, 'store']);
@@ -187,6 +194,13 @@ Route::prefix('v1')->group(function () {
     Route::get('/keuangan/spi', [Ctr\SpiController::class, 'index']);
     Route::get('/keuangan/spi/{id}', [Ctr\SpiController::class, 'show']);
 
+<<<<<<< HEAD
+    //berkas
+    Route::get('/berkas/{id}', '\App\Http\Controllers\API\BerkasController@show');
+    Route::post('/berkas', '\App\Http\Controllers\API\BerkasController@store');
+    Route::post('/berkas/{id}', '\App\Http\Controllers\API\BerkasController@update');
+    Route::delete('/berkas/{id}', '\App\Http\Controllers\API\BerkasController@destroy');
+=======
     // Generate Nomor VA <!-- Gunakan route Post --!>
     Route::get('/nomor_va', [Ctr\NovaController::class, 'index']);
     Route::post('/nomor_va', [Ctr\NovaController::class, 'store']);
@@ -197,6 +211,7 @@ Route::prefix('v1')->group(function () {
 
 
     
+>>>>>>> 040a0a099f1bf58e441b304470870e32c9000c27
 });
 Route::prefix('v1')->middleware('auth:api')->group(function () {
     Route::get('/user', function (Request $request) {
