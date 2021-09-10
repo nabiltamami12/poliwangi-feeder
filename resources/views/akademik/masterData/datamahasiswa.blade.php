@@ -76,7 +76,7 @@
   });
   $('#program_studi').on('change',function (e) {
     var program_studi = $(this).val()
-    var kelas = $.grep(dataGlobal['kelas'], function(e){ return e.program_studi == program_studi; });
+    var kelas =   
     $('#kelas').html('')
     var optKelas = `<option value=""> - </option>`;
     $.each(kelas,function (key,row) {
@@ -90,7 +90,6 @@
   })
 } );
 async function getData() {
-    var dataGlobal =  getDataGlobal()
     var optProgram,optJurusan,optKelas,optStatus;
     $.each(dataGlobal['prodi'],function (key,row) {
         optProgram += `<option value="${row.nomor}">${row.nama_program} ${row.program_studi}</option>`

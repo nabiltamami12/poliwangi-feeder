@@ -69,8 +69,8 @@ dt_opt = {
       "targets": [2],
       "data": null,
       "render": function(data, type, full) {
-        var ganjil = (data['semester']==1)?'<span>ganjil</span>' : `<span style="color:#28a3eb;cursor:pointer;" onclick="change_semester(${data['nomor']},1)">ganjil</span>`
-        var genap = (data['semester']==2)?'<span>genap</span>' : `<span style="color:#28a3eb;cursor:pointer;" onclick="change_semester(${data['nomor']},2)">Genap</span>`
+        var ganjil = (data['semester']==1)?'<span>Gasal</span>' : `<span style="color:#28a3eb;cursor:pointer;" onclick="change_semester(${data['nomor']},1)">Gasal</span>`
+        var genap = (data['semester']==2)?'<span>Genap</span>' : `<span style="color:#28a3eb;cursor:pointer;" onclick="change_semester(${data['nomor']},2)">Genap</span>`
         res = (data['status']=="1")? ganjil+" || "+genap:"-";
         return res;
       }

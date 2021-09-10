@@ -405,12 +405,12 @@ $(document).ready(function () {
     });
 
     getData();
-    $('.simpan').on('click',function (e) {
+    $('#simpan').on('click',function (e) {
         var tanggal = $('#tanggal').val();
         var keterangan = $('#keterangan').val();
         var libur = $('#libur').val();
         $.ajax({
-            url: url_api+"/hariaktifkuliah/",
+            url: url_api+"/hariaktifkuliah",
             type: 'post',
             dataType: 'json',
             data: {tanggal:tanggal,keterangan:keterangan,libur:libur},
@@ -470,7 +470,7 @@ function change_date(tanggal,status) {
 }
 function getData(){
     $.ajax({
-        url: url_api+"/hariaktifkuliah/",
+        url: url_api+"/hariaktifkuliah",
         type: 'get',
         dataType: 'json',
         data: {},

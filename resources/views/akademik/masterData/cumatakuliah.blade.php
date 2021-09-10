@@ -52,7 +52,7 @@
               <div class="form-group row mb-0">
                 <label>Semester</label>
                 <select class="form-control" id="semester" name="semester" required>
-                  <option value="1">Ganjil</option>
+                  <option value="1">Gasal</option>
                   <option value="2">Genap</option>
                 </select>
               </div>
@@ -172,12 +172,14 @@
         e.preventDefault();
         var data = $('#form_cu').serialize();
         if (id!="") {
+            var url = url_api+"/matakuliah/"+id;
             var type = "put";
         } else {
+            var url = url_api+"/matakuliah";
             var type = "post";
         }
         $.ajax({
-            url: url_api+"/matakuliah/"+id,
+            url: url,
             type: type,
             dataType: 'json',
             data: data,

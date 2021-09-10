@@ -26,6 +26,7 @@ class SpiController extends Controller
     {
         try {
             $first = Spi::select('id_mahasiswa')->distinct()->get();
+            $second = [];
             $final = [];
             foreach ($first as $key=>$value) {
                 $second[$key] = Spi::select(

@@ -38,7 +38,7 @@
             <div class="col-md-6 form-group mt-3 mt-md-0">
               <label for="status-mahasiswa">Semester</label>
               <select class="form-control" id="status" name="status">
-                <option> Semester Ganjil </option>
+                <option> Semester Gasal </option>
                 <option> Semester Genap </option>
               </select>
             </div>

@@ -33,7 +33,7 @@ class GlobalController extends Controller
     public function index($id=null)
     {
         try {
-            $periode = Periode::select('tahun','semester')->where('status',1)->get();
+            $periode = Periode::select('tahun','semester')->where('status',1)->first();
             $jurusan = Jurusan::get();
             $agama = Agama::get();
             $goldarah = Goldarah::get();

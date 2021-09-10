@@ -105,13 +105,15 @@
         e.preventDefault();
         var data = $('#form_cu').serialize();
         if (id!="") {
+            var url = url_api+"/kelas/"+id;
             var type = "put";
         } else {
+            var url = url_api+"/kelas";
             var type = "post";
         }
         console.log(data)
         $.ajax({
-            url: url_api+"/kelas/"+id,
+            url: url,
             type: type,
             dataType: 'json',
             data: data,
