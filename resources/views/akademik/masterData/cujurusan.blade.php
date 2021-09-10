@@ -3,17 +3,15 @@
 @section('content')
 
 <!-- Header -->
-<header class="header">
-
-</header>
+<header class="header"></header>
 
 <!-- Page content -->
-<section class="page-content  container-fluid" id="akademik_datajurusan">
+<section class="page-content container-fluid">
   <div class="row">
     <div class="col-xl-12">
       <div class="card shadow padding--small">
 
-        <div class="card-header p-0 m-0 border-0">
+        <div class="card-header p-0">
           <div class="row align-items-center">
             <div class="col">
               <h2 class="mb-0">{{ ($id==null)?"TAMBAH":"UBAH" }} DATA JURUSAN</h2>
@@ -73,12 +71,14 @@
         e.preventDefault();
         var data = $('#form_cu').serialize();
         if (id!="") {
+            var url = url_api+"/jurusan/"+id;
             var type = "put";
         } else {
+            var url = url_api+"/jurusan";
             var type = "post";
         }
         $.ajax({
-            url: url_api+"/jurusan/"+id,
+            url: url,
             type: type,
             dataType: 'json',
             data: data,

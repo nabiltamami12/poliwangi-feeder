@@ -108,7 +108,7 @@ class DosenPengampuController extends Controller
         if ($validated->fails()) {
             $this->status = 'failed';
             $this->data = "Tidak ada data";
-            $this->err = $validated->errors();
+            $this->error = $validated->errors();
         } else {
             /* Mengecek proses input ke database dan melaporkan jika ada error. */
             try {
@@ -135,7 +135,7 @@ class DosenPengampuController extends Controller
             } catch(QueryException $e) {
                 $this->status = 'failed';
                 $this->data = "Tidak ada data";
-                $this->err = $e;
+                $this->error = $e;
             }
         }
         return response()->json([
@@ -228,10 +228,10 @@ class DosenPengampuController extends Controller
         if ($validated->fails()) {
             $this->status = 'failed';
             $this->data = "Tidak ada data";
-            $this->err = $validated->errors();
+            $this->error = $validated->errors();
         } else if (!$check){
             $this->status = "failed";
-            $this->err = "Data not found";
+            $this->error = "Data not found";
         } else {
             $check->update($data);
             $this->data = $data;

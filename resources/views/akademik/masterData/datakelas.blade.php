@@ -5,19 +5,19 @@
 <header class="header"></header>
 
 <!-- Page content -->
-<section class="page-content container-fluid" id="akademik_datakelas">
+<section class="page-content container-fluid">
   <div class="row">
     <div class="col-xl-12">
       <div class="card shadow padding--small">
 
-        <div class="card-header p-0 m-0 border-0">
+        <div class="card-header p-0">
           <div class="row align-items-center">
             <div class="col">
               <h2 class="mb-0">Data Kelas</h2>
             </div>
             <div class="col text-right">
               <button type="button" onclick="add_btn()" class="btn btn-primary">
-                <span class="iconify mr-2" data-icon="bx:bxs-plus-circle"></span>
+                <i class="iconify-inline mr-1" data-icon="bx:bxs-plus-circle"></i>
                 Tambah
               </button>
             </div>
@@ -86,9 +86,9 @@
         "mRender": function(data, type, full) {
           var id = data['nomor'];
           var text_hapus = data['kode'];
-          var btn_dosen = `<span class="iconify" data-icon="mdi:account-eye" onclick='window.location.href = window.location.href+"/dosen/${data['nomor']}"' data-icon="bx:bx-edit-alt" ></span>` 
-          var btn_update = `<span class="iconify edit-icon" onclick='update_btn(${id})' data-icon="bx:bx-edit-alt" ></span>` 
-          var btn_delete = `<span class="iconify delete-icon" data-icon="bx:bx-trash"  onclick='delete_btn(${id},"kelas","kelas","${text_hapus}")'></span>`; 
+          var btn_dosen = `<i class="iconify" data-icon="mdi:account-eye" onclick='window.location.href = window.location.href+"/dosen/${data['nomor']}"' data-icon="bx:bx-edit-alt" ></i>` 
+          var btn_update = `<i class="iconify edit-icon" onclick='update_btn(${id})' data-icon="bx:bx-edit-alt" ></i>` 
+          var btn_delete = `<i class="iconify delete-icon" data-icon="bx:bx-trash"  onclick='delete_btn(${id},"kelas","kelas","${text_hapus}")'></i>`; 
           res = btn_dosen+" "+btn_update+" "+btn_delete;
           return res;
         }

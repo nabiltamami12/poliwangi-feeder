@@ -1,6 +1,6 @@
 @extends('layouts.mainAkademik')
 
-@section('content')
+@section('style')
 <style>
   .calendar {
     margin: auto;
@@ -228,6 +228,8 @@
     color: #041f2f;
   }
 </style>
+@endsection
+@section('content')
 <!-- Header -->
 <header class="header"></header>
 

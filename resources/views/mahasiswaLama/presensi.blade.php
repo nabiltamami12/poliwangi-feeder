@@ -1,131 +1,141 @@
-@extends('layouts.mainMala')
+@extends('layouts.mainAkademik')
 
 @section('content')
 <!-- Header -->
 <header class="header"></header>
 
 <!-- Page content -->
-<section class="page-content container-fluid" id="mala_presensi">
+<section class="page-content container-fluid">
   <div class="row">
     <div class="col-xl-12">
       <div class="card shadow">
-        <div class="card-header border-0 padding--big">
+        <div class="card-header padding--big">
           <div class="row align-items-center">
 
-            <div class="col-12 col-md-6 form-group">
+            <div class="col-md-9 form-group">
               <div class="d-flex align-items-center date_picker">
-                <input id="txtDate" type="text" class="form-control date-input cursor_default" value="23 Jul 2021"
-                  readonly />
+                <input id="txtDate" type="text" class="form-control form-control-sm date-input  pl-2" placeholder="Pilih Tanggal" readonly />
                 <label class="input-group-btn" for="txtDate">
                   <span class="date_button">
-                    <span class="iconify" data-icon="bx:bx-calendar" data-inline="false"></span>
+                    <i class="iconify" data-icon="bx:bx-calendar" data-inline="false"></i>
                   </span>
                 </label>
               </div>
             </div>
 
-            <div class="col-12 col-md-6 form-group">
-              <div class="custom_select mt-4 mt-md-0">
-                <select id="semester">
-                  <option selected>Semester Ganjil</option>
-                  <option>Semester Genap</option>
-                </select>
-              </div>
+            <div class="col-md-3 form-group">
+              <button type="button" id="btn_reset" class="btn btn-danger ml-0 ml-md-3">
+                Reset
+              </button>
             </div>
           </div>
         </div>
         <hr>
         <div class="table-responsive padding--big">
-          <table class="table align-items-center table-borderless table-flush table-hover">
+          <table id="datatable" class="table align-items-center table-flush table-borderless table-hover">
             <thead class="table-header">
               <tr>
-                <th scope="col" class="border-0" style="width: 25%">Tanggal</th>
-                <th scope="col" class="border-0" style="width: 30%">Mata Kuliah</th>
-                <th scope="col" class="border-0 text-center">Kelas</th>
-                <th scope="col" class="border-0 text-center">JUMLAH KEHADIRAN</th>
-                <th scope="col" class="border-0 text-center">TIDAK HADIR</th>
+                <th scope="col" >Nomor</th>
+                <th scope="col" style="width: 25%">Tanggal</th>
+                <th scope="col" style="width: 30%">Mata Kuliah</th>
+                <th scope="col" class="text-center">Kelas</th>
+                <th scope="col" class="text-center">JUMLAH KEHADIRAN</th>
+                <th scope="col" class="text-center">TIDAK HADIR</th>
               </tr>
             </thead>
+            <tbody>
 
-            <tbody class="table-body">
-              <tr>
-                <td>02/07/2021</td>
-                <td class="font-weight-bold">Matematika Dasar</td>
-                <td class="text-center">MT001</td>
-                <td class="text-center">24</td>
-                <td class="text-center">0</td>
-              </tr>
-
-              <tr>
-                <td>02/07/2021</td>
-                <td class="font-weight-bold">Pengantar perkuliahan II</td>
-                <td class="text-center">KGA12</td>
-                <td class="text-center">24</td>
-                <td class="text-center">0</td>
-              </tr>
-
-              <tr>
-                <td>02/07/2021</td>
-                <td class="font-weight-bold">Matematika Dasar</td>
-                <td class="text-center">MT001</td>
-                <td class="text-center">24</td>
-                <td class="text-center">0</td>
-              </tr>
-
-              <tr>
-                <td>02/07/2021</td>
-                <td class="font-weight-bold">Pengantar perkuliahan II</td>
-                <td class="text-center">KGA12</td>
-                <td class="text-center">24</td>
-                <td class="text-center">0</td>
-              </tr>
-
-              <tr>
-                <td>02/07/2021</td>
-                <td class="font-weight-bold">Matematika Dasar</td>
-                <td class="text-center">MT001</td>
-                <td class="text-center">24</td>
-                <td class="text-center">0</td>
-              </tr>
-
-              <tr>
-                <td>02/07/2021</td>
-                <td class="font-weight-bold">Pengantar perkuliahan II</td>
-                <td class="text-center">KGA12</td>
-                <td class="text-center">24</td>
-                <td class="text-center">0</td>
-              </tr>
-
-              <tr>
-                <td>02/07/2021</td>
-                <td class="font-weight-bold">Matematika Dasar</td>
-                <td class="text-center">MT001</td>
-                <td class="text-center">24</td>
-                <td class="text-center">0</td>
-              </tr>
-
-              <tr>
-                <td>02/07/2021</td>
-                <td class="font-weight-bold">Pengantar perkuliahan II</td>
-                <td class="text-center">KGA12</td>
-                <td class="text-center">24</td>
-                <td class="text-center">0</td>
-              </tr>
             </tbody>
           </table>
+          
         </div>
       </div>
     </div>
   </div>
 </section>
-@endsection
-
-@section('js')
 <script>
+  var mahasiswa = 31570;
+  var tahun = dataGlobal['periode']['tahun'];
+  var semester = dataGlobal['periode']['semester'];
+  var nomor = 1;
   $(document).ready(function(){
     $("#txtDate").datepicker({
       format: "dd MM yyyy",
-    });
+      autoclose: true
+    }).on('change',function (e) {
+      getByFilter();
+    })
+
+    $('#btn_reset').on('click',function () {
+      resetFilter();
+    })
+
+    dt_url = `${url_api}/absensi/rekap-matkul?mahasiswa=${mahasiswa}&tahun=${tahun}&semester=${semester}`;
+    console.log(dt_url)
+    dt_opt = {
+      "columnDefs": [
+          {
+            "aTargets": [0],
+            "mData": null,
+            "mRender": function(data, type, full) {
+              res = nomor++;
+              return res;
+            }
+          },{
+            "aTargets": [1],
+            "mData": null,
+            "mRender": function(data, type, full) {
+              res = data['tanggal'];
+              return res;
+            }
+          },{
+            "aTargets": [2],
+            "mData": null,
+            "mRender": function(data, type, full) {
+              res = data['kode'];
+              return res;
+            }
+          },{
+            "aTargets": [3],
+            "mData": null,
+            "mRender": function(data, type, full) {
+              res = data['matakuliah'];
+              return res;
+            }
+          },{
+            "aTargets": [4],
+            "mData": null,
+            "mRender": function(data, type, full) {
+              res = data['hadir'];
+              return res;
+            }
+          },{
+            "aTargets": [5],
+            "mData": null,
+            "mRender": function(data, type, full) {
+              res = data['tidak_hadir'];
+              return res;
+            }
+          }
+        ]}
   })
+  function resetFilter() {
+    var url = `${url_api}/absensi/rekap-matkul?mahasiswa=${mahasiswa}&tahun=${tahun}&semester=${semester}`;
+    dt.ajax.url(url).load();
+  }
+  function getByFilter() {
+    var date = new Date($('#txtDate').val()),
+    tahun = date.getFullYear(),
+    bulan = date.getMonth() < 10 ? '0' + (date.getMonth()+1) : (date.getMonth()+1),
+    tanggal = date.getDate()  < 10 ? '0' + date.getDate()  : date.getDate(),
+    dateFormat = tahun + '-' + bulan + '-' + tanggal;
+
+    var url = `${url_api}/absensi/rekap-matkul?mahasiswa=${mahasiswa}&tahun=${tahun}&semester=${semester}&tanggal=${dateFormat}`;
+    dt.ajax.url(url).load();
+  }
 </script>
+@endsection
+
+@section('js')
+
 @endsection

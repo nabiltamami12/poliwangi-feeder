@@ -17,23 +17,18 @@ class SyaratController extends Controller
      */
     public function index()
     {
-        $this->data = Syarat::get();
-
+        try {
+            $this->data = Syarat::get();
+            $this->status = "success";
+        } catch (QueryException $e) {
+            $this->status = "failed";
+            $this->error = $e;
+        }
         return response()->json([
-            "status" => true,
+            "status" => $this->status,
             "data" => $this->data,
-            "error" => ''
+            "error" => $this->error
         ]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -58,16 +53,19 @@ class SyaratController extends Controller
                 ]
             );
         }
-
-        $syarat = Syarat::create($data);
-
-        return response(
-            [
-                'status' => "success",
-                'data' => new SyaratResource($syarat),
-                'error' => ''
-            ]
-        );
+        try {
+            $syarat = Syarat::create($data);
+            $this->data = $syarat;
+            $this->status = "success";
+        } catch (QueryException $e) {
+            $this->status = "failed";
+            $this->error = $e;
+        }
+        return response()->json([
+            "status" => $this->status,
+            "data" => $this->data,
+            "error" => $this->error
+        ]);
     }
 
     /**
@@ -78,33 +76,25 @@ class SyaratController extends Controller
      */
     public function show($id)
     {
-        //
-        if ($id) {
-            $syarat = Syarat::where('id', $id)->get();
-            return response()->json([
-                "status" => 'success',
-                "data" => $syarat,
-                "error" => ''
-            ]);
-        } else {
-            $syarat = Syarat::get();
-            return response()->json([
-                "status" => 'failed',
-                "data" => ["message" => "id required"],
-                "error" => ''
-            ]);
+        try {
+            if ($id) {
+                $syarat = Syarat::where('id', $id)->get();
+                
+            } else {
+                $syarat = Syarat::get();
+                
+            }
+            $this->data = $syarat;
+            $this->status = "success";
+        } catch (QueryException $e) {
+            $this->status = "failed";
+            $this->error = $e;
         }
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        return response()->json([
+            "status" => $this->status,
+            "data" => $this->data,
+            "error" => $this->error
+        ]);
     }
 
     /**
@@ -124,20 +114,24 @@ class SyaratController extends Controller
 
         if ($validate->fails()) {
             $this->status = "error";
-            $this->err = $validate->errors();
+            $this->error = $validate->errors();
         } else if (!$syarat) {
             $this->status = "failed";
-            $this->err = "Data not found";
+            $this->error = "Data not found";
         } else {
-            $syarat->update($data);
-            $this->data = $syarat->get();
-            $this->status = "success";
+            try {
+                $syarat->update($data);
+                $this->data = $syarat->get();
+                $this->status = "success";
+            } catch (QueryException $e) {
+                $this->status = "failed";
+                $this->error = $e;
+            }
         }
-
         return response()->json([
-            'status' => $this->status,
-            'data' => $data,
-            'error' => ''
+            "status" => $this->status,
+            "data" => $this->data,
+            "error" => $this->error
         ]);
     }
 
@@ -149,16 +143,19 @@ class SyaratController extends Controller
      */
     public function destroy($id)
     {
-        //
-        $syarat = Syarat::where('id', $id);
-        $syarat->delete();
-
-        return response(
-            [
-                'status' => "success",
-                'data' => ["message" => "data berhasil di hapus"],
-                'erorr' => ''
-            ]
-        );
+        try {
+            $syarat = Syarat::where('id', $id);
+            $syarat->delete();
+            $this->data = $syarat;
+            $this->status = "success";
+        } catch (QueryException $e) {
+            $this->status = "failed";
+            $this->error = $e;
+        }
+        return response()->json([
+            "status" => $this->status,
+            "data" => $this->data,
+            "error" => $this->error
+        ]);
     }
 }

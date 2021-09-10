@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\MatakuliahJenis;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Database\QueryException;
 
 class MatakuliahJenisController extends Controller
 {
@@ -16,19 +17,22 @@ class MatakuliahJenisController extends Controller
      */
 
     protected $status = null;
-    protected $err = null;
+    protected $error = null;
     protected $data = null;
     
     public function index()
     {
-        $this->data = MatakuliahJenis::get();
-        $this->status = "success";
-
-       
+        try {
+            $this->data = MatakuliahJenis::get();
+            $this->status = "success";
+        } catch (QueryException $e) {
+            $this->status = "failed";
+            $this->error = $e;
+        }
         return response()->json([
             "status" => $this->status,
             "data" => $this->data,
-            "error" => $this->err
+            "error" => $this->error
         ]);
     }
 }

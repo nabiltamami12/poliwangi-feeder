@@ -24,3 +24,10 @@ $php artisan migrate
 
 ### Permision server
 sudo chown -R $USER:www-data storage
+or
+sudo chown -R www-data:www-data storage
+
+### Require
+Enable extension php pada file /etc/php/php.ini
+1. ext-iconv
+2. ext-gd

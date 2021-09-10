@@ -1,218 +1,185 @@
-@extends('layouts.mainKeuangan')
+@extends('layouts.mainAkademik')
 
 @section('content')
 <!-- Header -->
 <header class="header"></header>
 
 <!-- Page content -->
-<section class="page-content page-content__keuangan container-fluid" id="keuangan_spiMandiri">
+<section class="page-content page-content__keuangan container-fluid">
   <div class="row">
     <div class="col-xl-12">
       <div class="card shadow padding--small">
-
-        <div class="card-header p-0 m-0 border-0 ">
+        <div class="card-header p-0">
           <div class="row align-items-center">
-            <div class="col-12 col-md-7">
-              <h2 class="mb-0 text-center text-md-left">Data Sumbangan Pengembangan Institusi Jalur Mandiri</h2>
+            <div class="col-12 col-md-6">
+              <h2 class="mb-0 text-center text-md-left">Data Sumbangan Pengembangan Institusi</h2>
             </div>
-            <div class="col-12 col-md-5 text-center text-md-right mt-3 mt-md-0">
-              <button type="button" class="btn-primary">
-                <span class="iconify mr-2" data-icon="bx:bx-download"></span>
-                <span>Import</span>
+            <div class="col-12 col-md-6 text-center text-md-right mt-3 mt-md-0">
+              <form id="form_cu" enctype="multipart/form-data">
+                @csrf
+              <input type="file" name="file" id="file" onchange="clickButton()" hidden>
+              <input type="submit" value="submit" id="submit" hidden>
+              </form>
+              
+              <button type="button" class="btn btn-primary" onclick="importFile()">
+                <i class="iconify-inline mr-1" data-icon="bx:bx-download"></i>
+                Import
               </button>
-              <button type="button" class="btn-primary ml-3">
-                <span class="iconify mr-2" data-icon="bx:bx-upload"></span>
-                <span>Eksport</span>
+              
+              <button type="button" class="btn btn-warning ml-md-2" onclick="window.location.href=`${url_api}/keuangan/spi/export`">
+                <i class="iconify-inline mr-1" data-icon="bx:bx-upload"></i>
+                Eksport
               </button>
-            </div>
-          </div>
-
-          <hr class="my-4">
-
-          <div class="row align-items-center padding--small py-0 ">
-            <div class="col-sm-6 col-12">
-              <div class="form-group row">
-                <select class="form-control" id="dataperhalaman">
-                  <option>10</option>
-                  <option>20</option>
-                  <option>30</option>
-                </select>
-                <label class="label-datashowperpage ml-3" for="dataperhalaman">Data per Halaman</label>
-              </div>
-            </div>
-
-            <div class="col-md-4 col-12 offset-md-2 offset-0 mt-md-0 mt-2 p-0 text-right">
-              <label class="sr-only" for="searchdata">Search</label>
-              <div class="input-group">
-                <input type="search" class="form-control" id="searchdata" placeholder="Pencarian ...">
-                <div class="input-group-prepend">
-                  <div class="input-group-text search-icon">
-                    <span class="iconify" data-icon="fluent:search-32-regular"></span>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>
+        <hr class="mt-4">
+
+        
 
         <div class="table-responsive">
-          <table class="table align-items-center table-flush table-borderless table-hover">
+          <table class="table align-items-center table-flush table-borderless table-hover" id="datatable">
             <thead class="table-header">
               <tr>
-                <th scope="col" class="border-0 text-center px-2">No</th>
-                <th scope="col" class="border-0" style="width: 20%">Nama</th>
-                <th scope="col" class="border-0 text-center">Nim</th>
-                <th scope="col" class="border-0 text-center">Tanggal</th>
-                <th scope="col" class="border-0 text-center">Nominal</th>
-                <th scope="col" class="border-0">Keterangan</th>
-                <th scope="col" class="border-0 text-center">Aksi</th>
+                <th scope="col" class="text-center pr-0">No</th>
+                <th scope="col" class="text-center">NIM</th>
+                <th scope="col">Nama</th>
+                <th scope="col" class="text-center">Tanggal</th>
+                <th scope="col" class="text-right">Tarif spi</th>
+                <th scope="col" class="text-right">Pembayaran spi</th>
+                <th scope="col" class="text-right">Piutang</th>
+                <th scope="col" class="text-center">Aksi</th>
               </tr>
             </thead>
 
             <tbody class="table-body">
-              <tr>
-                <td class="text-center px-2">1</td>
-                <td class="font-weight-bold text-capitalize">Jessica Charisa</td>
-                <td class="text-center">4891203526</td>
-                <td class="text-center">13 Juli 2021</td>
-                <td class="text-center">Rp. 5.000.000</td>
-                <td class="text-capitalize">SPI bulan juli</td>
-                <td class="text-center">
-                  <span class="iconify edit-icon" data-icon="bx:bx-edit-alt"></span>
-                  <span class="iconify delete-icon" data-icon="bx:bx-trash"></span>
-                </td>
-              </tr>
-
-              <tr>
-                <td class="text-center px-2">2</td>
-                <td class="font-weight-bold text-capitalize">John Martin</td>
-                <td class="text-center">4891203526</td>
-                <td class="text-center">13 Juli 2021</td>
-                <td class="text-center">Rp. 5.000.000</td>
-                <td class="text-capitalize">SPI bulan juli</td>
-                <td class="text-center">
-                  <span class="iconify edit-icon" data-icon="bx:bx-edit-alt"></span>
-                  <span class="iconify delete-icon" data-icon="bx:bx-trash"></span>
-                </td>
-              </tr>
-
-              <tr>
-                <td class="text-center px-2">3</td>
-                <td class="font-weight-bold text-capitalize">Farhan Pratama</td>
-                <td class="text-center">4891203526</td>
-                <td class="text-center">13 Juli 2021</td>
-                <td class="text-center">Rp. 5.000.000</td>
-                <td class="text-capitalize">SPI bulan juli</td>
-                <td class="text-center">
-                  <span class="iconify edit-icon" data-icon="bx:bx-edit-alt"></span>
-                  <span class="iconify delete-icon" data-icon="bx:bx-trash"></span>
-                </td>
-              </tr>
-
-              <tr>
-                <td class="text-center px-2">4</td>
-                <td class="font-weight-bold text-capitalize">Widya Astuti</td>
-                <td class="text-center">4891203526</td>
-                <td class="text-center">13 Juli 2021</td>
-                <td class="text-center">Rp. 5.000.000</td>
-                <td class="text-capitalize">SPI bulan juli</td>
-                <td class="text-center">
-                  <span class="iconify edit-icon" data-icon="bx:bx-edit-alt"></span>
-                  <span class="iconify delete-icon" data-icon="bx:bx-trash"></span>
-                </td>
-              </tr>
-
-              <tr>
-                <td class="text-center px-2">5</td>
-                <td class="font-weight-bold text-capitalize">Jessica Charisa</td>
-                <td class="text-center">4891203526</td>
-                <td class="text-center">13 Juli 2021</td>
-                <td class="text-center">Rp. 5.000.000</td>
-                <td class="text-capitalize">SPI bulan juli</td>
-                <td class="text-center">
-                  <span class="iconify edit-icon" data-icon="bx:bx-edit-alt"></span>
-                  <span class="iconify delete-icon" data-icon="bx:bx-trash"></span>
-                </td>
-              </tr>
-
-              <tr>
-                <td class="text-center px-2">6</td>
-                <td class="font-weight-bold text-capitalize">Jessica Charisa</td>
-                <td class="text-center">4891203526</td>
-                <td class="text-center">13 Juli 2021</td>
-                <td class="text-center">Rp. 5.000.000</td>
-                <td class="text-capitalize">SPI bulan juli</td>
-                <td class="text-center">
-                  <span class="iconify edit-icon" data-icon="bx:bx-edit-alt"></span>
-                  <span class="iconify delete-icon" data-icon="bx:bx-trash"></span>
-                </td>
-              </tr>
-
-              <tr>
-                <td class="text-center px-2">7</td>
-                <td class="font-weight-bold text-capitalize">Jessica Charisa</td>
-                <td class="text-center">4891203526</td>
-                <td class="text-center">13 Juli 2021</td>
-                <td class="text-center">Rp. 5.000.000</td>
-                <td class="text-capitalize">SPI bulan juli</td>
-                <td class="text-center">
-                  <span class="iconify edit-icon" data-icon="bx:bx-edit-alt"></span>
-                  <span class="iconify delete-icon" data-icon="bx:bx-trash"></span>
-                </td>
-              </tr>
-
-              <tr>
-                <td class="text-center px-2">8</td>
-                <td class="font-weight-bold text-capitalize">Jessica Charisa</td>
-                <td class="text-center">4891203526</td>
-                <td class="text-center">13 Juli 2021</td>
-                <td class="text-center">Rp. 5.000.000</td>
-                <td class="text-capitalize">SPI bulan juli</td>
-                <td class="text-center">
-                  <span class="iconify edit-icon" data-icon="bx:bx-edit-alt"></span>
-                  <span class="iconify delete-icon" data-icon="bx:bx-trash"></span>
-                </td>
-              </tr>
-
-              <tr>
-                <td class="text-center px-2">9</td>
-                <td class="font-weight-bold text-capitalize">Jessica Charisa</td>
-                <td class="text-center">4891203526</td>
-                <td class="text-center">13 Juli 2021</td>
-                <td class="text-center">Rp. 5.000.000</td>
-                <td class="text-capitalize">SPI bulan juli</td>
-                <td class="text-center">
-                  <span class="iconify edit-icon" data-icon="bx:bx-edit-alt"></span>
-                  <span class="iconify delete-icon" data-icon="bx:bx-trash"></span>
-                </td>
-              </tr>
-
+              
             </tbody>
           </table>
         </div>
 
-        <div class="row justify-content-between align-items-center table-information">
-          <h3>Menampilkan 1 sampai 9 dari 9 total data</h3>
-          <nav aria-label="pagination table">
-            <ul class="pagination">
-              <li class="page-item disabled" aria-label="Previous">
-                <a class="page-link" href="#" tabindex="-1">
-                  Previous
-                </a>
-              </li>
-              <li class="page-item active">
-                <a class="page-link" href="#">1<span class="sr-only">(current)</span></a>
-              </li>
-              <li class="page-item disabled" aria-label="Next">
-                <a class="page-link" href="#">
-                  Next
-                </a>
-              </li>
-            </ul>
-          </nav>
-        </div>
+        
       </div>
     </div>
   </div>
 </section>
+<script>
+const toCurrency = (number) => 
+      Intl.NumberFormat("id-ID", { style : 'currency', currency:'IDR', minimumFractionDigits: 0 }).format(number);
+
+
+function importFile() {
+  $("#file").click()
+}
+
+function clickButton() {
+  $("#submit").click();
+}
+$(document).ready(function() {
+
+var nomor = 1;
+dt_url = `${url_api}/keuangan/spi`;
+dt_opt = {
+"columnDefs": [
+    {
+      "aTargets": [0],
+      "mData": null,
+      "className": 'text-center pr-0',
+      "mRender": function(data, type, full) {
+        res = nomor++;
+        return res;
+      }
+    },{
+      "aTargets": [1],
+      "mData": null,
+      "className": 'text-center',
+      "mRender": function(data, type, full) {
+        res = data['id_mahasiswa'];
+        return res;
+      }
+    },{
+      "aTargets": [2],
+      "mData": null,
+      "className": 'font-weight-bold text-capitalize',
+      "mRender": function(data, type, full) {
+        res = data['nama'];
+        return res;
+      }
+    },{
+      "aTargets": [3],
+      "mData": null,
+      "className": 'text-center',
+      "mRender": function(data, type, full) {
+        res = data['tanggal_pembayaran'];
+        return res;
+      }
+    },{
+      "aTargets": [4],
+      "mData": null,
+      "className": 'font-weight-bold text-right',
+      "mRender": function(data, type, full) {
+        res = toCurrency(data['tarif']);
+        return res;
+      }
+    },{
+      "aTargets": [5],
+      "mData": null,
+      "className": 'font-weight-bold text-right',
+      "mRender": function(data, type, full) {
+        res = toCurrency(data['nom_pembayaran']);
+        return res;
+      }
+    },{
+      "aTargets": [6],
+      "mData": null,
+      "className": 'font-weight-bold text-right',
+      "mRender": function(data, type, full) {
+        res = toCurrency(data['piutang']);
+        return res;
+      }
+    },{
+      "aTargets": [7],
+      "mData": null,
+      "className": 'font-weight-bold text-right',
+      "mRender": function(data, type, full) {
+        var id = data['id_mahasiswa'];
+        var test =  data['nama'];
+        var detail = `<a href="{{ url('akademik/keuangan/spi/detail/${id}/${test}') }}" class="font-weight-bold text-primary text-underline">Lihat Detail</a>`
+        res = detail;
+        return res;
+      }
+    },
+  ]}
+
+  $("#form_cu").submit(function(e) {
+        e.preventDefault();
+        $.ajax({
+            url: url_api+"/keuangan/spi/import",
+            type: "post",
+            dataType: 'json',
+            data: new FormData(this),
+            contentType: false,
+            cache: false,
+            processData: false,
+            beforeSend: function(text) {
+                // loading func
+                console.log("loading")
+                loading('show')
+            },
+            success: function(res) {
+                if (res.status=="success") {
+                    window.location.href = "{{url('/akademik/keuangan/spi')}}";                    
+                } else {
+                    console.log("Gagal");
+                }
+                loading('hide')
+            }
+        });
+    });
+
+
+}
+ 
+);
+</script>
 @endsection

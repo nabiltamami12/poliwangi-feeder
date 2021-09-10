@@ -5,21 +5,18 @@
 <header class="header"></header>
 
 <!-- Page content -->
-<section class="page-content container-fluid" id="akademik_khsmahasiswa">
+<section class="page-content container-fluid">
   <h1 class="page-content__title">Kartu Hasil Studi</h1>
-
   <div class="row">
     <div class="col-xl-12">
       <div class="card shadow padding--small">
-
-        <div class="card-header p-0 m-0 border-0">
+        <div class="card-header p-0">
           <div class="row align-items-center">
             <div class="col">
               <h3 class="mb-0">KHS yang Tersedia</h3>
             </div>
           </div>
         </div>
-
         <hr class="my-4">
 
         <form class="form-input">
@@ -62,7 +59,7 @@
                   <h2>KHS Semester satu</h2>
                 </td>
                 <td class="text-center">
-                  <span class="iconify download-icon text-primary" data-icon="bx:bx-download"></span>
+                  <i class="iconify-inline mr-1 text-primary" data-icon="bx:bx-cloud-download"></i>
                   <span class="font-weight-bold text-primary">Unduh File PDF</span>
                 </td>
               </tr>
@@ -73,7 +70,7 @@
                   <h2>KHS Semester Dua</h2>
                 </td>
                 <td class="text-center">
-                  <span class="iconify download-icon text-primary" data-icon="bx:bx-download"></span>
+                  <i class="iconify-inline mr-1 text-primary" data-icon="bx:bx-cloud-download"></i>
                   <span class="font-weight-bold text-primary">Unduh File PDF</span>
                 </td>
               </tr>
@@ -84,7 +81,7 @@
                   <h2>KHS Semester Tiga</h2>
                 </td>
                 <td class="text-center">
-                  <span class="iconify download-icon text-primary" data-icon="bx:bx-download"></span>
+                  <i class="iconify-inline mr-1 text-primary" data-icon="bx:bx-cloud-download"></i>
                   <span class="font-weight-bold text-primary">Unduh File PDF</span>
                 </td>
               </tr>
@@ -94,7 +91,7 @@
                   <h2>KHS Semester Empat</h2>
                   </th>
                 <td class="text-center">
-                  <span class="iconify download-icon text-primary" data-icon="bx:bx-download"></span>
+                  <i class="iconify-inline mr-1 text-primary" data-icon="bx:bx-cloud-download"></i>
                   <span class="font-weight-bold text-primary">Unduh File PDF</span>
                 </td>
               </tr>

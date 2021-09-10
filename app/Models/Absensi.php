@@ -16,6 +16,8 @@ class Absensi extends Model
         'mahasiswa',
         'tanggal',
         'status',
+        'dosen',
+        'tanggal_entry',
         'minggu'
     ];
 }

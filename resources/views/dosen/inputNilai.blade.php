@@ -5,18 +5,17 @@
 <header class="header"></header>
 
 <!-- Page content -->
-<section class="page-content container-fluid" id="dosen_inputnilai">
+<section class="page-content container-fluid">
   <div class="row">
     <div class="col-xl-12">
       <div class="card shadow padding--small">
-
-        <div class="card-header p-0 m-0 border-0">
+        <div class="card-header p-0 m-0">
           <div class="row align-items-center">
-            <div class="col-12 col-md-3">
-              <h3 class="mb-0 text-center text-md-left font-weight-bold">Nilai Mahasiswa</h3>
+            <div class="col-lg-5">
+              <h3 class="mb-0 text-center text-lg-left font-weight-bold">Nilai Mahasiswa</h3>
             </div>
-            <div class="col-12 col-md-9 text-center text-md-right">
-              <button type="button" class="btn btn-icon btn-warning mt-3 mt-md-0">
+            <div class="col-12 col-lg-7 text-center text-md-right">
+              <button type="button" id="btn_cetak" class="btn btn-icon btn-warning mt-3 mt-md-0">
                 <span class="btn-inner--icon"><span class="iconify" data-icon="bx:bx-printer"></span></span>
                 <span class="btn-inner--text">Cetak Data</span>
               </button>
@@ -82,6 +81,7 @@ var countData
 
 $(document).ready(function() {
   var id = dataGlobal['user']['nomor'];
+  var nama = dataGlobal['user']['nama'];
   var semester = dataGlobal['periode']['semester'];
   var tahun = dataGlobal['periode']['tahun'];
   getFilter(id,semester);
@@ -122,7 +122,7 @@ $(document).ready(function() {
     var id_kelas = $(this).val()
     var matakuliah = $('#matkul').val()
     $.ajax({
-      url: url_api+"/inputnilai?tahun="+tahun+"&kelas="+id_kelas+"&matakuliah="+matakuliah,
+      url: url_api+"/nilai?tahun="+tahun+"&kelas="+id_kelas+"&matakuliah="+matakuliah,
       type: 'get',
       dataType: 'json',
       data: {},
@@ -142,6 +142,25 @@ $(document).ready(function() {
       }
     })
   })
+
+  $('#btn_cetak').on('click',function (e) {
+    var id_kelas = $('#kelas').val()
+    var matakuliah = $('#matkul').val()
+    
+    var arr = {
+      'tahun' : tahun,
+      'semester' : $('#semester').val(),
+      'prodi' : $('#prodi :selected').text(),
+      'kelas' : $('#kelas :selected').text(),
+      'id_kelas' : id_kelas,
+      'matakuliah' : $('#matkul :selected').text(),
+      'id_matakuliah' : matakuliah,
+      'dosen' : nama,
+    }
+    localStorage.setItem('cetak-eval', JSON.stringify(arr));
+    window.open("{{url('akademik/kuliah/cetak-evaluasi-nilai/')}}",'_blank');
+  })
+
   $('#btn_publish').on('click',function (e) {
     var dataSimpan = [];
     for (let index = 1; index <= countData; index++) {
@@ -154,7 +173,7 @@ $(document).ready(function() {
     }
     console.log(dataSimpan)
     $.ajax({
-      url: url_api+"/inputnilai/publish",
+      url: url_api+"/nilai/publish",
       type: 'put',
       dataType: 'json',
       data: {"data":dataSimpan},
@@ -197,7 +216,7 @@ $(document).ready(function() {
     }
     console.log(dataSimpan)
     $.ajax({
-      url: url_api+"/inputnilai",
+      url: url_api+"/nilai",
       type: 'post',
       dataType: 'json',
       data: {"data":dataSimpan},

@@ -20,10 +20,6 @@
                 <span class="iconify mr-2" data-icon="bx:bxs-plus-circle"></span>
                 Tambah
               </button>
-              <button type="button" class="btn btn-secondary ml-0 ml-md-3">
-                <span class="iconify mr-2" data-icon="bx:bx-download"></span>
-                Unduh Data
-              </button>
             </div>
           </div>
         </div>
@@ -80,7 +76,7 @@
   });
   $('#program_studi').on('change',function (e) {
     var program_studi = $(this).val()
-    var kelas = $.grep(dataGlobal['kelas'], function(e){ return e.program_studi == program_studi; });
+    var kelas =   
     $('#kelas').html('')
     var optKelas = `<option value=""> - </option>`;
     $.each(kelas,function (key,row) {
@@ -94,7 +90,6 @@
   })
 } );
 async function getData() {
-  
     var optProgram,optJurusan,optKelas,optStatus;
     $.each(dataGlobal['prodi'],function (key,row) {
         optProgram += `<option value="${row.nomor}">${row.nama_program} ${row.program_studi}</option>`

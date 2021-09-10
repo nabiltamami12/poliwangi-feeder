@@ -108,7 +108,7 @@ h6,
 }
 
 .text-dark {
-  color: #343a40 !important;
+  color: #062e46 !important;
 }
 
 .badge {
@@ -125,11 +125,11 @@ h6,
 }
 
 .bg-primary {
-  background-color: #556ee6 !important;
+  background-color: #28a3eb !important;
 }
 
 .bg-secondary {
-  background-color: #74788d !important;
+  background-color: #6f7bf7 !important;
 }
 
 .bg-success {
@@ -137,7 +137,7 @@ h6,
 }
 
 .bg-info {
-  background-color: #50a5f1 !important;
+  background-color: #b2def8 !important;
 }
 
 .bg-warning {
@@ -149,7 +149,7 @@ h6,
 }
 
 .bg-dark {
-  background-color: #343a40 !important;
+  background-color: #062e46 !important;
 }
 
 .btn {
@@ -601,8 +601,8 @@ option[disabled] {
   background-color: #666666;
 }
 .default-radio input[type=radio].radio-primary:checked {
-  border: 1px solid #556ee6;
-  background-color: #556ee6;
+  border: 1px solid #28a3eb;
+  background-color: #28a3eb;
 }
 
 .custom-radio input[type=radio]:checked,
@@ -647,7 +647,7 @@ option[disabled] {
 
 .custom-radio .radio-primary:checked + .custom-control-label:before,
 .custom-radio .radio-primary:not(:checked) + .custom-control-label:before {
-  background: #556ee6;
+  background: #28a3eb;
 }
 
 .custom-radio .radio-success:checked + .custom-control-label:before,

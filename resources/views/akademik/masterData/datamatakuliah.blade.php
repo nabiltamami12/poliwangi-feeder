@@ -5,19 +5,18 @@
 <header class="header"></header>
 
 <!-- Page content -->
-<section class="page-content  container-fluid" id="akademik_datamatakuliah">
+<section class="page-content container-fluid" id="akademik_datamatakuliah">
   <div class="row">
     <div class="col-xl-12">
       <div class="card shadow padding--small">
-        <div class="card-header p-0 m-0 border-0 ">
-
+        <div class="card-header p-0">
           <div class="row align-items-center">
             <div class="col">
               <h2 class="mb-0">Data Matakuliah</h2>
             </div>
             <div class="col text-right">
               <button type="button" onclick="add_btn()" class="btn btn-primary">
-                <span class="iconify mr-2" data-icon="bx:bxs-plus-circle"></span>
+                <i class="iconify mr-1" data-icon="bx:bxs-plus-circle"></i>
                 Tambah
               </button>
             </div>
@@ -29,12 +28,12 @@
 
             <thead class="table-header">
               <tr>
-                <th scope="col" class="border-0 text-center p-2">No</th>
-                <th scope="col" class="border-0">Kode</th>
-                <th scope="col" class="border-0">Matakuliah</th>
-                <th scope="col" class="border-0 text-center">Jenis</th>
-                <th scope="col" class="border-0 text-center">Semester</th>
-                <th scope="col" class="border-0 text-center">Aksi</th>
+                <th scope="col" class="text-center p-2">No</th>
+                <th scope="col">Kode</th>
+                <th scope="col">Matakuliah</th>
+                <th scope="col" class="text-center">Jenis</th>
+                <th scope="col" class="text-center">Semester</th>
+                <th scope="col" class="text-center">Aksi</th>
               </tr>
             </thead>
           </table>
@@ -91,8 +90,8 @@ dt_opt = {
         "mRender": function(data, type, full) {
           var id = data['nomor'];
           var text_hapus = data['kode'];
-          var btn_update = `<span class="iconify edit-icon" onclick='update_btn(${id})' data-icon="bx:bx-edit-alt" ></span>` 
-          var btn_delete = `<span class="iconify delete-icon" data-icon="bx:bx-trash"  onclick='delete_btn(${id},"matakuliah","matakuliah","${text_hapus}")'></span>`; 
+          var btn_update = `<i class="iconify edit-icon" onclick='update_btn(${id})' data-icon="bx:bx-edit-alt" ></i>` 
+          var btn_delete = `<i class="iconify delete-icon" data-icon="bx:bx-trash"  onclick='delete_btn(${id},"matakuliah","matakuliah","${text_hapus}")'></i>`; 
           res = btn_update+" "+btn_delete;
           return res;
         }

@@ -5,7 +5,7 @@
 <header class="header"></header>
 
 <!-- Page content -->
-<section class="page-content container-fluid" id="akademik_dashboard">
+<section class="page-content container-fluid">
   <div id="piechart" class="shadow mt-4">
     <div class="data-piechart">
       <div class="data-item">
@@ -27,7 +27,7 @@
     </div>
   </div>
 
-  <div id="barchart" class="mt-4">
+  <div id="barchart" class="mt-4-5">
     <div class="row">
       <div class="col-xl-12">
         <h1 class="page-heading mb-3">Mahasiswa Per Prodi</h1>
@@ -39,16 +39,16 @@
   <div class="row">
     <div class="col-xl-12">
       <div class="card shadow">
-        <div class="table-responsive">
+        <div class="table-responsive table_dashboardAkademik">
           <table class="table align-items-center table-borderless table-flush table-hover">
             <thead class="table-header">
               <tr>
-                <th scope="col" class="border-0 text-center px-2"></th>
-                <th scope="col" class="border-0">Kode</th>
-                <th scope="col" class="border-0">Mata Kuliah</th>
-                <th scope="col" class="border-0 text-center px-0">Laki-laki</th>
-                <th scope="col" class="border-0 text-center px-0">Perempuan</th>
-                <th scope="col" class="border-0 text-center px-2">Total</th>
+                <th scope="col" class="text-center px-2"></th>
+                <th scope="col">Kode</th>
+                <th scope="col">Mata Kuliah</th>
+                <th scope="col" class="text-center px-0">Laki-laki</th>
+                <th scope="col" class="text-center px-0">Perempuan</th>
+                <th scope="col" class="text-center px-2">Total</th>
               </tr>
             </thead>
             <tbody class="table-body">
@@ -124,9 +124,11 @@
 @endsection
 
 @section('js')
-<!-- Chart JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.4.1/chart.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.0.0-rc.1/chartjs-plugin-datalabels.min.js"
+  integrity="sha512-+UYTD5L/bU1sgAfWA0ELK5RlQ811q8wZIocqI7+K0Lhh8yVdIoAMEs96wJAIbgFvzynPm36ZCXtkydxu1cs27w=="
+  crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="{{ asset('js/chart.js') }}"></script>
-<!-- Loader -->
 <script src="{{ asset('js/loading.js') }}"></script>
 @endsection

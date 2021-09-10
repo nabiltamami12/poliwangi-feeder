@@ -5,27 +5,26 @@
 <header class="header"></header>
 
 <!-- Page content -->
-<section class="page-content container-fluid" id="akademik_nilai">
+<section class="page-content container-fluid">
   <div class="row">
     <div class="col-xl-12">
       <div class="card shadow padding--small">
-
-        <div class="card-header p-0 m-0 border-0 ">
+        <div class="card-header p-0">
           <div class="row align-items-center">
             <div class="col-12 col-md-6">
-              <h2 class="mb-0 text-center text-md-left">Data Mahasiswa</h2>
+              <h2 class="mb-0 text-center text-md-left">Nilai Mahasiswa</h2>
             </div>
             <div class="col-12 col-md-6 text-center text-md-right">
               <button type="button" class="btn btn-primary mt-3 mt-md-0">
-                <span class="iconify" data-icon="bx:bxs-plus-circle"></span>
+                <i class="iconify-inline mr-1" data-icon="bx:bxs-plus-circle"></i>
                 Tambah
               </button>
-              <button type="button" class="btn btn-info mt-3 mt-md-0 ml-0 ml-md-2 text-primary">
-                <span class="iconify" data-icon="bx:bx-download"></span>
+              <button type="button" class="btn btn-info_transparent mt-3 mt-md-0 ml-md-2 text-primary">
+                <i class="iconify-inline mr-1" data-icon="bx:bx-download"></i>
                 Import
               </button>
-              <button type="button" class="btn btn-warning mt-3 mt-md-0 ml-0 ml-md-2">
-                <span class="iconify" data-icon="bx:bx-upload"></span>
+              <button type="button" class="btn btn-warning mt-3 mt-md-0 ml-md-2">
+                <i class="iconify-inline mr-1" data-icon="bx:bx-upload"></i>
                 Eksport
               </button>
             </div>
@@ -72,7 +71,7 @@
           <div class="col-12 col-md-6">
             <form class="form-inline">
               <div class="form-group row">
-                <select class="form-control" id="dataperhalaman">
+                <select class="form-control form-control-sm" id="dataperhalaman">
                   <option>10</option>
                   <option>20</option>
                   <option>30</option>
@@ -82,14 +81,12 @@
             </form>
           </div>
           <div class="col-12 col-md-4 offset-md-2 offset-0 text-right p-0 mt-3 mt-md-0">
-            <div class="input-group">
-              <input type="search" class="form-control" id="searchdata" placeholder="Pencarian ...">
-              <div class="input-group-prepend">
-                <div class="input-group-text search-icon rounded-right">
-                  <span class="iconify" data-icon="fluent:search-32-regular"></span>
-                </div>
-              </div>
-            </div>
+            <form class="search_form" action="">
+              <input class="form-control form-control-sm" type="search" placeholder="Pencarian...">
+              <button type="submit">
+                <i class="iconify-inline" data-icon="bx:bx-search"></i>
+              </button>
+            </form>
           </div>
         </div>
 
@@ -98,7 +95,7 @@
             <thead class="table-header">
               <tr>
                 <th scope="col" class="text-center px-2">Nim</th>
-                <th scope="col">Nama</th>
+                <th scope="col" style="width: 25%">Nama</th>
                 <th scope="col">Mata Kuliah</th>
                 <th scope="col">Kategori</th>
                 <th scope="col" class="text-center">Nilai</th>
@@ -114,8 +111,8 @@
                 <td>tugas harian</td>
                 <td class="text-center">98</td>
                 <td class="text-center">
-                  <span class="iconify edit-icon" data-icon="bx:bx-edit-alt"></span>
-                  <span class="iconify delete-icon" data-icon="bx:bx-trash"></span>
+                  <i class="iconify edit-icon mr-2" data-icon="bx:bx-edit-alt"></i>
+                  <i class="iconify delete-icon" data-icon="bx:bx-trash"></i>
                 </td>
               </tr>
 
@@ -126,8 +123,8 @@
                 <td>tugas harian</td>
                 <td class="text-center">98</td>
                 <td class="text-center">
-                  <span class="iconify edit-icon" data-icon="bx:bx-edit-alt"></span>
-                  <span class="iconify delete-icon" data-icon="bx:bx-trash"></span>
+                  <i class="iconify edit-icon mr-2" data-icon="bx:bx-edit-alt"></i>
+                  <i class="iconify delete-icon" data-icon="bx:bx-trash"></i>
                 </td>
               </tr>
 
@@ -138,8 +135,8 @@
                 <td>tugas harian</td>
                 <td class="text-center">98</td>
                 <td class="text-center">
-                  <span class="iconify edit-icon" data-icon="bx:bx-edit-alt"></span>
-                  <span class="iconify delete-icon" data-icon="bx:bx-trash"></span>
+                  <i class="iconify edit-icon mr-2" data-icon="bx:bx-edit-alt"></i>
+                  <i class="iconify delete-icon" data-icon="bx:bx-trash"></i>
                 </td>
               </tr>
 
@@ -150,8 +147,8 @@
                 <td>tugas harian</td>
                 <td class="text-center">98</td>
                 <td class="text-center">
-                  <span class="iconify edit-icon" data-icon="bx:bx-edit-alt"></span>
-                  <span class="iconify delete-icon" data-icon="bx:bx-trash"></span>
+                  <i class="iconify edit-icon mr-2" data-icon="bx:bx-edit-alt"></i>
+                  <i class="iconify delete-icon" data-icon="bx:bx-trash"></i>
                 </td>
               </tr>
 
@@ -162,8 +159,8 @@
                 <td>tugas harian</td>
                 <td class="text-center">98</td>
                 <td class="text-center">
-                  <span class="iconify edit-icon" data-icon="bx:bx-edit-alt"></span>
-                  <span class="iconify delete-icon" data-icon="bx:bx-trash"></span>
+                  <i class="iconify edit-icon mr-2" data-icon="bx:bx-edit-alt"></i>
+                  <i class="iconify delete-icon" data-icon="bx:bx-trash"></i>
                 </td>
               </tr>
 
@@ -174,8 +171,8 @@
                 <td>tugas harian</td>
                 <td class="text-center">98</td>
                 <td class="text-center">
-                  <span class="iconify edit-icon" data-icon="bx:bx-edit-alt"></span>
-                  <span class="iconify delete-icon" data-icon="bx:bx-trash"></span>
+                  <i class="iconify edit-icon mr-2" data-icon="bx:bx-edit-alt"></i>
+                  <i class="iconify delete-icon" data-icon="bx:bx-trash"></i>
                 </td>
               </tr>
 
@@ -186,8 +183,8 @@
                 <td>tugas harian</td>
                 <td class="text-center">98</td>
                 <td class="text-center">
-                  <span class="iconify edit-icon" data-icon="bx:bx-edit-alt"></span>
-                  <span class="iconify delete-icon" data-icon="bx:bx-trash"></span>
+                  <i class="iconify edit-icon mr-2" data-icon="bx:bx-edit-alt"></i>
+                  <i class="iconify delete-icon" data-icon="bx:bx-trash"></i>
                 </td>
               </tr>
 
@@ -198,8 +195,8 @@
                 <td>tugas harian</td>
                 <td class="text-center">98</td>
                 <td class="text-center">
-                  <span class="iconify edit-icon" data-icon="bx:bx-edit-alt"></span>
-                  <span class="iconify delete-icon" data-icon="bx:bx-trash"></span>
+                  <i class="iconify edit-icon mr-2" data-icon="bx:bx-edit-alt"></i>
+                  <i class="iconify delete-icon" data-icon="bx:bx-trash"></i>
                 </td>
               </tr>
 
@@ -210,8 +207,8 @@
                 <td>tugas harian</td>
                 <td class="text-center">98</td>
                 <td class="text-center">
-                  <span class="iconify edit-icon" data-icon="bx:bx-edit-alt"></span>
-                  <span class="iconify delete-icon" data-icon="bx:bx-trash"></span>
+                  <i class="iconify edit-icon mr-2" data-icon="bx:bx-edit-alt"></i>
+                  <i class="iconify delete-icon" data-icon="bx:bx-trash"></i>
                 </td>
               </tr>
             </tbody>
@@ -220,20 +217,16 @@
 
         <div class="row justify-content-between align-items-center table-information">
           <h3>Menampilkan 1 sampai 9 dari 9 total data</h3>
-          <nav aria-label="pagination table">
+          <nav aria-label="Page navigation example">
             <ul class="pagination">
               <li class="page-item disabled" aria-label="Previous">
-                <a class="page-link" href="#" tabindex="-1">
-                  Previous
-                </a>
+                <a class="page-link" href="#" tabindex="-1">Previous</a>
               </li>
               <li class="page-item active">
                 <a class="page-link" href="#">1<span class="sr-only">(current)</span></a>
               </li>
               <li class="page-item disabled" aria-label="Next">
-                <a class="page-link" href="#">
-                  Next
-                </a>
+                <a class="page-link" href="#">Next</a>
               </li>
             </ul>
           </nav>

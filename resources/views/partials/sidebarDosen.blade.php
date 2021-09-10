@@ -23,14 +23,14 @@
         <ul class="navbar-nav">
           <li class="nav-item">
             <a class="nav-link {{($title === "dosen-dashboard") ? 'aktif' : ''}}" href="/dosen/dashboard">
-              <span class="iconify" data-icon="bx-bx-home-circle"></span>
+              <i class="iconify" data-icon="bx-bx-home-circle"></i>
               <span class="nav-link-text">Dashboard</span>
             </a>
           </li>
 
           <li class="nav-item">
             <a class="nav-link {{($title === "dosen-presensi") ? 'aktif' : ''}}" href="/dosen/presensi">
-              <span class="iconify" data-icon="bx:bx-badge-check"></span>
+              <i class="iconify" data-icon="bx:bx-badge-check"></i>
               <span class="nav-link-text">Presensi</span>
             </a>
           </li>

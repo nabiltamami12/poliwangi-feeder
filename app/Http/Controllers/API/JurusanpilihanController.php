@@ -8,10 +8,14 @@ use App\Models\Jurusanpilihan;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Resources\JurusanpilihanResource;
 use App\Models\Jurusan;
+use Illuminate\Database\QueryException;
 use DB;
 
 class JurusanpilihanController extends Controller
 {
+    protected $status = null;
+    protected $error = null;
+    protected $data = null;
     /**
      * Display a listing of the resource.
      *
@@ -19,7 +23,8 @@ class JurusanpilihanController extends Controller
      */
     public function index()
     {
-        $jurusan = DB::table("jurusan_pilihan")
+        try {
+            $jurusan = DB::table("jurusan_pilihan")
             ->select(
                 "jurusan_pilihan.nomor",
                 "program_studi.program_studi",
@@ -29,22 +34,17 @@ class JurusanpilihanController extends Controller
             )
             ->join("program_studi", "jurusan_pilihan.program_studi", "=", "program_studi.nomor")
             ->get();
-
+            $this->data = $jurusan;
+            $this->status = "success";
+        } catch (QueryException $e) {
+            $this->status = "failed";
+            $this->error = $e;
+        }
         return response()->json([
-            'status' => 'berhasil',
-            'data' => $jurusan,
-            'error' => ''
+            "status" => $this->status,
+            "data" => $this->data,
+            "error" => $this->error
         ]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -70,15 +70,19 @@ class JurusanpilihanController extends Controller
             );
         }
 
-        $jurusan = Jurusanpilihan::create($data);
-
-        return response(
-            [
-                'status' => "success",
-                'data' => new JurusanpilihanResource($jurusan),
-                'error' => ''
-            ]
-        );
+        try {
+            $jurusan = Jurusanpilihan::create($data);
+            $this->data = $jurusan;
+            $this->status = "success";
+        } catch (QueryException $e) {
+            $this->status = "failed";
+            $this->error = $e;
+        }
+        return response()->json([
+            "status" => $this->status,
+            "data" => $this->data,
+            "error" => $this->error
+        ]);
     }
 
     /**
@@ -89,43 +93,32 @@ class JurusanpilihanController extends Controller
      */
     public function show($id)
     {
-        //
-        if ($id) {
-            $jurusan = Jurusanpilihan::select(
-                "jurusan_pilihan.nomor",
-                "program_studi.program_studi",
-                "jurusan_pilihan.kuota",
-                "jurusan_pilihan.tahun"
-
-            )
-                ->join("program_studi", "jurusan_pilihan.program_studi", "=", "program_studi.nomor")
-                ->where('jurusan_pilihan.nomor', $id)
-                ->get();
-
-            return response()->json([
-                'status' => 'berhasil',
-                'data' => $jurusan,
-                'error' => ''
-            ]);
-        } else {
-            $jurusan = Jurusanpilihan::get();
-            return response()->json([
-                "status" => 'failed',
-                "data" => ["message" => "id required"],
-                "error" => ''
-            ]);
+        try {
+            if ($id) {
+                $jurusan = Jurusanpilihan::select(
+                    "jurusan_pilihan.nomor",
+                    "program_studi.program_studi",
+                    "jurusan_pilihan.kuota",
+                    "jurusan_pilihan.tahun"
+    
+                )
+                    ->join("program_studi", "jurusan_pilihan.program_studi", "=", "program_studi.nomor")
+                    ->where('jurusan_pilihan.nomor', $id)
+                    ->get();
+            } else {
+                $jurusan = Jurusanpilihan::get();
+            }
+            $this->data = $jurusan;
+            $this->status = "success";
+        } catch (QueryException $e) {
+            $this->status = "failed";
+            $this->error = $e;
         }
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        return response()->json([
+            "status" => $this->status,
+            "data" => $this->data,
+            "error" => $this->error
+        ]);
     }
 
     /**
@@ -145,20 +138,24 @@ class JurusanpilihanController extends Controller
 
         if ($validate->fails()) {
             $this->status = "error";
-            $this->err = $validate->errors();
+            $this->error = $validate->errors();
         } else if (!$jurusan) {
             $this->status = "failed";
-            $this->err = "Data not found";
+            $this->error = "Data not found";
         } else {
-            $jurusan->update($data);
-            $this->data = $jurusan->get();
-            $this->status = "success";
+            try {
+                $jurusan->update($data);
+                $this->data = $jurusan->get();
+                $this->status = "success";
+            } catch (QueryException $e) {
+                $this->status = "failed";
+                $this->error = $e;
+            }
         }
-
         return response()->json([
-            'status' => $this->status,
-            'data' => $data,
-            'error' => ''
+            "status" => $this->status,
+            "data" => $this->data,
+            "error" => $this->error
         ]);
     }
 
@@ -170,15 +167,19 @@ class JurusanpilihanController extends Controller
      */
     public function destroy($id)
     {
-        //
-        $jurusan = Jurusanpilihan::where('nomor', $id);
-        $jurusan->delete();
-        return response(
-            [
-                'status' => "success",
-                'data' => ["message" => "data berhasil di hapus"],
-                'erorr' => ''
-            ]
-        );
+        try {
+            $jurusan = Jurusanpilihan::where('nomor', $id);
+            $jurusan->delete();
+            $this->data = $jurusan;
+            $this->status = "success";
+        } catch (QueryException $e) {
+            $this->status = "failed";
+            $this->error = $e;
+        }
+        return response()->json([
+            "status" => $this->status,
+            "data" => $this->data,
+            "error" => $this->error
+        ]);
     }
 }

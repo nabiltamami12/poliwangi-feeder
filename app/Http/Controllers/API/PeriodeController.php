@@ -7,9 +7,14 @@ use App\Models\Periode;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use DB;
+use Illuminate\Database\QueryException;
 
 class PeriodeController extends Controller
 {
+    protected $status = null;
+    protected $error = null;
+    protected $data = null;
+
     //
     /**
      * Display a listing of the resource.
@@ -18,22 +23,19 @@ class PeriodeController extends Controller
      */
     public function index()
     {
-        $periode = Periode::get();
-            return response()->json([
-                "status" => 'success',
-                "data" => $periode,
-                "error" => ''
-            ]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        try {
+            $periode = Periode::get();
+            $this->data = $periode;
+            $this->status = "success";
+        } catch (QueryException $e) {
+            $this->status = "failed";
+            $this->error = $e;
+        }
+        return response()->json([
+            "status" => $this->status,
+            "data" => $this->data,
+            "error" => $this->error
+        ]);
     }
 
     /**
@@ -44,7 +46,6 @@ class PeriodeController extends Controller
      */
     public function store(Request $request)
     {
-        //
         $data = $request->all();
 
         $validator = Validator::make($data, [
@@ -62,13 +63,21 @@ class PeriodeController extends Controller
             );
         }
 
-        $periode = Periode::create($data);
+        try {
+            $periode = Periode::create($data);
+            $this->data = $periode;
+            $this->status = "success";
+        } catch (QueryException $e) {
+            $this->status = "failed";
+            $this->error = $e;
+        }
+
 
         return response(
             [
-                'status' => "success",
-                'data' => $periode,
-                'error' => ''
+                'status' => $this->status,
+                'data' => $this->data,
+                'error' => $this->error
             ]
         );
     }
@@ -81,23 +90,19 @@ class PeriodeController extends Controller
      */
     public function show($id)
     {
-        $periode = Periode::where('nomor', $id)->get();
+        try {
+            $periode = Periode::where('nomor', $id)->get();
+            $this->data = $periode;
+            $this->status = "success";
+        } catch (QueryException $e) {
+            $this->status = "failed";
+            $this->error = $e;
+        }
         return response()->json([
-            "status" => 'success',
-            "data" => $periode,
-            "error" => ''
+            "status" => $this->status,
+            "data" => $this->data,
+            "error" => $this->error
         ]);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
     }
 
     /**
@@ -117,43 +122,62 @@ class PeriodeController extends Controller
         ]);
 
         if ($validate->fails()) {
-            $this->status = "error";
-            $this->err = $validate->errors();
+            $this->status = "failed";
+            $this->error = $validate->errors();
         } else if (!$periode) {
             $this->status = "failed";
-            $this->err = "Data not found";
+            $this->error = "Data not found";
         } else {
-            $periode->update($data);
-            $this->data = $periode->get();
-            $this->status = "success";
+            try {
+                $periode->update($data);
+                $this->data = $periode->get();
+                $this->status = "success";
+            } catch (QueryException $e) {
+                $this->status = "failed";
+                $this->error = $e;
+            }
         }
-
         return response()->json([
-            'status' => $this->status,
-            'data' => $data,
-            'error' => ''
+            "status" => $this->status,
+            "data" => $this->data,
+            "error" => $this->error
         ]);
     }
 
     public function change_status($id)
     {
-        $periode = DB::table('periode')->update(['status'=>0]);
-        $periode = Periode::where('nomor',$id)->update(['status'=>1]);
-
+        try {
+            $periode = DB::table('periode')->update(['status'=>0]);
+            $periode = Periode::where('nomor',$id)->update(['status'=>1]);
+    
+            $this->data = [];
+            $this->status = "success";
+        } catch (QueryException $e) {
+            $this->status = "failed";
+            $this->error = $e;
+        }
         return response()->json([
-            'status' => 'success',
-            'data' => null,
-            'error' => ''
+            "status" => $this->status,
+            "data" => $this->data,
+            "error" => $this->error
         ]);
     }
+
     public function change_semester($id,$semester)
     {
-        $periode = Periode::where('nomor',$id)->update(['semester'=>$semester]);
-
+        try {
+            $periode = Periode::where('nomor',$id)->update(['semester'=>$semester]);
+  
+            $this->data = [];
+            $this->status = "success";
+        } catch (QueryException $e) {
+            $this->status = "failed";
+            $this->error = $e;
+        }
         return response()->json([
-            'status' => 'success',
-            'data' => null,
-            'error' => ''
+            "status" => $this->status,
+            "data" => $this->data,
+            "error" => $this->error
         ]);
     }
 
@@ -165,16 +189,20 @@ class PeriodeController extends Controller
      */
     public function destroy($id)
     {
-        //
-        $periode = Periode::where('nomor', $id);
-        $periode->delete();
-
-        return response(
-            [
-                'status' => "success",
-                'data' => ["message" => "data berhasil di hapus"],
-                'erorr' => ''
-            ]
-        );
+        try {
+            $periode = Periode::where('nomor', $id);
+            $periode->delete();
+      
+            $this->data = [];
+            $this->status = "success";
+        } catch (QueryException $e) {
+            $this->status = "failed";
+            $this->error = $e;
+        }
+        return response()->json([
+            "status" => $this->status,
+            "data" => $this->data,
+            "error" => $this->error
+        ]);
     }
 }

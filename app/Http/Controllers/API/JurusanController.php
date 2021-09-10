@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Jurusan;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Database\QueryException;
 use DB;
 class JurusanController extends Controller
 {
@@ -16,35 +17,28 @@ class JurusanController extends Controller
      */
 
     protected $status = null;
-    protected $err = null;
+    protected $error = null;
     protected $data = null;
 
     
     
     public function index()
     {
-        $this->data = Jurusan::select('jurusan.*','pegawai.nama as kajur')
-        ->join('pegawai','pegawai.nomor','=','jurusan.kepala')->get();
-        $this->status = "success";
-
-       
+        try {
+            $jurusan = Jurusan::select('jurusan.*','pegawai.nama as kajur')
+            ->join('pegawai','pegawai.nomor','=','jurusan.kepala')
+            ->get();
+            $this->data = $jurusan;
+            $this->status = "success";
+        } catch (QueryException $e) {
+            $this->status = "failed";
+            $this->error = $e;
+        }
         return response()->json([
             "status" => $this->status,
             "data" => $this->data,
-            "error" => $this->err
-        ]);
-    }
-
-    
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+            "error" => $this->error
+        ]);       
     }
 
     /**
@@ -71,19 +65,22 @@ class JurusanController extends Controller
 
         if ($validated->fails()) {
             $this->status = 'error';
-            $this->err = $validated->errors();
+            $this->error = $validated->errors();
         } else {
-            $data = Jurusan::create($data);
-            $this->data = $data;
-            $this->status = "success";
+            try {
+                $data = Jurusan::create($data);
+                $this->data = $data;
+                $this->status = "success";
+            } catch (QueryException $e) {
+                $this->status = "failed";
+                $this->error = $e;
+            }
         }
         return response()->json([
-            'status' => $this->status,
-            'data' => $this->data,
-            'error' => $this->err
+            "status" => $this->status,
+            "data" => $this->data,
+            "error" => $this->error
         ]);
-
-        
     }
 
     /**
@@ -94,26 +91,19 @@ class JurusanController extends Controller
      */
     public function show($id)
     {
-        $this->data = Jurusan::where("nomor", $id)->get();
-        $this->status = "success";
-
-        
+        try {
+            $jurusan = Jurusan::where("nomor", $id)->get();
+            $this->data = $jurusan;
+            $this->status = "success";
+        } catch (QueryException $e) {
+            $this->status = "failed";
+            $this->error = $e;
+        }
         return response()->json([
             "status" => $this->status,
             "data" => $this->data,
-            "error" => $this->err
+            "error" => $this->error
         ]);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
     }
 
     /**
@@ -142,21 +132,25 @@ class JurusanController extends Controller
 
         if ($validate->fails()) {
             $this->status = "error";
-            $this->err = $validate->errors();
+            $this->error = $validate->errors();
         } else if(!$check){
             $this->status = "failed";
-            $this->err = "Data not found";
+            $this->error = "Data not found";
         }
         else {
-            $check->update($data);
-            $this->data = $check->get();
-            $this->status = "success";
+            try {
+                $check->update($data);
+                $this->data = $check->get();
+                $this->status = "success";
+            } catch (QueryException $e) {
+                $this->status = "failed";
+                $this->error = $e;
+            }
         }
-
         return response()->json([
-            'status' => $this->status,
-            'data' => $this->data,
-            'error' => $this->err
+            "status" => $this->status,
+            "data" => $this->data,
+            "error" => $this->error
         ]);
     }
 
@@ -168,20 +162,24 @@ class JurusanController extends Controller
      */
     public function destroy($id)
     {
-        $check = Jurusan::where('nomor', $id);
-
-        if ($check) {
-            $this->status = "success";
-            $this->data = $check->get();
-            $check->delete();
-        } else {
+        try {
+            $check = Jurusan::where('nomor', $id);
+    
+            if ($check) {
+                $this->status = "success";
+                $this->data = $check->get();
+                $check->delete();
+            } else {
+                $this->status = "failed";
+            }
+        } catch (QueryException $e) {
             $this->status = "failed";
+            $this->error = $e;
         }
-
         return response()->json([
-            'status' => $this->status,
-            'data' => $this->data,
-            'error' => $this->err
+            "status" => $this->status,
+            "data" => $this->data,
+            "error" => $this->error
         ]);
     }
 }

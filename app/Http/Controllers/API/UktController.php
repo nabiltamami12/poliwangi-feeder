@@ -64,7 +64,7 @@ class UktController extends Controller
 
         if ($validated->fails()) {
             $this->status = 'error';
-            $this->err = $validated->errors();
+            $this->error = $validated->errors();
         } else {
             $data = Ukt::create($data);
             $this->data = $data;
@@ -132,10 +132,10 @@ class UktController extends Controller
 
         if ($validate->fails()) {
             $this->status = "error";
-            $this->err = $validate->errors();
+            $this->error = $validate->errors();
         } else if(!$check){
             $this->status = "failed";
-            $this->err = "Data not found";
+            $this->error = "Data not found";
         }
         else {
             $check->update($data);
