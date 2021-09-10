@@ -40,7 +40,7 @@
             <div class="col-md-6 form-group mt-3 mt-md-0">
               <label for="jenjang">Jenjang</label>
               <select class="form-control" id="semester">
-                <option value="1">Semester Ganjil</option>
+                <option value="1">Semester Gasal</option>
                 <option value="2">Semester Genap</option>
               </select>
             </div>
