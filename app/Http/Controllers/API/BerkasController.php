@@ -54,10 +54,6 @@ class BerkasController extends Controller
 
 
         if ($files = $request->file('file')) {
-
-            //store file into document folder
-            // $file = $request->file('file');
-            // $file->storeAs('public/documents', $file->hashName());
             $namafile = $files->getClientOriginalName();
             $document = new Berkas();
             $document->file = $namafile;
@@ -65,18 +61,6 @@ class BerkasController extends Controller
             $document->id_pendaftar = $request->id_pendaftar;
             $files->move(public_path() . '/berkas', $namafile);
             $document->save();
-
-            // $check = Berkas::where('berkas', $data['berkas'])->first();
-            // if ($check == null) {
-            //     $document = new Berkas();
-            //     $document->file = $file;
-            //     $document->id_syarat = $request->id_syarat;
-            //     $document->id_pendaftar = $request->id_pendaftar;
-            //     $document->save();
-            // } else {
-            //     $document = Berkas::where('id', $check['id'])->update($data);
-            // }
-            //store your file into database
 
 
             return response()->json([
