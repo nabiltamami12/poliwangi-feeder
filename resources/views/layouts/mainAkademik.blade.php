@@ -98,6 +98,8 @@
       tagMenu.parentNode.parentNode.parentNode.classList.add('showsubmenu');
     }
     $(document).ready(function() {
+      $('#txt_semester_topnav').html((dataGlobal['periode']['semester']==1)?"Semester Gasal":"Semester Genap");
+      $('#txt_tahun_topnav').html(dataGlobal['periode']['tahun']+"/"+(dataGlobal['periode']['tahun']+1));
       $(".date-input").datepicker({
         format: "dd MM yyyy",
         autoclose: true
