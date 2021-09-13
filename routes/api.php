@@ -199,8 +199,8 @@ Route::prefix('v1')->group(function () {
     Route::post('/nomor_va', [Ctr\NovaController::class, 'store']);
 
     // Setting Biaya
-    Route::get('test', [Ctr\SettingBiayaController::class, 'index']);
-    Route::post('test', [Ctr\SettingBiayaController::class, 'store']);
+    Route::get('setting_biaya', [Ctr\SettingBiayaController::class, 'index']);
+    Route::post('setting_biaya', [Ctr\SettingBiayaController::class, 'store']);
 
 
 
