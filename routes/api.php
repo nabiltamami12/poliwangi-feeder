@@ -169,17 +169,10 @@ Route::prefix('v1')->group(function () {
     Route::delete('/syarat/{id}', '\App\Http\Controllers\API\SyaratController@destroy');
 
     //jalur_pendaftar
-<<<<<<< HEAD
     Route::get('/daftar/{id}', '\App\Http\Controllers\API\PendaftarController@show');
     Route::post('/daftar', '\App\Http\Controllers\API\PendaftarController@store');
     Route::post('/daftar/{id}', '\App\Http\Controllers\API\PendaftarController@update');
     Route::delete('/daftar/{id}', '\App\Http\Controllers\API\PendaftarController@destroy');
-=======
-    Route::get('/daftar/{id}', '\App\Http\Controllers\API\JalurpendaftarController@show');
-    Route::post('/daftar', '\App\Http\Controllers\API\JalurpendaftarController@store');
-    Route::put('/daftar/{id}', '\App\Http\Controllers\API\JalurpendaftarController@update');
-    Route::delete('/daftar/{id}', '\App\Http\Controllers\API\JalurpendaftarController@destroy');
->>>>>>> 67be049c04558619da24dba59a133456b6723985
 
     // Rekap Tarif UKT
     Route::get('/keuangan/rekap_ukt', [Ctr\UktController::class, 'index']);
@@ -204,21 +197,16 @@ Route::prefix('v1')->group(function () {
     // Generate Nomor VA <!-- Gunakan route Post --!>
     Route::get('/nomor_va', [Ctr\NovaController::class, 'index']);
     Route::post('/nomor_va', [Ctr\NovaController::class, 'store']);
-<<<<<<< HEAD
-=======
 
     // Setting Biaya
     Route::get('setting_biaya', [Ctr\SettingBiayaController::class, 'index']);
     Route::post('setting_biaya', [Ctr\SettingBiayaController::class, 'store']);
 
 
-
-
-
-
-    
->>>>>>> 67be049c04558619da24dba59a133456b6723985
+    // example use bni api
+    Route::get('/test', [Ctr\MahasiswaController::class, 'create_va']);
 });
+
 Route::prefix('v1')->middleware('auth:api')->group(function () {
     Route::get('/user', function (Request $request) {
         return $request->user();

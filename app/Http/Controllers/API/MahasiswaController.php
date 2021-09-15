@@ -9,6 +9,7 @@ use App\Models\Nilai;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\QueryException;
+use BNI;
 
 class MahasiswaController extends Controller
 {
@@ -144,5 +145,11 @@ class MahasiswaController extends Controller
             "data" => $this->data,
             "error" => $this->error
         ]);
+    }
+
+    public function create_va()
+    {
+        $obj = new BNI();
+        return $obj->test();
     }
 }
