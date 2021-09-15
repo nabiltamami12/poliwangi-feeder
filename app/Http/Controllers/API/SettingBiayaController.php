@@ -67,14 +67,11 @@ class SettingBiayaController extends Controller
             );
         }
 
-        $check = SB::where('nama', $data['nama'])->first();
-
-        if ($check == null) {
-            $this->data = SB::create($data);
-        } else {
-            $check->update($data);
-            $this->data = $check->get();
-        }
+        $this->data = SB::updateOrCreate([
+            'nama' => $data['nama']
+        ],[
+            'nilai' => $data['nilai'], 'keterangan' => $data['keterangan']
+        ]);
 
         return response()->json([
             'status' => $this->status,
