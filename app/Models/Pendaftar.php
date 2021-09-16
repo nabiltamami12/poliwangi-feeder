@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Jalurpendaftar extends Model
+class Pendaftar extends Model
 {
     use HasFactory;
     public $timestamps = false;
@@ -46,7 +46,7 @@ class Jalurpendaftar extends Model
         'nilai_ijazah',
         'nilai_uan',
         'darah',
-        'prestasi_olahrga',
+        'prestasi_olahraga',
         'nun',
         'nijazah',
         'ayah',
@@ -79,14 +79,14 @@ class Jalurpendaftar extends Model
         'email',
         'nik',
         'kelas_pagi_sore',
-        'ijazah',
+        'ijasah',
         'status_kawin',
         'ukuran_baju',
         'pernahpt',
         'tahunmasuk_pt',
         'jumlah_sks',
         'pt_asal',
-        'nummampel',
+        'nunmapel',
         'nijazahmapel',
         'status_smu',
         'jurusan_smu',

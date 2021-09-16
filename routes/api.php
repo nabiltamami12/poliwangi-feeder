@@ -169,10 +169,11 @@ Route::prefix('v1')->group(function () {
     Route::delete('/syarat/{id}', '\App\Http\Controllers\API\SyaratController@destroy');
 
     //jalur_pendaftar
-    Route::get('/daftar/{id}', '\App\Http\Controllers\API\JalurpendaftarController@show');
-    Route::post('/daftar', '\App\Http\Controllers\API\JalurpendaftarController@store');
-    Route::put('/daftar/{id}', '\App\Http\Controllers\API\JalurpendaftarController@update');
-    Route::delete('/daftar/{id}', '\App\Http\Controllers\API\JalurpendaftarController@destroy');
+    Route::get('/daftar/{id}', '\App\Http\Controllers\API\PendaftarController@show');
+    Route::post('/daftar', '\App\Http\Controllers\API\PendaftarController@store');
+    Route::post('/daftar/{id}', '\App\Http\Controllers\API\PendaftarController@update');
+    Route::delete('/daftar/{id}', '\App\Http\Controllers\API\PendaftarController@destroy');
+    
     // Rekap Tarif UKT
     Route::get('/keuangan/rekap_ukt', [Ctr\UktController::class, 'index']);
     Route::post('/keuangan/rekap_ukt', [Ctr\UktController::class, 'store']);
@@ -187,13 +188,25 @@ Route::prefix('v1')->group(function () {
     Route::get('/keuangan/spi', [Ctr\SpiController::class, 'index']);
     Route::get('/keuangan/spi/{id}', [Ctr\SpiController::class, 'show']);
 
+    //berkas
+    Route::get('/berkas/{id}', '\App\Http\Controllers\API\BerkasController@show');
+    Route::post('/berkas', '\App\Http\Controllers\API\BerkasController@store');
+    Route::post('/berkas/{id}', '\App\Http\Controllers\API\BerkasController@update');
+    Route::delete('/berkas/{id}', '\App\Http\Controllers\API\BerkasController@destroy');
+
     // Generate Nomor VA <!-- Gunakan route Post --!>
     Route::get('/nomor_va', [Ctr\NovaController::class, 'index']);
     Route::post('/nomor_va', [Ctr\NovaController::class, 'store']);
 
+    // Setting Biaya
+    Route::get('setting_biaya', [Ctr\SettingBiayaController::class, 'index']);
+    Route::post('setting_biaya', [Ctr\SettingBiayaController::class, 'store']);
 
-    
+
+    // example use bni api
+    Route::get('/test', [Ctr\MahasiswaController::class, 'create_va']);
 });
+
 Route::prefix('v1')->middleware('auth:api')->group(function () {
     Route::get('/user', function (Request $request) {
         return $request->user();
