@@ -136,7 +136,7 @@ Route::prefix('v1')->group(function () {
     Route::get('/absensi/rekap/detail', [Ctr\AbsensiController::class, 'detail_rekap_absensi']);
     Route::get('/absensi/dosen/{id}', [Ctr\AbsensiController::class, 'show_dosen']);
     Route::get('/absensi/home/{id}', [Ctr\AbsensiController::class, 'one']);
-    Route::get('/absensi/{id}', [Ctr\AbsensiController::class, 'show']);
+    Route::post('/absensi/{id}', [Ctr\AbsensiController::class, 'show']);
     Route::post('/absensi', [Ctr\AbsensiController::class, 'store']);
     Route::post('/absensi/dosen', [Ctr\AbsensiController::class, 'absensi_dosen']);
     Route::put('/absensi/admin', [Ctr\AbsensiController::class, 'absensi_admin']);
@@ -150,6 +150,7 @@ Route::prefix('v1')->group(function () {
     Route::delete('/filehari/{nama}', '\App\Http\Controllers\API\HariAktifController@destroy');
 
     //Jalur Pmb
+    Route::get('/jalurpmb/', '\App\Http\Controllers\API\JalurpmbController@index');
     Route::get('/jalurpmb/{id}', '\App\Http\Controllers\API\JalurpmbController@show');
     Route::post('/jalurpmb', '\App\Http\Controllers\API\JalurpmbController@store');
     Route::put('/jalurpmb/{pmb}', '\App\Http\Controllers\API\JalurpmbController@update');
@@ -161,7 +162,6 @@ Route::prefix('v1')->group(function () {
     Route::post('/jurusanpilihan', '\App\Http\Controllers\API\JurusanpilihanController@store');
     Route::put('/jurusanpilihan/{id}', '\App\Http\Controllers\API\JurusanpilihanController@update');
     Route::delete('/jurusanpilihan/{id}', '\App\Http\Controllers\API\JurusanpilihanController@destroy');
-
     //syarat
     Route::get('/syarat/{id}', '\App\Http\Controllers\API\SyaratController@show');
     Route::post('/syarat', '\App\Http\Controllers\API\SyaratController@store');

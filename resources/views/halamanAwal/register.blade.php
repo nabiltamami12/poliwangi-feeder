@@ -65,15 +65,13 @@
       <div class="row justify-content-center">
         <div class="col-lg-9">
           <div class="card bg-secondary mt-5 border-0 mb-0 rounded">
+            <form id="form">
             <div class="card-body">
               <div class="card_inner">
                 <form>
                   <div class="form-group mb-0">
                     <label for="jalur-seleksi" class="font-weight-bold">Pilih Jalur Seleksi</label>
-                    <select class="form-control" id="jalur-seleksi">
-                      <option selected="true" disabled="disabled">Jalur Seleksi</option>
-                      <option>2</option>
-                      <option>3</option>
+                    <select class="form-control" id="jalur_seleksi">
                     </select>
                   </div>
                 </form>
@@ -83,18 +81,12 @@
                 <form>
                   <div class="form-group mb-0">
                     <label class="font-weight-bold">Pilih Jurusan</label>
-                    <select class="form-control">
-                      <option selected="true" disabled="disabled">Jurusan</option>
-                      <option>2</option>
-                      <option>3</option>
+                    <select class="form-control" id="jurusan">
                     </select>
                   </div>
                   <div class="form-group mb-0 mt-3">
-                    <label class="font-weight-bold">Pilih Prodi</label>
-                    <select class="form-control">
-                      <option selected="true" disabled="disabled">Prodi</option>
-                      <option>2</option>
-                      <option>3</option>
+                    <label class="font-weight-bold">Pilih Program Studi</label>
+                    <select class="form-control" id="program_studi">
                     </select>
                   </div>
                 </form>
@@ -165,8 +157,8 @@
                 </div>
               </div>
               <button type="submit" class="btn btn-primary w-100 mt-4 rounded-sm">Submit</button>
-
             </div>
+            <form>
           </div>
           <div class="row register_account">
             <div class="col text-center">
@@ -191,14 +183,92 @@
   <!-- Argon JS -->
   <script src="{{ url('argon') }}/assets/js/argon.js?v=1.2.0"></script>
   <script type="text/javascript">
+    var url_api = "{{ url('/api/v1') }}";
+    var dataGlobal = JSON.parse(localStorage.getItem('globalData')) 
+    console.log(dataGlobal)
     $(document).ready(function(){
+      getData();
       $("#txtDate").datepicker({
         format: "dd MM yyyy",
+      });
+      $('#jurusan').on('change',function (e) {
+        var jurusan = $(this).val()
+        var kelas = $.grep(dataGlobal['prodi'], function(e){ return e.jurusan == jurusan; });
+        $('#program_studi').html('')
+        var optKelas = `<option value=""> - </option>`;
+        $.each(kelas,function (key,row) {
+          optKelas += `<option value="${row.nomor}">${row.nama_program} ${row.program_studi}</option>`
+        })
+        $('#program_studi').append(optKelas); 
+      })
+      $("#form").submit(function(e) {
+        e.preventDefault();
+        var data = $('#form').serialize();
+        
+        $.ajax({
+            url: url_api+"/jurusan",
+            type: 'post',
+            dataType: 'json',
+            data: data,
+            beforeSend: function(text) {
+                // loading func
+                console.log("loading")
+                // loading('show')
+            },
+            success: function(res) {
+              console.log(res)
+                if (res.status=="success") {
+                    // window.location.href = "{{url('/akademik/master/datajurusan')}}";                    
+                } else {
+                    // alert gagal
+                }
+                // loading('hide')
+
+            }
+        });
       });
     })
 
     function auth() {
       window.location = "{{ url('/admin/dashboard') }}";
+    }
+    function getData() {
+      $.ajax({
+        url: url_api+"/jalurpmb/",
+        type: 'get',
+        dataType: 'json',
+        data: {},
+        beforeSend: function(text) {
+          // loading func
+          console.log("loading")
+          // loading("show");
+        },
+        success: function(res) {
+          if (res.status=="success") {
+            console.log(res.status)
+              // return res['data'];
+              // localStorage.setItem('globalData', JSON.stringify(res['data']));
+              var html = '';
+              html = '<option value="" disabled>Pilih Jalur</option>'
+              $.each(res.data,function (key,row) {
+                console.log(row)
+                if (row.is_active==1) {
+                  html = `<option value="${row.id}">${row.jalur_daftar}</option>`;
+                  $('#jalur_seleksi').append(html);
+                }
+              })
+              var optJurusan = `<option value=""> - </option>`;
+              $.each(dataGlobal['jurusan'],function (key,row) {
+                console.log(row.jurusan)
+                  optJurusan += `<option value="${row.nomor}">${row.jurusan}</option>`
+              })
+              $('#jurusan').append(optJurusan)
+          } else {
+              // alert gagal
+          }
+          // loading("hide");
+        }
+      });
     }
   </script>
 </body>
