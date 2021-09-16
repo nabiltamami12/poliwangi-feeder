@@ -241,6 +241,11 @@ Route::prefix('akademik')->group(function () {
                 "title" => "akademik-master"
             ]);
         });
+        Route::get('/datadosen', function () {
+            return view('akademik.masterData/datadosen', [
+                "title" => "akademik-master",
+            ]);
+        });
     
         Route::get('/dataruangan', function () {
             return view('akademik.masterData/dataruangan', [
