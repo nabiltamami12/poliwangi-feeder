@@ -381,6 +381,12 @@ Route::prefix('akademik')->group(function () {
             ]);
         });
         
+        Route::get('/absensi/dashboard-dosen', function () {
+            return view('dosen.dashboardDosen', [
+                "title" => "absensi-dosen"
+            ]);
+        });
+
         Route::get('/absensi/kelas-dosen', function () {
             return view('dosen.presensiDosen', [
                 "title" => "absensi-dosen"

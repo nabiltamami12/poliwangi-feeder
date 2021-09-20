@@ -232,6 +232,30 @@ class AbsensiController extends Controller
         ]);
     }
 
+    public function get_batal_kelas(Request $request)
+    {
+        try {
+            $data = DB::table('kelas_mengajar')
+                        ->select('matakuliah.matakuliah','kelas_mengajar.id')
+                        ->join('kuliah','kuliah.nomor','=','kelas_mengajar.kuliah')
+                        ->join('matakuliah','kuliah.matakuliah','=','matakuliah.nomor')
+                        ->where('kelas_mengajar.status','batal')
+                        ->where('kelas_mengajar.dosen',$request->dosen)
+                        ->get();
+            $this->data = $data;
+            $this->status = 'success';
+        } catch (QueryException $e) {
+            $this->status = "failed";
+            $this->error = $e;
+        }
+
+        return response()->json([
+            "status" => $this->status,
+            "data" => $this->data,
+            "error" => $this->error
+        ]);
+    }
+
     /**
      * Display the specified resource.
      *
@@ -258,6 +282,7 @@ class AbsensiController extends Controller
         }
 
         $day = Carbon::now()->isoformat('dddd');
+        $year = Carbon::now()->isoformat('Y');
         $array = [];
         
         try {
@@ -276,11 +301,10 @@ class AbsensiController extends Controller
             ->join("jam", "jam.nomor", "=", "kuliah.jam")
             ->where('mahasiswa.nomor', '=', $id)
             ->where("hari.hari", $day)
+            ->where("kuliah.tahun", $year)
             // ->whereBetween('jam.jam', [$now, $limit])
             ->orderBy('jam.jam', 'asc')
             ->get();
-
-            // die(json_encode(DB::getQueryLog()));
 
             foreach ($data as $key=>$value) {
                 $check[$key] = Abs::whereDate('tanggal', $date)->where('kuliah',  $data[$key]->kuliah)->first();
@@ -327,7 +351,100 @@ class AbsensiController extends Controller
             "error" => $this->error,
         ]);
     }
+
     public function show_dosen($id)
+    {
+        DB::enableQueryLog();
+        // Untuk mengambil hanya per mahasiswa.
+        $table = DB::table('kuliah');
+        date_default_timezone_set('Asia/Jakarta');
+        Carbon::setLocale('id');
+        
+
+        $now = Carbon::now()->format('H:i');
+        $date = Carbon::now()->format('Y-m-d');
+        $int = (int) str_replace(':', '', $now);
+
+        if ($int >= 1000 && $int <= 1140 ) {
+            $limit = Carbon::now()->addMinutes(50)->format('H:i');
+        } else {
+            $limit = Carbon::now()->addMinutes(90)->format('H:i');
+        }
+
+        $day = Carbon::now()->isoformat('dddd');
+        $year = Carbon::now()->isoformat('Y');
+        $array = [];
+        
+        try {
+            $data = $table->distinct()->select(
+                'matakuliah.matakuliah',
+                'pegawai.nama as dosen',
+                'kelas.kode as kelas',
+                'hari.hari',
+                'jam.jam',
+                'kuliah.nomor as kuliah',
+                DB::raw("(select count(*) from mahasiswa m where m.kelas = kuliah.kelas) as jml_mhs")
+                )
+            ->join("kelas", "kelas.nomor", "=", "kuliah.kelas")
+            ->join("matakuliah", "matakuliah.nomor", "=", "kuliah.matakuliah")
+            ->join("pegawai", "pegawai.nomor", "=", "kuliah.dosen")
+            ->join("hari", "hari.nomor", "=", "kuliah.hari")
+            ->join("jam", "jam.nomor", "=", "kuliah.jam")
+            ->where('kuliah.dosen', '=', $id)
+            ->where("hari.hari", $day)
+            ->where("kuliah.tahun", $year)
+            // ->whereBetween('jam.jam', [$now, $limit])
+            ->orderBy('jam.jam', 'asc')
+            ->get();
+            
+            foreach ($data as $key=>$value) {
+                $check[$key] = Abs::whereDate('tanggal', $date)->where('kuliah',  $value->kuliah)->first();
+
+                if ($check[$key]) {
+                    if ($check[$key]->status=='H') {
+                        $baru[$key] = "Hadir";
+                    } elseif ($check[$key]->status=='I') {
+                        $baru[$key] = "Izin";
+                    } elseif ($check[$key]->status=='S') {
+                        $baru[$key] = "Sakit";
+                    } else{
+                        $baru[$key] = "Unknown";
+                    }
+                    $status = $check[$key]->status;
+                } else {
+                    $status = null;
+                    $baru[$key] = "Belum Presensi";
+                };
+                array_push($array, [
+                    "matakuliah" => $value->matakuliah,
+                    "dosen" => $value->dosen,
+                    "kelas" => $value->kelas,
+                    "hari" => $value->hari,
+                    "jam" => $value->jam,
+                    "jml_mhs" => $value->jml_mhs,
+                    'status' => $status,
+                    'status_text' => $baru[$key],
+                    'kuliah' => $value->kuliah
+                ]);
+            }
+
+            $this->data = $array;
+            $this->status = "success";
+        } catch (QueryException $e) {
+            $this->status = "failed";
+            $this->error = $e;
+        }
+        
+        
+
+        return response()->json([
+            "status" =>$this->status,
+            "data" => $this->data,
+            "error" => $this->error,
+        ]);
+    }
+
+    public function show_kelas_dosen($id)
     {
         DB::enableQueryLog();
         // Untuk mengambil hanya per mahasiswa.
@@ -341,6 +458,7 @@ class AbsensiController extends Controller
         $int = (int) str_replace(':', '', $now);
 
         $day = Carbon::now()->isoformat('dddd');
+        $year = Carbon::now()->isoformat('Y');
         $array = [];
         
         try {
@@ -361,6 +479,7 @@ class AbsensiController extends Controller
             ->join("jam", "jam.nomor", "=", "kuliah.jam")
             ->where('kuliah.dosen', '=', $id)
             ->where("hari.hari", $day)
+            ->where("kuliah.tahun", $year)
             // ->whereBetween('jam.jam', [$now, $limit])
             ->orderBy('jam.jam', 'asc')
             ->get();

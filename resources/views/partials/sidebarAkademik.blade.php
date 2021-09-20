@@ -128,6 +128,11 @@
                 </a>
               </li>
               <li class="nav-item">
+                <a class="nav-link {{($title === "absensi-mahasiswa") ? 'aktif' : ''}}" href="{{url('akademik/kuliah/absensi/dashboard-dosen')}}">
+                  <span class="nav-link-text ml-0">Abasensi Mahasiswa (Dashboard Dosen)</span>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a class="nav-link {{($title === "absensi-dosen") ? 'aktif' : ''}}" href="{{url('akademik/kuliah/absensi/kelas-dosen')}}">
                   <span class="nav-link-text ml-0">Absensi Dosen</span>
                 </a>
