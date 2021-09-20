@@ -145,7 +145,7 @@
             </ul>
           </li>
           
-          <!-- <li class="nav-item">
+          <li class="nav-item">
             <div class="nav-link {{($title === "akademik-keuangan") ? 'aktif' : ''}}">
             <span class=" iconify" data-icon="bx:bx-book-bookmark"></span>
               <span class="nav-link-text">Keuangan<img src="{{ url('images') }}/sidebar-right.png" class="arrow"
@@ -163,7 +163,7 @@
                 </a>
               </li>
             </ul>
-          </li> -->
+          </li>
           {{--
           <li class="nav-item">
             <div class="nav-link {{($title === "akademik-khs") ? 'aktif' : ''}}"">
