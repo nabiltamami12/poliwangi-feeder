@@ -41,7 +41,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.js"></script>
-  
+
   <!-- Font Awesome JS -->
   <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
     integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous">
@@ -53,9 +53,9 @@
   @yield('style')
   <script>
     var url_api = "{{ url('/api/v1') }}";
-    var url = "{{ base_path(); }}";
-    var dataGlobal = JSON.parse(localStorage.getItem('globalData')) 
-    var dataJurusan,dataDosen,dataProgram;
+    var url = "{{ base_path() }}";
+    var dataGlobal = JSON.parse(localStorage.getItem('globalData'))
+    var dataJurusan, dataDosen, dataProgram;
   </script>
 </head>
 
@@ -88,8 +88,9 @@
   <script type="text/javascript">
     var dt, dt_url, dt_opt;
     var dt_init = document.getElementById("datatable");
-     // set menu active
-    var tagMenu = document.querySelector(`[href="{{ url(Request::segment(1).'/'.Request::segment(2).'/'.Request::segment(3)) }}"]`);
+    // set menu active
+    var tagMenu = document.querySelector(
+      `[href="{{ url(Request::segment(1) . '/' . Request::segment(2) . '/' . Request::segment(3)) }}"]`);
     if (tagMenu) {
       tagMenu.childNodes[1].classList.add('sub-aktif');
       tagMenu.parentNode.parentNode.parentNode.classList.add('showsubmenu');
@@ -129,7 +130,8 @@
     });
   </script>
   <!-- Bootstrap Datepicker -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.js" type="text/javascript"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.js"
+    type="text/javascript"></script>
   @yield('js')
 </body>
 

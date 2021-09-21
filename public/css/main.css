@@ -2545,3 +2545,63 @@ nav#navbar h1 {
     height: 3rem !important;
   }
 }
+.form_absensiMhs select.form-control {
+  background-color: rgba(173, 181, 189, 0.2);
+}
+
+.table_absensiMhs select.form-control {
+  padding: 0.5rem;
+  margin: 0;
+  min-width: 2.875rem;
+  max-height: 33px;
+  background-image: url("https://api.iconify.design/bx/bx-chevron-down.svg?color=%23FFFFFF");
+  background-position: calc(100% - 0.5rem) center;
+  color: #fff;
+  font-weight: 500;
+  border: 0;
+}
+.table_absensiMhs select.form-control option {
+  background-color: #fff;
+}
+.table_absensiMhs td:first-child,
+.table_absensiMhs .main_header th:first-child {
+  background-color: #fff;
+  position: sticky;
+  left: 0;
+  z-index: 3;
+  padding-left: 0.5rem;
+}
+.table_absensiMhs td:nth-child(2),
+.table_absensiMhs .main_header th:nth-child(2) {
+  background-color: #fff;
+  position: sticky;
+  left: 6.67rem;
+  z-index: 3;
+  padding-left: 0;
+  padding-right: 0.5rem;
+}
+.table_absensiMhs td:last-child,
+.table_absensiMhs .main_header th:last-child {
+  background-color: #fff;
+  position: sticky;
+  right: 0;
+  z-index: 3;
+}
+.table_absensiMhs .main_header th:first-child,
+.table_absensiMhs .main_header th:nth-child(2),
+.table_absensiMhs .main_header th:last-child {
+  background-color: #f6f9fc;
+}
+.table_absensiMhs .table-hover tbody tr:hover,
+.table_absensiMhs .table-hover tbody tr:hover td {
+  color: #525f7f;
+  background-color: #f6f9fc;
+}
+.table_absensiMhs .table-hover tr {
+  transition: none;
+}
+.table_absensiMhs th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
