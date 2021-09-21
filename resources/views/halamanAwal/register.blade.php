@@ -23,13 +23,13 @@
   <!-- Icons -->
   <link rel="stylesheet" href="{{ url('argon') }}/assets/vendor/nucleo/css/nucleo.css" type="text/css">
   <link rel="stylesheet" href="{{ url('argon') }}/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css"
-    type="text/css">
+  type="text/css">
   <!-- Iconify -->
   <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
   <!-- Bootstrap Datepicker -->
   <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css"
-    type="text/css" />
+  href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css"
+  type="text/css" />
   <!-- Argon CSS -->
   <link rel="stylesheet" href="{{ url('argon') }}/assets/css/argon.css?v=1.2.0" type="text/css">
   <script src="{{ url('js/util.js') }}"></script>
@@ -55,41 +55,37 @@
       </div>
       <div class="separator separator-bottom separator-skew zindex-100">
         <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1"
-          xmlns="http://www.w3.org/2000/svg">
-          <polygon class="fill-default" points="2560 0 2560 100 0 100"></polygon>
-        </svg>
-      </div>
+        xmlns="http://www.w3.org/2000/svg">
+        <polygon class="fill-default" points="2560 0 2560 100 0 100"></polygon>
+      </svg>
     </div>
-    <!-- Page content -->
-    <div class="container mt--9 pb-7">
-      <div class="row justify-content-center">
-        <div class="col-lg-9">
-          <div class="card bg-secondary mt-5 border-0 mb-0 rounded">
-            <form id="form">
+  </div>
+  <!-- Page content -->
+  <div class="container mt--9 pb-7">
+    <div class="row justify-content-center">
+      <div class="col-lg-9">
+        <div class="card bg-secondary mt-5 border-0 mb-0 rounded">
+          <form id="form">
             <div class="card-body">
               <div class="card_inner">
-                <form>
-                  <div class="form-group mb-0">
-                    <label for="jalur-seleksi" class="font-weight-bold">Pilih Jalur Seleksi</label>
-                    <select class="form-control" id="jalur_seleksi">
-                    </select>
-                  </div>
-                </form>
+                <div class="form-group mb-0">
+                  <label for="jalur-seleksi" class="font-weight-bold">Pilih Jalur Seleksi</label>
+                  <select class="form-control" id="jalur_seleksi" name="jalur_daftar">
+                  </select>
+                </div>
               </div>
 
               <div class="card_inner mt-4">
-                <form>
-                  <div class="form-group mb-0">
-                    <label class="font-weight-bold">Pilih Jurusan</label>
-                    <select class="form-control" id="jurusan">
-                    </select>
-                  </div>
-                  <div class="form-group mb-0 mt-3">
-                    <label class="font-weight-bold">Pilih Program Studi</label>
-                    <select class="form-control" id="program_studi">
-                    </select>
-                  </div>
-                </form>
+                <div class="form-group mb-0">
+                  <label class="font-weight-bold">Pilih Jurusan</label>
+                  <select class="form-control" id="jurusan">
+                  </select>
+                </div>
+                <div class="form-group mb-0 mt-3">
+                  <label class="font-weight-bold">Pilih Program Studi</label>
+                  <select class="form-control" id="program_studi" name="program_studi">
+                  </select>
+                </div>
               </div>
 
               <div class="card_inner mt-4">
@@ -97,29 +93,26 @@
                 <hr>
                 <div class="row">
                   <div class="col-12 col-lg-6">
-                    <form>
-                      <div class="form-group">
-                        <label for="nama-lengkap">Nama Lengkap Calon Pendaftar<span>*</span></label>
-                        <input type="text" class="form-control" id="nama-lengkap" placeholder="Nama Lengkap" required>
+                    <div class="form-group">
+                      <label for="nama-lengkap">Nama Lengkap Calon Pendaftar<span>*</span></label>
+                      <input type="text" class="form-control" id="nama-lengkap" placeholder="Nama Lengkap" required name="nama">
+                    </div>
+                    <div class="form-group mt-3">
+                      <label>Tanggal Lahir<span>*</span></label>
+                      <div class="d-flex align-items-center date_picker">
+                        <input id="txtDate" type="text" class="form-control date-input" placeholder="DD/MM/YYYY" name="tgllahir" readonly />
+                        <label class="input-group-btn" for="txtDate">
+                          <span class="date_button">
+                            <i class="iconify" data-icon="bx:bx-calendar" data-inline="false"></i>
+                          </span>
+                        </label>
                       </div>
-                      <div class="form-group mt-3">
-                        <label>Tanggal Lahir<span>*</span></label>
-                        <div class="d-flex align-items-center date_picker">
-                          <input id="txtDate" type="text" class="form-control date-input" placeholder="DD/MM/YYYY"
-                            readonly />
-                          <label class="input-group-btn" for="txtDate">
-                            <span class="date_button">
-                              <i class="iconify" data-icon="bx:bx-calendar" data-inline="false"></i>
-                            </span>
-                          </label>
-                        </div>
-                      </div>
-                      <div class="form-group mt-3">
-                        <label for="asal-sekolah">Asal Sekolah<span>*</span></label>
-                        <input type="text" class="form-control" id="asal-sekolah" placeholder="Nama Sekolah Asal"
-                          required>
-                      </div>
-                    </form>
+                    </div>
+                    <div class="form-group mt-3">
+                      <label for="asal-sekolah">Asal Sekolah<span>*</span></label>
+                      <input type="text" class="form-control" id="asal-sekolah" placeholder="Nama Sekolah Asal"
+                      required name="smu">
+                    </div>
                   </div>
                   <div class="col-12 col-lg-6">
                     <div class="form-group mt-3 mt-lg-0">
@@ -129,7 +122,7 @@
                           <i class="iconify fileUpload-icon" data-icon="bx:bx-image-add"></i>
                         </label>
                       </div>
-                      <input type="file" class="form-control-file" id="file-input-foto" hidden>
+                      <input type="file" class="form-control-file" id="file-input-foto" hidden name="foto">
                     </div>
                   </div>
                 </div>
@@ -138,37 +131,54 @@
                   <div class="col">
                     <h2 class="text-center mt-3">Data Orang Tua</h2>
                     <hr>
-                    <form>
-                      <div class="form-group">
-                        <label for="nama-ayah">Nama Ayah<span>*</span></label>
-                        <input type="text" class="form-control" id="nama-ayah" placeholder="Nama Lengkap Ayah" required>
-                      </div>
-                      <div class="form-group mt-3">
-                        <label for="nama-ibu">Nama Ibu<span>*</span></label>
-                        <input type="text" class="form-control" id="nama-ibu" placeholder="Nama Lengkap Ibu" required>
-                      </div>
-                      <div class="form-group mt-3">
-                        <label for="nomor-hp">No. HP (WA Aktif) Orang Tua / Wali<span>*</span></label>
-                        <input type="tel" class="form-control" id="nomor-hp" placeholder="+62 -"
-                          pattern="[+]{1}[0-9]{11,14}" required>
-                      </div>
-                    </form>
+                    <div class="form-group">
+                      <label for="nama-ayah">Nama Ayah<span>*</span></label>
+                      <input type="text" class="form-control" id="nama-ayah" placeholder="Nama Lengkap Ayah" required name="ayah">
+                    </div>
+                    <div class="form-group mt-3">
+                      <label for="nama-ibu">Nama Ibu<span>*</span></label>
+                      <input type="text" class="form-control" id="nama-ibu" placeholder="Nama Lengkap Ibu" required name="ibu">
+                    </div>
+                    <div class="form-group mt-3">
+                      <label for="nomor-hp">No. HP (WA Aktif) Orang Tua / Wali<span>*</span></label>
+                      <input type="tel" class="form-control" id="nomor-hp" placeholder="+62 -"
+                      pattern="[+]{1}[0-9]{11,14}" required name="notelp_ortu">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row justify-content-center">
+                  <div class="col">
+                    <h2 class="text-center mt-3">Data Login</h2>
+                    <hr>
+                    <div class="form-group">
+                      <label for="nama-ayah">Email<span>*</span></label>
+                      <input type="email" class="form-control" id="email" placeholder="useremail@provider.com" required name="email">
+                    </div>
+                    <div class="form-group mt-3">
+                      <label for="nama-ibu">Password<span>*</span></label>
+                      <input type="password" class="form-control" id="password" placeholder="" required name="password">
+                    </div>
+                    <div class="form-group mt-3">
+                      <label for="nama-ibu">Ulangi Password<span>*</span></label>
+                      <input type="password" class="form-control" id="password_confirmation" placeholder="" required name="password_confirmation">
+                    </div>
                   </div>
                 </div>
               </div>
               <button type="submit" class="btn btn-primary w-100 mt-4 rounded-sm">Submit</button>
             </div>
             <form>
-          </div>
-          <div class="row register_account">
-            <div class="col text-center">
-              <p>Sudah punya akun? <a href="/">Klik Disini</a></p>
+            </div>
+            <div class="row register_account">
+              <div class="col text-center">
+                <p>Sudah punya akun? <a href="/">Klik Disini</a></p>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
 
   <!-- Argon Scripts -->
   <!-- Core -->
@@ -203,13 +213,13 @@
       })
       $("#form").submit(function(e) {
         e.preventDefault();
-        var data = $('#form').serialize();
-        
         $.ajax({
-            url: url_api+"/jurusan",
+            url: url_api+"/daftar",
             type: 'post',
             dataType: 'json',
-            data: data,
+            data: new FormData(e.target),
+            processData: false,
+            contentType: false,
             beforeSend: function(text) {
                 // loading func
                 console.log("loading")
