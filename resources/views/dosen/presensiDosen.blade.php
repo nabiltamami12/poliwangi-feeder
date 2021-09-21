@@ -239,7 +239,7 @@ function setSiswa(data) {
 
 async function getFilter(id,semester) {
   $.ajax({
-    url: url_api+"/absensi/dosen/"+id,
+    url: url_api+"/absensi/dosen/kelas/"+id,
     type: 'get',
     dataType: 'json',
     data: {},
