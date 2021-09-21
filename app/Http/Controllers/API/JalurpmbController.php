@@ -18,7 +18,9 @@ class JalurpmbController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-
+    protected $status = null;
+    protected $error = null;
+    protected $data = null;
     const FETCHED_ATTRIBUTE = [
         "jalur_daftar",
         "biaya",
@@ -160,7 +162,7 @@ class JalurpmbController extends Controller
                 'tanggal_awal' => $request->tanggal_awal,
                 'tanggal_akhir' => $request->tanggal_akhir,
             ]);
-    
+
             Jalursyarat::where('id_jalur', $pmb)->delete();
             foreach ($request->syarat as $key => $value) {
                 $score = array(
