@@ -13,14 +13,14 @@ use GuzzleHttp\Promise\Create;
 
 class JalurpmbController extends Controller
 {
+    protected $status = null;
+    protected $error = null;
+    protected $data = null;
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    protected $status = null;
-    protected $error = null;
-    protected $data = null;
     const FETCHED_ATTRIBUTE = [
         "jalur_daftar",
         "biaya",

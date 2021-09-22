@@ -130,10 +130,12 @@ Route::prefix('v1')->group(function () {
 
     // ABSENSI
     Route::get('/absensi', [Ctr\AbsensiController::class, 'index']);
+    Route::get('/absensi/kelas-batal', [Ctr\AbsensiController::class, 'get_batal_kelas']);
     Route::get('/absensi/rekap-matkul', [Ctr\AbsensiController::class, 'rekap_matkul']);
     Route::get('/absensi/rekap-kelas', [Ctr\AbsensiController::class, 'rekap_kelas']);
     Route::get('/absensi/cetak-kelas', [Ctr\AbsensiController::class, 'cetak_kelas']);
     Route::get('/absensi/rekap/detail', [Ctr\AbsensiController::class, 'detail_rekap_absensi']);
+    Route::get('/absensi/dosen/kelas/{id}', [Ctr\AbsensiController::class, 'show_kelas_dosen']);
     Route::get('/absensi/dosen/{id}', [Ctr\AbsensiController::class, 'show_dosen']);
     Route::get('/absensi/home/{id}', [Ctr\AbsensiController::class, 'one']);
     Route::get('/absensi/{id}', [Ctr\AbsensiController::class, 'show']);
@@ -162,7 +164,6 @@ Route::prefix('v1')->group(function () {
     Route::post('/jurusanpilihan', '\App\Http\Controllers\API\JurusanpilihanController@store');
     Route::put('/jurusanpilihan/{id}', '\App\Http\Controllers\API\JurusanpilihanController@update');
     Route::delete('/jurusanpilihan/{id}', '\App\Http\Controllers\API\JurusanpilihanController@destroy');
-
     //syarat
     Route::get('/syarat/{id}', '\App\Http\Controllers\API\SyaratController@show');
     Route::post('/syarat', '\App\Http\Controllers\API\SyaratController@store');
@@ -207,7 +208,10 @@ Route::prefix('v1')->group(function () {
     // Setting Biaya
     Route::get('setting_biaya', [Ctr\SettingBiayaController::class, 'index']);
     Route::post('setting_biaya', [Ctr\SettingBiayaController::class, 'store']);
+    // example use bni api
+    Route::get('/test', [Ctr\MahasiswaController::class, 'create_va']);
 });
+
 Route::prefix('v1')->middleware('auth:api')->group(function () {
     Route::get('/user', function (Request $request) {
         return $request->user();

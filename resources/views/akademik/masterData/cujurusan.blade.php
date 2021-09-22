@@ -101,7 +101,6 @@
 } );
 
 function getData(id) {
-    
     $.ajax({
         url: url_api+"/jurusan/"+id,
         type: 'get',
@@ -111,7 +110,6 @@ function getData(id) {
                 // loading func
                 console.log("loading")
                 loading('show')
-
         },
         success: function(res) {
             if (res.status=="success") {

@@ -242,6 +242,12 @@ Route::prefix('akademik')->group(function () {
             ]);
         });
 
+        Route::get('/datadosen', function () {
+            return view('akademik.masterData/datadosen', [
+                "title" => "akademik-master",
+            ]);
+        });
+
         Route::get('/dataruangan', function () {
             return view('akademik.masterData/dataruangan', [
                 "title" => "akademik-master"
@@ -372,6 +378,12 @@ Route::prefix('akademik')->group(function () {
         Route::get('/absensi/mahasiswa/rekap', function () {
             return view('mahasiswaLama.presensi', [
                 "title" => "rekap-absensi-mahasiswa"
+            ]);
+        });
+
+        Route::get('/absensi/dashboard-dosen', function () {
+            return view('dosen.dashboardDosen', [
+                "title" => "absensi-dosen"
             ]);
         });
 
@@ -702,13 +714,13 @@ Route::prefix('admin')->group(function () {
                 "title" => "admin-settingpmb"
             ]);
         });
-        Route::get('/editjalurpenerimaan/cu/', function () {
-            return view('admin.pmb.cuJalurPenerimaan', [
+        Route::get('/settingjalurpenerimaan/cu/', function () {
+            return view('admin.pmb/cuJalurPenerimaan', [
                 "title" => "admin-settingpmb"
             ]);
         });
-        Route::get('/editjalurpenerimaan/cu/{id}', function () {
-            return view('admin.pmb.cuJalurPenerimaan', [
+        Route::get('/settingjalurpenerimaan/cu/{id}', function () {
+            return view('admin.pmb/cuJalurPenerimaan', [
                 "title" => "admin-settingpmb"
             ]);
         });

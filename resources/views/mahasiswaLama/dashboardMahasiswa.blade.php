@@ -75,7 +75,7 @@
   </div>
 </section>
 <script>
-var id_mahasiswa = 1;
+var id_mahasiswa = 31570;
 var status_mahasiswa = "Aktif";
 var bulan = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
 var dt = new Date();
@@ -102,7 +102,7 @@ function getJadwal() {
     },
     success: function(res) {
       if (res.status=="success") {
-          $('.table->body').html('');
+          $('.table-body').html('');
           $.each(res.data,function (key,row) {
             var html = `<tr>
                   <td class="font-weight-bold wordwrap">${row.matakuliah}</td>
