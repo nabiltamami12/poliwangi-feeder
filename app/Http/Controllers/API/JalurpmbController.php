@@ -13,6 +13,9 @@ use GuzzleHttp\Promise\Create;
 
 class JalurpmbController extends Controller
 {
+    protected $status = null;
+    protected $error = null;
+    protected $data = null;
     /**
      * Display a listing of the resource.
      *

@@ -142,6 +142,8 @@ var id = dataGlobal['user']['nomor'];
 var nama = dataGlobal['user']['nama'];
 var semester = dataGlobal['periode']['semester'];
 var tahun = dataGlobal['periode']['tahun'];
+var id_kuliah = "{{$id_kuliah}}";
+var pertemuan = "{{$pertemuan}}";
 
 $(document).ready(function() {
   getFilter(id,semester);
@@ -191,7 +193,7 @@ function setSiswa(data) {
     // }else{
     //   var id_nilai = row.nomor;
     // }
-    arr_mhs.push({'mahasiswa':row.id_mahasiswa,'kuliah':row.kuliah,'status':row.status,'dosen':id})
+    arr_mhs.push({'mahasiswa':row.id_mahasiswa,'kuliah':row.kuliah,'status':row.status,'dosen':id,'minggu':pertemuan})
     console.log(arr_mhs)
     var status_alpa = `<span id="btn_absensi_${row.id_mahasiswa}" data-id="${row.id_mahasiswa}" class="badge badge-danger">
                     <i class="iconify-inline mr-1" data-icon="bi:x-circle-fill"></i>
@@ -239,7 +241,7 @@ function setSiswa(data) {
 
 async function getFilter(id,semester) {
   $.ajax({
-    url: url_api+"/absensi/dosen/"+id,
+    url: `${url_api}/absensi/dosen/kelas?dosen=${id}&kuliah=${id_kuliah}&pertemuan=${pertemuan}`,
     type: 'get',
     dataType: 'json',
     data: {},

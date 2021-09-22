@@ -27,6 +27,7 @@ class DosenPengampuController extends Controller
     {
         try {
             $dosenpengampu = DosenPengampu::select(
+                'pegawai.nip',
                 'pegawai.nama',
                 'pegawai.nomor',
                 DB::raw('count(DISTINCT dosen_pengampu.matakuliah) as jumlah_matkul'),

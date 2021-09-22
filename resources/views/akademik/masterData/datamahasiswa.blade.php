@@ -76,7 +76,8 @@
   });
   $('#program_studi').on('change',function (e) {
     var program_studi = $(this).val()
-    var kelas =   
+    var kelas = $.grep(dataGlobal['kelas'], function(e){ return e.program_studi == program_studi; });
+    
     $('#kelas').html('')
     var optKelas = `<option value=""> - </option>`;
     $.each(kelas,function (key,row) {
@@ -112,7 +113,7 @@ async function getData() {
 }
 function setDatatable() {
   var nomor = 1;
-  dt_url = `${url_api}/mahasiswa?program=${$('#program').val()}&jurusan=${$('#jurusan').val()}&status=${$('#status').val()}&kelas=${$('#kelas').val()}`;
+  dt_url = `${url_api}/mahasiswa?program_studi=${$('#program_studi').val()}&status=${$('#status').val()}&kelas=${$('#kelas').val()}`;
 dt_opt = {
   "columnDefs": [
         {

@@ -15,11 +15,11 @@
     type="text/css">
   <!-- Iconify -->
   <script src="https://code.iconify.design/2/2.0.3/iconify.min.js"></script>
+  <!-- Page plugins -->
   <!-- Bootstrap Datepicker -->
   <link rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css"
     type="text/css" />
-  <!-- Page plugins -->
   <!-- Argon CSS -->
   <link rel="stylesheet" href="{{ url('argon') }}/assets/css/argon.css?v=1.2.0" type="text/css">
   <!-- Custom CSS -->

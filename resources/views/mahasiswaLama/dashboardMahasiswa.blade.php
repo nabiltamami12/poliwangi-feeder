@@ -63,7 +63,10 @@
         <div class="card-body p-0">
           <input type="hidden" id="kuliah_saat_ini">
           <h6 class="mb-0">Mata Kuliah Saat Ini</h6>
-          <h5 class="mb-0 mt-2" id="matkul_saat_ini"></h5>
+          <select class="form-control" id="matkul_open"></select>
+          <h6 class="mb-0 mt-4">Pertemuan Ke- :</h6>
+          <h5 class="mb-0 mt-2" id="pertemuan_saat_ini"></h5>
+          <p class="mb-0 mt-2 text-danger text-sm" >*pastikan pertemuan sesuai</p>
           <h6 class="mb-0 mt-4">Dosen Pengampu:</h6>
           <h5 class="mb-0 mt-2" id="dosen_saat_ini"></h5>
           <h6 class="mb-0 mt-4">Status Anda</h6>
@@ -75,7 +78,7 @@
   </div>
 </section>
 <script>
-var id_mahasiswa = 1;
+var id_mahasiswa = 31570;
 var status_mahasiswa = "Aktif";
 var bulan = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
 var dt = new Date();
@@ -102,8 +105,61 @@ function getJadwal() {
     },
     success: function(res) {
       if (res.status=="success") {
-          $('.table->body').html('');
-          $.each(res.data,function (key,row) {
+          $('.table-body').html('');
+          var opt = '';
+          $.each(res.data.kelas,function (key,row_kelas_open) {
+            var kelas = $.grep(res.data.data, function(e){ return e.kuliah == row_kelas_open.kuliah; });
+            console.log(kelas);
+            opt += `<option data-dosen="${kelas[0].dosen}" data-status="${kelas[0].status}" data-pertemuan="${row_kelas_open.pertemuan}" value="${row_kelas_open.kuliah}">${row_kelas_open.matakuliah}</option>`;
+
+            var pertemuan = row_kelas_open.pertemuan;
+            var status = kelas[0].status;
+            var dosen = kelas[0].dosen;
+
+            if (status=="H") {
+              var text = "Sudah Presensi"
+              $('#btn_absen').css('display','none')
+              $('#status_saat_ini').addClass('text-success')
+            }else{
+              $('#status_saat_ini').addClass('text-danger')
+              var text = "Belum Presensi"
+              $('#btn_absen').css('display','block')
+            }
+            $('#pertemuan_saat_ini').html(pertemuan)
+            $('#dosen_saat_ini').html(dosen)
+            $('#status_saat_ini').html(text)
+          })
+          $('#matkul_open').append(opt);
+          $('#matkul_open').on('change',function (e) {
+            if ($(this).val()=="") {
+              $('#mahasiswa_saat_ini').html('-')
+              $('#pertemuan_saat_ini').html('-')
+              $('#status_saat_ini').html('-')
+              $('#btn_presensi').addClass('btn-no-jadwal');
+              $('#btn_presensi').css('display','block')
+              $('#btn_presensi').attr('disabled',true)
+              $('#btn_presensi').text('Presensi Tidak Tersedia') 
+            }else{
+              var jml_kelas = $('#matkul_open :selected').data('jml');
+              var pertemuan = $('#matkul_open :selected').data('pertemuan');
+              var status = $('#matkul_open :selected').data('status');
+              var dosen = $('#matkul_open :selected').data('dosen');
+
+              if (status=="H") {
+                var text = "Sudah Presensi"
+                $('#btn_absen').css('display','none')
+                $('#status_saat_ini').addClass('text-success')
+              }else{
+                $('#status_saat_ini').addClass('text-danger')
+                var text = "Belum Presensi"
+                $('#btn_absen').css('display','block')
+              }
+              $('#pertemuan_saat_ini').html(pertemuan)
+              $('#dosen_saat_ini').html(dosen)
+              $('#status_saat_ini').html(text)
+            }
+          })
+          $.each(res.data.data,function (key,row) {
             var html = `<tr>
                   <td class="font-weight-bold wordwrap">${row.matakuliah}</td>
                   <td class="wordwrap">${row.dosen}</td>
@@ -130,30 +186,14 @@ function getJadwal() {
             console.log(`masih kuliah : ${status}`)
             console.log("==============================")
 
-            if (status==true) {
-              console.log(status)
-              $('#kuliah_saat_ini').val(row.kuliah);
-              $('#matkul_saat_ini').html(row.matakuliah);
-              $('#dosen_saat_ini').html(row.dosen);
-              $('#status_saat_ini').html(row.status_text);
-              $('#btn_absen').attr('disabled',false);
-              if (row.status==null) {
-                $('#status_saat_ini').removeClass('text-success');
-                $('#status_saat_ini').addClass('text-danger');
-                $('#btn_absen').css('display','block')
-              }else{
-                $('#status_saat_ini').removeClass('text-danger');
-                $('#status_saat_ini').addClass('text-success');
-                $('#btn_absen').css('display','none')
-              }
-            }
+            
           })
           $('#btn_absen').on('click',function (e) {
             $.ajax({
-              url: url_api+"/absensi/",
+              url: url_api+"/absensi",
               type: 'post',
               dataType: 'json',
-              data: {'kuliah':$('#kuliah_saat_ini').val(),'mahasiswa':id_mahasiswa,},
+              data: {'kuliah':$('#matkul_open').val(),'mahasiswa':id_mahasiswa,'minggu':$('#matkul_open :selected').data('pertemuan')},
               beforeSend: function(text) {
                   // loading func
                   console.log("loading")

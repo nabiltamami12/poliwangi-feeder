@@ -22,7 +22,8 @@
         <!-- Nav items -->
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link {{($title === "maba-dashboard") ? 'aktif' : ''}}" href="/mahasiswabaru/dashboard">
+            <a class="nav-link {{($title === "maba-dashboard") ? 'aktif' : ''}}"
+              href="{{ url('/mahasiswabaru/dashboard')}}">
               <i class="iconify" data-icon="bx-bx-home-circle"></i>
               <span class="nav-link-text">Dashboard</span>
             </a>
@@ -35,23 +36,27 @@
             </div>
             <ul class="nav-item-dropdown-content">
               <li class="nav-item">
-                <a class="nav-link" href="/mahasiswabaru/verifikasidata">
-                  <span class="nav-link-dropdown-text">Verifikasi Data</span>
+                <a class="nav-link" href="{{ url('/mahasiswabaru/verifikasidata')}}">
+                  <span class="mini_icon">VI</span>
+                  <span class="nav-link-text">Verifikasi Identitas Diri</span>
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/mahasiswabaru/pembayaranva">
-                  <span class="nav-link-dropdown-text">Generate VA Pembayaran</span>
+                <a class="nav-link" href="{{ url('/mahasiswabaru/daftarulang')}}">
+                  <span class="mini_icon">DU</span>
+                  <span class="nav-link-text">Daftar Ulang</span>
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/mahasiswabaru/daftarulang">
-                  <span class="nav-link-dropdown-text">Daftar Ulang</span>
+                <a class="nav-link" href="{{ url('/mahasiswabaru/pembayaranva')}}">
+                  <span class="mini_icon">GP</span>
+                  <span class="nav-link-text">Generate VA Pembayaran</span>
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/mahasiswabaru/editdatamahasiswa">
-                  <span class="nav-link-dropdown-text">Edit Data Mahasiswa</span>
+                <a class="nav-link" href="{{ url('/mahasiswabaru/editdatamahasiswa')}}">
+                  <span class="mini_icon">ED</span>
+                  <span class="nav-link-text">Edit Data Mahasiswa</span>
                 </a>
               </li>
             </ul>

@@ -14,20 +14,16 @@ jQuery(function ($) {
         $(this).toggleClass("open");
         $(this).next().slideToggle(300);
     });
-});
 
-setInterval(function () {
-    // SIDEBAR_HIDE_SHOW
-    let width = document.getElementById("sidenav-main").offsetWidth;
-    const sidebar_text = document.querySelectorAll(".nav-link-text");
-
-    if (width < 100) {
-        for (i = 0; i < sidebar_text.length; i++) {
-            sidebar_text[i].style.display = "none";
-        }
-    } else {
-        for (i = 0; i < sidebar_text.length; i++) {
-            sidebar_text[i].style.display = "block";
-        }
+    // mini sidebar as default
+    if ($("body").hasClass("g-sidenav-pinned")) {
+        $("body").removeClass("g-sidenav-pinned g-sidenav-show");
+        $("body").addClass("g-sidenav-hidden");
+        $(".sidenav-toggler").removeClass("active");
+        $(".navbar-brand").addClass("d-none");
     }
-}, 10);
+
+    $(".sidenav").hover(function () {
+        $(".navbar-brand").removeClass("d-none");
+    });
+});

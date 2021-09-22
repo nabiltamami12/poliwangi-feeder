@@ -52,27 +52,27 @@ Route::prefix('admin')->group(function () {
 Route::prefix('mahasiswabaru')->group(function () {
     Route::get('/dashboard', function () {
         return view('mahasiswaBaru.dashboardMaba', [
-            "title" => "maba-dashboard"
+            "title" => "Dashboard"
         ]);
     });
     Route::get('/verifikasidata', function () {
         return view('mahasiswaBaru.verifikasiData', [
-            "title" => "maba-mahasiswa"
+            "title" => "Verifikasi Data"
         ]);
     });
     Route::get('/pembayaranva', function () {
         return view('mahasiswaBaru.generatePembayaranVA', [
-            "title" => "maba-mahasiswa"
+            "title" => "Pembayaran VA"
         ]);
     });
     Route::get('/daftarulang', function () {
         return view('mahasiswaBaru.daftarUlang', [
-            "title" => "maba-mahasiswa"
+            "title" => "Daftar Ulang"
         ]);
     });
     Route::get('/editdatamahasiswa', function () {
         return view('mahasiswaBaru.editDataMahasiswa', [
-            "title" => "maba-mahasiswa"
+            "title" => "Edit Data Mahasiswa"
         ]);
     });
 });
@@ -80,39 +80,39 @@ Route::prefix('mahasiswabaru')->group(function () {
 Route::prefix('mahasiswalama')->group(function () {
     Route::get('/dashboard', function () {
         return view('mahasiswaLama.dashboardMahasiswa', [
-            "title" => "mala-dashboard"
+            "title" => "Dashboard"
         ]);
     });
 
     Route::get('/pembayaran', function () {
         return view('mahasiswaLama.pembayaran', [
-            "title" => "mala-pembayaran"
+            "title" => "Pembayaran"
         ]);
     });
 
     Route::get('/presensi', function () {
         return view('mahasiswaLama.presensi', [
-            "title" => "mala-presensi"
+            "title" => "Presensi"
         ]);
     });
 
     Route::prefix('penilaian')->group(function () {
         Route::get('/nilaisemester', function () {
             return view('mahasiswaLama.nilaisemester', [
-                "title" => "mala-penilaian"
+                "title" => "Nilai Semester"
             ]);
         });
 
         Route::get('/khs', function () {
             return view('mahasiswaLama.khs', [
-                "title" => "mala-penilaian"
+                "title" => "KHS"
             ]);
         });
     });
 
     Route::get('/formcuti', function () {
         return view('mahasiswaLama.formcuti', [
-            "title" => "mala-formcuti"
+            "title" => "Form Cuti"
         ]);
     });
 });
@@ -239,6 +239,11 @@ Route::prefix('akademik')->group(function () {
             return view('akademik.masterData/cukelasdosen', [
                 "id" => $id,
                 "title" => "akademik-master"
+            ]);
+        });
+        Route::get('/datadosen', function () {
+            return view('akademik.masterData/datadosen', [
+                "title" => "akademik-master",
             ]);
         });
     
@@ -376,8 +381,16 @@ Route::prefix('akademik')->group(function () {
             ]);
         });
         
-        Route::get('/absensi/kelas-dosen', function () {
+        Route::get('/absensi/dashboard-dosen', function () {
+            return view('dosen.dashboardDosen', [
+                "title" => "absensi-dosen"
+            ]);
+        });
+
+        Route::get('/absensi/kelas-dosen/{id_kuliah}/{pertemuan}', function ($id_kuliah,$pertemuan) {
             return view('dosen.presensiDosen', [
+                "id_kuliah" => $id_kuliah,
+                "pertemuan" => $pertemuan,
                 "title" => "absensi-dosen"
             ]);
         });
@@ -387,8 +400,18 @@ Route::prefix('akademik')->group(function () {
                 "title" => "rekap-absensi-mahasiswa"
             ]);
         });
-        Route::get('/absensi/rekap/detail/{id}/{kelas}/{matkul}', function () {
+        Route::get('/absensi/rekap/detail/{id}/{kelas}/{matkul}', function ($id,$kelas,$matkul) {
             return view('akademik.kuliah.detailrekapabsensi', [
+                "id" => $id,
+                "kelas" => $kelas,
+                "matkul" => $matkul,
+                "title" => "rekap-absensi-mahasiswa"
+            ]);
+        });
+        Route::get('/absensi/rekap-mahasiswa/{kelas}/{matkul}', function ($kelas,$matkul) {
+            return view('akademik.kuliah.rekapabsensikelasmahasiswa', [
+                "kelas" => $kelas,
+                "matkul" => $matkul,
                 "title" => "rekap-absensi-mahasiswa"
             ]);
         });
@@ -815,7 +838,20 @@ Route::prefix('keuangan')->group(function () {
                 "title" => "keuangan-rekapitulasi",
             ]);
         });
+    });
 
+    Route::prefix('buktipembayaran')->group(function () {
+        Route::get('/email', function () {
+            return view('keuangan.buktiPembayaran.email', [
+                "title" => "keuangan-buktipembayaran",
+            ]);
+        });
+
+        Route::get('/kwitansi', function () {
+            return view('keuangan.buktiPembayaran.kwitansi', [
+                "title" => "keuangan-buktipembayaran",
+            ]);
+        });
     });
 });
 
@@ -833,4 +869,8 @@ Route::get('/loading2', function () {
 
 Route::get('/document', function () {
     return view('testingKomponen.document');
+});
+
+Route::get('/absensiperkuliahan', function () {
+    return view('testingKomponen.documentAbsensiPerkuliahan');
 });
