@@ -65,15 +65,15 @@
               <div class="text-center mb-4">
                 <p>Silahkan melengkapi data untuk melanjutkan</p>
               </div>
-              <form role="form" method="POST" id="form_action" onsubmit="event.preventDefault(); auth();">
+              <form role="form" method="POST" id="form" onsubmit="event.preventDefault();">
                 <div class="form-group">
                   <div class="input-group input-group-merge input-group-alternative">
                     <div class="input-group-prepend">
                       <span class="input-group-text">
-                        <i class="iconify" data-icon="bx:bxs-envelope" data-inline="false"></i>
+                        <i class="iconify" data-icon="bx:bxs-user" data-inline="false"></i>
                       </span>
                     </div>
-                    <input class="form-control" placeholder="Email" type="email" id="email" name="email" :value="old('email')" autofocus>
+                    <input class="form-control" placeholder="No. Pendaftaran" type="text" id="nodaftar" name="nodaftar" :value="old('nodaftar')" autofocus>
                   </div>
                 </div>
                 <div class="form-group">
@@ -100,7 +100,7 @@
           </div>
           <div class="row register_account">
             <div class="col text-center">
-              <p>Daftar Mahasiswa Baru? <a href="{{ url('/akademik/dashboard') }}">Klik Disini</a></p>
+              <p>Daftar Mahasiswa Baru? <a href="{{ url('/register') }}">Klik Disini</a></p>
             </div>
           </div>
         </div>
@@ -118,9 +118,29 @@
   <!-- Argon JS -->
   <script src="{{ url('argon') }}/assets/js/argon.js?v=1.2.0"></script>
   <script type="text/javascript">
-    function auth() {
-      window.location = "{{ url('/akademik/dashboard') }}";
-    }
+    var url_api = "{{ url('/api/v1') }}";
+    $("#form").submit(function(e) {
+      e.preventDefault();
+      $.ajax({
+        url: url_api+"/login",
+        type: 'post',
+        dataType: 'json',
+        data: new FormData(e.target),
+        processData: false,
+        contentType: false,
+        beforeSend: function(text) {
+        },
+        success: function(res) {
+          console.log(res)
+          if (res.status=="success") {
+            localStorage.setItem('pmb', res.data)
+            window.location.href = "{{url('/pmbgenerateva')}}"
+          } else {
+            alert('Error: '.res.data.message)
+          }
+        }
+      });
+    });
   </script>
 </body>
 
