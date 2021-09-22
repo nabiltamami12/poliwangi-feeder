@@ -147,7 +147,7 @@
           
           <li class="nav-item">
             <div class="nav-link {{($title === "akademik-keuangan") ? 'aktif' : ''}}">
-            <span class=" iconify" data-icon="bx:bx-book-bookmark"></span>
+            <span class=" iconify" data-icon="bx:bx-dollar-circle"></span>
               <span class="nav-link-text">Keuangan<img src="{{ url('images') }}/sidebar-right.png" class="arrow"
                   alt=""></span>
             </div>

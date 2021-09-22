@@ -135,7 +135,7 @@ Route::prefix('v1')->group(function () {
     Route::get('/absensi/rekap-kelas', [Ctr\AbsensiController::class, 'rekap_kelas']);
     Route::get('/absensi/cetak-kelas', [Ctr\AbsensiController::class, 'cetak_kelas']);
     Route::get('/absensi/rekap/detail', [Ctr\AbsensiController::class, 'detail_rekap_absensi']);
-    Route::get('/absensi/dosen/kelas/{id}', [Ctr\AbsensiController::class, 'show_kelas_dosen']);
+    Route::get('/absensi/dosen/kelas', [Ctr\AbsensiController::class, 'show_kelas_dosen']);
     Route::get('/absensi/dosen/{id}', [Ctr\AbsensiController::class, 'show_dosen']);
     Route::get('/absensi/home/{id}', [Ctr\AbsensiController::class, 'one']);
     Route::get('/absensi/{id}', [Ctr\AbsensiController::class, 'show']);
@@ -144,6 +144,9 @@ Route::prefix('v1')->group(function () {
     Route::put('/absensi/admin', [Ctr\AbsensiController::class, 'absensi_admin']);
     Route::put('/absensi/{id}', [Ctr\AbsensiController::class, 'update']);
     Route::delete('/absensi/{id}', [Ctr\AbsensiController::class, 'destroy']);
+
+    // KELAS MENGAJAR
+    Route::post('/kelas-mengajar', [Ctr\AbsensiController::class, 'kelas_mengajar']);
 
     //FILE UPLOAD HARI AKTIF 
     Route::get('/filehari/{nama}', '\App\Http\Controllers\API\HariAktifController@show');

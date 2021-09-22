@@ -387,8 +387,10 @@ Route::prefix('akademik')->group(function () {
             ]);
         });
 
-        Route::get('/absensi/kelas-dosen', function () {
+        Route::get('/absensi/kelas-dosen/{id_kuliah}/{pertemuan}', function ($id_kuliah,$pertemuan) {
             return view('dosen.presensiDosen', [
+                "id_kuliah" => $id_kuliah,
+                "pertemuan" => $pertemuan,
                 "title" => "absensi-dosen"
             ]);
         });

@@ -8,6 +8,12 @@
     color:red;
     font-weight:400;
   }
+  .no-kelas{
+    text-align:center;
+    font-style:italic;
+    color:red;
+    font-weight:400;
+  }
   .btn-no-jadwal{
     border-color:#E9ECEF!important;
     background-color:#E9ECEF!important;
@@ -45,7 +51,7 @@
                 </tr>
               </thead>
 
-              <tbody class="table-body table-body-lg">
+              <tbody id="tb_body_jadwal" class="table-body table-body-lg">
                 
               </tbody>
             </table>
@@ -55,7 +61,7 @@
     </div>
 
     <div class="col-md-4">
-      <div class="card shadow padding--medium card_presensi mt-0 mt-md-4">
+    <div class="card shadow padding--medium card_presensi mt-0 mt-md-4">
         <div class="card-header p-0">
           <div class="row align-items-center">
             <div class="col">
@@ -64,28 +70,67 @@
           </div>
           <hr class="my-4">
         </div>
-        <div id="card_presensi" class="card-body p-0" hidden>
-          <input type="hidden" id="kuliah_saat_ini">
+        <div id="card_presensi" class="card-body p-0">
           <h6 class="mb-0">Mata Kuliah Saat Ini</h6>
-          <h5 class="mb-0 mt-2" id="matkul_saat_ini"></h5>
+          <select class="form-control" id="matkul_open"></select>
+          <!-- <h5 class="mb-0 mt-2" id="matkul_saat_ini"></h5> -->
+          <h6 class="mb-0 mt-4">Pertemuan Ke- :</h6>
+          <h5 class="mb-0 mt-2" id="pertemuan_saat_ini"></h5>
+          <p class="mb-0 mt-2 text-danger text-sm" >*pastikan pertemuan sesuai</p>
           <h6 class="mb-0 mt-4">Jumlah Mahasiswa :</h6>
-          <h5 class="mb-0 mt-2" id="mahasiswa_saat_ini">45</h5>
+          <h5 class="mb-0 mt-2" id="mahasiswa_saat_ini"></h5>
           <h6 class="mb-0 mt-4">Status Presensi</h6>
-          <h5 class="mb-0 mt-2 text-danger">Belum Di Cek</h5>
+          <h5 class="mb-0 mt-2" id="status_saat_ini"></h5>
         </div>
           <button type="button" id="btn_presensi" disabled class="btn btn-primary w-100 mt-4 rounded-sm btn-no-jadwal">Presensi Tidak Tersedia</button>
       </div>
     </div>
+    <div class="col-md-12">
+      
+    <div class="card shadow padding--medium card_presensi mt-0 mt-md-4">
+        <div class="card-header p-0">
+          <div class="row align-items-center">
+            <div class="col">
+              <h3 class="mb-0">Kelas dibatalkan</h3>
+            </div>
+          </div>
+          <hr class="my-4">
+        </div>
+        <div class="card-body p-0" >
+          <div class="table-responsive">
+            <p class="no-kelas">Tidak ada kelas dibatalkan</p>
+            <table id="tabel_kelas" hidden class="table align-items-center table-borderless table-flush table-hover">
+              <thead class="table-header">
+                <tr>
+                  <th scope="col" style="width: 55%;">Mata Kuliah</th>
+                  <th scope="col" class="text-center">Kelas</th>
+                  <th scope="col" class="text-center">Pertemuan</th>
+                  <th scope="col" class="text-center">Aksi</th>
+                </tr>
+              </thead>
+
+              <tbody id="tb_body_kelas" class="table-body table-body-lg">
+                
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 <script>
-var id_dosen = 1;
+var id_dosen = dataGlobal['user']['nomor'];
+var nama = dataGlobal['user']['nama'];
+var semester = dataGlobal['periode']['semester'];
+var tahun = dataGlobal['periode']['tahun'];
+
 var status_mahasiswa = "Aktif";
 var bulan = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
 var dt = new Date();
 var jam_sekarang = ((dt.getHours().toString().length==1)?"0"+dt.getHours():dt.getHours()) +":"+dt.getMinutes();
 var tanggal_sekarang = ((dt.getDate().toString().length==1)?"0"+dt.getDate():dt.getDate())+" "+bulan[dt.getMonth()]+" "+dt.getFullYear();
+var data_kelas_open = [];
 $('#tanggal_sekarang').html(tanggal_sekarang)
 $('#status_mahasiswa').html(status_mahasiswa)
 $('#btn_absen').css('display','none')
@@ -107,15 +152,40 @@ function getJadwal() {
     },
     success: function(res) {
       if (res.status=="success") {
-          $('.table-body').html('');
-          if (res.data!=[]) {
-            $.each(res.data,function (key,row) {
+          $('#tb_body_jadwal').html('');
+          $('#tb_body_kelas').html('');
+          if (res.data.kelas.length>0) {
+            $.each(res.data.kelas,function (key,row_kelas) {
+              if (row_kelas.status=="batal") {
+                var html = `<tr>
+                      <td class="font-weight-bold wordwrap">${row_kelas.matakuliah}</td>
+                      <td class="text-center">${row_kelas.kode}</td>
+                      <td class="text-center">${row_kelas.pertemuan}</td>
+                      <td class="text-center"><button onclick="buka_kelas(${row_kelas.kuliah},${row_kelas.pertemuan},'reload')" class="btn btn-sm btn-success btn-buka">Buka kelas</button></td>
+                    </tr>`;
+                $('#tb_body_kelas').append(html)
+                $('#tabel_kelas').attr('hidden',false);
+                $('.no-kelas').attr('hidden',true);
+              }else{
+                $('#tabel_kelas').attr('hidden',true);
+                $('.no-kelas').attr('hidden',false);
+              }
+              if (row_kelas.status_kelas=="open") {
+                data_kelas_open.push(row_kelas);
+              }
+            })
+          }else{
+            $('#tabel_kelas').attr('hidden',true);
+            $('.no-kelas').attr('hidden',false);
+          }
+          if (res.data.data.length>0) {
+            $.each(res.data.data,function (key,row) {
               var html = `<tr>
                     <td class="font-weight-bold wordwrap">${row.matakuliah}</td>
                     <td class="text-center">${row.kelas}</td>
                     <td class="text-center">${row.jam}</td>
                   </tr>`;
-              $('.table-body').append(html)
+              $('#tb_body_jadwal').append(html)
               var jam_kelas = new Date();
               var arr_jam_kelas = row.jam.split(':');
               jam_kelas.setHours(arr_jam_kelas[0], arr_jam_kelas[1], 00, 000);
@@ -135,65 +205,102 @@ function getJadwal() {
               console.log(`masih kuliah : ${status}`)
               console.log("==============================")
 
-              if (status==true) {
-                console.log(status)
-                $('#kuliah_saat_ini').val(row.kuliah);
-                $('#matkul_saat_ini').html(row.matakuliah);
-                $('#mahasiswa_saat_ini').html(row.jml_mhs);
-                $('#status_saat_ini').html(row.status_text);
-                $('#btn_presensi').attr('disabled',false);
-                if (row.status==null) {
-                  $('#status_saat_ini').removeClass('text-success');
-                  $('#status_saat_ini').addClass('text-danger');
-                  $('#btn_presensi').css('display','block')
-                }else{
-                  $('#status_saat_ini').removeClass('text-danger');
-                  $('#status_saat_ini').addClass('text-success');
-                  $('#btn_presensi').css('display','none')
-                }
-                $('#card_presensi').attr('hidden',false)
-                $('#btn_presensi').html('Cek Presensi');
-                $('#btn_presensi').removeClass('btn-no-jadwal');
-              }else{
-                $('#card_presensi').attr('hidden',true)
-                $('#btn_presensi').attr('disabled',true)
-                $('#btn_presensi').html('Presensi Tidak Tersedia');
-                $('#btn_presensi').addClass('btn-no-jadwal');
-              }
             })
+
             $('#tabel_jadwal').attr('hidden',false);
             $('.no-jadwal').attr('hidden',true);
+            
           }else{
             $('#tabel_jadwal').attr('hidden',true);
             $('.no-jadwal').attr('hidden',false);
           }
-          $('#btn_presensi').on('click',function (e) {
-            $.ajax({
-              url: url_api+"/absensi/",
-              type: 'post',
-              dataType: 'json',
-              data: {'kuliah':$('#kuliah_saat_ini').val(),'mahasiswa':id_dosen,},
-              beforeSend: function(text) {
-                  // loading func
-                  console.log("loading")
-                  // loading('show')
-              },
-              success: function(res) {
-                console.log(res)
-                  if (res.status=="success") {
-                    location.reload()                 
-                  } else {
-                      // alert gagal
-                  }
-                  // loading('hide')
+          var opt = '';
+          $.each(data_kelas_open,function (key,row_kelas_open) {
+            var kelas = $.grep(res.data.data, function(e){ return e.kuliah == row_kelas_open.kuliah; });
+            opt += `<option data-status="${row_kelas_open.status}" data-pertemuan="${row_kelas_open.pertemuan}" data-jml="${kelas[0].jml_mhs}" value="${row_kelas_open.kuliah}">${row_kelas_open.matakuliah}</option>`;
+            
+            $('#mahasiswa_saat_ini').html(kelas[0].jml_mhs)
+            $('#pertemuan_saat_ini').html(row_kelas_open.pertemuan)
+            $('#status_saat_ini').html(row_kelas_open.status)
+            
+            $('#status_saat_ini').addClass('text-success');
+            $('#btn_presensi').removeClass('btn-no-jadwal');
+            $('#btn_presensi').css('display','block')
+            $('#btn_presensi').attr('disabled',false)
+            $('#btn_presensi').text('Cek Presensi')
 
-              }
-            });
+          })
+          $('#matkul_open').append(opt);
+
+          $('#matkul_open').on('change',function (e) {
+            if ($(this).val()=="") {
+              $('#mahasiswa_saat_ini').html('-')
+              $('#pertemuan_saat_ini').html('-')
+              $('#status_saat_ini').html('-')
+              $('#btn_presensi').addClass('btn-no-jadwal');
+              $('#btn_presensi').css('display','block')
+              $('#btn_presensi').attr('disabled',true)
+              $('#btn_presensi').text('Presensi Tidak Tersedia') 
+            }else{
+              var jml_kelas = $('#matkul_open :selected').data('jml');
+              var pertemuan = $('#matkul_open :selected').data('pertemuan');
+              var status = $('#matkul_open :selected').data('status');
+              
+              status = "Belum Presensi";
+              $('#mahasiswa_saat_ini').html(jml_kelas)
+              $('#pertemuan_saat_ini').html(pertemuan)
+              $('#status_saat_ini').html(status)
+              
+              $('#status_saat_ini').removeClass('text-success');
+              $('#status_saat_ini').addClass('text-danger');
+              $('#btn_presensi').removeClass('btn-no-jadwal');
+              $('#btn_presensi').css('display','block')
+              $('#btn_presensi').attr('disabled',false)
+              $('#btn_presensi').text('Cek Presensi')
+              
+            }
+          })
+          $('#btn_presensi').on('click',function (e) {
+            var kuliah = $('#matkul_open').val();
+            var pertemuan = $('#matkul_open :selected').data('pertemuan');
+
+            window.location = "{{ url('/akademik/kuliah/absensi/kelas-dosen/') }}"+"/"+kuliah+"/"+pertemuan;
           })
       } else {
           // alert gagal
       }
       // loading('hide')
+    }
+  });
+}
+function buka_kelas(kuliah,pertemuan,status) {
+  var data_kls = {
+    'tahun':tahun,
+    'dosen':id_dosen,
+    'kuliah':kuliah,
+    'pertemuan':pertemuan,
+    'status':'mengajar',
+    'status_kelas':'open',
+  }
+  $.ajax({
+    url: url_api+"/kelas-mengajar",
+    type: 'post',
+    dataType: 'json',
+    data: data_kls,
+    beforeSend: function(text) {
+        // loading func
+        console.log("loading")
+        // loading('show')
+    },
+    success: function(res) {
+      console.log(res)
+        if (res.status=="success") {
+          location.reload()                 
+        } else {
+            // alert gagal
+        }
+        // loading('hide')
+
     }
   });
 }

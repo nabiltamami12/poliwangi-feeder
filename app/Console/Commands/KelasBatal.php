@@ -39,14 +39,13 @@ class KelasBatal extends Command
      */
     public function handle()
     {
+        DB::enableQueryLog();
         date_default_timezone_set('Asia/Jakarta');
         Carbon::setLocale('id');
 
         $day = Carbon::now()->isoformat('dddd');
         $year = Carbon::now()->isoformat('Y');
         $date = Carbon::now()->format('Y-m-d');
-
-
         $now = Carbon::now()->format('H:i');
 
         $data = DB::table('kuliah')->select(
@@ -68,17 +67,16 @@ class KelasBatal extends Command
         foreach ($data as $key => $value) {
             $data = [
                 'tahun' => $year,
-                'dosen' => $value->dosen,
                 'kuliah' => $value->kuliah,
             ];
 
             $pertemuan = DB::table('kelas_mengajar')
-                            ->select('pertemuan','created_at')
+                            ->select('pertemuan','created_at','jam_mulai')
                             ->where($data)
                             ->first();
             $date_pertemuan = "";
             if ($pertemuan == null) {
-                $count_pertemuan = 0;
+                $count_pertemuan = 1;
                 $date_pertemuan = "";
             }else{
                 $date_pertemuan = Carbon::parse($pertemuan->created_at)->format('Y-m-d');
@@ -88,13 +86,37 @@ class KelasBatal extends Command
                     $count_pertemuan = $pertemuan->pertemuan;
                 }
             }
-            $limit = Carbon::parse($value->jam_kelas)->addMinutes(180)->format('H:i');
+
+            $data['pertemuan'] = $count_pertemuan;
+            if ($pertemuan==null) {
+                $jam_mulai = $value->jam_kelas;
+            }else{
+                $jam_mulai = $pertemuan->jam_mulai;
+            }
+            $limit = Carbon::parse($jam_mulai)->addMinutes(1)->format('H:i');
+            // echo $value->matakuliah." - ".$jam_mulai." - ".$now." - ".$limit." || ";
             if($now>$limit){
-                $data['pertemuan'] = $count_pertemuan;
-                $data['status'] = "batal";
-                $check = DB::table('kelas_mengajar')->where($data)->get();
-                if (count($check)==0) {
+                // echo "true";
+                $check = DB::table('kelas_mengajar')->where($data)->first();
+                $data['status_kelas'] = "close";
+                if ($check==null) {
+                    $data['jam_mulai'] = $jam_mulai;
+                    $data['status'] = "batal";
                     DB::table('kelas_mengajar')->insert($data);
+                    DB::table('absensi_mahasiswa')
+                    ->where('kuliah',$data['kuliah'])
+                    ->where('minggu',$data['pertemuan'])
+                    ->delete();
+                }else{
+                    if($check->status!="hadir"){
+                        $data['status'] = "batal";
+                        DB::table('absensi_mahasiswa')
+                        ->where('kuliah',$data['kuliah'])
+                        ->where('minggu',$data['pertemuan'])
+                        ->delete();
+
+                    }
+                    DB::table('kelas_mengajar')->where('id',$check->id)->update($data);
                 }
                 $i++;
             }
