@@ -209,9 +209,13 @@ Route::prefix('v1')->group(function () {
     Route::get('setting_biaya', [Ctr\SettingBiayaController::class, 'index']);
     Route::post('setting_biaya', [Ctr\SettingBiayaController::class, 'store']);
 
+    // Berkas Keuangan
+    Route::post('berkas_keuangan', [Ctr\BerkasKeuanganController::class, 'store']);
+
 
     // example use bni api
     Route::get('/test', [Ctr\MahasiswaController::class, 'create_va']);
+
 });
 
 Route::prefix('v1')->middleware('auth:api')->group(function () {
