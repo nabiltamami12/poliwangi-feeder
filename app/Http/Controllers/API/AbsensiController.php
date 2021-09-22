@@ -893,7 +893,8 @@ class AbsensiController extends Controller
                 'matakuliah.kode',
                 'matakuliah.matakuliah',
                 DB::raw('COUNT(CASE WHEN absensi_mahasiswa.status = "H" THEN 1 END) AS HADIR,COUNT(CASE WHEN absensi_mahasiswa.status = "S" OR absensi_mahasiswa.status = "A" THEN 1 END) AS TIDAK_HADIR')
-            )->join('kuliah', 'absensi_mahasiswa.kuliah', '=', 'kuliah.nomor')
+            )
+            ->join('kuliah', 'absensi_mahasiswa.kuliah', '=', 'kuliah.nomor')
             ->join('matakuliah', 'kuliah.matakuliah', '=', 'matakuliah.nomor')
             ->join('kelas', 'kuliah.kelas', '=', 'kelas.nomor')
             ->join('mahasiswa', 'absensi_mahasiswa.mahasiswa', '=', 'mahasiswa.nomor')
@@ -901,7 +902,10 @@ class AbsensiController extends Controller
             ->where('matakuliah.nomor', $request->matakuliah)
             ->where('kuliah.semester', $request->semester)
             ->where('kuliah.tahun', $request->tahun)
-            ->groupBy('matakuliah.matakuliah')
+            ->groupBy('mahasiswa.nomor')
+            ->orderBy('mahasiswa')
+            ->orderBy('nama')
+            ->orderBy('minggu')
             ->get();
     
             
@@ -928,7 +932,8 @@ class AbsensiController extends Controller
             'mahasiswa.nama',
             DB::raw("GROUP_CONCAT(absensi_mahasiswa.minggu) as minggu"),
             DB::raw("GROUP_CONCAT(absensi_mahasiswa.status) as status"),
-        )->join('kuliah', 'absensi_mahasiswa.kuliah', '=', 'kuliah.nomor')
+        )
+        ->join('kuliah', 'absensi_mahasiswa.kuliah', '=', 'kuliah.nomor')
         ->join('matakuliah', 'kuliah.matakuliah', '=', 'matakuliah.nomor')
         ->join('kelas', 'kuliah.kelas', '=', 'kelas.nomor')
         ->join('mahasiswa', 'absensi_mahasiswa.mahasiswa', '=', 'mahasiswa.nomor')
