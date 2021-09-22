@@ -512,6 +512,11 @@ Route::prefix('akademik')->group(function () {
                 "title" => "akademik-kuliah",
             ]);
         });
+        Route::get('/absensi/rekap-mahasiswa', function () {
+          return view('akademik.kuliah.rekapAbsensiMahasiswa', [
+              "title" => "akademik-kuliah",
+          ]);
+      });
     });
 });
 
@@ -833,7 +838,20 @@ Route::prefix('keuangan')->group(function () {
                 "title" => "keuangan-rekapitulasi",
             ]);
         });
+    });
 
+    Route::prefix('buktipembayaran')->group(function () {
+        Route::get('/email', function () {
+            return view('keuangan.buktiPembayaran.email', [
+                "title" => "keuangan-buktipembayaran",
+            ]);
+        });
+
+        Route::get('/kwitansi', function () {
+            return view('keuangan.buktiPembayaran.kwitansi', [
+                "title" => "keuangan-buktipembayaran",
+            ]);
+        });
     });
 });
 
@@ -851,4 +869,8 @@ Route::get('/loading2', function () {
 
 Route::get('/document', function () {
     return view('testingKomponen.document');
+});
+
+Route::get('/absensiperkuliahan', function () {
+    return view('testingKomponen.documentAbsensiPerkuliahan');
 });

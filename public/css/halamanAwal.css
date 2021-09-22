@@ -91,7 +91,6 @@ h6,
 .h4,
 .h5,
 .h6 {
-  font-family: "Montserrat", sans-serif;
   color: #041f2f;
 }
 
@@ -194,7 +193,6 @@ h6,
 }
 
 .btn {
-  font-family: "Montserrat", sans-serif;
   font-size: 1rem;
   font-weight: 500;
   line-height: 1.21em;
@@ -587,7 +585,6 @@ h6,
 
 .page-item .page-link,
 .page-item span {
-  font-family: "Montserrat", sans-serif;
   font-size: 0.8125rem;
   margin: 0;
   border-radius: 0 !important;
