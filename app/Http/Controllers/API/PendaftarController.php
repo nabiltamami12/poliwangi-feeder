@@ -8,8 +8,11 @@ use App\Models\Pendaftar;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Resources\JalurpendaftarResource;
 use Illuminate\Database\QueryException;
-use Illuminate\Validation\Rules\Password;
+// use Illuminate\Validation\Rules\Password;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Contracts\Encryption\DecryptException;
+use BNI;
 
 class PendaftarController extends Controller
 {
@@ -60,7 +63,7 @@ class PendaftarController extends Controller
             'ibu' => 'required|string|max:60',
             'notelp_ortu' => 'required|string|max:20',
             'email' => 'required|email',
-            'password' => ['required', 'confirmed', Password::min(8)],
+            // 'password' => ['required', 'confirmed', Password::min(8)],
         ]);
 
         if ($validator->fails()) {
@@ -82,22 +85,23 @@ class PendaftarController extends Controller
         $document->ibu = $request->ibu;
         $document->notelp_ortu = $request->notelp_ortu;
         $document->email = $request->email;
-        $document->password = Hash::make($request->password);
+        // $document->password = Hash::make($request->password);
         $document->save();
 
         if ($fotos = $request->file('foto')) {
             $update_data = [];
             $namafile = md5($document->id.'f0to').'.'.$fotos->getClientOriginalExtension();
             $update_data['foto'] = $namafile;
+            $update_data['nodaftar'] = date('Y').$document->id;
             $fotos->move(public_path() . '/pendaftar', $namafile);
             $check = Pendaftar::where('nomor', $document->id);
             $check->update($update_data);
         }
 
         return response()->json([
-            "success" => true,
-            "message" => "Sukses",
-            "file" => $document
+            "status" => 'success',
+            "data" => Crypt::encrypt($document->id),
+            "message" => "Sukses"
         ]);
     }
 
@@ -300,6 +304,105 @@ class PendaftarController extends Controller
             "status" => $this->status,
             "data" => $this->data,
             "error" => $this->error
+        ]);
+    }
+
+    public function va(Request $request)
+    {
+        $token = $request->header('token');
+        try{
+            $id = Crypt::decrypt($token);
+            $document = Pendaftar::select('is_lunas')->where('nomor', $id)->get()->first();
+            if ($document->is_lunas == 1) {
+                return response()->json([
+                    "status" => 'success',
+                    "data" => [
+                        'is_lunas' => 1
+                    ],
+                    "error" => $this->error
+                ]);
+            }
+            /*
+            $BniEnc = new BNI();
+            $raw = array(
+                'type' => 'createbilling',
+                'trx_id' => mt_rand(), // fill with Billing ID
+                'trx_amount' => 10000,
+                'billing_type' => 'c',
+                'datetime_expired' => date('c', time() + 2 * 3600), // billing will be expired in 2 hours
+                'virtual_account' => '',
+                'customer_name' => 'Mr. X',
+                'customer_email' => '',
+                'customer_phone' => '',
+            );
+
+            $response = $BniEnc->getContent($raw);
+            $response_json = json_decode($response, true);
+
+            if ($response_json['status'] !== '000') {
+                // handling jika gagal
+                var_dump($response_json);
+            }
+            else {
+                $data_response = $BniEnc->decrypt($response_json['data'], $client_id, $secret_key);
+                // $data_response will contains something like this: 
+                // array(
+                //  'virtual_account' => 'xxxxx',
+                //  'trx_id' => 'xxx',
+                // );
+                var_dump($data_response);
+            }*/
+
+            $this->data = [
+                'is_lunas' => 0,
+                'trx_amount' => 201500,
+                'virtual_account' => '80010000'.$id.'187',
+                'datetime_expired_iso8601' => '2021-10-05T16:00:00+07:00',
+                'document' => $document
+            ];
+            $this->status = 'success';
+        }catch(DecryptException $e){
+            $this->status = 'failed';
+            $this->error = $e;
+        }
+        return response()->json([
+            "status" => $this->status,
+            "data" => $this->data,
+            "error" => $this->error
+        ]);
+    }
+
+    public function login(Request $request)
+    {
+        $data = $request->all();
+
+        $validator = Validator::make($data, [
+            'nodaftar' => 'required',
+            'password' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return response(
+                [
+                    'status' => "failed",
+                    'data' => null,
+                    'error' => $validator->errors(),
+                ]
+            );
+        }
+        $document = Pendaftar::select('password', 'nomor')->where('nodaftar', $data['nodaftar'])->get()->first();
+        $hashedPassword = $document->password;
+        if (Hash::check($request->password, $hashedPassword)) {
+            return response()->json([
+                "status" => 'success',
+                "data" => Crypt::encrypt($document->nomor),
+                "message" => "Sukses"
+            ]);
+        }
+        return response()->json([
+            "status" => 'failed',
+            "data" => null,
+            "message" => "Gagal"
         ]);
     }
 }

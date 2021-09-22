@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Request;
 
 // Misc
 Route::post('v1/register', [Ctr\AuthController::class, 'register']);
-Route::post('v1/login', [Ctr\AuthController::class, 'login']);
+// Route::post('v1/login', [Ctr\AuthController::class, 'login']);
 Route::get('warning', [Ctr\AuthController::class, 'warning'])->name('warning');
 
 
@@ -171,8 +171,10 @@ Route::prefix('v1')->group(function () {
     Route::delete('/syarat/{id}', '\App\Http\Controllers\API\SyaratController@destroy');
 
     //jalur_pendaftar
+    Route::get('/daftar/va', '\App\Http\Controllers\API\PendaftarController@va');
     Route::get('/daftar/{id}', '\App\Http\Controllers\API\PendaftarController@show');
     Route::post('/daftar', '\App\Http\Controllers\API\PendaftarController@store');
+    Route::post('/login', [Ctr\PendaftarController::class, 'login']);
     Route::post('/daftar/{id}', '\App\Http\Controllers\API\PendaftarController@update');
     Route::delete('/daftar/{id}', '\App\Http\Controllers\API\PendaftarController@destroy');
     
