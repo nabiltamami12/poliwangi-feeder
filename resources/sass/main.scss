@@ -20,10 +20,6 @@ body {
     cursor: pointer;
 }
 
-.page-heading {
-    @include mixintext(600, 1.125rem, 1.22em, $font-black);
-}
-
 .form-row {
     display: flex;
     margin-right: 0;
@@ -43,72 +39,78 @@ body {
 
 .sidenav#sidenav-main {
     background-color: #fff;
-    padding: 0;
-    margin: 0;
-
-    .navbar-brand-img,
-    .navbar-brand > img {
-        max-width: 150%;
-        max-height: auto;
+    .sidenav-header {
+        .navbar-brand-img {
+            max-width: 150%;
+            max-height: auto;
+        }
     }
 
-    .navbar-nav {
+    .sidenav-menu {
         margin-top: 10px;
+        .nav-link,
+        .nav-link-submenu {
+            border-radius: 0.5rem;
+            margin: 0 6px;
+            padding: 12.5px 17px;
 
-        .nav-item {
-            position: relative;
-            list-style: none;
-
-            .nav-item-dropdown-content {
-                padding-left: 35px;
+            .iconify {
+                color: $font-black;
+                font-size: 1rem;
+                & + .nav-link-text {
+                    margin-left: 1.1rem;
+                }
             }
+            .mini_icon {
+                width: calc(1rem + 1.1rem);
+            }
+            .nav-link-text {
+                @include mixintext(500, 0.875rem, 1.22em, $font-black);
+                display: none;
+            }
+            &.aktif {
+                background-color: #f6f9fc;
+                .iconify {
+                    color: $primary;
+                }
+            }
+        }
 
-            div.nav-link {
+        div.nav-link {
+            cursor: pointer;
+            .nav-link-text::after {
+                content: url("https://api.iconify.design/bx/bx-chevron-right.svg");
+                margin: auto 0;
+                position: absolute;
+                right: 25px;
+                transition: -webkit-transform 0.5s ease-in-out;
+                -webkit-transition: -webkit-transform 0.5s ease-in-out;
+                transform: rotate(0deg);
+            }
+            &.open {
                 .nav-link-text::after {
-                    content: url("https://api.iconify.design/bx/bx-chevron-right.svg");
-                    margin: auto 0;
-                    position: absolute;
-                    right: 25px;
                     transition: -webkit-transform 0.5s ease-in-out;
                     -webkit-transition: -webkit-transform 0.5s ease-in-out;
-                    transform: rotate(0deg);
-                }
-                &.open {
-                    .nav-link-text::after {
-                        transition: -webkit-transform 0.5s ease-in-out;
-                        -webkit-transition: -webkit-transform 0.5s ease-in-out;
-                        transform: rotate(90deg);
-                    }
+                    transform: rotate(90deg);
                 }
             }
+            & + ul .nav-link-text {
+                @include mixintext(500, 0.8125rem, 1.22em, $font-black);
+            }
+        }
+    }
+}
 
+.g-sidenav-show {
+    .sidenav#sidenav-main {
+        .sidenav-menu {
             .nav-link,
             .nav-link-submenu {
-                position: relative;
-                cursor: pointer;
-                margin: 0 6px;
-                padding: 17px;
-
-                &.aktif {
-                    background-color: #f6f9fc;
-                    margin: 0 6px;
-                    border-radius: 0.5rem;
-                    .iconify {
-                        color: $primary;
-                    }
+                .mini_icon {
+                    opacity: 0;
                 }
-
-                .iconify {
-                    color: $font-black;
-                    font-size: 15px;
-                }
-
                 .nav-link-text {
-                    @include mixintext(500, 0.875rem, 1.22em, $font-black);
-                    margin-left: 1.28em;
-                }
-                .nav-link-dropdown-text {
-                    @include mixintext(500, 0.8125rem, 1.22em, $font-black);
+                    display: inline;
                 }
             }
         }
@@ -223,36 +225,6 @@ nav#navbar {
                 background: rgba(6, 46, 70, 0.25);
                 border-radius: 0.25rem;
             }
-        }
-    }
-
-    // ===================== CHART =====================
-    #piechart {
-        border-radius: 0.5rem;
-        background-color: #fff;
-        padding: 1.875rem 1.5625rem;
-        .page-heading {
-            text-align: center;
-            margin-bottom: 1.125rem;
-        }
-
-        .data-piechart {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            grid-column-gap: 1.5rem;
-        }
-
-        .data-item {
-            max-width: 100%;
-            canvas {
-                max-width: 100%;
-            }
-        }
-    }
-
-    #barchart {
-        .page-heading {
-            margin-bottom: 1.25rem;
         }
     }
 
@@ -917,3 +889,75 @@ nav#navbar {
 @import "./keuangan";
 @import "./admin";
 @import "./responsive";
+
+.form_absensiMhs {
+    select.form-control {
+        background-color: rgba(173, 181, 189, 0.2);
+    }
+}
+
+.table_absensiMhs {
+    select.form-control {
+        padding: 0.5rem;
+        margin: 0;
+        min-width: 2.875rem;
+        max-height: 33px;
+        background-image: url("https://api.iconify.design/bx/bx-chevron-down.svg?color=%23FFFFFF");
+        background-position: calc(100% - 0.5rem) center;
+        color: #fff;
+        font-weight: 500;
+        border: 0;
+        option {
+            background-color: #fff;
+        }
+    }
+
+    td:first-child,
+    .main_header th:first-child {
+        background-color: #fff;
+        position: sticky;
+        left: 0;
+        z-index: 3;
+        padding-left: 0.5rem;
+    }
+
+    td:nth-child(2),
+    .main_header th:nth-child(2) {
+        background-color: #fff;
+        position: sticky;
+        left: 6.67rem;
+        z-index: 3;
+        padding-left: 0;
+        padding-right: 0.5rem;
+    }
+
+    td:last-child,
+    .main_header th:last-child {
+        background-color: #fff;
+        position: sticky;
+        right: 0;
+        z-index: 3;
+    }
+
+    .main_header th:first-child,
+    .main_header th:nth-child(2),
+    .main_header th:last-child {
+        background-color: #f6f9fc;
+    }
+
+    .table-hover tbody tr:hover,
+    .table-hover tbody tr:hover td {
+        color: #525f7f;
+        background-color: #f6f9fc;
+    }
+
+    .table-hover tr {
+        transition: none;
+    }
+
+    th {
+        position: sticky;
+        top: 0;
+        z-index: 2;
+    }
+}

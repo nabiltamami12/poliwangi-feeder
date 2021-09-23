@@ -46,32 +46,60 @@
             <ul class="nav-item-dropdown-content">
               <li class="nav-item">
                 <a class="nav-link" href="{{ url('/keuangan/rekapitulasi/datapendaftar')}}">
-                  <span class="nav-link-dropdown-text">Data Pendaftar</span>
+                  <span class="mini_icon">DP</span>
+                  <span class="nav-link-text">Data Pendaftar</span>
                 </a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="{{ url('/keuangan/rekapitulasi/spi')}}">
-                  <span class="nav-link-dropdown-text">SPI</span>
+                  <span class="mini_icon">SP</span>
+                  <span class="nav-link-text">SPI</span>
                 </a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="{{ url('/keuangan/rekapitulasi/piutangmahasiswa')}}">
-                  <span class="nav-link-dropdown-text">Piutang Mahasiswa</span>
+                  <span class="mini_icon">PM</span>
+                  <span class="nav-link-text">Piutang Mahasiswa</span>
                 </a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="{{ url('/keuangan/rekapitulasi/penyisihanpiutang')}}">
-                  <span class="nav-link-dropdown-text">Penyisihan Piutang</span>
+                  <span class="mini_icon">PP</span>
+                  <span class="nav-link-text">Penyisihan Piutang</span>
                 </a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="{{ url('/keuangan/rekapitulasi/inputdatapembayaran')}}">
-                  <span class="nav-link-dropdown-text">Input Data Pembayaran</span>
+                  <span class="mini_icon">ID</span>
+                  <span class="nav-link-text">Input Data Pembayaran</span>
                 </a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="{{ url('/keuangan/rekapitulasi/riwayatpembayaran')}}">
-                  <span class="nav-link-dropdown-text">Riwayat pembayaran</span>
+                  <span class="mini_icon">RP</span>
+                  <span class="nav-link-text">Riwayat Pembayaran</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+
+          <li class="nav-item">
+            <div class="nav-link {{($title === "keuangan-buktipembayaran") ? 'aktif' : ''}}">
+              <i class="iconify" data-icon="bx:bx-dollar-circle"></i>
+              <span class="nav-link-text">Bukti Pembayaran</span>
+            </div>
+            <ul class="nav-item-dropdown-content">
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url('/keuangan/buktipembayaran/email')}}">
+                  <span class="mini_icon">EM</span>
+                  <span class="nav-link-text">Email</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url('/keuangan/buktipembayaran/kwitansi')}}">
+                  <span class="mini_icon">KW</span>
+                  <span class="nav-link-text">Kwitansi</span>
                 </a>
               </li>
             </ul>

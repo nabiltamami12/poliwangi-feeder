@@ -24,7 +24,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('kelas:check')->everyMinute();
+        $schedule->command('kelas:check')->everyThirtyMinutes();
     }
 
     /**

@@ -22,21 +22,24 @@
         <!-- Nav items -->
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link {{($title === "mala-dashboard") ? 'aktif' : ''}}" href="/mahasiswalama/dashboard">
+            <a class="nav-link {{($title === "mala-dashboard") ? 'aktif' : ''}}"
+              href="{{ url('/mahasiswalama/dashboard')}}">
               <i class="iconify" data-icon="bx-bx-home-circle"></i>
               <span class="nav-link-text">Dashboard</span>
             </a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link {{($title === "mala-pembayaran") ? 'aktif' : ''}}" href="/mahasiswalama/pembayaran">
+            <a class="nav-link {{($title === "mala-pembayaran") ? 'aktif' : ''}}"
+              href="{{ url('/mahasiswalama/pembayaran')}}">
               <i class="iconify" data-icon="bx:bx-dollar-circle"></i>
               <span class="nav-link-text">Pembayaran</span>
             </a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link {{($title === "mala-presensi") ? 'aktif' : ''}}" href="/mahasiswalama/presensi">
+            <a class="nav-link {{($title === "mala-presensi") ? 'aktif' : ''}}"
+              href="{{ url('/mahasiswalama/presensi')}}">
               <i class="iconify" data-icon="bx:bx-badge-check"></i>
               <span class="nav-link-text">Presensi</span>
             </a>
@@ -44,25 +47,29 @@
 
           <li class="nav-item">
             <div class="nav-link {{($title === "mala-penilaian") ? 'aktif' : ''}}">
-              <span class=" iconify" data-icon="bx:bx-book-bookmark"></span>
+              <span class="iconify" data-icon="bx:bx-book-bookmark"></span>
               <span class="nav-link-text">Penilaian</span>
             </div>
+
             <ul class="nav-item-dropdown-content">
               <li class="nav-item">
-                <a class="nav-link" href="/mahasiswalama/penilaian/nilaisemester">
-                  <span class="nav-link-dropdown-text">NIlai Semester</span>
+                <a class="nav-link" href="{{ url('/mahasiswalama/penilaian/nilaisemester')}}">
+                  <span class="mini_icon">NS</span>
+                  <span class="nav-link-text">Nilai Semester</span>
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/mahasiswalama/penilaian/khs">
-                  <span class="nav-link-dropdown-text">KHS</span>
+                <a class="nav-link" href="{{ url('/mahasiswalama/penilaian/khs')}}">
+                  <span class="mini_icon">KH</span>
+                  <span class="nav-link-text">KHS</span>
                 </a>
               </li>
             </ul>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link {{($title === "mala-formcuti") ? 'aktif' : ''}}" href="/mahasiswalama/formcuti">
+            <a class="nav-link {{($title === "mala-formcuti") ? 'aktif' : ''}}"
+              href="{{ url('/mahasiswalama/formcuti')}}">
               <i class="iconify" data-icon="bx:bx-calendar-star"></i>
               <span class="nav-link-text">Form Cuti</span>
             </a>

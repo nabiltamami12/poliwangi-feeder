@@ -6,31 +6,34 @@
 
 <!-- Page content -->
 <section class="page-content container-fluid">
-  <div id="piechart" class="shadow mt-4">
-    <div class="data-piechart">
-      <div class="data-item">
-        <h1 class="page-heading">Mahasiswa</h1>
-        <canvas id="piechart-mahasiswa"></canvas>
-      </div>
-      <div class="data-item">
-        <h1 class="page-heading">Alumni</h1>
-        <canvas id="piechart-alumni"></canvas>
-      </div>
-      <div class="data-item">
-        <h1 class="page-heading">Dosen</h1>
-        <canvas id="piechart-dosen"></canvas>
-      </div>
-      <div class="data-item">
-        <h1 class="page-heading">Pegawai</h1>
-        <canvas id="piechart-pegawai"></canvas>
-      </div>
-    </div>
-  </div>
+  <div class="row">
+    <div class="col-xl-12">
+      <div class="card shadow padding--big mt-4">
+        <div class="row">
+          <div class="col-6 col-sm-3">
+            <h2 class="card_title text-center mb-4">Mahasiswa</h2>
+            <canvas id="piechart-mahasiswa"></canvas>
+          </div>
 
-  <div id="barchart">
-    <div class="row mt-4-5 mb-4">
-      <div class="col-12">
-        <h1 class="page-heading">Mahasiswa Per tahun</h1>
+          <div class="col-6 col-sm-3">
+            <h2 class="card_title text-center mb-4">Alumni</h2>
+            <canvas id="piechart-alumni"></canvas>
+          </div>
+
+          <div class="col-6 col-sm-3 mt-5 mt-sm-0">
+            <h2 class="card_title text-center mb-4">Dosen</h2>
+            <canvas id="piechart-dosen"></canvas>
+          </div>
+
+          <div class="col-6 col-sm-3 mt-5 mt-sm-0">
+            <h2 class="card_title text-center mb-4">Pegawai</h2>
+            <canvas id="piechart-pegawai"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <div class="my-4-5">
+        <h2 class="card_title mb-3">Mahasiswa Per Tahun</h2>
         <canvas id="mahasiswa-per-tahun"></canvas>
       </div>
     </div>
@@ -44,5 +47,6 @@
   src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.0.0-rc.1/chartjs-plugin-datalabels.min.js"
   integrity="sha512-+UYTD5L/bU1sgAfWA0ELK5RlQ811q8wZIocqI7+K0Lhh8yVdIoAMEs96wJAIbgFvzynPm36ZCXtkydxu1cs27w=="
   crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="{{ asset('js/chart.js') }}"></script>
+<script src="{{ asset('js/piechart.js') }}"></script>
+<script src="{{ asset('js/barchartMahasiswaTahun.js') }}"></script>
 @endsection

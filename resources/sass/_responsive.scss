@@ -3,14 +3,17 @@
     .modal-xl {
         max-width: 630px;
     }
-    .g-sidenav-pinned {
-        .sidenav#sidenav-main {
-            min-width: 288px;
-            max-width: 288px;
-        }
-        .main-content#panel {
-            margin-left: 288px;
-        }
+    .g-sidenav-pinned .sidenav.fixed-left + .main-content {
+        margin-left: 288px;
+    }
+    .g-sidenav-pinned .sidenav.fixed-right + .main-content {
+        margin-left: 288px;
+    }
+    .sidenav:hover {
+        max-width: 288px;
+    }
+    .g-sidenav-pinned .sidenav {
+        max-width: 288px !important;
     }
     select#dataperhalaman {
         max-height: 1.5rem;
@@ -114,16 +117,6 @@
                 img {
                     min-height: 120px;
                 }
-            }
-        }
-
-        #piechart {
-            h1 {
-                margin-bottom: 0;
-            }
-            .data-piechart {
-                grid-template-columns: repeat(2, 1fr);
-                grid-row-gap: 24px;
             }
         }
     }

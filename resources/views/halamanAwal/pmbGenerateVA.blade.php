@@ -11,13 +11,18 @@
 -->
 <!DOCTYPE html>
 <html>
-
+<script type="text/javascript">
+  if (localStorage.getItem('pmb') == null) {
+    window.location.href = "{{url('/register')}}"
+  }
+  var url_api = "{{ url('/api/v1') }}";
+</script>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
   <meta name="author" content="Creative Tim">
-  <title>Register | {{ config('app.name') }}</title>
+  <title>Pembayaran VA | {{ config('app.name') }}</title>
   <!-- Favicon -->
   <link rel="icon" href="{{ url('argon') }}/assets/img/brand/favicon.png" type="image/png">
   <!-- Icons -->
@@ -78,7 +83,7 @@
                   <label class="mt-4">VA untuk Pembayaran Biaya Pendaftaran</label>
                   <div class="field_kode mt-2">
                     <input type="text" class="form-control font-weight-bold pl-2 rounded" id="va-aktif"
-                      value="1281928746273601" readonly>
+                      value="loading.." readonly>
                     <button class="salin_kode btn btn-primary">Salin Kode</button>
                   </div>
                 </div>
@@ -88,7 +93,7 @@
                 <div class="row mt-4">
                   <div class="col d-flex justify-content-between">
                     <p class="mb-0 text-dark">Total Tagihan</p>
-                    <h1 class="mb-0">Rp 201.000</h1>
+                    <h1 class="mb-0" id="trx-amount">loading..</h1>
                   </div>
                 </div>
               </div>
@@ -97,7 +102,7 @@
                 <div class="instruksi_pembayaran mt-4">
                   <ul>
                     <li>Pilih Transaksi Lain > Pembayaran > Lainnya > Virtual Account BNI</li>
-                    <li>Masukkan Nomor VA 128 1281928746273601 kemudian pilih Benar</li>
+                    <li>Masukkan Nomor VA <span id="va-aktif-intruksi">loading..</span> kemudian pilih Benar</li>
                     <li>Periksa informasi yang tertera di layar. Pastikan Merchant adalah Politeknik Negeri
                       Banyuwangi, <br> Total tagihan sudah benar dan username. Jika benar, pilih Ya.</li>
                   </ul>
@@ -123,9 +128,32 @@
   <!-- Argon JS -->
   <script src="{{ url('argon') }}/assets/js/argon.js?v=1.2.0"></script>
   <script type="text/javascript">
-    function auth() {
-      window.location = "{{ url('/admin/dashboard') }}";
-    }
+    const toCurrency = (number) => 
+      Intl.NumberFormat("id-ID", { style : 'currency', currency:'IDR', minimumFractionDigits: 0 }).format(number);
+
+    $.ajax({
+      url: url_api+"/daftar/va/",
+      type: 'get',
+      dataType: 'json',
+      data: {},
+      headers: {
+        'token': localStorage.getItem('pmb')
+      },
+      beforeSend: function(text) {
+      },
+      success: function(res) {
+        if (res.status=="success") {
+          if (res.data.is_lunas == 1) {
+            window.location.href = "{{url('/mahasiswabaru/verifikasidata')}}"
+          }else{
+            $('#va-aktif').val(res.data.virtual_account)
+            $('#va-aktif-intruksi').text(res.data.virtual_account)
+            $('#trx-amount').text(toCurrency(res.data.trx_amount))
+          }
+        } else {
+        }
+      }
+    });
 
     const input = document.getElementById('va-aktif');
     const coppyBtn = document.querySelector('.salin_kode');

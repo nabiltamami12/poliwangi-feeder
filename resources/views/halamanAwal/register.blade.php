@@ -97,6 +97,10 @@
                       <label for="nama-lengkap">Nama Lengkap Calon Pendaftar<span>*</span></label>
                       <input type="text" class="form-control" id="nama-lengkap" placeholder="Nama Lengkap" required name="nama">
                     </div>
+                    <div class="form-group">
+                      <label for="nama-ayah">Email<span>*</span></label>
+                      <input type="email" class="form-control" id="email" placeholder="useremail@provider.com" required name="email">
+                    </div>
                     <div class="form-group mt-3">
                       <label>Tanggal Lahir<span>*</span></label>
                       <div class="d-flex align-items-center date_picker">
@@ -146,25 +150,6 @@
                     </div>
                   </div>
                 </div>
-
-                <div class="row justify-content-center">
-                  <div class="col">
-                    <h2 class="text-center mt-3">Data Login</h2>
-                    <hr>
-                    <div class="form-group">
-                      <label for="nama-ayah">Email<span>*</span></label>
-                      <input type="email" class="form-control" id="email" placeholder="useremail@provider.com" required name="email">
-                    </div>
-                    <div class="form-group mt-3">
-                      <label for="nama-ibu">Password<span>*</span></label>
-                      <input type="password" class="form-control" id="password" placeholder="" required name="password">
-                    </div>
-                    <div class="form-group mt-3">
-                      <label for="nama-ibu">Ulangi Password<span>*</span></label>
-                      <input type="password" class="form-control" id="password_confirmation" placeholder="" required name="password_confirmation">
-                    </div>
-                  </div>
-                </div>
               </div>
               <button type="submit" class="btn btn-primary w-100 mt-4 rounded-sm">Submit</button>
             </div>
@@ -172,7 +157,7 @@
             </div>
             <div class="row register_account">
               <div class="col text-center">
-                <p>Sudah punya akun? <a href="/">Klik Disini</a></p>
+                <p>Sudah punya akun? <a href="{{ url('/') }}">Klik Disini</a></p>
               </div>
             </div>
           </div>
@@ -221,19 +206,18 @@
             processData: false,
             contentType: false,
             beforeSend: function(text) {
-                // loading func
-                console.log("loading")
-                // loading('show')
+              // loading func
+              console.log("loading")
+              // loading('show')
             },
             success: function(res) {
               console.log(res)
-                if (res.status=="success") {
-                    // window.location.href = "{{url('/akademik/master/datajurusan')}}";                    
-                } else {
-                    // alert gagal
-                }
-                // loading('hide')
-
+              if (res.status=="success") {
+                localStorage.setItem('pmb', res.data)
+                window.location.href = "{{url('/pmbgenerateva')}}"
+              } else {
+                alert('Error: '.res.data.message)
+              }
             }
         });
       });

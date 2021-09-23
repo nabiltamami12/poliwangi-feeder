@@ -16,9 +16,9 @@
               <h2 class="mb-0 text-center text-md-left">Data Mahasiswa</h2>
             </div>
             <div class="col-12 col-md-6 text-center text-md-right mt-3 mt-md-0">
-              <button type="button" onclick="add_btn()" class="btn btn-primary">
-                <span class="iconify mr-2" data-icon="bx:bxs-plus-circle"></span>
-                Tambah
+              <button type="button" onclick="cetak()" class="btn btn-warning">
+                <span class="iconify mr-2" data-icon="bx:bx-printer"></span>
+                Cetak 
               </button>
             </div>
           </div>
@@ -39,8 +39,8 @@
               </select>
             </div>
             <div class="col-md-4 form-group mt-3 mt-md-0">
-              <label for="status-mahasiswa">Status Mahasiswa</label>
-              <select class="form-control" id="status" name="status">
+              <label for="matakuliah">Matakuliah</label>
+              <select class="form-control" id="matakuliah" name="matakuliah">
                 
               </select>
             </div>
@@ -54,9 +54,9 @@
                 <th scope="col" class="text-center px-2">No</th>
                 <th scope="col">NIM</th>
                 <th scope="col">Nama</th>
-                <th scope="col" class="text-center">Tanggal Lahir</th>
-                <th scope="col" class="text-center">No. Telp</th>
-                <th scope="col" class="text-center">Email</th>
+                <th scope="col" class="text-center">Kehadiran</th>
+                <th scope="col" class="text-center">Tidak Hadir</th>
+                <th scope="col" class="text-center">Ketentuan Kehadiran</th>
                 <th scope="col" class="text-center">Aksi</th>
               </tr>
             </thead>
@@ -77,7 +77,6 @@
   $('#program_studi').on('change',function (e) {
     var program_studi = $(this).val()
     var kelas = $.grep(dataGlobal['kelas'], function(e){ return e.program_studi == program_studi; });
-    
     $('#kelas').html('')
     var optKelas = `<option value=""> - </option>`;
     $.each(kelas,function (key,row) {
@@ -85,35 +84,39 @@
     })
     $('#kelas').append(optKelas); 
   })
-  $('select').on('change',function (e) {
-    var url = `${url_api}/mahasiswa?program_studi=${$('#program_studi').val()}&status=${$('#status').val()}&kelas=${$('#kelas').val()}`;
+  $('#kelas').on('change',function (e) {
+    var kelas = $(this).val()
+    var matakuliah = $.grep(dataGlobal['matakuliah'], function(e){ return e.tahun == dataGlobal['periode']['tahun']; });
+    matakuliah = $.grep(matakuliah, function(e){ return e.semester == dataGlobal['periode']['semester']; });
+    matakuliah = $.grep(matakuliah, function(e){ return e.kelas == kelas; });
+
+    $('#matakuliah').html('')
+    var optMatakuliah = `<option value=""> - </option>`;
+    $.each(matakuliah,function (key,row) {
+      optMatakuliah += `<option value="${row.nomor}">${row.matakuliah}</option>`
+    })
+    $('#matakuliah').append(optMatakuliah); 
+  })
+  $('#matakuliah').on('change',function (e) {
+    var url = `${url_api}/absensi/rekap-kelas?kelas=${$('#kelas').val()}&tahun=${dataGlobal['periode']['tahun']}&semester=${dataGlobal['periode']['semester']}&matakuliah=${$('#matakuliah').val()}`;
     dt.ajax.url(url).load();
   })
 } );
 async function getData() {
-    var optProgram,optJurusan,optKelas,optStatus;
+    var optProgram,optJurusan,optKelas,optMatakuliah;
+    var optProgram = `<option value=""> - </option>`;
+
     $.each(dataGlobal['prodi'],function (key,row) {
         optProgram += `<option value="${row.nomor}">${row.nama_program} ${row.program_studi}</option>`
     })
     $('#program_studi').append(optProgram)
 
-    var kelas = $.grep(dataGlobal['kelas'], function(e){ return e.program_studi == $('#program_studi').val(); });
-    $('#kelas').html('')
-    var optKelas = `<option value=""> - </option>`;
-    $.each(kelas,function (key,row) {
-      optKelas += `<option value="${row.nomor}">${row.kode}</option>`
-    })
-    $('#kelas').append(optKelas); 
-
-    $.each(dataGlobal['status'],function (key,row) {
-        optStatus += `<option value="${row.kode}">${row.status}</option>`
-    })
-    $('#status').append(optStatus)
+    
     setDatatable();
 }
 function setDatatable() {
   var nomor = 1;
-  dt_url = `${url_api}/mahasiswa?program_studi=${$('#program_studi').val()}&status=${$('#status').val()}&kelas=${$('#kelas').val()}`;
+  dt_url = `${url_api}/absensi/rekap-kelas?kelas=${$('#kelas').val()}&tahun=${dataGlobal['periode']['tahun']}&semester=${dataGlobal['periode']['semester']}&matakuliah=${$('#matakuliah').val()}`;
 dt_opt = {
   "columnDefs": [
         {
@@ -127,7 +130,7 @@ dt_opt = {
           "aTargets": [1],
           "mData": null,
           "mRender": function(data, type, full) {
-            res = data['nrp'];
+            res = data['nim'];
             return (res==null)?"-":res;
           }
         },{
@@ -141,36 +144,61 @@ dt_opt = {
           "aTargets": [3],
           "mData": null,
           "mRender": function(data, type, full) {
-            res = data['tgllahir'];
+            res = data['hadir'];
             return (res==null)?"-":res;
           }
         },{
           "aTargets": [4],
           "mData": null,
           "mRender": function(data, type, full) {
-            res = data['notelp'];
+            res = data['tidak_hadir'];
             return (res==null)?"-":res;
           }
         },{
           "aTargets": [5],
           "mData": null,
           "mRender": function(data, type, full) {
-            res = data['email'];
+            res = 16;
             return (res==null)?"-":res;
           }
         },{
           "aTargets": [6],
           "mData": null,
           "mRender": function(data, type, full) {
-            var id = data['nomor'];
-            var text_hapus = data['nama'];
-            var btn_update = `<span class="iconify edit-icon" onclick='update_btn(${id})' data-icon="bx:bx-edit-alt" ></span>` 
-            var btn_delete = `<span class="iconify delete-icon" data-icon="bx:bx-trash"  onclick='delete_btn(${id},"mahasiswa","mahasiswa","${text_hapus}")'></span>`; 
-            res = btn_update+" "+btn_delete;
+            var btn_detail = `<span class="iconify" onclick='detail_btn(${data['mahasiswa']})' data-icon="bx:bx-group" ></span>` 
+            res = btn_detail;
             return res;
           }
         },
       ]}
+}
+function detail_btn(id) {
+    window.location.href = window.location.href+"/detail/"+id+"/"+$('#kelas').val()+"/"+$('#matakuliah').val();
+}
+function cetak() {
+    console.log($('#kelas').val())
+    console.log($('#matakuliah').val())
+    if (($('#kelas').val()==null || $('#kelas').val()=="") || ($('#matakuliah').val()==null || $('#matakuliah').val()=="") ) {
+        alert('Pilih kelas terlebih dahulu!')
+    } else {
+      var id_kelas = $('#kelas').val()
+      var matakuliah = $('#matakuliah').val()
+      
+      var arr = {
+        'tahun' : dataGlobal['periode']['tahun'],
+        'semester' : dataGlobal['periode']['semester'],
+        'prodi' : $('#program_studi :selected').text(),
+        'kelas' : $('#kelas :selected').text(),
+        'id_kelas' : id_kelas,
+        'matakuliah' : $('#matakuliah :selected').text(),
+        'id_matakuliah' : matakuliah,
+        'dosen' : '',
+      }
+      console.log(arr)
+      localStorage.setItem('cetak-absen', JSON.stringify(arr));
+      
+        window.open("{{url('akademik/kuliah/cetak-absensi-kelas/')}}",'_blank');
+    }
 }
 </script>
 @endsection

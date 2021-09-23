@@ -115,39 +115,28 @@
 
 @section('js')
 <script>
-  $(function() {
-    $(".date-input").datepicker({
-      format: "dd MM yyyy",
-    });
-  });
+  // $(function() {
+  //   $(".date-input").datepicker({
+  //     format: "dd MM yyyy",
+  //   });
+  // });
 
   $(document).ready(function() {
     var id = "{{$id}}";
     getData(id);
-    $('#jalur_penerimaan').on('change', function(e) {
-      var program_studi = $(this).val()
-      var kelas = $.grep(dataGlobal['kelas'], function(e) {
-        return e.program_studi == program_studi;
-      });
-      console.log(program_studi)
-      console.log(kelas)
-      $('#kelas').html('')
-      var optKelas = `<option value=""> - </option>`;
-      $.each(kelas, function(key, row) {
-        optKelas += `<option value="${row.nomor}">${row.kode}</option>`
-      })
-      $('#kelas').append(optKelas);
-    })
 
+    if (id != "") {
+      getData(id);
+    }
     // form tambah data
     $("#form_cu").submit(function(e) {
       e.preventDefault();
       var data = $('#form_cu').serialize();
       if (id != "") {
-        var url = url_api + "/matakuliah/" + id;
+        var url = url_api + "/jalurpmb/" + id;
         var type = "put";
       } else {
-        var url = url_api + "/matakuliah";
+        var url = url_api + "/jalurpmb";
         var type = "post";
       }
       $.ajax({
@@ -162,76 +151,71 @@
         },
         success: function(res) {
           if (res.status == "success") {
-            window.location.href = "{{url('/akademik/master/datamatakuliah')}}";
+            window.location.href = "{{url('/admin/PMB/settingJalurPenerimaan')}}";
           } else {
             // alert gagal
           }
           loading('hide')
+
         }
       });
     });
-
   });
 
-  async function getData(id) {
-
-
-    var optProdi = `<option value=""> - </option>`;
-    $.each(dataGlobal['prodi'], function(key, row) {
-      optProdi += `<option value="${row.nomor}">${row.nama_program} ${row.program_studi}</option>`
+  function getData(id) {
+    var optJalur_daftar = `<option value=""> - </option>`;
+    $.each(dataGlobal['jalur_daftar'], function(key, row) {
+      optJalur_daftar += `<option value="${row.nomor}">${row.nama}</option>`
     })
-    $('#program_studi').append(optProdi)
+    $('#jalur_daftar').append(optJalur_daftar)
 
-    var optMatkulJenis = `<option value=""> - </option>`;
-    $.each(dataGlobal['mk_jenis'], function(key, row) {
-      optMatkulJenis += `<option value="${row.nomor}">${row.matakuliah_jenis}</option>`
+    var optTanggal_awal = `<option value=""> - </option>`;
+    $.each(dataGlobal['tanggal_awal'], function(key, row) {
+      optTanggal_awal += `<option value="${row.nomor}">${row.nama}</option>`
     })
-    $('#matakuliah_jenis').append(optMatkulJenis)
-    $('#mk_group').append(optMatkulJenis)
+    $('#tanggal_awal').append(optTanggal_awal)
 
-    if (id != "") {
-      $.ajax({
-        url: url_api + "/jalur_pmb/" + id,
-        type: 'get',
-        dataType: 'json',
-        data: {},
-        beforeSend: function(text) {
-          // loading func
-          console.log("loading")
-          loading('show')
-        },
-        success: function(res) {
-          if (res.status == "success") {
-            var data = res['data'][0];
-            $.each(data, function(key, row) {
-              $('#' + key).val(row);
-            })
-            $('#masuk_penilaian').val(data.masuk_penilaian).change();
-            $('#wali_kelas').val(data.id_wali_kelas).change();
+    var optTanggal_akhir = `<option value=""> - </option>`;
+    $.each(dataGlobal['tanggal_akhir'], function(key, row) {
+      optTanggal_akhir += `<option value="${row.nomor}">${row.nama}</option>`
+    })
+    $('#tanggal_akhir').append(optTanggal_akhir)
 
-            var kelas = $.grep(dataGlobal['kelas'], function(e) {
-              return e.program_studi == data.program_studi;
-            });
+    var optBiaya = `<option value=""> - </option>`;
+    $.each(dataGlobal['biaya'], function(key, row) {
+      optBiaya += `<option value="${row.nomor}">${row.nama}</option>`
+    })
+    $('#biaya').append(optBiaya)
 
-            var optKelas = `<option value=""> - </option>`;
-            $.each(kelas, function(key, row) {
-              if (row.kelas == data.kelas) {
-                var select = "selected";
-              } else {
-                var select = "";
-              }
+    var optKuota = `<option value=""> - </option>`;
+    $.each(dataGlobal['kuota'], function(key, row) {
+      optKuota += `<option value="${row.nomor}">${row.nama}</option>`
+    })
+    $('#kuota').append(optKuota)
 
-              optKelas += `<option ${select} value="${row.nomor}">${row.kode}</option>`
-            })
-            $('#kelas').append(optKelas);
-
-          } else {
-            // alert gagal
-          }
-          loading('hide')
+    $.ajax({
+      url: url_api + "/jalurpmb/" + id,
+      type: 'get',
+      dataType: 'json',
+      data: {},
+      beforeSend: function(text) {
+        // loading func
+        console.log("loading")
+        loading('show')
+      },
+      success: function(res) {
+        if (res.status == "success") {
+          var data = res['data'][0];
+          $.each(data, function(key, row) {
+            $('#' + key).val(row);
+          })
+        } else {
+          // alert gagal
         }
-      });
-    }
+        loading('hide')
+
+      }
+    });
   }
 </script>
 @endsection
