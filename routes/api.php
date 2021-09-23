@@ -211,10 +211,16 @@ Route::prefix('v1')->group(function () {
 
     // Berkas Keuangan
     Route::post('berkas_keuangan', [Ctr\BerkasKeuanganController::class, 'store']);
+    Route::get('/approve/{id}', [Ctr\BerkasKeuanganController::class, 'approve']);
+    Route::post('/perjanjian/{id}', [Ctr\BerkasKeuanganController::class, 'perjanjian']);
+
+
 
 
     // example use bni api
     Route::get('/test', [Ctr\MahasiswaController::class, 'create_va']);
+
+
 
 });
 
