@@ -2608,3 +2608,11 @@ nav#navbar h1 {
   top: 0;
   z-index: 2;
 }
+.btn-modal-ok {
+  background-color: #34C38F;
+  color:#fff;
+}
+.btn-modal-cancel {
+  border-color: #F46A6A;
+  color:#F46A6A;
+}
