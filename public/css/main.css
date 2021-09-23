@@ -2546,7 +2546,10 @@ nav#navbar h1 {
   }
 }
 .form_absensiMhs select.form-control {
+  background-image: url("https://api.iconify.design/bx/bx-chevron-down.svg?color=%23ADB5BD");
   background-color: rgba(173, 181, 189, 0.2);
+  font-weight: 500;
+  color: #adb5bd;
 }
 
 .table_absensiMhs select.form-control {
@@ -2559,6 +2562,7 @@ nav#navbar h1 {
   color: #fff;
   font-weight: 500;
   border: 0;
+  box-shadow: none;
 }
 .table_absensiMhs select.form-control option {
   background-color: #fff;
@@ -2575,7 +2579,6 @@ nav#navbar h1 {
 .table_absensiMhs .main_header th:nth-child(2) {
   background-color: #fff;
   position: sticky;
-  left: 6.67rem;
   z-index: 3;
   padding-left: 0;
   padding-right: 0.5rem;
@@ -2594,7 +2597,7 @@ nav#navbar h1 {
 }
 .table_absensiMhs .table-hover tbody tr:hover,
 .table_absensiMhs .table-hover tbody tr:hover td {
-  color: #525f7f;
+  color: #041f2f;
   background-color: #f6f9fc;
 }
 .table_absensiMhs .table-hover tr {

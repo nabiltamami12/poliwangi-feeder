@@ -43,8 +43,8 @@
 
             <hr class="my-4">
 
-            <div class="table-responsive table_absensiMhs p-0">
-              <table cellspacing="0" class="table align-items-center table-flush table-borderless table-hover">
+            <div class="table-responsive table_absensiMhs">
+              <table class="table align-items-center table-flush table-borderless table-hover">
                 <thead class="table-header">
                   <tr class="main_header">
                     <th rowspan="2" scope="col" class="text-center">NIM</th>
@@ -53,22 +53,22 @@
                     <th rowspan="2" scope="col" class="text-center px-1">Presentase</th>
                   </tr>
                   <tr>
-                    <th colspan="1" scope="col" class="text-center px-1">1</th>
-                    <th colspan="1" scope="col" class="text-center px-1">2</th>
-                    <th colspan="1" scope="col" class="text-center px-1">3</th>
-                    <th colspan="1" scope="col" class="text-center px-1">4</th>
-                    <th colspan="1" scope="col" class="text-center px-1">5</th>
-                    <th colspan="1" scope="col" class="text-center px-1">6</th>
-                    <th colspan="1" scope="col" class="text-center px-1">7</th>
-                    <th colspan="1" scope="col" class="text-center px-1">8</th>
-                    <th colspan="1" scope="col" class="text-center px-1">9</th>
-                    <th colspan="1" scope="col" class="text-center px-1">10</th>
-                    <th colspan="1" scope="col" class="text-center px-1">11</th>
-                    <th colspan="1" scope="col" class="text-center px-1">12</th>
-                    <th colspan="1" scope="col" class="text-center px-1">13</th>
-                    <th colspan="1" scope="col" class="text-center px-1">14</th>
-                    <th colspan="1" scope="col" class="text-center px-1">15</th>
-                    <th colspan="1" scope="col" class="text-center px-1">16</th>
+                    <th scope="col" class="text-center px-1"">1</th>
+                    <th scope="col" class="text-center px-1"">2</th>
+                    <th scope="col" class="text-center px-1"">3</th>
+                    <th scope="col" class="text-center px-1"">4</th>
+                    <th scope="col" class="text-center px-1"">5</th>
+                    <th scope="col" class="text-center px-1"">6</th>
+                    <th scope="col" class="text-center px-1"">7</th>
+                    <th scope="col" class="text-center px-1"">8</th>
+                    <th scope="col" class="text-center px-1"">9</th>
+                    <th scope="col" class="text-center px-1"">10</th>
+                    <th scope="col" class="text-center px-1"">11</th>
+                    <th scope="col" class="text-center px-1"">12</th>
+                    <th scope="col" class="text-center px-1"">13</th>
+                    <th scope="col" class="text-center px-1"">14</th>
+                    <th scope="col" class="text-center px-1"">15</th>
+                    <th scope="col" class="text-center px-1"">16</th>
                   </tr>
                 </thead>
 
@@ -121,18 +121,23 @@
     })
 
     function chooseColor() {
-      var conceptName = $(this).find(":selected").text();
-      if (conceptName == '-') {
-        $(this).css('backgroundColor', '#fff');
-      }if (conceptName == 'H') {
-        $(this).css('backgroundColor', '#34C38F');
-      } else if (conceptName == 'I') {
-        $(this).css('backgroundColor', '#28A3EB');
-      } else if (conceptName == 'S') {
-        $(this).css('backgroundColor', '#F1B44C');
-      } else if (conceptName == 'A') {
-        $(this).css('backgroundColor', '#F46A6A');
+      let conceptName = $(this).find(":selected").text();
+      if (conceptName === '-') {
+        $(this).css('background-color', '#FFF');
+        $(this).css('color', '#ADB5BD');
+        $(this).css('background-image',
+          'url("https://api.iconify.design/bx/bx-chevron-down.svg?color=%23ADB5BD")');
+        $(this).css('border', '1px solid #ADB5BD');
+      } else if (conceptName === 'H') {
+        $(this).css('background-color', '#34C38F');
+      } else if (conceptName === 'I') {
+        $(this).css('background-color', '#28A3EB');
+      } else if (conceptName === 'S') {
+        $(this).css('background-color', '#F1B44C');
+      } else if (conceptName === 'A') {
+        $(this).css('background-color', '#F46A6A');
       }
+
     }
     function getData() {
       $.ajax({
@@ -184,6 +189,19 @@
 
       $(".table_absensiMhs select").each(chooseColor);
       $('.table_absensiMhs select').change(chooseColor);
+
+      function checkWidth() {
+        let elemWidth = $('.table_absensiMhs tr td:first-child').outerWidth();
+        console.log(elemWidth);
+        $('.table_absensiMhs tr td:nth-child(2),.table_absensiMhs .main_header th:nth-child(2)').css("left",
+          elemWidth + 'px');
+      }
+
+      let resizeObserver = new ResizeObserver(checkWidth);
+      resizeObserver.observe($(".main-content")[0]);
+
+      $(window).on('resize', checkWidth);
+
       $('.select-absen').on('change',function (e) {
         var status = $(this).val(); 
         var mahasiswa = $(this).data('mhs'); 

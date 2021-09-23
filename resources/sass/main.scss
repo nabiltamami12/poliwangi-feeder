@@ -892,7 +892,10 @@ nav#navbar {
 
 .form_absensiMhs {
     select.form-control {
+        background-image: url("https://api.iconify.design/bx/bx-chevron-down.svg?color=%23ADB5BD");
         background-color: rgba(173, 181, 189, 0.2);
+        font-weight: 500;
+        color: $font-placeholder;
     }
 }
 
@@ -907,6 +910,7 @@ nav#navbar {
         color: #fff;
         font-weight: 500;
         border: 0;
+        box-shadow: none;
         option {
             background-color: #fff;
         }
@@ -925,7 +929,6 @@ nav#navbar {
     .main_header th:nth-child(2) {
         background-color: #fff;
         position: sticky;
-        left: 6.67rem;
         z-index: 3;
         padding-left: 0;
         padding-right: 0.5rem;
@@ -947,7 +950,7 @@ nav#navbar {
 
     .table-hover tbody tr:hover,
     .table-hover tbody tr:hover td {
-        color: #525f7f;
+        color: $font-black;
         background-color: #f6f9fc;
     }
 
