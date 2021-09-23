@@ -16,6 +16,10 @@
               <h2 class="mb-0 text-center text-md-left">Data Mahasiswa</h2>
             </div>
             <div class="col-12 col-md-6 text-center text-md-right mt-3 mt-md-0">
+              <button type="button" onclick='detail_btn()' class="btn btn-success">
+                <span class="iconify mr-2" data-icon="bx:bx-pencil"></span>
+                Edit
+              </button>
               <button type="button" onclick="cetak()" class="btn btn-warning">
                 <span class="iconify mr-2" data-icon="bx:bx-printer"></span>
                 Cetak 
@@ -57,7 +61,6 @@
                 <th scope="col" class="text-center">Kehadiran</th>
                 <th scope="col" class="text-center">Tidak Hadir</th>
                 <th scope="col" class="text-center">Ketentuan Kehadiran</th>
-                <th scope="col" class="text-center">Aksi</th>
               </tr>
             </thead>
             <tbody></tbody>
@@ -92,8 +95,9 @@
 
     $('#matakuliah').html('')
     var optMatakuliah = `<option value=""> - </option>`;
+    console.log(matakuliah)
     $.each(matakuliah,function (key,row) {
-      optMatakuliah += `<option value="${row.nomor}">${row.matakuliah}</option>`
+      optMatakuliah += `<option data-kuliah="${row.kuliah}" value="${row.nomor}">${row.matakuliah}</option>`
     })
     $('#matakuliah').append(optMatakuliah); 
   })
@@ -151,7 +155,7 @@ dt_opt = {
           "aTargets": [4],
           "mData": null,
           "mRender": function(data, type, full) {
-            res = data['tidak_hadir'];
+            res = 16 - data['hadir'];
             return (res==null)?"-":res;
           }
         },{
@@ -161,23 +165,20 @@ dt_opt = {
             res = 16;
             return (res==null)?"-":res;
           }
-        },{
-          "aTargets": [6],
-          "mData": null,
-          "mRender": function(data, type, full) {
-            var btn_detail = `<span class="iconify" onclick='detail_btn(${data['mahasiswa']})' data-icon="bx:bx-group" ></span>` 
-            res = btn_detail;
-            return res;
-          }
-        },
+        }
       ]}
 }
 function detail_btn(id) {
-    window.location.href = window.location.href+"/detail/"+id+"/"+$('#kelas').val()+"/"+$('#matakuliah').val();
+  var kelas = $('#kelas').val();
+  var matakuliah = $('#matakuliah').val();
+
+  if((kelas == null || kelas == "") || (matakuliah == null  || matakuliah == "")){
+    alert('Lengkapi kelas dan matakuliah terlebih dahulu')
+  }else{
+    window.location.href = "{{url('akademik/kuliah/absensi/rekap-mahasiswa/')}}"+"/"+kelas+"/"+matakuliah;
+  }
 }
 function cetak() {
-    console.log($('#kelas').val())
-    console.log($('#matakuliah').val())
     if (($('#kelas').val()==null || $('#kelas').val()=="") || ($('#matakuliah').val()==null || $('#matakuliah').val()=="") ) {
         alert('Pilih kelas terlebih dahulu!')
     } else {

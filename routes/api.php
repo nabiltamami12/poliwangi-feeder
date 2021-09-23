@@ -133,12 +133,13 @@ Route::prefix('v1')->group(function () {
     Route::get('/absensi/kelas-batal', [Ctr\AbsensiController::class, 'get_batal_kelas']);
     Route::get('/absensi/rekap-matkul', [Ctr\AbsensiController::class, 'rekap_matkul']);
     Route::get('/absensi/rekap-kelas', [Ctr\AbsensiController::class, 'rekap_kelas']);
-    Route::get('/absensi/cetak-kelas', [Ctr\AbsensiController::class, 'cetak_kelas']);
+    Route::get('/absensi/rekap-kelas-mahasiswa', [Ctr\AbsensiController::class, 'rekap_kelas_mahasiswa']);
     Route::get('/absensi/rekap/detail', [Ctr\AbsensiController::class, 'detail_rekap_absensi']);
     Route::get('/absensi/dosen/kelas', [Ctr\AbsensiController::class, 'show_kelas_dosen']);
     Route::get('/absensi/dosen/{id}', [Ctr\AbsensiController::class, 'show_dosen']);
     Route::get('/absensi/home/{id}', [Ctr\AbsensiController::class, 'one']);
     Route::get('/absensi/{id}', [Ctr\AbsensiController::class, 'show']);
+    Route::post('/absensi-admin', [Ctr\AbsensiController::class, 'absensi_admin_kelas']);
     Route::post('/absensi', [Ctr\AbsensiController::class, 'store']);
     Route::post('/absensi/dosen', [Ctr\AbsensiController::class, 'absensi_dosen']);
     Route::put('/absensi/admin', [Ctr\AbsensiController::class, 'absensi_admin']);
@@ -213,8 +214,17 @@ Route::prefix('v1')->group(function () {
     // Setting Biaya
     Route::get('setting_biaya', [Ctr\SettingBiayaController::class, 'index']);
     Route::post('setting_biaya', [Ctr\SettingBiayaController::class, 'store']);
+<<<<<<< HEAD
+=======
+
+    // Berkas Keuangan
+    Route::post('berkas_keuangan', [Ctr\BerkasKeuanganController::class, 'store']);
+
+
+>>>>>>> beb7bf2a0ec078318246f087cbfcd4759149ad00
     // example use bni api
     Route::get('/test', [Ctr\MahasiswaController::class, 'create_va']);
+
 });
 
 Route::prefix('v1')->middleware('auth:api')->group(function () {

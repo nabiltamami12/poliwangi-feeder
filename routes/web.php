@@ -400,13 +400,18 @@ Route::prefix('akademik')->group(function () {
                 "title" => "rekap-absensi-mahasiswa"
             ]);
         });
-        Route::get('/absensi/rekap/detail/{id}/{kelas}/{matkul}', function () {
+        Route::get('/absensi/rekap/detail/{id}/{kelas}/{matkul}', function ($id,$kelas,$matkul) {
             return view('akademik.kuliah.detailrekapabsensi', [
+                "id" => $id,
+                "kelas" => $kelas,
+                "matkul" => $matkul,
                 "title" => "rekap-absensi-mahasiswa"
             ]);
         });
-        Route::get('/absensi/rekap-mahasiswa', function () {
+        Route::get('/absensi/rekap-mahasiswa/{kelas}/{matkul}', function ($kelas,$matkul) {
             return view('akademik.kuliah.rekapabsensikelasmahasiswa', [
+                "kelas" => $kelas,
+                "matkul" => $matkul,
                 "title" => "rekap-absensi-mahasiswa"
             ]);
         });
@@ -512,11 +517,14 @@ Route::prefix('akademik')->group(function () {
                 "title" => "akademik-kuliah",
             ]);
         });
+<<<<<<< HEAD
         Route::get('/absensi/rekap-mahasiswa', function () {
             return view('akademik.kuliah.rekapAbsensiMahasiswa', [
                 "title" => "akademik-kuliah",
             ]);
         });
+=======
+>>>>>>> beb7bf2a0ec078318246f087cbfcd4759149ad00
     });
 });
 

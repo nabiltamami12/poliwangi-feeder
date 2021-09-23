@@ -1,5 +1,9 @@
 <?php
+
 namespace App\Helpers;
+
+use App\Providers\BniEnc;
+use Exception;
 
 /**
  * Library Access BNI API_V3.0.3
@@ -121,9 +125,9 @@ class BniHelper {
 	}
 
 	
-	public function test()
+	public static function create()
 	{
-		return $this->url;
+		return self::$url;
 	}
 
 }

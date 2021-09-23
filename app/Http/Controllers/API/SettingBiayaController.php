@@ -16,18 +16,25 @@ class SettingBiayaController extends Controller
      */
 
     protected $status = null;
-    protected $err = null;
+    protected $error = null;
     protected $data = null;
 
     public function index()
     {
-        $this->data = SB::where('nama', 'biaya_admin')->get();
-        $this->status = "success";
+        try {
+            $data = SB::where('nama', 'biaya_admin')->first();
+            $this->data = $data->nilai;
+            $this->status = "success";
+        
+        } catch (QueryException $e) {
+            $this->status = "failed";
+            $this->error = $e;
+        }
 
         return response()->json([
             'status' => $this->status,
             'data' => $this->data,
-            'error' => $this->err
+            'error' => $this->error
         ]);
     }
 
@@ -67,61 +74,26 @@ class SettingBiayaController extends Controller
             );
         }
 
-        $this->data = SB::updateOrCreate([
-            'nama' => $data['nama']
-        ],[
-            'nilai' => $data['nilai'], 'keterangan' => $data['keterangan']
-        ]);
+        try {
+            
+            $this->data = SB::updateOrCreate([
+                'nama' => $data['nama']
+            ],[
+                'nilai' => $data['nilai'], 'keterangan' => $data['keterangan']
+            ]);
+    
+            $this->data = $data['nilai'];
+            $this->status = "success";
+        } catch (QueryException $e) {
+            $this->status = "failed";
+            $this->error = $e;
+        }
 
         return response()->json([
-            'status' => $this->status,
-            'data' => $this->data,
-            'error' => $this->err
+            "status" =>$this->status,
+            "data" => $this->data,
+            "error" => $this->error,
         ]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

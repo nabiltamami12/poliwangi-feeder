@@ -15,7 +15,7 @@
               <h2 class="mb-0 text-center text-md-left">Tarif SPI & UKT</h2>
             </div>
             <div class="col text-right">
-              <button type="button" onclick="add_btn()" class="btn btn-primary "><img src="/images/add-icon--white.png" alt="">Tambah</button>
+              <button type="button" onclick="setting_biaya()" class="btn btn-primary ">Biaya Admin</button>
             </div>
           </div>
         </div>
@@ -31,6 +31,7 @@
                 <th rowspan="2" scope="col" class="text-center px-2">Prodi</th>
                 <th rowspan="2" scope="col" class="text-center px-2">Sumbangan<br>pembangunan<br>institusi</th>
                 <th colspan="8" scope="col" class="text-center px-2">Tarif UKT</th>
+                <th rowspan="2" scope="col" class="text-center px-2">Aksi</th>
               </tr>
               <tr>
                 <th colspan="1" scope="col" class="text-center px-2">Kelompok<br>1</th>
@@ -54,14 +55,32 @@
       </div>
     </div>
   </div>
+  <div class="modal fade" id="biayaModal" tabindex="-1" aria-labelledby="deleteModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content p-0 padding--medium">
+        <input type="hidden" id="id_delete">
+        <input type="hidden" id="endpoint">
+
+        <div class="modal-header">
+          <h5 class="modal-title text-center">Setting Biaya Admin</h5>
+        </div>
+        <div class="modal-body">
+            <input type="text" class="form-control" id="biaya_admin" placeholder="Biaya Admin" name="biaya_admin">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-modal-cancel" data-dismiss="modal">Batal</button>
+          <button type="button" class="btn btn--blue btn-modal-ok" id="btn_modal_hapus" onclick="simpan_func()">Simpan</button>
+        </div>
+      </div>
+    </div>
+</div>
 </section>
 <script>
 const toCurrency = (number) => 
       Intl.NumberFormat("id-ID", { style : 'currency', currency:'IDR', minimumFractionDigits: 0 }).format(number);
   
-$(document).ready(function() {
-
-  
+$(document).ready(function() {  
   var nomor = 1;
   dt_url = `${url_api}/keuangan/rekap_ukt`;
   dt_opt = {
@@ -154,12 +173,64 @@ $(document).ready(function() {
           res = toCurrency(data['kelompok_8']);
           return res;
         }
+      },{
+        "aTargets": [11],
+        "mData": null,
+        "className": 'text-center px-2',
+        "mRender": function(data, type, full) {          
+          var id = data['id'];
+          var btn_update = `<i class="iconify edit-icon" onclick='update_btn(${id})' data-icon="bx:bx-edit-alt" ></i>` 
+          return res = btn_update;
+        }
       }
     ]}
   } 
 );
 
+function setting_biaya() {
+  $('#biayaModal').modal('show')
+  $.ajax({
+      url: url_api+"/setting_biaya",
+      type: 'get',
+      dataType: 'json',
+      data: {},
+      beforeSend: function(text) {
+              // loading func
+              console.log("loading")
+              loading('show')
+      },
+      success: function(res) {
+          if (res.status=="success") {
+            $('#biaya_admin').val(res.data);              
+          } else {
+              // alert gagal
+          }
+          loading('hide')
 
+      }
+  });
+}
+function simpan_func() {
+    $.ajax({
+        url: url_api+"/setting_biaya",
+        type: 'post',
+        dataType: 'json',
+        data: {'nilai':$('#biaya_admin').val()},
+        beforeSend: function(text) {
+                // loading func
+                console.log("loading")
+                loading('show')
+        },
+        success: function(res) {
+            if (res.status=="success") {
+                $('#biayaModal').modal('hide')              
+            } else {
+                // alert gagal
+            }
+            loading('hide')
 
+        }
+    });
+}
 </script>
 @endsection

@@ -135,9 +135,9 @@
 <script>
 var url = $(location).attr('href')
 parts = url.split("/")
-var matkul = parts[parts.length-1]
-var kelas = parts[parts.length-2]
-var mahasiswa = parts[parts.length-3]
+var matkul = "{{$matkul}}";
+var kelas = "{{$kelas}}";
+var mahasiswa = "{{$id}}";
 var dataFilter
 var countData
 var arr_mhs = []
