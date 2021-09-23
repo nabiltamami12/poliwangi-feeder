@@ -230,6 +230,70 @@ class AbsensiController extends Controller
         ]);
     }
 
+    public function absensi_admin_kelas(Request $request)
+    {
+        date_default_timezone_set('Asia/Jakarta');
+        Carbon::setLocale('id');
+
+        $date = Carbon::now()->format('Y-m-d H:i:s');
+    
+        try {
+            
+            $data_kuliah = DB::table('kuliah')
+                                ->select('kuliah.tahun','kuliah.dosen','jam.jam')
+                                ->join('jam','jam.nomor','=','kuliah.jam')
+                                ->where('kuliah.nomor',$request->kuliah)->first();
+
+            foreach ($request->data as $key => $value) {
+                $id_absensi = $value['nomor'];
+                $arr = [
+                    'kuliah' => $value['kuliah'],
+                    'mahasiswa' => $value['mahasiswa'],
+                    'minggu' => $value['pertemuan'],
+                    'tanggal' => $date,
+                    'tanggal_entry' => $date,
+                    'status' => $value['status'],
+                    'dosen' => $data_kuliah->dosen,
+                ];
+
+                if ($id_absensi=="") {
+                    DB::table('absensi_mahasiswa')->insert($arr);
+                }else{
+                    DB::table('absensi_mahasiswa')->where('nomor',$id_absensi)->update($arr);
+                }
+                
+                $data_kelas_mengajar = [
+                    'tahun' => $data_kuliah->tahun,
+                    'kuliah' => $request->kuliah,
+                    'pertemuan' => $value['pertemuan']
+                ];
+
+                $check = DB::table('kelas_mengajar')->where($data_kelas_mengajar)->first();
+                $data_kelas_mengajar['dosen'] = $data_kuliah->dosen;
+                $data_kelas_mengajar['jam_mulai'] = $data_kuliah->jam;
+                $data_kelas_mengajar['status'] = "hadir";
+                $data_kelas_mengajar['status_kelas'] = "close";
+                if ($check==null) {
+                    DB::table('kelas_mengajar')->insert($data_kelas_mengajar);
+                }else{
+                    DB::table('kelas_mengajar')->where('id',$check->id)->update($data_kelas_mengajar);
+                }
+            }
+            $this->data = null;
+            $this->status = "success";
+        } catch (QueryException $e) {
+            $this->status = "failed";
+            $this->error = $e;
+        }
+        
+
+        return response()->json([
+            "status" => $this->status,
+            "data" => $this->data,
+            "error" => $this->error
+        ]);
+    }
+
     public function absensi_admin(Request $request)
     {
         date_default_timezone_set('Asia/Jakarta');
@@ -920,23 +984,34 @@ class AbsensiController extends Controller
             "error" => $this->error
         ]);
     }
-    public function cetak_kelas(Request $request) {
+    public function rekap_kelas_mahasiswa(Request $request) {
         
         DB::enableQueryLog();
         // Rekap absensi per matakuliah
         DB::statement("SET SQL_MODE=''");
         
+        $date = Carbon::now()->format('Y-m-d H:i:s');
+
         $mhs = Abs::select(
             'mahasiswa.nomor as mahasiswa',
             'mahasiswa.nrp as nim',
             'mahasiswa.nama',
+            'kuliah.dosen',
+            'kuliah.nomor as kuliah',
+            DB::raw("GROUP_CONCAT(absensi_mahasiswa.tanggal) as tanggal"),
             DB::raw("GROUP_CONCAT(absensi_mahasiswa.minggu) as minggu"),
             DB::raw("GROUP_CONCAT(absensi_mahasiswa.status) as status"),
+            DB::raw("GROUP_CONCAT(absensi_mahasiswa.nomor) as nomor_absensi"),
+            DB::raw("CONCAT(program.program,' ',program_studi.program_studi) as prodi"),
+            'kelas.kode as kelas',
+            'matakuliah.matakuliah'
         )
         ->join('kuliah', 'absensi_mahasiswa.kuliah', '=', 'kuliah.nomor')
         ->join('matakuliah', 'kuliah.matakuliah', '=', 'matakuliah.nomor')
         ->join('kelas', 'kuliah.kelas', '=', 'kelas.nomor')
         ->join('mahasiswa', 'absensi_mahasiswa.mahasiswa', '=', 'mahasiswa.nomor')
+        ->join("program_studi","program_studi.nomor", "=", "mahasiswa.program_studi")
+        ->join('program', 'program.nomor', '=', 'program_studi.program')
         ->where('kelas.nomor', $request->kelas)
         ->where('matakuliah.nomor', $request->matakuliah)
         ->where('kuliah.semester', $request->semester)
@@ -950,38 +1025,89 @@ class AbsensiController extends Controller
         $id_kuliah="";
         $id_mahasiswa="";
         $data = [];
+        $info = [];
         $arr_pertemuan = [];
         $arr_minggu = [];
+        $arr_nomor = [];
         $arr_status = [];
+        $arr_check = [];
+        $arr_check_mhs = [];
+        $dosen = "";
         foreach ($mhs as $key => $value) {
+            $dosen = $value->dosen;
             $arr_minggu = explode(",",$value->minggu);
             $arr_status = explode(',',$value->status);
+            $arr_nomor = explode(',',$value->nomor_absensi);
+            $arr_tanggal = explode(',',$value->tanggal);
             $data_minggu = [];
+            $data_nomor = [];
             $x = 0;
             $persentase = 0;
             for ($i=1; $i <= 16 ; $i++) { 
                 $data_minggu[$i] = "";
+                $data_nomor[$i] = "";
+                $k = array_search($i,$arr_minggu); 
                 if (in_array($i,$arr_minggu)) {
-                    $k = array_search($i,$arr_minggu); 
                     $data_minggu[$i] = $arr_status[$k];
+                    $data_nomor[$i] = $arr_nomor[$k];
                     if($arr_status[$k]=="H"){
                         $x++;
                     }
+                    if(!in_array($i,$arr_check)){
+                        array_push($arr_check,$i);
+                    }
                 }
+                
             }
-
             $persentase = ($x/16)*100;
-
+            $info = [
+                'kuliah' => $value->kuliah,
+                'prodi' => $value->prodi,
+                'kelas' => $value->kelas,
+                'matakuliah' => $value->matakuliah,
+            ];
             $arr = [
+                'mahasiswa' => $value->mahasiswa,
                 'nim' => $value->nim,
                 'nama' => $value->nama,
+                'absensi' => $data_nomor,
                 'pertemuan' => $data_minggu,
                 'persentase' => round($persentase)."%"
             ];
-                
+            $arr_check_minggu[$value->mahasiswa] =$data_minggu; 
+            $arr_check_mhs[$value->mahasiswa] =$arr_tanggal; 
             array_push($data,$arr);
         }
-        $this->data = $data;
+        $edit_minggu = [];
+        $y = 0;
+        foreach ($arr_check_minggu as $key => $value) {
+            // echo json_encode($value);
+            for ($i=1; $i <= 16 ; $i++) { 
+                if (in_array($i,$arr_check)) {
+                    // echo $i." - ada = ".$value[$i]." ";
+                    if ($value[$i] == "") {
+                        // echo " insert ".$key." ".json_encode($arr_check_mhs[$key])." ";
+                        $arr = [
+                            'kuliah' => $info['kuliah'],
+                            'mahasiswa' => $key,
+                            'minggu' => $i,
+                            'tanggal' => $date,
+                            'tanggal_entry' => $date,
+                            'status' => "A",
+                            'dosen' => $dosen,
+                        ];
+                        $insert = DB::table('absensi_mahasiswa')->insert($arr);
+                        $value[$i] = "A";
+                        $arr['absensi'][$i] = DB::getPdo()->lastInsertId();
+                    }
+                    // echo " || ";
+                }
+            }
+            $data[$y]['pertemuan'] = $value;
+            $y++;
+        }
+
+        $this->data = ['info'=> $info,'data'=>$data];
         $this->status = "success";
 
         return response()->json([

@@ -15,7 +15,7 @@
                 <h2 class="mb-0">Absensi Mahasiswa</h2>
               </div>
               <div class="col text-right">
-                <button type="button" class="btn btn-primary">
+                <button type="button" id="btn_simpan" class="btn btn-primary">
                   <i class="iconify-inline mr-1" data-icon="bx:bx-save"></i>
                   Simpan
                 </button>
@@ -28,24 +28,15 @@
               <div class="form-row mt-4">
                 <div class="col-md-4 pr-md-4-5">
                   <label for="program-studi">Program Studi</label>
-                  <select class="form-control" id="program-studi">
-                    <option selected="selected">D3 Teknik Informatika</option>
-                    <option>D3 Ilmu Gigi</option>
-                  </select>
+                  <input type="text" class="form-control" readonly id="prodi"  />
                 </div>
                 <div class="col-md-4 px-md-3 mt-3 mt-md-0">
                   <label for="mata-kuliah">Mata Kuliah</label>
-                  <select class="form-control" id="mata-kuliah">
-                    <option>Human Computer Interaction</option>
-                    <option selected="selected">Pemrograman Dasar</option>
-                  </select>
+                  <input type="text" class="form-control" readonly id="matakuliah"  />
                 </div>
                 <div class="col-md-4 pl-md-4-5 mt-3 mt-md-0">
                   <label for="kelas">Kelas</label>
-                  <select class="form-control" id="kelas">
-                    <option selected="selected">1 (Satu) - A</option>
-                    <option>2 (Dua) - A</option>
-                  </select>
+                  <input type="text" class="form-control" readonly id="kelas"  />
                 </div>
               </div>
             </form>
@@ -82,409 +73,7 @@
                 </thead>
 
                 <tbody class="table-body">
-                   <!-- <tr>
-                    <td class="text-center">4891203526</td>
-                    <td class="font-weight-bold text-capitalize">Zarkasyi Matiin</td>
-                    <td class="text-center px-1">
-                      <select class="form-control">
-                        <option selected="selected">H</option>
-                        <option>I</option>
-                        <option>S</option>
-                        <option>A</option>
-                      </select>
-                    </td>
-                    <td class="text-center px-1">
-                      <select class="form-control">
-                        <option selected="selected">H</option>
-                        <option>I</option>
-                        <option>S</option>
-                        <option>A</option>
-                      </select>
-                    </td>
-                    <td class="text-center px-1">
-                      <select class="form-control">
-                        <option selected="selected">H</option>
-                        <option>I</option>
-                        <option>S</option>
-                        <option>A</option>
-                      </select>
-                    </td>
-                    <td class="text-center px-1">
-                      <select class="form-control">
-                        <option selected="selected">H</option>
-                        <option>I</option>
-                        <option>S</option>
-                        <option>A</option>
-                      </select>
-                    </td>
-                    <td class="text-center px-1">
-                      <select class="form-control">
-                        <option selected="selected">H</option>
-                        <option>I</option>
-                        <option>S</option>
-                        <option>A</option>
-                      </select>
-                    </td>
-                    <td class="text-center px-1">
-                      <select class="form-control">
-                        <option selected="selected">H</option>
-                        <option>I</option>
-                        <option>S</option>
-                        <option>A</option>
-                      </select>
-                    </td>
-                    <td class="text-center px-1">
-                      <select class="form-control">
-                        <option selected="selected">H</option>
-                        <option>I</option>
-                        <option>S</option>
-                        <option>A</option>
-                      </select>
-                    </td>
-                    <td class="text-center px-1">
-                      <select class="form-control">
-                        <option selected="selected">H</option>
-                        <option>I</option>
-                        <option>S</option>
-                        <option>A</option>
-                      </select>
-                    </td>
-                    <td class="text-center px-1">
-                      <select class="form-control">
-                        <option selected="selected">H</option>
-                        <option>I</option>
-                        <option>S</option>
-                        <option>A</option>
-                      </select>
-                    </td>
-                    <td class="text-center px-1">
-                      <select class="form-control">
-                        <option selected="selected">H</option>
-                        <option>I</option>
-                        <option>S</option>
-                        <option>A</option>
-                      </select>
-                    </td>
-                    <td class="text-center px-1">
-                      <select class="form-control">
-                        <option selected="selected">H</option>
-                        <option>I</option>
-                        <option>S</option>
-                        <option>A</option>
-                      </select>
-                    </td>
-                    <td class="text-center px-1">
-                      <select class="form-control">
-                        <option selected="selected">H</option>
-                        <option>I</option>
-                        <option>S</option>
-                        <option>A</option>
-                      </select>
-                    </td>
-                    <td class="text-center px-1">
-                      <select class="form-control">
-                        <option selected="selected">H</option>
-                        <option>I</option>
-                        <option>S</option>
-                        <option>A</option>
-                      </select>
-                    </td>
-                    <td class="text-center px-1">
-                      <select class="form-control">
-                        <option selected="selected">H</option>
-                        <option>I</option>
-                        <option>S</option>
-                        <option>A</option>
-                      </select>
-                    </td>
-                    <td class="text-center px-1">
-                      <select class="form-control">
-                        <option selected="selected">H</option>
-                        <option>I</option>
-                        <option>S</option>
-                        <option>A</option>
-                      </select>
-                    </td>
-                    <td class="text-center px-1">
-                      <select class="form-control">
-                        <option selected="selected">H</option>
-                        <option>I</option>
-                        <option>S</option>
-                        <option>A</option>
-                      </select>
-                    </td>
-                    <td class="text-center px-1">100%</td>
-
-                  </tr>
-
-                  <tr>
-                    <td class="text-center">4891203526</td>
-                    <td class="font-weight-bold text-capitalize">Zarkasyi Matiin</td>
-                    <td class="text-center px-1">
-                      <select class="form-control">
-                        <option selected="selected">H</option>
-                        <option>I</option>
-                        <option>S</option>
-                        <option>A</option>
-                      </select>
-                    </td>
-                    <td class="text-center px-1">
-                      <select class="form-control">
-                        <option>H</option>
-                        <option>I</option>
-                        <option selected="selected">S</option>
-                        <option>A</option>
-                      </select>
-                    </td>
-                    <td class="text-center px-1">
-                      <select class="form-control">
-                        <option selected="selected">H</option>
-                        <option>I</option>
-                        <option>S</option>
-                        <option>A</option>
-                      </select>
-                    </td>
-                    <td class="text-center px-1">
-                      <select class="form-control">
-                        <option selected="selected">H</option>
-                        <option>I</option>
-                        <option>S</option>
-                        <option>A</option>
-                      </select>
-                    </td>
-                    <td class="text-center px-1">
-                      <select class="form-control">
-                        <option selected="selected">H</option>
-                        <option>I</option>
-                        <option>S</option>
-                        <option>A</option>
-                      </select>
-                    </td>
-                    <td class="text-center px-1">
-                      <select class="form-control">
-                        <option selected="selected">H</option>
-                        <option>I</option>
-                        <option>S</option>
-                        <option>A</option>
-                      </select>
-                    </td>
-                    <td class="text-center px-1">
-                      <select class="form-control">
-                        <option selected="selected">H</option>
-                        <option>I</option>
-                        <option>S</option>
-                        <option>A</option>
-                      </select>
-                    </td>
-                    <td class="text-center px-1">
-                      <select class="form-control">
-                        <option selected="selected">H</option>
-                        <option>I</option>
-                        <option>S</option>
-                        <option>A</option>
-                      </select>
-                    </td>
-                    <td class="text-center px-1">
-                      <select class="form-control">
-                        <option selected="selected">H</option>
-                        <option>I</option>
-                        <option>S</option>
-                        <option>A</option>
-                      </select>
-                    </td>
-                    <td class="text-center px-1">
-                      <select class="form-control">
-                        <option selected="selected">H</option>
-                        <option>I</option>
-                        <option>S</option>
-                        <option>A</option>
-                      </select>
-                    </td>
-                    <td class="text-center px-1">
-                      <select class="form-control">
-                        <option selected="selected">H</option>
-                        <option>I</option>
-                        <option>S</option>
-                        <option>A</option>
-                      </select>
-                    </td>
-                    <td class="text-center px-1">
-                      <select class="form-control">
-                        <option selected="selected">H</option>
-                        <option>I</option>
-                        <option>S</option>
-                        <option>A</option>
-                      </select>
-                    </td>
-                    <td class="text-center px-1">
-                      <select class="form-control">
-                        <option selected="selected">H</option>
-                        <option>I</option>
-                        <option>S</option>
-                        <option>A</option>
-                      </select>
-                    </td>
-                    <td class="text-center px-1">
-                      <select class="form-control">
-                        <option selected="selected">H</option>
-                        <option>I</option>
-                        <option>S</option>
-                        <option>A</option>
-                      </select>
-                    </td>
-                    <td class="text-center px-1">
-                      <select class="form-control">
-                        <option selected="selected">H</option>
-                        <option>I</option>
-                        <option>S</option>
-                        <option>A</option>
-                      </select>
-                    </td>
-                    <td class="text-center px-1">
-                      <select class="form-control">
-                        <option selected="selected">H</option>
-                        <option>I</option>
-                        <option>S</option>
-                        <option>A</option>
-                      </select>
-                    </td>
-                    <td class="text-center px-1">93.8%</td>
-
-                  </tr>
-
-                  <tr>
-                    <td class="text-center">4891203526</td>
-                    <td class="font-weight-bold text-capitalize">Tiana Levin</td>
-                    <td class="text-center px-1">
-                      <select class="form-control">
-                        <option selected="selected">H</option>
-                        <option>I</option>
-                        <option>S</option>
-                        <option>A</option>
-                      </select>
-                    </td>
-                    <td class="text-center px-1">
-                      <select class="form-control">
-                        <option selected="selected">H</option>
-                        <option>I</option>
-                        <option>S</option>
-                        <option>A</option>
-                      </select>
-                    </td>
-                    <td class="text-center px-1">
-                      <select class="form-control">
-                        <option selected="selected">H</option>
-                        <option>I</option>
-                        <option>S</option>
-                        <option>A</option>
-                      </select>
-                    </td>
-                    <td class="text-center px-1">
-                      <select class="form-control">
-                        <option>H</option>
-                        <option>I</option>
-                        <option>S</option>
-                        <option selected="selected">A</option>
-                      </select>
-                    </td>
-                    <td class="text-center px-1">
-                      <select class="form-control">
-                        <option selected="selected">H</option>
-                        <option>I</option>
-                        <option>S</option>
-                        <option>A</option>
-                      </select>
-                    </td>
-                    <td class="text-center px-1">
-                      <select class="form-control">
-                        <option selected="selected">H</option>
-                        <option>I</option>
-                        <option>S</option>
-                        <option>A</option>
-                      </select>
-                    </td>
-                    <td class="text-center px-1">
-                      <select class="form-control">
-                        <option selected="selected">H</option>
-                        <option>I</option>
-                        <option>S</option>
-                        <option>A</option>
-                      </select>
-                    </td>
-                    <td class="text-center px-1">
-                      <select class="form-control">
-                        <option selected="selected">H</option>
-                        <option>I</option>
-                        <option>S</option>
-                        <option>A</option>
-                      </select>
-                    </td>
-                    <td class="text-center px-1">
-                      <select class="form-control">
-                        <option selected="selected">H</option>
-                        <option>I</option>
-                        <option>S</option>
-                        <option>A</option>
-                      </select>
-                    </td>
-                    <td class="text-center px-1">
-                      <select class="form-control">
-                        <option selected="selected">H</option>
-                        <option>I</option>
-                        <option>S</option>
-                        <option>A</option>
-                      </select>
-                    </td>
-                    <td class="text-center px-1">
-                      <select class="form-control">
-                        <option selected="selected">H</option>
-                        <option>I</option>
-                        <option>S</option>
-                        <option>A</option>
-                      </select>
-                    </td>
-                    <td class="text-center px-1">
-                      <select class="form-control">
-                        <option selected="selected">H</option>
-                        <option>I</option>
-                        <option>S</option>
-                        <option>A</option>
-                      </select>
-                    </td>
-                    <td class="text-center px-1">
-                      <select class="form-control">
-                        <option selected="selected">H</option>
-                        <option>I</option>
-                        <option>S</option>
-                        <option>A</option>
-                      </select>
-                    </td>
-                    <td class="text-center px-1">
-                      <select class="form-control">
-                        <option selected="selected">H</option>
-                        <option>I</option>
-                        <option>S</option>
-                        <option>A</option>
-                      </select>
-                    </td>
-                    <td class="text-center px-1">
-                      <select class="form-control">
-                        <option selected="selected">H</option>
-                        <option>I</option>
-                        <option>S</option>
-                        <option>A</option>
-                      </select>
-                    </td>
-                    <td class="text-center px-1">
-                      <select class="form-control">
-                        <option selected="selected">H</option>
-                        <option>I</option>
-                        <option>S</option>
-                        <option>A</option>
-                      </select>
-                    </td>
-                    <td class="text-center px-1">93.8%</td>
-                  </tr>  -->
+                   
                 </tbody>
               </table>
             </div>
@@ -497,17 +86,40 @@
 
 @section('js')
   <script>
+    var kuliah = "";
     var kelas = "{{$kelas}}";
     var matakuliah = "{{$matkul}}";
     var semester = dataGlobal['periode']['semester'];
     var tahun = dataGlobal['periode']['tahun'];
-
+    var arr_mhs = [];
     $(document).ready(function() {
       getData();
-      
-      $(".table_absensiMhs select").each(chooseColor);
-      $('.table_absensiMhs select').click(chooseColor);
+      $('#btn_simpan').on('click',function (e) {
+        console.log(arr_mhs)
+        $.ajax({
+          url: url_api+"/absensi-admin",
+          type: 'post',
+          dataType: 'json',
+          data: {'kuliah':kuliah,'data':arr_mhs},
+          beforeSend: function(text) {
+              // loading func
+              console.log("loading")
+              // loading('show')
+          },
+          success: function(res) {
+            console.log(res)
+              if (res.status=="success") {
+                location.reload()                 
+              } else {
+                  // alert gagal
+              }
+              // loading('hide')
+
+          }
+        });
+      })
     })
+
     function chooseColor() {
       var conceptName = $(this).find(":selected").text();
       if (conceptName == '-') {
@@ -524,7 +136,7 @@
     }
     function getData() {
       $.ajax({
-        url: `{{url('/api/v1')}}/absensi/cetak-kelas?kelas=${kelas}&tahun=${tahun}&semester=${semester}&matakuliah=${matakuliah}`,
+        url: `{{url('/api/v1')}}/absensi/rekap-kelas-mahasiswa?kelas=${kelas}&tahun=${tahun}&semester=${semester}&matakuliah=${matakuliah}`,
         type: 'get',
         dataType: 'json',
         data: {},
@@ -532,7 +144,12 @@
                 // loading func
         },
         success: function(res) {
-          var data = res.data;
+          var data = res.data.data;
+          var info = res.data.info;
+          kuliah = info.kuliah
+          $('#prodi').val(info.prodi)
+          $('#matakuliah').val(info.matakuliah)
+          $('#kelas').val(info.kelas)
           console.log(data)
           if (res.status=="success") {
               setMahasiswa(data)
@@ -549,10 +166,8 @@
                     <td class="text-center">${row.nim}</td>
                     <td class="font-weight-bold text-capitalize">${row.nama}</td>`;
         for (let index = 1; index <= 16; index++) {
-          console.log(row.pertemuan[index])
-          
           html += `<td class="text-center px-1">
-                      <select class="form-control">
+                      <select class="form-control select-absen" data-absensi="${row.absensi[index]}" data-mhs="${row.mahasiswa}" data-pertemuan="${index}">
                         <option ${(row.pertemuan[index]=="")?'selected':""} value="">-</option>
                         <option ${(row.pertemuan[index]=="H")?'selected':""} value="H">H</option>
                         <option ${(row.pertemuan[index]=="I")?'selected':""} value="I">I</option>
@@ -564,11 +179,28 @@
         html += `<td class="text-center px-1">${row.persentase}</td>`
         html += `</tr>`;
       })
-        $('.table-body').append(html);
+      $('.table-body').append(html);
 
 
       $(".table_absensiMhs select").each(chooseColor);
-      $('.table_absensiMhs select').click(chooseColor);
+      $('.table_absensiMhs select').change(chooseColor);
+      $('.select-absen').on('change',function (e) {
+        var status = $(this).val(); 
+        var mahasiswa = $(this).data('mhs'); 
+        var pertemuan = $(this).data('pertemuan'); 
+        var absensi = $(this).data('absensi'); 
+
+        check = "insert";
+        $.each(arr_mhs, function() { 
+            if(this.mahasiswa === mahasiswa && this.pertemuan===pertemuan){ 
+              this.status = status;
+              check = "update";
+            }
+        }); 
+        if (check == "insert") {
+          arr_mhs.push({'nomor':absensi,'mahasiswa':mahasiswa,'kuliah':kuliah,'status':status,'pertemuan':pertemuan})
+        }
+      })
     }
   </script>
 @endsection

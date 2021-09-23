@@ -95,8 +95,9 @@
 
     $('#matakuliah').html('')
     var optMatakuliah = `<option value=""> - </option>`;
+    console.log(matakuliah)
     $.each(matakuliah,function (key,row) {
-      optMatakuliah += `<option value="${row.nomor}">${row.matakuliah}</option>`
+      optMatakuliah += `<option data-kuliah="${row.kuliah}" value="${row.nomor}">${row.matakuliah}</option>`
     })
     $('#matakuliah').append(optMatakuliah); 
   })
