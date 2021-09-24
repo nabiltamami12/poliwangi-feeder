@@ -24,6 +24,30 @@
     type="text/css" />
   <!-- Custom CSS -->
   <link href="{{ asset('css/main.css') }}" rel="stylesheet">
+  <script src="{{ url('argon') }}/assets/vendor/jquery/dist/jquery.min.js"></script>
+  <script type="text/javascript">
+    var url_api = "{{ url('/api/v1') }}";
+    $.ajax({
+      url: url_api+"/daftar/check",
+      type: 'post',
+      dataType: 'json',
+      data: {},
+      headers: {
+        'token': localStorage.getItem('pmb')
+      },
+      beforeSend: function(text) {
+      },
+      success: function(res) {
+        if (res.status=="success") {
+          if (res.data.is_lunas == 0) {
+            window.location.href = "{{url('/pmbgenerateva')}}"
+          }
+        } else {
+          window.location.href = "{{url('/')}}"
+        }
+      }
+    });
+  </script>
 </head>
 
 
@@ -43,7 +67,6 @@
 
   <!-- Argon Scripts -->
   <!-- Core -->
-  <script src="{{ url('argon') }}/assets/vendor/jquery/dist/jquery.min.js"></script>
   <script src="{{ url('argon') }}/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   <script src="{{ url('argon') }}/assets/vendor/js-cookie/js.cookie.js"></script>
   <script src="{{ url('argon') }}/assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js"></script>
