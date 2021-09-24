@@ -2616,3 +2616,7 @@ nav#navbar h1 {
   border-color: #F46A6A;
   color:#F46A6A;
 }
+.calendar_content div.selected {
+  background-color: #D8EFFB;
+  color: #28A3EB !important;
+}

@@ -70,6 +70,7 @@
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="{{ url('/akademik/master/datadosen')}}">
+                  <span class="mini_icon">DD</span>
                   <span class="nav-link-text ml-0">Data Dosen</span>
                 </a>
               </li>

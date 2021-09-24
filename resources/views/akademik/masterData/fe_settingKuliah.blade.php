@@ -2,6 +2,9 @@
 
 @section('style')
 <style>
+  .date{
+    cursor: pointer;
+  }
   .calendar {
     margin: auto;
   }
@@ -285,12 +288,12 @@
         </div>
         <div class="card_content">
           <label for="keterangan">Keterangan</label>
-          <textarea class="form-control textarea_notresize" id="keterangan" rows="8">Berisi Keterangan</textarea>
+          <textarea class="form-control textarea_notresize" id="keterangan" rows="8"></textarea>
           <label for="status" class="mt-4">Status</label>
-          <select name="sources" id="sources" class="customSelect sources" placeholder="Hari Aktif">
-            <option value="hariAktif">Hari Aktif</option>
-            <option value="hariLibur">Hari Libur</option>
-            <option value="HariLiburNasional">Hari Libur Nasional</option>
+          <select name="status" id="status" class="customSelect sources" placeholder="Hari Aktif">
+            <option value="0">Hari Aktif</option>
+            <option value="1">Hari Libur</option>
+            <option value="3">Hari Libur Nasional</option>
           </select>
           <button type="submit" class="btn btn-primary w-100 mt-4">
             <i class="iconify mr-1" data-icon="bx:bx-save"></i>
@@ -311,6 +314,33 @@
   const customText = document.getElementById("custom-text");
   const formUpload = document.querySelector(".uploadSuratKeputusan form");
   const formWrapper = document.querySelector('.uploadSuratKeputusan');
+  var month = {
+            "Januari":1,
+            "Februari":2,
+            "Maret":3,
+            "April":4,
+            "Mei":5,
+            "Juni":6,
+            "Juli":7,
+            "Agustus":8,
+            "September":9,
+            "Oktober":10,
+            "November":11,
+            "Desember":12,
+  };
+
+  $(document).ready(function () {
+    // getData()
+    $('.date').on('click',function (e) {
+      var bulan_tahun = $("#calendar_first").find(".calendar_header").find('h2').text()
+      bulan_tahun = bulan_tahun.split(" ");
+      var libur = $(this).hasClass('libur');
+      var tanggal = ($(this).text().toString().length==1)?"0"+$(this).text():$(this).text();
+      var bulan = (month[bulan_tahun[0]].toString().length==1)?"0"+month[bulan_tahun[0]]:month[bulan_tahun[0]];
+      var tahun = bulan_tahun[1];
+      var date =  `${tahun}-${bulan}-${tanggal}`;
+    })
+  })
 
   customBtn.addEventListener("click", function () {
     inputFile.click();
@@ -333,5 +363,6 @@
     let formWrapper_width = formWrapper.offsetWidth-100;
     document.querySelector('.nama_dokumen').style.maxWidth = formWrapper_width + "px"
   }
+  
 </script>
 @endsection
