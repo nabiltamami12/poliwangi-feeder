@@ -804,7 +804,7 @@ class AbsensiController extends Controller
         $now = Carbon::now()->format('H:i');
 
         $data = [
-            'tahun'=>$request->tahun,
+            'tahun'=>$this->tahun_aktif,
             'kuliah'=>$request->kuliah,
             'pertemuan'=>$request->pertemuan,
             // 'status'=>'mengajar',
@@ -924,8 +924,8 @@ class AbsensiController extends Controller
             ->join('kelas', 'kuliah.kelas', '=', 'kelas.nomor')
             ->join('mahasiswa', 'absensi_mahasiswa.mahasiswa', '=', 'mahasiswa.nomor')
             ->where('absensi_mahasiswa.mahasiswa', $request->mahasiswa)
-            ->where('kuliah.semester', $request->semester)
-            ->where('kuliah.tahun', $request->tahun);
+            ->where('kuliah.semester', $this->semester_aktif)
+            ->where('kuliah.tahun', $this->tahun_aktif);
     
             if ($request->tanggal) {
                 $query = $query->whereDate('tanggal',$request->tanggal);
@@ -964,8 +964,8 @@ class AbsensiController extends Controller
             ->join('mahasiswa', 'absensi_mahasiswa.mahasiswa', '=', 'mahasiswa.nomor')
             ->where('kelas.nomor', $request->kelas)
             ->where('matakuliah.nomor', $request->matakuliah)
-            ->where('kuliah.semester', $request->semester)
-            ->where('kuliah.tahun', $request->tahun)
+            ->where('kuliah.semester', $this->semester_aktif)
+            ->where('kuliah.tahun', $this->tahun_aktif)
             ->groupBy('mahasiswa.nomor')
             ->orderBy('mahasiswa')
             ->orderBy('nama')
@@ -1014,8 +1014,8 @@ class AbsensiController extends Controller
         ->join('program', 'program.nomor', '=', 'program_studi.program')
         ->where('kelas.nomor', $request->kelas)
         ->where('matakuliah.nomor', $request->matakuliah)
-        ->where('kuliah.semester', $request->semester)
-        ->where('kuliah.tahun', $request->tahun)
+        ->where('kuliah.semester', $this->semester_aktif)
+        ->where('kuliah.tahun', $this->tahun_aktif)
         ->groupBy('mahasiswa.nomor')
         ->orderBy('mahasiswa')
         ->orderBy('nama')
@@ -1144,7 +1144,7 @@ class AbsensiController extends Controller
                                 ->join("program_studi as ps","ps.nomor", "=", "m.program_studi")
                                 ->join("program as p","p.nomor", "=", "ps.program")
                                 ->where('m.nomor', $request->mahasiswa)
-                                ->where('kl.tahun', $request->tahun)
+                                ->where('kl.tahun', $this->tahun_aktif)
                                 ->where('kl.kelas', $request->kelas)
                                 ->where('kl.matakuliah', $request->matakuliah)
                                 ->get();

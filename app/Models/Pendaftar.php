@@ -24,7 +24,7 @@ class Pendaftar extends Model
         'status',
         'spi',
         'nrp',
-        't_ajaran',
+        'tahun_ajaran',
         'semester',
         'warga',
         'tgllahir',
