@@ -214,8 +214,6 @@ Route::prefix('v1')->group(function () {
     // Setting Biaya
     Route::get('setting_biaya', [Ctr\SettingBiayaController::class, 'index']);
     Route::post('setting_biaya', [Ctr\SettingBiayaController::class, 'store']);
-<<<<<<< HEAD
-=======
 
     // Berkas Keuangan
     Route::post('berkas_keuangan', [Ctr\BerkasKeuanganController::class, 'store']);
@@ -225,7 +223,6 @@ Route::prefix('v1')->group(function () {
 
 
 
->>>>>>> beb7bf2a0ec078318246f087cbfcd4759149ad00
     // example use bni api
     Route::get('/test', [Ctr\MahasiswaController::class, 'create_va']);
 
