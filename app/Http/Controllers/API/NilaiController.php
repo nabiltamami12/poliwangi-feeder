@@ -38,7 +38,7 @@ class NilaiController extends Controller
                 ->join("kelas as k", "k.nomor", "=", "m.kelas")
                 ->join("kuliah as kl", "kl.kelas", "=", "k.nomor")
                 ->join("nilai as n", "n.kuliah", "=", "kl.nomor",'left')
-                ->where('kl.tahun', $request->tahun)
+                ->where('kl.tahun', $this->tahun_aktif)
                 ->where('kl.kelas', $request->kelas)
                 ->where('kl.matakuliah', $request->matakuliah)
                 ->get();
@@ -100,8 +100,8 @@ class NilaiController extends Controller
                             ->join('matakuliah as mk','mk.nomor','=','kl.matakuliah')
                             ->join('nilai as n','n.kuliah','=','kl.nomor','left')
                             ->where('m.nrp',$request->nim)
-                            ->where('mk.semester',$request->semester)
-                            ->where('kl.tahun',$request->tahun)
+                            ->where('mk.semester',$this->semester_aktif)
+                            ->where('kl.tahun',$this->tahun_aktif)
                             ->get();
             }else{
                 $data = [];
