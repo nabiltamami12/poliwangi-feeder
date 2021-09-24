@@ -174,14 +174,15 @@ Route::prefix('v1')->group(function () {
     Route::put('/syarat/{id}', '\App\Http\Controllers\API\SyaratController@update');
     Route::delete('/syarat/{id}', '\App\Http\Controllers\API\SyaratController@destroy');
 
-    //jalur_pendaftar
     Route::get('/daftar/va', '\App\Http\Controllers\API\PendaftarController@va');
-    Route::get('/daftar/{id}', '\App\Http\Controllers\API\PendaftarController@show');
-    Route::post('/daftar', '\App\Http\Controllers\API\PendaftarController@store');
+    Route::get('/daftar', '\App\Http\Controllers\API\PendaftarController@show');
+    Route::post('/daftar/update', '\App\Http\Controllers\API\PendaftarController@update');
     Route::post('/login', [Ctr\PendaftarController::class, 'login']);
-    Route::post('/daftar/{id}', '\App\Http\Controllers\API\PendaftarController@update');
-    Route::delete('/daftar/{id}', '\App\Http\Controllers\API\PendaftarController@destroy');
+    Route::post('/daftar/check', [Ctr\PendaftarController::class, 'is_lunas']);
+    // Route::post('/daftar/{id}', '\App\Http\Controllers\API\PendaftarController@update');
+    // Route::delete('/daftar/{id}', '\App\Http\Controllers\API\PendaftarController@destroy');
 
+    //jalur_pendaftar
     Route::get('/daftar/{id}', '\App\Http\Controllers\API\JalurpendaftarController@show');
     Route::post('/daftar', '\App\Http\Controllers\API\JalurpendaftarController@store');
     Route::put('/daftar/{id}', '\App\Http\Controllers\API\JalurpendaftarController@update');
@@ -220,13 +221,8 @@ Route::prefix('v1')->group(function () {
     Route::get('/approve/{id}', [Ctr\BerkasKeuanganController::class, 'approve']);
     Route::post('/perjanjian/{id}', [Ctr\BerkasKeuanganController::class, 'perjanjian']);
 
-
-
-
     // example use bni api
     Route::get('/test', [Ctr\MahasiswaController::class, 'create_va']);
-
-
 
 });
 
