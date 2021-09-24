@@ -199,7 +199,7 @@
       $("#form").submit(function(e) {
         e.preventDefault();
         $.ajax({
-            url: url_api+"/daftar",
+            url: url_api+"/pendaftar",
             type: 'post',
             dataType: 'json',
             data: new FormData(e.target),

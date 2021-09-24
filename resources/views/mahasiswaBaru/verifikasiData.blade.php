@@ -225,7 +225,7 @@
 @section('js')
 <script>
   $.ajax({
-    url: url_api+"/daftar",
+    url: url_api+"/pendaftar",
     type: 'get',
     dataType: 'json',
     data: {},
@@ -273,7 +273,7 @@
 
   $("#submit-1").on('click', function() {
     $.ajax({
-      url: url_api+"/daftar/update",
+      url: url_api+"/pendaftar/update",
       type: 'post',
       dataType: 'json',
       data: new FormData($('.form_data')[0]),
@@ -292,7 +292,7 @@
   $("#submit-2").on('click', function(e) {
     e.preventDefault();
     $.ajax({
-      url: url_api+"/daftar/update",
+      url: url_api+"/pendaftar/update",
       type: 'post',
       dataType: 'json',
       data: new FormData($('.form_data')[1]),

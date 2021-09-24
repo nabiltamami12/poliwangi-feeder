@@ -174,11 +174,12 @@ Route::prefix('v1')->group(function () {
     Route::put('/syarat/{id}', '\App\Http\Controllers\API\SyaratController@update');
     Route::delete('/syarat/{id}', '\App\Http\Controllers\API\SyaratController@destroy');
 
-    Route::get('/daftar/va', '\App\Http\Controllers\API\PendaftarController@va');
-    Route::get('/daftar', '\App\Http\Controllers\API\PendaftarController@show');
-    Route::post('/daftar/update', '\App\Http\Controllers\API\PendaftarController@update');
+    Route::get('/pendaftar/va', '\App\Http\Controllers\API\PendaftarController@va');
+    Route::get('/pendaftar', '\App\Http\Controllers\API\PendaftarController@show');
+    Route::post('/pendaftar', '\App\Http\Controllers\API\PendaftarController@store');
+    Route::post('/pendaftar/update', '\App\Http\Controllers\API\PendaftarController@update');
     Route::post('/login', [Ctr\PendaftarController::class, 'login']);
-    Route::post('/daftar/check', [Ctr\PendaftarController::class, 'is_lunas']);
+    Route::post('/pendaftar/check', [Ctr\PendaftarController::class, 'is_lunas']);
     // Route::post('/daftar/{id}', '\App\Http\Controllers\API\PendaftarController@update');
     // Route::delete('/daftar/{id}', '\App\Http\Controllers\API\PendaftarController@destroy');
 

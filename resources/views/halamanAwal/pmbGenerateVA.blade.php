@@ -132,7 +132,7 @@
       Intl.NumberFormat("id-ID", { style : 'currency', currency:'IDR', minimumFractionDigits: 0 }).format(number);
 
     $.ajax({
-      url: url_api+"/daftar/va/",
+      url: url_api+"/pendaftar/va/",
       type: 'get',
       dataType: 'json',
       data: {},
