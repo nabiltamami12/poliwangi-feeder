@@ -156,7 +156,7 @@ Route::prefix('v1')->group(function () {
     Route::delete('/filehari/{nama}', '\App\Http\Controllers\API\HariAktifController@destroy');
 
     //Jalur Pmb
-    Route::get('/jalurpmb/', '\App\Http\Controllers\API\JalurpmbController@index');
+    Route::get('/jalurpmb', '\App\Http\Controllers\API\JalurpmbController@index');
     Route::get('/jalurpmb/{id}', '\App\Http\Controllers\API\JalurpmbController@show');
     Route::post('/jalurpmb', '\App\Http\Controllers\API\JalurpmbController@store');
     Route::put('/jalurpmb/{pmb}', '\App\Http\Controllers\API\JalurpmbController@update');
@@ -181,7 +181,12 @@ Route::prefix('v1')->group(function () {
     Route::post('/login', [Ctr\PendaftarController::class, 'login']);
     Route::post('/daftar/{id}', '\App\Http\Controllers\API\PendaftarController@update');
     Route::delete('/daftar/{id}', '\App\Http\Controllers\API\PendaftarController@destroy');
-    
+
+    Route::get('/daftar/{id}', '\App\Http\Controllers\API\JalurpendaftarController@show');
+    Route::post('/daftar', '\App\Http\Controllers\API\JalurpendaftarController@store');
+    Route::put('/daftar/{id}', '\App\Http\Controllers\API\JalurpendaftarController@update');
+    Route::delete('/daftar/{id}', '\App\Http\Controllers\API\JalurpendaftarController@destroy');
+
     // Rekap Tarif UKT
     Route::get('/keuangan/rekap_ukt', [Ctr\UktController::class, 'index']);
     Route::post('/keuangan/rekap_ukt', [Ctr\UktController::class, 'store']);
@@ -209,13 +214,22 @@ Route::prefix('v1')->group(function () {
     // Setting Biaya
     Route::get('setting_biaya', [Ctr\SettingBiayaController::class, 'index']);
     Route::post('setting_biaya', [Ctr\SettingBiayaController::class, 'store']);
+<<<<<<< HEAD
+=======
 
     // Berkas Keuangan
     Route::post('berkas_keuangan', [Ctr\BerkasKeuanganController::class, 'store']);
+    Route::get('/approve/{id}', [Ctr\BerkasKeuanganController::class, 'approve']);
+    Route::post('/perjanjian/{id}', [Ctr\BerkasKeuanganController::class, 'perjanjian']);
 
 
+
+
+>>>>>>> beb7bf2a0ec078318246f087cbfcd4759149ad00
     // example use bni api
     Route::get('/test', [Ctr\MahasiswaController::class, 'create_va']);
+
+
 
 });
 

@@ -10,7 +10,7 @@
   <div class="row">
     <div class="col-xl-12">
       <div class="card padding--small">
-        
+
         <div class="card-header p-0 m-0 border-0">
           <div class=" row align-items-center">
             <div class="col">
@@ -45,44 +45,43 @@
 </section>
 <script>
   $(document).ready(function() {
-  var nomor = 1;
-  dt_url = `${url_api}/jurusan`;
-dt_opt = {
-  "columnDefs": [
-      {
+    var nomor = 1;
+    dt_url = `${url_api}/jurusan`;
+    dt_opt = {
+      "columnDefs": [{
         "aTargets": [0],
         "mData": null,
         "mRender": function(data, type, full) {
           res = nomor++;
           return res;
         }
-      },{
+      }, {
         "aTargets": [1],
         "mData": null,
         "mRender": function(data, type, full) {
           res = data['jurusan'];
           return res;
         }
-      },{
+      }, {
         "aTargets": [2],
         "mData": null,
         "mRender": function(data, type, full) {
           res = data['kajur'];
           return res;
         }
-      },{
+      }, {
         "aTargets": [3],
         "mData": null,
         "mRender": function(data, type, full) {
           var id = data['nomor'];
           var text_hapus = data['jurusan'];
-          var btn_update = `<i class="iconify edit-icon" onclick='update_btn(${id})' data-icon="bx:bx-edit-alt" ></i>` 
-          var btn_delete = `<i class="iconify delete-icon" data-icon="bx:bx-trash"  onclick='delete_btn(${id},"jurusan","jurusan","${text_hapus}")'></i>`; 
-          res = btn_update+" "+btn_delete;
+          var btn_update = `<i class="iconify edit-icon" onclick='update_btn(${id})' data-icon="bx:bx-edit-alt" ></i>`
+          var btn_delete = `<i class="iconify delete-icon" data-icon="bx:bx-trash"  onclick='delete_btn(${id},"jurusan","jurusan","${text_hapus}")'></i>`;
+          res = btn_update + " " + btn_delete;
           return res;
         }
-      },
-    ]}
-} );
+      }, ]
+    }
+  });
 </script>
 @endsection
