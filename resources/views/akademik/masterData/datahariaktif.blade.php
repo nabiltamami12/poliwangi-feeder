@@ -237,7 +237,7 @@
     background: transparent !important;
   }
 
-  .fc-libur {
+  .fc-day-top.fc-sat,.fc-day-top.fc-sun,.fc-libur {
     color: #F46A6A !important;
   }
   .form-group {
@@ -416,7 +416,7 @@ $(document).ready(function () {
             data: {tanggal:tanggal,keterangan:keterangan,libur:libur},
             beforeSend: function(text) {
                     // loading func
-                    console.log("loading")
+                    // console.log("loading")
                     loading('show')
             },
             success: function(res) {
@@ -428,9 +428,9 @@ $(document).ready(function () {
                         title: keterangan,
                         start: tanggal
                     },true);
-                    console.log('tambah event')
+                    // console.log('tambah event')
                 }else{
-                    console.log('hapus event')
+                    // console.log('hapus event')
                     calendar.fullCalendar('removeEvents',tanggal);
                 }
                 $('.fc-day-top[data-date="'+tanggal+'"]').attr('data-status',libur);
@@ -444,8 +444,8 @@ $(document).ready(function () {
         var file_data = $('#file').prop('files')[0];   
         var form_data = new FormData();                  
         form_data.append('file', file_data);
-        console.log(file_data);                             
-        console.log(form_data);                             
+        // console.log(file_data);                             
+        // console.log(form_data);                             
         $.ajax({
             url: url_api+"/hariaktifkuliah/upload",
             dataType: 'json',
@@ -488,14 +488,14 @@ function getData(){
                             title: row.keterangan,
                             start: row.tanggal.split(" ")[0],
                         }
-                        console.log(arr)
+                        // console.log(arr)
                         calendar.fullCalendar('renderEvent',arr)
                     }
                 }
                 change_date(row.tanggal.split(" ")[0],row.libur)
                 $('.fc-day-top[data-date="'+row.tanggal.split(" ")[0]+'"]').attr('data-status',row.libur);
                 $('.fc-day-top[data-date="'+row.tanggal.split(" ")[0]+'"]').attr('data-keterangan',row.keterangan);
-                loading('hide')
+                // loading('hide')
             })
         }
     })
