@@ -218,12 +218,20 @@ Route::prefix('v1')->group(function () {
     Route::post('setting_biaya', [Ctr\SettingBiayaController::class, 'store']);
 
     // Berkas Keuangan
+    Route::get('/list_cicilan', [Ctr\BerkasKeuanganController::class, 'index']);
+    Route::get('/stats', [Ctr\BerkasKeuanganController::class, 'statistik']);
+    Route::get('/detail_dokumen/{id}', [Ctr\BerkasKeuanganController::class, 'detail_dokumen']);
     Route::post('berkas_keuangan', [Ctr\BerkasKeuanganController::class, 'store']);
     Route::get('/approve/{id}', [Ctr\BerkasKeuanganController::class, 'approve']);
     Route::post('/perjanjian/{id}', [Ctr\BerkasKeuanganController::class, 'perjanjian']);
+    Route::post('/cicilan/{id}', [Ctr\BerkasKeuanganController::class, 'detail_cicilan']);
+    
 
     // example use bni api
     Route::get('/test', [Ctr\MahasiswaController::class, 'create_va']);
+    Route::post('/test/{id}', [Ctr\BerkasKeuanganController::class, 'detail_cicilan']);
+
+
 
 });
 
