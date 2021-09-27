@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Pendaftar;
+use App\Models\Jalurpmb;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Resources\JalurpendaftarResource;
 use Illuminate\Database\QueryException;
@@ -58,7 +59,6 @@ class PendaftarController extends Controller
      */
     public function store(Request $request)
     {
-        //
         $data = $request->all();
 
         $validator = Validator::make($data, [
@@ -84,6 +84,7 @@ class PendaftarController extends Controller
                 ]
             );
         }
+
         $document = new Pendaftar();
         $document->jalur_daftar = $request->jalur_daftar;
         $document->program_studi = $request->program_studi;
@@ -95,6 +96,7 @@ class PendaftarController extends Controller
         $document->notelp_ortu = $request->notelp_ortu;
         $document->email = $request->email;
         // $document->password = Hash::make($request->password);
+        $document->trx_amount = Jalurpmb::select('biaya')->where('id', $request->jalur_daftar)->get()->first()->biaya;
         $document->save();
 
         if ($fotos = $request->file('foto')) {
@@ -215,7 +217,7 @@ class PendaftarController extends Controller
         $token = $request->header('token');
         try{
             $id = Crypt::decrypt($token);
-            $document = Pendaftar::select('is_lunas')->where('nomor', $id)->get()->first();
+            $document = Pendaftar::select('is_lunas', 'trx_amount')->where('nomor', $id)->get()->first();
             if ($document->is_lunas == 1) {
                 return response()->json([
                     "status" => 'success',
@@ -258,9 +260,9 @@ class PendaftarController extends Controller
 
             $this->data = [
                 'is_lunas' => 0,
-                'trx_amount' => 201500,
-                'virtual_account' => '80010000'.$id.'187',
-                'datetime_expired_iso8601' => '2021-10-05T16:00:00+07:00',
+                'trx_amount' => $document->trx_amount,
+                'virtual_account' => '80010000'.$id.'000',
+                'datetime_expired_iso8601' => date('c', time() + 2 * 3600 * 24), // 2 days
                 'document' => $document
             ];
             $this->status = 'success';
