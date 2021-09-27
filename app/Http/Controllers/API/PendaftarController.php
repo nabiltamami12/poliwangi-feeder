@@ -336,4 +336,22 @@ class PendaftarController extends Controller
             "message" => "Gagal"
         ]);
     }
+
+    public function keuangan()
+    {
+        try {
+            $tahun_aktif = DB::table('periode')->select('tahun')->where('status', '1')->get()->first()->tahun;
+            $data = Pendaftar::select('trx_id', 'trx_amount', 'nama', 'is_lunas', 'nomor')->where('tahun_ajaran', $tahun_aktif)->distinct()->get();
+            $this->data = $data;
+            $this->status = "success";
+        } catch (QueryException $e) {
+            $this->status = "failed";
+            $this->error = $e;
+        }
+        return response()->json([
+            "status" => $this->status,
+            "data" => $this->data,
+            "error" => $this->error
+        ]);
+    }
 }

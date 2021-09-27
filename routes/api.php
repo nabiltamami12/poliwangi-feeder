@@ -186,6 +186,7 @@ Route::prefix('v1')->group(function () {
     Route::post('/pendaftar/update', '\App\Http\Controllers\API\PendaftarController@update');
     Route::post('/login', [Ctr\PendaftarController::class, 'login']);
     Route::post('/pendaftar/check', [Ctr\PendaftarController::class, 'is_lunas']);
+    Route::get('/pendaftar/keuangan', [Ctr\PendaftarController::class, 'keuangan']);
     // Route::post('/daftar/{id}', '\App\Http\Controllers\API\PendaftarController@update');
     // Route::delete('/daftar/{id}', '\App\Http\Controllers\API\PendaftarController@destroy');
 

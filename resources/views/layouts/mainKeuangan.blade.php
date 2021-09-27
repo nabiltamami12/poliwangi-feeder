@@ -24,6 +24,16 @@
   <link rel="stylesheet" href="{{ url('argon') }}/assets/css/argon.css?v=1.2.0" type="text/css">
   <!-- Custom CSS -->
   <link href="{{ asset('css/main.css') }}" rel="stylesheet">
+  <link rel="stylesheet" href="{{ asset('assets/core.css') }}">
+  <!-- Datatable CSS -->
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap4.min.css">
+
+  
+  <script src="{{ url('argon') }}/assets/vendor/jquery/dist/jquery.min.js"></script>
+  <script type="text/javascript">
+    var url_api = "{{ url('/api/v1') }}";
+    var dt, dt_url, dt_opt;
+  </script>
 </head>
 
 <body>
@@ -40,9 +50,11 @@
     @include('partials.footer')
   </main>
 
+  <!-- Datatable JS -->
+  <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.min.js"></script>
   <!-- Argon Scripts -->
   <!-- Core -->
-  <script src="{{ url('argon') }}/assets/vendor/jquery/dist/jquery.min.js"></script>
   <script src="{{ url('argon') }}/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   <script src="{{ url('argon') }}/assets/vendor/js-cookie/js.cookie.js"></script>
   <script src="{{ url('argon') }}/assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js"></script>
@@ -54,6 +66,56 @@
   <script src="{{ url('argon') }}/assets/js/argon.js?v=1.2.0"></script>
   <script src="{{ url('js/util.js') }}"></script>
   <script src="{{ asset('js/script.js') }}"></script>
+  <script type="text/javascript">
+    var dt_init = $("#datatable");
+    // set menu active
+    var tagMenu = document.querySelector(
+      `[href="{{ url(Request::segment(1) . '/' . Request::segment(2) . '/' . Request::segment(3)) }}"]`);
+    if (tagMenu) {
+      tagMenu.childNodes[1].classList.add('sub-aktif');
+      tagMenu.parentNode.parentNode.parentNode.classList.add('showsubmenu');
+    }
+    $(document).ready(function() {
+      // $('#txt_semester_topnav').html((dataGlobal['periode']['semester']==1)?"Semester Gasal":"Semester Genap");
+      // $('#txt_tahun_topnav').html(dataGlobal['periode']['tahun']+"/"+(dataGlobal['periode']['tahun']+1));
+      // $(".date-input").datepicker({
+      //   format: "dd MM yyyy",
+      //   autoclose: true
+      // });
+      // datatable
+      if (dt_init) {
+        console.log(dt_url)
+        dt = $('#datatable').DataTable({
+          "processing": true,
+          "ajax": {
+            url: dt_url,
+            type: 'GET',
+            data: {},
+            headers: {
+              "Authorization": window.localStorage.getItem('token')
+            }
+          },
+          ...dt_opt,
+          // "dom": 'lfrtip',
+          "language": {
+            "paginate": {
+              "next": 'Next',
+              "previous": 'Previous'
+            },
+            "processing": "Proses ...",
+            "emptyTable": "Tidak ada data dalam tabel",
+            "info": "Menampilkan _START_ sampai _END_ dari _TOTAL_ total data",
+            "infoEmpty": "Menampilkan 0 sampai 0 dari 0 total data",
+            "infoFiltered": "(difilter dari _MAX_ total)",
+            "lengthMenu": "_MENU_ Data per halaman",
+            "search": "",
+            "searchPlaceholder": "Pencarian ..."
+          }
+        });
+      }
+
+    });
+  </script>
   <!-- Bootstrap Datepicker -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.js"
     type="text/javascript"></script>

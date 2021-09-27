@@ -28,31 +28,8 @@
         </div>
         <hr class="mt-4">
 
-        <div class="row align-items-center px-3 my-4">
-          <div class="col-12 col-md-6">
-            <form class="form-inline">
-              <div class="form-group row">
-                <select class="form-control form-control-sm" id="dataperhalaman">
-                  <option>10</option>
-                  <option>20</option>
-                  <option>30</option>
-                </select>
-                <label for="dataperhalaman" class="ml-3 mt-2 mt-sm-0">Data per Halaman</label>
-              </div>
-            </form>
-          </div>
-          <div class="col-12 col-md-4 offset-md-2 offset-0 text-right p-0 mt-3 mt-md-0">
-            <form class="search_form" action="">
-              <input class="form-control form-control-sm" type="search" placeholder="Pencarian...">
-              <button type="submit">
-                <i class="iconify-inline" data-icon="bx:bx-search"></i>
-              </button>
-            </form>
-          </div>
-        </div>
-
         <div class="table-responsive">
-          <table class="table align-items-center table-flush table-borderless table-hover">
+          <table class="table align-items-center table-flush table-borderless table-hover" id="datatable">
             <thead class="table-header">
               <tr>
                 <th scope="col" class="text-center">No</th>
@@ -83,24 +60,73 @@
           </table>
         </div>
 
-        <div class="row justify-content-between align-items-center table-information">
-          <h3>Menampilkan 1 sampai 2 dari 2 total data</h3>
-          <nav aria-label="Page navigation example">
-            <ul class="pagination">
-              <li class="page-item disabled" aria-label="Previous">
-                <a class="page-link" href="#" tabindex="-1">Previous</a>
-              </li>
-              <li class="page-item active">
-                <a class="page-link" href="#">1<span class="sr-only">(current)</span></a>
-              </li>
-              <li class="page-item disabled" aria-label="Next">
-                <a class="page-link" href="#">Next</a>
-              </li>
-            </ul>
-          </nav>
-        </div>
       </div>
     </div>
   </div>
 </section>
+<script>
+const toCurrency = (number) => 
+      Intl.NumberFormat("id-ID", { style : 'currency', currency:'IDR', minimumFractionDigits: 0 }).format(number);
+
+
+function importFile() {
+  $("#file").click()
+}
+
+function clickButton() {
+  $("#submit").click();
+}
+$(document).ready(function() {
+
+var nomor = 1;
+dt_url = `${url_api}/pendaftar/keuangan`;
+dt_opt = {
+"columnDefs": [
+    {
+      "aTargets": [0],
+      "mData": null,
+      "className": 'text-center pr-0',
+      "mRender": function(data, type, full) {
+        return nomor++;
+      }
+    },{
+      "aTargets": [1],
+      "mData": null,
+      "className": 'text-center',
+      "mRender": function(data, type, full) {
+        return data['trx_id'];
+      }
+    },{
+      "aTargets": [2],
+      "mData": null,
+      "className": 'font-weight-bold text-capitalize',
+      "mRender": function(data, type, full) {
+        return data['nama'];
+      }
+    },{
+      "aTargets": [3],
+      "mData": null,
+      "className": 'font-weight-bold text-right',
+      "mRender": function(data, type, full) {
+        return toCurrency(data['trx_amount']);
+      }
+    },{
+      "aTargets": [4],
+      "mData": null,
+      "className": 'text-success text-uppercase font-weight-bold',
+      "mRender": function(data, type, full) {
+        if (data['is_lunas'] == 1) {
+          return '<span style="color:green">Lunas</span>'
+        }else{
+          return '<span style="color:red">Belum Lunas</span>'
+        }
+      }
+    }
+  ]}
+
+
+}
+ 
+);
+</script>
 @endsection
