@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Contracts\Encryption\DecryptException;
 use BNI;
+use DB;
 
 class PendaftarController extends Controller
 {
@@ -25,10 +26,18 @@ class PendaftarController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $table = DB::table('pendaftar');
+        if ($request->program_studi) {
+            $query = $table->where('program_studi',$request->program_studi); 
+        }
+        if ($request->jalur) {
+            $query = $table->where('mahasiswa_jalur_penerimaan',$request->jalur);
+        }
+        
         try {
-            $this->data = Pendaftar::get();
+            $this->data = $table->get();
             $this->status = "success";
         } catch (QueryException $e) {
             $this->status = "failed";
