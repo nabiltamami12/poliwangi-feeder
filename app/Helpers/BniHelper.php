@@ -2,7 +2,6 @@
 
 namespace App\Helpers;
 
-use App\Providers\BniEnc;
 use Exception;
 
 /**

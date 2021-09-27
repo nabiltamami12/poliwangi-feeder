@@ -175,6 +175,7 @@ Route::prefix('v1')->group(function () {
     Route::put('/syarat/{id}', '\App\Http\Controllers\API\SyaratController@update');
     Route::delete('/syarat/{id}', '\App\Http\Controllers\API\SyaratController@destroy');
 
+    Route::get('admin/pendaftar', '\App\Http\Controllers\API\PendaftarController@index');
     Route::get('/pendaftar/va', '\App\Http\Controllers\API\PendaftarController@va');
     Route::get('/pendaftar', '\App\Http\Controllers\API\PendaftarController@show');
     Route::post('/pendaftar', '\App\Http\Controllers\API\PendaftarController@store');
