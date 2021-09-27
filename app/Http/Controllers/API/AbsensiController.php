@@ -964,8 +964,8 @@ class AbsensiController extends Controller
             ->join('mahasiswa', 'absensi_mahasiswa.mahasiswa', '=', 'mahasiswa.nomor')
             ->where('kelas.nomor', $request->kelas)
             ->where('matakuliah.nomor', $request->matakuliah)
-            ->where('kuliah.semester', $this->semester_aktif)
-            ->where('kuliah.tahun', $this->tahun_aktif)
+            ->where('kuliah.semester', $request->semester)
+            ->where('kuliah.tahun', $request->tahun)
             ->groupBy('mahasiswa.nomor')
             ->orderBy('mahasiswa')
             ->orderBy('nama')
@@ -1014,8 +1014,8 @@ class AbsensiController extends Controller
         ->join('program', 'program.nomor', '=', 'program_studi.program')
         ->where('kelas.nomor', $request->kelas)
         ->where('matakuliah.nomor', $request->matakuliah)
-        ->where('kuliah.semester', $this->semester_aktif)
-        ->where('kuliah.tahun', $this->tahun_aktif)
+        ->where('kuliah.semester', $request->semester)
+        ->where('kuliah.tahun', $request->tahun)
         ->groupBy('mahasiswa.nomor')
         ->orderBy('mahasiswa')
         ->orderBy('nama')
@@ -1031,6 +1031,7 @@ class AbsensiController extends Controller
         $arr_nomor = [];
         $arr_status = [];
         $arr_check = [];
+        $arr_check_minggu = [];
         $arr_check_mhs = [];
         $dosen = "";
         foreach ($mhs as $key => $value) {
