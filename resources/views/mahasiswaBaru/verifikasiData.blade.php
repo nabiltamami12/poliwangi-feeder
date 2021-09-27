@@ -68,7 +68,7 @@
                   </div>
                   <div class="col-md-4 form-group mt-3">
                     <label>Tanggal Lahir</label>
-                    <div class="d-flex align-items-center date_picker">
+                    <div class="d-flex align-items-center date_picker w-100 ">
                       <input id="txtDate" type="text" class="form-control date-input" value="23 Jul 2021" readonly name="tgllahir" />
                       <label class="input-group-btn" for="txtDate">
                         <span class="date_button">

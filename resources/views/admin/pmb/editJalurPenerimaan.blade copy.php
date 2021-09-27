@@ -32,7 +32,7 @@
                 <h2 class="card_title mb-2 font-weight-500">Tanggal Pendaftaran</h2>
                 <div class="d-sm-flex align-items-center">
                   <div class="form-group">
-                    <div class="d-flex align-items-center date_picker">
+                    <div class="d-flex align-items-center date_picker w-100 ">
                       <input id="txtDate1" type="text" class="form-control date-input" value="24 January 2022"
                         readonly />
                       <label class="input-group-btn" for="txtDate1">
@@ -44,7 +44,7 @@
                   </div>
                   <p class="mx-3 font-weight-500 text-center my-3">Sampai</p>
                   <div class="form-group">
-                    <div class="d-flex align-items-center date_picker">
+                    <div class="d-flex align-items-center date_picker w-100 ">
                       <input id="txtDate2" type="text" class="form-control date-input" value="24 February 2022"
                         readonly />
                       <label class="input-group-btn" for="txtDate2">

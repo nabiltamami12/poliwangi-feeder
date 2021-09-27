@@ -87,10 +87,10 @@
       e.preventDefault();
       var data = $('#form_cu').serialize();
       if (id != "") {
-        var url = url_api + "/jalurpmb/" + id;
+        var url = url_api + "/prodi/" + id;
         var type = "put";
       } else {
-        var url = url_api + "/jalurpmb";
+        var url = url_api + "/prodi";
         var type = "post";
       }
       $.ajax({
@@ -105,7 +105,7 @@
         },
         success: function(res) {
           if (res.status == "success") {
-            window.location.href = "{{url('/admin/pmb/settingJalurPenerimaan')}}";
+            window.location.href = "{{url('/akademik/master/dataprodi')}}";
           } else {
             // alert gagal
           }

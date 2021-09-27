@@ -89,7 +89,7 @@
                         <div class="col-sm-4 col-12">
                             <div class="form-group row mb-0">
                                 <label for="sekjur">Tanggal Lahir</label>
-                                <div class="d-flex align-items-center date_picker">
+                                <div class="d-flex align-items-center date_picker w-100 ">
                                     <input id="tgllahir" name="tgllahir" type="text" class="form-control date-input" placeholder="Pilih Tanggal" readonly />
                                     <label class="input-group-btn" for="tgllahir">
                                     <span class="date_button">
@@ -102,7 +102,7 @@
                         <div class="col-sm-4 col-12">
                             <div class="form-group row mb-0">
                                 <label for="sekjur">Tanggal Masuk</label>
-                                <div class="d-flex align-items-center date_picker">
+                                <div class="d-flex align-items-center date_picker w-100 ">
                                     <input id="tglmasuk" name="tglmasuk" type="text" class="form-control date-input" placeholder="Pilih Tanggal" readonly />
                                     <label class="input-group-btn" for="tglmasuk">
                                     <span class="date_button">
@@ -289,7 +289,7 @@
                         <div class="col-sm-4 col-12">
                             <div class="form-group row mb-0">
                                 <label for="jurusan">Tanggal Lahir Ayah</label>
-                                <div class="d-flex align-items-center date_picker">
+                                <div class="d-flex align-items-center date_picker w-100 ">
                                     <input id="tanggal_lahir_ayah" name="tanggal_lahir_ayah" type="text" class="form-control date-input" placeholder="Pilih Tanggal" readonly />
                                     <label class="input-group-btn" for="tanggal_lahir_ayah">
                                     <span class="date_button">
@@ -333,7 +333,7 @@
                         <div class="col-sm-4 col-12">
                             <div class="form-group row mb-0">
                                 <label for="jurusan">Tanggal Lahir Ibu</label>
-                                <div class="d-flex align-items-center date_picker">
+                                <div class="d-flex align-items-center date_picker w-100 ">
                                     <input id="tanggal_lahir_ibu" name="tanggal_lahir_ibu" type="text" class="form-control date-input" placeholder="Pilih Tanggal" readonly />
                                     <label class="input-group-btn" for="tanggal_lahir_ibu">
                                     <span class="date_button">
@@ -448,7 +448,7 @@
                         <div class="col-sm-4 col-12">
                             <div class="form-group row mb-0">
                                 <label for="jurusan">Tanggal Lulus</label>
-                                <div class="d-flex align-items-center date_picker">
+                                <div class="d-flex align-items-center date_picker w-100 ">
                                     <input id="tgllulus" name="tgllulus" type="text" class="form-control date-input" placeholder="Pilih Tanggal" readonly />
                                     <label class="input-group-btn" for="tgllulus">
                                     <span class="date_button">
