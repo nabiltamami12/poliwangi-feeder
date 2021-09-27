@@ -149,4 +149,44 @@ class GlobalController extends Controller
             "error"         => $this->error
         ]);
     }
+
+    public function get_provinsi()
+    {
+        $data = DB::table('tb_provinsi')->get();
+        return response()->json([
+            "status"        => 'success',
+            "data"          => $data,
+            "error"         => $this->error
+        ]);
+    }
+
+    public function get_kabupaten($id_provinsi)
+    {
+        $data = DB::table('tb_kabupaten')->select('id_kabupaten', 'nama')->where('id_provinsi', $id_provinsi)->get();
+        return response()->json([
+            "status"        => 'success',
+            "data"          => $data,
+            "error"         => $this->error
+        ]);
+    }
+
+    public function get_kecamatan($id_kabupaten)
+    {
+        $data = DB::table('tb_kecamatan')->select('id_kecamatan', 'nama')->where('id_kabupaten', $id_kabupaten)->get();
+        return response()->json([
+            "status"        => 'success',
+            "data"          => $data,
+            "error"         => $this->error
+        ]);
+    }
+
+    public function get_kelurahan($id_kecamatan)
+    {
+        $data = DB::table('tb_kelurahan')->select('id_kelurahan', 'nama')->where('id_kecamatan', $id_kecamatan)->get();
+        return response()->json([
+            "status"        => 'success',
+            "data"          => $data,
+            "error"         => $this->error
+        ]);
+    }
 }

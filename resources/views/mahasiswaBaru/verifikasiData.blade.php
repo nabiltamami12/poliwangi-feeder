@@ -125,23 +125,24 @@
                     <div class="col-md-4 form-group mt-3">
                       <label for="provinsi">Provinsi</label>
                       <select class="form-control" id="provinsi">
-                        <option>Jawa Timur</option>
-                        <option>Jawa Barat</option>
                       </select>
                     </div>
                     <div class="col-md-4 form-group mt-3">
                       <label for="kota">Kabupaten / Kota</label>
-                      <input type="text" class="form-control" id="kota" placeholder="Kota Banyuwangi">
+                      <select class="form-control" id="kabupaten">
+                      </select>
                     </div>
                     <div class="col-md-4 form-group mt-3">
                       <label for="kecamatan">Kecamatan</label>
-                      <input type="text" class="form-control" id="kecamatan" placeholder="Nama Kecamatan">
+                      <select class="form-control" id="kecamatan" name="kecamatan">
+                      </select>
                     </div>
                   </div>
                   <div class="form-row">
                     <div class="col-md-6 form-group mt-3">
                       <label for="kelurahan">Desa / Kelurahan</label>
-                      <input type="text" class="form-control" id="kelurahan" placeholder="Nama Kelurahan">
+                      <select class="form-control" id="kelurahan" name="kelurahan">
+                      </select>
                     </div>
                     <div class="col-md-6 form-group mt-3 pr-0 pr-md-1">
                       <label for="kode-pos">Kode Pos</label>
@@ -309,6 +310,25 @@
   });
 
   $(document).ready(function(){
+    $.ajax({
+      url: url_api+"/list-provinsi",
+      dataType: 'json',
+      beforeSend: function(text) {
+      },
+      success: function(res) {
+        var selector = '#provinsi'
+        if (res.status=="success") {
+          var html_opsi = '';
+          html_opsi = '<option value="">Pilih Provinsi</option>'
+          $(selector).append(html_opsi);
+          $.each(res.data,function (key,row) {
+            html_opsi = `<option value="${row.id_provinsi}">${row.nama}</option>`;
+              $(selector).append(html_opsi);
+          })
+        }
+      }
+    });
+
     $(".date-input").datepicker({
       format: "dd MM yyyy",
     });
@@ -321,5 +341,79 @@
       $(".nav-pills .active").parent().prev("li").find("a").trigger("click");
     });
   })
+
+  $(document).on('change', '#provinsi', function (e) {
+    $('#kecamatan').empty()
+    $('#kelurahan').empty()
+    var id_provinsi = e.target.value
+    var selector = '#kabupaten'
+    $(selector).empty()
+    $(selector).empty()
+    $.ajax({
+      url: url_api+"/list-kabupaten/"+id_provinsi,
+      dataType: 'json',
+      beforeSend: function(text) {
+      },
+      success: function(res) {
+        if (res.status=="success") {
+          var html_opsi = '';
+          html_opsi = '<option value="">Pilih Kabupaten</option>'
+          $(selector).append(html_opsi);
+          $.each(res.data,function (key,row) {
+            html_opsi = `<option value="${row.id_kabupaten}">${row.nama}</option>`;
+              $(selector).append(html_opsi);
+          })
+        }
+      }
+    });
+  })
+
+  $(document).on('change', '#kabupaten', function (e) {
+    $('#kelurahan').empty()
+    var id_kabupaten = e.target.value
+    var selector = '#kecamatan'
+    $(selector).empty()
+    $.ajax({
+      url: url_api+"/list-kecamatan/"+id_kabupaten,
+      dataType: 'json',
+      beforeSend: function(text) {
+      },
+      success: function(res) {
+        if (res.status=="success") {
+          var html_opsi = '';
+          html_opsi = '<option value="">Pilih Kecamatan</option>'
+          $(selector).append(html_opsi);
+          $.each(res.data,function (key,row) {
+            html_opsi = `<option value="${row.id_kecamatan}">${row.nama}</option>`;
+              $(selector).append(html_opsi);
+          })
+        }
+      }
+    });
+  })
+
+  $(document).on('change', '#kecamatan', function (e) {
+    var id_kecamatan = e.target.value
+    var selector = '#kelurahan'
+    $(selector).empty()
+    $.ajax({
+      url: url_api+"/list-kelurahan/"+id_kecamatan,
+      dataType: 'json',
+      beforeSend: function(text) {
+      },
+      success: function(res) {
+        if (res.status=="success") {
+          var html_opsi = '';
+          html_opsi = '<option value="">Pilih Kelurahan</option>'
+          $(selector).append(html_opsi);
+          $.each(res.data,function (key,row) {
+            html_opsi = `<option value="${row.id_kelurahan}">${row.nama}</option>`;
+              $(selector).append(html_opsi);
+          })
+        }
+      }
+    });
+  })
+
 </script>
 @endsection
