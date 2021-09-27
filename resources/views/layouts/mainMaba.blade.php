@@ -28,7 +28,7 @@
   <script type="text/javascript">
     var url_api = "{{ url('/api/v1') }}";
     $.ajax({
-      url: url_api+"/daftar/check",
+      url: url_api+"/pendaftar/check",
       type: 'post',
       dataType: 'json',
       data: {},

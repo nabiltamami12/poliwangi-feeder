@@ -23,8 +23,13 @@ Route::get('warning', [Ctr\AuthController::class, 'warning'])->name('warning');
 
 Route::prefix('v1')->group(function () {
     // Global data
+    Route::get('/globaldataregister/', [Ctr\GlobalController::class, 'pendaftar']);
     Route::get('/globaldata/', [Ctr\GlobalController::class, 'index']);
     Route::get('/globaldata/{id}', [Ctr\GlobalController::class, 'index']);
+    Route::get('/list-provinsi', [Ctr\GlobalController::class, 'get_provinsi']);
+    Route::get('/list-kabupaten/{id_provinsi}', [Ctr\GlobalController::class, 'get_kabupaten']);
+    Route::get('/list-kecamatan/{id_kabupaten}', [Ctr\GlobalController::class, 'get_kecamatan']);
+    Route::get('/list-kelurahan/{id_kecamatan}', [Ctr\GlobalController::class, 'get_kelurahan']);
     // Program
     Route::get('/program', [Ctr\ProgramController::class, 'index']);
     // Program
@@ -182,6 +187,7 @@ Route::prefix('v1')->group(function () {
     Route::post('/pendaftar/update', '\App\Http\Controllers\API\PendaftarController@update');
     Route::post('/login', [Ctr\PendaftarController::class, 'login']);
     Route::post('/pendaftar/check', [Ctr\PendaftarController::class, 'is_lunas']);
+    Route::get('/pendaftar/keuangan', [Ctr\PendaftarController::class, 'keuangan']);
     // Route::post('/daftar/{id}', '\App\Http\Controllers\API\PendaftarController@update');
     // Route::delete('/daftar/{id}', '\App\Http\Controllers\API\PendaftarController@destroy');
 
