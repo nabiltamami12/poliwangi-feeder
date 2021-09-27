@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Matakuliah;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Carbon;
 use DB;
 use Illuminate\Database\QueryException;
 
@@ -89,6 +90,9 @@ class MatakuliahController extends Controller
         }
 
         try {
+            $data['tahun'] = $this->tahun_aktif;
+            $data['tanggal_mulai_efektif'] = Carbon::parse($data['tanggal_mulai_efektif'])->format('Y-m-d');
+            $data['tanggal_akhir_efektif'] = Carbon::parse($data['tanggal_akhir_efektif'])->format('Y-m-d');
             $matakuliah = Matakuliah::create($data);
             $this->data = $matakuliah;
             $this->status = "success";
