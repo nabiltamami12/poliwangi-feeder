@@ -81,7 +81,7 @@ dt_opt = {
         "mRender": function(data, type, full) {
           var id = data['nomor'];
           var text_hapus = data['nama_program']+" "+data['program_studi'];
-          var btn_update = `<i class="iconify edit-icon" onclick='update_btn(${id})' data-icon="bx:bx-edit-alt"></i>` 
+          var btn_update = `<i class="iconify edit-icon text-primary" onclick='update_btn(${id})' data-icon="bx:bx-edit-alt"></i>` 
           var btn_delete = `<i class="iconify delete-icon" data-icon="bx:bx-trash" onclick='delete_btn(${id},"prodi","program studi","${text_hapus}")'></i>`; 
           res = btn_update+" "+btn_delete;
           return res;

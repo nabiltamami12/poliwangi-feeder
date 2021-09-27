@@ -70,7 +70,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-modal-cancel" data-dismiss="modal">Batal</button>
-          <button type="button" class="btn btn--blue btn-modal-ok" id="btn_modal_hapus" onclick="simpan_func()">Simpan</button>
+          <button type="button" class="btn btn--blue btn-success" id="btn_modal_hapus" onclick="simpan_func()">Simpan</button>
         </div>
       </div>
     </div>
@@ -179,7 +179,7 @@ $(document).ready(function() {
         "className": 'text-center px-2',
         "mRender": function(data, type, full) {          
           var id = data['id'];
-          var btn_update = `<i class="iconify edit-icon" onclick='update_btn(${id})' data-icon="bx:bx-edit-alt" ></i>` 
+          var btn_update = `<i class="iconify edit-icon text-primary" onclick='update_btn(${id})' data-icon="bx:bx-edit-alt" ></i>` 
           return res = btn_update;
         }
       }
