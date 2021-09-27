@@ -23,6 +23,7 @@ Route::get('warning', [Ctr\AuthController::class, 'warning'])->name('warning');
 
 Route::prefix('v1')->group(function () {
     // Global data
+    Route::get('/globaldataregister/', [Ctr\GlobalController::class, 'pendaftar']);
     Route::get('/globaldata/', [Ctr\GlobalController::class, 'index']);
     Route::get('/globaldata/{id}', [Ctr\GlobalController::class, 'index']);
     // Program
@@ -174,6 +175,7 @@ Route::prefix('v1')->group(function () {
     Route::put('/syarat/{id}', '\App\Http\Controllers\API\SyaratController@update');
     Route::delete('/syarat/{id}', '\App\Http\Controllers\API\SyaratController@destroy');
 
+    Route::get('admin/pendaftar', '\App\Http\Controllers\API\PendaftarController@index');
     Route::get('/pendaftar/va', '\App\Http\Controllers\API\PendaftarController@va');
     Route::get('/pendaftar', '\App\Http\Controllers\API\PendaftarController@show');
     Route::post('/pendaftar', '\App\Http\Controllers\API\PendaftarController@store');

@@ -385,6 +385,14 @@ Route::prefix('akademik')->group(function () {
         });
     });
 
+    Route::prefix('pmb')->group(function () {
+        Route::get('/datapendaftar', function () {
+            return view('admin.pmb.datapendaftar', [
+                "title" => "pmb-pendaftar",
+            ]);
+        });
+    });
+    
     Route::prefix('report')->group(function () {
         Route::get('/cuti', function () {
             return view('akademik.report.reportcuti', [
