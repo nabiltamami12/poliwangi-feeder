@@ -28,16 +28,101 @@ class PendaftarController extends Controller
      */
     public function index(Request $request)
     {
+        DB::enableQueryLog();
         $table = DB::table('pendaftar');
+        $table->select('pendaftar.*','jalur_penerimaan.jalur_daftar as jalur_penerimaan');
+        $table->join('jalur_penerimaan','jalur_penerimaan.id','=','pendaftar.jalur_daftar');
         if ($request->program_studi) {
             $query = $table->where('program_studi',$request->program_studi); 
         }
         if ($request->jalur) {
             $query = $table->where('mahasiswa_jalur_penerimaan',$request->jalur);
         }
-        
         try {
             $this->data = $table->get();
+            $this->status = "success";
+        } catch (QueryException $e) {
+            $this->status = "failed";
+            $this->error = $e;
+        }
+        return response()->json([
+            "status" => $this->status,
+            "data" => $this->data,
+            "error" => $this->error
+        ]);
+    }
+
+    public function verifikasi_pendaftar($id)
+    {
+        DB::enableQueryLog();
+        try {
+            $pendaftar = DB::table('pendaftar');
+            $data = $pendaftar->where('nomor',$id)->first();
+            if ($data->status=="Y") {
+                $status = null;
+                $delete = DB::table('mahasiswa')->where('no_pendaftaran',$data->nodaftar)->delete();
+            }else{
+                $status = "Y";
+
+                $arr = [
+                    'no_pendaftaran' => $data->nodaftar,
+                    'nama' => $data->nama,
+                    'nik' => $data->nik,
+                    'nisn' => $data->nisn,
+                    'tmplahir' => $data->tempat_lahir,
+                    'tgllahir' => $data->tgllahir,
+                    'anak_ke' => $data->anak_ke,
+                    'jenis_kelamin' => $data->sex,
+                    'program_studi' => $data->program_studi,
+                    'jumlah_anak' => $data->jumlah_anak,
+                    'lulussmu' => $data->tahun_lulus_smu,
+                    'smu' => $data->smu,
+                    'alamat' => $data->alamat,
+                    'status' => "B",
+                    'jalur_daftar' => $data->jalur_daftar,
+                    // 'notelp' => $data->telp,
+                    // 'nrp' => $data->nrp,
+                    // 'tahunmasuk_pt' => $data->tahun_ajaran,
+                    // 'semester' => $data->semester_masuk,
+                    // 'warga' => $data->warga,
+                    // 'penghasilan_ayah' => $data->penghasilan,
+                    // 'el' => $data->el,
+                    // 'alamat_smu' => $data->alamat_smu,
+                    // 'nijazah' => $data->nijazah,
+                    // 'nijazahmapel' => $data->nilai_uan,
+                    // 'darah' => $data->darah,
+                    // 'prestasi_olahraga' => $data->prestasi_olahraga,
+                    // 'nun' => $data->nun,
+                    // 'ayah' => $data->ayah,
+                    // 'kerja_ayah' => $data->kerja_ayah,
+                    // 'keterangan_ayah' => $data->keterangan_ayah,
+                    // 'ibu' => $data->ibu,
+                    // 'karja_ibu' => $data->karja_ibu,
+                    // 'keterangan_ibu' => $data->keterangan_ibu,
+                    // 'penghasilan_ibu' => $data->penghasilan_ibu,
+                    // 'alamat_ortu' => $data->alamat_ortu,
+                    // 'notelp_ortu' => $data->notelp_ortu,
+                    // 'ukt' => $data->ukt,
+                    // 'sekolah' => $data->sekolah,
+                    // 'kode_transaksi' => $data->kode_transaksi,
+                    // 'mahasiswa_jalur_penerimaan' => $data->mahasiswa_jalur_penerimaan,
+                    // 'kabupaten_kota' => $data->kota,
+                    // 'kabupaten_kota_ortu' => $data->kota_ortu,
+                    // 'subkampus' => $data->subkampus,
+                    // 'foto' => $data->foto,
+                    // 'email' => $data->email,
+                    // 'password' => $data->password,
+                    // 'ijasah' => $data->ijasah,
+                    // 'status_kawin' => $data->status_kawin,
+                    // 'ukuran_baju' => $data->ukuran_baju,
+                    // 'pernahpt' => $data->pernahpt,
+                ];
+                $insert = DB::table('mahasiswa')->insert($arr);
+            }
+            $update = $pendaftar->where('nomor',$id)->update(['status'=> $status]);
+
+            
+            $this->data = null;
             $this->status = "success";
         } catch (QueryException $e) {
             $this->status = "failed";

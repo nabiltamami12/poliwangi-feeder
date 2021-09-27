@@ -14,6 +14,7 @@ use App\Models\Goldarah;
 use App\Models\Kelas;
 use App\Models\Matakuliah;
 use App\Models\Prodi;
+use App\Models\Jalurpmb;
 use App\Models\Periode;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
@@ -37,6 +38,7 @@ class GlobalController extends Controller
             $jurusan = Jurusan::get();
             $agama = Agama::get();
             $goldarah = Goldarah::get();
+            $jalur_pmb =  Jalurpmb::get();;
             $program = Program::get();
             $matkul_jenis = MatakuliahJenis::get();
             $status = Status::get();
@@ -92,6 +94,7 @@ class GlobalController extends Controller
                 'program'=>$program,
                 'jurusan'=>$jurusan,
                 'dosen'=>$dosen,
+                'jalur_pmb'=>$jalur_pmb,
                 'kelas'=>$kelas,
                 'mk_jenis'=>$matkul_jenis,
                 'status'=>$status,
