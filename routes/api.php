@@ -23,6 +23,7 @@ Route::get('warning', [Ctr\AuthController::class, 'warning'])->name('warning');
 
 Route::prefix('v1')->group(function () {
     // Global data
+    Route::get('/globaldataregister/', [Ctr\GlobalController::class, 'pendaftar']);
     Route::get('/globaldata/', [Ctr\GlobalController::class, 'index']);
     Route::get('/globaldata/{id}', [Ctr\GlobalController::class, 'index']);
     // Program

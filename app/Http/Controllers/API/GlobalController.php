@@ -34,7 +34,7 @@ class GlobalController extends Controller
     {
         try {
             $periode = Periode::select('tahun','semester')->where('status',1)->first();
-            $jurusan = Jurusan::get();
+            $jurusan = Jurusan::where('jurusan', '!=', '')->get();
             $agama = Agama::get();
             $goldarah = Goldarah::get();
             $program = Program::get();
@@ -117,6 +117,36 @@ class GlobalController extends Controller
             "status" => $this->status,
             "data" => $this->data,
             "error" => $this->error
+        ]);
+    }
+
+    public function pendaftar()
+    {
+        try {
+            $jurusan    = Jurusan::where('jurusan', '!=', '')->get();
+            $prodi      = Prodi::select(
+                "program_studi.*",
+                "program.program as nama_program",
+                "jurusan.jurusan as nama_jurusan",
+                "program_studi.alias",
+            )
+            ->join("program", "program_studi.program", "=", "program.NOMOR")
+            ->join("jurusan", "program_studi.jurusan", "=", "jurusan.NOMOR")
+            ->get();
+    
+            $this->data = [
+                'jurusan'   => $jurusan,
+                'prodi'     => $prodi
+            ];
+            $this->status   = "success";
+        } catch (QueryException $e) {
+            $this->status   = "failed";
+            $this->error    = $e;
+        }
+        return response()->json([
+            "status"        => $this->status,
+            "data"          => $this->data,
+            "error"         => $this->error
         ]);
     }
 }
