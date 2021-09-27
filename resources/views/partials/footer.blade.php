@@ -6,15 +6,21 @@
         <input type="hidden" id="endpoint">
 
         <div class="modal-header">
-          <h5 class="modal-title text-warning text-center">Peringatan</h5>
+            <p class="text-center">
+                <h5 class="modal-title text-warning text-center">Peringatan</h5>
+            </p>
         </div>
         <div class="modal-body">
-          <p class="text-center">Apakah anda yakin mau menghapus data <span id="context_hapus"></span> :</p>
-          <h2 class="text-center"><span id="text_hapus"></span></h2>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-modal-cancel" data-dismiss="modal">Batal</button>
-          <button type="button" class="btn btn--blue btn-modal-ok" id="btn_modal_hapus" onclick="delete_func()">Hapus data</button>
+          <p class="text-center font-weight-bold">Apakah anda yakin mau menghapus data <span id="context_hapus"></span> :</p>
+          <h2 class="text-center mb-4"><span id="text_hapus"></span></h2>
+          <div class="row">
+                <div class="col-md-6">
+                    <button type="button" class="btn btn-modal-cancel w-100" data-dismiss="modal">Batal</button>
+                </div>
+                <div class="col-md-6">
+                    <button type="button" class="btn btn-primary w-100" id="btn_modal_hapus" onclick="delete_func()">Hapus data</button>
+                </div>
+            </div>
         </div>
       </div>
     </div>
