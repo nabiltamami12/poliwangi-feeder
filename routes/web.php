@@ -391,6 +391,11 @@ Route::prefix('akademik')->middleware(['aksesuntuk:akademik'])->group(function (
                 "title" => "pmb-pendaftar",
             ]);
         });
+        Route::get('/pengajuan/cicilan', function () {
+            return view('mahasiswaLama.pengajuancicilan', [
+                "title" => "pmb-pendaftar",
+            ]);
+        });
     });
     
     Route::prefix('report')->group(function () {

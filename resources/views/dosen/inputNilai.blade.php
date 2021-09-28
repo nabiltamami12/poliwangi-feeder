@@ -147,7 +147,6 @@ $(document).ready(function() {
     var matakuliah = $('#matkul').val()
     
     var arr = {
-      'tahun' : tahun,
       'semester' : $('#semester').val(),
       'prodi' : $('#prodi :selected').text(),
       'kelas' : $('#kelas :selected').text(),

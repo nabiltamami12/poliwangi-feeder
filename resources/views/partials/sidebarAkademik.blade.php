@@ -1,3 +1,15 @@
+<div class="loaderScreen-wrapper">
+  <div class="spinner-grow text-warning" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+  <div class="spinner-grow text-info" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+  <div class="spinner-grow text-light" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>
+
 <!-- Sidenav -->
 <nav class="sidenav navbar navbar-vertical fixed-left navbar-expand-xs navbar-light" id="sidenav-main">
   <div class="scrollbar-inner">
@@ -188,6 +200,13 @@
                 <a class="nav-link" href="{{ url('akademik/pmb/datapendaftar')}}">
                   <span class="mini_icon">DP</span>
                   <span class="nav-link-text">Data Pendaftar</span>
+                </a>
+              </li>
+              
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url('akademik/pmb/pengajuan/cicilan')}}">
+                  <span class="mini_icon">DP</span>
+                  <span class="nav-link-text">Pengajuan Cicilan</span>
                 </a>
               </li>
               
