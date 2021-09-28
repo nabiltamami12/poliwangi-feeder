@@ -82,18 +82,13 @@
             type: type,
             dataType: 'json',
             data: data,
-            beforeSend: function(text) {
-                // loading func
-                console.log("loading")
-                loading('show')
-            },
             success: function(res) {
                 if (res.status=="success") {
                     window.location.href = "{{url('/akademik/master/datajurusan')}}";                    
                 } else {
                     // alert gagal
                 }
-                loading('hide')
+                
 
             }
         });
@@ -106,11 +101,6 @@ function getData(id) {
         type: 'get',
         dataType: 'json',
         data: {},
-        beforeSend: function(text) {
-                // loading func
-                console.log("loading")
-                loading('show')
-        },
         success: function(res) {
             if (res.status=="success") {
                 var data = res['data'][0];
@@ -120,7 +110,7 @@ function getData(id) {
             } else {
                 // alert gagal
             }
-            loading('hide')
+            
 
         }
     });

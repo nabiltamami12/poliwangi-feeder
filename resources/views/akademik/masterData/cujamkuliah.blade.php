@@ -104,18 +104,13 @@
             type: type,
             dataType: 'json',
             data: data,
-            beforeSend: function(text) {
-                // loading func
-                console.log("loading")
-                loading('show')
-            },
             success: function(res) {
                 if (res.status=="success") {
                     window.location.href = "{{url('/akademik/master/datajamkuliah')}}";                    
                 } else {
                     // alert gagal
                 }
-                loading('hide')
+                
             }
         });
     });
@@ -136,11 +131,6 @@ async function getData(id) {
             type: 'get',
             dataType: 'json',
             data: {},
-            beforeSend: function(text) {
-                    // loading func
-                    console.log("loading")
-                    loading('show')
-            },
             success: function(res) {
                 if (res.status=="success") {
                     var data = res['data'][0];
@@ -150,7 +140,7 @@ async function getData(id) {
                 } else {
                     // alert gagal
                 }
-                loading('hide')
+                
             }
         });
     }

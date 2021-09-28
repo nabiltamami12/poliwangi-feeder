@@ -155,11 +155,6 @@ $(document).ready(function() {
       type: 'post',
       dataType: 'json',
       data: {data:arr_mhs},
-      beforeSend: function(text) {
-          // loading func
-          console.log("loading")
-          // loading('show')
-      },
       success: function(res) {
         console.log(res)
           if (res.status=="success") {
@@ -167,7 +162,7 @@ $(document).ready(function() {
           } else {
               // alert gagal
           }
-          // loading('hide')
+          
 
       }
     });
@@ -245,11 +240,6 @@ async function getFilter(id,semester) {
     type: 'get',
     dataType: 'json',
     data: {},
-    beforeSend: function(text) {
-            // loading func
-            console.log("loading")
-            loading('show')
-    },
     success: function(res) {
         if (res.status=="success") {
             $('#program_studi').val(res.data.info.prodi)
@@ -260,7 +250,7 @@ async function getFilter(id,semester) {
         } else {
             // alert gagal
         }
-        loading('hide')
+        
     }
   });
 }

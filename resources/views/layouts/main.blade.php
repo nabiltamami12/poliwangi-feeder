@@ -6,6 +6,9 @@
 </head>
 
 <body>
+  <div class="loaderScreen-wrapper">
+    <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+  </div>
 
   {{-- For Select Menu Sidebar --}}
   @php

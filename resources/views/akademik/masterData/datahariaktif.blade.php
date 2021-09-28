@@ -414,11 +414,6 @@ $(document).ready(function () {
             type: 'post',
             dataType: 'json',
             data: {tanggal:tanggal,keterangan:keterangan,libur:libur},
-            beforeSend: function(text) {
-                    // loading func
-                    // console.log("loading")
-                    loading('show')
-            },
             success: function(res) {
                 change_date(tanggal,libur)
                 if (keterangan!="") {
@@ -436,7 +431,7 @@ $(document).ready(function () {
                 $('.fc-day-top[data-date="'+tanggal+'"]').attr('data-status',libur);
                 $('.fc-day-top[data-date="'+tanggal+'"]').attr('data-keterangan',keterangan);
 
-                loading('hide')
+                
             }
         })
     })
@@ -474,11 +469,6 @@ function getData(){
         type: 'get',
         dataType: 'json',
         data: {},
-        beforeSend: function(text) {
-                // loading func
-                console.log("loading")
-                loading('show')
-        },
         success: function(res) {
             $.each(res.data,function (key,row) {
                 if(row.keterangan!=null){
@@ -495,7 +485,7 @@ function getData(){
                 change_date(row.tanggal.split(" ")[0],row.libur)
                 $('.fc-day-top[data-date="'+row.tanggal.split(" ")[0]+'"]').attr('data-status',row.libur);
                 $('.fc-day-top[data-date="'+row.tanggal.split(" ")[0]+'"]').attr('data-keterangan',row.keterangan);
-                // loading('hide')
+                
             })
         }
     })

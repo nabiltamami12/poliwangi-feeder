@@ -12,6 +12,14 @@ jQuery(function ($) {
     tagMenu.parentNode.parentNode.parentNode.classList.add('showsubmenu');
   }
 
+  // jquery ajax global event handler
+  $( document ).ajaxComplete(function() {
+	  loading('hide');
+	});
+	$( document ).ajaxSend(function() {
+	  loading('show');
+	});
+
 	var dt_init = document.getElementById("datatable");
 	// datatable
 	if (dt_init) {

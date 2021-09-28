@@ -161,18 +161,13 @@ dt_opt = {
             contentType: false,
             cache: false,
             processData: false,
-            beforeSend: function(text) {
-                // loading func
-                console.log("loading")
-                loading('show')
-            },
             success: function(res) {
                 if (res.status=="success") {
                     window.location.href = "{{url('/akademik/keuangan/spi')}}";                    
                 } else {
                     console.log("Gagal");
                 }
-                loading('hide')
+                
             }
         });
     });

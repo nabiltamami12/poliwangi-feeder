@@ -194,18 +194,13 @@ function setting_biaya() {
       type: 'get',
       dataType: 'json',
       data: {},
-      beforeSend: function(text) {
-              // loading func
-              console.log("loading")
-              loading('show')
-      },
       success: function(res) {
           if (res.status=="success") {
             $('#biaya_admin').val(res.data);              
           } else {
               // alert gagal
           }
-          loading('hide')
+          
 
       }
   });
@@ -216,18 +211,13 @@ function simpan_func() {
         type: 'post',
         dataType: 'json',
         data: {'nilai':$('#biaya_admin').val()},
-        beforeSend: function(text) {
-                // loading func
-                console.log("loading")
-                loading('show')
-        },
         success: function(res) {
             if (res.status=="success") {
                 $('#biayaModal').modal('hide')              
             } else {
                 // alert gagal
             }
-            loading('hide')
+            
 
         }
     });

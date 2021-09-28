@@ -154,11 +154,6 @@ dt_opt = {
                     type: 'put',
                     dataType: 'json',
                     data: {},
-                    beforeSend: function(text) {
-                        // loading func
-                        console.log("loading")
-                        // loading('show')
-                    },
                     success: function(res) {
                         console.log(res)
                         if (res.status=="success") {
@@ -178,7 +173,7 @@ dt_opt = {
                         } else {
                             // alert gagal
                         }
-                        // loading('hide')
+                        
 
                     }
                 });

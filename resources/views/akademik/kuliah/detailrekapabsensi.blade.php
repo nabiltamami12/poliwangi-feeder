@@ -157,11 +157,6 @@ $(document).ready(function() {
       type: 'put',
       dataType: 'json',
       data: {data:arr_mhs},
-      beforeSend: function(text) {
-          // loading func
-          console.log("loading")
-          // loading('show')
-      },
       success: function(res) {
         console.log(res)
           if (res.status=="success") {
@@ -169,7 +164,7 @@ $(document).ready(function() {
           } else {
               // alert gagal
           }
-          // loading('hide')
+          
 
       }
     });
@@ -252,18 +247,13 @@ async function getFilter() {
     type: 'get',
     dataType: 'json',
     data: {},
-    beforeSend: function(text) {
-            // loading func
-            console.log("loading")
-            loading('show')
-    },
     success: function(res) {
         if (res.status=="success") {
             setSiswa(res.data)
         } else {
             // alert gagal
         }
-        loading('hide')
+        
     }
   });
 }
