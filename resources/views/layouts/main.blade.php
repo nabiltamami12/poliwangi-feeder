@@ -30,7 +30,9 @@
       $sidebar = 'partials.sidebarKeuangan';
   @endphp
 
-  @include($sidebar)
+  @if ($sidebar)  
+    @include($sidebar)
+  @endif
 
   <!-- Main content -->
   <main class="main-content" id="panel">

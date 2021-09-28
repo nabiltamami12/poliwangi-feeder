@@ -26,9 +26,9 @@ Route::get('/', function () {
     return view('halamanAwal.login');
 })->name('login');
 
-Route::get('/login', function () {
-    return view('halamanAwal.login');
-})->name('login');
+// Route::get('/login', function () {
+//     return view('halamanAwal.login');
+// })->name('login');
 
 Route::get('/register', function () {
     return view('halamanAwal.register');
@@ -66,7 +66,7 @@ Route::prefix('mahasiswabaru')->middleware(['aksesuntuk:maba'])->group(function 
     });
 });
 
-Route::prefix('akademik')->group(function () {
+Route::prefix('akademik')->middleware(['aksesuntuk:akademik'])->group(function () {
     Route::get('/dashboard', function () {
         return view('akademik.dashboardAkademik', [
             "title" => "akademik-dashboard",

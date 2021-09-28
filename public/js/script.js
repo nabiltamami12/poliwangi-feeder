@@ -7,10 +7,10 @@ jQuery(function ($) {
 		autoclose: true
 	});
 	// set menu active
-    if (tagMenu) {
-      tagMenu.childNodes[1].classList.add('sub-aktif');
-      tagMenu.parentNode.parentNode.parentNode.classList.add('showsubmenu');
-    }
+  if (tagMenu) {
+    tagMenu.childNodes[1].classList.add('sub-aktif');
+    tagMenu.parentNode.parentNode.parentNode.classList.add('showsubmenu');
+  }
 
 	var dt_init = document.getElementById("datatable");
 	// datatable
