@@ -39,7 +39,6 @@
 
   <!-- Custom CSS -->
   <link href="{{ asset('css/main.css') }}" rel="stylesheet">
-  <link href="{{ asset('css/responsive.css') }}" rel="stylesheet">
 
   @yield('style')
   <script>

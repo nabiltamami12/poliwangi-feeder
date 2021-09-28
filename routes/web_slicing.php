@@ -75,7 +75,7 @@ Route::prefix('mahasiswalama')->group(function () {
     });
 });
 
-Route::prefix('admin')->group(function () {
+Route::prefix('admin')->middleware(['aksesuntuk:admin'])->group(function () {
     Route::get('/dashboard', function () {
         return view('admin.dashboardAdmin', [
             "title" => "admin-dashboard"

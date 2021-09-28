@@ -38,7 +38,7 @@ Route::get('/pmbgenerateva', function () {
     return view('halamanAwal.pmbGenerateVA');
 })->name('generateVA-PMB');
 
-Route::prefix('mahasiswabaru')->group(function () {
+Route::prefix('mahasiswabaru')->middleware(['aksesuntuk:maba'])->group(function () {
     Route::get('/dashboard', function () {
         return view('mahasiswaBaru.dashboardMaba', [
             "title" => "Dashboard"
