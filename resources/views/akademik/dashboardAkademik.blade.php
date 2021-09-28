@@ -132,4 +132,7 @@
 <script src="{{ asset('js/piechart.js') }}"></script>
 <script src="{{ asset('js/barchartMahasiswaProdi.js') }}"></script>
 <script src="{{ asset('js/loading.js') }}"></script>
+<script>
+  getGlobalData(1);
+</script>
 @endsection

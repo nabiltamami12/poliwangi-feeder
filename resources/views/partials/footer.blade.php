@@ -94,6 +94,7 @@
             success: function(res) {
                 if (res.status=="success") {
                     // return res['data'];
+                    localStorage.removeItem('globalData');
                     localStorage.setItem('globalData', JSON.stringify(res['data']));
                 } else {
                     // alert gagal
