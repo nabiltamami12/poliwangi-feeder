@@ -472,7 +472,7 @@ Route::prefix('akademik')->middleware(['aksesuntuk:akademik'])->group(function (
     });
 });
 
-Route::prefix('keuangan')->group(function () {
+Route::prefix('keuangan')->middleware(['aksesuntuk:keuangan'])->group(function () {
     Route::get('/dashboard', function () {
         return view('keuangan.dashboardKeuangan', [
             "title" => "keuangan-dashboard",
