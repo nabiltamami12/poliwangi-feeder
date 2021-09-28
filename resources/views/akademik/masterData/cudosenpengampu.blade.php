@@ -163,11 +163,6 @@ function setMatkul(id_select_prodi,id_select_matkul,row,status) {
       type: type,
       dataType: 'json',
       data: arr,
-      beforeSend: function(text) {
-        // loading func
-        loading("show");
-        console.log("loading")
-      },
       success: function(res) {
         if (res.status=="success") {
           if (type=="post") {
@@ -187,7 +182,7 @@ function setMatkul(id_select_prodi,id_select_matkul,row,status) {
         } else {
           // alert gagal
         }
-        loading("hide");
+        ;
       }
     });
   })
@@ -199,18 +194,13 @@ function fun_hapus(id) {
       type: 'delete',
       dataType: 'json',
       data: {},
-      beforeSend: function(text) {
-          // loading func
-          loading("show");
-          console.log("loading")
-      },
       success: function(res) {
           if (res.status=="success") {
               $('.col-id-'+id).remove()               
           } else {
               // alert gagal
           }
-          loading("hide");
+          ;
       }
   });
 }
@@ -222,11 +212,6 @@ async function getData(id) {
             type: 'get',
             dataType: 'json',
             data: {},
-            beforeSend: function(text) {
-                    // loading func
-                    console.log("loading")
-                    loading("show");
-            },
             success: function(res) {
                 if (res.status=="success") {
                     var data = res['data'];
@@ -244,7 +229,7 @@ async function getData(id) {
                       searchMatkul(id_select_matkul,row.program_studi,id_pengampu,row.matakuliah)
                     })
                     setMatkul("prodi","matkul",null,'tambah')
-                    loading("hide");
+                    ;
                 } else {
                     // alert gagal
                 }

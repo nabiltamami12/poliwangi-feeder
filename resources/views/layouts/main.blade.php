@@ -6,7 +6,7 @@
 </head>
 
 <body>
-  <div class="loaderScreen-wrapper">
+  <div class="loaderScreen-wrapper" style="display: none;">
     <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
   </div>
 
