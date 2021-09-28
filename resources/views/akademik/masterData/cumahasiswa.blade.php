@@ -115,7 +115,7 @@
                         <div class="col-sm-6 col-12">
                             <div class="form-group row mb-0">
                                 <label for="sekjur">Jalur Penerimaan</label>
-                                <input type="text" class="form-control" id="mahasiswa_jalur_penerimaan" placeholder="Jalur Penerimaan" name="jalur_penerimaan" >
+                                <input type="text" class="form-control" id="jalur_daftar" placeholder="Jalur Penerimaan" name="jalur_daftar" >
                             </div>
                         </div>
                         <div class="col-sm-6 col-12">
@@ -136,7 +136,7 @@
                         <div class="col-sm-6 col-12">
                             <div class="form-group row mb-0">
                                 <label for="jurusan_inggris">Kewarganegaraan</label>
-                                <select class="form-control" id="warga" name="warga" required>
+                                <select class="form-control" id="warga" name="warga" >
                                     <option value="WNI">WNI</option>
                                     <option value="WNA">WNA</option>
                                 </select>
@@ -145,7 +145,7 @@
                         <div class="col-sm-6 col-12">
                             <div class="form-group row mb-0">
                                 <label for="jurusan_inggris">Agama</label>
-                                <select class="form-control" id="agama" name="agama" required>
+                                <select class="form-control" id="agama" name="agama" >
                                    
                                 </select>
                             </div>
@@ -153,7 +153,7 @@
                         <div class="col-sm-6 col-12">
                             <div class="form-group row mb-0">
                                 <label for="jurusan_inggris">Golongan Darah</label>
-                                <select class="form-control" id="darah" name="darah" required>
+                                <select class="form-control" id="darah" name="darah" >
                                    
                                 </select>
                             </div>

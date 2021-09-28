@@ -93,7 +93,7 @@ class MahasiswaController extends Controller
 
 	public function update(Request $request, $id)
 	{
-		$check = Mhs::where('NOMOR', $id);
+		$check = Mhs::where('nomor', $id);
 		$data = $request->all();
 
 		$validate = Validator::make($data, [

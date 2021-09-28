@@ -24,6 +24,7 @@ class Mahasiswa extends Model
         'tgllahir',
         'tglmasuk',
         'mahasiswa_jalur_penerimaan',
+        'jalur_daftar',
         'anak_ke',
         'jenis_kelamin',
         'warga',
