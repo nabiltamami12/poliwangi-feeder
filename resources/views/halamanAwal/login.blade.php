@@ -73,7 +73,7 @@
                         <i class="iconify" data-icon="bx:bxs-user" data-inline="false"></i>
                       </span>
                     </div>
-                    <input class="form-control" placeholder="No. Pendaftaran" type="text" id="nodaftar" name="nodaftar" :value="old('nodaftar')" autofocus>
+                    <input class="form-control" placeholder="Username / No. Pendaftaran" type="text" id="nodaftar" name="nodaftar" :value="old('nodaftar')" autofocus>
                   </div>
                 </div>
                 <div class="form-group">
@@ -121,6 +121,16 @@
     var url_api = "{{ url('/api/v1') }}";
     $("#form").submit(function(e) {
       e.preventDefault();
+      
+      //sementara untuk demo saja
+      let demo = check_demo(e.target);
+      if (demo) {
+        window.location.href = demo;
+        return;
+      }
+      // console.log('keliwat');
+      // return;
+
       $.ajax({
         url: url_api+"/login",
         type: 'post',
@@ -131,7 +141,6 @@
         beforeSend: function(text) {
         },
         success: function(res) {
-          console.log(res)
           if (res.status=="success") {
             localStorage.setItem('pmb', res.data)
             window.location.href = "{{url('/pmbgenerateva')}}"
@@ -141,6 +150,40 @@
         }
       });
     });
+
+    //sementara untuk demo saja
+    function check_demo(e){
+      let akses = document.getElementById('nodaftar').value;
+      switch(akses){
+        case 'admin':
+          return "{{url('/admin/dashboard')}}";
+          break;
+
+        case 'akademik':
+          return "{{url('/akademik/dashboard')}}";
+          break;
+
+        case 'dosen':
+          return "{{url('/dosen/dashboard')}}";
+          break;
+
+        case 'keuangan':
+          return "{{url('/keuangan/dashboard')}}";
+          break;
+
+        case 'mahasiswa_baru':
+          return "{{url('/akademik/dashboard')}}";
+          break;
+
+        case 'mahasiswa_lama':
+          return "{{url('/akademik/dashboard')}}";
+          break;
+
+        default:
+          return false;
+          break;
+      }
+    }
   </script>
 </body>
 
