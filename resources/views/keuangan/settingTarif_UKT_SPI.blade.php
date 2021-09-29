@@ -94,11 +94,11 @@
     function updateSuffix() {
       if(window.innerWidth > 768){
         const width = getTextWidth(inputElements[i].value, "14px Montserrat");
-        prefixElements[i].style.right = width + "px";
+        prefixElements[i].style.right = (width+20)+ "px";
       }
       else{
         const width = getTextWidth(inputElements[i].value, "12px Montserrat");
-        prefixElements[i].style.right = width + "px";
+        prefixElements[i].style.right = (width+20)+ "px";
       }
     }
 

@@ -479,15 +479,29 @@ Route::prefix('keuangan')->middleware(['aksesuntuk:keuangan'])->group(function (
         ]);
     });
 
-    Route::get('/tarif', function () {
-        return view('keuangan.tarif_UKT_SPI', [
-            "title" => "keuangan-tarif",
-        ]);
-    });
-    Route::get('/tarif/UKTSPI', function () {
-        return view('keuangan.settingTarif_UKT_SPI', [
-            "title" => "keuangan-tarif",
-        ]);
+    Route::prefix('tarif')->group(function() {
+        Route::get('/', function () {
+            return view('keuangan.tarif_UKT_SPI', [
+                "title" => "keuangan-tarif",
+            ]);
+        });
+        Route::get('/cu', function () {
+            return view('keuangan.cutarifspi', [
+                "id" => null,
+                "title" => "keuangan-tarif"
+            ]);
+        });
+        Route::get('/cu/{id}', function ($id) {
+            return view('keuangan.cutarifspi', [
+                "id" => $id,
+                "title" => "keuangan-tarif"
+            ]);
+        });
+        Route::get('/UKTSPI', function () {
+            return view('keuangan.settingTarif_UKT_SPI', [
+                "title" => "keuangan-tarif",
+            ]);
+        });
     });
 
     Route::prefix('rekapitulasi')->group(function () {
