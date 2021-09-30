@@ -33,7 +33,7 @@
           <hr class="mt-3 mb-4">
         </div>
         <div class="card_content">
-          <div class="uploadSuratKeputusan rounded p-3 d-flex justify-content-center align-items-center">
+          <div class="uploadDokumen rounded p-3 d-flex justify-content-center align-items-center">
             <form class="align-items-center d-none">
               <i class="iconify mr-1" data-icon="bx:bxs-file-pdf" data-inline="false"></i>
               <input type="file" id="file" hidden onchange="showFileName()" />
@@ -82,8 +82,8 @@
   const inputFile = document.getElementById("file");
   const customBtn = document.getElementById("custom-btn");
   const customText = document.getElementById("custom-text");
-  const formUpload = document.querySelector(".uploadSuratKeputusan form");
-  const formWrapper = document.querySelector('.uploadSuratKeputusan');
+  const formUpload = document.querySelector(".uploadDokumen form");
+  const formWrapper = document.querySelector('.uploadDokumen');
 
   customBtn.addEventListener("click", function () {
     inputFile.click();

@@ -206,11 +206,11 @@
     border-color: #28a3eb;
   }
 
-  .uploadSuratKeputusan {
+  .uploadDokumen {
     border: 1px solid #C4C4C4;
   }
 
-  .uploadSuratKeputusan .iconify {
+  .uploadDokumen .iconify {
     font-size: 1.5rem;
     color: #000;
   }
@@ -265,7 +265,7 @@
           <hr class="mt-3 mb-4">
         </div>
         <div class="card_content">
-          <div class="uploadSuratKeputusan rounded p-3 d-flex justify-content-center align-items-center">
+          <div class="uploadDokumen rounded p-3 d-flex justify-content-center align-items-center">
             <form class="align-items-center d-none">
               <i class="iconify mr-1" data-icon="bx:bxs-file-pdf" data-inline="false"></i>
               <input type="file" id="file" hidden onchange="example()" />
@@ -312,8 +312,8 @@
   const inputFile = document.getElementById("file");
   const customBtn = document.getElementById("custom-btn");
   const customText = document.getElementById("custom-text");
-  const formUpload = document.querySelector(".uploadSuratKeputusan form");
-  const formWrapper = document.querySelector('.uploadSuratKeputusan');
+  const formUpload = document.querySelector(".uploadDokumen form");
+  const formWrapper = document.querySelector('.uploadDokumen');
   var month = {
             "Januari":1,
             "Februari":2,
@@ -339,6 +339,7 @@
       var bulan = (month[bulan_tahun[0]].toString().length==1)?"0"+month[bulan_tahun[0]]:month[bulan_tahun[0]];
       var tahun = bulan_tahun[1];
       var date =  `${tahun}-${bulan}-${tanggal}`;
+      $('#keterangan')
     })
   })
 
