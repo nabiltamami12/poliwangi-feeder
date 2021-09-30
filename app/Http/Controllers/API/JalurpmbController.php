@@ -85,20 +85,20 @@ class JalurpmbController extends Controller
             $jalur = new Jalurpmb;
             $jalur->jalur_daftar = $request->jalur_daftar;
             $jalur->biaya = $request->biaya;
-            $jalur->is_active = $request->is_active;
+            $jalur->is_active = 0;
             $jalur->tahun = $request->tahun;
             $jalur->kuota = $request->kuota;
             $jalur->tanggal_tes = $request->tanggal_tes;
             $jalur->tanggal_awal = $request->tanggal_awal;
             $jalur->tanggal_akhir = $request->tanggal_akhir;
             $jalur->save();
-            foreach ($request->syarat as $key => $value) {
-                $score = array(
-                    'id_jalur' => $jalur->id,
-                    'id_syarat' => $value['id_syarat']
-                );
-                $scores = Jalursyarat::Create($score);
-            }
+            // foreach ($request->syarat as $key => $value) {
+            //     $score = array(
+            //         'id_jalur' => $jalur->id,
+            //         'id_syarat' => $value['id_syarat']
+            //     );
+            //     $scores = Jalursyarat::Create($score);
+            // }
             $this->data = $jalur;
             $this->status = "success";
         } catch (QueryException $e) {
@@ -155,7 +155,7 @@ class JalurpmbController extends Controller
             $jalur->update([
                 'jalur_daftar' => $request->jalur_daftar,
                 'biaya' => $request->biaya,
-                'is_active' => $request->is_active,
+                'is_active' => 0,
                 'tahun' => $request->tahun,
                 'kuota' => $request->kuota,
                 'tanggal_tes' => $request->tanggal_tes,
@@ -163,14 +163,14 @@ class JalurpmbController extends Controller
                 'tanggal_akhir' => $request->tanggal_akhir,
             ]);
 
-            Jalursyarat::where('id_jalur', $pmb)->delete();
-            foreach ($request->syarat as $key => $value) {
-                $score = array(
-                    'id_jalur' => $jalur->id,
-                    'id_syarat' => $value['id_syarat']
-                );
-                $scores = Jalursyarat::Create($score);
-            }
+            // Jalursyarat::where('id_jalur', $pmb)->delete();
+            // foreach ($request->syarat as $key => $value) {
+            //     $score = array(
+            //         'id_jalur' => $jalur->id,
+            //         'id_syarat' => $value['id_syarat']
+            //     );
+            //     $scores = Jalursyarat::Create($score);
+            // }
             $this->data = $jalur;
             $this->status = "success";
         } catch (QueryException $e) {

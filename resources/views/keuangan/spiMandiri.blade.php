@@ -64,10 +64,6 @@
   </div>
 </section>
 <script>
-const formatAngka = (number) => 
-      Intl.NumberFormat("id-ID", { style : 'currency', currency:'IDR', minimumFractionDigits: 0 }).format(number);
-
-
 function importFile() {
   $("#file").click()
 }

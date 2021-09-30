@@ -98,8 +98,7 @@
               </div>
               <div class="py-3 d-flex">
                 <i class="iconify text-success mr-3" data-icon="akar-icons:circle-check-fill"></i>
-                <p class="d-inline-block">Upload Dokumen Pengajuan Keringanan <span
-                    class="text-primary">(Optional)</span></p>
+                <p class="d-inline-block">Upload Dokumen Pengajuan Keringanan <span class="text-primary">(Optional)</span></p>
               </div>
             </div>
           </div>
@@ -117,9 +116,9 @@
 
 @section('js')
 <script>
-  $(function () {
+  $(function() {
     $(".date-input").datepicker({
-        format: "dd MM yyyy",
+      format: "dd MM yyyy",
     });
   });
 </script>

@@ -6,11 +6,6 @@ jQuery(function ($) {
 		format: "dd MM yyyy",
 		autoclose: true
 	});
-	// set menu active
-  if (tagMenu) {
-    tagMenu.childNodes[1].classList.add('sub-aktif');
-    tagMenu.parentNode.parentNode.parentNode.classList.add('showsubmenu');
-  }
 
   // jquery ajax global event handler
   $( document ).ajaxComplete(function() {

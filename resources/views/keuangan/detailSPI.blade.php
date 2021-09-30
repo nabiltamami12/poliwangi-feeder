@@ -72,9 +72,6 @@
     </div>
   </div>
 <script>
-const formatAngka = (number) => 
-      Intl.NumberFormat("id-ID", { style : 'currency', currency:'IDR', minimumFractionDigits: 0 }).format(number);
-
 $(document).ready(function() {
 
 var id = "{{$id}}";

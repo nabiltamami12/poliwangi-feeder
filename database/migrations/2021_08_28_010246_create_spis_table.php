@@ -13,15 +13,17 @@ class CreateSpisTable extends Migration
      */
     public function up()
     {
-        Schema::create('spi', function (Blueprint $table) {
-            $table->id();
-            $table->integer('tahun');
-            $table->integer('id_mahasiwa');
-            $table->integer('tarif');
-            $table->integer('pembayaran');
-            $table->date('tanggal_pembyaran');
-            $table->integer('piutang');
-        });
+        if (!Schema::hasTable('spi')) {
+            Schema::create('spi', function (Blueprint $table) {
+                $table->id();
+                $table->integer('tahun');
+                $table->integer('id_mahasiwa');
+                $table->integer('tarif');
+                $table->integer('pembayaran');
+                $table->date('tanggal_pembyaran');
+                $table->integer('piutang');
+            });
+        }
     }
 
     /**

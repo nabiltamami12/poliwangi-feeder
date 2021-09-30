@@ -174,6 +174,7 @@ Route::prefix('v1')->group(function () {
     Route::put('/jurusanpilihan/{id}', '\App\Http\Controllers\API\JurusanpilihanController@update');
     Route::delete('/jurusanpilihan/{id}', '\App\Http\Controllers\API\JurusanpilihanController@destroy');
     //syarat
+    Route::get('/syarat', '\App\Http\Controllers\API\SyaratController@index');
     Route::get('/syarat/{id}', '\App\Http\Controllers\API\SyaratController@show');
     Route::post('/syarat', '\App\Http\Controllers\API\SyaratController@store');
     Route::put('/syarat/{id}', '\App\Http\Controllers\API\SyaratController@update');
