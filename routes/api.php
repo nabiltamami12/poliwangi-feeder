@@ -174,6 +174,7 @@ Route::prefix('v1')->group(function () {
     Route::put('/jurusanpilihan/{id}', '\App\Http\Controllers\API\JurusanpilihanController@update');
     Route::delete('/jurusanpilihan/{id}', '\App\Http\Controllers\API\JurusanpilihanController@destroy');
     //syarat
+    Route::get('/syarat', '\App\Http\Controllers\API\SyaratController@index');
     Route::get('/syarat/{id}', '\App\Http\Controllers\API\SyaratController@show');
     Route::post('/syarat', '\App\Http\Controllers\API\SyaratController@store');
     Route::put('/syarat/{id}', '\App\Http\Controllers\API\SyaratController@update');
@@ -226,13 +227,18 @@ Route::prefix('v1')->group(function () {
     Route::post('setting_biaya', [Ctr\SettingBiayaController::class, 'store']);
 
     // Berkas Keuangan
-    Route::get('/list_cicilan', [Ctr\BerkasKeuanganController::class, 'index']);
-    Route::get('/stats', [Ctr\BerkasKeuanganController::class, 'statistik']);
-    Route::get('/detail_dokumen/{id}', [Ctr\BerkasKeuanganController::class, 'detail_dokumen']);
+<<<<<<< HEAD
     Route::post('berkas_keuangan', [Ctr\BerkasKeuanganController::class, 'store']);
-    Route::get('/approve/{id}', [Ctr\BerkasKeuanganController::class, 'approve']);
-    Route::post('/perjanjian/{id}', [Ctr\BerkasKeuanganController::class, 'perjanjian']);
-    Route::post('/cicilan/{id}', [Ctr\BerkasKeuanganController::class, 'detail_cicilan']);
+    // example use bni api
+    Route::get('/test', [Ctr\MahasiswaController::class, 'create_va']);
+=======
+    Route::get('keuangan/list_cicilan', [Ctr\BerkasKeuanganController::class, 'index']);
+    Route::get('keuangan/stats', [Ctr\BerkasKeuanganController::class, 'statistik']);
+    Route::get('keuangan/detail_dokumen/{id}', [Ctr\BerkasKeuanganController::class, 'detail_dokumen']);
+    Route::post('keuangan/pengajuan-cicilan', [Ctr\BerkasKeuanganController::class, 'store']);
+    Route::get('keuangan/approve/{id}', [Ctr\BerkasKeuanganController::class, 'approve']);
+    Route::post('keuangan/perjanjian/{id}', [Ctr\BerkasKeuanganController::class, 'perjanjian']);
+    Route::post('keuangan/cicilan/{id}', [Ctr\BerkasKeuanganController::class, 'detail_cicilan']);
     
 
     // example use bni api
@@ -241,6 +247,7 @@ Route::prefix('v1')->group(function () {
 
 
 
+>>>>>>> 09196fe62eae9ea302ef3bd781d3a9a0d3a4b8c3
 });
 
 Route::prefix('v1')->middleware('auth:api')->group(function () {

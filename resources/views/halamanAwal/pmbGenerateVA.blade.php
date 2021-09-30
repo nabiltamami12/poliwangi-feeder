@@ -128,7 +128,7 @@
   <!-- Argon JS -->
   <script src="{{ url('argon') }}/assets/js/argon.js?v=1.2.0"></script>
   <script type="text/javascript">
-    const toCurrency = (number) => 
+    const formatAngka = (number) => 
       Intl.NumberFormat("id-ID", { style : 'currency', currency:'IDR', minimumFractionDigits: 0 }).format(number);
 
     $.ajax({
@@ -148,7 +148,7 @@
           }else{
             $('#va-aktif').val(res.data.virtual_account)
             $('#va-aktif-intruksi').text(res.data.virtual_account)
-            $('#trx-amount').text(toCurrency(res.data.trx_amount))
+            $('#trx-amount').text(formatAngka(res.data.trx_amount))
           }
         } else {
         }

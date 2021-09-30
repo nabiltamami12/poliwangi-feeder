@@ -334,7 +334,7 @@ Route::prefix('akademik')->middleware(['aksesuntuk:akademik'])->group(function (
                 "title" => "rekap-absensi-mahasiswa"
             ]);
         });
-        Route::get('/absensi/rekap/detail/{id}/{kelas}/{matkul}', function ($id,$kelas,$matkul) {
+        Route::get('/absensi/rekap/detail/{id}/{kelas}/{matkul}', function ($id, $kelas, $matkul) {
             return view('akademik.kuliah.detailrekapabsensi', [
                 "id" => $id,
                 "kelas" => $kelas,
@@ -342,7 +342,7 @@ Route::prefix('akademik')->middleware(['aksesuntuk:akademik'])->group(function (
                 "title" => "rekap-absensi-mahasiswa"
             ]);
         });
-        Route::get('/absensi/rekap-mahasiswa/{kelas}/{matkul}', function ($kelas,$matkul) {
+        Route::get('/absensi/rekap-mahasiswa/{kelas}/{matkul}', function ($kelas, $matkul) {
             return view('akademik.kuliah.rekapabsensikelasmahasiswa', [
                 "kelas" => $kelas,
                 "matkul" => $matkul,
@@ -394,6 +394,11 @@ Route::prefix('akademik')->middleware(['aksesuntuk:akademik'])->group(function (
         Route::get('/pengajuan/cicilan', function () {
             return view('mahasiswaLama.pengajuancicilan', [
                 "title" => "pmb-pendaftar",
+            ]);
+        });
+        Route::get('/piutangmahasiswa', function () {
+            return view('keuangan.piutangMahasiswa', [
+                "title" => "keuangan-rekapitulasi",
             ]);
         });
     });
@@ -464,6 +469,10 @@ Route::prefix('akademik')->middleware(['aksesuntuk:akademik'])->group(function (
                 "title" => "akademik-kuliah",
             ]);
         });
+<<<<<<< HEAD
+
+=======
+>>>>>>> 09196fe62eae9ea302ef3bd781d3a9a0d3a4b8c3
         Route::get('/absensi/rekap-mahasiswa', function () {
             return view('akademik.kuliah.rekapAbsensiMahasiswa', [
                 "title" => "akademik-kuliah",
@@ -494,7 +503,66 @@ Route::prefix('keuangan')->middleware(['aksesuntuk:keuangan'])->group(function (
         Route::get('/cu/{id}', function ($id) {
             return view('keuangan.cutarifspi', [
                 "id" => $id,
+<<<<<<< HEAD
+                "title" => "admin-settingpmb"
+            ]);
+        });
+        Route::get('/settingjalursyarat', function () {
+            return view('admin.pmb.settingJalurSyarat', [
+                "title" => "admin-settingpmb"
+            ]);
+        });
+        Route::get('/settingjalursyarat/cu/', function () {
+            return view('admin.pmb/cuJalurSyarat', [
+                "id" => null,
+                "title" => "admin-settingpmb"
+            ]);
+        });
+        Route::get('/settingjalursyarat/cu/{id}', function ($id) {
+            return view('admin.pmb/cuJalurSyarat', [
+                "id" => $id,
+                "title" => "admin-settingpmb"
+            ]);
+        });
+        Route::get('/settingjurusanpilihan', function () {
+            return view('admin.pmb.settingJurusanPilihan', [
+                "title" => "admin-settingpmb"
+            ]);
+        });
+        Route::get('/editjurusanpilihan', function () {
+            return view('admin.pmb.editJurusanPilihan', [
+                "title" => "admin-settingpmb"
+            ]);
+        });
+
+        Route::get('/settingjadwalseleksi', function () {
+            return view('admin.pmb.settingJadwalSeleksi', [
+                "title" => "admin-settingpmb"
+            ]);
+        });
+        Route::get('/editjadwalseleksi', function () {
+            return view('admin.pmb.editJadwalSeleksi', [
+                "title" => "admin-settingpmb"
+            ]);
+        });
+
+        Route::get('/settingjurusanasal', function () {
+            return view('admin.pmb.settingJurusanAsalPendaftar', [
+                "title" => "admin-settingpmb"
+            ]);
+        });
+        Route::get('/editjurusanasal', function () {
+            return view('admin.pmb.editJurusanAsalPendaftar', [
+                "title" => "admin-settingpmb"
+            ]);
+        });
+
+        Route::get('/settingjurusanlinear', function () {
+            return view('admin.pmb.settingJurusanLinear', [
+                "title" => "admin-settingpmb"
+=======
                 "title" => "keuangan-tarif"
+>>>>>>> 09196fe62eae9ea302ef3bd781d3a9a0d3a4b8c3
             ]);
         });
     });

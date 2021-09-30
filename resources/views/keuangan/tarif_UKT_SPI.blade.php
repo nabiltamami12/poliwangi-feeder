@@ -77,8 +77,6 @@
 </div>
 </section>
 <script>
-const toCurrency = (number) => 
-      Intl.NumberFormat("id-ID", { style : 'currency', currency:'IDR', minimumFractionDigits: 0 }).format(number);
   
 $(document).ready(function() {  
   var nomor = 1;
@@ -106,7 +104,7 @@ $(document).ready(function() {
         "mData": null,
         "className": 'text-center px-2',
         "mRender": function(data, type, full) {
-          res = toCurrency(data['spi']);
+          res = formatAngka(data['spi']);
           return res;
         }
       },{
@@ -114,7 +112,7 @@ $(document).ready(function() {
         "mData": null,
         "className": 'text-center px-2',
         "mRender": function(data, type, full) {
-          res = toCurrency(data['kelompok_1']);
+          res = formatAngka(data['kelompok_1']);
           return res;
         }
       },{
@@ -122,7 +120,7 @@ $(document).ready(function() {
         "mData": null,
         "className": 'text-center px-2',
         "mRender": function(data, type, full) {
-          res = toCurrency(data['kelompok_2']);
+          res = formatAngka(data['kelompok_2']);
           return res;
         }
       },{
@@ -130,7 +128,7 @@ $(document).ready(function() {
         "mData": null,
         "className": 'text-center px-2',
         "mRender": function(data, type, full) {
-          res = toCurrency(data['kelompok_3']);
+          res = formatAngka(data['kelompok_3']);
           return res;
         }
       },{
@@ -138,7 +136,7 @@ $(document).ready(function() {
         "mData": null,
         "className": 'text-center px-2',
         "mRender": function(data, type, full) {
-          res = toCurrency(data['kelompok_4']);
+          res = formatAngka(data['kelompok_4']);
           return res;
         }
       },{
@@ -146,7 +144,7 @@ $(document).ready(function() {
         "mData": null,
         "className": 'text-center px-2',
         "mRender": function(data, type, full) {
-          res = toCurrency(data['kelompok_5']);
+          res = formatAngka(data['kelompok_5']);
           return res;
         }
       },{
@@ -154,7 +152,7 @@ $(document).ready(function() {
         "mData": null,
         "className": 'text-center px-2',
         "mRender": function(data, type, full) {
-          res = toCurrency(data['kelompok_6']);
+          res = formatAngka(data['kelompok_6']);
           return res;
         }
       },{
@@ -162,7 +160,7 @@ $(document).ready(function() {
         "mData": null,
         "className": 'text-center px-2',
         "mRender": function(data, type, full) {
-          res = toCurrency(data['kelompok_7']);
+          res = formatAngka(data['kelompok_7']);
           return res;
         }
       },{
@@ -170,7 +168,7 @@ $(document).ready(function() {
         "mData": null,
         "className": 'text-center px-2',
         "mRender": function(data, type, full) {
-          res = toCurrency(data['kelompok_8']);
+          res = formatAngka(data['kelompok_8']);
           return res;
         }
       },{

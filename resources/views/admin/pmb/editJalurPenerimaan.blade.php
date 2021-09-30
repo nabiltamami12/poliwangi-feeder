@@ -32,9 +32,14 @@
                 <h2 class="card_title mb-2 font-weight-500">Tanggal Pendaftaran</h2>
                 <div class="d-sm-flex align-items-center">
                   <div class="form-group">
+<<<<<<< HEAD:resources/views/admin/pmb/editJalurPenerimaan.blade.php
+                    <div class="d-flex align-items-center date_picker">
+                      <input id="txtDate1" type="text" class="form-control date-input" value="24 January 2022" readonly />
+=======
                     <div class="d-flex align-items-center date_picker w-100 ">
                       <input id="txtDate1" type="text" class="form-control date-input" value="24 January 2022"
                         readonly />
+>>>>>>> 09196fe62eae9ea302ef3bd781d3a9a0d3a4b8c3:resources/views/admin/pmb/editJalurPenerimaan.blade copy.php
                       <label class="input-group-btn" for="txtDate1">
                         <span class="date_button">
                           <i class="iconify" data-icon="bx:bx-calendar" data-inline="false"></i>
@@ -44,9 +49,14 @@
                   </div>
                   <p class="mx-3 font-weight-500 text-center my-3">Sampai</p>
                   <div class="form-group">
+<<<<<<< HEAD:resources/views/admin/pmb/editJalurPenerimaan.blade.php
+                    <div class="d-flex align-items-center date_picker">
+                      <input id="txtDate2" type="text" class="form-control date-input" value="24 February 2022" readonly />
+=======
                     <div class="d-flex align-items-center date_picker w-100 ">
                       <input id="txtDate2" type="text" class="form-control date-input" value="24 February 2022"
                         readonly />
+>>>>>>> 09196fe62eae9ea302ef3bd781d3a9a0d3a4b8c3:resources/views/admin/pmb/editJalurPenerimaan.blade copy.php
                       <label class="input-group-btn" for="txtDate2">
                         <span class="date_button">
                           <i class="iconify" data-icon="bx:bx-calendar" data-inline="false"></i>
@@ -98,8 +108,7 @@
               </div>
               <div class="py-3 d-flex">
                 <i class="iconify text-success mr-3" data-icon="akar-icons:circle-check-fill"></i>
-                <p class="d-inline-block">Upload Dokumen Pengajuan Keringanan <span
-                    class="text-primary">(Optional)</span></p>
+                <p class="d-inline-block">Upload Dokumen Pengajuan Keringanan <span class="text-primary">(Optional)</span></p>
               </div>
             </div>
           </div>
@@ -117,9 +126,9 @@
 
 @section('js')
 <script>
-  $(function () {
+  $(function() {
     $(".date-input").datepicker({
-        format: "dd MM yyyy",
+      format: "dd MM yyyy",
     });
   });
 </script>

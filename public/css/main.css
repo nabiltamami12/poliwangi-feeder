@@ -2199,10 +2199,10 @@ nav#navbar h1 {
   line-height: 1.5em;
   color: #041f2f;
 }
-.page-content__admin .uploadSuratKeputusan {
+.page-content__admin .uploadDokumen {
   border: 1px solid #c4c4c4;
 }
-.page-content__admin .uploadSuratKeputusan .iconify {
+.page-content__admin .uploadDokumen .iconify {
   font-size: 1.5rem;
   color: #000;
 }
