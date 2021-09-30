@@ -68,6 +68,16 @@
             }
         });
     }
+
+    function formatAngka(number) {
+        var number = Intl.NumberFormat("id-ID", { style : 'currency', currency:'IDR', minimumFractionDigits: 0 }).format(number);
+        if (isNaN(number)) {
+            return number;
+        }else{
+            return 0;
+        }
+    }
+
     function loading(status) {
         if (status=="show") {
             $(".loaderScreen-wrapper").fadeIn("fast");

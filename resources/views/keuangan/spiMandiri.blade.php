@@ -64,7 +64,7 @@
   </div>
 </section>
 <script>
-const toCurrency = (number) => 
+const formatAngka = (number) => 
       Intl.NumberFormat("id-ID", { style : 'currency', currency:'IDR', minimumFractionDigits: 0 }).format(number);
 
 
@@ -118,7 +118,7 @@ dt_opt = {
       "mData": null,
       "className": 'font-weight-bold text-right',
       "mRender": function(data, type, full) {
-        res = toCurrency(data['tarif']);
+        res = formatAngka(data['tarif']);
         return res;
       }
     },{
@@ -126,7 +126,7 @@ dt_opt = {
       "mData": null,
       "className": 'font-weight-bold text-right',
       "mRender": function(data, type, full) {
-        res = toCurrency(data['nom_pembayaran']);
+        res = formatAngka(data['nom_pembayaran']);
         return res;
       }
     },{
@@ -134,7 +134,7 @@ dt_opt = {
       "mData": null,
       "className": 'font-weight-bold text-right',
       "mRender": function(data, type, full) {
-        res = toCurrency(data['piutang']);
+        res = formatAngka(data['piutang']);
         return res;
       }
     },{
