@@ -1,4 +1,4 @@
-@extends('layouts.mainAkademik')
+@extends('layouts.main')
 
 @section('content')
 <!-- Header -->
@@ -70,15 +70,13 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-modal-cancel" data-dismiss="modal">Batal</button>
-          <button type="button" class="btn btn--blue btn-modal-ok" id="btn_modal_hapus" onclick="simpan_func()">Simpan</button>
+          <button type="button" class="btn btn--blue btn-success" id="btn_modal_hapus" onclick="simpan_func()">Simpan</button>
         </div>
       </div>
     </div>
 </div>
 </section>
 <script>
-const toCurrency = (number) => 
-      Intl.NumberFormat("id-ID", { style : 'currency', currency:'IDR', minimumFractionDigits: 0 }).format(number);
   
 $(document).ready(function() {  
   var nomor = 1;
@@ -106,7 +104,7 @@ $(document).ready(function() {
         "mData": null,
         "className": 'text-center px-2',
         "mRender": function(data, type, full) {
-          res = toCurrency(data['spi']);
+          res = formatAngka(data['spi']);
           return res;
         }
       },{
@@ -114,7 +112,7 @@ $(document).ready(function() {
         "mData": null,
         "className": 'text-center px-2',
         "mRender": function(data, type, full) {
-          res = toCurrency(data['kelompok_1']);
+          res = formatAngka(data['kelompok_1']);
           return res;
         }
       },{
@@ -122,7 +120,7 @@ $(document).ready(function() {
         "mData": null,
         "className": 'text-center px-2',
         "mRender": function(data, type, full) {
-          res = toCurrency(data['kelompok_2']);
+          res = formatAngka(data['kelompok_2']);
           return res;
         }
       },{
@@ -130,7 +128,7 @@ $(document).ready(function() {
         "mData": null,
         "className": 'text-center px-2',
         "mRender": function(data, type, full) {
-          res = toCurrency(data['kelompok_3']);
+          res = formatAngka(data['kelompok_3']);
           return res;
         }
       },{
@@ -138,7 +136,7 @@ $(document).ready(function() {
         "mData": null,
         "className": 'text-center px-2',
         "mRender": function(data, type, full) {
-          res = toCurrency(data['kelompok_4']);
+          res = formatAngka(data['kelompok_4']);
           return res;
         }
       },{
@@ -146,7 +144,7 @@ $(document).ready(function() {
         "mData": null,
         "className": 'text-center px-2',
         "mRender": function(data, type, full) {
-          res = toCurrency(data['kelompok_5']);
+          res = formatAngka(data['kelompok_5']);
           return res;
         }
       },{
@@ -154,7 +152,7 @@ $(document).ready(function() {
         "mData": null,
         "className": 'text-center px-2',
         "mRender": function(data, type, full) {
-          res = toCurrency(data['kelompok_6']);
+          res = formatAngka(data['kelompok_6']);
           return res;
         }
       },{
@@ -162,7 +160,7 @@ $(document).ready(function() {
         "mData": null,
         "className": 'text-center px-2',
         "mRender": function(data, type, full) {
-          res = toCurrency(data['kelompok_7']);
+          res = formatAngka(data['kelompok_7']);
           return res;
         }
       },{
@@ -170,7 +168,7 @@ $(document).ready(function() {
         "mData": null,
         "className": 'text-center px-2',
         "mRender": function(data, type, full) {
-          res = toCurrency(data['kelompok_8']);
+          res = formatAngka(data['kelompok_8']);
           return res;
         }
       },{
@@ -179,7 +177,7 @@ $(document).ready(function() {
         "className": 'text-center px-2',
         "mRender": function(data, type, full) {          
           var id = data['id'];
-          var btn_update = `<i class="iconify edit-icon" onclick='update_btn(${id})' data-icon="bx:bx-edit-alt" ></i>` 
+          var btn_update = `<i class="iconify edit-icon text-primary" onclick='update_btn(${id})' data-icon="bx:bx-edit-alt" ></i>` 
           return res = btn_update;
         }
       }
@@ -194,18 +192,13 @@ function setting_biaya() {
       type: 'get',
       dataType: 'json',
       data: {},
-      beforeSend: function(text) {
-              // loading func
-              console.log("loading")
-              loading('show')
-      },
       success: function(res) {
           if (res.status=="success") {
             $('#biaya_admin').val(res.data);              
           } else {
               // alert gagal
           }
-          loading('hide')
+          
 
       }
   });
@@ -216,18 +209,13 @@ function simpan_func() {
         type: 'post',
         dataType: 'json',
         data: {'nilai':$('#biaya_admin').val()},
-        beforeSend: function(text) {
-                // loading func
-                console.log("loading")
-                loading('show')
-        },
         success: function(res) {
             if (res.status=="success") {
                 $('#biayaModal').modal('hide')              
             } else {
                 // alert gagal
             }
-            loading('hide')
+            
 
         }
     });

@@ -6,15 +6,21 @@
         <input type="hidden" id="endpoint">
 
         <div class="modal-header">
-          <h5 class="modal-title text-warning text-center">Peringatan</h5>
+            <p class="text-center">
+                <h5 class="modal-title text-warning text-center">Peringatan</h5>
+            </p>
         </div>
         <div class="modal-body">
-          <p class="text-center">Apakah anda yakin mau menghapus data <span id="context_hapus"></span> :</p>
-          <h2 class="text-center"><span id="text_hapus"></span></h2>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-modal-cancel" data-dismiss="modal">Batal</button>
-          <button type="button" class="btn btn--blue btn-modal-ok" id="btn_modal_hapus" onclick="delete_func()">Hapus data</button>
+          <p class="text-center font-weight-bold">Apakah anda yakin mau menghapus data <span id="context_hapus"></span> :</p>
+          <h2 class="text-center mb-4"><span id="text_hapus"></span></h2>
+          <div class="row">
+                <div class="col-md-6">
+                    <button type="button" class="btn btn-modal-cancel w-100" data-dismiss="modal">Batal</button>
+                </div>
+                <div class="col-md-6">
+                    <button type="button" class="btn btn-primary w-100" id="btn_modal_hapus" onclick="delete_func()">Hapus data</button>
+                </div>
+            </div>
         </div>
       </div>
     </div>
@@ -46,11 +52,6 @@
             type: 'delete',
             dataType: 'json',
             data: {},
-            beforeSend: function(text) {
-                // loading func
-                loading("show");
-                console.log("loading")
-            },
             success: function(res) {
                 $('#deleteModal').modal('hide');
                 if (res.status=="success") {
@@ -58,10 +59,20 @@
                 } else {
                     // alert gagal
                 }
-                loading("hide");
+                ;
             }
         });
     }
+
+    function formatAngka(number) {
+        var number = Intl.NumberFormat("id-ID", { style : 'currency', currency:'IDR', minimumFractionDigits: 0 }).format(number);
+        if (isNaN(number)) {
+            return number;
+        }else{
+            return 0;
+        }
+    }
+
     function loading(status) {
         if (status=="show") {
             $(".loaderScreen-wrapper").fadeIn("fast");
@@ -80,19 +91,15 @@
             type: 'get',
             dataType: 'json',
             data: {},
-            beforeSend: function(text) {
-                    // loading func
-                    console.log("loading")
-                    loading("show");
-            },
             success: function(res) {
                 if (res.status=="success") {
                     // return res['data'];
+                    localStorage.removeItem('globalData');
                     localStorage.setItem('globalData', JSON.stringify(res['data']));
                 } else {
                     // alert gagal
                 }
-                loading("hide");
+                ;
             }
         });
     }

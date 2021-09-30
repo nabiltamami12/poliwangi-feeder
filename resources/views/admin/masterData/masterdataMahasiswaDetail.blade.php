@@ -1,4 +1,4 @@
-@extends('layouts.mainAdmin')
+@extends('layouts.main')
 
 @section('content')
 <!-- Header -->
@@ -137,7 +137,7 @@
                     </div>
                     <div class="col-md-4 form-group mt-3">
                       <label>Tanggal Lahir</label>
-                      <div class="d-flex align-items-center date_picker">
+                      <div class="d-flex align-items-center date_picker w-100 ">
                         <input id="txtDate1" type="text" class="form-control date-input" value="26 January 2002"
                           readonly />
                         <label class="input-group-btn" for="txtDate1">
@@ -305,7 +305,7 @@
                     </div>
                     <div class="col-md-4 form-group mt-3">
                       <label>Tanggal Lahir Ayah</label>
-                      <div class="d-flex align-items-center date_picker">
+                      <div class="d-flex align-items-center date_picker w-100 ">
                         <input id="txtDate2" type="text" class="form-control date-input" value="11 January 1965"
                           readonly />
                         <label class="input-group-btn" for="txtDate2">
@@ -341,7 +341,7 @@
                     </div>
                     <div class="col-md-4 form-group mt-3">
                       <label>Tanggal Lahir Ibu</label>
-                      <div class="d-flex align-items-center date_picker">
+                      <div class="d-flex align-items-center date_picker w-100 ">
                         <input id="txtDate3" type="text" class="form-control date-input" value="21 September 1970"
                           readonly />
                         <label class="input-group-btn" for="txtDate3">

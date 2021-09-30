@@ -1,4 +1,4 @@
-@extends('layouts.mainAkademik')
+@extends('layouts.main')
 
 @section('content')
   <!-- Header -->
@@ -101,11 +101,6 @@
           type: 'post',
           dataType: 'json',
           data: {'kuliah':kuliah,'data':arr_mhs},
-          beforeSend: function(text) {
-              // loading func
-              console.log("loading")
-              // loading('show')
-          },
           success: function(res) {
             console.log(res)
               if (res.status=="success") {
@@ -113,7 +108,7 @@
               } else {
                   // alert gagal
               }
-              // loading('hide')
+              
 
           }
         });

@@ -70,6 +70,7 @@
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="{{ url('/akademik/master/datadosen')}}">
+                  <span class="mini_icon">DD</span>
                   <span class="nav-link-text ml-0">Data Dosen</span>
                 </a>
               </li>
@@ -176,6 +177,37 @@
               </li>
             </ul>
           </li>
+
+          <li class="nav-item">
+            <div class="nav-link {{($title === "maba-mahasiswa") ? 'aktif' : ''}}">
+              <i class="iconify" data-icon="bx:bx-user-pin"></i>
+              <span class="nav-link-text">PMB</span>
+            </div>
+            <ul class="nav-item-dropdown-content">
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url('akademik/pmb/datapendaftar')}}">
+                  <span class="mini_icon">DP</span>
+                  <span class="nav-link-text">Data Pendaftar</span>
+                </a>
+              </li>
+              
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url('akademik/pmb/pengajuan/cicilan')}}">
+                  <span class="mini_icon">DP</span>
+                  <span class="nav-link-text">Pengajuan Cicilan</span>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url('akademik/pmb/piutangmahasiswa')}}">
+                  <span class="mini_icon">DP</span>
+                  <span class="nav-link-text">Piutang Mahasiswa (Admin)</span>
+                </a>
+              </li>
+              
+            </ul>
+          </li>
+
           {{--
           <li class="nav-item">
             <div class="nav-link {{($title === "akademik-khs") ? 'aktif' : ''}}"">

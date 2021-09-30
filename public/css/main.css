@@ -732,6 +732,7 @@ select {
   justify-content: center;
   align-items: center;
   z-index: 999999;
+  opacity:0.8;
 }
 
 #loader {
@@ -2198,10 +2199,10 @@ nav#navbar h1 {
   line-height: 1.5em;
   color: #041f2f;
 }
-.page-content__admin .uploadSuratKeputusan {
+.page-content__admin .uploadDokumen {
   border: 1px solid #c4c4c4;
 }
-.page-content__admin .uploadSuratKeputusan .iconify {
+.page-content__admin .uploadDokumen .iconify {
   font-size: 1.5rem;
   color: #000;
 }
@@ -2615,4 +2616,8 @@ nav#navbar h1 {
 .btn-modal-cancel {
   border-color: #F46A6A;
   color:#F46A6A;
+}
+.calendar_content div.selected {
+  background-color: #D8EFFB;
+  color: #28A3EB !important;
 }

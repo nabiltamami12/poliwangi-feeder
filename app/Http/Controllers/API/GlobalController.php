@@ -14,6 +14,7 @@ use App\Models\Goldarah;
 use App\Models\Kelas;
 use App\Models\Matakuliah;
 use App\Models\Prodi;
+use App\Models\Jalurpmb;
 use App\Models\Periode;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
@@ -34,9 +35,10 @@ class GlobalController extends Controller
     {
         try {
             $periode = Periode::select('tahun','semester')->where('status',1)->first();
-            $jurusan = Jurusan::get();
+            $jurusan = Jurusan::where('jurusan', '!=', '')->get();
             $agama = Agama::get();
             $goldarah = Goldarah::get();
+            $jalur_pmb =  Jalurpmb::get();;
             $program = Program::get();
             $matkul_jenis = MatakuliahJenis::get();
             $status = Status::get();
@@ -92,6 +94,7 @@ class GlobalController extends Controller
                 'program'=>$program,
                 'jurusan'=>$jurusan,
                 'dosen'=>$dosen,
+                'jalur_pmb'=>$jalur_pmb,
                 'kelas'=>$kelas,
                 'mk_jenis'=>$matkul_jenis,
                 'status'=>$status,
@@ -117,6 +120,76 @@ class GlobalController extends Controller
             "status" => $this->status,
             "data" => $this->data,
             "error" => $this->error
+        ]);
+    }
+
+    public function pendaftar()
+    {
+        try {
+            $jurusan    = Jurusan::where('jurusan', '!=', '')->get();
+            $prodi      = Prodi::select(
+                "program_studi.*",
+                "program.program as nama_program",
+                "jurusan.jurusan as nama_jurusan",
+                "program_studi.alias",
+            )
+            ->join("program", "program_studi.program", "=", "program.NOMOR")
+            ->join("jurusan", "program_studi.jurusan", "=", "jurusan.NOMOR")
+            ->get();
+    
+            $this->data = [
+                'jurusan'   => $jurusan,
+                'prodi'     => $prodi
+            ];
+            $this->status   = "success";
+        } catch (QueryException $e) {
+            $this->status   = "failed";
+            $this->error    = $e;
+        }
+        return response()->json([
+            "status"        => $this->status,
+            "data"          => $this->data,
+            "error"         => $this->error
+        ]);
+    }
+
+    public function get_provinsi()
+    {
+        $data = DB::table('tb_provinsi')->get();
+        return response()->json([
+            "status"        => 'success',
+            "data"          => $data,
+            "error"         => $this->error
+        ]);
+    }
+
+    public function get_kabupaten($id_provinsi)
+    {
+        $data = DB::table('tb_kabupaten')->select('id_kabupaten', 'nama')->where('id_provinsi', $id_provinsi)->get();
+        return response()->json([
+            "status"        => 'success',
+            "data"          => $data,
+            "error"         => $this->error
+        ]);
+    }
+
+    public function get_kecamatan($id_kabupaten)
+    {
+        $data = DB::table('tb_kecamatan')->select('id_kecamatan', 'nama')->where('id_kabupaten', $id_kabupaten)->get();
+        return response()->json([
+            "status"        => 'success',
+            "data"          => $data,
+            "error"         => $this->error
+        ]);
+    }
+
+    public function get_kelurahan($id_kecamatan)
+    {
+        $data = DB::table('tb_kelurahan')->select('id_kelurahan', 'nama')->where('id_kecamatan', $id_kecamatan)->get();
+        return response()->json([
+            "status"        => 'success',
+            "data"          => $data,
+            "error"         => $this->error
         ]);
     }
 }

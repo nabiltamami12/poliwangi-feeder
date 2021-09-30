@@ -34,11 +34,11 @@
                             passed_month != today.getMonth()) &&
                         iter_date < today
                     ) {
-                        var m = `<div class="date">`;
+                        var m = `<div class="date ${shownDate}">`;
                     } else {
                         var m = checkToday(iter_date)
-                            ? '<div class="today">'
-                            : `<div class="date">`;
+                            ? `<div class="date ${shownDate} today">`
+                            : `<div class="date ${shownDate}">`;
                     }
                     calendar.datesBody.append(m + shownDate + "</div>");
                 }
@@ -56,12 +56,13 @@
             selectDates(selected);
             checkBlank();
             checkSunday();
+            checkDate();
 
             clickedElement = calendar.datesBody.find("div");
             clickedElement.on("click", function () {
                 clicked = $(this);
                 var whichCalendar = calendar.name;
-
+                
                 if (firstClick && secondClick) {
                     thirdClicked = getClickedInfo(clicked, calendar);
                     var firstClickDateObj = new Date(
@@ -279,8 +280,32 @@
         }
 
         function checkSunday() {
+            $(".calendar_weekdays div").eq(5).css("color", "#F46A6A");
             $(".calendar_weekdays div").eq(6).css("color", "#F46A6A");
+            var i = 0;
+            $(".calendar_content div:nth-child(7n-1)").addClass("libur");
             $(".calendar_content div:nth-child(7n)").addClass("libur");
+        }
+
+        function checkDate() {
+            $.ajax({
+                url: url_api+"/hariaktifkuliah?bulan=9",
+                type: 'get',
+                dataType: 'json',
+                data: {},
+                success: function(res) {
+                  console.log(res)
+                    $.each(res.data,function (key,row) {
+                        var tgl = parseInt(row.tanggal.split(" ")[0].split("-")[2])
+                        
+                        $(".calendar_content").find('div.date.'+tgl).addClass('libur');
+                        // $(".calendar_content").find('div.date.'+tgl).addClass('selected');
+                        $(".calendar_content").find('div.date.'+tgl).append(text);
+                        $(".calendar_content").find('div.date.'+tgl).prop('data-keterangan',row.keterangan);
+                        console.log(e)
+                    })
+                }
+            })
         }
 
         var e = 480;
@@ -299,7 +324,7 @@
             "Juli",
             "Agustus",
             "September",
-            "October",
+            "Oktober",
             "November",
             "Desember",
         ];
@@ -352,7 +377,7 @@
 
         b();
         c(month, year, 0);
-        c(nextMonth, nextYear, 1);
+        // c(nextMonth, nextYear, 1);
         switchButton.on("click", function () {
             var clicked = $(this);
             var generateCalendars = function (e) {
@@ -364,7 +389,7 @@
                 nextYear = nextDatesSecond[1];
 
                 c(month, year, 0);
-                c(nextMonth, nextYear, 1);
+                // c(nextMonth, nextYear, 1);
             };
             if (clicked.attr("class").indexOf("left") != -1) {
                 generateCalendars("previous");

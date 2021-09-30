@@ -1,4 +1,4 @@
-@extends('layouts.mainAkademik')
+@extends('layouts.main')
 
 @section('content')
 <!-- Header -->
@@ -72,7 +72,7 @@
     </div>
   </div>
 <script>
-const toCurrency = (number) => 
+const formatAngka = (number) => 
       Intl.NumberFormat("id-ID", { style : 'currency', currency:'IDR', minimumFractionDigits: 0 }).format(number);
 
 $(document).ready(function() {
@@ -97,7 +97,7 @@ dt_opt = {
       "mData": null,
       "className": 'text-right',
       "mRender": function(data, type, full) {
-        res = toCurrency(data['pembayaran']);
+        res = formatAngka(data['pembayaran']);
         return res;
       }
     },{

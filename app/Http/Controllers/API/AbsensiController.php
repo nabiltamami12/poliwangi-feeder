@@ -804,7 +804,7 @@ class AbsensiController extends Controller
         $now = Carbon::now()->format('H:i');
 
         $data = [
-            'tahun'=>$request->tahun,
+            'tahun'=>$this->tahun_aktif,
             'kuliah'=>$request->kuliah,
             'pertemuan'=>$request->pertemuan,
             // 'status'=>'mengajar',
@@ -924,8 +924,8 @@ class AbsensiController extends Controller
             ->join('kelas', 'kuliah.kelas', '=', 'kelas.nomor')
             ->join('mahasiswa', 'absensi_mahasiswa.mahasiswa', '=', 'mahasiswa.nomor')
             ->where('absensi_mahasiswa.mahasiswa', $request->mahasiswa)
-            ->where('kuliah.semester', $request->semester)
-            ->where('kuliah.tahun', $request->tahun);
+            ->where('kuliah.semester', $this->semester_aktif)
+            ->where('kuliah.tahun', $this->tahun_aktif);
     
             if ($request->tanggal) {
                 $query = $query->whereDate('tanggal',$request->tanggal);
@@ -1031,6 +1031,7 @@ class AbsensiController extends Controller
         $arr_nomor = [];
         $arr_status = [];
         $arr_check = [];
+        $arr_check_minggu = [];
         $arr_check_mhs = [];
         $dosen = "";
         foreach ($mhs as $key => $value) {
@@ -1144,7 +1145,7 @@ class AbsensiController extends Controller
                                 ->join("program_studi as ps","ps.nomor", "=", "m.program_studi")
                                 ->join("program as p","p.nomor", "=", "ps.program")
                                 ->where('m.nomor', $request->mahasiswa)
-                                ->where('kl.tahun', $request->tahun)
+                                ->where('kl.tahun', $this->tahun_aktif)
                                 ->where('kl.kelas', $request->kelas)
                                 ->where('kl.matakuliah', $request->matakuliah)
                                 ->get();

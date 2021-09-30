@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Pendaftar;
+use App\Models\Jalurpmb;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Resources\JalurpendaftarResource;
 use Illuminate\Database\QueryException;
@@ -13,6 +14,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Contracts\Encryption\DecryptException;
 use BNI;
+use DB;
 
 class PendaftarController extends Controller
 {
@@ -25,10 +27,103 @@ class PendaftarController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        DB::enableQueryLog();
+        $table = DB::table('pendaftar');
+        $table->select('pendaftar.*','jalur_penerimaan.jalur_daftar as jalur_penerimaan');
+        $table->join('jalur_penerimaan','jalur_penerimaan.id','=','pendaftar.jalur_daftar');
+        if ($request->program_studi) {
+            $query = $table->where('program_studi',$request->program_studi); 
+        }
+        if ($request->jalur) {
+            $query = $table->where('mahasiswa_jalur_penerimaan',$request->jalur);
+        }
         try {
-            $this->data = Pendaftar::get();
+            $this->data = $table->get();
+            $this->status = "success";
+        } catch (QueryException $e) {
+            $this->status = "failed";
+            $this->error = $e;
+        }
+        return response()->json([
+            "status" => $this->status,
+            "data" => $this->data,
+            "error" => $this->error
+        ]);
+    }
+
+    public function verifikasi_pendaftar($id)
+    {
+        DB::enableQueryLog();
+        try {
+            $pendaftar = DB::table('pendaftar');
+            $data = $pendaftar->where('nomor',$id)->first();
+            if ($data->status=="Y") {
+                $status = null;
+                $delete = DB::table('mahasiswa')->where('no_pendaftaran',$data->nodaftar)->delete();
+            }else{
+                $status = "Y";
+
+                $arr = [
+                    'no_pendaftaran' => $data->nodaftar,
+                    'nama' => $data->nama,
+                    'nik' => $data->nik,
+                    'nisn' => $data->nisn,
+                    'tmplahir' => $data->tempat_lahir,
+                    'tgllahir' => $data->tgllahir,
+                    'anak_ke' => $data->anak_ke,
+                    'jenis_kelamin' => $data->sex,
+                    'program_studi' => $data->program_studi,
+                    'jumlah_anak' => $data->jumlah_anak,
+                    'lulussmu' => $data->tahun_lulus_smu,
+                    'smu' => $data->smu,
+                    'alamat' => $data->alamat,
+                    'status' => "B",
+                    'jalur_daftar' => $data->jalur_daftar,
+                    // 'notelp' => $data->telp,
+                    // 'nrp' => $data->nrp,
+                    // 'tahunmasuk_pt' => $data->tahun_ajaran,
+                    // 'semester' => $data->semester_masuk,
+                    // 'warga' => $data->warga,
+                    // 'penghasilan_ayah' => $data->penghasilan,
+                    // 'el' => $data->el,
+                    // 'alamat_smu' => $data->alamat_smu,
+                    // 'nijazah' => $data->nijazah,
+                    // 'nijazahmapel' => $data->nilai_uan,
+                    // 'darah' => $data->darah,
+                    // 'prestasi_olahraga' => $data->prestasi_olahraga,
+                    // 'nun' => $data->nun,
+                    // 'ayah' => $data->ayah,
+                    // 'kerja_ayah' => $data->kerja_ayah,
+                    // 'keterangan_ayah' => $data->keterangan_ayah,
+                    // 'ibu' => $data->ibu,
+                    // 'karja_ibu' => $data->karja_ibu,
+                    // 'keterangan_ibu' => $data->keterangan_ibu,
+                    // 'penghasilan_ibu' => $data->penghasilan_ibu,
+                    // 'alamat_ortu' => $data->alamat_ortu,
+                    // 'notelp_ortu' => $data->notelp_ortu,
+                    // 'ukt' => $data->ukt,
+                    // 'sekolah' => $data->sekolah,
+                    // 'kode_transaksi' => $data->kode_transaksi,
+                    // 'mahasiswa_jalur_penerimaan' => $data->mahasiswa_jalur_penerimaan,
+                    // 'kabupaten_kota' => $data->kota,
+                    // 'kabupaten_kota_ortu' => $data->kota_ortu,
+                    // 'subkampus' => $data->subkampus,
+                    // 'foto' => $data->foto,
+                    // 'email' => $data->email,
+                    // 'password' => $data->password,
+                    // 'ijasah' => $data->ijasah,
+                    // 'status_kawin' => $data->status_kawin,
+                    // 'ukuran_baju' => $data->ukuran_baju,
+                    // 'pernahpt' => $data->pernahpt,
+                ];
+                $insert = DB::table('mahasiswa')->insert($arr);
+            }
+            $update = $pendaftar->where('nomor',$id)->update(['status'=> $status]);
+
+            
+            $this->data = null;
             $this->status = "success";
         } catch (QueryException $e) {
             $this->status = "failed";
@@ -49,7 +144,6 @@ class PendaftarController extends Controller
      */
     public function store(Request $request)
     {
-        //
         $data = $request->all();
 
         $validator = Validator::make($data, [
@@ -75,6 +169,7 @@ class PendaftarController extends Controller
                 ]
             );
         }
+
         $document = new Pendaftar();
         $document->jalur_daftar = $request->jalur_daftar;
         $document->program_studi = $request->program_studi;
@@ -86,6 +181,7 @@ class PendaftarController extends Controller
         $document->notelp_ortu = $request->notelp_ortu;
         $document->email = $request->email;
         // $document->password = Hash::make($request->password);
+        $document->trx_amount = Jalurpmb::select('biaya')->where('id', $request->jalur_daftar)->get()->first()->biaya;
         $document->save();
 
         if ($fotos = $request->file('foto')) {
@@ -111,15 +207,14 @@ class PendaftarController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request)
     {
+        $token = $request->header('token');
         try {
-            if ($id) {
-                $jalurpendaftar = Pendaftar::where('nomor', $id)->get();
-            } else {
-                $jalurpendaftar = Pendaftar::get();
-            }
-            $this->data = $jalurpendaftar;
+            $id = Crypt::decrypt($token);
+            $document = Pendaftar::where('nomor', $id)->get()->first();
+            unset($document->nodaftar, $document->nomor, $document->password);
+            $this->data = $document;
             $this->status = "success";
         } catch (QueryException $e) {
             $this->status = "failed";
@@ -139,148 +234,43 @@ class PendaftarController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
-
-        $validator = Validator::make($request->all(), [
-            'foto' => 'required|mimes:jpg,png,jpeg|max:2048',
-        ]);
-
-        if ($validator->fails()) {
-            $error = $validator->errors()->all()[0];
-            return response()->json([
-                'status' => 'failed',
-                'message' => $error,
-                'data' => []
-            ]);
-        } else {
-            $document = Pendaftar::where('nomor', $id);
-
-
-            $document->ummb = $request->ummb;
-            $document->jurusan = $request->jurusan;
-            $document->program = $request->program;
-            $document->nodaftar = $request->nodaftar;
-            $document->nama = $request->nama;
-            $document->agama = $request->agama;
-            $document->sex = $request->sex;
-            $document->alamat = $request->alamat;
-            $document->telp = $request->telp;
-            $document->status = $request->status;
-            $document->spi = $request->spi;
-            $document->nrp = $request->nrp;
-            $document->t_ajaran = $request->t_ajaran;
-            $document->semester = $request->semester;
-            $document->warga = $request->warga;
-            $document->tgllahir = $request->tgllahir;
-            $document->penghasilan = $request->penghasilan;
-            $document->jumlah_anak = $request->jumlah_anak;
-            $document->el = $request->el;
-            $document->pmdk = $request->pmdk;
-            $document->anak_ke = $request->anak_ke;
-            $document->gelombang = $request->gelombang;
-            $document->bebas_spp = $request->bebas_spp;
-            $document->bebas_ikoma = $request->bebas_ikoma;
-            $document->bebas_kemahasiswaan = $request->bebas_kemahasiswaan;
-            $document->bebas_spi = $request->bebas_spi;
-            $document->keterangan_bebas_spi = $request->keterangan_bebas_spi;
-            $document->tempat_lahir = $request->tempat_lahir;
-            $document->smu = $request->smu;
-            $document->alamat_smu = $request->alamat_smu;
-            $document->tahun_lulus_smu = $request->tahun_lulus_smu;
-            $document->nilai_ijazah = $request->nilai_ijazah;
-            $document->nilai_uan = $request->nilai_uan;
-            $document->darah = $request->darah;
-            $document->prestasi_olahraga = $request->prestasi_olahraga;
-            $document->nun = $request->nun;
-            $document->nijazah = $request->nijazah;
-            $document->ayah = $request->ayah;
-            $document->kerja_ayah = $request->kerja_ayah;
-            $document->ibu = $request->ibu;
-            $document->kerja_ibu = $request->kerja_ibu;
-            $document->keterangan_ibu = $request->keterangan_ibu;
-            $document->penghasilan_ibu = $request->penghasilan_ibu;
-            $document->alamat_ortu = $request->alamat_ortu;
-            $document->notelp_ortu = $request->notelp_ortu;
-            $document->nisn = $request->nisn;
-            $document->tanggal_ubah = $request->tanggal_ubah;
-            $document->cadangan = $request->candangan;
-            $document->ukt = $request->ukt;
-            $document->bebas_ukt = $request->bebas_ukt;
-            $document->sekolah = $request->sekolah;
-            $document->kode_transaksi = $request->kode_transaksi;
-            $document->publik = $request->publik;
-            $document->mahasiswa_jalur_penerimaan = $request->mahasiswa_jalur_penerimaan;
-            $document->kota = $request->kota;
-            $document->kota_ortu = $request->kota_ortu;
-            $document->pendaftaran = $request->pendaftaran;
-            $document->ikoma = $request->ikoma;
-            $document->kemahasiswaan = $request->kemahasiswaan;
-            $document->subkampus = $request->subkampus;
-            $document->tanggal_transfer_spp = $request->tanggal_transfer_spp;
-            $document->kirim_email = $request->kirim_email;
-            $document->kirim_sms = $request->kirim_sms;
-            $document->email = $request->email;
-            $document->nik = $request->nik;
-            $document->kelas_pagi_sore = $request->kelas_pagi_sore;
-            $document->ijasah = $request->ijasah;
-            $document->status_kawin = $request->status_kawin;
-            $document->ukuran_baju = $request->ukuran_baju;
-            $document->pernahpt = $request->pernahpt;
-            $document->tahunmasuk_pt = $request->tahunmasuk_pt;
-            $document->jumlah_sks = $request->jumlah_sks;
-            $document->pt_asal = $request->pt_asal;
-            $document->nunmapel = $request->nunmapel;
-            $document->nijazahmapel = $request->nijazahmapel;
-            $document->status_smu = $request->status_smu;
-            $document->jurusan_smu = $request->jurusan_smu;
-            $document->thlahirayah = $request->thlahirayah;
-            $document->pendidikanayah = $request->pendidikanayah;
-            $document->thlahiribu = $request->thlahiribu;
-            $document->pendidikanibu = $request->pendidikanibu;
-            $document->sumberbiaya = $request->sumberbiaya;
-            $document->lembaga = $request->lembaga;
-            $document->jenis_lembaga = $request->jenis_lembaga;
-            $document->jenis_tempattinggal = $request->jenis_tempattinggal;
-            $document->transportasi = $request->transportasi;
-            $document->minat = $request->minat;
-            $document->infopolije = $request->infopolije;
-            $document->biaya_lain = $request->biaya_lain;
-            $document->ukt3 = $request->ukt3;
-            $document->ukt4 = $request->ukt4;
-            $document->ukt5 = $request->ukt5;
-            $document->kelurahan = $request->kelurahan;
-            $document->kecamatan = $request->kecamatan;
-            $document->feeder_wilayah = $request->feeder_wilayah;
-            $document->nomor_ukt = $request->nomor_ukt;
-            $document->bidikmisi = $request->bidikmisi;
-            $document->rata_sem_1 = $request->rata_sem_1;
-            $document->rata_sem_2 = $request->rata_sem_2;
-            $document->rata_sem_3 = $request->rata_sem_3;
-            $document->rata_sem_4 = $request->rata_sem_4;
-            $document->rata_sem_5 = $request->rata_sem_5;
-            $document->rata_sem_6 = $request->rata_sem_6;
-            $document->kap_bidikmisi = $request->kap_bidikmisi;
-            $document->noref_bank = $request->noref_bank;
-            $document->tanggal_transfer = $request->tanggal_transfer;
-            $document->pembayaran = $request->pembayaran;
-            $document->scan_pembayaran = $request->scan_pembayaran;
-            $document->jurusan_asal = $request->jurusan_asal;
-            $document->prestasi = $request->prestasi;
-            if ($request->foto && $request->foto->isValid()) {
-                $file_name = $request->foto->getClientOriginalName();
-                $request->foto->move(public_path('pendaftar'), $file_name);
-                $path = $file_name;
-                $request->foto = $path;
+        $token = $request->header('token');
+        $id = Crypt::decrypt($token);
+        $update_data = [];
+        foreach ($request->all() as $key => $value) {
+            $update_data[$key] = $value;
+            if ($key == 'tgllahir') {
+                $update_data['tgllahir'] = date('Y-m-d', strtotime($value));
             }
-            $document->update($request->all());
-            return response()->json([
-                'status' => 'success',
-                'data' => $document,
-                'messagge' => 'data berhasil di update'
-            ]);
+            
         }
+        unset($update_data['id'], $update_data['nodaftar']);
+        if ($ijasah = $request->file('ijasah')) {
+            $namafile = md5($id.'ijas4h').'.'.$ijasah->getClientOriginalExtension();
+            $update_data['ijasah'] = $namafile;
+            $ijasah->move(public_path() . '/pendaftar', $namafile);
+            // $check = Pendaftar::where('nomor', $document->id);
+            // $check->update($update_data);
+        }
+        if ($foto_peraturan = $request->file('foto_peraturan')) {
+            $namafile = md5($id.'f0to_p3raturan').'.'.$foto_peraturan->getClientOriginalExtension();
+            $update_data['foto_peraturan'] = $namafile;
+            $foto_peraturan->move(public_path() . '/pendaftar', $namafile);
+            // $check = Pendaftar::where('nomor', $document->id);
+            // $check->update($update_data);
+        }
+        if (count($update_data) > 0) {
+            $document = Pendaftar::where('nomor', $id);
+            $document->update($update_data);
+        }
+
+        return response()->json([
+            'status' => 'success',
+            'data' => $update_data,
+            'messagge' => 'data berhasil di update'
+        ]);
     }
 
     /**
@@ -312,7 +302,7 @@ class PendaftarController extends Controller
         $token = $request->header('token');
         try{
             $id = Crypt::decrypt($token);
-            $document = Pendaftar::select('is_lunas')->where('nomor', $id)->get()->first();
+            $document = Pendaftar::select('is_lunas', 'trx_amount')->where('nomor', $id)->get()->first();
             if ($document->is_lunas == 1) {
                 return response()->json([
                     "status" => 'success',
@@ -355,11 +345,37 @@ class PendaftarController extends Controller
 
             $this->data = [
                 'is_lunas' => 0,
-                'trx_amount' => 201500,
-                'virtual_account' => '80010000'.$id.'187',
-                'datetime_expired_iso8601' => '2021-10-05T16:00:00+07:00',
+                'trx_amount' => $document->trx_amount,
+                'virtual_account' => '80010000'.$id.'000',
+                'datetime_expired_iso8601' => date('c', time() + 2 * 3600 * 24), // 2 days
                 'document' => $document
             ];
+            $this->status = 'success';
+        }catch(DecryptException $e){
+            $this->status = 'failed';
+            $this->error = $e;
+        }
+        return response()->json([
+            "status" => $this->status,
+            "data" => $this->data,
+            "error" => $this->error
+        ]);
+    }
+
+    public function is_lunas(Request $request)
+    {
+        $token = $request->header('token');
+        try{
+            $id = Crypt::decrypt($token);
+            $document = Pendaftar::select('is_lunas')->where('nomor', $id)->get()->first();
+            $this->data = [
+                'is_lunas' => 0
+            ];
+            if ($document->is_lunas == 1) {
+                $this->data = [
+                    'is_lunas' => 1
+                ];
+            }
             $this->status = 'success';
         }catch(DecryptException $e){
             $this->status = 'failed';
@@ -403,6 +419,24 @@ class PendaftarController extends Controller
             "status" => 'failed',
             "data" => null,
             "message" => "Gagal"
+        ]);
+    }
+
+    public function keuangan()
+    {
+        try {
+            $tahun_aktif = DB::table('periode')->select('tahun')->where('status', '1')->get()->first()->tahun;
+            $data = Pendaftar::select('trx_id', 'trx_amount', 'nama', 'is_lunas', 'nomor')->where('tahun_ajaran', $tahun_aktif)->distinct()->get();
+            $this->data = $data;
+            $this->status = "success";
+        } catch (QueryException $e) {
+            $this->status = "failed";
+            $this->error = $e;
+        }
+        return response()->json([
+            "status" => $this->status,
+            "data" => $this->data,
+            "error" => $this->error
         ]);
     }
 }

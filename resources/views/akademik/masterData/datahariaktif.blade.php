@@ -1,4 +1,4 @@
-@extends('layouts.mainAkademik')
+@extends('layouts.main')
 
 @section('style')
 <style>
@@ -203,12 +203,12 @@
     border-color: #28a3eb;
   }
 
-  .uploadSuratKeputusan {
+  .uploadDokumen {
 	cursor: pointer;
     border: 1px solid #C4C4C4;
   }
 
-  .uploadSuratKeputusan .iconify {
+  .uploadDokumen .iconify {
     font-size: 1.5rem;
     color: #000;
   }
@@ -237,7 +237,7 @@
     background: transparent !important;
   }
 
-  .fc-libur {
+  .fc-day-top.fc-sat,.fc-day-top.fc-sun,.fc-libur {
     color: #F46A6A !important;
   }
   .form-group {
@@ -267,7 +267,7 @@
 							<hr class="mt-3 mb-4">
 						</div>
 						<div class="card_content">
-							<div class="uploadSuratKeputusan rounded p-3 d-flex justify-content-center align-items-center">
+							<div class="uploadDokumen rounded p-3 d-flex justify-content-center align-items-center">
 								<form class="align-items-center d-none">
 									<i class="iconify mr-1" data-icon="bx:bxs-file-pdf" data-inline="false"></i>
 									<input type="file" id="file" hidden onchange="example()" />
@@ -281,36 +281,6 @@
 						</div>
 					</div>
 				</div>
-
-				{{--
-                <div class="col-xl-12">
-                    <div class="card padding--small">
-                        <div class="card-header p-0 m-0 border-0 ">
-                            <div class="row align-items-center">
-                                <div class="col">
-                                    <h2 class="mb-0">SK Kalender Akademik</h2>
-                                </div>
-                            </div>
-
-                            <hr class="mt-3">
-                            <div class="row align-items-center ml-1 mb-3">
-                                <input type="hidden" id="tanggal">
-                                <div class="col-sm-12 col-12">
-                                    <div class="form-group row mb-0">
-                                        <input type="file" id="file">
-                                        <a href="{{asset('documents/sk_hari_aktif.pdf')}}" target="_blank">Preview </a>
-                                    </div>
-                                </div>
-                                
-                            </div>
-                            <div class="col text-right">
-                                <button type="button" class="btn btn-primary" id="upload">Upload</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-				--}}
-
                 <div class="col-xl-12">
                     <div class="card padding--small">
                         <div class="card-header p-0 m-0 border-0 ">
@@ -360,8 +330,8 @@ var calendar;
 const inputFile = document.getElementById("file");
 const customBtn = document.getElementById("custom-btn");
 const customText = document.getElementById("custom-text");
-const formUpload = document.querySelector(".uploadSuratKeputusan form");
-const formWrapper = document.querySelector('.uploadSuratKeputusan');
+const formUpload = document.querySelector(".uploadDokumen form");
+const formWrapper = document.querySelector('.uploadDokumen');
 formWrapper.addEventListener("click", function () {
 	inputFile.click();
 });
@@ -414,11 +384,6 @@ $(document).ready(function () {
             type: 'post',
             dataType: 'json',
             data: {tanggal:tanggal,keterangan:keterangan,libur:libur},
-            beforeSend: function(text) {
-                    // loading func
-                    console.log("loading")
-                    loading('show')
-            },
             success: function(res) {
                 change_date(tanggal,libur)
                 if (keterangan!="") {
@@ -428,15 +393,15 @@ $(document).ready(function () {
                         title: keterangan,
                         start: tanggal
                     },true);
-                    console.log('tambah event')
+                    // console.log('tambah event')
                 }else{
-                    console.log('hapus event')
+                    // console.log('hapus event')
                     calendar.fullCalendar('removeEvents',tanggal);
                 }
                 $('.fc-day-top[data-date="'+tanggal+'"]').attr('data-status',libur);
                 $('.fc-day-top[data-date="'+tanggal+'"]').attr('data-keterangan',keterangan);
 
-                loading('hide')
+                
             }
         })
     })
@@ -444,8 +409,8 @@ $(document).ready(function () {
         var file_data = $('#file').prop('files')[0];   
         var form_data = new FormData();                  
         form_data.append('file', file_data);
-        console.log(file_data);                             
-        console.log(form_data);                             
+        // console.log(file_data);                             
+        // console.log(form_data);                             
         $.ajax({
             url: url_api+"/hariaktifkuliah/upload",
             dataType: 'json',
@@ -474,11 +439,6 @@ function getData(){
         type: 'get',
         dataType: 'json',
         data: {},
-        beforeSend: function(text) {
-                // loading func
-                console.log("loading")
-                loading('show')
-        },
         success: function(res) {
             $.each(res.data,function (key,row) {
                 if(row.keterangan!=null){
@@ -488,14 +448,14 @@ function getData(){
                             title: row.keterangan,
                             start: row.tanggal.split(" ")[0],
                         }
-                        console.log(arr)
+                        // console.log(arr)
                         calendar.fullCalendar('renderEvent',arr)
                     }
                 }
                 change_date(row.tanggal.split(" ")[0],row.libur)
                 $('.fc-day-top[data-date="'+row.tanggal.split(" ")[0]+'"]').attr('data-status',row.libur);
                 $('.fc-day-top[data-date="'+row.tanggal.split(" ")[0]+'"]').attr('data-keterangan',row.keterangan);
-                loading('hide')
+                
             })
         }
     })

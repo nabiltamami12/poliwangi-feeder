@@ -1,4 +1,4 @@
-@extends('layouts.mainAdmin')
+@extends('layouts.main')
 
 @section('content')
 <!-- Header -->
@@ -45,7 +45,7 @@
             </div>
             <div class="col-md-6 form-group">
               <label>Tanggal Lahir</label>
-              <div class="d-flex align-items-center date_picker">
+              <div class="d-flex align-items-center date_picker w-100 ">
                 <input id="txtDate" type="text" class="form-control date-input" value="23 Jul 2021" readonly />
                 <label class="input-group-btn" for="txtDate">
                   <span class="date_button">

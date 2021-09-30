@@ -1,4 +1,4 @@
-@extends('layouts.mainKeuangan')
+@extends('layouts.main')
 
 @section('content')
 <!-- Header -->
@@ -22,7 +22,7 @@
           <div class="form-row">
             <div class="form-group col-md-6 pr-md-2">
               <label>Tanggal Pembayaran</label>
-              <div class="d-flex align-items-center date_picker">
+              <div class="d-flex align-items-center date_picker w-100 ">
                 <input id="txtDate" type="text" class="form-control date-input" value="13 Jul 2021" readonly />
                 <label class="input-group-btn" for="txtDate">
                   <span class="date_button">

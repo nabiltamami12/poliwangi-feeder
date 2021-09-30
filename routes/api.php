@@ -23,8 +23,13 @@ Route::get('warning', [Ctr\AuthController::class, 'warning'])->name('warning');
 
 Route::prefix('v1')->group(function () {
     // Global data
+    Route::get('/globaldataregister/', [Ctr\GlobalController::class, 'pendaftar']);
     Route::get('/globaldata/', [Ctr\GlobalController::class, 'index']);
     Route::get('/globaldata/{id}', [Ctr\GlobalController::class, 'index']);
+    Route::get('/list-provinsi', [Ctr\GlobalController::class, 'get_provinsi']);
+    Route::get('/list-kabupaten/{id_provinsi}', [Ctr\GlobalController::class, 'get_kabupaten']);
+    Route::get('/list-kecamatan/{id_kabupaten}', [Ctr\GlobalController::class, 'get_kecamatan']);
+    Route::get('/list-kelurahan/{id_kecamatan}', [Ctr\GlobalController::class, 'get_kelurahan']);
     // Program
     Route::get('/program', [Ctr\ProgramController::class, 'index']);
     // Program
@@ -175,14 +180,19 @@ Route::prefix('v1')->group(function () {
     Route::put('/syarat/{id}', '\App\Http\Controllers\API\SyaratController@update');
     Route::delete('/syarat/{id}', '\App\Http\Controllers\API\SyaratController@destroy');
 
-    //jalur_pendaftar
-    Route::get('/daftar/va', '\App\Http\Controllers\API\PendaftarController@va');
-    Route::get('/daftar/{id}', '\App\Http\Controllers\API\PendaftarController@show');
-    Route::post('/daftar', '\App\Http\Controllers\API\PendaftarController@store');
+    Route::get('admin/pendaftar', '\App\Http\Controllers\API\PendaftarController@index');
+    Route::put('admin/pendaftar/verifikasi/{id}', '\App\Http\Controllers\API\PendaftarController@verifikasi_pendaftar');
+    Route::get('/pendaftar/va', '\App\Http\Controllers\API\PendaftarController@va');
+    Route::get('/pendaftar', '\App\Http\Controllers\API\PendaftarController@show');
+    Route::post('/pendaftar', '\App\Http\Controllers\API\PendaftarController@store');
+    Route::post('/pendaftar/update', '\App\Http\Controllers\API\PendaftarController@update');
     Route::post('/login', [Ctr\PendaftarController::class, 'login']);
-    Route::post('/daftar/{id}', '\App\Http\Controllers\API\PendaftarController@update');
-    Route::delete('/daftar/{id}', '\App\Http\Controllers\API\PendaftarController@destroy');
+    Route::post('/pendaftar/check', [Ctr\PendaftarController::class, 'is_lunas']);
+    Route::get('/pendaftar/keuangan', [Ctr\PendaftarController::class, 'keuangan']);
+    // Route::post('/daftar/{id}', '\App\Http\Controllers\API\PendaftarController@update');
+    // Route::delete('/daftar/{id}', '\App\Http\Controllers\API\PendaftarController@destroy');
 
+    //jalur_pendaftar
     Route::get('/daftar/{id}', '\App\Http\Controllers\API\JalurpendaftarController@show');
     Route::post('/daftar', '\App\Http\Controllers\API\JalurpendaftarController@store');
     Route::put('/daftar/{id}', '\App\Http\Controllers\API\JalurpendaftarController@update');
@@ -217,9 +227,27 @@ Route::prefix('v1')->group(function () {
     Route::post('setting_biaya', [Ctr\SettingBiayaController::class, 'store']);
 
     // Berkas Keuangan
+<<<<<<< HEAD
     Route::post('berkas_keuangan', [Ctr\BerkasKeuanganController::class, 'store']);
     // example use bni api
     Route::get('/test', [Ctr\MahasiswaController::class, 'create_va']);
+=======
+    Route::get('keuangan/list_cicilan', [Ctr\BerkasKeuanganController::class, 'index']);
+    Route::get('keuangan/stats', [Ctr\BerkasKeuanganController::class, 'statistik']);
+    Route::get('keuangan/detail_dokumen/{id}', [Ctr\BerkasKeuanganController::class, 'detail_dokumen']);
+    Route::post('keuangan/pengajuan-cicilan', [Ctr\BerkasKeuanganController::class, 'store']);
+    Route::get('keuangan/approve/{id}', [Ctr\BerkasKeuanganController::class, 'approve']);
+    Route::post('keuangan/perjanjian/{id}', [Ctr\BerkasKeuanganController::class, 'perjanjian']);
+    Route::post('keuangan/cicilan/{id}', [Ctr\BerkasKeuanganController::class, 'detail_cicilan']);
+    
+
+    // example use bni api
+    Route::get('/test', [Ctr\MahasiswaController::class, 'create_va']);
+    Route::post('/test/{id}', [Ctr\BerkasKeuanganController::class, 'detail_cicilan']);
+
+
+
+>>>>>>> 09196fe62eae9ea302ef3bd781d3a9a0d3a4b8c3
 });
 
 Route::prefix('v1')->middleware('auth:api')->group(function () {

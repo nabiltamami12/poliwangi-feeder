@@ -1,4 +1,4 @@
-@extends('layouts.mainAkademik')
+@extends('layouts.main')
 
 @section('content')
 <!-- Header -->
@@ -13,7 +13,7 @@
           <div class="row align-items-center">
 
             <div class="col-md-9 form-group">
-              <div class="d-flex align-items-center date_picker">
+              <div class="d-flex align-items-center date_picker w-100 ">
                 <input id="txtDate" type="text" class="form-control form-control-sm date-input  pl-2" placeholder="Pilih Tanggal" readonly />
                 <label class="input-group-btn" for="txtDate">
                   <span class="date_button">

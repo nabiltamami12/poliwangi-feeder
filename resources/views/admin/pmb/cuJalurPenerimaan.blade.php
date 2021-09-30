@@ -1,4 +1,4 @@
-@extends('layouts.mainAkademik')
+@extends('layouts.main')
 
 @section('content')
 <!-- Header -->
@@ -27,6 +27,7 @@
 
             <div class="row jalurPMB_pendaftaran">
               <div class="col-lg-6">
+<<<<<<< HEAD
                 <h2 class="card_title mb-2 font-weight-500">Tanggal Pendaftaran</h2>
                 <div class="d-sm-flex align-items-center">
                   <div class="form-group">
@@ -48,6 +49,31 @@
                           <i class="iconify" data-icon="bx:bx-calendar" data-inline="false"></i>
                         </span>
                       </label>
+=======
+                <form>
+                  <h2 class="card_title mb-2 font-weight-500">Tanggal Pendaftaran</h2>
+                  <div class="d-sm-flex align-items-center">
+                    <div class="form-group">
+                      <div class="d-flex align-items-center date_picker w-100 ">
+                        <input id="tanggal_awal" type="text" class="form-control date-input" name="tanggal_awal" />
+                        <label class="input-group-btn" for="txtDate1">
+                          <span class="date_button">
+                            <i class="iconify" data-icon="bx:bx-calendar" data-inline="false"></i>
+                          </span>
+                        </label>
+                      </div>
+                    </div>
+                    <p class="mx-3 font-weight-500 text-center my-3">Sampai</p>
+                    <div class="form-group">
+                      <div class="d-flex align-items-center date_picker w-100 ">
+                        <input id="tanggal_akhir" type="text" class="form-control date-input" name="tanggal_akhir" />
+                        <label class="input-group-btn" for="txtDate2">
+                          <span class="date_button">
+                            <i class="iconify" data-icon="bx:bx-calendar" data-inline="false"></i>
+                          </span>
+                        </label>
+                      </div>
+>>>>>>> 09196fe62eae9ea302ef3bd781d3a9a0d3a4b8c3
                     </div>
                   </div>
                 </div>
@@ -143,18 +169,13 @@
         type: type,
         dataType: 'json',
         data: data,
-        beforeSend: function(text) {
-          // loading func
-          console.log("loading")
-          loading('show')
-        },
         success: function(res) {
           if (res.status == "success") {
             window.location.href = "{{url('/admin/settingpmb/settingjalurpenerimaan')}}";
           } else {
             // alert gagal
           }
-          loading('hide')
+          
 
         }
       });
@@ -197,11 +218,6 @@
       type: 'get',
       dataType: 'json',
       data: {},
-      beforeSend: function(text) {
-        // loading func
-        console.log("loading")
-        loading('show')
-      },
       success: function(res) {
         if (res.status == "success") {
           var data = res['data'];
@@ -211,7 +227,7 @@
         } else {
           // alert gagal
         }
-        loading('hide')
+        
 
       }
     });

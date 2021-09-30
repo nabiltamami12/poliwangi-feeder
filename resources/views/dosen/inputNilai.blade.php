@@ -1,4 +1,4 @@
-@extends('layouts.mainAkademik')
+@extends('layouts.main')
 
 @section('content')
 <!-- Header -->
@@ -82,9 +82,7 @@ var countData
 $(document).ready(function() {
   var id = dataGlobal['user']['nomor'];
   var nama = dataGlobal['user']['nama'];
-  var semester = dataGlobal['periode']['semester'];
-  var tahun = dataGlobal['periode']['tahun'];
-  getFilter(id,semester);
+  getFilter(id);
 
   $('#prodi').on('change',function (e) {
     var program_studi = $(this).val()
@@ -117,20 +115,16 @@ $(document).ready(function() {
     $('.table-body').html('')
   })
   $('#kelas').on('change',function (e) {
+    console.log("kelas")
     $('.table-header').html('')
     $('.table-body').html('')
     var id_kelas = $(this).val()
     var matakuliah = $('#matkul').val()
     $.ajax({
-      url: url_api+"/nilai?tahun="+tahun+"&kelas="+id_kelas+"&matakuliah="+matakuliah,
+      url: url_api+"/nilai?kelas="+id_kelas+"&matakuliah="+matakuliah,
       type: 'get',
       dataType: 'json',
       data: {},
-      beforeSend: function(text) {
-              // loading func
-              console.log("loading")
-              loading('show')
-      },
       success: function(res) {
         var data = res.data;
         if (res.status=="success") {
@@ -138,7 +132,7 @@ $(document).ready(function() {
         } else {
             // alert gagal
         }
-        loading('hide')
+        
       }
     })
   })
@@ -148,7 +142,6 @@ $(document).ready(function() {
     var matakuliah = $('#matkul').val()
     
     var arr = {
-      'tahun' : tahun,
       'semester' : $('#semester').val(),
       'prodi' : $('#prodi :selected').text(),
       'kelas' : $('#kelas :selected').text(),
@@ -177,18 +170,13 @@ $(document).ready(function() {
       type: 'put',
       dataType: 'json',
       data: {"data":dataSimpan},
-      beforeSend: function(text) {
-              // loading func
-              console.log("loading")
-              loading('show')
-      },
       success: function(res) {
           if (res.status=="success") {
               console.log(res)
           } else {
               // alert gagal
           }
-          loading('hide')
+          
       }
     });
   })
@@ -220,18 +208,13 @@ $(document).ready(function() {
       type: 'post',
       dataType: 'json',
       data: {"data":dataSimpan},
-      beforeSend: function(text) {
-              // loading func
-              console.log("loading")
-              loading('show')
-      },
       success: function(res) {
           if (res.status=="success") {
               console.log(res)
           } else {
               // alert gagal
           }
-          loading('hide')
+          
       }
     });
   })
@@ -273,59 +256,37 @@ function setSiswa(data) {
                 <td class="text-center px-3">${row.nim}</td>
                 <td class="font-weight-bold text-capitalize pl-1">${row.nama}</td>
                 <td class="text-center px-3">
-                  <div class="form-group">
                     <input type="text" class="form-control" id="uts_${i}" value="${row.quis1}" ${(row.is_published==1)?"readonly":""}>
-                  </div>
                 </td>
                 <td class="text-center px-3">
-                  <div class="form-group">
                     <input type="text" class="form-control" id="uas_${i}" value="${row.quis2}" ${(row.is_published==1)?"readonly":""}>
-                  </div>
                 </td>
                 <td class="text-center px-3">
-                  <div class="form-group">
                     <input type="text" class="form-control" id="tugas_${i}" value="${row.tugas}" ${(row.is_published==1)?"readonly":""}>
-                  </div>
                 </td>
                 <td class="text-center px-3">
-                  <div class="form-group">
                     <input type="text" class="form-control" id="kuis_${i}" value="${row.kuis}" ${(row.is_published==1)?"readonly":""}>
-                  </div>
                 </td>
                 <td class="text-center px-3">
-                  <div class="form-group">
                     <input type="text" class="form-control" id="kehadiran_${i}" readonly>
-                  </div>
                 </td>
                 <td class="text-center px-3">
-                  <div class="form-group">
                     <input type="text" class="form-control" id="praktikum_${i}" value="${row.praktikum}" ${(row.is_published==1)?"readonly":""}>
-                  </div>
                 </td>
                 <td class="text-center px-3">
-                  <div class="form-group">
                     <input type="text" class="form-control" id="na_${i}" value="${row.na}" readonly>
-                  </div>
                 </td>
                 <td class="text-center px-3">
-                  <div class="form-group">
                     <input type="text" class="form-control" id="up_${i}" readonly>
-                  </div>
                 </td>
                 <td class="text-center px-3">
-                  <div class="form-group">
                     <input type="text" class="form-control" id="nhu_${i}" value="${row.nhu}" readonly>
-                  </div>
                 </td>
                 <td class="text-center px-3">
-                  <div class="form-group">
                     <input type="text" class="form-control" id="nh_${i}" value="${row.nh}" readonly>
-                  </div>
                 </td>
                 <td class="text-center px-3">
-                  <div class="form-group">
                     <input type="text" class="form-control" id="keterangan_${i}" value="${row.keterangan}" ${(row.is_published==1)?"readonly":""}>
-                  </div>
                 </td>
               </tr>`
     $('.table-body').append(html)
@@ -334,9 +295,12 @@ function setSiswa(data) {
 }
 
 function getMatkul(prodi,semester) {
+  console.log(dataFilter);
+  console.log(dataFilter['matakuliah']);
   var matkul = $.grep(dataFilter['matakuliah'], function(e){ return e.program_studi == prodi; });
+  console.log(matkul);
   var matkul = $.grep(matkul, function(e){ return e.semester == semester; });
-
+  console.log(matkul);
   $('#matkul').html('')
   var optMatkul = `<option value=""> - </option>`;
   $.each(matkul,function (key,row) {
@@ -353,17 +317,13 @@ function getMatkul(prodi,semester) {
   })
   $('#kelas').append(optKelas)
 }
-async function getFilter(id,semester) {
+async function getFilter(id) {
+  var semester = $('#semester').val()
   $.ajax({
     url: url_api+"/dosen/filter/"+id+"/"+semester,
     type: 'get',
     dataType: 'json',
     data: {},
-    beforeSend: function(text) {
-            // loading func
-            console.log("loading")
-            loading('show')
-    },
     success: function(res) {
         if (res.status=="success") {
             var data = res['data'];
@@ -378,7 +338,7 @@ async function getFilter(id,semester) {
         } else {
             // alert gagal
         }
-        loading('hide')
+        
     }
   });
 }

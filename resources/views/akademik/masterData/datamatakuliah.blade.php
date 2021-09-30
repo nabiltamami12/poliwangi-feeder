@@ -1,4 +1,4 @@
-@extends('layouts.mainAkademik')
+@extends('layouts.main')
 
 @section('content')
 <!-- Header -->
@@ -89,9 +89,9 @@ dt_opt = {
         "mData": null,
         "mRender": function(data, type, full) {
           var id = data['nomor'];
-          var text_hapus = data['kode'];
-          var btn_update = `<i class="iconify edit-icon" onclick='update_btn(${id})' data-icon="bx:bx-edit-alt" ></i>` 
-          var btn_delete = `<i class="iconify delete-icon" data-icon="bx:bx-trash"  onclick='delete_btn(${id},"matakuliah","matakuliah","${text_hapus}")'></i>`; 
+          var text_hapus = data['matakuliah'];
+          var btn_update = `<i class="iconify edit-icon text-primary" onclick='update_btn(${id})' data-icon="bx:bx-edit-alt" ></i>` 
+          var btn_delete = `<i class="iconify delete-icon text-primary" data-icon="bx:bx-trash"  onclick='delete_btn(${id},"matakuliah","matakuliah","${text_hapus}")'></i>`; 
           res = btn_update+" "+btn_delete;
           return res;
         }

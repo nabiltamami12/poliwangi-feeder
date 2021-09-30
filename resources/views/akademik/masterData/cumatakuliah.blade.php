@@ -1,4 +1,4 @@
-@extends('layouts.mainAkademik')
+@extends('layouts.main')
 
 @section('content')
 
@@ -94,12 +94,6 @@
             </div>
             <div class="col-sm-6 col-12">
               <div class="form-group row mb-0">
-                <label>Tahun</label>
-                <input type="text" class="form-control" id="tahun" name="tahun">
-              </div>
-            </div>
-            <div class="col-sm-6 col-12">
-              <div class="form-group row mb-0">
                 <label>Matakuliah Inggris</label>
                 <input type="text" class="form-control" id="matakuliah_inggris" name="matakuliah_inggris">
               </div>
@@ -113,13 +107,27 @@
             <div class="col-sm-6 col-12">
               <div class="form-group row mb-0">
                 <label>Tanggal mulai efektif</label>
-                <input type="text" class="form-control" id="tanggal_mulai_efektif" name="tanggal_mulai_efektif">
+                <div class="d-flex align-items-center date_picker w-100 ">
+                    <input id="tanggal_mulai_efektif" name="tanggal_mulai_efektif" type="text" class="form-control date-input" placeholder="Pilih Tanggal" readonly />
+                    <label class="input-group-btn" for="tanggal_mulai_efektif">
+                    <span class="date_button">
+                        <i class="iconify" data-icon="bx:bx-calendar" data-inline="false"></i>
+                    </span>
+                    </label>
+                </div>
               </div>
             </div>
             <div class="col-sm-6 col-12">
               <div class="form-group row mb-0">
                 <label>Tanggal akhir efektif</label>
-                <input type="text" class="form-control" id="tanggal_akhir_efektif" name="tanggal_akhir_efektif">
+                <div class="d-flex align-items-center date_picker w-100 ">
+                    <input id="tanggal_akhir_efektif" name="tanggal_akhir_efektif" type="text" class="form-control date-input" placeholder="Pilih Tanggal" readonly />
+                    <label class="input-group-btn" for="tanggal_akhir_efektif">
+                    <span class="date_button">
+                        <i class="iconify" data-icon="bx:bx-calendar" data-inline="false"></i>
+                    </span>
+                    </label>
+                </div>
               </div>
             </div>
             <div class="col-sm-6 col-12">
@@ -183,18 +191,13 @@
             type: type,
             dataType: 'json',
             data: data,
-            beforeSend: function(text) {
-                // loading func
-                console.log("loading")
-                loading('show')
-            },
             success: function(res) {
                 if (res.status=="success") {
                     window.location.href = "{{url('/akademik/master/datamatakuliah')}}";                    
                 } else {
                     // alert gagal
                 }
-                loading('hide')
+                
             }
         });
     });
@@ -223,11 +226,6 @@ async function getData(id) {
             type: 'get',
             dataType: 'json',
             data: {},
-            beforeSend: function(text) {
-                    // loading func
-                    console.log("loading")
-                    loading('show')
-            },
             success: function(res) {
                 if (res.status=="success") {
                     var data = res['data'][0];
@@ -254,7 +252,7 @@ async function getData(id) {
                 } else {
                     // alert gagal
                 }
-                loading('hide')
+                
             }
         });
     }

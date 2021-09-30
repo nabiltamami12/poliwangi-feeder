@@ -1,4 +1,4 @@
-@extends('layouts.mainAkademik')
+@extends('layouts.main')
 
 @section('content')
 <style>
@@ -145,16 +145,12 @@ function getJadwal() {
     type: 'get',
     dataType: 'json',
     data: {},
-    beforeSend: function(text) {
-            // loading func
-            console.log("loading")
-            // loading('show')
-    },
     success: function(res) {
       if (res.status=="success") {
           $('#tb_body_jadwal').html('');
           $('#tb_body_kelas').html('');
           if (res.data.kelas.length>0) {
+            var check_batal = false;
             $.each(res.data.kelas,function (key,row_kelas) {
               if (row_kelas.status=="batal") {
                 var html = `<tr>
@@ -164,8 +160,7 @@ function getJadwal() {
                       <td class="text-center"><button onclick="buka_kelas(${row_kelas.kuliah},${row_kelas.pertemuan},'reload')" class="btn btn-sm btn-success btn-buka">Buka kelas</button></td>
                     </tr>`;
                 $('#tb_body_kelas').append(html)
-                $('#tabel_kelas').attr('hidden',false);
-                $('.no-kelas').attr('hidden',true);
+                check_batal = true;
               }else{
                 $('#tabel_kelas').attr('hidden',true);
                 $('.no-kelas').attr('hidden',false);
@@ -174,7 +169,14 @@ function getJadwal() {
                 data_kelas_open.push(row_kelas);
               }
             })
+            if (check_batal) {
+              console.log("batal loooo")
+              $('#tabel_kelas').attr('hidden',false);
+              $('.no-kelas').attr('hidden',true);
+            }
           }else{
+            console.log("batal loooo")
+
             $('#tabel_kelas').attr('hidden',true);
             $('.no-kelas').attr('hidden',false);
           }
@@ -269,7 +271,7 @@ function getJadwal() {
       } else {
           // alert gagal
       }
-      // loading('hide')
+      
     }
   });
 }
@@ -287,11 +289,6 @@ function buka_kelas(kuliah,pertemuan,status) {
     type: 'post',
     dataType: 'json',
     data: data_kls,
-    beforeSend: function(text) {
-        // loading func
-        console.log("loading")
-        // loading('show')
-    },
     success: function(res) {
       console.log(res)
         if (res.status=="success") {
@@ -299,7 +296,7 @@ function buka_kelas(kuliah,pertemuan,status) {
         } else {
             // alert gagal
         }
-        // loading('hide')
+        
 
     }
   });

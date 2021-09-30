@@ -1,4 +1,4 @@
-@extends('layouts.mainAkademik')
+@extends('layouts.main')
 
 @section('content')
 
@@ -27,7 +27,7 @@
                         <div class="col-sm-6 col-12">
                             <div class="form-group row mb-0">
                                 <label for="jurusan">Nama Siswa</label>
-                                <input type="text" class="form-control" id="nama" name="nama" required>
+                                <input type="text" class="form-control" id="nama" name="nama" placeholder="Nama Lengkap" required>
                             </div>
                         </div>
                         <div class="col-sm-6 col-12">
@@ -65,31 +65,31 @@
                         <div class="col-sm-4 col-12">
                             <div class="form-group row mb-0">
                                 <label for="jurusan">NIM</label>
-                                <input type="text" class="form-control" id="nrp" name="nrp" required>
+                                <input type="text" class="form-control" id="nrp" name="nrp" placeholder="NIM Mahasiswa" required>
                             </div>
                         </div>
                         <div class="col-sm-4 col-12">
                             <div class="form-group row mb-0">
                                 <label for="jurusan">NIK</label>
-                                <input type="text" class="form-control" id="nik" name="nik" >
+                                <input type="text" class="form-control" id="nik" name="nik"  placeholder="NIK Mahasiswa">
                             </div>
                         </div>
                         <div class="col-sm-4 col-12">
                             <div class="form-group row mb-0">
                                 <label for="jurusan">NISN</label>
-                                <input type="text" class="form-control" id="nisn" name="nisn" >
+                                <input type="text" class="form-control" id="nisn" name="nisn"  placeholder="NISN Mahasiswa">
                             </div>
                         </div>
                         <div class="col-sm-4 col-12">
                             <div class="form-group row mb-0">
                                 <label for="kajur">Tempat Lahir</label>
-                                <input type="text" class="form-control" id="tmplahir" name="tmplahir" >
+                                <input type="text" class="form-control" id="tmplahir" name="tmplahir" placeholder="Tempat Lahir Mahasiswa" >
                             </div>
                         </div>
                         <div class="col-sm-4 col-12">
                             <div class="form-group row mb-0">
                                 <label for="sekjur">Tanggal Lahir</label>
-                                <div class="d-flex align-items-center date_picker">
+                                <div class="d-flex align-items-center date_picker w-100 ">
                                     <input id="tgllahir" name="tgllahir" type="text" class="form-control date-input" placeholder="Pilih Tanggal" readonly />
                                     <label class="input-group-btn" for="tgllahir">
                                     <span class="date_button">
@@ -102,7 +102,7 @@
                         <div class="col-sm-4 col-12">
                             <div class="form-group row mb-0">
                                 <label for="sekjur">Tanggal Masuk</label>
-                                <div class="d-flex align-items-center date_picker">
+                                <div class="d-flex align-items-center date_picker w-100 ">
                                     <input id="tglmasuk" name="tglmasuk" type="text" class="form-control date-input" placeholder="Pilih Tanggal" readonly />
                                     <label class="input-group-btn" for="tglmasuk">
                                     <span class="date_button">
@@ -115,13 +115,13 @@
                         <div class="col-sm-6 col-12">
                             <div class="form-group row mb-0">
                                 <label for="sekjur">Jalur Penerimaan</label>
-                                <input type="text" class="form-control" id="jalur_penerimaan" name="jalur_penerimaan" >
+                                <input type="text" class="form-control" id="jalur_daftar" placeholder="Jalur Penerimaan" name="jalur_daftar" >
                             </div>
                         </div>
                         <div class="col-sm-6 col-12">
                             <div class="form-group row mb-0">
                                 <label for="alias">Anak ke</label>
-                                <input type="text" class="form-control" id="anak_ke" name="anak_ke" >
+                                <input type="number" class="form-control" id="anak_ke" name="anak_ke" placeholder="0" >
                             </div>
                         </div>
                         <div class="col-sm-6 col-12">
@@ -136,7 +136,7 @@
                         <div class="col-sm-6 col-12">
                             <div class="form-group row mb-0">
                                 <label for="jurusan_inggris">Kewarganegaraan</label>
-                                <select class="form-control" id="warga" name="warga" required>
+                                <select class="form-control" id="warga" name="warga" >
                                     <option value="WNI">WNI</option>
                                     <option value="WNA">WNA</option>
                                 </select>
@@ -145,7 +145,7 @@
                         <div class="col-sm-6 col-12">
                             <div class="form-group row mb-0">
                                 <label for="jurusan_inggris">Agama</label>
-                                <select class="form-control" id="agama" name="agama" required>
+                                <select class="form-control" id="agama" name="agama" >
                                    
                                 </select>
                             </div>
@@ -153,7 +153,7 @@
                         <div class="col-sm-6 col-12">
                             <div class="form-group row mb-0">
                                 <label for="jurusan_inggris">Golongan Darah</label>
-                                <select class="form-control" id="goldarah" name="goldarah" required>
+                                <select class="form-control" id="darah" name="darah" >
                                    
                                 </select>
                             </div>
@@ -161,25 +161,25 @@
                         <div class="col-sm-6 col-12">
                             <div class="form-group row mb-0">
                                 <label for="konsentrasi">Tahun Lulus</label>
-                                <input type="text" class="form-control" id="tahun_lulus" name="tahun_lulus" >
+                                <input type="number" class="form-control" id="tahun_lulus" placeholder="20XX" name="tahun_lulus" >
                             </div>
                         </div>
                         <div class="col-sm-6 col-12">
                             <div class="form-group row mb-0">
                                 <label for="akreditasi">Nomor Telp</label>
-                                <input type="text" class="form-control" id="notelp" name="notelp" >
+                                <input type="text" class="form-control" id="notelp" name="notelp" placeholder="Nomor Telpon" >
                             </div>
                         </div>
                         <div class="col-sm-6 col-12">
                             <div class="form-group row mb-0">
                                 <label for="akreditasi">Prestasi Olahraga</label>
-                                <input type="text" class="form-control" id="prestasi_olahraga" name="prestasi_olahraga" >
+                                <input type="text" class="form-control" id="prestasi_olahraga" name="prestasi_olahraga" placeholder="Prestasi Olahraga" >
                             </div>
                         </div>
                         <div class="col-sm-6 col-12">
                             <div class="form-group row mb-0">
                                 <label for="akreditasi">Beasiswa</label>
-                                <input type="text" class="form-control" id="beasiswa" name="beasiswa" >
+                                <input type="text" class="form-control" id="beasiswa" name="beasiswa"  placeholder="Beasiswa">
                             </div>
                         </div>
                     </div>
@@ -195,55 +195,55 @@
                         <div class="col-sm-12 col-12">
                             <div class="form-group row mb-0">
                                 <label for="jurusan">Alamat</label>
-                                <input type="text" class="form-control" id="alamat" name="alamat" >
+                                <input type="text" class="form-control" id="alamat" name="alamat" placeholder="Alamat Tempat Tinggal" >
                             </div>
                         </div>
                         <div class="col-sm-4 col-12">
                             <div class="form-group row mb-0">
                                 <label for="jurusan">Jalan</label>
-                                <input type="text" class="form-control" id="jalan" name="jalan" >
+                                <input type="text" class="form-control" id="jalan" name="jalan"  placeholder="Jalan Tempat Tinggal">
                             </div>
                         </div>
                         <div class="col-sm-4 col-12">
                             <div class="form-group row mb-0">
                                 <label for="jurusan">RT</label>
-                                <input type="text" class="form-control" id="rt" name="rt" >
+                                <input type="text" class="form-control" id="rt" name="rt"  placeholder="01">
                             </div>
                         </div>
                         <div class="col-sm-4 col-12">
                             <div class="form-group row mb-0">
                                 <label for="jurusan">RW</label>
-                                <input type="text" class="form-control" id="rw" name="rw" >
+                                <input type="text" class="form-control" id="rw" name="rw"  placeholder="01">
                             </div>
                         </div>
                         <div class="col-sm-4 col-12">
                             <div class="form-group row mb-0">
                                 <label for="jurusan">Desa/Kelurahan</label>
-                                <input type="text" class="form-control" id="kelurahan" name="kelurahan" >
+                                <input type="text" class="form-control" id="kelurahan" name="kelurahan" placeholder="Kelurahan" >
                             </div>
                         </div>
                         <div class="col-sm-4 col-12">
                             <div class="form-group row mb-0">
                                 <label for="jurusan">Kecamatan</label>
-                                <input type="text" class="form-control" id="kecamatan" name="kecamatan" >
+                                <input type="text" class="form-control" id="kecamatan" name="kecamatan" placeholder="Kecamatan" >
                             </div>
                         </div>
                         <div class="col-sm-4 col-12">
                             <div class="form-group row mb-0">
                                 <label for="kajur">Kabupaten / Kota</label>
-                                <input type="text" class="form-control" id="kabupaten_kota" name="kabupaten_kota" >
+                                <input type="text" class="form-control" id="kabupaten_kota" name="kabupaten_kota" placeholder="Kabupaten / Kota" >
                             </div>
                         </div>
                         <div class="col-sm-6 col-12">
                             <div class="form-group row mb-0">
                                 <label for="sekjur">Provinsi</label>
-                                <input type="text" class="form-control" id="propinsi" name="propinsi" >
+                                <input type="text" class="form-control" id="propinsi" name="propinsi" placeholder="Provinsi" >
                             </div>
                         </div>
                         <div class="col-sm-6 col-12">
                             <div class="form-group row mb-0">
                                 <label for="alias">Kode Pos</label>
-                                <input type="text" class="form-control" id="kode_pos" name="kode_pos" >
+                                <input type="text" class="form-control" id="kode_pos" name="kode_pos" placeholder="Kode Pos" >
                             </div>
                         </div>
                     </div>            
@@ -265,31 +265,31 @@
                         <div class="col-sm-4 col-12">
                             <div class="form-group row mb-0">
                                 <label for="jurusan">Ayah</label>
-                                <input type="text" class="form-control" id="ayah" name="ayah" >
+                                <input type="text" class="form-control" id="ayah" name="ayah" placeholder="Nama Ayah" >
                             </div>
                         </div>
                         <div class="col-sm-4 col-12">
                             <div class="form-group row mb-0">
                                 <label for="jurusan">Kerja Ayah</label>
-                                <input type="text" class="form-control" id="kerja_ayah" name="kerja_ayah" >
+                                <input type="text" class="form-control" id="kerja_ayah" name="kerja_ayah"  placeholder="Pekerjaan Ayah">
                             </div>
                         </div>
                         <div class="col-sm-4 col-12">
                             <div class="form-group row mb-0">
                                 <label for="jurusan">Penghasilan Ayah</label>
-                                <input type="text" class="form-control" id="penghasilan_ayah" name="penghasilan_ayah" >
+                                <input type="text" class="form-control" id="penghasilan_ayah" name="penghasilan_ayah" placeholder="Penghasilan Ayah" >
                             </div>
                         </div>
                         <div class="col-sm-4 col-12">
                             <div class="form-group row mb-0">
                                 <label for="jurusan">Tempat Lahir Ayah</label>
-                                <input type="text" class="form-control" id="tempat_lahir_ayah" name="tempat_lahir_ayah" >
+                                <input type="text" class="form-control" id="tempat_lahir_ayah" name="tempat_lahir_ayah" placeholder="Tempat Lahir Ayah" >
                             </div>
                         </div>
                         <div class="col-sm-4 col-12">
                             <div class="form-group row mb-0">
                                 <label for="jurusan">Tanggal Lahir Ayah</label>
-                                <div class="d-flex align-items-center date_picker">
+                                <div class="d-flex align-items-center date_picker w-100 ">
                                     <input id="tanggal_lahir_ayah" name="tanggal_lahir_ayah" type="text" class="form-control date-input" placeholder="Pilih Tanggal" readonly />
                                     <label class="input-group-btn" for="tanggal_lahir_ayah">
                                     <span class="date_button">
@@ -308,32 +308,32 @@
                         <div class="col-sm-4 col-12">
                             <div class="form-group row mb-0">
                                 <label for="jurusan">Ibu</label>
-                                <input type="text" class="form-control" id="ibu" name="ibu" >
+                                <input type="text" class="form-control" id="ibu" name="ibu" placeholder="Nama Ibu" >
                             </div>
                         </div>
                         <div class="col-sm-4 col-12">
                             <div class="form-group row mb-0">
                                 <label for="jurusan">Kerja Ibu</label>
-                                <input type="text" class="form-control" id="kerja_ibu" name="kerja_ibu" >
+                                <input type="text" class="form-control" id="kerja_ibu" name="kerja_ibu" placeholder="Pekerjaan Ibu">
                             </div>
                         </div>
                         <div class="col-sm-4 col-12">
                             <div class="form-group row mb-0">
                                 <label for="jurusan">Penghasilan Ibu</label>
-                                <input type="text" class="form-control" id="penghasilan_ibu" name="penghasilan_ibu" >
+                                <input type="text" class="form-control" id="penghasilan_ibu" name="penghasilan_ibu"  placeholder="Penghasilan Ibu">
                             </div>
                         </div>
 
                         <div class="col-sm-4 col-12">
                             <div class="form-group row mb-0">
                                 <label for="jurusan">Tempat Lahir Ibu</label>
-                                <input type="text" class="form-control" id="tempat_lahir_ibu" name="tempat_lahir_ibu" >
+                                <input type="text" class="form-control" id="tempat_lahir_ibu" name="tempat_lahir_ibu"  placeholder="Tempat Lahir Ibu">
                             </div>
                         </div>
                         <div class="col-sm-4 col-12">
                             <div class="form-group row mb-0">
                                 <label for="jurusan">Tanggal Lahir Ibu</label>
-                                <div class="d-flex align-items-center date_picker">
+                                <div class="d-flex align-items-center date_picker w-100 ">
                                     <input id="tanggal_lahir_ibu" name="tanggal_lahir_ibu" type="text" class="form-control date-input" placeholder="Pilih Tanggal" readonly />
                                     <label class="input-group-btn" for="tanggal_lahir_ibu">
                                     <span class="date_button">
@@ -346,67 +346,67 @@
                         <div class="col-sm-4 col-12">
                             <div class="form-group row mb-0">
                                 <label for="jurusan">Pendidikan Ibu</label>
-                                <input type="text" class="form-control" id="pendidikan_ibu" name="pendidikan_ibu" >
+                                <input type="text" class="form-control" id="pendidikan_ibu" name="pendidikan_ibu" placeholder="Pendidikan Ibu" >
                             </div>
                         </div>
                         <div class="col-sm-12 col-12">
                             <div class="form-group row mb-0">
                                 <label for="jurusan">Nomor Orang Tua</label>
-                                <input type="text" class="form-control" id="notelp_ortu" name="notelp_ortu" >
+                                <input type="text" class="form-control" id="notelp_ortu" name="notelp_ortu" placeholder="Nomor Telpon Orang Tua" >
                             </div>
                         </div>
                         <div class="col-sm-12 col-12">
                             <div class="form-group row mb-0">
                                 <label for="jurusan">Alamat Orang Tua</label>
-                                <input type="text" class="form-control" id="alamat_ortu" name="alamat_ortu" >
+                                <input type="text" class="form-control" id="alamat_ortu" name="alamat_ortu" placeholder="Alamat Orang Tua" >
                             </div>
                         </div>
                         <div class="col-sm-4 col-12">
                             <div class="form-group row mb-0">
                                 <label for="jurusan">Jalan</label>
-                                <input type="text" class="form-control" id="jalan_ortu" name="jalan_ortu" >
+                                <input type="text" class="form-control" id="jalan_ortu" name="jalan_ortu" placeholder="Jalan">
                             </div>
                         </div>
                         <div class="col-sm-4 col-12">
                             <div class="form-group row mb-0">
                                 <label for="jurusan">RT</label>
-                                <input type="text" class="form-control" id="rt_ortu" name="rt_ortu" >
+                                <input type="text" class="form-control" id="rt_ortu" name="rt_ortu" placeholder="01" >
                             </div>
                         </div>
                         <div class="col-sm-4 col-12">
                             <div class="form-group row mb-0">
                                 <label for="jurusan">RW</label>
-                                <input type="text" class="form-control" id="rw_ortu" name="rw_ortu" >
+                                <input type="text" class="form-control" id="rw_ortu" name="rw_ortu" placeholder="01">
                             </div>
                         </div>
                         <div class="col-sm-4 col-12">
                             <div class="form-group row mb-0">
                                 <label for="jurusan">Desa/Kelurahan</label>
-                                <input type="text" class="form-control" id="kelurahan_ortu" name="kelurahan_ortu" >
+                                <input type="text" class="form-control" id="kelurahan_ortu" name="kelurahan_ortu" placeholder="Kelurahan">
                             </div>
                         </div>
                         <div class="col-sm-4 col-12">
                             <div class="form-group row mb-0">
                                 <label for="jurusan">Kecamatan</label>
-                                <input type="text" class="form-control" id="kecamatan_ortu" name="kecamatan_ortu" >
+                                <input type="text" class="form-control" id="kecamatan_ortu" name="kecamatan_ortu" placeholder="Kecamatan">
                             </div>
                         </div>
                         <div class="col-sm-4 col-12">
                             <div class="form-group row mb-0">
                                 <label for="kajur">Kabupaten / Kota</label>
-                                <input type="text" class="form-control" id="kabupaten_kota_ortu" name="kabupaten_kota_ortu" >
+                                <input type="text" class="form-control" id="kabupaten_kota_ortu" name="kabupaten_kota_ortu" placeholder="Kabupaten">
                             </div>
                         </div>
                         <div class="col-sm-6 col-12">
                             <div class="form-group row mb-0">
                                 <label for="sekjur">Provinsi</label>
-                                <input type="text" class="form-control" id="propinsi_ortu" name="propinsi_ortu" >
+                                <input type="text" class="form-control" id="propinsi_ortu" name="propinsi_ortu" placeholder="Provinsi">
                             </div>
                         </div>
                         <div class="col-sm-6 col-12">
                             <div class="form-group row mb-0">
                                 <label for="alias">Kode Pos</label>
-                                <input type="text" class="form-control" id="kode_pos_ortu" name="kode_pos_ortu" >
+                                <input type="text" class="form-control" id="kode_pos_ortu" name="kode_pos_ortu" placeholder="Kode Pos" >
                             </div>
                         </div>
                     </div>            
@@ -429,26 +429,26 @@
                         <div class="col-sm-6 col-12">
                             <div class="form-group row mb-0">
                                 <label for="akreditasi">Asal Sekolah</label>
-                                <input type="text" class="form-control" id="sekolah" name="sekolah" >
+                                <input type="text" class="form-control" id="sekolah" name="sekolah" placeholder="Asal Sekolah">
                             </div>
                         </div>
 
                         <div class="col-sm-6 col-12">
                             <div class="form-group row mb-0">
                                 <label for="akreditasi">SMU</label>
-                                <input type="text" class="form-control" id="smu" name="smu" >
+                                <input type="text" class="form-control" id="smu" name="smu" placeholder="SMU">
                             </div>
                         </div>
                         <div class="col-sm-4 col-12">
                             <div class="form-group row mb-0">
                                 <label for="jurusan">NUN</label>
-                                <input type="text" class="form-control" id="nun" name="nun" >
+                                <input type="text" class="form-control" id="nun" name="nun" placeholder="Nilai NUN">
                             </div>
                         </div>
                         <div class="col-sm-4 col-12">
                             <div class="form-group row mb-0">
                                 <label for="jurusan">Tanggal Lulus</label>
-                                <div class="d-flex align-items-center date_picker">
+                                <div class="d-flex align-items-center date_picker w-100 ">
                                     <input id="tgllulus" name="tgllulus" type="text" class="form-control date-input" placeholder="Pilih Tanggal" readonly />
                                     <label class="input-group-btn" for="tgllulus">
                                     <span class="date_button">
@@ -461,7 +461,7 @@
                         <div class="col-sm-4 col-12">
                             <div class="form-group row mb-0">
                                 <label for="jurusan">Tahun Lulus SMU</label>
-                                <input type="text" class="form-control" id="lulussmu" name="lulussmu" >
+                                <input type="text" class="form-control" id="lulussmu" name="lulussmu" placeholder="20XX" >
                             </div>
                         </div>
                     </div>            
@@ -482,7 +482,7 @@
     $(document).ready(function() {
     var id = "{{$id}}";
     getData(id);        
-    loading('hide')
+    
 
     $('#program_studi').on('change',function (e) {
         var program_studi = $(this).val()
@@ -513,18 +513,13 @@
             type: type,
             dataType: 'json',
             data: data,
-            beforeSend: function(text) {
-                // loading func
-                console.log("loading")
-                loading('show')
-            },
             success: function(res) {
                 if (res.status=="success") {
                     window.location.href = "{{url('/akademik/master/datamahasiswa')}}";                    
                 } else {
                     // alert gagal
                 }
-                loading('hide')
+                
             }
         });
     });
@@ -561,7 +556,7 @@ async function getData(id) {
     $.each(dataGlobal['goldarah'],function (key,row) {
         optGoldarah += `<option value="${row.nomor}">${row.goldarah}</option>`
     })
-    $('#goldarah').append(optGoldarah)
+    $('#darah').append(optGoldarah)
 
     if (id!="") {
         $.ajax({
@@ -569,11 +564,6 @@ async function getData(id) {
             type: 'get',
             dataType: 'json',
             data: {},
-            beforeSend: function(text) {
-                    // loading func
-                    console.log("loading")
-                    loading('show')
-            },
             success: function(res) {
                 if (res.status=="success") {
                     var data = res['data'][0];
@@ -591,7 +581,7 @@ async function getData(id) {
                 } else {
                     // alert gagal
                 }
-                loading('hide')
+                
             }
         });
     }

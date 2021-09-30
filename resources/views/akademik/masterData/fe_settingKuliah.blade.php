@@ -1,7 +1,10 @@
-@extends('layouts.mainAkademik')
+@extends('layouts.main')
 
 @section('style')
 <style>
+  .date{
+    cursor: pointer;
+  }
   .calendar {
     margin: auto;
   }
@@ -203,11 +206,11 @@
     border-color: #28a3eb;
   }
 
-  .uploadSuratKeputusan {
+  .uploadDokumen {
     border: 1px solid #C4C4C4;
   }
 
-  .uploadSuratKeputusan .iconify {
+  .uploadDokumen .iconify {
     font-size: 1.5rem;
     color: #000;
   }
@@ -262,7 +265,7 @@
           <hr class="mt-3 mb-4">
         </div>
         <div class="card_content">
-          <div class="uploadSuratKeputusan rounded p-3 d-flex justify-content-center align-items-center">
+          <div class="uploadDokumen rounded p-3 d-flex justify-content-center align-items-center">
             <form class="align-items-center d-none">
               <i class="iconify mr-1" data-icon="bx:bxs-file-pdf" data-inline="false"></i>
               <input type="file" id="file" hidden onchange="example()" />
@@ -285,12 +288,12 @@
         </div>
         <div class="card_content">
           <label for="keterangan">Keterangan</label>
-          <textarea class="form-control textarea_notresize" id="keterangan" rows="8">Berisi Keterangan</textarea>
+          <textarea class="form-control textarea_notresize" id="keterangan" rows="8"></textarea>
           <label for="status" class="mt-4">Status</label>
-          <select name="sources" id="sources" class="customSelect sources" placeholder="Hari Aktif">
-            <option value="hariAktif">Hari Aktif</option>
-            <option value="hariLibur">Hari Libur</option>
-            <option value="HariLiburNasional">Hari Libur Nasional</option>
+          <select name="status" id="status" class="customSelect sources" placeholder="Hari Aktif">
+            <option value="0">Hari Aktif</option>
+            <option value="1">Hari Libur</option>
+            <option value="3">Hari Libur Nasional</option>
           </select>
           <button type="submit" class="btn btn-primary w-100 mt-4">
             <i class="iconify mr-1" data-icon="bx:bx-save"></i>
@@ -309,8 +312,36 @@
   const inputFile = document.getElementById("file");
   const customBtn = document.getElementById("custom-btn");
   const customText = document.getElementById("custom-text");
-  const formUpload = document.querySelector(".uploadSuratKeputusan form");
-  const formWrapper = document.querySelector('.uploadSuratKeputusan');
+  const formUpload = document.querySelector(".uploadDokumen form");
+  const formWrapper = document.querySelector('.uploadDokumen');
+  var month = {
+            "Januari":1,
+            "Februari":2,
+            "Maret":3,
+            "April":4,
+            "Mei":5,
+            "Juni":6,
+            "Juli":7,
+            "Agustus":8,
+            "September":9,
+            "Oktober":10,
+            "November":11,
+            "Desember":12,
+  };
+
+  $(document).ready(function () {
+    // getData()
+    $('.date').on('click',function (e) {
+      var bulan_tahun = $("#calendar_first").find(".calendar_header").find('h2').text()
+      bulan_tahun = bulan_tahun.split(" ");
+      var libur = $(this).hasClass('libur');
+      var tanggal = ($(this).text().toString().length==1)?"0"+$(this).text():$(this).text();
+      var bulan = (month[bulan_tahun[0]].toString().length==1)?"0"+month[bulan_tahun[0]]:month[bulan_tahun[0]];
+      var tahun = bulan_tahun[1];
+      var date =  `${tahun}-${bulan}-${tanggal}`;
+      $('#keterangan')
+    })
+  })
 
   customBtn.addEventListener("click", function () {
     inputFile.click();
@@ -333,5 +364,6 @@
     let formWrapper_width = formWrapper.offsetWidth-100;
     document.querySelector('.nama_dokumen').style.maxWidth = formWrapper_width + "px"
   }
+  
 </script>
 @endsection

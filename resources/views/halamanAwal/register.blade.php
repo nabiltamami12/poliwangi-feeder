@@ -103,7 +103,7 @@
                     </div>
                     <div class="form-group mt-3">
                       <label>Tanggal Lahir<span>*</span></label>
-                      <div class="d-flex align-items-center date_picker">
+                      <div class="d-flex align-items-center date_picker w-100 ">
                         <input id="txtDate" type="text" class="form-control date-input" placeholder="DD/MM/YYYY" name="tgllahir" readonly />
                         <label class="input-group-btn" for="txtDate">
                           <span class="date_button">
@@ -168,6 +168,34 @@
   <!-- Argon Scripts -->
   <!-- Core -->
   <script src="{{ url('argon') }}/assets/vendor/jquery/dist/jquery.min.js"></script>
+  <script type="text/javascript">
+    function loading(status) {
+        if (status=="show") {
+            $(".loaderScreen-wrapper").fadeIn("fast");
+        } else {
+            $(".loaderScreen-wrapper").fadeOut("slow");
+        }
+    }
+    var url_api = "{{ url('/api/v1') }}";
+    
+    if (localStorage.getItem("globaldataRegister") === null) {
+      $.when(
+        $.ajax({
+          url: url_api+"/globaldataregister",
+          type: 'get',
+          dataType: 'json',
+          data: {},
+          success: function(res) {
+            if (res.status=="success") {
+              localStorage.setItem('globaldataRegister', JSON.stringify(res['data']));
+            }
+            ;
+          }
+        })
+      ).done(function(reslt){
+      });
+    }
+  </script>
   <script src="{{ url('argon') }}/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   <script src="{{ url('argon') }}/assets/vendor/js-cookie/js.cookie.js"></script>
   <script src="{{ url('argon') }}/assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js"></script>
@@ -178,10 +206,9 @@
   <!-- Argon JS -->
   <script src="{{ url('argon') }}/assets/js/argon.js?v=1.2.0"></script>
   <script type="text/javascript">
-    var url_api = "{{ url('/api/v1') }}";
-    var dataGlobal = JSON.parse(localStorage.getItem('globalData')) 
-    console.log(dataGlobal)
+    var dataGlobal = ''
     $(document).ready(function(){
+      dataGlobal = JSON.parse(localStorage.getItem('globaldataRegister'))
       getData();
       $("#txtDate").datepicker({
         format: "dd MM yyyy",
@@ -199,68 +226,52 @@
       $("#form").submit(function(e) {
         e.preventDefault();
         $.ajax({
-            url: url_api+"/daftar",
-            type: 'post',
-            dataType: 'json',
-            data: new FormData(e.target),
-            processData: false,
-            contentType: false,
-            beforeSend: function(text) {
-              // loading func
-              console.log("loading")
-              // loading('show')
-            },
-            success: function(res) {
-              console.log(res)
-              if (res.status=="success") {
-                localStorage.setItem('pmb', res.data)
-                window.location.href = "{{url('/pmbgenerateva')}}"
-              } else {
-                alert('Error: '.res.data.message)
-              }
+          url: url_api+"/pendaftar",
+          type: 'post',
+          dataType: 'json',
+          data: new FormData(e.target),
+          processData: false,
+          contentType: false,
+          beforeSend: function(text) {
+          },
+          success: function(res) {
+            if (res.status=="success") {
+              localStorage.setItem('pmb', res.data)
+              window.location.href = "{{url('/pmbgenerateva')}}"
+            } else {
+              alert('Error: '.res.data.message)
             }
+          }
         });
       });
     })
-
-    function auth() {
-      window.location = "{{ url('/admin/dashboard') }}";
-    }
     function getData() {
       $.ajax({
-        url: url_api+"/jalurpmb/",
+        url: url_api+"/jalurpmb",
         type: 'get',
         dataType: 'json',
         data: {},
         beforeSend: function(text) {
-          // loading func
-          console.log("loading")
-          // loading("show");
         },
         success: function(res) {
-          if (res.status=="success") {
-            console.log(res.status)
-              // return res['data'];
-              // localStorage.setItem('globalData', JSON.stringify(res['data']));
-              var html = '';
-              html = '<option value="" disabled>Pilih Jalur</option>'
-              $.each(res.data,function (key,row) {
-                console.log(row)
-                if (row.is_active==1) {
-                  html = `<option value="${row.id}">${row.jalur_daftar}</option>`;
-                  $('#jalur_seleksi').append(html);
-                }
-              })
-              var optJurusan = `<option value=""> - </option>`;
-              $.each(dataGlobal['jurusan'],function (key,row) {
-                console.log(row.jurusan)
-                  optJurusan += `<option value="${row.nomor}">${row.jurusan}</option>`
-              })
-              $('#jurusan').append(optJurusan)
-          } else {
-              // alert gagal
+          if (dataGlobal == null) {
+            dataGlobal = JSON.parse(localStorage.getItem('globaldataRegister'))
           }
-          // loading("hide");
+          if (res.status=="success") {
+            var html = '';
+            html = '<option value="" disabled>Pilih Jalur</option>'
+            $.each(res.data,function (key,row) {
+              if (row.is_active==1) {
+                html = `<option value="${row.id}">${row.jalur_daftar}</option>`;
+                $('#jalur_seleksi').append(html);
+              }
+            })
+            var optJurusan = `<option value=""> - </option>`;
+            $.each(dataGlobal['jurusan'],function (key,row) {
+              optJurusan += `<option value="${row.nomor}">${row.jurusan}</option>`
+            })
+            $('#jurusan').append(optJurusan)
+          }
         }
       });
     }

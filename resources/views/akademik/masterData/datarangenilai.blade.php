@@ -1,4 +1,4 @@
-@extends('layouts.mainAkademik')
+@extends('layouts.main')
 
 @section('content')
 
@@ -17,7 +17,7 @@
               <h2 class="mb-0">Data Range Nilai</h2>
             </div>
             <div class="col text-right">
-              <button type="button" onclick="add_btn()" class="btn btn-primary "><img src="/images/add-icon--white.png" alt=""> Tambah</button>
+              <button type="button" onclick="add_btn()" class="btn btn-primary "><i class="iconify-inline mr-1" data-icon='bx:bx-plus-circle'></i> Tambah</button>
               </div>
             </div>
             
@@ -94,8 +94,8 @@ dt_opt = {
         "mRender": function(data, type, full) {
           var id = data['nomor'];
           var text_hapus = "";
-          var btn_update = `<i class="iconify edit-icon" onclick='update_btn(${id})' data-icon="bx:bx-edit-alt" ></i>` 
-          var btn_delete = `<i class="iconify delete-icon" data-icon="bx:bx-trash"  onclick='delete_btn(${id},"rangenilai","range nilai","${text_hapus}")'></i>`; 
+          var btn_update = `<i class="iconify edit-icon text-primary" onclick='update_btn(${id})' data-icon="bx:bx-edit-alt" ></i>` 
+          var btn_delete = `<i class="iconify delete-icon text-primary" data-icon="bx:bx-trash"  onclick='delete_btn(${id},"rangenilai","range nilai","${text_hapus}")'></i>`; 
           res = btn_update+" "+btn_delete;
           return res;
         }

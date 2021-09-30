@@ -1,4 +1,4 @@
-@extends('layouts.mainAkademik')
+@extends('layouts.main')
 
 @section('content')
 
@@ -17,7 +17,7 @@
               <h2 class="mb-0">Data Periode</h2>
             </div>
             <div class="col text-right">
-              <button type="button" onclick="add_btn()" class="btn btn-primary"><img src="/images/add-icon--white.png" alt=""> Tambah</button>
+              <button type="button" onclick="add_btn()" class="btn btn-primary"><i class="iconify-inline mr-1" data-icon='bx:bx-plus-circle'></i> Tambah</button>
             </div>
           </div>
         </div>
@@ -69,17 +69,17 @@ dt_opt = {
       "targets": [2],
       "data": null,
       "render": function(data, type, full) {
-        var ganjil = (data['semester']==1)?'<span>Gasal</span>' : `<span style="color:#28a3eb;cursor:pointer;" onclick="change_semester(${data['nomor']},1)">Gasal</span>`
-        var genap = (data['semester']==2)?'<span>Genap</span>' : `<span style="color:#28a3eb;cursor:pointer;" onclick="change_semester(${data['nomor']},2)">Genap</span>`
-        res = (data['status']=="1")? ganjil+" || "+genap:"-";
+        var ganjil = (data['semester']==1)?'<span class="text-success">Gasal <i class="iconify-inline mr-1" style="font-size:12px;" data-icon="akar-icons:circle-check-fill"></i></span>' : `<span class="text-warning" style="cursor:pointer;" onclick="change_semester(${data['nomor']},1)">Gasal</span>`
+        var genap = (data['semester']==2)?'<span class="text-success">Genap <i class="iconify-inline mr-1" style="font-size:12px;" data-icon="akar-icons:circle-check-fill"></i></span>' : `<span class="text-warning" style="cursor:pointer;" onclick="change_semester(${data['nomor']},2)">Genap</span>`
+        res = (data['status']=="1")? ganjil+"  ||  "+genap:"-";
         return res;
       }
     },{
       "targets": [3],
       "data": null,
       "render": function(data, type, full) {
-        var aktif = "<span>aktif</span>"
-        var non_aktif = `<button class="btn btn-primary" onclick="change_status(${data['nomor']})">aktifkan</button>`
+        var aktif = "<span class='text-success' style='font-size:12px;font-weight:600;'>aktif <i class='iconify-inline mr-1' style='font-size:12px;' data-icon='akar-icons:circle-check-fill'></i></span>"
+        var non_aktif = `<button class="btn btn-warning btn-sm" onclick="change_status(${data['nomor']})"><i class="iconify-inline mr-1" style="font-size:12px;" data-icon="akar-icons:circle-check-fill"></i>aktifkan</button>`
         res = (data['status']=="1")?aktif:non_aktif;
         return res;
       }
@@ -89,8 +89,8 @@ dt_opt = {
       "render": function(data, type, full) {
         var id = data['nomor'];
         var text_hapus = "";
-        var btn_update = `<span class="iconify edit-icon" onclick='update_btn(${id})' data-icon="bx:bx-edit-alt" data-inline="true"></span>` 
-        var btn_delete = `<span class="iconify delete-icon" data-icon="bx:bx-trash" data-inline="true" onclick='delete_btn(${id},"periode","periode","${text_hapus}")'></span>`; 
+        var btn_update = `<span class="iconify edit-icon text-primary" onclick='update_btn(${id})' data-icon="bx:bx-edit-alt" data-inline="true"></span>` 
+        var btn_delete = `<span class="iconify delete-icon text-primary" data-icon="bx:bx-trash" data-inline="true" onclick='delete_btn(${id},"periode","periode","${text_hapus}")'></span>`; 
         res = btn_update+" "+btn_delete;
         return res;
       }
@@ -104,18 +104,13 @@ function change_status(id) {
         type: "put",
         dataType: 'json',
         data: {},
-        beforeSend: function(text) {
-            // loading func
-            console.log("loading")
-            loading('show');
-          },
           success: function(res) {
             if (res.status=="success") {
               dt.ajax.reload();                
             } else {
               // alert gagal
             }
-            loading('hide');
+            ;
         }
     });
 }
@@ -131,18 +126,13 @@ function change_semester(id,semester) {
         type: "put",
         dataType: 'json',
         data: {},
-        beforeSend: function(text) {
-            // loading func
-            console.log("loading")
-            loading('show');
-          },
           success: function(res) {
             if (res.status=="success") {
               dt.ajax.reload();
             } else {
               // alert gagal
             }
-            loading('hide');
+            ;
         }
     });
 }
