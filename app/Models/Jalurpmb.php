@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Jalursyarat;
+use Illuminate\Support\Carbon;
 
 class Jalurpmb extends Model
 {
@@ -27,4 +28,24 @@ class Jalurpmb extends Model
         "tanggal_akhir",
         "syarat"
     ];
+
+
+    public function getTanggalAwalAttribute()
+    {
+        return Carbon::parse($this->attributes['tanggal_awal'])
+            ->isoFormat('D MMMM Y');
+    }
+    public function getTanggalAkhirAttribute()
+    {
+        return Carbon::parse($this->attributes['tanggal_akhir'])
+            ->isoFormat('D MMMM Y');
+    }
+    public function setTanggalAwalAttribute($value)
+    {
+        $this->attributes['tanggal_awal'] = Carbon::parse($value)->format('Y-m-d');
+    }
+    public function setTanggalAkhirAttribute($value)
+    {
+        $this->attributes['tanggal_akhir'] = Carbon::parse($value)->format('Y-m-d');
+    }
 }

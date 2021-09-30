@@ -400,7 +400,7 @@ Route::prefix('akademik')->group(function () {
                 "title" => "rekap-absensi-mahasiswa"
             ]);
         });
-        Route::get('/absensi/rekap/detail/{id}/{kelas}/{matkul}', function ($id,$kelas,$matkul) {
+        Route::get('/absensi/rekap/detail/{id}/{kelas}/{matkul}', function ($id, $kelas, $matkul) {
             return view('akademik.kuliah.detailrekapabsensi', [
                 "id" => $id,
                 "kelas" => $kelas,
@@ -408,7 +408,7 @@ Route::prefix('akademik')->group(function () {
                 "title" => "rekap-absensi-mahasiswa"
             ]);
         });
-        Route::get('/absensi/rekap-mahasiswa/{kelas}/{matkul}', function ($kelas,$matkul) {
+        Route::get('/absensi/rekap-mahasiswa/{kelas}/{matkul}', function ($kelas, $matkul) {
             return view('akademik.kuliah.rekapabsensikelasmahasiswa', [
                 "kelas" => $kelas,
                 "matkul" => $matkul,
@@ -517,14 +517,12 @@ Route::prefix('akademik')->group(function () {
                 "title" => "akademik-kuliah",
             ]);
         });
-<<<<<<< HEAD
+
         Route::get('/absensi/rekap-mahasiswa', function () {
             return view('akademik.kuliah.rekapAbsensiMahasiswa', [
                 "title" => "akademik-kuliah",
             ]);
         });
-=======
->>>>>>> beb7bf2a0ec078318246f087cbfcd4759149ad00
     });
 });
 
@@ -746,7 +744,23 @@ Route::prefix('admin')->group(function () {
                 "title" => "admin-settingpmb"
             ]);
         });
-
+        Route::get('/settingjalursyarat', function () {
+            return view('admin.pmb.settingJalurSyarat', [
+                "title" => "admin-settingpmb"
+            ]);
+        });
+        Route::get('/settingjalursyarat/cu/', function () {
+            return view('admin.pmb/cuJalurSyarat', [
+                "id" => null,
+                "title" => "admin-settingpmb"
+            ]);
+        });
+        Route::get('/settingjalursyarat/cu/{id}', function ($id) {
+            return view('admin.pmb/cuJalurSyarat', [
+                "id" => $id,
+                "title" => "admin-settingpmb"
+            ]);
+        });
         Route::get('/settingjurusanpilihan', function () {
             return view('admin.pmb.settingJurusanPilihan', [
                 "title" => "admin-settingpmb"

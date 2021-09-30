@@ -11,15 +11,12 @@
   <link rel="icon" href="{{ url('argon') }}/assets/img/brand/favicon.png" type="image/png">
   <!-- Icons -->
   <link rel="stylesheet" href="{{ url('argon') }}/assets/vendor/nucleo/css/nucleo.css" type="text/css">
-  <link rel="stylesheet" href="{{ url('argon') }}/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css"
-    type="text/css">
+  <link rel="stylesheet" href="{{ url('argon') }}/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" type="text/css">
   <!-- Iconify -->
   <script src="https://code.iconify.design/2/2.0.3/iconify.min.js"></script>
   <!-- Page plugins -->
   <!-- Bootstrap Datepicker -->
-  <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css"
-    type="text/css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css" type="text/css" />
   <!-- Argon CSS -->
   <link rel="stylesheet" href="{{ url('argon') }}/assets/css/argon.css?v=1.2.0" type="text/css">
   <!-- Custom CSS -->
@@ -55,8 +52,7 @@
   <script src="{{ url('js/util.js') }}"></script>
   <script src="{{ asset('js/script.js') }}"></script>
   <!-- Bootstrap Datepicker -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.js"
-    type="text/javascript"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.js" type="text/javascript"></script>
   @yield('js')
 </body>
 

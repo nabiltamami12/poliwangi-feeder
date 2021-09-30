@@ -20,53 +20,50 @@
 
         <div class="card-body padding--medium">
           <form id="form_cu">
-            <form class="form-inline">
-              <h1 class="mr-4">Jalur Penerimaan: </h1>
-              <label class="sr-only" for="jalur_penerimaan">Jalur Penerimaan</label>
-              <input type="text" class="form-control flex-grow-1" id="jalur_penerimaan" name="jalur_penerimaan">
-            </form>
+            <h1 class="mr-4">Jalur Penerimaan: </h1>
+            <label class="sr-only" for="jalur_daftar">Jalur Penerimaan</label>
+            <input type="text" class="form-control flex-grow-1" id="jalur_daftar" name="jalur_daftar">
             <hr class="mt-4 mb-3">
 
             <div class="row jalurPMB_pendaftaran">
               <div class="col-lg-6">
-                <form>
-                  <h2 class="card_title mb-2 font-weight-500">Tanggal Pendaftaran</h2>
-                  <div class="d-sm-flex align-items-center">
-                    <div class="form-group">
-                      <div class="d-flex align-items-center date_picker">
-                        <input id="tanggal_awal" type="text" class="form-control date-input" name="tanggal_awal" />
-                        <label class="input-group-btn" for="txtDate1">
-                          <span class="date_button">
-                            <i class="iconify" data-icon="bx:bx-calendar" data-inline="false"></i>
-                          </span>
-                        </label>
-                      </div>
-                    </div>
-                    <p class="mx-3 font-weight-500 text-center my-3">Sampai</p>
-                    <div class="form-group">
-                      <div class="d-flex align-items-center date_picker">
-                        <input id="tanggal_akhir" type="text" class="form-control date-input" name="tanggal_akhir" />
-                        <label class="input-group-btn" for="txtDate2">
-                          <span class="date_button">
-                            <i class="iconify" data-icon="bx:bx-calendar" data-inline="false"></i>
-                          </span>
-                        </label>
-                      </div>
+                <h2 class="card_title mb-2 font-weight-500">Tanggal Pendaftaran</h2>
+                <div class="d-sm-flex align-items-center">
+                  <div class="form-group">
+                    <div class="d-flex align-items-center date_picker">
+                      <input id="tanggal_awal" type="text" class="form-control date-input" name="tanggal_awal" />
+                      <label class="input-group-btn" for="txtDate1">
+                        <span class="date_button">
+                          <i class="iconify" data-icon="bx:bx-calendar" data-inline="false"></i>
+                        </span>
+                      </label>
                     </div>
                   </div>
-
-                  <div class="form-group mt-4 biaya_pendaftaran">
-                    <h2 class="card_title mb-2 font-weight-500">Biaya Pendaftaran</h2>
-                    <label class="sr-only" for="biaya_pendaftaran">Biaya Pendaftaran</label>
-                    <input type="text" class="form-control text-right" id="biaya" name="biaya">
+                  <p class="mx-3 font-weight-500 text-center my-3">Sampai</p>
+                  <div class="form-group">
+                    <div class="d-flex align-items-center date_picker">
+                      <input id="tanggal_akhir" type="text" class="form-control date-input" name="tanggal_akhir" />
+                      <label class="input-group-btn" for="txtDate2">
+                        <span class="date_button">
+                          <i class="iconify" data-icon="bx:bx-calendar" data-inline="false"></i>
+                        </span>
+                      </label>
+                    </div>
                   </div>
+                </div>
 
-                  <div class="form-group mt-4">
-                    <h2 class="card_title mb-2 font-weight-500">Kuota</h2>
-                    <label class="sr-only" for="kuota">Kuota</label>
-                    <input type="text" class="form-control" id="kuota" name="kuota">
-                  </div>
-                </form>
+                <div class="form-group mt-4 biaya_pendaftaran">
+                  <h2 class="card_title mb-2 font-weight-500">Biaya Pendaftaran</h2>
+                  <label class="sr-only" for="biaya_pendaftaran">Biaya Pendaftaran</label>
+                  <input type="text" class="form-control text-right" id="biaya" name="biaya">
+                </div>
+
+                <div class="form-group mt-4">
+                  <h2 class="card_title mb-2 font-weight-500">Kuota</h2>
+                  <label class="sr-only" for="kuota">Kuota</label>
+                  <input type="text" class="form-control" id="kuota" name="kuota">
+                </div>
+
               </div>
 
               <div class="col-lg-6 pl-3 mt-4 mt-lg-0">
@@ -109,17 +106,18 @@
         </div>
       </div>
     </div>
+    </form>
   </div>
 </section>
 @endsection
 
 @section('js')
 <script>
-  // $(function() {
-  //   $(".date-input").datepicker({
-  //     format: "dd MM yyyy",
-  //   });
-  // });
+  $(function() {
+    $(".date-input").datepicker({
+      format: "D M Y",
+    });
+  });
 
   $(document).ready(function() {
     var id = "{{$id}}";
@@ -138,6 +136,7 @@
       } else {
         var url = url_api + "/jalurpmb";
         var type = "post";
+
       }
       $.ajax({
         url: url,
@@ -151,7 +150,7 @@
         },
         success: function(res) {
           if (res.status == "success") {
-            window.location.href = "{{url('/admin/PMB/settingJalurPenerimaan')}}";
+            window.location.href = "{{url('/admin/settingpmb/settingjalurpenerimaan')}}";
           } else {
             // alert gagal
           }
@@ -205,7 +204,7 @@
       },
       success: function(res) {
         if (res.status == "success") {
-          var data = res['data'][0];
+          var data = res['data'];
           $.each(data, function(key, row) {
             $('#' + key).val(row);
           })

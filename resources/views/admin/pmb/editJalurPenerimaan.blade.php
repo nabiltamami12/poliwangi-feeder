@@ -33,8 +33,7 @@
                 <div class="d-sm-flex align-items-center">
                   <div class="form-group">
                     <div class="d-flex align-items-center date_picker">
-                      <input id="txtDate1" type="text" class="form-control date-input" value="24 January 2022"
-                        readonly />
+                      <input id="txtDate1" type="text" class="form-control date-input" value="24 January 2022" readonly />
                       <label class="input-group-btn" for="txtDate1">
                         <span class="date_button">
                           <i class="iconify" data-icon="bx:bx-calendar" data-inline="false"></i>
@@ -45,8 +44,7 @@
                   <p class="mx-3 font-weight-500 text-center my-3">Sampai</p>
                   <div class="form-group">
                     <div class="d-flex align-items-center date_picker">
-                      <input id="txtDate2" type="text" class="form-control date-input" value="24 February 2022"
-                        readonly />
+                      <input id="txtDate2" type="text" class="form-control date-input" value="24 February 2022" readonly />
                       <label class="input-group-btn" for="txtDate2">
                         <span class="date_button">
                           <i class="iconify" data-icon="bx:bx-calendar" data-inline="false"></i>
@@ -98,8 +96,7 @@
               </div>
               <div class="py-3 d-flex">
                 <i class="iconify text-success mr-3" data-icon="akar-icons:circle-check-fill"></i>
-                <p class="d-inline-block">Upload Dokumen Pengajuan Keringanan <span
-                    class="text-primary">(Optional)</span></p>
+                <p class="d-inline-block">Upload Dokumen Pengajuan Keringanan <span class="text-primary">(Optional)</span></p>
               </div>
             </div>
           </div>
@@ -117,9 +114,9 @@
 
 @section('js')
 <script>
-  $(function () {
+  $(function() {
     $(".date-input").datepicker({
-        format: "dd MM yyyy",
+      format: "dd MM yyyy",
     });
   });
 </script>
