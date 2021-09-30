@@ -227,11 +227,6 @@ Route::prefix('v1')->group(function () {
     Route::post('setting_biaya', [Ctr\SettingBiayaController::class, 'store']);
 
     // Berkas Keuangan
-<<<<<<< HEAD
-    Route::post('berkas_keuangan', [Ctr\BerkasKeuanganController::class, 'store']);
-    // example use bni api
-    Route::get('/test', [Ctr\MahasiswaController::class, 'create_va']);
-=======
     Route::get('keuangan/list_cicilan', [Ctr\BerkasKeuanganController::class, 'index']);
     Route::get('keuangan/stats', [Ctr\BerkasKeuanganController::class, 'statistik']);
     Route::get('keuangan/detail_dokumen/{id}', [Ctr\BerkasKeuanganController::class, 'detail_dokumen']);
@@ -247,7 +242,6 @@ Route::prefix('v1')->group(function () {
 
 
 
->>>>>>> 09196fe62eae9ea302ef3bd781d3a9a0d3a4b8c3
 });
 
 Route::prefix('v1')->middleware('auth:api')->group(function () {

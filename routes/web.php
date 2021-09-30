@@ -469,10 +469,6 @@ Route::prefix('akademik')->middleware(['aksesuntuk:akademik'])->group(function (
                 "title" => "akademik-kuliah",
             ]);
         });
-<<<<<<< HEAD
-
-=======
->>>>>>> 09196fe62eae9ea302ef3bd781d3a9a0d3a4b8c3
         Route::get('/absensi/rekap-mahasiswa', function () {
             return view('akademik.kuliah.rekapAbsensiMahasiswa', [
                 "title" => "akademik-kuliah",
@@ -503,8 +499,7 @@ Route::prefix('keuangan')->middleware(['aksesuntuk:keuangan'])->group(function (
         Route::get('/cu/{id}', function ($id) {
             return view('keuangan.cutarifspi', [
                 "id" => $id,
-<<<<<<< HEAD
-                "title" => "admin-settingpmb"
+                "title" => "keuangan-tarif"
             ]);
         });
         Route::get('/settingjalursyarat', function () {
@@ -560,9 +555,6 @@ Route::prefix('keuangan')->middleware(['aksesuntuk:keuangan'])->group(function (
         Route::get('/settingjurusanlinear', function () {
             return view('admin.pmb.settingJurusanLinear', [
                 "title" => "admin-settingpmb"
-=======
-                "title" => "keuangan-tarif"
->>>>>>> 09196fe62eae9ea302ef3bd781d3a9a0d3a4b8c3
             ]);
         });
     });
