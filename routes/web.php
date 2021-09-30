@@ -497,11 +497,6 @@ Route::prefix('keuangan')->middleware(['aksesuntuk:keuangan'])->group(function (
                 "title" => "keuangan-tarif"
             ]);
         });
-        Route::get('/UKTSPI', function () {
-            return view('keuangan.settingTarif_UKT_SPI', [
-                "title" => "keuangan-tarif",
-            ]);
-        });
     });
 
     Route::prefix('rekapitulasi')->group(function () {
@@ -517,8 +512,10 @@ Route::prefix('keuangan')->middleware(['aksesuntuk:keuangan'])->group(function (
             ]);
         });
 
-        Route::get('/spi/detail', function () {
+        Route::get('/spi/detail/{id}/{nama}', function ($id, $nama) {
             return view('keuangan.detailSPI', [
+                "id" => $id,
+                'nama' => $nama,
                 "title" => "keuangan-rekapitulasi",
             ]);
         });

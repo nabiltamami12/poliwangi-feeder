@@ -61,7 +61,7 @@ table tr td .iconify:hover{
 }
 
 /*sidebar*/
-.sub-aktif{
+.aktif .nav-link-text, .sub-aktif>span{
   color: #28a3eb !important;
 }
 .page-content hr.mt {
