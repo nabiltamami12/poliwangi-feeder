@@ -209,6 +209,13 @@
                   <span class="nav-link-text">Pengajuan Cicilan</span>
                 </a>
               </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url('akademik/pmb/piutangmahasiswa')}}">
+                  <span class="mini_icon">DP</span>
+                  <span class="nav-link-text">Piutang Mahasiswa (Admin)</span>
+                </a>
+              </li>
               
             </ul>
           </li>

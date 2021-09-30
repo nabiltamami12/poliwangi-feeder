@@ -396,6 +396,11 @@ Route::prefix('akademik')->group(function () {
                 "title" => "pmb-pendaftar",
             ]);
         });
+        Route::get('/piutangmahasiswa', function () {
+            return view('keuangan.piutangMahasiswa', [
+                "title" => "keuangan-rekapitulasi",
+            ]);
+        });
     });
     
     Route::prefix('report')->group(function () {
