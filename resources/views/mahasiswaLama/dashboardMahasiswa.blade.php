@@ -1,4 +1,4 @@
-@extends('layouts.mainAkademik')
+@extends('layouts.main')
 
 @section('content')
 <!-- Header -->
@@ -98,11 +98,6 @@ function getJadwal() {
     type: 'get',
     dataType: 'json',
     data: {},
-    beforeSend: function(text) {
-            // loading func
-            console.log("loading")
-            // loading('show')
-    },
     success: function(res) {
       if (res.status=="success") {
           $('.table-body').html('');
@@ -194,11 +189,6 @@ function getJadwal() {
               type: 'post',
               dataType: 'json',
               data: {'kuliah':$('#matkul_open').val(),'mahasiswa':id_mahasiswa,'minggu':$('#matkul_open :selected').data('pertemuan')},
-              beforeSend: function(text) {
-                  // loading func
-                  console.log("loading")
-                  // loading('show')
-              },
               success: function(res) {
                 console.log(res)
                   if (res.status=="success") {
@@ -206,7 +196,7 @@ function getJadwal() {
                   } else {
                       // alert gagal
                   }
-                  // loading('hide')
+                  
 
               }
             });
@@ -214,7 +204,7 @@ function getJadwal() {
       } else {
           // alert gagal
       }
-      // loading('hide')
+      
     }
   });
 }

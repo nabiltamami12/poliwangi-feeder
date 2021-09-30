@@ -171,12 +171,12 @@
           return "{{url('/keuangan/dashboard')}}";
           break;
 
-        case 'mahasiswa_baru':
-          return "{{url('/akademik/dashboard')}}";
+        case 'mahasiswabaru':
+          return "{{url('/mahasiswabaru/dashboard')}}";
           break;
 
-        case 'mahasiswa_lama':
-          return "{{url('/akademik/dashboard')}}";
+        case 'mahasiswalama':
+          return "{{url('/mahasiswalama/dashboard')}}";
           break;
 
         default:

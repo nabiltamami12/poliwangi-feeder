@@ -1,4 +1,4 @@
-@extends('layouts.mainAkademik')
+@extends('layouts.main')
 
 @section('content')
 
@@ -104,18 +104,13 @@ function change_status(id) {
         type: "put",
         dataType: 'json',
         data: {},
-        beforeSend: function(text) {
-            // loading func
-            console.log("loading")
-            loading('show');
-          },
           success: function(res) {
             if (res.status=="success") {
               dt.ajax.reload();                
             } else {
               // alert gagal
             }
-            loading('hide');
+            ;
         }
     });
 }
@@ -131,18 +126,13 @@ function change_semester(id,semester) {
         type: "put",
         dataType: 'json',
         data: {},
-        beforeSend: function(text) {
-            // loading func
-            console.log("loading")
-            loading('show');
-          },
           success: function(res) {
             if (res.status=="success") {
               dt.ajax.reload();
             } else {
               // alert gagal
             }
-            loading('hide');
+            ;
         }
     });
 }

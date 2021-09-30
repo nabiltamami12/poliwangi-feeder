@@ -26,9 +26,9 @@ Route::get('/', function () {
     return view('halamanAwal.login');
 })->name('login');
 
-Route::get('/login', function () {
-    return view('halamanAwal.login');
-})->name('login');
+// Route::get('/login', function () {
+//     return view('halamanAwal.login');
+// })->name('login');
 
 Route::get('/register', function () {
     return view('halamanAwal.register');
@@ -38,7 +38,7 @@ Route::get('/pmbgenerateva', function () {
     return view('halamanAwal.pmbGenerateVA');
 })->name('generateVA-PMB');
 
-Route::prefix('mahasiswabaru')->group(function () {
+Route::prefix('mahasiswabaru')->middleware(['aksesuntuk:maba'])->group(function () {
     Route::get('/dashboard', function () {
         return view('mahasiswaBaru.dashboardMaba', [
             "title" => "Dashboard"
@@ -66,7 +66,7 @@ Route::prefix('mahasiswabaru')->group(function () {
     });
 });
 
-Route::prefix('akademik')->group(function () {
+Route::prefix('akademik')->middleware(['aksesuntuk:akademik'])->group(function () {
     Route::get('/dashboard', function () {
         return view('akademik.dashboardAkademik', [
             "title" => "akademik-dashboard",
@@ -477,22 +477,36 @@ Route::prefix('akademik')->group(function () {
     });
 });
 
-Route::prefix('keuangan')->group(function () {
+Route::prefix('keuangan')->middleware(['aksesuntuk:keuangan'])->group(function () {
     Route::get('/dashboard', function () {
         return view('keuangan.dashboardKeuangan', [
             "title" => "keuangan-dashboard",
         ]);
     });
 
-    Route::get('/tarif', function () {
-        return view('keuangan.tarif_UKT_SPI', [
-            "title" => "keuangan-tarif",
-        ]);
-    });
-    Route::get('/tarif/UKTSPI', function () {
-        return view('keuangan.settingTarif_UKT_SPI', [
-            "title" => "keuangan-tarif",
-        ]);
+    Route::prefix('tarif')->group(function() {
+        Route::get('/', function () {
+            return view('keuangan.tarif_UKT_SPI', [
+                "title" => "keuangan-tarif",
+            ]);
+        });
+        Route::get('/cu', function () {
+            return view('keuangan.cutarifspi', [
+                "id" => null,
+                "title" => "keuangan-tarif"
+            ]);
+        });
+        Route::get('/cu/{id}', function ($id) {
+            return view('keuangan.cutarifspi', [
+                "id" => $id,
+                "title" => "keuangan-tarif"
+            ]);
+        });
+        Route::get('/UKTSPI', function () {
+            return view('keuangan.settingTarif_UKT_SPI', [
+                "title" => "keuangan-tarif",
+            ]);
+        });
     });
 
     Route::prefix('rekapitulasi')->group(function () {

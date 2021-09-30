@@ -1,4 +1,4 @@
-@extends('layouts.mainAkademik')
+@extends('layouts.main')
 
 @section('content')
 <!-- Header -->
@@ -125,11 +125,6 @@ $(document).ready(function() {
       type: 'get',
       dataType: 'json',
       data: {},
-      beforeSend: function(text) {
-              // loading func
-              console.log("loading")
-              loading('show')
-      },
       success: function(res) {
         var data = res.data;
         if (res.status=="success") {
@@ -137,7 +132,7 @@ $(document).ready(function() {
         } else {
             // alert gagal
         }
-        loading('hide')
+        
       }
     })
   })
@@ -175,18 +170,13 @@ $(document).ready(function() {
       type: 'put',
       dataType: 'json',
       data: {"data":dataSimpan},
-      beforeSend: function(text) {
-              // loading func
-              console.log("loading")
-              loading('show')
-      },
       success: function(res) {
           if (res.status=="success") {
               console.log(res)
           } else {
               // alert gagal
           }
-          loading('hide')
+          
       }
     });
   })
@@ -218,18 +208,13 @@ $(document).ready(function() {
       type: 'post',
       dataType: 'json',
       data: {"data":dataSimpan},
-      beforeSend: function(text) {
-              // loading func
-              console.log("loading")
-              loading('show')
-      },
       success: function(res) {
           if (res.status=="success") {
               console.log(res)
           } else {
               // alert gagal
           }
-          loading('hide')
+          
       }
     });
   })
@@ -339,11 +324,6 @@ async function getFilter(id) {
     type: 'get',
     dataType: 'json',
     data: {},
-    beforeSend: function(text) {
-            // loading func
-            console.log("loading")
-            loading('show')
-    },
     success: function(res) {
         if (res.status=="success") {
             var data = res['data'];
@@ -358,7 +338,7 @@ async function getFilter(id) {
         } else {
             // alert gagal
         }
-        loading('hide')
+        
     }
   });
 }

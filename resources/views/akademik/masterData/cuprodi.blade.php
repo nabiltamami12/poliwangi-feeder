@@ -1,4 +1,4 @@
-@extends('layouts.mainAkademik')
+@extends('layouts.main')
 
 @section('content')
 
@@ -98,18 +98,13 @@
         type: type,
         dataType: 'json',
         data: data,
-        beforeSend: function(text) {
-          // loading func
-          console.log("loading")
-          loading('show')
-        },
         success: function(res) {
           if (res.status == "success") {
             window.location.href = "{{url('/akademik/master/dataprodi')}}";
           } else {
             // alert gagal
           }
-          loading('hide')
+          
         }
       });
     });
@@ -142,11 +137,6 @@
         type: 'get',
         dataType: 'json',
         data: {},
-        beforeSend: function(text) {
-          // loading func
-          console.log("loading")
-          loading('show')
-        },
         success: function(res) {
           if (res.status == "success") {
             var data = res['data'][0];
@@ -156,7 +146,7 @@
           } else {
             // alert gagal
           }
-          loading('hide')
+          
         }
       });
     }

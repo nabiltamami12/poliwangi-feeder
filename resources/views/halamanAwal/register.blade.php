@@ -185,14 +185,11 @@
           type: 'get',
           dataType: 'json',
           data: {},
-          beforeSend: function(text) {
-            loading("show");
-          },
           success: function(res) {
             if (res.status=="success") {
               localStorage.setItem('globaldataRegister', JSON.stringify(res['data']));
             }
-            loading("hide");
+            ;
           }
         })
       ).done(function(reslt){

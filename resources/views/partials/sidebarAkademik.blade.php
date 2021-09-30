@@ -1,15 +1,3 @@
-<div class="loaderScreen-wrapper">
-  <div class="spinner-grow text-warning" role="status">
-    <span class="sr-only">Loading...</span>
-  </div>
-  <div class="spinner-grow text-info" role="status">
-    <span class="sr-only">Loading...</span>
-  </div>
-  <div class="spinner-grow text-light" role="status">
-    <span class="sr-only">Loading...</span>
-  </div>
-</div>
-
 <!-- Sidenav -->
 <nav class="sidenav navbar navbar-vertical fixed-left navbar-expand-xs navbar-light" id="sidenav-main">
   <div class="scrollbar-inner">

@@ -236,11 +236,6 @@ function getData(){
         type: 'get',
         dataType: 'json',
         data: {},
-        beforeSend: function(text) {
-                // loading func
-                console.log("loading")
-                loading('show')
-        },
         success: function(res) {
             
         }

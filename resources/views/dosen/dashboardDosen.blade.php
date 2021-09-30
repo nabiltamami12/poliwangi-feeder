@@ -1,4 +1,4 @@
-@extends('layouts.mainAkademik')
+@extends('layouts.main')
 
 @section('content')
 <style>
@@ -145,11 +145,6 @@ function getJadwal() {
     type: 'get',
     dataType: 'json',
     data: {},
-    beforeSend: function(text) {
-            // loading func
-            console.log("loading")
-            // loading('show')
-    },
     success: function(res) {
       if (res.status=="success") {
           $('#tb_body_jadwal').html('');
@@ -276,7 +271,7 @@ function getJadwal() {
       } else {
           // alert gagal
       }
-      // loading('hide')
+      
     }
   });
 }
@@ -294,11 +289,6 @@ function buka_kelas(kuliah,pertemuan,status) {
     type: 'post',
     dataType: 'json',
     data: data_kls,
-    beforeSend: function(text) {
-        // loading func
-        console.log("loading")
-        // loading('show')
-    },
     success: function(res) {
       console.log(res)
         if (res.status=="success") {
@@ -306,7 +296,7 @@ function buka_kelas(kuliah,pertemuan,status) {
         } else {
             // alert gagal
         }
-        // loading('hide')
+        
 
     }
   });

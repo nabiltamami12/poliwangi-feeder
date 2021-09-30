@@ -1,4 +1,4 @@
-@extends('layouts.mainMala')
+@extends('layouts.main')
 
 @section('content')
 <!-- Header -->

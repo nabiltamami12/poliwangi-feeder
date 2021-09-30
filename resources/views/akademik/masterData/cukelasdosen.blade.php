@@ -1,4 +1,4 @@
-@extends('layouts.mainAkademik')
+@extends('layouts.main')
 
 @section('content')
 
@@ -64,11 +64,6 @@ async function getData(id) {
             type: 'get',
             dataType: 'json',
             data: {},
-            beforeSend: function(text) {
-                    // loading func
-                    console.log("loading")
-                    loading("show");
-            },
             success: function(res) {
                 if (res.status=="success") {
                     var data = res['data'];
@@ -133,11 +128,6 @@ async function getData(id) {
                                         type: type,
                                         dataType: 'json',
                                         data: arr,
-                                        beforeSend: function(text) {
-                                            // loading func
-                                            loading("show");
-                                            console.log("loading")
-                                        },
                                         success: function(res) {
                                             console.log(res)
                                             if (res.status=="success") {
@@ -146,12 +136,12 @@ async function getData(id) {
                                             } else {
                                                 // alert gagal
                                             }
-                                            loading("hide");
+                                            ;
                                         }
                                     });
                                 })
                     })
-                    loading("hide");
+                    ;
                 } else {
                     // alert gagal
                 }

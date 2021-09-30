@@ -21,7 +21,7 @@ Route::get('/loading2', function () {
     return view('testingKomponen.testloading2');
 });
 
-Route::prefix('dosen')->group(function () {
+Route::prefix('dosen')->middleware(['aksesuntuk:dosen'])->group(function () {
     Route::get('/dashboard', function () {
         return view('dosen.dashboardDosen', [
             "title" => "dosen-dashboard"
@@ -35,7 +35,7 @@ Route::prefix('dosen')->group(function () {
     });
 });
 
-Route::prefix('mahasiswalama')->group(function () {
+Route::prefix('mahasiswalama')->middleware(['aksesuntuk:mala'])->group(function () {
     Route::get('/dashboard', function () {
         return view('mahasiswaLama.dashboardMahasiswa', [
             "title" => "Dashboard"
@@ -75,7 +75,7 @@ Route::prefix('mahasiswalama')->group(function () {
     });
 });
 
-Route::prefix('admin')->group(function () {
+Route::prefix('admin')->middleware(['aksesuntuk:admin'])->group(function () {
     Route::get('/dashboard', function () {
         return view('admin.dashboardAdmin', [
             "title" => "admin-dashboard"

@@ -1,4 +1,4 @@
-@extends('layouts.mainAkademik')
+@extends('layouts.main')
 
 @section('content')
 
@@ -6,7 +6,7 @@
 <header class="header"></header>
 
 <!-- Page content -->
-<section class="page-content container-fluid">
+<section class="page-content page-content__keuangan container-fluid">
   <div class="row">
     <div class="col-xl-12">
       <div class="card shadow padding--small">
@@ -21,7 +21,7 @@
 
         <hr class="my-4">
 
-        <form id="form_cu" class="form-input">
+        <form id="form_cu" class="form-input setting_tarif_UKTSPI">
           <input type="hidden" id="id" name="id">
           <div class="form-row">
             <div class="col-sm-6 col-12">
@@ -32,57 +32,66 @@
               </div>
             </div>
             <div class="col-sm-6 col-12">
-              <div class="form-group row mb-0">
+              <div class="form-group form-group_nominal row mb-0">
                 <label for="sekjur">Sumbangan Pembangunan Institusi</label>
-                <input type="text" class="form-control" id="spi" name="spi" >
+                <input type="text" class="form-control text-right input_field" id="spi" name="spi" placeholder="0">
+                <span class="input_prefix">Rp.</span>
               </div>
             </div>
             <div class="col-sm-12 col-12">
-              <div class="form-group row mb-0">
+              <div class="form-group form-group_nominal row mb-0">
                 <label for="sekjur">Kelompok 1</label>
-                <input type="text" class="form-control" id="kelompok_1" name="kelompok_1" >
+                <input type="text" class="form-control text-right input_field" id="kelompok_1" name="kelompok_1" placeholder="0">
+                <span class="input_prefix">Rp.</span>
               </div>
             </div>
             <div class="col-sm-12 col-12">
-              <div class="form-group row mb-0">
+              <div class="form-group form-group_nominal row mb-0">
                 <label for="sekjur">Kelompok 2</label>
-                <input type="text" class="form-control" id="kelompok_2" name="kelompok_2" >
+                <input type="text" class="form-control text-right input_field" id="kelompok_2" name="kelompok_2" placeholder="0">
+                <span class="input_prefix">Rp.</span>
               </div>
             </div>
             <div class="col-sm-12 col-12">
-              <div class="form-group row mb-0">
+              <div class="form-group form-group_nominal row mb-0">
                 <label for="sekjur">Kelompok 3</label>
-                <input type="text" class="form-control" id="kelompok_3" name="kelompok_3" >
+                <input type="text" class="form-control text-right input_field" id="kelompok_3" name="kelompok_3" placeholder="0">
+                <span class="input_prefix">Rp.</span>
               </div>
             </div>
             <div class="col-sm-12 col-12">
-              <div class="form-group row mb-0">
+              <div class="form-group form-group_nominal row mb-0">
                 <label for="sekjur">Kelompok 4</label>
-                <input type="text" class="form-control" id="kelompok_4" name="kelompok_4" >
+                <input type="text" class="form-control text-right input_field" id="kelompok_4" name="kelompok_4" placeholder="0">
+                <span class="input_prefix">Rp.</span>
               </div>
             </div>
             <div class="col-sm-12 col-12">
-              <div class="form-group row mb-0">
+              <div class="form-group form-group_nominal row mb-0">
                 <label for="sekjur">Kelompok 5</label>
-                <input type="text" class="form-control" id="kelompok_5" name="kelompok_5" >
+                <input type="text" class="form-control text-right input_field" id="kelompok_5" name="kelompok_5" placeholder="0">
+                <span class="input_prefix">Rp.</span>
               </div>
             </div>
             <div class="col-sm-12 col-12">
-              <div class="form-group row mb-0">
+              <div class="form-group form-group_nominal row mb-0">
                 <label for="sekjur">Kelompok 6</label>
-                <input type="text" class="form-control" id="kelompok_6" name="kelompok_6" >
+                <input type="text" class="form-control text-right input_field" id="kelompok_6" name="kelompok_6" placeholder="0">
+                <span class="input_prefix">Rp.</span>
               </div>
             </div>
             <div class="col-sm-12 col-12">
-              <div class="form-group row mb-0">
+              <div class="form-group form-group_nominal row mb-0">
                 <label for="sekjur">Kelompok 7</label>
-                <input type="text" class="form-control" id="kelompok_7" name="kelompok_7" >
+                <input type="text" class="form-control text-right input_field" id="kelompok_7" name="kelompok_7" placeholder="0">
+                <span class="input_prefix">Rp.</span>
               </div>
             </div>
             <div class="col-sm-12 col-12">
-              <div class="form-group row mb-0">
+              <div class="form-group form-group_nominal row mb-0">
                 <label for="sekjur">Kelompok 8</label>
-                <input type="text" class="form-control" id="kelompok_8" name="kelompok_8" >
+                <input type="text" class="form-control text-right input_field" id="kelompok_8" name="kelompok_8" placeholder="0">
+                <span class="input_prefix">Rp.</span>
               </div>
             </div>
           </div>
@@ -124,21 +133,18 @@
             type: type,
             dataType: 'json',
             data: data,
-            beforeSend: function(text) {
-                // loading func
-                console.log("loading")
-                loading('show')
-            },
             success: function(res) {
                 if (res.status=="success") {
                     window.location.href = "{{url('/akademik/keuangan/tarif')}}";                    
                 } else {
                     console.log("Gagal");
                 }
-                loading('hide')
+                
             }
         });
     });
+
+    set_rp();
 } );
 
 function getData(id) {
@@ -148,24 +154,49 @@ function getData(id) {
         type: 'get',
         dataType: 'json',
         data: {},
-        beforeSend: function(text) {
-                // loading func
-                console.log("loading")
-                loading('show')
-        },
         success: function(res) {
             if (res.status=="success") {
                 var data = res['data'][0];
                 $.each(data,function (key,row) {
                     $('#'+key).val(row);
-                })                
+                })
+                set_rp();         
             } else {
                 // alert gagal
             }
-            loading('hide')
+            
 
         }
     });
+}
+
+const inputElements = document.querySelectorAll(".input_field");
+const prefixElements = document.querySelectorAll(".input_prefix");
+
+function set_rp() {
+  for(let i=0 ; i<prefixElements.length; i++){
+    inputElements[i].addEventListener("input", updateSuffix);
+    updateSuffix();
+
+    function updateSuffix() {
+      if(window.innerWidth > 768){
+        const width = getTextWidth(inputElements[i].value, "14px Montserrat");
+        prefixElements[i].style.right = (width+20)+ "px";
+      }
+      else{
+        const width = getTextWidth(inputElements[i].value, "12px Montserrat");
+        prefixElements[i].style.right = (width+7)+ "px";
+      }
+    }
+
+    function getTextWidth(text, font) {
+      var canvas = getTextWidth.canvas || (getTextWidth.canvas = document.createElement("canvas"));
+      var context = canvas.getContext("2d");
+      context.font = font;
+      var metrics = context.measureText(text);
+      return metrics.width;
+    }
+  }
 }
 </script>
 @endsection

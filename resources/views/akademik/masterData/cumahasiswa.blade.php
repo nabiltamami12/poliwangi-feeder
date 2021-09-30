@@ -1,4 +1,4 @@
-@extends('layouts.mainAkademik')
+@extends('layouts.main')
 
 @section('content')
 
@@ -482,7 +482,7 @@
     $(document).ready(function() {
     var id = "{{$id}}";
     getData(id);        
-    loading('hide')
+    
 
     $('#program_studi').on('change',function (e) {
         var program_studi = $(this).val()
@@ -513,18 +513,13 @@
             type: type,
             dataType: 'json',
             data: data,
-            beforeSend: function(text) {
-                // loading func
-                console.log("loading")
-                loading('show')
-            },
             success: function(res) {
                 if (res.status=="success") {
                     window.location.href = "{{url('/akademik/master/datamahasiswa')}}";                    
                 } else {
                     // alert gagal
                 }
-                loading('hide')
+                
             }
         });
     });
@@ -569,11 +564,6 @@ async function getData(id) {
             type: 'get',
             dataType: 'json',
             data: {},
-            beforeSend: function(text) {
-                    // loading func
-                    console.log("loading")
-                    loading('show')
-            },
             success: function(res) {
                 if (res.status=="success") {
                     var data = res['data'][0];
@@ -591,7 +581,7 @@ async function getData(id) {
                 } else {
                     // alert gagal
                 }
-                loading('hide')
+                
             }
         });
     }

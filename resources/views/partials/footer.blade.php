@@ -52,11 +52,6 @@
             type: 'delete',
             dataType: 'json',
             data: {},
-            beforeSend: function(text) {
-                // loading func
-                loading("show");
-                console.log("loading")
-            },
             success: function(res) {
                 $('#deleteModal').modal('hide');
                 if (res.status=="success") {
@@ -64,7 +59,7 @@
                 } else {
                     // alert gagal
                 }
-                loading("hide");
+                ;
             }
         });
     }
@@ -96,11 +91,6 @@
             type: 'get',
             dataType: 'json',
             data: {},
-            beforeSend: function(text) {
-                    // loading func
-                    console.log("loading")
-                    loading("show");
-            },
             success: function(res) {
                 if (res.status=="success") {
                     // return res['data'];
@@ -109,7 +99,7 @@
                 } else {
                     // alert gagal
                 }
-                loading("hide");
+                ;
             }
         });
     }
