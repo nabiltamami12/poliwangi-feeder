@@ -66,6 +66,39 @@ Route::prefix('mahasiswabaru')->middleware(['aksesuntuk:maba'])->group(function 
     });
 });
 
+Route::prefix('mahasiswa')->middleware(['aksesuntuk:mahasiswa'])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('mahasiswaLama.dashboardMahasiswa', [
+            "title" => "absensi-mahasiswa"
+        ]);
+    });
+
+    Route::get('/rekap', function () {
+        return view('mahasiswaLama.presensi', [
+            "title" => "rekap-absensi-mahasiswa"
+        ]);
+    });
+
+    Route::get('/pembayaran', function () {
+        return view('mahasiswaLama.pembayaran', [
+            "title" => "Pembayaran"
+        ]);
+    });
+    
+    Route::get('/presensi', function () {
+        return view('mahasiswaLama.presensi', [
+            "title" => "Presensi"
+        ]);
+    });
+
+    Route::get('/rekap-nilai', function () {
+        return view('akademik.kuliah/datarekapnilai', [
+            "title" => "rekap-nilai"
+        ]);
+    });
+
+});
+
 Route::prefix('akademik')->middleware(['aksesuntuk:akademik'])->group(function () {
     Route::get('/dashboard', function () {
         return view('akademik.dashboardAkademik', [
@@ -300,18 +333,6 @@ Route::prefix('akademik')->middleware(['aksesuntuk:akademik'])->group(function (
         Route::get('/rekap-nilai', function () {
             return view('akademik.kuliah/datarekapnilai', [
                 "title" => "rekap-nilai"
-            ]);
-        });
-
-        Route::get('/absensi/dashboard-mahasiswa', function () {
-            return view('mahasiswaLama.dashboardMahasiswa', [
-                "title" => "absensi-mahasiswa"
-            ]);
-        });
-
-        Route::get('/absensi/mahasiswa/rekap', function () {
-            return view('mahasiswaLama.presensi', [
-                "title" => "rekap-absensi-mahasiswa"
             ]);
         });
 
