@@ -61,7 +61,7 @@ table tr td .iconify:hover{
 }
 
 /*sidebar*/
-.sub-aktif{
+.aktif .nav-link-text, .sub-aktif>span{
   color: #28a3eb !important;
 }
 .page-content hr.mt {
@@ -133,4 +133,8 @@ table tr td .iconify:hover{
   100% {
     transform: translate(24px, 0);
   }
+}
+
+.dropdown-menu.show {
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }

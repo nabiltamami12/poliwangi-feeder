@@ -192,23 +192,22 @@
                 Tambah
               </button>
 
+              <button type="button" class="btn btn-secondary mt-3 mt-md-0 ml-0 ml-md-1">
+                <i class="iconify-inline mr-1" data-icon="bx:bx-cloud-upload"></i>
+                Upload Buku Besar
+              </button>
+
               <div class="dropdown">
                 <button class="btn btn-primary dropdown-toggle mt-3 mt-md-0 ml-0 ml-md-1" type="button"
                   id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i class="iconify-inline mr-1" data-icon="bx:bx-cloud-upload"></i>
-                  Upload
+                  <i class="iconify-inline mr-1" data-icon="bx:bx-cloud-download"></i>
+                  Download
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <a class="dropdown-item" href="#">Action</a>
-                  <a class="dropdown-item" href="#">Another action</a>
-                  <a class="dropdown-item" href="#">Something else here</a>
+                  <a class="dropdown-item" href="#">Rekap Piutan</a>
+                  <a class="dropdown-item" href="{{url('/template/Template Buku Besar.xlsx')}}">Template Buku Besar</a>
                 </div>
               </div>
-
-              <button type="button" class="btn btn-secondary mt-3 mt-md-0 ml-0 ml-md-1">
-                <i class="iconify-inline mr-1" data-icon="bx:bx-cloud-download"></i>
-                Download Rekap
-              </button>
             </div>
           </div>
         </div>

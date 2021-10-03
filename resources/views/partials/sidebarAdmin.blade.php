@@ -161,6 +161,12 @@
                 </a>
               </li>
               <li class="nav-item">
+                <a class="nav-link" href="{{ url('/admin/settingpmb/settingjalursyarat')}}">
+                  <span class="mini_icon">JP</span>
+                  <span class="nav-link-text">Setting Jalur Syarat PMB</span>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a class="nav-link" href="{{ url('/admin/settingpmb/settingjurusanpilihan')}}">
                   <span class="mini_icon">JP</span>
                   <span class="nav-link-text">Setting Jurusan Pilihan</span>

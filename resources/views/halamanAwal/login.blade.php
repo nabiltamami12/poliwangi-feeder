@@ -179,6 +179,10 @@
           return "{{url('/mahasiswalama/dashboard')}}";
           break;
 
+        case 'mahasiswa':
+          return "{{url('/mahasiswa/dashboard')}}";
+          break;
+
         default:
           return false;
           break;

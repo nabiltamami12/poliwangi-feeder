@@ -26,7 +26,7 @@
     elseif(in_array('maba', $akses_untuk))
       $sidebar = 'partials.sidebarMaba';
 
-    elseif(in_array('mala', $akses_untuk))
+    elseif(in_array('mahasiswa', $akses_untuk))
       $sidebar = 'partials.sidebarMala';
 
     elseif(in_array('keuangan', $akses_untuk))
@@ -49,6 +49,20 @@
   </main>
 
   @include('layouts.bottomBody')
+  <script type="text/javascript">
+    // set menu active
+    var tagMenu = document.querySelector(`[href="{{ url(Request::segment(1) . '/' . Request::segment(2) . '/' . Request::segment(3)) }}"]`);
+
+    // document.querySelectorAll("div.navbar-inner.sidenav-menu ul.navbar-nav li.nav-item a.nav-link").forEach( (item) => {
+    //   console.log(item+' >>>')
+    // });
+
+    if (tagMenu) {
+      tagMenu.classList.add('sub-aktif');
+      document.querySelector('div.aktif').classList.add('open');
+      tagMenu.parentNode.parentNode.style.display = 'block';
+    }
+  </script>
 </body>
 
 </html>

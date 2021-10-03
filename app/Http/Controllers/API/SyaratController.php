@@ -10,11 +10,18 @@ use App\Http\Resources\SyaratResource;
 
 class SyaratController extends Controller
 {
+    protected $status = null;
+    protected $error = null;
+    protected $data = null;
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+    const FETCHED_ATTRIBUTE = [
+        "nama",
+    ];
+
     public function index()
     {
         try {
@@ -79,10 +86,8 @@ class SyaratController extends Controller
         try {
             if ($id) {
                 $syarat = Syarat::where('id', $id)->get();
-                
             } else {
                 $syarat = Syarat::get();
-                
             }
             $this->data = $syarat;
             $this->status = "success";

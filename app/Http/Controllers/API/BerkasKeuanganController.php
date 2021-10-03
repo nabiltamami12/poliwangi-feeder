@@ -274,6 +274,11 @@ class BerkasKeuanganController extends Controller
         ]);
     }
 
+    public function template_buku_besar()
+    {
+        // code...
+    }
+
     
 
     /**

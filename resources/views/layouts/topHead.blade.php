@@ -2,7 +2,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
   <meta name="author" content="Creative Tim">
-  <title>{{ $title }}</title>
+  @php
+  $judul = 'SIM Poliwangi | '.ucwords(preg_replace('/-/m', ' ', $title));
+  @endphp
+  <title>{{ $judul }}</title>
   {{--
   <!-- Icons -->
   <link rel="stylesheet" href="{{ url('argon') }}/assets/vendor/nucleo/css/nucleo.css" type="text/css">
@@ -47,5 +50,4 @@
     var dataGlobal = JSON.parse(localStorage.getItem('globalData'))
     var dataJurusan, dataDosen, dataProgram;
     var dt, dt_url, dt_opt;
-    var tagMenu = document.querySelector(`[href="{{ url(Request::segment(1) . '/' . Request::segment(2) . '/' . Request::segment(3)) }}"]`);
   </script>
