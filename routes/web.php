@@ -159,11 +159,13 @@ Route::prefix('akademik')->middleware(['aksesuntuk:akademik'])->group(function (
 
         Route::get('/absensi/rekap', function () {
             return view('akademik.kuliah.rekapabsensimahasiswa', [
+                "page" => "akademik",
                 "title" => "rekap-absensi-mahasiswa"
             ]);
         });
         Route::get('/absensi/rekap-mahasiswa/{kelas}/{matkul}', function ($kelas, $matkul) {
             return view('akademik.kuliah.rekapabsensikelasmahasiswa', [
+                "page" => "akademik",
                 "kelas" => $kelas,
                 "matkul" => $matkul,
                 "title" => "rekap-absensi-mahasiswa"
@@ -400,6 +402,7 @@ Route::prefix('admin')->middleware(['aksesuntuk:admin'])->group(function () {
         
         Route::get('/absensi/rekap', function () {
             return view('akademik.kuliah.rekapabsensimahasiswa', [
+                "page" => "admin",
                 "title" => "rekap-absensi-mahasiswa"
             ]);
         });
@@ -412,6 +415,7 @@ Route::prefix('admin')->middleware(['aksesuntuk:admin'])->group(function () {
 
         Route::get('/absensi/rekap-mahasiswa/{kelas}/{matkul}', function ($kelas, $matkul) {
             return view('akademik.kuliah.rekapabsensikelasmahasiswa', [
+                "page" => "admin",
                 "kelas" => $kelas,
                 "matkul" => $matkul,
                 "title" => "rekap-absensi-mahasiswa"
@@ -432,6 +436,17 @@ Route::prefix('admin')->middleware(['aksesuntuk:admin'])->group(function () {
     });
 
     Route::prefix('keuangan')->group(function () {
+        Route::get('/piutangmahasiswa', function () {
+            return view('keuangan.piutangMahasiswa', [
+                "title" => "keuangan-rekapitulasi",
+            ]);
+        });
+
+        Route::get('/datapendaftar', function () {
+            return view('keuangan.dataPendaftar', [
+                "title" => "keuangan-rekapitulasi",
+            ]);
+        });
         Route::get('/tarif', function () {
             return view('keuangan.tarif_UKT_SPI', [
                 "title" => "keuangan-tarif",

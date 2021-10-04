@@ -141,7 +141,7 @@
             </div>
             <ul class="nav-item-dropdown-content">
               <li class="nav-item">
-                <a class="nav-link" href="{{ url('admin/pmb/datapendaftar')}}">
+                <a class="nav-link" href="{{ url('admin/keuangan/datapendaftar')}}">
                   <span class="mini_icon">PM</span>
                   <span class="nav-link-text">Pendaftar Mahasiswa Baru</span>
                 </a>
@@ -159,7 +159,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{{ url('admin/pmb/piutangmahasiswa')}}">
+                <a class="nav-link" href="{{ url('admin/keuangan/piutangmahasiswa')}}">
                   <span class="mini_icon">DP</span>
                   <span class="nav-link-text">Piutang Mahasiswa</span>
                 </a>
