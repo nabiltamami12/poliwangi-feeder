@@ -268,7 +268,7 @@ function getJadwal() {
             var kuliah = $('#matkul_open').val();
             var pertemuan = $('#matkul_open :selected').data('pertemuan');
 
-            window.location = "{{ url('/akademik/kuliah/absensi/kelas-dosen/') }}"+"/"+kuliah+"/"+pertemuan;
+            window.location = "{{ url('/dosen/kuliah/absensi/kelas-dosen/') }}"+"/"+kuliah+"/"+pertemuan;
           })
       } else {
           // alert gagal
