@@ -15,10 +15,12 @@
               <h2 class="mb-0 text-center text-md-left">Rekapitulasi Penyisihan Piutang</h2>
             </div>
             <div class="col-12 col-md-8 text-center text-md-right mt-3 mt-md-0">
+              @if (false)
               <button type="button" class="btn btn-info_transparent text-primary mr-0 mr-md-2">
                 <i class="iconify-inline mr-2" data-icon="bx:bx-download"></i>
                 Import
               </button>
+              @endif
 
               <div class="dropdown">
                 <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton"

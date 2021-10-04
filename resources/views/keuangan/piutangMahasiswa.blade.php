@@ -115,7 +115,7 @@
     <div class="modal-dialog modal-dialog-centered modal-lg">
       <div class="modal-content padding--medium">
         <div class="perjanjian_pembayaran">
-          <h1 class="modal-title text-center mt-2">Upload Buku Besar</h1>
+          <h1 class="modal-title text-center mt-2">Upload Piutang Mahasiswa</h1>
           <div onclick="bukuBesarModal()" style="cursor: pointer;" class="detail_dokumen upload-perjanjian d-flex align-items-center justify-content-between mt-5">
             <form>
               <span>
@@ -222,7 +222,7 @@
 
               <button type="button" onclick="bukuBesarModal()" class="btn btn-secondary mt-3 mt-md-0 ml-0 ml-md-1">
                 <i class="iconify-inline mr-1" data-icon="bx:bx-cloud-upload"></i>
-                Upload Buku Besar
+                Upload Piutang Mahasiswa
               </button>
 
               <div class="dropdown">
@@ -233,7 +233,7 @@
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                   <a class="dropdown-item" href="#">Rekap Piutan</a>
-                  <a class="dropdown-item" href="{{url('/template/Template Buku Besar.xlsx')}}">Template Buku Besar</a>
+                  <a class="dropdown-item" href="{{url('/template/Template Piutang.xlsx')}}">Template Piutang Mahasiswa</a>
                 </div>
               </div>
             </div>
