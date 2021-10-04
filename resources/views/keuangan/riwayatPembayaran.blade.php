@@ -59,10 +59,10 @@
 							<h2 class="mb-0 text-center text-md-left">Riwayat Pembayaran</h2>
 						</div>
 						<div class="col-12 col-md-8 text-center text-md-right">
-							<button type="button" class="btn btn-warning_transparent mt-3 mt-md-0">
+							{{-- <button type="button" class="btn btn-warning_transparent mt-3 mt-md-0">
 								<i class="iconify-inline mr-1" data-icon="bx:bx-filter-alt"></i>
 								Filter
-							</button>
+							</button> --}}
 							<button type="button" onclick="bukuBesarModal()" class="btn btn-info_transparent mt-3 mt-md-0 ml-md-2 text-primary">
 								<i class="iconify-inline mr-1" data-icon="bx:bx-download"></i>
 								Import
@@ -71,7 +71,7 @@
 								<i class="iconify-inline mr-1" data-icon="bx:bx-download"></i>
 								Template Import UKT
 							</a>
-							<div class="dropdown">
+							{{-- <div class="dropdown">
 								<button class="btn btn-primary dropdown-toggle mt-3 mt-md-0 ml-md-2" type="button"
 									id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 									<i class="iconify-inline mr-1" data-icon="bx:bx-printer"></i>
@@ -81,7 +81,7 @@
 									<button type="button" class="dropdown-item" data-toggle="modal"
 										data-target="#cetakRekapPembayaranModal">Cetak Rekap</button>
 								</div>
-							</div>
+							</div> --}}
 						</div>
 					</div>
 				</div>
@@ -97,98 +97,10 @@
 								<th scope="col" class="text-right">Nominal</th>
 								<th scope="col" class="text-center">Pembayaran</th>
 								<th scope="col">Keterangan</th>
-								<th scope="col" class="text-center">Aksi</th>
+								{{-- <th scope="col" class="text-center">Aksi</th> --}}
 							</tr>
 						</thead>
 						<tbody class="table-body"></tbody>
-						@if (false)
-						<tbody class="table-body">
-							<tr>
-								<td class="text-center">12 Juli 2021</td>
-								<td class="text-center">351321090</td>
-								<td class="text-capitalize">fatimah azzahra</td>
-								<td class="font-weight-bold text-right">Rp. 2.500.000</td>
-								<td class="text-center">UKT</td>
-								<td class="text-right">Cicilan ke-2</td>
-								<td class="text-center">
-									<i class="iconify edit-icon mr-2" data-icon="bx:bx-edit-alt"></i>
-									<i class="iconify delete-icon" data-icon="bx:bx-trash"></i>
-								</td>
-							</tr>
-							<tr>
-								<td class="text-center">12 Juli 2021</td>
-								<td class="text-center">351321090</td>
-								<td class="text-capitalize">Kierra Stanton</td>
-								<td class="font-weight-bold text-right">Rp. 2.500.000</td>
-								<td class="text-center">UKT</td>
-								<td class="text-right">Cicilan ke-1</td>
-								<td class="text-center">
-									<i class="iconify edit-icon mr-2" data-icon="bx:bx-edit-alt"></i>
-									<i class="iconify delete-icon" data-icon="bx:bx-trash"></i>
-								</td>
-							</tr>
-							<tr>
-								<td class="text-center">12 Juli 2021</td>
-								<td class="text-center">351321090</td>
-								<td class="text-capitalize">Skylar Lipshutz</td>
-								<td class="font-weight-bold text-right">Rp. 2.500.000</td>
-								<td class="text-center">SPI</td>
-								<td class="text-right">-</td>
-								<td class="text-center">
-									<i class="iconify edit-icon mr-2" data-icon="bx:bx-edit-alt"></i>
-									<i class="iconify delete-icon" data-icon="bx:bx-trash"></i>
-								</td>
-							</tr>
-							<tr>
-								<td class="text-center">12 Juli 2021</td>
-								<td class="text-center">351321090</td>
-								<td class="text-capitalize">Abram Mango</td>
-								<td class="font-weight-bold text-right">Rp. 2.500.000</td>
-								<td class="text-center">SPI</td>
-								<td class="text-right">-</td>
-								<td class="text-center">
-									<i class="iconify edit-icon mr-2" data-icon="bx:bx-edit-alt"></i>
-									<i class="iconify delete-icon" data-icon="bx:bx-trash"></i>
-								</td>
-							</tr>
-							<tr>
-								<td class="text-center">12 Juli 2021</td>
-								<td class="text-center">351321090</td>
-								<td class="text-capitalize">Cooper Franci</td>
-								<td class="font-weight-bold text-right">Rp. 2.500.000</td>
-								<td class="text-center">UKT</td>
-								<td class="text-right">Cicilan ke-3</td>
-								<td class="text-center">
-									<i class="iconify edit-icon mr-2" data-icon="bx:bx-edit-alt"></i>
-									<i class="iconify delete-icon" data-icon="bx:bx-trash"></i>
-								</td>
-							</tr>
-							<tr>
-								<td class="text-center">12 Juli 2021</td>
-								<td class="text-center">351321090</td>
-								<td class="text-capitalize">Aspen Philips</td>
-								<td class="font-weight-bold text-right">Rp. 2.500.000</td>
-								<td class="text-center">UKT</td>
-								<td class="text-right">Cicilan ke-1</td>
-								<td class="text-center">
-									<i class="iconify edit-icon mr-2" data-icon="bx:bx-edit-alt"></i>
-									<i class="iconify delete-icon" data-icon="bx:bx-trash"></i>
-								</td>
-							</tr>
-							<tr>
-								<td class="text-center">12 Juli 2021</td>
-								<td class="text-center">351321090</td>
-								<td class="text-capitalize">Carla Levin</td>
-								<td class="font-weight-bold text-right">Rp. 2.500.000</td>
-								<td class="text-center">SPI</td>
-								<td class="text-right">-</td>
-								<td class="text-center">
-									<i class="iconify edit-icon mr-2" data-icon="bx:bx-edit-alt"></i>
-									<i class="iconify delete-icon" data-icon="bx:bx-trash"></i>
-								</td>
-							</tr>
-						</tbody>
-						@endif
 					</table>
 				</div>
 
@@ -232,16 +144,16 @@
 				}
 			},
 			{ data: "keterangan", className : 'text-right', },
-			{ 
-				className : 'text-center',
-				data: null,
-				render: (data, type, row, meta) => {
-					return `
-						<i class="iconify edit-icon mr-2" data-icon="bx:bx-edit-alt"></i>
-						<i class="iconify delete-icon" data-icon="bx:bx-trash"></i>
-					`;
-				}
-			}
+			// { 
+			// 	className : 'text-center',
+			// 	data: null,
+			// 	render: (data, type, row, meta) => {
+			// 		return `
+			// 			<i class="iconify edit-icon mr-2" data-icon="bx:bx-edit-alt"></i>
+			// 			<i class="iconify delete-icon" data-icon="bx:bx-trash"></i>
+			// 		`;
+			// 	}
+			// }
 		]
 	};
 
