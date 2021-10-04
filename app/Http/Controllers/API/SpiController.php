@@ -114,7 +114,7 @@ class SpiController extends Controller
             $string =  $get[0]->program_studi;
             $prodi = str_replace(' ', '_',  $string);
             $prodi = strtolower($prodi);
-            $filename = "rekapspi_$req->tahun_$prodi.xlsx";
+            $filename = "rekapspi_{$req->tahun}_{$prodi}.xlsx";
             return Excel::download(new SpiExport($req->tahun, $req->prodi), $filename);
         }
     }
