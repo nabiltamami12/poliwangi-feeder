@@ -38,7 +38,7 @@
               <li class="nav-item">
                 <a class="nav-link" href="{{ url('/admin/master/dataperiode')}}">
                   <span class="mini_icon">DP</span>
-                  <span class="nav-link-text">Data Periode</span>
+                  <span class="nav-link-text">Data Periode Kuliah</span>
                 </a>
               </li>
               <li class="nav-item">
@@ -141,6 +141,12 @@
             </div>
             <ul class="nav-item-dropdown-content">
               <li class="nav-item">
+                <a class="nav-link" href="{{ url('admin/pmb/datapendaftar')}}">
+                  <span class="mini_icon">PM</span>
+                  <span class="nav-link-text">Pendaftar Mahasiswa Baru</span>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a class="nav-link {{($title === "keuangan-tarif") ? 'aktif' : ''}}" href="{{ url('admin/keuangan/tarif') }} ">
                   <span class="mini_icon">TR</span>
                   <span class="nav-link-text">Tarif UKT & SPI</span>
@@ -162,75 +168,49 @@
           </li>
 
           <li class="nav-item">
-            <div class="nav-link {{($title === "maba-mahasiswa") ? 'aktif' : ''}}">
-              <i class="iconify" data-icon="bx:bx-user-pin"></i>
-              <span class="nav-link-text">PMB</span>
-            </div>
-            <ul class="nav-item-dropdown-content">
-              <li class="nav-item">
-                <a class="nav-link" href="{{ url('admin/pmb/datapendaftar')}}">
-                  <span class="mini_icon">DP</span>
-                  <span class="nav-link-text">Data Pendaftar</span>
-                </a>
-              </li>
-              
-              <!-- <li class="nav-item">
-                <a class="nav-link" href="{{ url('admin/pmb/pengajuan/cicilan')}}">
-                  <span class="mini_icon">DP</span>
-                  <span class="nav-link-text">Pengajuan Cicilan</span>
-                </a>
-              </li> -->
-
-              
-              
-            </ul>
-          </li>
-
-
-          <!-- <li class="nav-item">
             <div class="nav-link {{($title === "admin-settingpmb") ? 'aktif' : ''}}">
               <i class="iconify-inline" data-icon="ant-design:setting-outlined"></i>
               <span class="nav-link-text">Setting PMB</span>
             </div>
             <ul class="nav-item-dropdown-content">
               <li class="nav-item">
-                <a class="nav-link" href="{{ url('/admin/settingpmb/settingjalurpenerimaan')}}">
+                <a class="nav-link" href="{{ url('/admin/pmb/settingjalurpenerimaan')}}">
                   <span class="mini_icon">JP</span>
                   <span class="nav-link-text">Setting Jalur Penerimaan PMB</span>
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{{ url('/admin/settingpmb/settingjalursyarat')}}">
+                <a class="nav-link" href="{{ url('/admin/pmb/settingjalursyarat')}}">
                   <span class="mini_icon">JP</span>
                   <span class="nav-link-text">Setting Jalur Syarat PMB</span>
                 </a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{{ url('/admin/settingpmb/settingjurusanpilihan')}}">
+              <!-- <li class="nav-item">
+                <a class="nav-link" href="{{ url('/admin/pmb/settingjurusanpilihan')}}">
                   <span class="mini_icon">JP</span>
                   <span class="nav-link-text">Setting Jurusan Pilihan</span>
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{{ url('/admin/settingpmb/settingjadwalseleksi')}}">
+                <a class="nav-link" href="{{ url('/admin/pmb/settingjadwalseleksi')}}">
                   <span class="mini_icon">JS</span>
                   <span class="nav-link-text">Setting Jadwal Seleksi</span>
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{{ url('/admin/settingpmb/settingjurusanasal')}}">
+                <a class="nav-link" href="{{ url('/admin/pmb/settingjurusanasal')}}">
                   <span class="mini_icon">JA</span>
                   <span class="nav-link-text">Setting Jurusan Asal Pendaftar</span>
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{{ url('/admin/settingpmb/settingjurusanlinear')}}">
+                <a class="nav-link" href="{{ url('/admin/pmb/settingjurusanlinear')}}">
                   <span class="mini_icon">JL</span>
                   <span class="nav-link-text">Setting Jurusan Linear</span>
                 </a>
-              </li>
+              </li> -->
             </ul>
-          </li> -->
+          </li>
           <!-- ===================== -->
           
 

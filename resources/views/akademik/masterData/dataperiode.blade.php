@@ -14,7 +14,7 @@
         <div class="card-header p-0">
           <div class="row align-items-center">
             <div class="col">
-              <h2 class="mb-0">Data Periode</h2>
+              <h2 class="mb-0">Data Periode Kuliah</h2>
             </div>
             <div class="col text-right">
               <button type="button" onclick="add_btn()" class="btn btn-primary"><i class="iconify-inline mr-1" data-icon='bx:bx-plus-circle'></i> Tambah</button>

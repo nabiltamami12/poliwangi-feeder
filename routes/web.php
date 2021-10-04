@@ -85,6 +85,12 @@ Route::prefix('mahasiswa')->middleware(['aksesuntuk:mahasiswa'])->group(function
         ]);
     });
     
+    Route::get('/pengajuan/cicilan', function () {
+        return view('mahasiswaLama.pengajuancicilan', [
+            "title" => "pmb-pendaftar",
+        ]);
+    });
+    
     Route::get('/presensi', function () {
         return view('mahasiswaLama.presensi', [
             "title" => "Presensi"
@@ -185,11 +191,6 @@ Route::prefix('akademik')->middleware(['aksesuntuk:akademik'])->group(function (
     Route::prefix('pmb')->group(function () {
         Route::get('/datapendaftar', function () {
             return view('admin.pmb.datapendaftar', [
-                "title" => "pmb-pendaftar",
-            ]);
-        });
-        Route::get('/pengajuan/cicilan', function () {
-            return view('mahasiswaLama.pengajuancicilan', [
                 "title" => "pmb-pendaftar",
             ]);
         });
@@ -545,120 +546,22 @@ Route::prefix('admin')->middleware(['aksesuntuk:admin'])->group(function () {
     });
 
     Route::prefix('pmb')->group(function () {
-        Route::get('/datapendaftar', function () {
-            return view('admin.pmb.datapendaftar', [
-                "title" => "pmb-pendaftar",
-            ]);
-        });
-        Route::get('/pengajuan/cicilan', function () {
-            return view('mahasiswaLama.pengajuancicilan', [
-                "title" => "pmb-pendaftar",
-            ]);
-        });
-        Route::get('/piutangmahasiswa', function () {
-            return view('keuangan.piutangMahasiswa', [
-                "title" => "keuangan-rekapitulasi",
-            ]);
-        });
-    });
-    
-    Route::prefix('report')->group(function () {
-        Route::get('/cuti', function () {
-            return view('akademik.report.reportcuti', [
-                "title" => "akademik-report",
-            ]);
-        });
 
-        Route::get('/dropout', function () {
-            return view('akademik.report.reportdo', [
-                "title" => "akademik-report",
+        Route::get('/settingjalurpenerimaan', function () {
+            return view('admin.pmb.settingJalurPenerimaan', [
+                "title" => "admin-settingpmb"
             ]);
         });
-
-        Route::get('/melebihisemester', function () {
-            return view('akademik.report.reportmelebihisemester', [
-                "title" => "akademik-report",
-            ]);
-        });
-
-        Route::get('/lulus', function () {
-            return view('akademik.report.reportlulus', [
-                "title" => "akademik-report",
-            ]);
-        });
-
-        Route::get('/judultugasakhir', function () {
-            return view('akademik.report.reportjudulta', [
-                "title" => "akademik-report",
-            ]);
-        });
-    });
-
-    Route::prefix('khs')->group(function () {
-        Route::get('/khs', function () {
-            return view('akademik.khs.khs', [
-                "title" => "akademik-khs",
-            ]);
-        });
-        Route::get('/khsmahasiswa', function () {
-            return view('akademik.khs.khsmahasiswa', [
-                "title" => "akademik-khs",
-            ]);
-        });
-    });
-
-    Route::prefix('kuliah')->group(function () {
-        Route::get('/skmahasiswaaktif', function () {
-            return view('akademik.kuliah.skmahasiswaaktif', [
-                "title" => "akademik-kuliah",
-            ]);
-        });
-        Route::get('/nilai', function () {
-            return view('akademik.kuliah.nilai', [
-                "title" => "akademik-kuliah",
-            ]);
-        });
-        Route::get('/nilaimahasiswa', function () {
-            return view('akademik.kuliah.detailnilaimahasiswa', [
-                "title" => "akademik-kuliah",
-            ]);
-        });
-        Route::get('/pelanggaran', function () {
-            return view('akademik.kuliah.pelanggaran', [
-                "title" => "akademik-kuliah",
-            ]);
-        });
-        Route::get('/absensi/rekap-mahasiswa', function () {
-            return view('akademik.kuliah.rekapAbsensiMahasiswa', [
-                "title" => "akademik-kuliah",
-            ]);
-        });
-    });
-});
-
-Route::prefix('keuangan')->middleware(['aksesuntuk:keuangan'])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('keuangan.dashboardKeuangan', [
-            "title" => "keuangan-dashboard",
-        ]);
-    });
-
-    Route::prefix('tarif')->group(function() {
-        Route::get('/', function () {
-            return view('keuangan.tarif_UKT_SPI', [
-                "title" => "keuangan-tarif",
-            ]);
-        });
-        Route::get('/cu', function () {
-            return view('keuangan.cutarifspi', [
+        Route::get('/settingjalurpenerimaan/cu/', function () {
+            return view('admin.pmb/cuJalurPenerimaan', [
                 "id" => null,
-                "title" => "keuangan-tarif"
+                "title" => "admin-settingpmb"
             ]);
         });
-        Route::get('/cu/{id}', function ($id) {
-            return view('keuangan.cutarifspi', [
+        Route::get('/settingjalurpenerimaan/cu/{id}', function ($id) {
+            return view('admin.pmb/cuJalurPenerimaan', [
                 "id" => $id,
-                "title" => "keuangan-tarif"
+                "title" => "admin-settingpmb"
             ]);
         });
         Route::get('/settingjalursyarat', function () {
@@ -714,6 +617,81 @@ Route::prefix('keuangan')->middleware(['aksesuntuk:keuangan'])->group(function (
         Route::get('/settingjurusanlinear', function () {
             return view('admin.pmb.settingJurusanLinear', [
                 "title" => "admin-settingpmb"
+            ]);
+        });
+    });
+    
+    Route::prefix('report')->group(function () {
+        Route::get('/cuti', function () {
+            return view('akademik.report.reportcuti', [
+                "title" => "akademik-report",
+            ]);
+        });
+
+        Route::get('/dropout', function () {
+            return view('akademik.report.reportdo', [
+                "title" => "akademik-report",
+            ]);
+        });
+
+        Route::get('/melebihisemester', function () {
+            return view('akademik.report.reportmelebihisemester', [
+                "title" => "akademik-report",
+            ]);
+        });
+
+        Route::get('/lulus', function () {
+            return view('akademik.report.reportlulus', [
+                "title" => "akademik-report",
+            ]);
+        });
+
+        Route::get('/judultugasakhir', function () {
+            return view('akademik.report.reportjudulta', [
+                "title" => "akademik-report",
+            ]);
+        });
+    });
+
+    Route::prefix('khs')->group(function () {
+        Route::get('/khs', function () {
+            return view('akademik.khs.khs', [
+                "title" => "akademik-khs",
+            ]);
+        });
+        Route::get('/khsmahasiswa', function () {
+            return view('akademik.khs.khsmahasiswa', [
+                "title" => "akademik-khs",
+            ]);
+        });
+    });
+
+    
+});
+
+Route::prefix('keuangan')->middleware(['aksesuntuk:keuangan'])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('keuangan.dashboardKeuangan', [
+            "title" => "keuangan-dashboard",
+        ]);
+    });
+
+    Route::prefix('tarif')->group(function() {
+        Route::get('/', function () {
+            return view('keuangan.tarif_UKT_SPI', [
+                "title" => "keuangan-tarif",
+            ]);
+        });
+        Route::get('/cu', function () {
+            return view('keuangan.cutarifspi', [
+                "id" => null,
+                "title" => "keuangan-tarif"
+            ]);
+        });
+        Route::get('/cu/{id}', function ($id) {
+            return view('keuangan.cutarifspi', [
+                "id" => $id,
+                "title" => "keuangan-tarif"
             ]);
         });
     });

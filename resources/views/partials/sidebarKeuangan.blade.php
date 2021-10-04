@@ -46,8 +46,8 @@
             <ul class="nav-item-dropdown-content">
               <li class="nav-item">
                 <a class="nav-link" href="{{ url('/keuangan/rekapitulasi/datapendaftar')}}">
-                  <span class="mini_icon">DP</span>
-                  <span class="nav-link-text">Data Pendaftar</span>
+                  <span class="mini_icon">PM</span>
+                  <span class="nav-link-text">Pendaftar Mahasiswa Baru</span>
                 </a>
               </li>
               <li class="nav-item">

@@ -12,7 +12,7 @@
         <div class="card-header p-0">
           <div class="row align-items-center">
             <div class="col-12 col-md-6">
-              <h2 class="mb-0 text-center text-md-left">Data Pendaftar</h2>
+              <h2 class="mb-0 text-center text-md-left">Data Pendaftar Mahasiswa Baru</h2>
             </div>
             <div class="col-12 col-md-6 text-center text-md-right mt-3 mt-md-0">
               <button type="button" class="btn btn-primary">

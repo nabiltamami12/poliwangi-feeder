@@ -44,6 +44,13 @@
               <span class="nav-link-text">Presensi</span>
             </a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link {{($title === "mala-pengajuan") ? 'aktif' : ''}}"
+              href="{{ url('/mahasiswa/presensi')}}">
+              <i class="iconify" data-icon="bx:bx-file-blank"></i>
+              <span class="nav-link-text">Pengajuan Cicilan</span>
+            </a>
+          </li>
 
           <!-- <li class="nav-item">
             <div class="nav-link {{($title === "mala-penilaian") ? 'aktif' : ''}}">
