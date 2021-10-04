@@ -19,7 +19,7 @@
         <div class="card-header p-0 m-0 border-0 mb-3">
           <div class="row align-items-center">
             <div class="col-12 col-md-6">
-              <h2 class="mb-0 text-center text-md-left">Data Pendaftar</h2>
+              <h2 class="mb-0 text-center text-md-left">Data Pendaftar Mahasiswa Baru</h2>
             </div>
           </div>
         </div>

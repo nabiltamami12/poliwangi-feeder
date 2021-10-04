@@ -331,4 +331,31 @@ class BerkasKeuanganController extends Controller
     {
         //
     }
+
+    public function penyisihanpiutang()
+    {
+        try {
+            $data = BK::select(
+            'keuangan_piutang.id', 
+            'keuangan_piutang.id_mahasiswa', 
+            'keuangan_piutang.total', 
+            'mahasiswa.nrp as nim',
+            'mahasiswa.nama',
+            DB::raw('SUM(CASE WHEN id_mahasiswa = id_mahasiswa THEN `keuangan_piutang`.total END) as jumlah'),
+            'keuangan_piutang.status as status_piutang')
+            ->join('mahasiswa', 'mahasiswa.nomor', '=', 'keuangan_piutang.id_mahasiswa')
+            ->groupBy('keuangan_piutang.id_mahasiswa')
+            ->get();
+            $this->data = $data;
+            $this->status = "success";
+        } catch (QueryException $e) {
+            $this->status = "failed";
+            $this->error = $e;
+        }
+        return response()->json([
+            "status" => $this->status,
+            "data" => $this->data,
+            "error" => $this->error
+        ]);
+    }
 }
