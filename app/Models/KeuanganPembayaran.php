@@ -14,6 +14,7 @@ class KeuanganPembayaran extends Model
         'id_mahasiswa',
         'id_piutang',
         'bulan',
+        'semester',
         'nominal',
         'status',
         'keterangan',

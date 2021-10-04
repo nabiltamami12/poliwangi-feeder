@@ -167,12 +167,20 @@
             <ul class="nav-item-dropdown-content">
               <li class="nav-item">
                 <a class="nav-link {{($title === "keuangan-tarif") ? 'aktif' : ''}}" href="{{ url('akademik/keuangan/tarif') }} ">
+                  <span class="mini_icon">TR</span>
                   <span class="nav-link-text">Tarif UKT & SPI</span>
                 </a>
               </li>
               <li class="nav-item">
                 <a class="nav-link {{($title === "keuangan-rekapitulasi") ? 'aktif' : ''}}" href="{{ url('akademik/keuangan/spi') }} ">
+                  <span class="mini_icon">SP</span>
                   <span class="nav-link-text">SPI</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url('akademik/pmb/piutangmahasiswa')}}">
+                  <span class="mini_icon">DP</span>
+                  <span class="nav-link-text">Piutang Mahasiswa (Admin)</span>
                 </a>
               </li>
             </ul>
@@ -191,19 +199,14 @@
                 </a>
               </li>
               
-              <li class="nav-item">
+              <!-- <li class="nav-item">
                 <a class="nav-link" href="{{ url('akademik/pmb/pengajuan/cicilan')}}">
                   <span class="mini_icon">DP</span>
                   <span class="nav-link-text">Pengajuan Cicilan</span>
                 </a>
-              </li>
+              </li> -->
 
-              <li class="nav-item">
-                <a class="nav-link" href="{{ url('akademik/pmb/piutangmahasiswa')}}">
-                  <span class="mini_icon">DP</span>
-                  <span class="nav-link-text">Piutang Mahasiswa (Admin)</span>
-                </a>
-              </li>
+              
               
             </ul>
           </li>

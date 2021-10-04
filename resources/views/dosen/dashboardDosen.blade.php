@@ -61,7 +61,7 @@
     </div>
 
     <div class="col-md-4">
-    <div class="card shadow padding--medium card_presensi mt-0 mt-md-4">
+      <div class="card shadow padding--medium card_presensi mt-0 mt-md-4">
         <div class="card-header p-0">
           <div class="row align-items-center">
             <div class="col">
@@ -70,7 +70,7 @@
           </div>
           <hr class="my-4">
         </div>
-        <div id="card_presensi" class="card-body p-0">
+        <div id="card_presensi" class="card-body p-0" hidden>
           <h6 class="mb-0">Mata Kuliah Saat Ini</h6>
           <select class="form-control" id="matkul_open"></select>
           <!-- <h5 class="mb-0 mt-2" id="matkul_saat_ini"></h5> -->
@@ -208,31 +208,33 @@ function getJadwal() {
               console.log("==============================")
 
             })
+            
+            var opt = '';
+            $.each(data_kelas_open,function (key,row_kelas_open) {
+              var kelas = $.grep(res.data.data, function(e){ return e.kuliah == row_kelas_open.kuliah; });
+              opt += `<option data-status="${row_kelas_open.status}" data-pertemuan="${row_kelas_open.pertemuan}" data-jml="${kelas[0].jml_mhs}" value="${row_kelas_open.kuliah}">${row_kelas_open.matakuliah}</option>`;
+              
+              $('#mahasiswa_saat_ini').html(kelas[0].jml_mhs)
+              $('#pertemuan_saat_ini').html(row_kelas_open.pertemuan)
+              $('#status_saat_ini').html(row_kelas_open.status)
+              
+              $('#status_saat_ini').addClass('text-success');
+              $('#btn_presensi').removeClass('btn-no-jadwal');
+              $('#btn_presensi').css('display','block')
+              $('#btn_presensi').attr('disabled',false)
+              $('#btn_presensi').text('Cek Presensi')
+
+            })
+            $('#matkul_open').append(opt);
+
 
             $('#tabel_jadwal').attr('hidden',false);
             $('.no-jadwal').attr('hidden',true);
-            
+            $('#card_presensi').attr('hidden',false);
           }else{
             $('#tabel_jadwal').attr('hidden',true);
             $('.no-jadwal').attr('hidden',false);
           }
-          var opt = '';
-          $.each(data_kelas_open,function (key,row_kelas_open) {
-            var kelas = $.grep(res.data.data, function(e){ return e.kuliah == row_kelas_open.kuliah; });
-            opt += `<option data-status="${row_kelas_open.status}" data-pertemuan="${row_kelas_open.pertemuan}" data-jml="${kelas[0].jml_mhs}" value="${row_kelas_open.kuliah}">${row_kelas_open.matakuliah}</option>`;
-            
-            $('#mahasiswa_saat_ini').html(kelas[0].jml_mhs)
-            $('#pertemuan_saat_ini').html(row_kelas_open.pertemuan)
-            $('#status_saat_ini').html(row_kelas_open.status)
-            
-            $('#status_saat_ini').addClass('text-success');
-            $('#btn_presensi').removeClass('btn-no-jadwal');
-            $('#btn_presensi').css('display','block')
-            $('#btn_presensi').attr('disabled',false)
-            $('#btn_presensi').text('Cek Presensi')
-
-          })
-          $('#matkul_open').append(opt);
 
           $('#matkul_open').on('change',function (e) {
             if ($(this).val()=="") {

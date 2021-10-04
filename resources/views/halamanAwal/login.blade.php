@@ -145,7 +145,8 @@
             localStorage.setItem('pmb', res.data)
             window.location.href = "{{url('/pmbgenerateva')}}"
           } else {
-            alert('Error: '.res.data.message)
+            console.log(res.error)
+            alert('Error: '+res.data.message)
           }
         }
       });
