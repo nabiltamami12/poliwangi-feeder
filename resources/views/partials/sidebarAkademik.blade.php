@@ -167,11 +167,13 @@
             <ul class="nav-item-dropdown-content">
               <li class="nav-item">
                 <a class="nav-link {{($title === "keuangan-tarif") ? 'aktif' : ''}}" href="{{ url('akademik/keuangan/tarif') }} ">
+                  <span class="mini_icon">TR</span>
                   <span class="nav-link-text">Tarif UKT & SPI</span>
                 </a>
               </li>
               <li class="nav-item">
                 <a class="nav-link {{($title === "keuangan-rekapitulasi") ? 'aktif' : ''}}" href="{{ url('akademik/keuangan/spi') }} ">
+                  <span class="mini_icon">SP</span>
                   <span class="nav-link-text">SPI</span>
                 </a>
               </li>
