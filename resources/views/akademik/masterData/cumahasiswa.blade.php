@@ -551,7 +551,7 @@
           data: data,
           success: function(res) {
             if (res.status == "success") {
-              window.location.href = "{{ url('/akademik/master/datamahasiswa') }}";
+              window.location.href = "{{ url('/admin/master/datamahasiswa') }}";
             } else {
               // alert gagal
             }

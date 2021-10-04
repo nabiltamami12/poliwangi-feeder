@@ -70,7 +70,7 @@
             data: data,
             success: function(res) {
                 if (res.status=="success") {
-                    window.location.href = "{{url('/akademik/master/dataperiode')}}";                    
+                    window.location.href = "{{url('/admin/master/dataperiode')}}";                    
                 } else {
                     // alert gagal
                 }

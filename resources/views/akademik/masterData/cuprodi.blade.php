@@ -100,7 +100,7 @@
         data: data,
         success: function(res) {
           if (res.status == "success") {
-            window.location.href = "{{url('/akademik/master/dataprodi')}}";
+            window.location.href = "{{url('/admin/master/dataprodi')}}";
           } else {
             // alert gagal
           }

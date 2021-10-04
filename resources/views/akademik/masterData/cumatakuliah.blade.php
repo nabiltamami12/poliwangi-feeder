@@ -193,7 +193,7 @@
             data: data,
             success: function(res) {
                 if (res.status=="success") {
-                    window.location.href = "{{url('/akademik/master/datamatakuliah')}}";                    
+                    window.location.href = "{{url('/admin/master/datamatakuliah')}}";                    
                 } else {
                     // alert gagal
                 }
