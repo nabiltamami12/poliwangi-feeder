@@ -4,7 +4,9 @@ namespace App\Exports;
 
 use App\Models\Spi;
 use Illuminate\Support\Carbon;
+use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\FromQuery;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithColumnWidths;
 use Maatwebsite\Excel\Concerns\WithCustomStartCell;
@@ -22,16 +24,23 @@ use PhpOffice\PhpSpreadsheet\Shared\Date;
 
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
-class SpiExport implements FromCollection, WithHeadings, WithColumnWidths, WithStyles, WithDrawings, WithCustomStartCell, WithEvents, WithColumnFormatting, WithMapping
+class SpiExport implements WithHeadings, WithColumnWidths, WithStyles, WithDrawings, WithCustomStartCell, WithEvents, WithColumnFormatting, WithMapping, FromQuery
 
 {
     /**
     * @return \Illuminate\Support\Collection
     */
+    use Exportable;
+    protected $tahun;
 
-    public function collection()
-    {
-        return Spi::select(
+    public function __construct(int $tahun) {
+        $this->tahun = $tahun;
+    }
+
+    
+
+    public function query() {
+        return Spi::query()->select(
             'spi.id',
             'spi.id_mahasiswa',
             'mahasiswa.nama',
@@ -39,8 +48,8 @@ class SpiExport implements FromCollection, WithHeadings, WithColumnWidths, WithS
             'spi.pembayaran',
             'spi.tanggal_pembayaran',
             'spi.piutang'
-        )
-        ->join('mahasiswa', 'spi.id_mahasiswa', '=', 'mahasiswa.nrp')->get();
+        )->where('tahun', '=', $this->tahun)
+        ->join('mahasiswa', 'spi.id_mahasiswa', '=', 'mahasiswa.nrp');
     }
 
     public function map($spi): array{

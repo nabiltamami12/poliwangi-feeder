@@ -234,6 +234,9 @@ Route::prefix('v1')->group(function () {
     Route::get('keuangan/approve/{id}', [Ctr\BerkasKeuanganController::class, 'approve']);
     Route::post('keuangan/perjanjian/{id}', [Ctr\BerkasKeuanganController::class, 'perjanjian']);
     Route::post('keuangan/cicilan/{id}', [Ctr\BerkasKeuanganController::class, 'detail_cicilan']);
+
+    //Menu Rekapitulasi >> Piutang Mahasiswa
+    Route::post('keuangan/upload-buku-besar', [Ctr\BerkasKeuanganController::class, 'upload_buku_besar']);
     
 
     // example use bni api

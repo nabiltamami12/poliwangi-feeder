@@ -10,6 +10,9 @@ use Illuminate\Support\Facades\File;
 use App\Models\BerkasKeuangan as BK;
 use Illuminate\Support\Facades\DB;
 use App\Models\KeuanganPembayaran as KB;
+use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Database\QueryException;
+use App\Imports\BukuBesarImport;
 
 class BerkasKeuanganController extends Controller
 {
@@ -274,9 +277,23 @@ class BerkasKeuanganController extends Controller
         ]);
     }
 
-    public function template_buku_besar()
+    public function upload_buku_besar(Request $request)
     {
-        // code...
+        try {
+            $import = new BukuBesarImport;
+            Excel::import($import, $request->file);
+            
+            $this->status = "success";
+            $this->data = $import->result();
+        } catch (QueryException $e) {
+            $this->status = "failed";
+            $this->error = $e;
+        }
+        return response()->json([
+            "status" => $this->status,
+            "data" => $this->data,
+            'error' => $this->error,
+        ]);
     }
 
     

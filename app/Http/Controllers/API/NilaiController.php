@@ -25,6 +25,7 @@ class NilaiController extends Controller
     
     public function index(Request $request)
     {
+        DB::enableQueryLog();
         //
         try {
             $input = DB::table("mahasiswa as m")
@@ -33,41 +34,42 @@ class NilaiController extends Controller
                     "m.nama",
                     "m.nrp as nim",
                     "kl.nomor as id_kuliah",
-                    "n.*"
+                    // "n.*"
                 )
-                ->join("kelas as k", "k.nomor", "=", "m.kelas")
-                ->join("kuliah as kl", "kl.kelas", "=", "k.nomor")
-                ->join("nilai as n", "n.kuliah", "=", "kl.nomor",'left')
+                ->join("kuliah as kl", "kl.kelas", "=", "m.kelas")
+                // ->join("nilai as n", "n.kuliah", "=", "kl.nomor",'left')
                 ->where('kl.tahun', $this->tahun_aktif)
                 ->where('kl.kelas', $request->kelas)
                 ->where('kl.matakuliah', $request->matakuliah)
                 ->get();
-    
+
                 $data=[];
             foreach ($input as $key => $value) {
+                $nilai = DB::table('nilai')->where([
+                    'kuliah' => $value->id_kuliah,
+                    'mahasiswa' => $value->id_mahasiswa,
+                ])->first();
                 $arr = [
                     'id_kuliah' => $value->id_kuliah,
                     'id_mahasiswa' => $value->id_mahasiswa,
-                    'is_published' => $value->is_published,
-                    'publisher' => $value->publisher,
-                    'tgl_publish' => $value->tgl_publish,
+                    'is_published' => $nilai->is_published,
+                    'publisher' => $nilai->publisher,
+                    'tgl_publish' => $nilai->tgl_publish,
                     'nim' => $value->nim,
                     'nama' => $value->nama,
-                    'nomor' => ($value->nomor==null)?0:$value->nomor,
-                    'kuliah' => ($value->nomor==null)?0:$value->nomor,
-                    'mahasiswa' => ($value->mahasiswa==null)?0:$value->mahasiswa,
-                    'quis1' => ($value->quis1==null)?0:$value->quis1,
-                    'quis2' => ($value->quis2==null)?0:$value->quis2,
-                    'tugas' => ($value->tugas==null)?0:$value->tugas,
-                    'ujian' => ($value->ujian==null)?0:$value->ujian,
-                    'na' => ($value->na==null)?0:$value->na,
-                    'her' => ($value->her==null)?0:$value->her,
-                    'nh' => ($value->nh==null)?"":$value->nh,
-                    'keterangan' => ($value->keterangan==null)?"":$value->keterangan,
-                    'nhu' => ($value->nhu==null)?"":$value->nhu,
-                    'nsp' => ($value->nsp==null)?0:$value->nsp,
-                    'kuis' => ($value->kuis==null)?0:$value->kuis,
-                    'praktikum' => ($value->praktikum==null)?0:$value->praktikum,
+                    'nomor' => ($nilai->nomor==null)?0:$nilai->nomor,
+                    'quis1' => ($nilai->quis1==null)?0:$nilai->quis1,
+                    'quis2' => ($nilai->quis2==null)?0:$nilai->quis2,
+                    'tugas' => ($nilai->tugas==null)?0:$nilai->tugas,
+                    'ujian' => ($nilai->ujian==null)?0:$nilai->ujian,
+                    'na' => ($nilai->na==null)?0:$nilai->na,
+                    'her' => ($nilai->her==null)?0:$nilai->her,
+                    'nh' => ($nilai->nh==null)?"":$nilai->nh,
+                    'keterangan' => ($nilai->keterangan==null)?"":$nilai->keterangan,
+                    'nhu' => ($nilai->nhu==null)?"":$nilai->nhu,
+                    'nsp' => ($nilai->nsp==null)?0:$nilai->nsp,
+                    'kuis' => ($nilai->kuis==null)?0:$nilai->kuis,
+                    'praktikum' => ($nilai->praktikum==null)?0:$nilai->praktikum,
                 ];
                 array_push($data,$arr);
             }

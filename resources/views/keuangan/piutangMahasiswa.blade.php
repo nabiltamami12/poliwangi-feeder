@@ -110,6 +110,34 @@
     </div>
   </div>
 
+  <div class="modal fade" id="bukuBesarModal" tabindex="-1" aria-labelledby="uploadPerjanjianModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content padding--medium">
+        <div class="perjanjian_pembayaran">
+          <h1 class="modal-title text-center mt-2">Upload Buku Besar</h1>
+          <div onclick="bukuBesarModal()" style="cursor: pointer;" class="detail_dokumen upload-perjanjian d-flex align-items-center justify-content-between mt-5">
+            <form>
+              <span>
+                <i class="iconify mr-2" data-icon="bx:bxs-file-pdf" data-inline="false"></i>
+                <input type="file" id="file_buku_besar" accept=".xlsx, .xls, .csv" hidden />
+                <a id="nama_buku_besar" class="nama_dokumen" target="_blank">No File</a>
+              </span>
+            </form>
+            <button type="button" class="custom-btn">
+              <i class="iconify text-primary" data-icon="bx:bx-cloud-upload" data-inline="false"></i>
+            </button>
+          </div>
+        </div>
+        <div class="modal_button mt-4-5 d-flex justify-content-between">
+          <button type="button" class="btn btn-outline-danger rounded-sm w-100 mr-2 mr-md-3"
+            data-dismiss="modal">Batal</button>
+          <button type="button" onclick="submitBukuBesar()" class="btn btn-success rounded-sm w-100 ml-2 ml-md-3">Submit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="row equal-cols">
     <div class="col-sm-6 col-lg-4">
       <div class="card card-stats mb-0">
@@ -192,7 +220,7 @@
                 Tambah
               </button>
 
-              <button type="button" class="btn btn-secondary mt-3 mt-md-0 ml-0 ml-md-1">
+              <button type="button" onclick="bukuBesarModal()" class="btn btn-secondary mt-3 mt-md-0 ml-0 ml-md-1">
                 <i class="iconify-inline mr-1" data-icon="bx:bx-cloud-upload"></i>
                 Upload Buku Besar
               </button>
@@ -244,7 +272,6 @@
 var path_berkas = "{{asset('')}}";
 var nomor = 1;
 dt_url = `${url_api}/keuangan/list_cicilan`;
-    console.log(dt_url)
   dt_opt = {
   "columnDefs": [
       {
@@ -464,6 +491,39 @@ dt_url = `${url_api}/keuangan/list_cicilan`;
       $('#nama_dokumen_perjanjian').prop('href',path_berkas+"/"+file_perjanjian)
     }
     $('#uploadPerjanjianModal').modal('show')
+  }
+
+  inputBukuBesar = document.getElementById('file_buku_besar');
+  namaBukuBesar = document.getElementById('nama_buku_besar');
+  function bukuBesarModal() {
+    inputBukuBesar.click();
+  }
+  inputBukuBesar.addEventListener("change", function () {
+    if (inputBukuBesar.value) {
+      let fileName = inputBukuBesar.value.match(/[0-9a-zA-Z\^\&\'\@\{\}\[\]\,\$\=\!\-\#\(\)\.\%\+\~\_ ]+$/)[0];
+      namaBukuBesar.innerHTML = fileName;
+    } else {
+      namaBukuBesar.innerHTML = "tidak ada file dipilih";
+    }
+    $('#bukuBesarModal').modal('show');
+  });
+  function submitBukuBesar() {
+    let file_data = $('#file_buku_besar').prop('files')[0];   
+    let form_data = new FormData();                  
+    form_data.append('file', file_data);
+
+    $.ajax({
+        url: url_api+"/keuangan/upload-buku-besar",
+        dataType: 'json',
+        cache: false,
+        contentType: false,
+        processData: false,
+        data: form_data,                         
+        type: 'post',
+        success: function(res){
+            // location.reload()
+        }
+    });
   }
 </script>
 @endsection

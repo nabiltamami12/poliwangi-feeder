@@ -16,7 +16,8 @@ class Controller extends BaseController
 
     public function __construct()
     {
-        $this->tahun_aktif = DB::table('periode')->select('tahun','semester')->where('status',1)->first()->tahun;
-        $this->semester = DB::table('periode')->select('tahun','semester')->where('status',1)->first()->semester;
+        $data = DB::table('periode')->select('tahun','semester')->where('status',1)->first();
+        $this->tahun_aktif = $data->tahun;
+        $this->semester_aktif = $data->semester;
     }
 }

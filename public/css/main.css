@@ -2,7 +2,6 @@
 @import url(https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap);
 @import url(https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap);
 @import url(https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap);
-@charset "UTF-8";
 * {
   padding: 0;
   margin: 0;
@@ -732,7 +731,6 @@ select {
   justify-content: center;
   align-items: center;
   z-index: 999999;
-  opacity:0.8;
 }
 
 #loader {
@@ -1110,7 +1108,7 @@ nav#navbar h1 {
 }
 .page-content .table-responsive .table-body input[type=checkbox]:before {
   font-family: "FontAwesome";
-  content: "";
+  content: "\f00c";
   color: transparent;
   display: block;
   width: 14px;
@@ -1515,6 +1513,9 @@ nav#navbar h1 {
 .page-content #pills-tab .nav-item:nth-child(3) .nav-link::before {
   content: "3";
 }
+.page-content #pills-tab .nav-item:nth-child(4) .nav-link::before {
+  content: "4";
+}
 .page-content .btnNext,
 .page-content .btnPrevious {
   text-decoration: none;
@@ -1526,6 +1527,69 @@ nav#navbar h1 {
 }
 .page-content .btnNext.btn-success:hover {
   color: #ffffff !important;
+}
+.page-content .tab-buttons {
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  -moz-column-gap: 1rem;
+       column-gap: 1rem;
+}
+.page-content .tab-buttons span {
+  position: relative;
+  border: 1px solid #adb5bd;
+  border-radius: 0.5rem;
+  border-left: 0;
+  font-weight: 400;
+  font-size: 0.875rem;
+  line-height: 1.21em;
+  color: #adb5bd;
+  padding-left: calc(49px + 1.5rem);
+  height: 3.0625rem;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  background-color: #fff;
+}
+.page-content .tab-buttons span.active {
+  border-color: #28a3eb;
+  background-color: #28a3eb;
+  color: #ffffff;
+}
+.page-content .tab-buttons span.active::before {
+  background-color: #f0f8fe;
+  color: #28a3eb;
+  border-color: #28a3eb;
+}
+.page-content .tab-buttons span::before {
+  position: absolute;
+  font-weight: 400;
+  font-size: 1.125rem;
+  line-height: 1.22em;
+  color: #ffffff;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #adb5bd;
+  width: 49px;
+  height: 100%;
+  border-radius: 0.45rem 0 0 0.45rem;
+  border: 1px solid #adb5bd;
+  border-top: 0;
+  border-bottom: 0;
+}
+.page-content .tab-buttons span:first-child::before {
+  content: "1";
+}
+.page-content .tab-buttons span:nth-child(2)::before {
+  content: "2";
+}
+.page-content .tab-buttons span:nth-child(3)::before {
+  content: "3";
+}
+.page-content .tab-buttons span:nth-child(4)::before {
+  content: "4";
 }
 
 .select2-container--default .select2-selection--single::after {
@@ -2481,6 +2545,10 @@ nav#navbar h1 {
   .page-content .form-select .form-group:nth-child(even) {
     padding: 0;
   }
+  .page-content .tab-buttons {
+    grid-template-columns: repeat(2, auto);
+    gap: 1rem;
+  }
 
   .page-content__keuangan .form-group_nominal .input_field {
     font: 12px Montserrat;
@@ -2545,6 +2613,11 @@ nav#navbar h1 {
 .calendar_content div {
     height: 3rem !important;
   }
+
+  .page-content .tab-buttons {
+    grid-template-columns: repeat(1, auto);
+    gap: 1rem;
+  }
 }
 .form_absensiMhs select.form-control {
   background-image: url("https://api.iconify.design/bx/bx-chevron-down.svg?color=%23ADB5BD");
@@ -2608,16 +2681,4 @@ nav#navbar h1 {
   position: sticky;
   top: 0;
   z-index: 2;
-}
-.btn-modal-ok {
-  background-color: #34C38F;
-  color:#fff;
-}
-.btn-modal-cancel {
-  border-color: #F46A6A;
-  color:#F46A6A;
-}
-.calendar_content div.selected {
-  background-color: #D8EFFB;
-  color: #28A3EB !important;
 }

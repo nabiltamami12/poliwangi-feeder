@@ -910,27 +910,26 @@ class AbsensiController extends Controller
     }
 
     public function rekap_matkul(Request $request) {
-        DB::enableQueryLog();
         // Rekap absensi per matakuliah
-        DB::statement("SET SQL_MODE=''");
         try {
-            $query = Abs::select(
+            $query = DB::table('kuliah')
+            ->select(
                 'absensi_mahasiswa.tanggal',
                 'matakuliah.kode',
                 'matakuliah.matakuliah',
-                DB::raw('COUNT(CASE WHEN absensi_mahasiswa.status = "H" THEN 1 END) AS HADIR,COUNT(CASE WHEN absensi_mahasiswa.status = "S" OR absensi_mahasiswa.status = "A" THEN 1 END) AS TIDAK_HADIR')
-            )->join('kuliah', 'absensi_mahasiswa.kuliah', '=', 'kuliah.nomor')
+                DB::raw('COUNT(CASE WHEN absensi_mahasiswa.status = "H" THEN 1 END) AS hadir'),
+                DB::raw('COUNT(CASE WHEN absensi_mahasiswa.status = "S" OR absensi_mahasiswa.status = "A" THEN 1 END) AS tidak_hadir'),
+            )
+            ->join('mahasiswa', 'mahasiswa.kelas', '=', 'kuliah.kelas')
             ->join('matakuliah', 'kuliah.matakuliah', '=', 'matakuliah.nomor')
-            ->join('kelas', 'kuliah.kelas', '=', 'kelas.nomor')
-            ->join('mahasiswa', 'absensi_mahasiswa.mahasiswa', '=', 'mahasiswa.nomor')
-            ->where('absensi_mahasiswa.mahasiswa', $request->mahasiswa)
+            ->join('absensi_mahasiswa', 'absensi_mahasiswa.kuliah', '=', 'kuliah.nomor','left')
+            ->where('mahasiswa.nomor', $request->mahasiswa)
             ->where('kuliah.semester', $this->semester_aktif)
             ->where('kuliah.tahun', $this->tahun_aktif);
-    
+            
             if ($request->tanggal) {
                 $query = $query->whereDate('tanggal',$request->tanggal);
             }
-    
             $this->data = $query->groupBy('matakuliah.matakuliah')->get(); 
             $this->status = "success";
         } catch (QueryException $e) {

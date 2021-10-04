@@ -10,7 +10,12 @@
     <div class="col-xl-12">
       <div class="card shadow">
         <div class="card-header padding--big">
-          <div class="row align-items-center">
+        <div class=" row align-items-center">
+            <div class="col">
+              <h2 class="mb-0">Rekapitulasi Absensi</h2>
+            </div>
+          </div>
+          <!-- <div class="row align-items-center">
 
             <div class="col-md-9 form-group">
               <div class="d-flex align-items-center date_picker w-100 ">
@@ -28,7 +33,7 @@
                 Reset
               </button>
             </div>
-          </div>
+          </div> -->
         </div>
         <hr>
         <div class="table-responsive padding--big">
@@ -36,7 +41,6 @@
             <thead class="table-header">
               <tr>
                 <th scope="col" >Nomor</th>
-                <th scope="col" style="width: 25%">Tanggal</th>
                 <th scope="col" style="width: 30%">Mata Kuliah</th>
                 <th scope="col" class="text-center">Kelas</th>
                 <th scope="col" class="text-center">JUMLAH KEHADIRAN</th>
@@ -85,32 +89,25 @@
             "aTargets": [1],
             "mData": null,
             "mRender": function(data, type, full) {
-              res = data['tanggal'];
+              res = data['kode'];
               return res;
             }
           },{
             "aTargets": [2],
             "mData": null,
             "mRender": function(data, type, full) {
-              res = data['kode'];
+              res = data['matakuliah'];
               return res;
             }
           },{
             "aTargets": [3],
             "mData": null,
             "mRender": function(data, type, full) {
-              res = data['matakuliah'];
-              return res;
-            }
-          },{
-            "aTargets": [4],
-            "mData": null,
-            "mRender": function(data, type, full) {
               res = data['hadir'];
               return res;
             }
           },{
-            "aTargets": [5],
+            "aTargets": [4],
             "mData": null,
             "mRender": function(data, type, full) {
               res = data['tidak_hadir'];
