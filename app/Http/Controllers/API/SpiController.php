@@ -103,8 +103,10 @@ class SpiController extends Controller
         ]);
     }
 
-    public function export() {
-        return Excel::download(new SpiExport, 'export.xlsx');
+    public function export(Request $req) {
+        $filename = "rekapspi_$req->tahun.xlsx";
+            
+        return Excel::download(new SpiExport($req->tahun), $filename);
     }
 
     /**

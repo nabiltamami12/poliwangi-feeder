@@ -31,15 +31,15 @@
             </div>
             <div class="col-md-6 form-group">
               <label for="kelas">Tahun</label>
-              <select class="form-control" id="kelas" name="kelas">
+              <select class="form-control" id="tahun" name="tahun">
                 <option value="2020">2020</option>
               </select>
             </div>
             <div class="col-md-6 form-group mt-3 mt-md-0">
               <label for="status-mahasiswa">Semester</label>
-              <select class="form-control" id="status" name="status">
-                <option> Semester Gasal </option>
-                <option> Semester Genap </option>
+              <select class="form-control" id="semester" name="semester">
+                <option value="1"> Semester Gasal </option>
+                <option value="2"> Semester Genap </option>
               </select>
             </div>
           </div>
@@ -66,9 +66,10 @@
   </div>
 </section>
 <script>
-  var tahun = dataGlobal['periode']['tahun']
-  var semester = dataGlobal['periode']['semester']
+  var tahun = $('#tahun').val()
+  var semester = $('#semester').val()
   $(document).ready(function() {
+    
     $('#nim ').on('change',function (e) {
       var url = `${url_api}/nilai/rekap?nim=${$('#nim').val()}&tahun=${tahun}&semester=${semester}`;
       dt.ajax.url(url).load();
@@ -77,12 +78,10 @@
       var url = `${url_api}/nilai/rekap?nim=${$('#nim').val()}&tahun=${tahun}&semester=${semester}`;
       dt.ajax.url(url).load();
     })  
-    set_datatable($(this).val())
   });
 
-function set_datatable(nim) {
   var nomor = 1;
-  dt_url = `${url_api}/nilai/rekap?nim=${nim}&tahun=${tahun}&semester=${semester}`;
+  dt_url = `${url_api}/nilai/rekap?nim=${$('#nim').val()}&tahun=${tahun}&semester=${semester}`;
 dt_opt = {
   "columnDefs": [
         {
@@ -140,6 +139,5 @@ dt_opt = {
           }
         },
       ]}
-}
 </script>
 @endsection

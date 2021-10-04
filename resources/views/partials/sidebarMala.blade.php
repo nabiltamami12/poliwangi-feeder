@@ -23,7 +23,7 @@
         <ul class="navbar-nav">
           <li class="nav-item">
             <a class="nav-link {{($title === "mala-dashboard") ? 'aktif' : ''}}"
-              href="{{ url('/mahasiswalama/dashboard')}}">
+              href="{{url('mahasiswa/dashboard')}}">
               <i class="iconify" data-icon="bx-bx-home-circle"></i>
               <span class="nav-link-text">Dashboard</span>
             </a>
@@ -31,7 +31,7 @@
 
           <li class="nav-item">
             <a class="nav-link {{($title === "mala-pembayaran") ? 'aktif' : ''}}"
-              href="{{ url('/mahasiswalama/pembayaran')}}">
+              href="{{ url('/mahasiswa/pembayaran')}}">
               <i class="iconify" data-icon="bx:bx-dollar-circle"></i>
               <span class="nav-link-text">Pembayaran</span>
             </a>
@@ -39,13 +39,13 @@
 
           <li class="nav-item">
             <a class="nav-link {{($title === "mala-presensi") ? 'aktif' : ''}}"
-              href="{{ url('/mahasiswalama/presensi')}}">
+              href="{{ url('/mahasiswa/presensi')}}">
               <i class="iconify" data-icon="bx:bx-badge-check"></i>
               <span class="nav-link-text">Presensi</span>
             </a>
           </li>
 
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <div class="nav-link {{($title === "mala-penilaian") ? 'aktif' : ''}}">
               <span class="iconify" data-icon="bx:bx-book-bookmark"></span>
               <span class="nav-link-text">Penilaian</span>
@@ -53,7 +53,7 @@
 
             <ul class="nav-item-dropdown-content">
               <li class="nav-item">
-                <a class="nav-link" href="{{ url('/mahasiswalama/penilaian/nilaisemester')}}">
+                <a class="nav-link" href="{{ url('/mahasiswa/rekap-nilai')}}">
                   <span class="mini_icon">NS</span>
                   <span class="nav-link-text">Nilai Semester</span>
                 </a>
@@ -65,15 +65,15 @@
                 </a>
               </li>
             </ul>
-          </li>
+          </li> -->
 
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a class="nav-link {{($title === "mala-formcuti") ? 'aktif' : ''}}"
               href="{{ url('/mahasiswalama/formcuti')}}">
               <i class="iconify" data-icon="bx:bx-calendar-star"></i>
               <span class="nav-link-text">Form Cuti</span>
             </a>
-          </li>
+          </li> -->
         </ul>
       </div>
     </div>
