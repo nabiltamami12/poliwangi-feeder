@@ -83,24 +83,4 @@
         }
     }
 
-    // AMBIL DATA GLOBAL
-    async function getGlobalData(id) {
-        console.log(id)
-        await $.ajax({
-            url: url_api+"/globaldata/"+id,
-            type: 'get',
-            dataType: 'json',
-            data: {},
-            success: function(res) {
-                if (res.status=="success") {
-                    // return res['data'];
-                    localStorage.removeItem('globalData');
-                    localStorage.setItem('globalData', JSON.stringify(res['data']));
-                } else {
-                    // alert gagal
-                }
-                ;
-            }
-        });
-    }
 </script>

@@ -119,6 +119,7 @@
   <script src="{{ url('argon') }}/assets/js/argon.js?v=1.2.0"></script>
   <script type="text/javascript">
     var url_api = "{{ url('/api/v1') }}";
+    getGlobalData(1);
     $("#form").submit(function(e) {
       e.preventDefault();
       
@@ -153,8 +154,9 @@
     });
 
     //sementara untuk demo saja
-    function check_demo(e){
+    async function check_demo(e){
       let akses = document.getElementById('nodaftar').value;
+
       switch(akses){
         case 'admin':
           return "{{url('/admin/dashboard')}}";
@@ -188,6 +190,25 @@
           return false;
           break;
       }
+    }
+    async function getGlobalData(id) {
+        console.log(id)
+        await $.ajax({
+            url: url_api+"/globaldata/"+id,
+            type: 'get',
+            dataType: 'json',
+            data: {},
+            success: function(res) {
+                if (res.status=="success") {
+                    // return res['data'];
+                    localStorage.removeItem('globalData');
+                    localStorage.setItem('globalData', JSON.stringify(res['data']));
+                } else {
+                    // alert gagal
+                }
+                ;
+            }
+        });
     }
   </script>
 </body>
