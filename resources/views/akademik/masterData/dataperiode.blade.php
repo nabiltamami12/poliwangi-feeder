@@ -62,7 +62,7 @@ dt_opt = {
       "targets": [1],
       "data": null,
       "render": function(data, type, full) {
-        res = data['tahun']+"-"+(data['tahun']+1);
+        res = data['tahun']+"-"+(parseInt(data['tahun'])+1);
         return res;
       }
     },{
@@ -88,7 +88,7 @@ dt_opt = {
       "data": null,
       "render": function(data, type, full) {
         var id = data['nomor'];
-        var text_hapus = "";
+        var text_hapus = data['tahun']+"-"+(parseInt(data['tahun'])+1);
         var btn_update = `<span class="iconify edit-icon text-primary" onclick='update_btn(${id})' data-icon="bx:bx-edit-alt" data-inline="true"></span>` 
         var btn_delete = `<span class="iconify delete-icon text-primary" data-icon="bx:bx-trash" data-inline="true" onclick='delete_btn(${id},"periode","periode","${text_hapus}")'></span>`; 
         res = btn_update+" "+btn_delete;

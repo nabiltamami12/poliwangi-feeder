@@ -119,7 +119,7 @@
   <script src="{{ url('argon') }}/assets/js/argon.js?v=1.2.0"></script>
   <script type="text/javascript">
     var url_api = "{{ url('/api/v1') }}";
-    getGlobalData(1);
+    getGlobalData(1)
     $("#form").submit(function(e) {
       e.preventDefault();
       
@@ -154,9 +154,8 @@
     });
 
     //sementara untuk demo saja
-    async function check_demo(e){
+    function check_demo(e){
       let akses = document.getElementById('nodaftar').value;
-
       switch(akses){
         case 'admin':
           return "{{url('/admin/dashboard')}}";

@@ -66,7 +66,7 @@
         "aTargets": [2],
         "mData": null,
         "mRender": function(data, type, full) {
-          res = data['kajur'];
+          res = data['kajur']+", "+data['gelar'];
           return res;
         }
       }, {

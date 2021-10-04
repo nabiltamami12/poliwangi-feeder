@@ -82,5 +82,4 @@
             $(".loaderScreen-wrapper").fadeOut("slow");
         }
     }
-
 </script>

@@ -28,11 +28,12 @@ class ProdiController extends Controller
                 "program_studi.*",
                 "program.program as nama_program",
                 "jurusan.jurusan as nama_jurusan",
-                "pegawai.nama as kaprodi"
+                "pegawai.nama as kaprodi",
+                "pegawai.gelar_blk as gelar",
             )
+            ->join("pegawai", "program_studi.kepala", "=", "pegawai.nomor",'LEFT')
             ->join("program", "program_studi.program", "=", "program.nomor")
             ->join("jurusan", "program_studi.jurusan", "=", "jurusan.nomor")
-            ->join("pegawai", "program_studi.kepala", "=", "pegawai.nomor",'LEFT')
             ->get();
             $this->data = $prodi;
             $this->status = "success";
@@ -103,10 +104,10 @@ class ProdiController extends Controller
     {
         try {
             $prodi = Prodi::select(
-    
                 "program_studi.*",
                 "program.program as nama_program",
                 "jurusan.jurusan as nama_jurusan",
+                DB::raw("CONCAT(pegawai.nama,', ',pegawai.gelar_blk) as kaprodi"),
             )
             ->join("program", "program_studi.program", "=", "program.nomor")
             ->join("jurusan", "program_studi.jurusan", "=", "jurusan.nomor")

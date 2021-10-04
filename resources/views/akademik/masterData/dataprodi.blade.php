@@ -72,7 +72,9 @@ dt_opt = {
         "aTargets": [3],
         "mData": null,
         "mRender": function(data, type, full) {
-          res = data['kaprodi'];
+          var kaprodi = (data['kaprodi']==null)?"-":data['kaprodi'];
+          var gelar = (data['gelar']==null)?"":", "+data['gelar'];
+          res = kaprodi+gelar;
           return res;
         }
       },{

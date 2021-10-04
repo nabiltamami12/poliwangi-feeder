@@ -64,9 +64,8 @@
           <input type="hidden" id="kuliah_saat_ini">
           <h6 class="mb-0">Mata Kuliah Saat Ini</h6>
           <select class="form-control" id="matkul_open"></select>
-          <h6 class="mb-0 mt-4">Pertemuan Ke- :</h6>
+          <h6 class="mb-0 mt-4">Pertemuan Ke- : <span class="text-danger text-sm" >(pastikan sesuai)</span> </h6>
           <h5 class="mb-0 mt-2" id="pertemuan_saat_ini"></h5>
-          <p class="mb-0 mt-2 text-danger text-sm" >*pastikan pertemuan sesuai</p>
           <h6 class="mb-0 mt-4">Dosen Pengampu:</h6>
           <h5 class="mb-0 mt-2" id="dosen_saat_ini"></h5>
           <h6 class="mb-0 mt-4">Status Anda</h6>
@@ -120,7 +119,7 @@ function getJadwal() {
               var text = "Belum Presensi"
               $('#btn_absen').css('display','block')
             }
-            $('#pertemuan_saat_ini').html(pertemuan)
+            $('#pertemuan_saat_ini').html("Pertemuan ke-"+pertemuan)
             $('#dosen_saat_ini').html(dosen)
             $('#status_saat_ini').html(text)
           })

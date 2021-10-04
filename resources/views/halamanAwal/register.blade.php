@@ -145,8 +145,7 @@
                     </div>
                     <div class="form-group mt-3">
                       <label for="nomor-hp">No. HP (WA Aktif) Orang Tua / Wali<span>*</span></label>
-                      <input type="tel" class="form-control" id="nomor-hp" placeholder="+62 -"
-                      pattern="[+]{1}[0-9]{11,14}" required name="notelp_ortu">
+                      <input type="text" class="form-control" id="nomor-hp" placeholder="+62 -" required name="notelp_ortu">
                     </div>
                   </div>
                 </div>

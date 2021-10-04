@@ -26,7 +26,7 @@
                 Import
               </button>
               
-              <button type="button" class="btn btn-warning ml-md-2" onclick="window.location.href=`${url_api}/keuangan/spi/export`">
+              <button type="button" class="btn btn-warning ml-md-2" onclick="exportModal()">
                 <i class="iconify-inline mr-1" data-icon="bx:bx-upload"></i>
                 Eksport
               </button>
@@ -63,6 +63,45 @@
     </div>
   </div>
 </section>
+<div class="modal fade" id="exportModal" tabindex="-1" aria-labelledby="exportModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content p-0 padding--medium">
+        <div class="modal-header">
+            <p class="text-center">
+                <h5 class="modal-title text-warning text-center">Export Modal</h5>
+            </p>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <p>Tahun</p>
+            <select class="form-control w-100" id="tahun_export">
+              <option value="2019">2019</option>
+              <option value="2020">2020</option>
+              <option value="2021">2021</option>
+              <option value="2022">2022</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <p>Program Studi</p>
+            <select class="form-control w-100" id="prodi_export">
+
+            </select>
+          </div>
+          <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <button type="button" class="btn btn-modal-cancel w-100" data-dismiss="modal">Batal</button>
+                </div>
+                <div class="col-md-6">
+                    <button type="button" class="btn btn-primary w-100" onclick="export_func()">Export</button>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
 <script>
 function importFile() {
   $("#file").click()
@@ -71,8 +110,20 @@ function importFile() {
 function clickButton() {
   $("#submit").click();
 }
+function exportModal() {
+  $('#exportModal').modal('show')
+}
+function export_func() {
+  var tahun = $('#tahun_export').val()
+  var prodi = $('#prodi_export').val()
+  window.location.href=`${url_api}/keuangan/spi/export/${tahun}/${prodi}`
+}
 $(document).ready(function() {
-
+  var optProdi = ``;
+  $.each(dataGlobal['prodi'],function (key,row) {
+      optProdi += `<option value="${row.nomor}">${row.nama_program} ${row.program_studi}</option>`
+  })
+  $('#prodi_export').append(optProdi)
 var nomor = 1;
 dt_url = `${url_api}/keuangan/spi`;
 dt_opt = {
