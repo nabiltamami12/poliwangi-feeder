@@ -25,8 +25,6 @@
               <input type="text" class="form-control" id="semester" readonly>
 
             </div>
-          </div>
-          <div class="form-row">
             <div class="col-md-6 form-group">
               <label for="matakuliah">Mata Kuliah</label>
               <input type="text" class="form-control" id="matakuliah" readonly>
@@ -36,6 +34,9 @@
               <label for="kelas">Kelas</label>
               <input type="text" class="form-control" id="kelas" readonly>
 
+            </div>
+            <div class="col-md-12 form-group mt-3 mt-md-0">
+              <button id="btn_batal" class="btn btn-outline-danger w-100">Batalkan Kelas</button>
             </div>
           </div>
         </form>
@@ -159,6 +160,30 @@ $(document).ready(function() {
         console.log(res)
           if (res.status=="success") {
             location.reload()                 
+          } else {
+              // alert gagal
+          }
+      }
+    });
+  });
+  $('#btn_batal').on('click',function (e) {
+    var data_kls = {
+      'tahun':tahun,
+      'dosen':id,
+      'kuliah':id_kuliah,
+      'pertemuan':pertemuan,
+      'status':'batal',
+      'status_kelas':'close',
+    }
+    $.ajax({
+      url: url_api+"/kelas-mengajar",
+      type: 'post',
+      dataType: 'json',
+      data: data_kls,
+      success: function(res) {
+        console.log(res)
+          if (res.status=="success") {
+            window.location = "{{url('/dosen/dashboard')}}";        
           } else {
               // alert gagal
           }

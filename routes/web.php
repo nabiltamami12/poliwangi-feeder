@@ -99,6 +99,26 @@ Route::prefix('mahasiswa')->middleware(['aksesuntuk:mahasiswa'])->group(function
 
 });
 
+Route::prefix('dosen')->middleware(['aksesuntuk:dosen'])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dosen.dashboardDosen', [
+            "title" => "dosen-dashboard"
+        ]);
+    });
+
+    Route::get('/presensi', function () {
+        return view('dosen.presensiDosen', [
+            "title" => "dosen-presensi"
+        ]);
+    });
+
+    Route::get('/penilaian', function () {
+        return view('dosen.inputNilai', [
+            "title" => "dosen-penilaian"
+        ]);
+    });
+});
+
 Route::prefix('akademik')->middleware(['aksesuntuk:akademik'])->group(function () {
     Route::get('/dashboard', function () {
         return view('akademik.dashboardAkademik', [
