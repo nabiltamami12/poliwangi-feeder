@@ -104,7 +104,7 @@
           success: function(res) {
             console.log(res)
               if (res.status=="success") {
-                location.reload()                 
+                window.location.href = "{{url('/admin/kuliah/absensi/rekap')}}";             
               } else {
                   // alert gagal
               }
