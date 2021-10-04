@@ -255,7 +255,7 @@
     $('#matakuliah').html(arr_cetak['matakuliah'])
     $('#dosen').html(arr_cetak['dosen'])
     $.ajax({
-      url: `{{url('/api/v1')}}/absensi/cetak-kelas?kelas=${arr_cetak['id_kelas']}&tahun=${arr_cetak['tahun']}&semester=${arr_cetak['semester']}&matakuliah=${arr_cetak['id_matakuliah']}`,
+      url: `{{url('/api/v1')}}/absensi/rekap-kelas-mahasiswa?kelas=${arr_cetak['id_kelas']}&tahun=${arr_cetak['tahun']}&semester=${arr_cetak['semester']}&matakuliah=${arr_cetak['id_matakuliah']}`,
       type: 'get',
       dataType: 'json',
       data: {},
@@ -263,7 +263,7 @@
               // loading func
       },
       success: function(res) {
-        var data = res.data;
+        var data = res.data.data;
         console.log(data)
         if (res.status=="success") {
             setSiswa(data)
