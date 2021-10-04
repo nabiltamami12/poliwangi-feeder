@@ -130,6 +130,11 @@ Route::prefix('dosen')->middleware(['aksesuntuk:dosen'])->group(function () {
             "title" => "absensi-dosen"
         ]);
     });
+    Route::get('/cetak-evaluasi-nilai', function () {
+        return view('cetak.evaluasinilai', [
+            "title" => "dosen-penilaian"
+        ]);
+    });
 });
 
 Route::prefix('akademik')->middleware(['aksesuntuk:akademik'])->group(function () {
