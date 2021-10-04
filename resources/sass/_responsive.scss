@@ -95,6 +95,11 @@
                 padding: 0;
             }
         }
+
+        .tab-buttons {
+            grid-template-columns: repeat(2, auto);
+            gap: 1rem;
+        }
     }
 
     .page-content__keuangan {
@@ -200,5 +205,12 @@
     .calendar_weekdays div,
     .calendar_content div {
         height: 3rem !important;
+    }
+
+    .page-content {
+        .tab-buttons {
+            grid-template-columns: repeat(1, auto);
+            gap: 1rem;
+        }
     }
 }
