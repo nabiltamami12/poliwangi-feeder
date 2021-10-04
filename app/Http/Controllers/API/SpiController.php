@@ -104,9 +104,19 @@ class SpiController extends Controller
     }
 
     public function export(Request $req) {
-        $filename = "rekapspi_$req->tahun.xlsx";
-            
-        return Excel::download(new SpiExport($req->tahun), $filename);
+        if ($req->tahun == null || $req->prodi == null) {
+            return response()->json([
+                'status' => 'error', 
+                "data" => null, 
+                'error' => "Parameter tidak lengkap."]);
+        } else {
+            $get = DB::table('program_studi')->select('program_studi')->where('nomor', $req->prodi)->get();
+            $string =  $get[0]->program_studi;
+            $prodi = str_replace(' ', '_',  $string);
+            $prodi = strtolower($prodi);
+            $filename = "rekapspi_$req->tahun_$prodi.xlsx";
+            return Excel::download(new SpiExport($req->tahun, $req->prodi), $filename);
+        }
     }
 
     /**

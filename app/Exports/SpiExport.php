@@ -32,9 +32,11 @@ class SpiExport implements WithHeadings, WithColumnWidths, WithStyles, WithDrawi
     */
     use Exportable;
     protected $tahun;
+    protected $prodi;
 
-    public function __construct(int $tahun) {
+    public function __construct($tahun, $prodi) {
         $this->tahun = $tahun;
+        $this->prodi = $prodi;
     }
 
     
@@ -48,7 +50,8 @@ class SpiExport implements WithHeadings, WithColumnWidths, WithStyles, WithDrawi
             'spi.pembayaran',
             'spi.tanggal_pembayaran',
             'spi.piutang'
-        )->where('tahun', '=', $this->tahun)
+        )->where('spi.tahun', 'like', $this->tahun)
+        ->where('mahasiswa.program_studi', 'like', $this->prodi)
         ->join('mahasiswa', 'spi.id_mahasiswa', '=', 'mahasiswa.nrp');
     }
 
