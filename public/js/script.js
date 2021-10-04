@@ -75,3 +75,5 @@ jQuery(function ($) {
 		$(".navbar-brand").removeClass("d-none");
 	});
 });
+
+moment.locale('id');
