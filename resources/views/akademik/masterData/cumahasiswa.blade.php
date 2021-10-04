@@ -21,7 +21,7 @@
 
         <div class="card shadow padding--small tab-content">
           <form id="form_cu" class="form-input mt-0">
-            <div class="content content1">
+            <div class="content form-row content1" style="margin-top: 1rem;">
               <div class="card-header p-0">
                 <div class="row align-items-center">
                   <div class="col">
@@ -29,176 +29,176 @@
                   </div>
                 </div>
               </div>
-              <hr class="mt my-4">
+              <div class="col-sm-12 col-12">
+                <hr class="mt" />
+              </div>
               <input type="hidden" id="nomor" name="nomor">
-              <div class="form-row">
-                <div class="col-sm-6 col-12">
-                  <div class="form-group row mb-0">
-                    <label for="jurusan">Nama Siswa</label>
-                    <input type="text" class="form-control" id="nama" name="nama" placeholder="Nama Lengkap" required>
-                  </div>
+              <div class="col-sm-6 col-12">
+                <div class="form-group row mb-0">
+                  <label for="jurusan">Nama Siswa</label>
+                  <input type="text" class="form-control" id="nama" name="nama" placeholder="Nama Lengkap" required>
                 </div>
-                <div class="col-sm-6 col-12">
-                  <div class="form-group row mb-0">
-                    <label>Status</label>
-                    <select class="form-control" id="status" name="status" required>
+              </div>
+              <div class="col-sm-6 col-12">
+                <div class="form-group row mb-0">
+                  <label>Status</label>
+                  <select class="form-control" id="status" name="status" required>
 
-                    </select>
-                  </div>
+                  </select>
                 </div>
-                <div class="col-sm-4 col-12">
-                  <div class="form-group row mb-0">
-                    <label>Program Studi</label>
-                    <select class="form-control" id="program_studi" name="program_studi" required>
+              </div>
+              <div class="col-sm-4 col-12">
+                <div class="form-group row mb-0">
+                  <label>Program Studi</label>
+                  <select class="form-control" id="program_studi" name="program_studi" required>
 
-                    </select>
-                  </div>
+                  </select>
                 </div>
-                <div class="col-sm-4 col-12">
-                  <div class="form-group row mb-0">
-                    <label>Kelas</label>
-                    <select class="form-control" id="kelas" name="kelas" required>
+              </div>
+              <div class="col-sm-4 col-12">
+                <div class="form-group row mb-0">
+                  <label>Kelas</label>
+                  <select class="form-control" id="kelas" name="kelas" required>
 
-                    </select>
-                  </div>
+                  </select>
                 </div>
-                <div class="col-sm-4 col-12">
-                  <div class="form-group row mb-0">
-                    <label>Dosen Wali</label>
-                    <select class="form-control" id="dosen_wali" name="dosen_wali" required>
+              </div>
+              <div class="col-sm-4 col-12">
+                <div class="form-group row mb-0">
+                  <label>Dosen Wali</label>
+                  <select class="form-control" id="dosen_wali" name="dosen_wali" required>
 
-                    </select>
+                  </select>
+                </div>
+              </div>
+              <div class="col-sm-4 col-12">
+                <div class="form-group row mb-0">
+                  <label for="jurusan">NIM</label>
+                  <input type="text" class="form-control" id="nrp" name="nrp" placeholder="NIM Mahasiswa" required>
+                </div>
+              </div>
+              <div class="col-sm-4 col-12">
+                <div class="form-group row mb-0">
+                  <label for="jurusan">NIK</label>
+                  <input type="text" class="form-control" id="nik" name="nik" placeholder="NIK Mahasiswa">
+                </div>
+              </div>
+              <div class="col-sm-4 col-12">
+                <div class="form-group row mb-0">
+                  <label for="jurusan">NISN</label>
+                  <input type="text" class="form-control" id="nisn" name="nisn" placeholder="NISN Mahasiswa">
+                </div>
+              </div>
+              <div class="col-sm-4 col-12">
+                <div class="form-group row mb-0">
+                  <label for="kajur">Tempat Lahir</label>
+                  <input type="text" class="form-control" id="tmplahir" name="tmplahir"
+                    placeholder="Tempat Lahir Mahasiswa">
+                </div>
+              </div>
+              <div class="col-sm-4 col-12">
+                <div class="form-group row mb-0">
+                  <label for="sekjur">Tanggal Lahir</label>
+                  <div class="d-flex align-items-center date_picker w-100 ">
+                    <input id="tgllahir" name="tgllahir" type="text" class="form-control date-input"
+                      placeholder="Pilih Tanggal" readonly />
+                    <label class="input-group-btn" for="tgllahir">
+                      <span class="date_button">
+                        <i class="iconify" data-icon="bx:bx-calendar" data-inline="false"></i>
+                      </span>
+                    </label>
                   </div>
                 </div>
-                <div class="col-sm-4 col-12">
-                  <div class="form-group row mb-0">
-                    <label for="jurusan">NIM</label>
-                    <input type="text" class="form-control" id="nrp" name="nrp" placeholder="NIM Mahasiswa" required>
+              </div>
+              <div class="col-sm-4 col-12">
+                <div class="form-group row mb-0">
+                  <label for="sekjur">Tanggal Masuk</label>
+                  <div class="d-flex align-items-center date_picker w-100 ">
+                    <input id="tglmasuk" name="tglmasuk" type="text" class="form-control date-input"
+                      placeholder="Pilih Tanggal" readonly />
+                    <label class="input-group-btn" for="tglmasuk">
+                      <span class="date_button">
+                        <i class="iconify" data-icon="bx:bx-calendar" data-inline="false"></i>
+                      </span>
+                    </label>
                   </div>
                 </div>
-                <div class="col-sm-4 col-12">
-                  <div class="form-group row mb-0">
-                    <label for="jurusan">NIK</label>
-                    <input type="text" class="form-control" id="nik" name="nik" placeholder="NIK Mahasiswa">
-                  </div>
+              </div>
+              <div class="col-sm-6 col-12">
+                <div class="form-group row mb-0">
+                  <label for="sekjur">Jalur Penerimaan</label>
+                  <input type="text" class="form-control" id="jalur_daftar" placeholder="Jalur Penerimaan"
+                    name="jalur_daftar">
                 </div>
-                <div class="col-sm-4 col-12">
-                  <div class="form-group row mb-0">
-                    <label for="jurusan">NISN</label>
-                    <input type="text" class="form-control" id="nisn" name="nisn" placeholder="NISN Mahasiswa">
-                  </div>
+              </div>
+              <div class="col-sm-6 col-12">
+                <div class="form-group row mb-0">
+                  <label for="alias">Anak ke</label>
+                  <input type="number" class="form-control" id="anak_ke" name="anak_ke" placeholder="0">
                 </div>
-                <div class="col-sm-4 col-12">
-                  <div class="form-group row mb-0">
-                    <label for="kajur">Tempat Lahir</label>
-                    <input type="text" class="form-control" id="tmplahir" name="tmplahir"
-                      placeholder="Tempat Lahir Mahasiswa">
-                  </div>
+              </div>
+              <div class="col-sm-6 col-12">
+                <div class="form-group row mb-0">
+                  <label for="jurusan_inggris">Jenis Kelamin</label>
+                  <select class="form-control" id="jenis_kelamin" name="jenis_kelamin" required>
+                    <option value="L">Laki-laki</option>
+                    <option value="P">Perempuan</option>
+                  </select>
                 </div>
-                <div class="col-sm-4 col-12">
-                  <div class="form-group row mb-0">
-                    <label for="sekjur">Tanggal Lahir</label>
-                    <div class="d-flex align-items-center date_picker w-100 ">
-                      <input id="tgllahir" name="tgllahir" type="text" class="form-control date-input"
-                        placeholder="Pilih Tanggal" readonly />
-                      <label class="input-group-btn" for="tgllahir">
-                        <span class="date_button">
-                          <i class="iconify" data-icon="bx:bx-calendar" data-inline="false"></i>
-                        </span>
-                      </label>
-                    </div>
-                  </div>
+              </div>
+              <div class="col-sm-6 col-12">
+                <div class="form-group row mb-0">
+                  <label for="jurusan_inggris">Kewarganegaraan</label>
+                  <select class="form-control" id="warga" name="warga">
+                    <option value="WNI">WNI</option>
+                    <option value="WNA">WNA</option>
+                  </select>
                 </div>
-                <div class="col-sm-4 col-12">
-                  <div class="form-group row mb-0">
-                    <label for="sekjur">Tanggal Masuk</label>
-                    <div class="d-flex align-items-center date_picker w-100 ">
-                      <input id="tglmasuk" name="tglmasuk" type="text" class="form-control date-input"
-                        placeholder="Pilih Tanggal" readonly />
-                      <label class="input-group-btn" for="tglmasuk">
-                        <span class="date_button">
-                          <i class="iconify" data-icon="bx:bx-calendar" data-inline="false"></i>
-                        </span>
-                      </label>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-sm-6 col-12">
-                  <div class="form-group row mb-0">
-                    <label for="sekjur">Jalur Penerimaan</label>
-                    <input type="text" class="form-control" id="jalur_daftar" placeholder="Jalur Penerimaan"
-                      name="jalur_daftar">
-                  </div>
-                </div>
-                <div class="col-sm-6 col-12">
-                  <div class="form-group row mb-0">
-                    <label for="alias">Anak ke</label>
-                    <input type="number" class="form-control" id="anak_ke" name="anak_ke" placeholder="0">
-                  </div>
-                </div>
-                <div class="col-sm-6 col-12">
-                  <div class="form-group row mb-0">
-                    <label for="jurusan_inggris">Jenis Kelamin</label>
-                    <select class="form-control" id="jenis_kelamin" name="jenis_kelamin" required>
-                      <option value="L">Laki-laki</option>
-                      <option value="P">Perempuan</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="col-sm-6 col-12">
-                  <div class="form-group row mb-0">
-                    <label for="jurusan_inggris">Kewarganegaraan</label>
-                    <select class="form-control" id="warga" name="warga">
-                      <option value="WNI">WNI</option>
-                      <option value="WNA">WNA</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="col-sm-6 col-12">
-                  <div class="form-group row mb-0">
-                    <label for="jurusan_inggris">Agama</label>
-                    <select class="form-control" id="agama" name="agama">
+              </div>
+              <div class="col-sm-6 col-12">
+                <div class="form-group row mb-0">
+                  <label for="jurusan_inggris">Agama</label>
+                  <select class="form-control" id="agama" name="agama">
 
-                    </select>
-                  </div>
+                  </select>
                 </div>
-                <div class="col-sm-6 col-12">
-                  <div class="form-group row mb-0">
-                    <label for="jurusan_inggris">Golongan Darah</label>
-                    <select class="form-control" id="darah" name="darah">
+              </div>
+              <div class="col-sm-6 col-12">
+                <div class="form-group row mb-0">
+                  <label for="jurusan_inggris">Golongan Darah</label>
+                  <select class="form-control" id="darah" name="darah">
 
-                    </select>
-                  </div>
+                  </select>
                 </div>
-                <div class="col-sm-6 col-12">
-                  <div class="form-group row mb-0">
-                    <label for="konsentrasi">Tahun Lulus</label>
-                    <input type="number" class="form-control" id="tahun_lulus" placeholder="20XX" name="tahun_lulus">
-                  </div>
+              </div>
+              <div class="col-sm-6 col-12">
+                <div class="form-group row mb-0">
+                  <label for="konsentrasi">Tahun Lulus</label>
+                  <input type="number" class="form-control" id="tahun_lulus" placeholder="20XX" name="tahun_lulus">
                 </div>
-                <div class="col-sm-6 col-12">
-                  <div class="form-group row mb-0">
-                    <label for="akreditasi">Nomor Telp</label>
-                    <input type="text" class="form-control" id="notelp" name="notelp" placeholder="Nomor Telpon">
-                  </div>
+              </div>
+              <div class="col-sm-6 col-12">
+                <div class="form-group row mb-0">
+                  <label for="akreditasi">Nomor Telp</label>
+                  <input type="text" class="form-control" id="notelp" name="notelp" placeholder="Nomor Telpon">
                 </div>
-                <div class="col-sm-6 col-12">
-                  <div class="form-group row mb-0">
-                    <label for="akreditasi">Prestasi Olahraga</label>
-                    <input type="text" class="form-control" id="prestasi_olahraga" name="prestasi_olahraga"
-                      placeholder="Prestasi Olahraga">
-                  </div>
+              </div>
+              <div class="col-sm-6 col-12">
+                <div class="form-group row mb-0">
+                  <label for="akreditasi">Prestasi Olahraga</label>
+                  <input type="text" class="form-control" id="prestasi_olahraga" name="prestasi_olahraga"
+                    placeholder="Prestasi Olahraga">
                 </div>
-                <div class="col-sm-6 col-12">
-                  <div class="form-group row mb-0">
-                    <label for="akreditasi">Beasiswa</label>
-                    <input type="text" class="form-control" id="beasiswa" name="beasiswa" placeholder="Beasiswa">
-                  </div>
+              </div>
+              <div class="col-sm-6 col-12">
+                <div class="form-group row mb-0">
+                  <label for="akreditasi">Beasiswa</label>
+                  <input type="text" class="form-control" id="beasiswa" name="beasiswa" placeholder="Beasiswa">
                 </div>
               </div>
             </div>
 
-            <div class="content content2">
+            <div class="content form-row content2">
               <div class="card-header p-0">
                 <div class="row align-items-center">
                   <div class="col">
@@ -267,14 +267,10 @@
             </div>
 
             <div class="content form-row content3">
-              <div class="col-sm-12 col-12">
-                <div class="form-group row mb-0">
-                  <div class="card-header p-0 m-0 border-0">
-                    <div class="row align-items-center">
-                      <div class="col">
-                        <h2 class="mb-0">DATA ORANG TUA</h2>
-                      </div>
-                    </div>
+              <div class="card-header p-0">
+                <div class="row align-items-center">
+                  <div class="col">
+                    <h2 class="mb-0">DATA ORANG TUA</h2>
                   </div>
                 </div>
               </div>
