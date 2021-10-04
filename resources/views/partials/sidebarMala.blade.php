@@ -29,13 +29,13 @@
             </a>
           </li>
 
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a class="nav-link {{($title === "mala-pembayaran") ? 'aktif' : ''}}"
               href="{{ url('/mahasiswa/pembayaran')}}">
               <i class="iconify" data-icon="bx:bx-dollar-circle"></i>
               <span class="nav-link-text">Pembayaran</span>
             </a>
-          </li>
+          </li> -->
 
           <li class="nav-item">
             <a class="nav-link {{($title === "mala-presensi") ? 'aktif' : ''}}"

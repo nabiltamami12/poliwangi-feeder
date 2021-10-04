@@ -126,6 +126,161 @@ Route::prefix('akademik')->middleware(['aksesuntuk:akademik'])->group(function (
         ]);
     });
 
+    Route::prefix('kuliah')->group(function () {
+        
+        Route::get('/rekap-nilai', function () {
+            return view('akademik.kuliah/datarekapnilai', [
+                "title" => "rekap-nilai"
+            ]);
+        });
+
+        Route::get('/absensi/rekap', function () {
+            return view('akademik.kuliah.rekapabsensimahasiswa', [
+                "title" => "rekap-absensi-mahasiswa"
+            ]);
+        });
+        Route::get('/absensi/rekap-mahasiswa/{kelas}/{matkul}', function ($kelas, $matkul) {
+            return view('akademik.kuliah.rekapabsensikelasmahasiswa', [
+                "kelas" => $kelas,
+                "matkul" => $matkul,
+                "title" => "rekap-absensi-mahasiswa"
+            ]);
+        });
+    });
+
+    Route::prefix('keuangan')->group(function () {
+        Route::get('/tarif', function () {
+            return view('keuangan.tarif_UKT_SPI', [
+                "title" => "keuangan-tarif",
+            ]);
+        });
+        Route::get('/tarif/cu/', function () {
+            return view('keuangan.cutarifspi', [
+                "id" => null,
+                "title" => "keuangan-tarif"
+            ]);
+        });
+        Route::get('/tarif/cu/{id}', function ($id) {
+            return view('keuangan.cutarifspi', [
+                "id" => $id,
+                "title" => "keuangan-tarif"
+            ]);
+        });
+
+        Route::get('/spi', function () {
+            return view('keuangan.spiMandiri', [
+                "title" => "keuangan-rekapitulasi",
+            ]);
+        });
+
+        Route::get('/spi/detail/{id}/{nama}', function ($id, $nama) {
+            return view('keuangan.detailSPI', [
+                "id" => $id,
+                'nama' => $nama,
+                "title" => "keuangan-rekapitulasi",
+            ]);
+        });
+    });
+
+    Route::prefix('pmb')->group(function () {
+        Route::get('/datapendaftar', function () {
+            return view('admin.pmb.datapendaftar', [
+                "title" => "pmb-pendaftar",
+            ]);
+        });
+        Route::get('/pengajuan/cicilan', function () {
+            return view('mahasiswaLama.pengajuancicilan', [
+                "title" => "pmb-pendaftar",
+            ]);
+        });
+        Route::get('/piutangmahasiswa', function () {
+            return view('keuangan.piutangMahasiswa', [
+                "title" => "keuangan-rekapitulasi",
+            ]);
+        });
+    });
+    
+    Route::prefix('report')->group(function () {
+        Route::get('/cuti', function () {
+            return view('akademik.report.reportcuti', [
+                "title" => "akademik-report",
+            ]);
+        });
+
+        Route::get('/dropout', function () {
+            return view('akademik.report.reportdo', [
+                "title" => "akademik-report",
+            ]);
+        });
+
+        Route::get('/melebihisemester', function () {
+            return view('akademik.report.reportmelebihisemester', [
+                "title" => "akademik-report",
+            ]);
+        });
+
+        Route::get('/lulus', function () {
+            return view('akademik.report.reportlulus', [
+                "title" => "akademik-report",
+            ]);
+        });
+
+        Route::get('/judultugasakhir', function () {
+            return view('akademik.report.reportjudulta', [
+                "title" => "akademik-report",
+            ]);
+        });
+    });
+
+    Route::prefix('khs')->group(function () {
+        Route::get('/khs', function () {
+            return view('akademik.khs.khs', [
+                "title" => "akademik-khs",
+            ]);
+        });
+        Route::get('/khsmahasiswa', function () {
+            return view('akademik.khs.khsmahasiswa', [
+                "title" => "akademik-khs",
+            ]);
+        });
+    });
+
+    Route::prefix('kuliah')->group(function () {
+        Route::get('/skmahasiswaaktif', function () {
+            return view('akademik.kuliah.skmahasiswaaktif', [
+                "title" => "akademik-kuliah",
+            ]);
+        });
+        Route::get('/nilai', function () {
+            return view('akademik.kuliah.nilai', [
+                "title" => "akademik-kuliah",
+            ]);
+        });
+        Route::get('/nilaimahasiswa', function () {
+            return view('akademik.kuliah.detailnilaimahasiswa', [
+                "title" => "akademik-kuliah",
+            ]);
+        });
+        Route::get('/pelanggaran', function () {
+            return view('akademik.kuliah.pelanggaran', [
+                "title" => "akademik-kuliah",
+            ]);
+        });
+        Route::get('/absensi/rekap-mahasiswa', function () {
+            return view('akademik.kuliah.rekapAbsensiMahasiswa', [
+                "title" => "akademik-kuliah",
+            ]);
+        });
+    });
+});
+
+Route::prefix('admin')->middleware(['aksesuntuk:admin'])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('akademik.dashboardAkademik', [
+            "title" => "akademik-dashboard",
+        ]);
+    });
+
     Route::prefix('master')->group(function () {
         Route::get('/dataperiode', function () {
             return view('akademik.masterData/dataperiode', [
@@ -333,20 +488,10 @@ Route::prefix('akademik')->middleware(['aksesuntuk:akademik'])->group(function (
 
 
     Route::prefix('kuliah')->group(function () {
-        Route::get('/penilaian', function () {
-            return view('dosen.inputNilai', [
-                "title" => "dosen-penilaian"
-            ]);
-        });
-
-        Route::get('/cetak-evaluasi-nilai', function () {
-            return view('cetak.evaluasinilai', [
-                "title" => "dosen-penilaian"
-            ]);
-        });
-        Route::get('/cetak-absensi-kelas', function () {
-            return view('cetak.cetakabsensikelas', [
-                "title" => "dosen-penilaian"
+        
+        Route::get('/absensi/rekap', function () {
+            return view('akademik.kuliah.rekapabsensimahasiswa', [
+                "title" => "rekap-absensi-mahasiswa"
             ]);
         });
 
@@ -356,33 +501,6 @@ Route::prefix('akademik')->middleware(['aksesuntuk:akademik'])->group(function (
             ]);
         });
 
-        Route::get('/absensi/dashboard-dosen', function () {
-            return view('dosen.dashboardDosen', [
-                "title" => "absensi-dosen"
-            ]);
-        });
-
-        Route::get('/absensi/kelas-dosen/{id_kuliah}/{pertemuan}', function ($id_kuliah, $pertemuan) {
-            return view('dosen.presensiDosen', [
-                "id_kuliah" => $id_kuliah,
-                "pertemuan" => $pertemuan,
-                "title" => "absensi-dosen"
-            ]);
-        });
-
-        Route::get('/absensi/rekap', function () {
-            return view('akademik.kuliah.rekapabsensimahasiswa', [
-                "title" => "rekap-absensi-mahasiswa"
-            ]);
-        });
-        Route::get('/absensi/rekap/detail/{id}/{kelas}/{matkul}', function ($id, $kelas, $matkul) {
-            return view('akademik.kuliah.detailrekapabsensi', [
-                "id" => $id,
-                "kelas" => $kelas,
-                "matkul" => $matkul,
-                "title" => "rekap-absensi-mahasiswa"
-            ]);
-        });
         Route::get('/absensi/rekap-mahasiswa/{kelas}/{matkul}', function ($kelas, $matkul) {
             return view('akademik.kuliah.rekapabsensikelasmahasiswa', [
                 "kelas" => $kelas,

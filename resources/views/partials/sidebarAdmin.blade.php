@@ -22,102 +22,92 @@
         <!-- Nav items -->
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link {{($title === "admin-dashboard") ? 'aktif' : ''}}" href="/admin/dashboard">
+            <a class="nav-link {{($title === "admin-dashboard") ? 'aktif' : ''}}"
+              href="{{ url('/admin/dashboard') }} ">
               <i class="iconify" data-icon="bx-bx-home-circle"></i>
               <span class="nav-link-text">Dashboard</span>
             </a>
           </li>
 
           <li class="nav-item">
-            <div class="nav-link {{($title === "admin-masterData") ? 'aktif' : ''}}">
+            <div class="nav-link {{($title === "admin-master") ? 'aktif' : ''}}">
               <i class="iconify" data-icon="bx:bx-user-pin"></i>
               <span class="nav-link-text">Master Data</span>
             </div>
             <ul class="nav-item-dropdown-content">
               <li class="nav-item">
-                <a class="nav-link" href="{{ url('/admin/masterdata/dataperiode')}}">
+                <a class="nav-link" href="{{ url('/admin/master/dataperiode')}}">
                   <span class="mini_icon">DP</span>
                   <span class="nav-link-text">Data Periode</span>
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{{ url('/admin/masterdata/datasettingkuliah')}}">
-                  <span class="mini_icon">SK</span>
-                  <span class="nav-link-text">Setting Kuliah</span>
+                <a class="nav-link" href="{{ url('/admin/master/datahariaktif')}}">
+                  <span class="mini_icon">DH</span>
+                  <span class="nav-link-text">Data Hari Aktif</span>
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{{ url('/admin/masterdata/datamahasiswa')}}">
-                  <span class="mini_icon">MA</span>
-                  <span class="nav-link-text">Mahasiswa</span>
+                <a class="nav-link" href="{{ url('/admin/master/datamahasiswa')}}">
+                  <span class="mini_icon">DM</span>
+                  <span class="nav-link-text">Data Mahasiswa</span>
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{{ url('/admin/masterdata/datamahasiswadetail')}}">
-                  <span class="mini_icon">MD</span>
-                  <span class="nav-link-text">Mahasiswa Detail</span>
+                <a class="nav-link" href="{{ url('/admin/master/datamatakuliah')}}">
+                  <span class="mini_icon">DM</span>
+                  <span class="nav-link-text">Data Matakuliah</span>
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{{ url('/admin/masterdata/datamatakuliah')}}">
-                  <span class="mini_icon">MA</span>
-                  <span class="nav-link-text">Matakuliah</span>
+                <a class="nav-link" href="{{ url('/admin/master/datakelas')}}">
+                  <span class="mini_icon">DK</span>
+                  <span class="nav-link-text">Data Kelas</span>
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{{ url('/admin/masterdata/datakelas')}}">
-                  <span class="mini_icon">KE</span>
-                  <span class="nav-link-text">Kelas</span>
+                <a class="nav-link" href="{{ url('/admin/master/datadosen')}}">
+                  <span class="mini_icon">DD</span>
+                  <span class="nav-link-text ml-0">Data Dosen</span>
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{{ url('/admin/masterdata/datadosen')}}">
-                  <span class="mini_icon">DO</span>
-                  <span class="nav-link-text">Dosen</span>
+                <a class="nav-link" href="{{url('/admin/master/datajurusan')}}">
+                  <span class="mini_icon">DJ</span>
+                  <span class="nav-link-text">Data Jurusan</span>
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{{ url('/admin/masterdata/datajurusan')}}">
-                  <span class="mini_icon">JU</span>
-                  <span class="nav-link-text">Jurusan</span>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{{ url('/admin/masterdata/dataprodi')}}">
-                  <span class="mini_icon">PS</span>
-                  <span class="nav-link-text">Program Studi</span>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{{ url('/admin/masterdata/dataruangan')}}">
-                  <span class="mini_icon">RU</span>
-                  <span class="nav-link-text">Ruangan</span>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{{ url('/admin/masterdata/datajamkuliah')}}">
-                  <span class="mini_icon">JK</span>
-                  <span class="nav-link-text">Jam Kuliah</span>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{{ url('/admin/masterdata/datadosenpengampu')}}">
+                <a class="nav-link" href="{{url('/admin/master/dataprodi')}}">
                   <span class="mini_icon">DP</span>
-                  <span class="nav-link-text">Dosen Pengampu</span>
+                  <span class="nav-link-text">Data Program Studi</span>
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{{ url('/admin/masterdata/datarangenilai')}}">
-                  <span class="mini_icon">RN</span>
-                  <span class="nav-link-text">Range Nilai</span>
+                <a class="nav-link" href="{{ url('/admin/master/dataruangan')}}">
+                  <span class="mini_icon">DR</span>
+                  <span class="nav-link-text">Data Ruangan</span>
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{{ url('/admin/masterdata/dataprogram')}}">
-                  <span class="mini_icon">PR</span>
-                  <span class="nav-link-text">Program</span>
+                <a class="nav-link" href="{{ url('/admin/master/datajamkuliah')}}">
+                  <span class="mini_icon">DJ</span>
+                  <span class="nav-link-text">Data Jam Kuliah</span>
                 </a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{url('/admin/master/datarangenilai')}}">
+                  <span class="mini_icon">DR</span>
+                  <span class="nav-link-text">Data Range Nilai</span>
+                </a>
+              </li>
+              <!-- <li class="nav-item">
+                <a class="nav-link" href="{{url('/admin/master/settingkuliah')}}">
+                  <span class="mini_icon">SK</span>
+                  <span class="nav-link-text">Setting Kuliah (FE)</span>
+                </a>
+              </li> -->
+
             </ul>
           </li>
 
@@ -128,27 +118,76 @@
             </div>
             <ul class="nav-item-dropdown-content">
               <li class="nav-item">
-                <a class="nav-link" href="{{ url('/admin/kuliah/absensi')}}">
-                  <span class="mini_icon">AB</span>
-                  <span class="nav-link-text">Absensi</span>
+                <a class="nav-link {{($title === "rekap-absensi-mahasiswa") ? 'aktif' : ''}}" href="{{url('admin/kuliah/absensi/rekap')}}">
+                  <span class="mini_icon">RA</span>
+                  <span class="nav-link-text ml-0">Rekap Abasensi Mahasiswa</span>
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{{ url('/admin/kuliah/pelanggaran')}}">
-                  <span class="mini_icon">PE</span>
-                  <span class="nav-link-text">Pelanggaran</span>
+                <a class="nav-link {{($title === "rekap-nilai") ? 'aktif' : ''}}" href="{{url('admin/kuliah/rekap-nilai')}}">
+                  <span class="mini_icon">RN</span>
+                  <span class="nav-link-text ml-0">Rekap Nilai Mahasiswa</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+
+          <li class="nav-item">
+            <div class="nav-link {{($title === "admin-keuangan") ? 'aktif' : ''}}">
+            <span class=" iconify" data-icon="bx:bx-dollar-circle"></span>
+              <span class="nav-link-text">Keuangan<img src="{{ url('images') }}/sidebar-right.png" class="arrow"
+                  alt=""></span>
+            </div>
+            <ul class="nav-item-dropdown-content">
+              <li class="nav-item">
+                <a class="nav-link {{($title === "keuangan-tarif") ? 'aktif' : ''}}" href="{{ url('admin/keuangan/tarif') }} ">
+                  <span class="mini_icon">TR</span>
+                  <span class="nav-link-text">Tarif UKT & SPI</span>
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{{ url('/admin/kuliah/nilai')}}">
-                  <span class="mini_icon">NI</span>
-                  <span class="nav-link-text">Nilai</span>
+                <a class="nav-link {{($title === "keuangan-rekapitulasi") ? 'aktif' : ''}}" href="{{ url('admin/keuangan/spi') }} ">
+                  <span class="mini_icon">SP</span>
+                  <span class="nav-link-text">SPI</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url('admin/pmb/piutangmahasiswa')}}">
+                  <span class="mini_icon">DP</span>
+                  <span class="nav-link-text">Piutang Mahasiswa</span>
                 </a>
               </li>
             </ul>
           </li>
 
           <li class="nav-item">
+            <div class="nav-link {{($title === "maba-mahasiswa") ? 'aktif' : ''}}">
+              <i class="iconify" data-icon="bx:bx-user-pin"></i>
+              <span class="nav-link-text">PMB</span>
+            </div>
+            <ul class="nav-item-dropdown-content">
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url('admin/pmb/datapendaftar')}}">
+                  <span class="mini_icon">DP</span>
+                  <span class="nav-link-text">Data Pendaftar</span>
+                </a>
+              </li>
+              
+              <!-- <li class="nav-item">
+                <a class="nav-link" href="{{ url('admin/pmb/pengajuan/cicilan')}}">
+                  <span class="mini_icon">DP</span>
+                  <span class="nav-link-text">Pengajuan Cicilan</span>
+                </a>
+              </li> -->
+
+              
+              
+            </ul>
+          </li>
+
+
+          <!-- <li class="nav-item">
             <div class="nav-link {{($title === "admin-settingpmb") ? 'aktif' : ''}}">
               <i class="iconify-inline" data-icon="ant-design:setting-outlined"></i>
               <span class="nav-link-text">Setting PMB</span>
@@ -191,7 +230,13 @@
                 </a>
               </li>
             </ul>
-          </li>
+          </li> -->
+          <!-- ===================== -->
+          
+
+          
+          
+          
         </ul>
       </div>
     </div>
