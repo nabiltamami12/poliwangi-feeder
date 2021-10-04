@@ -62,7 +62,7 @@ dt_opt = {
       "targets": [1],
       "data": null,
       "render": function(data, type, full) {
-        res = data['tahun']+"-"+(parseInt(data['tahun'])+1);
+        res = data['tahun']+"-"+(Number(data['tahun'])+1);
         return res;
       }
     },{
