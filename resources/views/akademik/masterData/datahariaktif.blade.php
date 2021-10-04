@@ -361,6 +361,7 @@ $(document).ready(function () {
         dayNames: ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'],
         dayNamesShort: ['Min','Sen','Sel','Rab','Kam','Jum','Sab'],
         events: arrHari,
+        buttonText: { today: "Hari Ini" },
         selectable: true,
         selectHelper: true,
         select: function (start, end, allDay) {
