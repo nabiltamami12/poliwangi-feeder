@@ -5,7 +5,7 @@
 <header class="header"></header>
 
 <!-- Page content -->
-<section class="page-content container-fluid" id="akademik_datamahasiswa">
+<section class="page-content container-fluid" id="admin_datamahasiswa">
   <div class="row">
     <div class="col-xl-12">
       <div class="card shadow padding--small">
@@ -175,7 +175,7 @@ function detail_btn(id) {
   if((kelas == null || kelas == "") || (matakuliah == null  || matakuliah == "")){
     alert('Lengkapi kelas dan matakuliah terlebih dahulu')
   }else{
-    window.location.href = "{{url('akademik/kuliah/absensi/rekap-mahasiswa/')}}"+"/"+kelas+"/"+matakuliah;
+    window.location.href = "{{url('admin/kuliah/absensi/rekap-mahasiswa/')}}"+"/"+kelas+"/"+matakuliah;
   }
 }
 function cetak() {
@@ -198,7 +198,7 @@ function cetak() {
       console.log(arr)
       localStorage.setItem('cetak-absen', JSON.stringify(arr));
       
-        window.open("{{url('akademik/kuliah/cetak-absensi-kelas/')}}",'_blank');
+        window.open("{{url('admin/kuliah/cetak-absensi-kelas/')}}",'_blank');
     }
 }
 </script>

@@ -62,7 +62,7 @@
                   <span class="nav-link-text">Piutang Mahasiswa</span>
                 </a>
               </li>
-              <li class="nav-item">
+              <!-- <li class="nav-item">
                 <a class="nav-link" href="{{ url('/keuangan/rekapitulasi/penyisihanpiutang')}}">
                   <span class="mini_icon">PP</span>
                   <span class="nav-link-text">Penyisihan Piutang</span>
@@ -79,12 +79,12 @@
                   <span class="mini_icon">RP</span>
                   <span class="nav-link-text">Riwayat Pembayaran</span>
                 </a>
-              </li>
+              </li> -->
             </ul>
           </li>
 
 
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <div class="nav-link {{($title === "keuangan-buktipembayaran") ? 'aktif' : ''}}">
               <i class="iconify" data-icon="bx:bx-dollar-circle"></i>
               <span class="nav-link-text">Bukti Pembayaran</span>
@@ -103,7 +103,7 @@
                 </a>
               </li>
             </ul>
-          </li>
+          </li> -->
         </ul>
       </div>
     </div>
