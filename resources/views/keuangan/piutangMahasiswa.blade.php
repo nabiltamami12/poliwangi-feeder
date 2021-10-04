@@ -187,10 +187,10 @@
               <h2 class="mb-0 text-center text-md-left">Piutang Mahasiswa</h2>
             </div>
             <div class="col-12 col-md-9 text-center text-md-right">
-              <button type="button" class="btn btn-success mt-3 mt-md-0">
+              {{-- <button type="button" class="btn btn-success mt-3 mt-md-0">
                 <i class="iconify-inline mr-1" data-icon="bx:bxs-plus-circle"></i>
                 Tambah
-              </button>
+              </button> --}}
 
               <div class="dropdown">
                 <button class="btn btn-primary dropdown-toggle mt-3 mt-md-0 ml-0 ml-md-1" type="button"

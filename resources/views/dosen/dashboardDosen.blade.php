@@ -19,6 +19,9 @@
     background-color:#E9ECEF!important;
     color:#8898AA!important;
   }
+  #status_saat_ini{
+    text-transform: uppercase;
+  }
 </style>
 <!-- Header -->
 <header class="header"></header>
