@@ -30,6 +30,7 @@ class BukuBesarImport implements ToCollection, WithHeadingRow, WithCalculatedFor
     {
         try {
             foreach ($rows as $i) {
+                DB::beginTransaction();
                 $cek_mhs = Mahasiswa::select('nomor','ukt_kelompok','ukt_nominal')
                     ->where('nrp', $i['nim'])
                     ->first();
@@ -46,30 +47,26 @@ class BukuBesarImport implements ToCollection, WithHeadingRow, WithCalculatedFor
                         ]);
                 }
                 // updateOrCreate
-                for ($i=0; $i < ; $i++) { 
-                    // code...
+                $res = [];
+                $res[$i['nim']] = 0;
+                for ($smt=1; $smt <= 14; $smt++) {
+                    if (!$i[$smt]) continue;
+                    KeuanganPembayaran::updateOrCreate(
+                        [ 'id_mahasiswa' => $cek_mhs->nomor, 'semester' => $smt ],
+                        [
+                            'nominal' => $i[$smt], 
+                            'status' => '1',
+                            'keterangan' => "data unggahan",
+                            'semester' => $smt,
+                            'id_mahasiswa' => $cek_mhs->nomor
+                        ]
+                    );
+                    $res[$i['nim']] += 1;
                 }
-                // KeuanganPembayaran::updateOrCreate(
-                //     ['id_mahasiswa' => $cek_mhs->nomor, 'semester' => $i['semester']],
 
-                // );
-
-                // id_mahasiswa #
-                // semester #
-                // nominal
-                // status "1"
-                // keterangan "data unggahan"
-                $this->res[] = $cek_mhs;
-
-                // $this->res[] = $cek_mhs;
-                // $this->res[] = $row['nama'];
-                // $row[99] = 'tes';
-                // $this->res[] = $row;
+                $this->res[] = $res;
+                DB::commit();
             }
-
-
-            // DB::beginTransaction();
-            // DB::commit();
         } catch(QueryException $e) {
             $res["error"] = $e;
         }
