@@ -727,6 +727,7 @@ select {
   top: 0;
   left: 0;
   background-color: #242f3f;
+  opacity:0.9;
   display: flex;
   justify-content: center;
   align-items: center;
