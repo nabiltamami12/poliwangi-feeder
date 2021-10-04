@@ -256,37 +256,37 @@ function setSiswa(data) {
                 <td class="text-center px-3">${row.nim}</td>
                 <td class="font-weight-bold text-capitalize pl-1">${row.nama}</td>
                 <td class="text-center px-3">
-                    <input type="text" class="form-control" id="uts_${i}" value="${row.quis1}" ${(row.is_published==1)?"readonly":""}>
+                    <input type="text" class="form-control" id="uts_${i}" value="${row.quis1}">
                 </td>
                 <td class="text-center px-3">
-                    <input type="text" class="form-control" id="uas_${i}" value="${row.quis2}" ${(row.is_published==1)?"readonly":""}>
+                    <input type="text" class="form-control" id="uas_${i}" value="${row.quis2}">
                 </td>
                 <td class="text-center px-3">
-                    <input type="text" class="form-control" id="tugas_${i}" value="${row.tugas}" ${(row.is_published==1)?"readonly":""}>
+                    <input type="text" class="form-control" id="tugas_${i}" value="${row.tugas}">
                 </td>
                 <td class="text-center px-3">
-                    <input type="text" class="form-control" id="kuis_${i}" value="${row.kuis}" ${(row.is_published==1)?"readonly":""}>
+                    <input type="text" class="form-control" id="kuis_${i}" value="${row.kuis}">
                 </td>
                 <td class="text-center px-3">
-                    <input type="text" class="form-control" id="kehadiran_${i}" readonly>
+                    <input type="text" class="form-control" id="kehadiran_${i}" disabled>
                 </td>
                 <td class="text-center px-3">
-                    <input type="text" class="form-control" id="praktikum_${i}" value="${row.praktikum}" ${(row.is_published==1)?"readonly":""}>
+                    <input type="text" class="form-control" id="praktikum_${i}" value="${row.praktikum}">
                 </td>
                 <td class="text-center px-3">
-                    <input type="text" class="form-control" id="na_${i}" value="${row.na}" readonly>
+                    <input type="text" class="form-control" id="na_${i}" value="${row.na}" disabled>
                 </td>
                 <td class="text-center px-3">
-                    <input type="text" class="form-control" id="up_${i}" readonly>
+                    <input type="text" class="form-control" id="up_${i}" disabled>
                 </td>
                 <td class="text-center px-3">
-                    <input type="text" class="form-control" id="nhu_${i}" value="${row.nhu}" readonly>
+                    <input type="text" class="form-control" id="nhu_${i}" value="${row.nhu}" disabled>
                 </td>
                 <td class="text-center px-3">
-                    <input type="text" class="form-control" id="nh_${i}" value="${row.nh}" readonly>
+                    <input type="text" class="form-control" id="nh_${i}" value="${row.nh}" disabled>
                 </td>
                 <td class="text-center px-3">
-                    <input type="text" class="form-control" id="keterangan_${i}" value="${row.keterangan}" ${(row.is_published==1)?"readonly":""}>
+                    <input type="text" class="form-control" id="keterangan_${i}" value="${row.keterangan}">
                 </td>
               </tr>`
     $('.table-body').append(html)
