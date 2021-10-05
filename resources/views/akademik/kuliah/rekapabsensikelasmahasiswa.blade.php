@@ -12,7 +12,7 @@
           <div class="card-header p-0">
             <div class="row align-items-center">
               <div class="col">
-                <h2 class="mb-0">Rekap Presensi Mahasiswa</h2>
+                <h2 class="mb-0">Presensi Mahasiswa</h2>
               </div>
               <div class="col text-right">
                 <button type="button" id="btn_simpan" class="btn btn-primary">
