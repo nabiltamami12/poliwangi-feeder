@@ -136,8 +136,7 @@
           <li class="nav-item">
             <div class="nav-link {{($title === "admin-keuangan") ? 'aktif' : ''}}">
             <span class=" iconify" data-icon="bx:bx-dollar-circle"></span>
-              <span class="nav-link-text">Keuangan<img src="{{ url('images') }}/sidebar-right.png" class="arrow"
-                  alt=""></span>
+              <span class="nav-link-text">Keuangan</span>
             </div>
             <ul class="nav-item-dropdown-content">
               <li class="nav-item">

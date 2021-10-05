@@ -74,22 +74,20 @@
   </div>
 </section>
 <script>
-  var tahun = $('#tahun').val()
-  var semester = $('#semester').val()
   $(document).ready(function() {
     
     $('#nim ').on('change',function (e) {
-      var url = `${url_api}/nilai/rekap?nim=${$('#nim').val()}&tahun=${tahun}&semester=${semester}`;
+      var url = `${url_api}/nilai/rekap?nim=${$('#nim').val()}&tahun=${$('#tahun').val()}&semester=${$('#semester').val()}`;
       dt.ajax.url(url).load();
     })  
     $('select').on('change',function (e) {
-      var url = `${url_api}/nilai/rekap?nim=${$('#nim').val()}&tahun=${tahun}&semester=${semester}`;
+      var url = `${url_api}/nilai/rekap?nim=${$('#nim').val()}&tahun=${$('#tahun').val()}&semester=${$('#semester').val()}`;
       dt.ajax.url(url).load();
     })  
   });
 
   var nomor = 1;
-  dt_url = `${url_api}/nilai/rekap?nim=${$('#nim').val()}&tahun=${tahun}&semester=${semester}`;
+  dt_url = `${url_api}/nilai/rekap?nim=${$('#nim').val()}&tahun=${$('#tahun').val()}&semester=${$('#semester').val()}`;
 dt_opt = {
   "columnDefs": [
         {
@@ -149,7 +147,7 @@ dt_opt = {
       ]}
 
   function update_nilai(matkul, kelas) {
-    window.location.href = window.location.href+`/edit?matkul=${matkul}&tahun=${tahun}&semester=${semester}&nim=${$('#nim').val()}&kelas=${kelas}`;
+    window.location.href = window.location.href+`/edit?matkul=${matkul}&tahun=${$('#tahun').val()}&semester=${$('#semester').val()}&nim=${$('#nim').val()}&kelas=${kelas}`;
   }
 </script>
 @endsection

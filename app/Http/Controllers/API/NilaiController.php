@@ -95,6 +95,7 @@ class NilaiController extends Controller
     public function rekap(Request $request)
     {
         try {
+            $set_tahun = $request->get('tahun') ?? $this->tahun_aktif;
             if ($request->nim) {
                 $data = DB::table('mahasiswa as m')
                             ->select('m.nrp','m.nama','mk.kode','mk.matakuliah','m.jumlah_sks','n.nomor' ,'n.nh','n.na', 'mk.nomor as nomor_matkul', 'kl.kelas')
@@ -104,7 +105,7 @@ class NilaiController extends Controller
                             ->join('nilai as n','n.kuliah','=','kl.nomor','left')
                             ->where('m.nrp',$request->nim)
                             ->where('mk.semester',$this->semester_aktif)
-                            ->where('kl.tahun',$this->tahun_aktif)
+                            ->where('kl.tahun', $set_tahun)
                             ->get();
             }else{
                 $data = [];
