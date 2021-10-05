@@ -66,7 +66,9 @@
         "aTargets": [2],
         "mData": null,
         "mRender": function(data, type, full) {
-          res = data['kajur']+", "+data['gelar'];
+          var kajur = (data['kajur']==null)?"-":data['kajur'];
+          var gelar = (data['gelar']==null)?"":", "+data['gelar'];
+          res = kajur+gelar;
           return res;
         }
       }, {

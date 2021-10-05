@@ -270,13 +270,15 @@
 							<div class="uploadDokumen rounded p-3 d-flex justify-content-center align-items-center">
 								<form class="align-items-center d-none">
 									<i class="iconify mr-1" data-icon="bx:bxs-file-pdf" data-inline="false"></i>
-									<input type="file" id="file" hidden onchange="example()" />
+									<input type="file" accept="application/pdf" id="file" hidden onchange="example()" />
 									<span id="custom-text" class="d-inline-block nama_dokumen">tidak ada file dipilih</span>
 								</form>
 								<button type="button" id="custom-btn">
 									<i class="iconify text-primary" data-icon="bx:bx-cloud-upload" data-inline="false"></i>
 								</button>
 							</div>
+              <p class="text-sm text-danger"> * Upload file bertipe PDF </p>
+
 							<button type="button" class="btn btn-primary mt-4 w-100" id="upload"> <i class="iconify mr-1" data-icon="bx:bx-save"></i> Simpan</button>
 						</div>
 					</div>

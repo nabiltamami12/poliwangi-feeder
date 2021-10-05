@@ -81,7 +81,7 @@ dt_opt = {
         "aTargets": [4],
         "mData": null,
         "mRender": function(data, type, full) {
-          res = (data['semester']==1)?"ganjil":"genap";
+          res = (data['semester']==1)?"gasal":"genap";
           return res;
         }
       },{
