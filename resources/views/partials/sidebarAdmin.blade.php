@@ -164,6 +164,12 @@
                   <span class="nav-link-text">Piutang Mahasiswa</span>
                 </a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url('/admin/keuangan/riwayatpembayaran')}}">
+                  <span class="mini_icon">RP</span>
+                  <span class="nav-link-text">Riwayat Pembayaran</span>
+                </a>
+              </li>
             </ul>
           </li>
 
