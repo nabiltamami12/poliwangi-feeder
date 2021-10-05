@@ -126,7 +126,7 @@
   <table class="table-header">
     <thead>
       <tr>
-        <th colspan="2">Rekap Absensi Kehadiran Mahasiswa</th>
+        <th colspan="2">Rekap Presensi Kehadiran Mahasiswa</th>
       </tr>
     </thead>
     <tbody>
