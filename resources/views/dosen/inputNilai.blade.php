@@ -362,7 +362,7 @@ function set_edit(){
           $('#prodi').val(prodi).trigger("change");
           $('#semester').val(semester).trigger("change");
           $('#matkul').val(searchParams.get('matkul')).trigger("change");
-
+          $('#kelas').val(searchParams.get('kelas')).trigger("change");
         } else {
           alert('Silahkan cek ulang program studi mahasiswa.')
         }
