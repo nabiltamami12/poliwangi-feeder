@@ -38,7 +38,7 @@
               </select>
             </div>
             <div class="col-md-6 form-group mt-3 mt-md-0">
-              <label for="jenjang">Jenjang</label>
+              <label for="jenjang">Semester</label>
               <select class="form-control" id="semester">
                 <option value="1">Semester Gasal</option>
                 <option value="2">Semester Genap</option>
@@ -218,6 +218,8 @@ $(document).ready(function() {
       }
     });
   })
+
+  set_edit();
 } );
 
 function setSiswa(data) {
@@ -316,6 +318,7 @@ function getMatkul(prodi,semester) {
     optKelas += `<option value="${row.nomor}">${row.kode}</option>`
   })
   $('#kelas').append(optKelas)
+  return true;
 }
 async function getFilter(id) {
   var semester = $('#semester').val()
@@ -341,6 +344,32 @@ async function getFilter(id) {
         
     }
   });
+}
+
+function set_edit(){
+  let searchParams = new URLSearchParams(window.location.search)
+  if(!searchParams.get('nim')) return;
+
+  $.ajax({
+    url: "{{url('api/v1/mahasiswa/nim')}}/"+searchParams.get('nim'),
+    type: 'get',
+    dataType: 'json',
+    data: {},
+    success: function(res) {
+        if (res.status=="success") {
+          let semester = searchParams.get('semester');
+          let prodi = res.data.program_studi;
+          $('#prodi').val(prodi).trigger("change");
+          $('#semester').val(semester).trigger("change");
+          $('#matkul').val(searchParams.get('matkul')).trigger("change");
+
+        } else {
+          alert('Silahkan cek ulang program studi mahasiswa.')
+        }
+        
+    }
+  });
+  // $('#matkul').val();
 }
 </script>
 @endsection

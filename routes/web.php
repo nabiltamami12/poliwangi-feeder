@@ -514,6 +514,12 @@ Route::prefix('admin')->middleware(['aksesuntuk:admin'])->group(function () {
             ]);
         });
 
+        Route::get('/rekap-nilai/edit', function () {
+            return view('dosen.inputNilai', [
+                "title" => "dosen-penilaian"
+            ]);
+        });
+
         Route::get('/absensi/rekap-mahasiswa/{kelas}/{matkul}', function ($kelas, $matkul) {
             return view('akademik.kuliah.rekapabsensikelasmahasiswa', [
                 "kelas" => $kelas,

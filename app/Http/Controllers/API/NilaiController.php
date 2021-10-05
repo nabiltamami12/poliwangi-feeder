@@ -96,7 +96,7 @@ class NilaiController extends Controller
         try {
             if ($request->nim) {
                 $data = DB::table('mahasiswa as m')
-                            ->select('m.nrp','m.nama','mk.kode','mk.matakuliah','m.jumlah_sks','n.nomor' ,'n.nh','n.na')
+                            ->select('m.nrp','m.nama','mk.kode','mk.matakuliah','m.jumlah_sks','n.nomor' ,'n.nh','n.na', 'mk.nomor as nomor_matkul')
                             ->join('kelas as k','k.nomor','=','m.kelas')
                             ->join('kuliah as kl','kl.kelas','=','k.nomor')
                             ->join('matakuliah as mk','mk.nomor','=','kl.matakuliah')

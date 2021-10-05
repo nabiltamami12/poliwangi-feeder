@@ -132,12 +132,16 @@ dt_opt = {
           "mRender": function(data, type, full) {
             var id = data['nomor'];
             var text_hapus = data['kode']+" - "+data['matakuliah'];
-            // var btn_update = `<span class="iconify edit-icon text-primary" onclick='update_btn(${id})' data-icon="bx:bx-edit-alt" ></span>` 
+            var btn_update = `<span class="iconify edit-icon text-primary" onclick="update_nilai('${data['nomor_matkul']}')" data-icon="bx:bx-edit-alt" ></span>` 
             var btn_delete = `<span class="iconify delete-icon text-primary" data-icon="bx:bx-trash"  onclick='delete_btn(${id},"nilai","nilai matakuliah ","${text_hapus}")'></span>`; 
-            res = (id==null)?'': btn_delete;
+            res = (id==null)?'': btn_update+btn_delete;
             return res;
           }
         },
       ]}
+
+  function update_nilai(matkul) {
+    window.location.href = window.location.href+`/edit?matkul=${matkul}&tahun=${tahun}&semester=${semester}&nim=${$('#nim').val()}`;
+  }
 </script>
 @endsection
