@@ -121,12 +121,12 @@
                   <div class="col-12 col-lg-6">
                     <div class="form-group mt-3 mt-lg-0">
                       <label>Foto Calon Pendaftar<span>*</span></label>
-                      <div class="input-foto-siswa">
+                      <div class="input-foto-siswa" style="background-position: center center;background-size: cover;">
                         <label for="file-input-foto">
                           <i class="iconify fileUpload-icon" data-icon="bx:bx-image-add"></i>
                         </label>
                       </div>
-                      <input type="file" class="form-control-file" id="file-input-foto" hidden name="foto">
+                      <input type="file" class="form-control-file" id="file-input-foto" hidden name="foto" onchange="previewFile(this);">
                     </div>
                   </div>
                 </div>
@@ -273,6 +273,20 @@
           }
         }
       });
+    }
+
+        function previewFile(input){
+        var file = $("input[type=file]").get(0).files[0];
+ 
+        if(file){
+            var reader = new FileReader();
+ 
+            reader.onload = function(){
+                $('.input-foto-siswa').css('background-image', "url('"+reader.result+"')")
+            }
+ 
+            reader.readAsDataURL(file);
+        }
     }
   </script>
 </body>
