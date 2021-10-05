@@ -30,7 +30,7 @@
               </select> -->
             </div>
             <div class="col-md-6 form-group">
-              <label for="jenjang-pendidikan">NIM Mahasiswa</label>
+              <label for="jenjang-pendidikan">Nama Mahasiswa</label>
               <input type="text" class="form-control" id="nim" value="zarkasy" readonly>
             </div>
             <div class="col-md-6 form-group">
