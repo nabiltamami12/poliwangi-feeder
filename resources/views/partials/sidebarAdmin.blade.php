@@ -164,10 +164,16 @@
                   <span class="nav-link-text">Piutang Mahasiswa</span>
                 </a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url('/admin/keuangan/riwayatpembayaran')}}">
+                  <span class="mini_icon">RP</span>
+                  <span class="nav-link-text">Riwayat Pembayaran</span>
+                </a>
+              </li>
             </ul>
           </li>
 
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <div class="nav-link {{($title === "admin-settingpmb") ? 'aktif' : ''}}">
               <i class="iconify-inline" data-icon="ant-design:setting-outlined"></i>
               <span class="nav-link-text">Setting PMB</span>
@@ -185,7 +191,7 @@
                   <span class="nav-link-text">Setting Jalur Syarat PMB</span>
                 </a>
               </li>
-              <!-- <li class="nav-item">
+              <li class="nav-item">
                 <a class="nav-link" href="{{ url('/admin/pmb/settingjurusanpilihan')}}">
                   <span class="mini_icon">JP</span>
                   <span class="nav-link-text">Setting Jurusan Pilihan</span>
@@ -208,9 +214,9 @@
                   <span class="mini_icon">JL</span>
                   <span class="nav-link-text">Setting Jurusan Linear</span>
                 </a>
-              </li> -->
+              </li> 
             </ul>
-          </li>
+          </li> -->
           <!-- ===================== -->
           
 

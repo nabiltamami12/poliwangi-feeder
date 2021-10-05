@@ -478,6 +478,11 @@ Route::prefix('admin')->middleware(['aksesuntuk:admin'])->group(function () {
                 "title" => "keuangan-rekapitulasi",
             ]);
         });
+        Route::get('/riwayatpembayaran', function () {
+            return view('keuangan.riwayatPembayaran', [
+                "title" => "keuangan-rekapitulasi",
+            ]);
+        });
     });
 
     Route::prefix('pmb')->group(function () {
