@@ -12,7 +12,7 @@
         <div class="card-header p-0 m-0">
           <div class="row align-items-center">
             <div class="col-lg-5">
-              <h3 class="mb-0 text-center text-lg-left font-weight-bold">Nilai Mahasiswa</h3>
+              <h3 class="mb-0 text-center text-lg-left font-weight-bold" id="title-page">Nilai Mahasiswa</h3>
             </div>
             <div class="col-12 col-lg-7 text-center text-md-right">
               <button type="button" id="btn_cetak" class="btn btn-icon btn-warning mt-3 mt-md-0">
@@ -75,12 +75,16 @@
     </div>
   </div>
 </section>
+@endsection
+
+@section('js')
 <script>
 var dataFilter
 var countData
+var searchParams = new URLSearchParams(window.location.search);
 
 $(document).ready(function() {
-  var id = dataGlobal['user']['nomor'];
+  var id = searchParams.get('nim') ? null : dataGlobal['user']['nomor'];
   var nama = dataGlobal['user']['nama'];
   getFilter(id);
 
@@ -120,8 +124,11 @@ $(document).ready(function() {
     $('.table-body').html('')
     var id_kelas = $(this).val()
     var matakuliah = $('#matkul').val()
+
+    let uri = url_api+"/nilai?kelas="+id_kelas+"&matakuliah="+matakuliah
+    if (searchParams.get('tahun')) uri += `&tahun=${searchParams.get('tahun')}`;
     $.ajax({
-      url: url_api+"/nilai?kelas="+id_kelas+"&matakuliah="+matakuliah,
+      url: uri,
       type: 'get',
       dataType: 'json',
       data: {},
@@ -341,14 +348,14 @@ async function getFilter(id) {
         } else {
             // alert gagal
         }
-        
+        return true;
     }
   });
 }
 
 function set_edit(){
-  let searchParams = new URLSearchParams(window.location.search)
   if(!searchParams.get('nim')) return;
+  $('#title-page').text(`Nilai Mahasiswa Tahun ${searchParams.get('tahun')}`)
 
   $.ajax({
     url: "{{url('api/v1/mahasiswa/nim')}}/"+searchParams.get('nim'),

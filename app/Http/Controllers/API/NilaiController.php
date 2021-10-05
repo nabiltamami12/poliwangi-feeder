@@ -27,6 +27,7 @@ class NilaiController extends Controller
     {
         DB::enableQueryLog();
         //
+        $set_tahun = $request->get('tahun') ?? $this->tahun_aktif;
         try {
             $input = DB::table("mahasiswa as m")
                 ->select(
@@ -38,7 +39,7 @@ class NilaiController extends Controller
                 )
                 ->join("kuliah as kl", "kl.kelas", "=", "m.kelas")
                 // ->join("nilai as n", "n.kuliah", "=", "kl.nomor",'left')
-                ->where('kl.tahun', $this->tahun_aktif)
+                ->where('kl.tahun', $set_tahun)
                 ->where('kl.kelas', $request->kelas)
                 ->where('kl.matakuliah', $request->matakuliah)
                 ->get();
