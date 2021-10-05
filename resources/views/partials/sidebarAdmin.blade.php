@@ -120,7 +120,7 @@
               <li class="nav-item">
                 <a class="nav-link {{($title === "rekap-absensi-mahasiswa") ? 'aktif' : ''}}" href="{{url('admin/kuliah/absensi/rekap')}}">
                   <span class="mini_icon">RA</span>
-                  <span class="nav-link-text ml-0">Rekap Abasensi Mahasiswa</span>
+                  <span class="nav-link-text ml-0">Rekap Presensi Mahasiswa</span>
                 </a>
               </li>
               <li class="nav-item">
@@ -141,7 +141,7 @@
             </div>
             <ul class="nav-item-dropdown-content">
               <li class="nav-item">
-                <a class="nav-link" href="{{ url('admin/pmb/datapendaftar')}}">
+                <a class="nav-link" href="{{ url('admin/keuangan/datapendaftar')}}">
                   <span class="mini_icon">PM</span>
                   <span class="nav-link-text">Pendaftar Mahasiswa Baru</span>
                 </a>
@@ -159,15 +159,21 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{{ url('admin/pmb/piutangmahasiswa')}}">
+                <a class="nav-link" href="{{ url('admin/keuangan/piutangmahasiswa')}}">
                   <span class="mini_icon">DP</span>
                   <span class="nav-link-text">Piutang Mahasiswa</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url('/admin/keuangan/riwayatpembayaran')}}">
+                  <span class="mini_icon">RP</span>
+                  <span class="nav-link-text">Riwayat Pembayaran</span>
                 </a>
               </li>
             </ul>
           </li>
 
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <div class="nav-link {{($title === "admin-settingpmb") ? 'aktif' : ''}}">
               <i class="iconify-inline" data-icon="ant-design:setting-outlined"></i>
               <span class="nav-link-text">Setting PMB</span>
@@ -185,7 +191,7 @@
                   <span class="nav-link-text">Setting Jalur Syarat PMB</span>
                 </a>
               </li>
-              <!-- <li class="nav-item">
+              <li class="nav-item">
                 <a class="nav-link" href="{{ url('/admin/pmb/settingjurusanpilihan')}}">
                   <span class="mini_icon">JP</span>
                   <span class="nav-link-text">Setting Jurusan Pilihan</span>
@@ -208,9 +214,9 @@
                   <span class="mini_icon">JL</span>
                   <span class="nav-link-text">Setting Jurusan Linear</span>
                 </a>
-              </li> -->
+              </li> 
             </ul>
-          </li>
+          </li> -->
           <!-- ===================== -->
           
 

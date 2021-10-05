@@ -25,7 +25,11 @@ class JurusanController extends Controller
     public function index()
     {
         try {
-            $jurusan = Jurusan::select('jurusan.*','pegawai.nama as kajur')
+            $jurusan = Jurusan::select(
+                'jurusan.*', 
+                "pegawai.nama as kajur",
+                "pegawai.gelar_blk as gelar",
+            )
             ->join('pegawai','pegawai.nomor','=','jurusan.kepala')
             ->get();
             $this->data = $jurusan;

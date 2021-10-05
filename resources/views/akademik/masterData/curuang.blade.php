@@ -125,7 +125,7 @@
             data: data,
             success: function(res) {
                 if (res.status=="success") {
-                    window.location.href = "{{url('/akademik/master/dataruangan')}}";                    
+                    window.location.href = "{{url('/admin/master/dataruangan')}}";                    
                 } else {
                     // alert gagal
                 }

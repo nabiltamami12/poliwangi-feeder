@@ -106,7 +106,7 @@
             data: data,
             success: function(res) {
                 if (res.status=="success") {
-                    window.location.href = "{{url('/akademik/master/datajamkuliah')}}";                    
+                    window.location.href = "{{url('/admin/master/datajamkuliah')}}";                    
                 } else {
                     // alert gagal
                 }

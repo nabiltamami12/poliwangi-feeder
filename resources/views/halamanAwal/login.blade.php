@@ -119,6 +119,7 @@
   <script src="{{ url('argon') }}/assets/js/argon.js?v=1.2.0"></script>
   <script type="text/javascript">
     var url_api = "{{ url('/api/v1') }}";
+    getGlobalData(1)
     $("#form").submit(function(e) {
       e.preventDefault();
       
@@ -188,6 +189,25 @@
           return false;
           break;
       }
+    }
+    async function getGlobalData(id) {
+        console.log(id)
+        await $.ajax({
+            url: url_api+"/globaldata/"+id,
+            type: 'get',
+            dataType: 'json',
+            data: {},
+            success: function(res) {
+                if (res.status=="success") {
+                    // return res['data'];
+                    localStorage.removeItem('globalData');
+                    localStorage.setItem('globalData', JSON.stringify(res['data']));
+                } else {
+                    // alert gagal
+                }
+                ;
+            }
+        });
     }
   </script>
 </body>

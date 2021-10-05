@@ -65,12 +65,6 @@
             </div>
             <div class="col-sm-6 col-12">
               <div class="form-group row mb-0">
-                <label>Jam</label>
-                <input type="text" class="form-control" id="jam" name="jam" required>
-              </div>
-            </div>
-            <div class="col-sm-6 col-12">
-              <div class="form-group row mb-0">
                 <label>SKS</label>
                 <input type="text" class="form-control" id="sks" name="sks" required>
               </div>
@@ -193,7 +187,7 @@
             data: data,
             success: function(res) {
                 if (res.status=="success") {
-                    window.location.href = "{{url('/akademik/master/datamatakuliah')}}";                    
+                    window.location.href = "{{url('/admin/master/datamatakuliah')}}";                    
                 } else {
                     // alert gagal
                 }

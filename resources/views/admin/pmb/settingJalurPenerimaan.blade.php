@@ -56,7 +56,7 @@
                 <th scope="col" class="text-center px-2">No</th>
                 <th scope="col" style="width: 35%">Nama</th>
                 <th scope="col" class="text-center">biaya pendaftaran</th>
-                <th scope="col" class="text-center">Kuota</th>
+                <!-- <th scope="col" class="text-center">Kuota</th> -->
                 <th scope="col" class="text-center">Aksi</th>
               </tr>
             </thead>
@@ -131,15 +131,17 @@
           res = data['biaya'];
           return res;
         }
-      }, {
+      },
+      //  {
+      //   "aTargets": [3],
+      //   "mData": null,
+      //   "mRender": function(data, type, full) {
+      //     res = data['kuota'];
+      //     return res;
+      //   }
+      // }, 
+      {
         "aTargets": [3],
-        "mData": null,
-        "mRender": function(data, type, full) {
-          res = data['kuota'];
-          return res;
-        }
-      }, {
-        "aTargets": [4],
         "mData": null,
         "mRender": function(data, type, full) {
           var id = data['id'];

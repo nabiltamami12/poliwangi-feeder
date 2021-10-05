@@ -42,6 +42,33 @@
     </div>
   </div>
 </section>
+<div class="modal fade" id="konfirmModal" tabindex="-1" aria-labelledby="konfirmModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content p-0 padding--medium">
+        <input type="hidden" id="id_konfirm">
+
+        <div class="modal-header">
+            <p class="text-center">
+                <h5 class="modal-title text-warning text-center">Peringatan</h5>
+            </p>
+        </div>
+        <div class="modal-body">
+          <p class="text-center font-weight-bold">Apakah anda yakin mau mengganti periode aktif ?</p>
+          <p class="text-center">Hal ini dapat menyebabkan perubahan data pada website</p>
+          <h2 class="text-center mb-4"><span id="text_hapus"></span></h2>
+          <div class="row">
+                <div class="col-md-6">
+                    <button type="button" class="btn btn-modal-cancel w-100" data-dismiss="modal">Batal</button>
+                </div>
+                <div class="col-md-6">
+                    <button type="button" class="btn btn-primary w-100" id="btn_modal_hapus" onclick="konfirm_func()">Yakin</button>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+</div>
 @endsection
 
 @section('js')
@@ -62,7 +89,7 @@ dt_opt = {
       "targets": [1],
       "data": null,
       "render": function(data, type, full) {
-        res = data['tahun']+"-"+(data['tahun']+1);
+        res = data['tahun']+"-"+(Number(data['tahun'])+1);
         return res;
       }
     },{
@@ -88,7 +115,7 @@ dt_opt = {
       "data": null,
       "render": function(data, type, full) {
         var id = data['nomor'];
-        var text_hapus = "";
+        var text_hapus = data['tahun']+"-"+(parseInt(data['tahun'])+1);
         var btn_update = `<span class="iconify edit-icon text-primary" onclick='update_btn(${id})' data-icon="bx:bx-edit-alt" data-inline="true"></span>` 
         var btn_delete = `<span class="iconify delete-icon text-primary" data-icon="bx:bx-trash" data-inline="true" onclick='delete_btn(${id},"periode","periode","${text_hapus}")'></span>`; 
         res = btn_update+" "+btn_delete;
@@ -99,13 +126,19 @@ dt_opt = {
 };
 
 function change_status(id) {
+    $('#konfirmModal').modal('show');
+    $('#id_konfirm').val(id)
+  }
+  function konfirm_func() {
+    var id = $("#id_konfirm").val();
     $.ajax({
-        url: url_api+"/periode/change_status/"+id,
-        type: "put",
-        dataType: 'json',
-        data: {},
-          success: function(res) {
-            if (res.status=="success") {
+      url: url_api+"/periode/change_status/"+id,
+      type: "put",
+      dataType: 'json',
+      data: {},
+      success: function(res) {
+        if (res.status=="success") {
+              $('#konfirmModal').modal('hide');
               dt.ajax.reload();                
             } else {
               // alert gagal
@@ -132,7 +165,6 @@ function change_semester(id,semester) {
             } else {
               // alert gagal
             }
-            ;
         }
     });
 }

@@ -15,14 +15,14 @@
               <h2 class="mb-0 text-center text-md-left">Data Pendaftar Mahasiswa Baru</h2>
             </div>
             <div class="col-12 col-md-6 text-center text-md-right mt-3 mt-md-0">
-              <button type="button" class="btn btn-primary">
+              <!-- <button type="button" class="btn btn-primary">
                 <i class="iconify-inline mr-2" data-icon="bx:bx-download"></i>
                 Import
               </button>
               <button type="button" class="btn btn-warning ml-md-2">
                 <i class="iconify-inline" data-icon="bx:bx-upload"></i>
                 Eksport
-              </button>
+              </button> -->
             </div>
           </div>
         </div>

@@ -66,7 +66,10 @@ dt_opt = {
         "aTargets": [2],
         "mData": null,
         "mRender": function(data, type, full) {
-          res = data['nama'];
+
+          var nama = (data['nama']==null)?"-":data['nama'];
+          var gelar = (data['gelar_blk']==null)?"":", "+data['gelar_blk'];
+          res = nama+gelar;
           return res;
         }
       },{

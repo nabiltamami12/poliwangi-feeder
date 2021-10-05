@@ -137,37 +137,78 @@
 <!-- Header -->
 <header class="header"></header>
 <section class="page-content container-fluid">
-    <div class="row">
-        <div class="col-xl-12">
-            <div class="row">
-				<div class="col-xl-12">
-					<div class="card shadow padding--small">
-						<div class="card_header">
-							<h2 class="aside_title mb-0">Upload Surat Pengajuan Cicilan</h2>
-							<hr class="mt-3 mb-4">
-						</div>
-						<div class="card_content">
-							<div class="uploadDokumen rounded p-3 d-flex justify-content-center align-items-center">
-								<form class="align-items-center d-none">
-									<i class="iconify mr-1" data-icon="bx:bxs-file-pdf" data-inline="false"></i>
-									<input type="file" id="file" hidden onchange="example()" />
-									<span id="custom-text" class="d-inline-block nama_dokumen">tidak ada file dipilih</span>
-								</form>
-								<button type="button" id="custom-btn">
-									<i class="iconify text-primary" data-icon="bx:bx-cloud-upload" data-inline="false"></i>
-								</button>
-							</div>
-							<button type="button" class="btn btn-primary mt-4 w-100" id="upload"> <i class="iconify mr-1" data-icon="bx:bx-save"></i> Simpan</button>
-						</div>
-					</div>
-				</div>
-
-				
-
-                
-            </div>
+  <div class="row">
+    <div class="col-xl-6">
+      <div class="card shadow padding--small">
+        <div class="card_header">
+          <h2 class="aside_title mb-0">Upload Surat Pengajuan Cicilan</h2>
+          <hr class="mt-3 mb-4">
         </div>
-    </div>
+        <div class="card_content">
+          <div class="uploadDokumen rounded p-3 d-flex justify-content-center align-items-center">
+            <form class="align-items-center d-none">
+              <i class="iconify mr-1" data-icon="bx:bxs-file-pdf" data-inline="false"></i>
+              <input type="file" id="file" hidden onchange="example()" />
+              <span id="custom-text" class="d-inline-block nama_dokumen">tidak ada file dipilih</span>
+            </form>
+            <button type="button" id="custom-btn">
+              <i class="iconify text-primary" data-icon="bx:bx-cloud-upload" data-inline="false"></i>
+            </button>
+          </div>
+          <button type="button" class="btn btn-primary mt-4 w-100" id="upload"> <i class="iconify mr-1" data-icon="bx:bx-save"></i> Simpan</button>
+        </div>
+      </div>
+    </div>            
+    <div class="col-xl-6">
+      <div class="card shadow padding--small">
+        <div class="card_header">
+          <h2 class="aside_title mb-0">SURAT PERJANJIAN</h2>
+          <hr class="mt-3 mb-4">
+        </div>
+        <div class="card_content">
+          <div class="row">
+            <div class="col-xl-12">
+              <div class="uploadDokumen rounded p-3 d-flex justify-content-center align-items-center">
+              <i class="iconify" data-icon="bx:bx-file-blank"></i><span class="mt-1 ml-2">Preview File Perjanjian </span>
+              </div>
+            </div>
+            <div class="col-xl-12">
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-xl-3">
+                    <p>Tenor</p>
+                  </div>
+                  <div class="col-xl-9">
+                    <p>: 3 Bulan</p>
+                  </div>
+                  <div class="col-xl-3">
+                    <p>Januari</p>
+                  </div>
+                  <div class="col-xl-9">
+                    <p>: Rp 3.000.000,-</p>
+                  </div>
+                  <div class="col-xl-3">
+                    <p>Februari</p>
+                  </div>
+                  <div class="col-xl-9">
+                    <p>: Rp 3.000.000,-</p>
+                  </div>
+                  <div class="col-xl-3">
+                    <p>Maret</p>
+                  </div>
+                  <div class="col-xl-9">
+                    <p>: Rp 3.000.000,-</p>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <!-- <button type="button" class="btn btn-primary mt-4 w-100" id="upload"> <i class="iconify mr-1" data-icon="bx:bx-save"></i> Simpan</button> -->
+        </div>
+      </div>
+    </div>            
+  </div>      
 </section>
 @endsection
 

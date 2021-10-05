@@ -13,7 +13,7 @@
         <div class="card-header p-0 m-0 border-0">
           <div class="row align-items-center">
             <div class="col-12 col-md-6">
-              <h2 class="mb-0 text-center text-md-left">Rekap Nilai</h2>
+              <h2 class="mb-0 text-center text-md-left">Rekap Nilai Mahasiswa</h2>
             </div>
             <div class="col-12 col-md-6 text-center text-md-right mt-3 mt-md-0">
             </div>
@@ -22,17 +22,25 @@
         <hr class="my-4 mt">
         <form class="form-select rounded-0">
           <div class="form-row">
-            <div class="col-md-12 form-group">
-              <label for="jenjang-pendidikan">Mahasiswa</label>
-              <input type="text" class="form-control" id="nim" >
+            <div class="col-md-6 form-group">
+              <label for="jenjang-pendidikan">NIM Mahasiswa</label>
+              <input type="text" class="form-control" id="nim" value="111" readonly>
               <!-- <select class="form-control" id="mahasiswa" name="mahasiswa">
                 
               </select> -->
             </div>
             <div class="col-md-6 form-group">
+              <label for="jenjang-pendidikan">Nama Mahasiswa</label>
+              <input type="text" class="form-control" id="nim" value="zarkasy" readonly>
+            </div>
+            <div class="col-md-6 form-group">
               <label for="kelas">Tahun</label>
               <select class="form-control" id="tahun" name="tahun">
+                <option value="2019">2019</option>
                 <option value="2020">2020</option>
+                <option value="2021">2021</option>
+                <option value="2022">2022</option>
+                <option value="2023">2023</option>
               </select>
             </div>
             <div class="col-md-6 form-group mt-3 mt-md-0">

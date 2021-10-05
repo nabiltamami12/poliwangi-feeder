@@ -13,7 +13,7 @@
         <div class="card-header p-0 m-0 border-0">
           <div class="row align-items-center">
             <div class="col-12 col-md-6">
-              <h2 class="mb-0 text-center text-md-left">Data Mahasiswa</h2>
+              <h2 class="mb-0 text-center text-md-left">Rekap Presensi Mahasiswa</h2>
             </div>
             <div class="col-12 col-md-6 text-center text-md-right mt-3 mt-md-0">
               <button type="button" onclick='detail_btn()' class="btn btn-success">
@@ -178,7 +178,7 @@ function detail_btn(id) {
   if((kelas == null || kelas == "") || (matakuliah == null  || matakuliah == "")){
     alert('Lengkapi kelas dan matakuliah terlebih dahulu')
   }else{
-    window.location.href = "{{url('admin/kuliah/absensi/rekap-mahasiswa/')}}"+"/"+kelas+"/"+matakuliah;
+    window.location.href = "{{url($page.'/kuliah/absensi/rekap-mahasiswa/')}}"+"/"+kelas+"/"+matakuliah;
   }
 }
 function cetak() {
@@ -201,7 +201,7 @@ function cetak() {
       console.log(arr)
       localStorage.setItem('cetak-absen', JSON.stringify(arr));
       
-        window.open("{{url('admin/kuliah/cetak-absensi-kelas/')}}",'_blank');
+        window.open("{{url($page.'/kuliah/cetak-absensi-kelas/')}}",'_blank');
     }
 }
 </script>

@@ -119,7 +119,7 @@
             data: data,
             success: function(res) {
                 if (res.status=="success") {
-                    window.location.href = "{{url('/akademik/master/datakelas')}}";                    
+                    window.location.href = "{{url('/admin/master/datakelas')}}";                    
                 } else {
                     // alert gagal
                 }
