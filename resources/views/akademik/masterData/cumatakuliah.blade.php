@@ -31,7 +31,7 @@
                 <input type="text" class="form-control" id="matakuliah" name="matakuliah">
               </div>
             </div>
-            <div class="col-sm-12 col-12">
+            <div class="col-sm-6 col-12">
               <div class="form-group row mb-0">
                 <label>Program Studi</label>
                 <select class="form-control" id="program_studi" name="program_studi" required>
@@ -40,14 +40,6 @@
               </div>
             </div>
             
-            <div class="col-sm-6 col-12">
-              <div class="form-group row mb-0">
-                <label>Kelas</label>
-                <select class="form-control" id="kelas" name="kelas" required>
-
-                </select>
-              </div>
-            </div>
             <div class="col-sm-6 col-12">
               <div class="form-group row mb-0">
                 <label>Semester</label>
@@ -100,32 +92,6 @@
             </div>
             <div class="col-sm-6 col-12">
               <div class="form-group row mb-0">
-                <label>Tanggal mulai efektif</label>
-                <div class="d-flex align-items-center date_picker w-100 ">
-                    <input id="tanggal_mulai_efektif" name="tanggal_mulai_efektif" type="text" class="form-control date-input" placeholder="Pilih Tanggal" readonly />
-                    <label class="input-group-btn" for="tanggal_mulai_efektif">
-                    <span class="date_button">
-                        <i class="iconify" data-icon="bx:bx-calendar" data-inline="false"></i>
-                    </span>
-                    </label>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-6 col-12">
-              <div class="form-group row mb-0">
-                <label>Tanggal akhir efektif</label>
-                <div class="d-flex align-items-center date_picker w-100 ">
-                    <input id="tanggal_akhir_efektif" name="tanggal_akhir_efektif" type="text" class="form-control date-input" placeholder="Pilih Tanggal" readonly />
-                    <label class="input-group-btn" for="tanggal_akhir_efektif">
-                    <span class="date_button">
-                        <i class="iconify" data-icon="bx:bx-calendar" data-inline="false"></i>
-                    </span>
-                    </label>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-6 col-12">
-              <div class="form-group row mb-0">
                 <label>Matakuliah Jenis</label>
                 <select class="form-control" id="matakuliah_jenis" name="matakuliah_jenis" required>
 
@@ -156,19 +122,7 @@
   $(document).ready(function() {
     var id = "{{$id}}";
     getData(id);      
-    $('#program_studi').on('change',function (e) {
-        var program_studi = $(this).val()
-        var kelas = $.grep(dataGlobal['kelas'], function(e){ return e.program_studi == program_studi; });
-        console.log(program_studi)
-        console.log(kelas)
-        $('#kelas').html('')
-        var optKelas = `<option value=""> - </option>`;
-        $.each(kelas,function (key,row) {
-        optKelas += `<option value="${row.nomor}">${row.kode}</option>`
-        })
-        $('#kelas').append(optKelas); 
-    })
-
+    
     // form tambah data
     $("#form_cu").submit(function(e) {
         e.preventDefault();
@@ -229,20 +183,6 @@ async function getData(id) {
                     $('#masuk_penilaian').val(data.masuk_penilaian).change();
                     $('#wali_kelas').val(data.id_wali_kelas).change();
                     
-                    var kelas = $.grep(dataGlobal['kelas'], function(e){ return e.program_studi == data.program_studi; });
-                    
-                    var optKelas = `<option value=""> - </option>`;
-                    $.each(kelas,function (key,row) {
-                      if (row.kelas == data.kelas) {
-                        var select = "selected";
-                      }else{
-                        var select = "";
-                      }
-
-                      optKelas += `<option ${select} value="${row.nomor}">${row.kode}</option>`
-                    })
-                    $('#kelas').append(optKelas);
-
                 } else {
                     // alert gagal
                 }
