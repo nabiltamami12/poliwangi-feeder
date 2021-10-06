@@ -109,75 +109,6 @@
       </div>
     </div>
   </div>
-
-  <div class="row equal-cols">
-    <div class="col-sm-6 col-lg-4">
-      <div class="card card-stats mb-0">
-        <div class="card-body">
-          <div class="row">
-            <div class="col">
-              <h5 class="card-title text-uppercase text-muted mb-0">Total Piutang</h5>
-              <span class="h2 font-weight-bold mb-0">Rp. <span id="total_piutang"></span></span>
-            </div>
-            <div class="col-auto">
-              <div class="icon icon-shape bg-blue text-white rounded-circle shadow">
-                <i class="iconify-inline" data-icon="bx:bx-receipt"></i>
-              </div>
-            </div>
-          </div>
-          <p class="mt-3 mb-0 text-sm d-flex justify-content-between">
-            <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
-            <span class="text-nowrap text-muted">dari 1 Bulan Terakhir</span>
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-sm-6 col-lg-4">
-      <div class="card card-stats mb-0">
-        <div class="card-body">
-          <div class="row">
-            <div class="col">
-              <h5 class="card-title text-uppercase text-muted mb-0">PIUTANG BELUM TERBAYAR</h5>
-              <span class="h2 font-weight-bold mb-0">Rp. <span id="piutang_belum_terbayar"></span></span>
-            </div>
-            <div class="col-auto">
-              <div class="icon icon-shape bg-green text-white rounded-circle shadow">
-                <i class="iconify-inline" data-icon="bx:bx-receipt"></i>
-              </div>
-            </div>
-          </div>
-          <p class="mt-3 mb-0 text-sm d-flex justify-content-between">
-            <span class="text-danger mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
-            <span class="text-nowrap text-muted">dari 1 Bulan Terakhir</span>
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-sm-6 col-lg-4">
-      <div class="card card-stats mb-0">
-        <div class="card-body">
-          <div class="row">
-            <div class="col">
-              <h5 class="card-title text-uppercase text-muted mb-0">TOTAL MAHASISWA BELUM MEMBAYAR</h5>
-              <span class="h2 font-weight-bold mb-0"><span id="total_mahasiswa"></span> Orang</span>
-            </div>
-            <div class="col-auto">
-              <div class="icon icon-shape bg-orange text-white rounded-circle shadow">
-                <i class="iconify-inline" data-icon="bx:bx-receipt"></i>
-              </div>
-            </div>
-          </div>
-          <p class="mt-3 mb-0 text-sm d-flex justify-content-between">
-            <span class="text-danger mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
-            <span class="text-nowrap text-muted">dari 1 Bulan Terakhir</span>
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <div class="row">
     <div class="col-xl-12">
       <div class="card shadow padding--small">
@@ -192,7 +123,7 @@
                 Tambah
               </button> --}}
 
-              <div class="dropdown">
+              <!-- <div class="dropdown">
                 <button class="btn btn-primary dropdown-toggle mt-3 mt-md-0 ml-0 ml-md-1" type="button"
                   id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <i class="iconify-inline mr-1" data-icon="bx:bx-cloud-download"></i>
@@ -201,7 +132,7 @@
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                   <a class="dropdown-item" href="#">Rekap Piutan</a>
                 </div>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>
@@ -304,10 +235,7 @@ dt_url = `${url_api}/keuangan/list_cicilan`;
           var file_perjanjian = data['path_perjanjian'];
           var id = data['id'];
           var id_mahasiswa = data['id_mahasiswa'];
-          var btn_update = `<button type="button" class="btn btn-info" onclick="pengajuanModal()">
-                    <i class="iconify mr-1 text-black" data-icon="bx:bx-spreadsheet"></i>
-                    <span>Cek Dokumen</span>
-                  </button>
+          var btn_update = `
                   <button type="button" class="btn btn-primary" onclick="perjanjianModal(${id},${id_mahasiswa},'${file_perjanjian}')">
                     <i class="iconify mr-1" data-icon="bx:bx-cloud-upload"></i>
                     <span class="text-white">Upload Perjanjian</span>
@@ -453,9 +381,7 @@ dt_url = `${url_api}/keuangan/list_cicilan`;
   function perjanjianModal(id,id_mahasiswa,file_perjanjian) {
     $('#id_piutang').val(id)
     $('#id_mahasiswa').val(id_mahasiswa)
-    if (file_perjanjian!=null || file_perjanjian!="") {
-      $('#nama_dokumen_perjanjian').prop('href',path_berkas+"/"+file_perjanjian)
-    }
+    $('#nama_dokumen_perjanjian').prop('href',path_berkas+"/"+file_perjanjian)
     $('#uploadPerjanjianModal').modal('show')
   }
 </script>
