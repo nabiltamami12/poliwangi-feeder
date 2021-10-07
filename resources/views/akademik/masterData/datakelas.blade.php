@@ -86,10 +86,10 @@
         "mRender": function(data, type, full) {
           var id = data['nomor'];
           var text_hapus = data['kode'];
-          var btn_dosen = `<i class="iconify text-primary" data-icon="mdi:account-eye" onclick='window.location.href = window.location.href+"/dosen/${data['nomor']}"' data-icon="bx:bx-edit-alt" ></i>` 
+          // var btn_dosen = `<i class="iconify text-primary" data-icon="mdi:account-eye" onclick='window.location.href = window.location.href+"/dosen/${data['nomor']}"' data-icon="bx:bx-edit-alt" ></i>` 
           var btn_update = `<i class="iconify edit-icon text-primary" onclick='update_btn(${id})' data-icon="bx:bx-edit-alt" ></i>` 
           var btn_delete = `<i class="iconify delete-icon text-primary" data-icon="bx:bx-trash"  onclick='delete_btn(${id},"kelas","kelas","${text_hapus}")'></i>`; 
-          res = btn_dosen+" "+btn_update+" "+btn_delete;
+          res = btn_update+" "+btn_delete;
           return res;
         }
       },

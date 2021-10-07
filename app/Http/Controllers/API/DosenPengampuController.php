@@ -95,33 +95,33 @@ class DosenPengampuController extends Controller
      */
     public function show($id)
     {
-        // DB::statement("SET SQL_MODE=''");
-        // $data = DosenPengampu::select(
-        //     'dosen_pengampu.*',
-        //     'matakuliah.program_studi',
-        //     DB::raw('(select nomor from program_studi ps where ps.nomor = matakuliah.program_studi) as program_studi')
-        // )
-        // ->join("pegawai", "dosen_pengampu.dosen", "=", "pegawai.nomor",'right')
-        // ->join("matakuliah", "dosen_pengampu.matakuliah", "=", "matakuliah.nomor",'right')
-        // ->where("pegawai.staff", "=", 4)
-        // ->where("pegawai.nomor",$id)
-        // ->get();
-        // $dosen = Dosen::select('nama')
-        // ->where('nomor',$id)
-        // ->get();
+        DB::statement("SET SQL_MODE=''");
+        $data = DosenPengampu::select(
+            'dosen_pengampu.*',
+            'matakuliah.program_studi',
+            DB::raw('(select nomor from program_studi ps where ps.nomor = matakuliah.program_studi) as program_studi')
+        )
+        ->join("pegawai", "dosen_pengampu.dosen", "=", "pegawai.nomor",'right')
+        ->join("matakuliah", "dosen_pengampu.matakuliah", "=", "matakuliah.nomor",'right')
+        ->where("pegawai.staff", "=", 4)
+        ->where("pegawai.nomor",$id)
+        ->get();
+        $dosen = Dosen::select('nama')
+        ->where('nomor',$id)
+        ->get();
 
-        // $this->data = [
-        //     'nama' => $dosen[0]['nama'],
-        //     'matkul' => $data
-        // ];
+        $this->data = [
+            'nama' => $dosen[0]['nama'],
+            'matkul' => $data
+        ];
 
-        // $this->status = "success";
+        $this->status = "success";
         
 
         return response()->json([
             "status" => $this->status,
             "data" => $this->data,
-            "error" => $this->err,
+            "error" => $this->error,
         ]);
     }
 
