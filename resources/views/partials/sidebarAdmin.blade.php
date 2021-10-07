@@ -72,6 +72,12 @@
                 </a>
               </li>
               <li class="nav-item">
+                <a class="nav-link" href="{{ url('/admin/master/datadosenpengampu')}}">
+                  <span class="mini_icon">DD</span>
+                  <span class="nav-link-text">Data Dosen Pengampu</span>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a class="nav-link" href="{{url('/admin/master/datajurusan')}}">
                   <span class="mini_icon">DJ</span>
                   <span class="nav-link-text">Data Jurusan</span>

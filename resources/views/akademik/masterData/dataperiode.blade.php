@@ -28,6 +28,7 @@
               <tr>
                 <th scope="col">NO</th>
                 <th scope="col">Periode</th>
+                <th scope="col">Kode EPSBED</th>
                 <th scope="col">Semester</th>
                 <th scope="col">Status</th>
                 <th scope="col">AKSI</th>
@@ -96,13 +97,20 @@ dt_opt = {
       "targets": [2],
       "data": null,
       "render": function(data, type, full) {
+        res = (data['status']=="1")?data['tahun']+data['semester']:"-";
+        return res;
+      }
+    },{
+      "targets": [3],
+      "data": null,
+      "render": function(data, type, full) {
         var ganjil = (data['semester']==1)?'<span class="text-success">Gasal <i class="iconify-inline mr-1" style="font-size:12px;" data-icon="akar-icons:circle-check-fill"></i></span>' : `<span class="text-warning" style="cursor:pointer;" onclick="change_semester(${data['nomor']},1)">Gasal</span>`
         var genap = (data['semester']==2)?'<span class="text-success">Genap <i class="iconify-inline mr-1" style="font-size:12px;" data-icon="akar-icons:circle-check-fill"></i></span>' : `<span class="text-warning" style="cursor:pointer;" onclick="change_semester(${data['nomor']},2)">Genap</span>`
         res = (data['status']=="1")? ganjil+"  ||  "+genap:"-";
         return res;
       }
     },{
-      "targets": [3],
+      "targets": [4],
       "data": null,
       "render": function(data, type, full) {
         var aktif = "<span class='text-success' style='font-size:12px;font-weight:600;'>aktif <i class='iconify-inline mr-1' style='font-size:12px;' data-icon='akar-icons:circle-check-fill'></i></span>"
@@ -111,7 +119,7 @@ dt_opt = {
         return res;
       }
     },{
-      "targets": [4],
+      "targets": [5],
       "data": null,
       "render": function(data, type, full) {
         var id = data['nomor'];
