@@ -63,10 +63,8 @@
             </div>
             <div class="col-sm-6 col-12">
               <div class="form-group row mb-0">
-                <label>Matakuliah Group</label>
-                <select class="form-control" id="mk_group" name="mk_group">
-
-                </select>
+                <label>Bobot</label>
+                <input type="text" class="form-control" id="bobot" name="bobot" required>
               </div>
             </div>
             <div class="col-sm-6 col-12">

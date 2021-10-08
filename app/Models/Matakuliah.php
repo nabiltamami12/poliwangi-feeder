@@ -18,6 +18,7 @@ class Matakuliah extends Model
         'matakuliah',
         'jam',
         'sks',
+        'bobot',
         'mk_group',
         'mk_wajib',
         'tahun',
