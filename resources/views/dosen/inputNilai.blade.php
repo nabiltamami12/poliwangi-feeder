@@ -12,7 +12,7 @@
         <div class="card-header p-0 m-0">
           <div class="row align-items-center">
             <div class="col-lg-5">
-              <h3 class="mb-0 text-center text-lg-left font-weight-bold">Nilai Mahasiswa</h3>
+              <h3 class="mb-0 text-center text-lg-left font-weight-bold" id="title-page">Nilai Mahasiswa</h3>
             </div>
             <div class="col-12 col-lg-7 text-center text-md-right">
               <button type="button" id="btn_cetak" class="btn btn-icon btn-warning mt-3 mt-md-0">
@@ -38,7 +38,7 @@
               </select>
             </div>
             <div class="col-md-6 form-group mt-3 mt-md-0">
-              <label for="jenjang">Jenjang</label>
+              <label for="jenjang">Semester</label>
               <select class="form-control" id="semester">
                 <option value="1">Semester Gasal</option>
                 <option value="2">Semester Genap</option>
@@ -75,12 +75,16 @@
     </div>
   </div>
 </section>
+@endsection
+
+@section('js')
 <script>
 var dataFilter
 var countData
+var searchParams = new URLSearchParams(window.location.search);
 
 $(document).ready(function() {
-  var id = dataGlobal['user']['nomor'];
+  var id = searchParams.get('nim') ? null : dataGlobal['user']['nomor'];
   var nama = dataGlobal['user']['nama'];
   getFilter(id);
 
@@ -120,8 +124,11 @@ $(document).ready(function() {
     $('.table-body').html('')
     var id_kelas = $(this).val()
     var matakuliah = $('#matkul').val()
+
+    let uri = url_api+"/nilai?kelas="+id_kelas+"&matakuliah="+matakuliah
+    if (searchParams.get('tahun')) uri += `&tahun=${searchParams.get('tahun')}`;
     $.ajax({
-      url: url_api+"/nilai?kelas="+id_kelas+"&matakuliah="+matakuliah,
+      url: uri,
       type: 'get',
       dataType: 'json',
       data: {},
@@ -218,6 +225,8 @@ $(document).ready(function() {
       }
     });
   })
+
+  set_edit();
 } );
 
 function setSiswa(data) {
@@ -316,6 +325,7 @@ function getMatkul(prodi,semester) {
     optKelas += `<option value="${row.nomor}">${row.kode}</option>`
   })
   $('#kelas').append(optKelas)
+  return true;
 }
 async function getFilter(id) {
   var semester = $('#semester').val()
@@ -338,9 +348,35 @@ async function getFilter(id) {
         } else {
             // alert gagal
         }
+        return true;
+    }
+  });
+}
+
+function set_edit(){
+  if(!searchParams.get('nim')) return;
+  $('#title-page').text(`Nilai Mahasiswa Tahun ${searchParams.get('tahun')}`)
+
+  $.ajax({
+    url: "{{url('api/v1/mahasiswa/nim')}}/"+searchParams.get('nim'),
+    type: 'get',
+    dataType: 'json',
+    data: {},
+    success: function(res) {
+        if (res.status=="success") {
+          let semester = searchParams.get('semester');
+          let prodi = res.data.program_studi;
+          $('#prodi').val(prodi).trigger("change");
+          $('#semester').val(semester).trigger("change");
+          $('#matkul').val(searchParams.get('matkul')).trigger("change");
+          $('#kelas').val(searchParams.get('kelas')).trigger("change");
+        } else {
+          alert('Silahkan cek ulang program studi mahasiswa.')
+        }
         
     }
   });
+  // $('#matkul').val();
 }
 </script>
 @endsection

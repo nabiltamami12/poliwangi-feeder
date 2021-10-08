@@ -59,7 +59,8 @@
 
     if (tagMenu) {
       tagMenu.classList.add('sub-aktif');
-      document.querySelector('div.aktif').classList.add('open');
+      let div_aktif = document.querySelector('div.aktif');
+      if (div_aktif) div_aktif.classList.add('open')
       tagMenu.parentNode.parentNode.style.display = 'block';
     }
   </script>

@@ -147,6 +147,7 @@ dt_opt = {
         },{
           "aTargets": [3],
           "mData": null,
+          "className": "text-center",
           "mRender": function(data, type, full) {
             res = data['hadir'];
             return (res==null)?"-":res;
@@ -154,6 +155,7 @@ dt_opt = {
         },{
           "aTargets": [4],
           "mData": null,
+          "className": "text-center",
           "mRender": function(data, type, full) {
             res = 16 - data['hadir'];
             return (res==null)?"-":res;
@@ -161,6 +163,7 @@ dt_opt = {
         },{
           "aTargets": [5],
           "mData": null,
+          "className": "text-center",
           "mRender": function(data, type, full) {
             res = 16;
             return (res==null)?"-":res;
