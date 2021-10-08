@@ -211,6 +211,24 @@ Route::prefix('admin')->middleware(['aksesuntuk:admin'])->group(function () {
             ]);
         });
 
+        Route::get('/datakurikulum', function () {
+            return view('akademik.masterData/datakurikulum', [
+                "title" => "akademik-master",
+            ]);
+        });
+        Route::get('/datakurikulum/cu/', function () {
+            return view('akademik.masterData/tambahkurikulum', [
+                "id" => null,
+                "title" => "akademik-master"
+            ]);
+        });
+        Route::get('/datakurikulum/cu/{id}', function ($id) {
+            return view('akademik.masterData/updatekurikulum', [
+                "id" => $id,
+                "title" => "akademik-master"
+            ]);
+        });
+
         Route::get('/datahariaktif', function () {
             return view('akademik.masterData/datahariaktif', [
                 "title" => "akademik-master"

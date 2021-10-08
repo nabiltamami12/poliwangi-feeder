@@ -103,6 +103,14 @@ Route::prefix('v1')->group(function () {
     Route::put('/periode/{id}', '\App\Http\Controllers\API\PeriodeController@update');
     Route::delete('/periode/{id}', '\App\Http\Controllers\API\PeriodeController@destroy');
 
+    //periode
+    Route::get('/kurikulum/', '\App\Http\Controllers\API\KurikulumController@index');
+    Route::put('/kurikulum/change_status/{id}', '\App\Http\Controllers\API\KurikulumController@change_status');
+    Route::get('/kurikulum/{id}', '\App\Http\Controllers\API\KurikulumController@show');
+    Route::post('/kurikulum', '\App\Http\Controllers\API\KurikulumController@store');
+    Route::put('/kurikulum/{id}', '\App\Http\Controllers\API\KurikulumController@update');
+    Route::delete('/kurikulum/{id}', '\App\Http\Controllers\API\KurikulumController@destroy');
+
     //hariakitfkuliah
     Route::get('/hariaktifkuliah/', '\App\Http\Controllers\API\HariaktifkuliahController@index');
     Route::get('/hariaktifkuliah/{id}&{tahun}', '\App\Http\Controllers\API\HariaktifkuliahController@show');

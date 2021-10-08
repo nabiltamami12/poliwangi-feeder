@@ -60,6 +60,12 @@
                 </a>
               </li>
               <li class="nav-item">
+                <a class="nav-link" href="{{ url('/admin/master/datakurikulum')}}">
+                  <span class="mini_icon">DK</span>
+                  <span class="nav-link-text">Data Kurikulum</span>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a class="nav-link" href="{{ url('/admin/master/datakelas')}}">
                   <span class="mini_icon">DK</span>
                   <span class="nav-link-text">Data Kelas</span>
