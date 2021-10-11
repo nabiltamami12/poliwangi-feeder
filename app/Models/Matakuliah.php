@@ -13,7 +13,6 @@ class Matakuliah extends Model
     protected $fillable = [
         'nomor',
         'program_studi',
-        'kelas',
         'semester',
         'kode',
         'matakuliah',

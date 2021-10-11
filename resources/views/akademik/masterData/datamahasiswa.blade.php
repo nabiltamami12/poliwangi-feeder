@@ -106,7 +106,7 @@ async function getData() {
     $('#kelas').append(optKelas); 
 
     $.each(dataGlobal['status'],function (key,row) {
-        optStatus += `<option value="${row.kode}">${row.status}</option>`
+        optStatus += `<option value="${row.kode}">${row.status} - ${row.jenis}</option>`
     })
     $('#status').append(optStatus)
     setDatatable();
