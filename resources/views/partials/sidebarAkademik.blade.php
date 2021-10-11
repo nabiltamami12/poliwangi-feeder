@@ -36,8 +36,7 @@
           <li class="nav-item">
             <div class="nav-link {{($title === "akademik-kuliah") ? 'aktif' : ''}}">
               <span class=" iconify" data-icon="bx:bx-book-bookmark"></span>
-              <span class="nav-link-text">Kuliah<img src="{{ url('images') }}/sidebar-right.png" class="arrow"
-                  alt=""></span>
+              <span class="nav-link-text">Kuliah</span>
             </div>
             <ul class="nav-item-dropdown-content">
               

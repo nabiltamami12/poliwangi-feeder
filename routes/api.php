@@ -121,6 +121,7 @@ Route::prefix('v1')->group(function () {
     // Mahasiswa
     Route::get('/mahasiswa', [Ctr\MahasiswaController::class, 'index']);
     Route::get('/mahasiswa/{id}', [Ctr\MahasiswaController::class, 'show']);
+    Route::get('/mahasiswa/nim/{nim}', [Ctr\MahasiswaController::class, 'by_nim']);
     Route::post('/mahasiswa', [Ctr\MahasiswaController::class, 'store']);
     Route::put('/mahasiswa/{id}', [Ctr\MahasiswaController::class, 'update']);
     Route::delete('/mahasiswa/{id}', [Ctr\MahasiswaController::class, 'destroy']);
@@ -244,6 +245,7 @@ Route::prefix('v1')->group(function () {
     Route::post('keuangan/cicilan/{id}', [Ctr\BerkasKeuanganController::class, 'detail_cicilan']);
 
     Route::get('/keuangan/rekapitulasi/penyisihanpiutang', [Ctr\BerkasKeuanganController::class, 'penyisihanpiutang']);
+    Route::get('/keuangan/export/rekap-piutang', [Ctr\BerkasKeuanganController::class, 'export_piutang']);
 
     // Riwayat Pembayaran
     Route::post('/keuangan/upload-buku-besar', [Ctr\BerkasKeuanganController::class, 'upload_buku_besar']);

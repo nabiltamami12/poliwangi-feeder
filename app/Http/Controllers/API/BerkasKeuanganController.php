@@ -13,6 +13,7 @@ use App\Models\KeuanganPembayaran as KB;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Database\QueryException;
 use App\Imports\BukuBesarImport;
+use App\Exports\PiutangExport;
 
 class BerkasKeuanganController extends Controller
 {
@@ -357,5 +358,12 @@ class BerkasKeuanganController extends Controller
             "data" => $this->data,
             "error" => $this->error
         ]);
+    }
+
+    public function export_piutang()
+    {
+        ini_set('memory_limit', '-1');
+        ini_set('max_execution_time', '-1');
+        return Excel::download(new PiutangExport, 'Rekap Piutang Mahasiswa.xlsx');
     }
 }
