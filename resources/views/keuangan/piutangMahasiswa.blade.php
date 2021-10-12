@@ -104,7 +104,7 @@
         <div class="modal_button mt-4-5 d-flex justify-content-between">
           <button type="button" class="btn btn-outline-danger rounded-sm w-100 mr-2 mr-md-3"
             data-dismiss="modal">Batal</button>
-          <button type="button" id="btn_simpan" class="btn btn-success rounded-sm w-100 ml-2 ml-md-3">Submit</button>
+          <button type="button" id="btn_simpan" class="btn btn-success rounded-sm w-100 ml-2 ml-md-3">Simpan</button>
         </div>
       </div>
     </div>
