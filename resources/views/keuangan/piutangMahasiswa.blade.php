@@ -130,7 +130,7 @@
                   Download
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <a class="dropdown-item" href="#">Rekap Piutan</a>
+                  <a class="dropdown-item" href="{{url('api/v1/keuangan/export/rekap-piutang')}}">Rekap Piutan</a>
                 </div>
               </div> -->
             </div>

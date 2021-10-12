@@ -212,6 +212,7 @@ $(document).ready(function() {
       'matakuliah' : $('#matkul :selected').text(),
       'id_matakuliah' : matakuliah,
       'dosen' : nama,
+      'tahun' : searchParams.get('tahun') || new Date().getFullYear()
     }
     localStorage.setItem('cetak-eval', JSON.stringify(arr));
     window.open("{{url('dosen/cetak-evaluasi-nilai/')}}",'_blank');
