@@ -77,7 +77,10 @@
           <table class="table align-items-center table-flush table-borderless table-hover mt-4">
             <tbody class="table-body">
               <tr>
-                <td colspan="3">Setting Persentase</td>
+                <td colspan="3">
+                  Setting Persentase
+                  <input type="hidden" class="form-control" id="id_persentase" >
+                </td>
                 <td class="text-center px-3">
                     <input type="text" class="form-control persentase-count" placeholder="0" id="persentase_uts" >
                 </td>
@@ -123,10 +126,10 @@
 var dataFilter
 var countData
 var searchParams = new URLSearchParams(window.location.search);
+var id_dosen = searchParams.get('nim') ? null : dataGlobal['user']['nomor'];
+var nama = dataGlobal['user']['nama'];
 
 $(document).ready(function() {
-  var id_dosen = searchParams.get('nim') ? null : dataGlobal['user']['nomor'];
-  var nama = dataGlobal['user']['nama'];
   getFilter(id_dosen);
 
   $('#prodi').on('change',function (e) {
@@ -161,6 +164,7 @@ $(document).ready(function() {
       success: function(res) {
         var data = res.data.data;
         var range = res.data.range_nilai;
+        var persentase = res.data.persentase_nilai;
         if (res.status=="success") {
             setSiswa(data)
             $.each(range,function (key,row) {
@@ -169,6 +173,9 @@ $(document).ready(function() {
                   ${row.nh} = ${row.na}-${row.na_atas}, 
                 </span>`;
               $('#list_range').append(html);
+            })
+            $.each(persentase,function (key,row) {
+              $('#'+key).val(row)
             })
         } else {
             // alert gagal
@@ -190,7 +197,6 @@ $(document).ready(function() {
   })
 
   $('#btn_setting').on('click',function (e) {
-    console.log("wkwkwk")
     $('#settingModal').modal('show')
   })
 
@@ -221,7 +227,6 @@ $(document).ready(function() {
       }
       dataSimpan.push(arr)
     }
-    console.log(dataSimpan)
     $.ajax({
       url: url_api+"/nilai/publish",
       type: 'put',
@@ -229,7 +234,6 @@ $(document).ready(function() {
       data: {"data":dataSimpan},
       success: function(res) {
           if (res.status=="success") {
-              console.log(res)
           } else {
               // alert gagal
           }
@@ -259,7 +263,6 @@ $(document).ready(function() {
       }
       dataSimpan.push(arr)
     }
-    console.log(dataSimpan)
     $.ajax({
       url: url_api+"/nilai",
       type: 'post',
@@ -267,7 +270,6 @@ $(document).ready(function() {
       data: {"data":dataSimpan},
       success: function(res) {
           if (res.status=="success") {
-              console.log(res)
           } else {
               // alert gagal
           }
@@ -360,27 +362,25 @@ $('.persentase-count').on('keyup',function (e) {
   countPersentase(this)
 })
 $('.persentase-count').on('change',function (e) {
-  console.log("simpan")
   var dataPersentase = {
     'id' : $('#id_persentase').val(),
-    'matakuliah' : $('#matakuliah').val(),
+    'matakuliah' : $('#matkul').val(),
     'persentase_uts' : $('#persentase_uts').val(),
     'persentase_uas' : $('#persentase_uas').val(),
     'persentase_tugas' : $('#persentase_tugas').val(),
     'persentase_kuis' : $('#persentase_kuis').val(),
     'persentase_kehadiran' : $('#persentase_kehadiran').val(),
     'persentase_praktikum' : $('#persentase_praktikum').val(),
-    'total' : $('#total').val(),
+    'total' : $('#total_persentase').val(),
     'dosen' : id_dosen,
   }
   $.ajax({
     url: url_api+"/persentase-nilai",
     type: 'post',
     dataType: 'json',
-    data: {"data":dataPersentase},
+    data: dataPersentase,
     success: function(res) {
         if (res.status=="success") {
-            console.log(res)
         } else {
             // alert gagal
         }
@@ -397,30 +397,21 @@ function countPersentase(e) {
   var persentase_kuis = $('#persentase_kuis').val()
   var persentase_kehadiran = $('#persentase_kehadiran').val()
   var persentase_praktikum = $('#persentase_praktikum').val()
-  console.log(persentase_uts)
-  console.log(persentase_uas)
-  console.log(persentase_tugas)
-  console.log(persentase_kuis)
-  console.log(persentase_kehadiran)
-  console.log(persentase_praktikum)
+
   var total = Number(persentase_uts)+Number(persentase_uas)+Number(persentase_tugas)+Number(persentase_kuis)+Number(persentase_kehadiran)+Number(persentase_praktikum)
   $('#total_persentase').val(total)
   if (total>100) {
-    console.log(e)
-    console.log("lebih dari ")
     $(e).val("");
     $('#total_persentase').val("")
   }
-  console.log(total)
 }
 
 function getKelas(prodi,semester) {
   var kelas = $.grep(dataFilter['kelas'], function(e){ return e.program_studi == prodi; });
-  console.log(kelas);
   $('#kelas').html('')
-  var optkelas = `<option value=""> - </option>`;
+  var optKelas = `<option value=""> - </option>`;
   $.each(kelas,function (key,row) {
-    optkelas += `<option value="${row.nomor}">${row.kode}</option>`
+    optKelas += `<option value="${row.nomor}">${row.kode}</option>`
   })
   // var matakuliah = $('#kelas').val()
   // var kelas = $.grep(dataFilter['kelas'], function(e){ return e.matakuliah == matakuliah; });
@@ -445,7 +436,6 @@ async function getFilter(id_dosen) {
         if (res.status=="success") {
             var data = res['data'];
             dataFilter = data;
-            console.log(dataFilter)
             $('#prodi').html('')              
             var optProdi = `<option value=""> - </option>`;
             $.each(data['prodi'],function (key,row) {

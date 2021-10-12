@@ -47,15 +47,12 @@ class PersentaseNilaiController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->data;
-       
+        $data = $request->all();
         try {
-            foreach ($data as $key => $value) {
-                if ($value->id=="") {
-                    $data = PersentaseNilai::create($data);
-                }else {
-                    $data = PersentaseNilai::where('id',$value->id)->update($value);
-                }
+            if ($request->id=="") {
+                $sql = PersentaseNilai::create($data);
+            }else {
+                $sql = PersentaseNilai::where('id',$request->id)->update($data);
             }
             $this->data = null;
             $this->status = "success";

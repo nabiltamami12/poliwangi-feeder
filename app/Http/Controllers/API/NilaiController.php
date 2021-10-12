@@ -32,7 +32,7 @@ class NilaiController extends Controller
         $set_tahun = $request->get('tahun') ?? $this->tahun_aktif;
         try {
             $rangenilai = RangeNilai::orderBy('nh')->get();
-            $persentase_nilai = PersentaseNilai::where('matakuliah',$request->matakuliah)->get();
+            $persentase_nilai = PersentaseNilai::select('*','id as id_persentase')->where('matakuliah',$request->matakuliah)->first();
 
             $input = DB::table("mahasiswa as m")
                 ->select(
