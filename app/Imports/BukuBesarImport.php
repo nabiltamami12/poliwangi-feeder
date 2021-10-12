@@ -56,7 +56,7 @@ class BukuBesarImport implements ToCollection, WithHeadingRow, WithCalculatedFor
                         [
                             'nominal' => $i[$smt], 
                             'status' => '1',
-                            'keterangan' => "data unggahan",
+                            'keterangan' => "data import",
                             'semester' => $smt,
                             'id_mahasiswa' => $cek_mhs->nomor
                         ]

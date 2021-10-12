@@ -19,7 +19,7 @@
   <meta name="author" content="Creative Tim">
   <title>Login | {{ config('app.name') }}</title>
   <!-- Favicon -->
-  <link rel="icon" href="{{ url('argon') }}/assets/img/brand/favicon.png" type="image/png">
+  <link rel="icon" href="{{ url('favicon.png') }}" type="image/png">
   <!-- Icons -->
   <link rel="stylesheet" href="{{ url('argon') }}/assets/vendor/nucleo/css/nucleo.css" type="text/css">
   <link rel="stylesheet" href="{{ url('argon') }}/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css"

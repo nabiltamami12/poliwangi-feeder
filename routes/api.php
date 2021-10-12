@@ -121,6 +121,7 @@ Route::prefix('v1')->group(function () {
     // Mahasiswa
     Route::get('/mahasiswa', [Ctr\MahasiswaController::class, 'index']);
     Route::get('/mahasiswa/{id}', [Ctr\MahasiswaController::class, 'show']);
+    Route::get('/mahasiswa/nim/{nim}', [Ctr\MahasiswaController::class, 'by_nim']);
     Route::post('/mahasiswa', [Ctr\MahasiswaController::class, 'store']);
     Route::put('/mahasiswa/{id}', [Ctr\MahasiswaController::class, 'update']);
     Route::delete('/mahasiswa/{id}', [Ctr\MahasiswaController::class, 'destroy']);

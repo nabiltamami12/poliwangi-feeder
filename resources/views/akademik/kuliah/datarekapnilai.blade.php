@@ -74,22 +74,20 @@
   </div>
 </section>
 <script>
-  var tahun = $('#tahun').val()
-  var semester = $('#semester').val()
   $(document).ready(function() {
     
     $('#nim ').on('change',function (e) {
-      var url = `${url_api}/nilai/rekap?nim=${$('#nim').val()}&tahun=${tahun}&semester=${semester}`;
+      var url = `${url_api}/nilai/rekap?nim=${$('#nim').val()}&tahun=${$('#tahun').val()}&semester=${$('#semester').val()}`;
       dt.ajax.url(url).load();
     })  
     $('select').on('change',function (e) {
-      var url = `${url_api}/nilai/rekap?nim=${$('#nim').val()}&tahun=${tahun}&semester=${semester}`;
+      var url = `${url_api}/nilai/rekap?nim=${$('#nim').val()}&tahun=${$('#tahun').val()}&semester=${$('#semester').val()}`;
       dt.ajax.url(url).load();
     })  
   });
 
   var nomor = 1;
-  dt_url = `${url_api}/nilai/rekap?nim=${$('#nim').val()}&tahun=${tahun}&semester=${semester}`;
+  dt_url = `${url_api}/nilai/rekap?nim=${$('#nim').val()}&tahun=${$('#tahun').val()}&semester=${$('#semester').val()}`;
 dt_opt = {
   "columnDefs": [
         {
@@ -140,12 +138,16 @@ dt_opt = {
           "mRender": function(data, type, full) {
             var id = data['nomor'];
             var text_hapus = data['kode']+" - "+data['matakuliah'];
-            // var btn_update = `<span class="iconify edit-icon text-primary" onclick='update_btn(${id})' data-icon="bx:bx-edit-alt" ></span>` 
+            var btn_update = `<span class="iconify edit-icon text-primary" onclick="update_nilai('${data['nomor_matkul']}', '${data['kelas']}')" data-icon="bx:bx-edit-alt" ></span>` 
             var btn_delete = `<span class="iconify delete-icon text-primary" data-icon="bx:bx-trash"  onclick='delete_btn(${id},"nilai","nilai matakuliah ","${text_hapus}")'></span>`; 
-            res = (id==null)?'': btn_delete;
+            res = (id==null)?'': btn_update+btn_delete;
             return res;
           }
         },
       ]}
+
+  function update_nilai(matkul, kelas) {
+    window.location.href = window.location.href+`/edit?matkul=${matkul}&tahun=${$('#tahun').val()}&semester=${$('#semester').val()}&nim=${$('#nim').val()}&kelas=${kelas}`;
+  }
 </script>
 @endsection

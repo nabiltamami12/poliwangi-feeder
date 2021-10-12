@@ -29,6 +29,7 @@ class NilaiController extends Controller
     {
         DB::enableQueryLog();
         //
+        $set_tahun = $request->get('tahun') ?? $this->tahun_aktif;
         try {
             $rangenilai = RangeNilai::orderBy('nh')->get();
             $persentase_nilai = PersentaseNilai::where('matakuliah',$request->matakuliah)->get();
@@ -43,7 +44,7 @@ class NilaiController extends Controller
                 )
                 ->join("kuliah as kl", "kl.kelas", "=", "m.kelas")
                 // ->join("nilai as n", "n.kuliah", "=", "kl.nomor",'left')
-                ->where('kl.tahun', $this->tahun_aktif)
+                ->where('kl.tahun', $set_tahun)
                 ->where('kl.kelas', $request->kelas)
                 ->where('kl.matakuliah', $request->matakuliah)
                 ->get();
@@ -99,16 +100,17 @@ class NilaiController extends Controller
     public function rekap(Request $request)
     {
         try {
+            $set_tahun = $request->get('tahun') ?? $this->tahun_aktif;
             if ($request->nim) {
                 $data = DB::table('mahasiswa as m')
-                            ->select('m.nrp','m.nama','mk.kode','mk.matakuliah','m.jumlah_sks','n.nomor' ,'n.nh','n.na')
+                            ->select('m.nrp','m.nama','mk.kode','mk.matakuliah','m.jumlah_sks','n.nomor' ,'n.nh','n.na', 'mk.nomor as nomor_matkul', 'kl.kelas')
                             ->join('kelas as k','k.nomor','=','m.kelas')
                             ->join('kuliah as kl','kl.kelas','=','k.nomor')
                             ->join('matakuliah as mk','mk.nomor','=','kl.matakuliah')
                             ->join('nilai as n','n.kuliah','=','kl.nomor','left')
                             ->where('m.nrp',$request->nim)
                             ->where('mk.semester',$this->semester_aktif)
-                            ->where('kl.tahun',$this->tahun_aktif)
+                            ->where('kl.tahun', $set_tahun)
                             ->get();
             }else{
                 $data = [];

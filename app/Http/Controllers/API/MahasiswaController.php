@@ -179,4 +179,21 @@ class MahasiswaController extends Controller
 			var_dump($data_response);
 		}
 	}
+
+	public function by_nim($nim)
+	{
+		try {
+			$data = Mhs::where("nrp", $nim)->first();
+			$this->data = $data;
+			$this->status = "success";
+		} catch (QueryException $e) {
+			$this->status = "failed";
+			$this->error = $e;
+		}
+		return response()->json([
+			"status" => $this->status,
+			"data" => $this->data,
+			"error" => $this->error
+		]);
+	}
 }

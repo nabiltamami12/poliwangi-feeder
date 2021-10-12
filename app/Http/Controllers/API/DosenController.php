@@ -30,11 +30,13 @@ class DosenController extends Controller
                             ->join('kuliah as kl','kl.kelas','=','k.nomor')
                             ->where(function($query) use ($id)
                             {
-                                $query->where('kl.dosen','=',$id)
-                                    ->orWhere('kl.dosen2','=',$id)
-                                    ->orWhere('kl.dosen3','=',$id)
-                                    ->orWhere('kl.dosen4','=',$id)
-                                    ->orWhere('kl.dosen5','=',$id);
+                                if ($id !== 'null') {
+                                    $query->where('kl.dosen','=',$id)
+                                        ->orWhere('kl.dosen2','=',$id)
+                                        ->orWhere('kl.dosen3','=',$id)
+                                        ->orWhere('kl.dosen4','=',$id)
+                                        ->orWhere('kl.dosen5','=',$id);
+                                }
                             })
                             // ->join('matakuliah as m','m.program_studi','=','ps.nomor')
                             // ->join('dosen_pengampu as dp','dp.matakuliah','=','m.nomor')
@@ -49,11 +51,13 @@ class DosenController extends Controller
                             ->join('kuliah as kl','kl.kelas','=','k.nomor')
                             ->where(function($query) use ($id)
                             {
-                                $query->where('kl.dosen','=',$id)
-                                ->orWhere('kl.dosen2','=',$id)
-                                ->orWhere('kl.dosen3','=',$id)
-                                ->orWhere('kl.dosen4','=',$id)
-                                ->orWhere('kl.dosen5','=',$id);
+                                if ($id !== 'null') {
+                                    $query->where('kl.dosen','=',$id)
+                                    ->orWhere('kl.dosen2','=',$id)
+                                    ->orWhere('kl.dosen3','=',$id)
+                                    ->orWhere('kl.dosen4','=',$id)
+                                    ->orWhere('kl.dosen5','=',$id);
+                                }
                             })
                             ->where('kl.tahun',$this->tahun_aktif)
                             ->groupBy('k.nomor')
@@ -69,11 +73,13 @@ class DosenController extends Controller
                             ->where('kl.tahun',$this->tahun_aktif)
                             ->where(function($query) use ($id)
                             {
-                                $query->where('kl.dosen','=',$id)
-                                ->orWhere('kl.dosen2','=',$id)
-                                ->orWhere('kl.dosen3','=',$id)
-                                ->orWhere('kl.dosen4','=',$id)
-                                ->orWhere('kl.dosen5','=',$id);
+                                if ($id !== 'null') {
+                                    $query->where('kl.dosen','=',$id)
+                                    ->orWhere('kl.dosen2','=',$id)
+                                    ->orWhere('kl.dosen3','=',$id)
+                                    ->orWhere('kl.dosen4','=',$id)
+                                    ->orWhere('kl.dosen5','=',$id);
+                                }
                             })
                             ->get();
             $this->status = "success";
