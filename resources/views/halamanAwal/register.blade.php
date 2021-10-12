@@ -150,7 +150,7 @@
                   </div>
                 </div>
               </div>
-              <button type="submit" class="btn btn-primary w-100 mt-4 rounded-sm">Submit</button>
+              <button type="submit" class="btn btn-primary w-100 mt-4 rounded-sm">Simpan</button>
             </div>
             <form>
             </div>

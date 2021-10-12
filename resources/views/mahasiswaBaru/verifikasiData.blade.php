@@ -210,7 +210,7 @@
                 </div>
                 <div class="form_action mt-4">
                   <a class="btn btn-info btnPrevious rounded-sm">Sebelumnya</a>
-                  <button type="submit" class="btn btn-primary rounded-sm" id="submit-2">Submit</button>
+                  <button type="submit" class="btn btn-primary rounded-sm" id="submit-2">Simpan</button>
                 </div>
               </form>
             </div>

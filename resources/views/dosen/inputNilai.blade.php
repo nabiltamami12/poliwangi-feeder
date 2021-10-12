@@ -3,7 +3,12 @@
 @section('content')
 <!-- Header -->
 <header class="header"></header>
-
+<style>
+  .text-range{
+    padding-left:3%;
+    display:none;
+  }
+</style>
 <!-- Page content -->
 <section class="page-content container-fluid">
   <div class="row">
@@ -46,28 +51,64 @@
             </div>
           </div>
           <div class="form-row">
+            <div class="col-md-6 form-group mt-3 mt-md-0">
+              <label for="kelas">Kelas</label>
+              <select class="form-control" id="kelas">
+              </select>
+            </div>
             <div class="col-md-6 form-group">
               <label for="matakuliah">Mata Kuliah</label>
               <select class="form-control" id="matkul">
                 
               </select>
             </div>
-            <div class="col-md-6 form-group mt-3 mt-md-0">
-              <label for="kelas">Kelas</label>
-              <select class="form-control" id="kelas">
-              </select>
-            </div>
           </div>
         </form>
 
+        <hr class="my-4">
+        
+          <span>
+          Konversi Nilai :
+            <span class="ml-3" id="list_range">
+              
+            </span>
+          </span>
         <div class="table-responsive">
+          <table class="table align-items-center table-flush table-borderless table-hover mt-4">
+            <tbody class="table-body">
+              <tr>
+                <td colspan="3">Setting Persentase</td>
+                <td class="text-center px-3">
+                    <input type="text" class="form-control persentase-count" placeholder="0" id="persentase_uts" >
+                </td>
+                <td class="text-center px-3">
+                    <input type="text" class="form-control persentase-count" placeholder="0" id="persentase_uas" >
+                </td>
+                <td class="text-center px-3">
+                    <input type="text" class="form-control persentase-count" placeholder="0" id="persentase_tugas" >
+                </td>
+                <td class="text-center px-3">
+                    <input type="text" class="form-control persentase-count" placeholder="0" id="persentase_kuis" >
+                </td>
+                <td class="text-center px-3">
+                    <input type="text" class="form-control persentase-count" placeholder="0" id="persentase_kehadiran">
+                </td>
+                <td class="text-center px-3">
+                    <input type="text" class="form-control persentase-count" placeholder="0" id="persentase_praktikum" >
+                </td>
+                <td class="text-center px-3">
+                    <input type="text" class="form-control persentase-count" placeholder="0%" id="total_persentase"  disabled>
+                </td>
+              </tr>
+            </tbody>
+          </table>
           <table class="table align-items-center table-flush table-borderless table-hover mt-4">
             <thead class="table-header">
               
             </thead>
-
-            <tbody class="table-body">
-              
+            
+            <tbody class="table-body list-nilai">
+            
             </tbody>
           </table>
         </div>
@@ -80,45 +121,30 @@ var dataFilter
 var countData
 
 $(document).ready(function() {
-  var id = dataGlobal['user']['nomor'];
+  var id_dosen = dataGlobal['user']['nomor'];
   var nama = dataGlobal['user']['nama'];
-  getFilter(id);
+  getFilter(id_dosen);
 
   $('#prodi').on('change',function (e) {
     var program_studi = $(this).val()
     var semester = $('#semester').val()
-    getMatkul(program_studi,semester)
+    getKelas(program_studi,semester)
 
     $('.table-header').html('')
-    $('.table-body').html('')
+    $('.list-nilai').html('')
   })
   $('#semester').on('change',function (e) {
     var semester = $(this).val();
     var program_studi = $('#prodi').val();
-    getMatkul(program_studi,semester);
+    getKelas(program_studi,semester);
 
     $('.table-header').html('')
-    $('.table-body').html('')
+    $('.list-nilai').html('')
   })
   $('#matkul').on('change',function (e) {
-    var matakuliah = $(this).val()
-    var kelas = $.grep(dataFilter['kelas'], function(e){ return e.matakuliah == matakuliah; });
-
-    $('#kelas').html('')
-    var optKelas = `<option value=""> - </option>`;
-    $.each(kelas,function (key,row) {
-      optKelas += `<option value="${row.nomor}">${row.kode}</option>`
-    })
-    $('#kelas').append(optKelas)
-
     $('.table-header').html('')
-    $('.table-body').html('')
-  })
-  $('#kelas').on('change',function (e) {
-    console.log("kelas")
-    $('.table-header').html('')
-    $('.table-body').html('')
-    var id_kelas = $(this).val()
+    $('.list-nilai').html('')
+    var id_kelas = $('#kelas').val()
     var matakuliah = $('#matkul').val()
     $.ajax({
       url: url_api+"/nilai?kelas="+id_kelas+"&matakuliah="+matakuliah,
@@ -126,15 +152,39 @@ $(document).ready(function() {
       dataType: 'json',
       data: {},
       success: function(res) {
-        var data = res.data;
+        var data = res.data.data;
+        var range = res.data.range_nilai;
         if (res.status=="success") {
             setSiswa(data)
+            $.each(range,function (key,row) {
+              var html = `
+                <span class="font-weight-bold text-danger ml-1">
+                  ${row.nh} = ${row.na}-${row.na_atas}, 
+                </span>`;
+              $('#list_range').append(html);
+            })
         } else {
             // alert gagal
         }
         
       }
     })
+  })
+  $('#kelas').on('change',function (e) {
+    var kelas = $(this).val()
+    var kelas = $.grep(dataFilter['matakuliah'], function(e){ return e.kelas == kelas; });
+
+    $('#matkul').html('')
+    var optMatkul = `<option value=""> - </option>`;
+    $.each(kelas,function (key,row) {
+      optMatkul += `<option value="${row.nomor}">${row.matakuliah}</option>`
+    })
+    $('#matkul').append(optMatkul)
+  })
+
+  $('#btn_setting').on('click',function (e) {
+    console.log("wkwkwk")
+    $('#settingModal').modal('show')
   })
 
   $('#btn_cetak').on('click',function (e) {
@@ -160,7 +210,7 @@ $(document).ready(function() {
       var arr = {
         'nomor' : $('#id_nilai_'+index).val(),
         'is_publisheded' : 1,
-        'publisher' : id,
+        'publisher' : id_dosen,
       }
       dataSimpan.push(arr)
     }
@@ -223,7 +273,7 @@ $(document).ready(function() {
 function setSiswa(data) {
   var html = '';
   $('.table-header').html('')
-  $('.table-body').html('')
+  $('.list-nilai').html('')
   $('.table-header').append(`<tr>
                 <th scope="col" class="text-center pl-2 pr-0">No</th>
                 <th scope="col" class="text-center px-3">NIM</th>
@@ -289,38 +339,95 @@ function setSiswa(data) {
                     <input type="text" class="form-control" id="keterangan_${i}" value="${row.keterangan}">
                 </td>
               </tr>`
-    $('.table-body').append(html)
+    $('.list-nilai').append(html)
   })
+  
+  $('.text-range').css('display','block')
+  $('#btn_setting').attr('hidden','false')
   countData = i;
+  
+}
+$('.persentase-count').on('keyup',function (e) {
+  countPersentase(this)
+})
+$('.persentase-count').on('change',function (e) {
+  console.log("simpan")
+  var dataPersentase = {
+    'id' : $('#id_persentase').val(),
+    'matakuliah' : $('#matakuliah').val(),
+    'persentase_uts' : $('#persentase_uts').val(),
+    'persentase_uas' : $('#persentase_uas').val(),
+    'persentase_tugas' : $('#persentase_tugas').val(),
+    'persentase_kuis' : $('#persentase_kuis').val(),
+    'persentase_kehadiran' : $('#persentase_kehadiran').val(),
+    'persentase_praktikum' : $('#persentase_praktikum').val(),
+    'total' : $('#total').val(),
+    'dosen' : id_dosen,
+  }
+  $.ajax({
+    url: url_api+"/persentase-nilai",
+    type: 'post',
+    dataType: 'json',
+    data: {"data":dataPersentase},
+    success: function(res) {
+        if (res.status=="success") {
+            console.log(res)
+        } else {
+            // alert gagal
+        }
+        
+    }
+  });
+})
+
+function countPersentase(e) {
+  
+  var persentase_uts = $('#persentase_uts').val()
+  var persentase_uas = $('#persentase_uas').val()
+  var persentase_tugas = $('#persentase_tugas').val()
+  var persentase_kuis = $('#persentase_kuis').val()
+  var persentase_kehadiran = $('#persentase_kehadiran').val()
+  var persentase_praktikum = $('#persentase_praktikum').val()
+  console.log(persentase_uts)
+  console.log(persentase_uas)
+  console.log(persentase_tugas)
+  console.log(persentase_kuis)
+  console.log(persentase_kehadiran)
+  console.log(persentase_praktikum)
+  var total = Number(persentase_uts)+Number(persentase_uas)+Number(persentase_tugas)+Number(persentase_kuis)+Number(persentase_kehadiran)+Number(persentase_praktikum)
+  $('#total_persentase').val(total)
+  if (total>100) {
+    console.log(e)
+    console.log("lebih dari ")
+    $(e).val("");
+    $('#total_persentase').val("")
+  }
+  console.log(total)
 }
 
-function getMatkul(prodi,semester) {
-  console.log(dataFilter);
-  console.log(dataFilter['matakuliah']);
-  var matkul = $.grep(dataFilter['matakuliah'], function(e){ return e.program_studi == prodi; });
-  console.log(matkul);
-  var matkul = $.grep(matkul, function(e){ return e.semester == semester; });
-  console.log(matkul);
-  $('#matkul').html('')
-  var optMatkul = `<option value=""> - </option>`;
-  $.each(matkul,function (key,row) {
-    optMatkul += `<option value="${row.nomor}">${row.matakuliah}</option>`
-  })
-  $('#matkul').append(optMatkul)
-  var matakuliah = $('#matkul').val()
-  var kelas = $.grep(dataFilter['kelas'], function(e){ return e.matakuliah == matakuliah; });
-
+function getKelas(prodi,semester) {
+  var kelas = $.grep(dataFilter['kelas'], function(e){ return e.program_studi == prodi; });
+  console.log(kelas);
   $('#kelas').html('')
-  var optKelas = `<option value=""> - </option>`;
+  var optkelas = `<option value=""> - </option>`;
   $.each(kelas,function (key,row) {
-    optKelas += `<option value="${row.nomor}">${row.kode}</option>`
+    optkelas += `<option value="${row.nomor}">${row.kode}</option>`
   })
-  $('#kelas').append(optKelas)
+  $('#kelas').append(optkelas)
+  // var matakuliah = $('#kelas').val()
+  // var kelas = $.grep(dataFilter['kelas'], function(e){ return e.matakuliah == matakuliah; });
+
+  // $('#kelas').html('')
+  // var optKelas = `<option value=""> - </option>`;
+  // $.each(kelas,function (key,row) {
+  //   optKelas += `<option value="${row.nomor}">${row.kode}</option>`
+  // })
+  // $('#kelas').append(optKelas)
 }
-async function getFilter(id) {
+async function getFilter(id_dosen) {
   var semester = $('#semester').val()
   $.ajax({
-    url: url_api+"/dosen/filter/"+id+"/"+semester,
+    url: url_api+"/dosen/filter/"+id_dosen+"/"+semester,
     type: 'get',
     dataType: 'json',
     data: {},

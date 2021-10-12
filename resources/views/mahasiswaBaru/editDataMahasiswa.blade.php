@@ -157,7 +157,7 @@
                   <input type="file" class="form-control form-control-lg">
                 </div>
               </div>
-              <button type="submit" class="btn btn-primary rounded-sm w-100 mt-4-5">Submit</button>
+              <button type="submit" class="btn btn-primary rounded-sm w-100 mt-4-5">Simpan</button>
             </form>
           </div>
         </div>

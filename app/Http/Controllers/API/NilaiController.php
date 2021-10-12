@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Nilai;
+use App\Models\RangeNilai;
+use App\Models\PersentaseNilai;
 use DB;
 use Illuminate\Support\Carbon;
 use App\Http\Requests\ImportNilai;
@@ -28,6 +30,9 @@ class NilaiController extends Controller
         DB::enableQueryLog();
         //
         try {
+            $rangenilai = RangeNilai::orderBy('nh')->get();
+            $persentase_nilai = PersentaseNilai::where('matakuliah',$request->matakuliah)->get();
+
             $input = DB::table("mahasiswa as m")
                 ->select(
                     "m.nomor as id_mahasiswa",
@@ -73,7 +78,7 @@ class NilaiController extends Controller
                 ];
                 array_push($data,$arr);
             }
-            $this->data = $data;
+            $this->data = ['persentase_nilai'=>$persentase_nilai,'range_nilai'=> $rangenilai,'data'=>$data];
             $this->status = "success";
         } catch (QueryException $e) {
             $this->status = "failed";

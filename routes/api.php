@@ -133,6 +133,11 @@ Route::prefix('v1')->group(function () {
     Route::put('/dosenpengampu/{id}', [Ctr\DosenPengampuController::class, 'update']);
     Route::delete('dosenpengampu/{id}', [Ctr\DosenPengampuController::class, 'destroy']);
 
+    //PERSENTASE NILAI
+    Route::get('/persentase-nilai/{id}', '\App\Http\Controllers\API\PersentaseNilaiController@show');
+    Route::post('/persentase-nilai', '\App\Http\Controllers\API\PersentaseNilaiController@store');
+
+
     //NILAIDOSEN
     Route::get('/nilai/', '\App\Http\Controllers\API\NilaiController@index');
     Route::get('/nilai/rekap', '\App\Http\Controllers\API\NilaiController@rekap');

@@ -21,7 +21,7 @@ class RangeNilaiController extends Controller
     public function index()
     {
         try {
-            $rangenilai = RangeNilai::get();
+            $rangenilai = RangeNilai::orderBy('nh')->get();
             $this->data = $rangenilai;
             $this->status = "success";
         } catch (QueryException $e) {
