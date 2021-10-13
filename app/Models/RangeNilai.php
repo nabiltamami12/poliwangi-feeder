@@ -18,4 +18,10 @@ class RangeNilai extends Model
         'na_atas',
         'versi'
     ];
+
+    public static function last_version()
+    {
+        $max_version = RangeNilai::max('versi');
+        return RangeNilai::orderBy('nh')->where('versi', $max_version)->get();
+    }
 }
