@@ -8,6 +8,10 @@
     padding-left:3%;
     display:none;
   }
+  .table-body input{
+    margin-left: auto;
+    margin-right: auto;
+  }
 </style>
 <!-- Page content -->
 <section class="page-content container-fluid">
@@ -75,9 +79,12 @@
           </span>
         <div class="table-responsive">
           <table class="table align-items-center table-flush table-borderless table-hover mt-4">
-            <tbody class="table-body">
-              <tr>
-                <td colspan="3">Setting Persentase</td>
+            <thead class="table-body">
+              <tr id="table-persentase">
+                <td colspan="3" class="font-weight-bold">
+                  Setting Persentase
+                  <input type="hidden" id="id_persentase" name="id">
+                </td>
                 <td class="text-center px-3">
                     <input type="text" class="form-control persentase-count" placeholder="0" id="persentase_uts" >
                 </td>
@@ -99,10 +106,9 @@
                 <td class="text-center px-3">
                     <input type="text" class="form-control persentase-count" placeholder="0%" id="total_persentase"  disabled>
                 </td>
+                <td colspan="4"></td>
               </tr>
-            </tbody>
-          </table>
-          <table class="table align-items-center table-flush table-borderless table-hover mt-4">
+            </thead>
             <thead class="table-header">
               
             </thead>
@@ -120,12 +126,11 @@
 
 @section('js')
 <script>
-var dataFilter
-var countData
+var dataFilter, countData, id_dosen;
 var searchParams = new URLSearchParams(window.location.search);
 
 $(document).ready(function() {
-  var id_dosen = searchParams.get('nim') ? null : dataGlobal['user']['nomor'];
+  id_dosen = searchParams.get('nim') ? null : dataGlobal['user']['nomor'];
   var nama = dataGlobal['user']['nama'];
   getFilter(id_dosen);
 
@@ -136,6 +141,7 @@ $(document).ready(function() {
 
     $('.table-header').html('')
     $('.list-nilai').html('')
+    return true;
   })
   $('#semester').on('change',function (e) {
     var semester = $(this).val();
@@ -144,6 +150,7 @@ $(document).ready(function() {
 
     $('.table-header').html('')
     $('.list-nilai').html('')
+    return true;
   })
   $('#matkul').on('change',function (e) {
     $('.table-header').html('')
@@ -163,6 +170,7 @@ $(document).ready(function() {
         var range = res.data.range_nilai;
         if (res.status=="success") {
             setSiswa(data)
+            setPersentase(res.data.persentase_nilai)
             $.each(range,function (key,row) {
               var html = `
                 <span class="font-weight-bold text-danger ml-1">
@@ -190,7 +198,6 @@ $(document).ready(function() {
   })
 
   $('#btn_setting').on('click',function (e) {
-    console.log("wkwkwk")
     $('#settingModal').modal('show')
   })
 
@@ -217,12 +224,11 @@ $(document).ready(function() {
     for (let index = 1; index <= countData; index++) {
       var arr = {
         'nomor' : $('#id_nilai_'+index).val(),
-        'is_publisheded' : 1,
+        'is_published' : 1,
         'publisher' : id_dosen,
       }
       dataSimpan.push(arr)
     }
-    console.log(dataSimpan)
     $.ajax({
       url: url_api+"/nilai/publish",
       type: 'put',
@@ -355,13 +361,22 @@ function setSiswa(data) {
   $('.text-range').css('display','block')
   $('#btn_setting').attr('hidden','false')
   countData = i;
-  
 }
+
+function setPersentase(arr_persentase) {
+  if(arr_persentase.length < 1) return false;
+  const obj_persentase = arr_persentase[0];
+  for(const i in obj_persentase){
+    if(i==='id') $('#table-persentase input#id_persentase').val(obj_persentase[i]);
+    else if(i==='total') $('#table-persentase input#total_persentase').val(obj_persentase[i]);
+    else $('#table-persentase input#'+i).val(obj_persentase[i]);
+  }
+}
+
 $('.persentase-count').on('keyup',function (e) {
   countPersentase(this)
 })
 $('.persentase-count').on('change',function (e) {
-  console.log("simpan")
   var dataPersentase = {
     'id' : $('#id_persentase').val(),
     'matakuliah' : $('#matakuliah').val(),
@@ -371,8 +386,8 @@ $('.persentase-count').on('change',function (e) {
     'persentase_kuis' : $('#persentase_kuis').val(),
     'persentase_kehadiran' : $('#persentase_kehadiran').val(),
     'persentase_praktikum' : $('#persentase_praktikum').val(),
-    'total' : $('#total').val(),
-    'dosen' : id_dosen,
+    'total' : $('#total_persentase').val(),
+    'dosen' : id_dosen || null,
   }
   $.ajax({
     url: url_api+"/persentase-nilai",
@@ -398,41 +413,22 @@ function countPersentase(e) {
   var persentase_kuis = $('#persentase_kuis').val()
   var persentase_kehadiran = $('#persentase_kehadiran').val()
   var persentase_praktikum = $('#persentase_praktikum').val()
-  console.log(persentase_uts)
-  console.log(persentase_uas)
-  console.log(persentase_tugas)
-  console.log(persentase_kuis)
-  console.log(persentase_kehadiran)
-  console.log(persentase_praktikum)
   var total = Number(persentase_uts)+Number(persentase_uas)+Number(persentase_tugas)+Number(persentase_kuis)+Number(persentase_kehadiran)+Number(persentase_praktikum)
   $('#total_persentase').val(total)
   if (total>100) {
-    console.log(e)
-    console.log("lebih dari ")
     $(e).val("");
     $('#total_persentase').val("")
   }
-  console.log(total)
 }
 
 function getKelas(prodi,semester) {
   var kelas = $.grep(dataFilter['kelas'], function(e){ return e.program_studi == prodi; });
-  console.log(kelas);
   $('#kelas').html('')
-  var optkelas = `<option value=""> - </option>`;
+  var optKelas = `<option value=""> - </option>`;
   $.each(kelas,function (key,row) {
-    optkelas += `<option value="${row.nomor}">${row.kode}</option>`
-  })
-  // var matakuliah = $('#kelas').val()
-  // var kelas = $.grep(dataFilter['kelas'], function(e){ return e.matakuliah == matakuliah; });
-
-  // $('#kelas').html('')
-  // var optKelas = `<option value=""> - </option>`;
-  // $.each(kelas,function (key,row) {
-  //   optKelas += `<option value="${row.nomor}">${row.kode}</option>`
-  // })
-  // $('#kelas').append(optKelas)
-  $('#kelas').append(optKelas)
+    optKelas += `<option value="${row.nomor}">${row.kode}</option>`;
+  });
+  $('#kelas').append(optKelas);
   return true;
 }
 async function getFilter(id_dosen) {
@@ -446,7 +442,6 @@ async function getFilter(id_dosen) {
         if (res.status=="success") {
             var data = res['data'];
             dataFilter = data;
-            console.log(dataFilter)
             $('#prodi').html('')              
             var optProdi = `<option value=""> - </option>`;
             $.each(data['prodi'],function (key,row) {
@@ -466,18 +461,21 @@ function set_edit(){
   $('#title-page').text(`Nilai Mahasiswa Tahun ${searchParams.get('tahun')}`)
 
   $.ajax({
-    url: "{{url('api/v1/mahasiswa/nim')}}/"+searchParams.get('nim'),
+    url: "{{url('api/v1/nilai/get-nim')}}",
     type: 'get',
     dataType: 'json',
-    data: {},
+    data: {
+      nim: searchParams.get('nim'),
+      
+    },
     success: function(res) {
         if (res.status=="success") {
           let semester = searchParams.get('semester');
           let prodi = res.data.program_studi;
           $('#prodi').val(prodi).trigger("change");
           $('#semester').val(semester).trigger("change");
-          $('#matkul').val(searchParams.get('matkul')).trigger("change");
           $('#kelas').val(searchParams.get('kelas')).trigger("change");
+          $('#matkul').val(searchParams.get('matkul')).trigger("change");
         } else {
           alert('Silahkan cek ulang program studi mahasiswa.')
         }

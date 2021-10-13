@@ -425,6 +425,13 @@ Route::prefix('admin')->middleware(['aksesuntuk:admin'])->group(function () {
             ]);
         });
 
+        Route::get('/absensi/dosen', function () {
+            return view('admin.kuliah.absensidosen', [
+                "page" => "admin",
+                "title" => "rekap-absensi-mahasiswa"
+            ]);
+        });
+
         Route::get('/rekap-nilai', function () {
             return view('akademik.kuliah/datarekapnilai', [
                 "title" => "rekap-nilai"

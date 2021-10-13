@@ -73,4 +73,9 @@ class Mahasiswa extends Model
         'lulussmu',
         'nomor',
     ];
+
+    public function programStudi()
+    {
+        return $this->belongsTo(Prodi::class, 'program_studi', 'nomor');
+    }
 }

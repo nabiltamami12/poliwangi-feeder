@@ -145,6 +145,7 @@ Route::prefix('v1')->group(function () {
     Route::get('/nilai/{tahun}&{mk}&{kls}&{prodi}', '\App\Http\Controllers\API\NilaiController@show');
     Route::post('/nilai', '\App\Http\Controllers\API\NilaiController@store');
     Route::put('/nilai/publish', '\App\Http\Controllers\API\NilaiController@publish');
+    Route::get('/nilai/get-nim', [Ctr\NilaiController::class, 'get_nim']);
     Route::delete('/nilai/{id}', '\App\Http\Controllers\API\NilaiController@destroy');
 
     // ABSENSI

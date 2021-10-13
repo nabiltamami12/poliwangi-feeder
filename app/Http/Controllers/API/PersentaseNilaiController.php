@@ -50,12 +50,10 @@ class PersentaseNilaiController extends Controller
         $data = $request->data;
        
         try {
-            foreach ($data as $key => $value) {
-                if ($value->id=="") {
-                    $data = PersentaseNilai::create($data);
-                }else {
-                    $data = PersentaseNilai::where('id',$value->id)->update($value);
-                }
+            if ($data['id'] === "") {
+                $data = PersentaseNilai::create($data);
+            }else {
+                $data = PersentaseNilai::where('id',$data['id'])->update($data);
             }
             $this->data = null;
             $this->status = "success";
