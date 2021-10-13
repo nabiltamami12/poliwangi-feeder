@@ -397,14 +397,14 @@ Route::prefix('admin')->middleware(['aksesuntuk:admin'])->group(function () {
             ]);
         });
         Route::get('/datarangenilai/cu/', function () {
-            return view('akademik.masterData/curangenilai', [
+            return view('akademik.masterData/editrangenilai', [
                 "id" => null,
                 "title" => "akademik-master"
             ]);
         });
-        Route::get('/datarangenilai/cu/{id}', function ($id) {
-            return view('akademik.masterData/curangenilai', [
-                "id" => $id,
+        Route::get('/datarangenilai/history/', function () {
+            return view('akademik.masterData/historyrangenilai', [
+                "id" => null,
                 "title" => "akademik-master"
             ]);
         });

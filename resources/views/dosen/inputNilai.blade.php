@@ -128,10 +128,10 @@
 <script>
 var dataFilter, countData, id_dosen;
 var searchParams = new URLSearchParams(window.location.search);
+var id_dosen = searchParams.get('nim') ? null : dataGlobal['user']['nomor'];
+var nama = dataGlobal['user']['nama'];
 
 $(document).ready(function() {
-  id_dosen = searchParams.get('nim') ? null : dataGlobal['user']['nomor'];
-  var nama = dataGlobal['user']['nama'];
   getFilter(id_dosen);
 
   $('#prodi').on('change',function (e) {
@@ -168,6 +168,7 @@ $(document).ready(function() {
       success: function(res) {
         var data = res.data.data;
         var range = res.data.range_nilai;
+        var persentase = res.data.persentase_nilai;
         if (res.status=="success") {
             setSiswa(data)
             setPersentase(res.data.persentase_nilai)
@@ -177,6 +178,9 @@ $(document).ready(function() {
                   ${row.nh} = ${row.na}-${row.na_atas}, 
                 </span>`;
               $('#list_range').append(html);
+            })
+            $.each(persentase,function (key,row) {
+              $('#'+key).val(row)
             })
         } else {
             // alert gagal
@@ -236,7 +240,6 @@ $(document).ready(function() {
       data: {"data":dataSimpan},
       success: function(res) {
           if (res.status=="success") {
-              console.log(res)
           } else {
               // alert gagal
           }
@@ -266,7 +269,6 @@ $(document).ready(function() {
       }
       dataSimpan.push(arr)
     }
-    console.log(dataSimpan)
     $.ajax({
       url: url_api+"/nilai",
       type: 'post',
@@ -274,7 +276,6 @@ $(document).ready(function() {
       data: {"data":dataSimpan},
       success: function(res) {
           if (res.status=="success") {
-              console.log(res)
           } else {
               // alert gagal
           }
@@ -379,7 +380,7 @@ $('.persentase-count').on('keyup',function (e) {
 $('.persentase-count').on('change',function (e) {
   var dataPersentase = {
     'id' : $('#id_persentase').val(),
-    'matakuliah' : $('#matakuliah').val(),
+    'matakuliah' : $('#matkul').val(),
     'persentase_uts' : $('#persentase_uts').val(),
     'persentase_uas' : $('#persentase_uas').val(),
     'persentase_tugas' : $('#persentase_tugas').val(),
@@ -387,16 +388,15 @@ $('.persentase-count').on('change',function (e) {
     'persentase_kehadiran' : $('#persentase_kehadiran').val(),
     'persentase_praktikum' : $('#persentase_praktikum').val(),
     'total' : $('#total_persentase').val(),
-    'dosen' : id_dosen || null,
+    'dosen' : id_dosen,
   }
   $.ajax({
     url: url_api+"/persentase-nilai",
     type: 'post',
     dataType: 'json',
-    data: {"data":dataPersentase},
+    data: dataPersentase,
     success: function(res) {
         if (res.status=="success") {
-            console.log(res)
         } else {
             // alert gagal
         }
