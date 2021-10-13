@@ -15,6 +15,7 @@ class RangeNilai extends Model
         'na',
         'nh',
         'akumulasi',
-        'na_atas'
+        'na_atas',
+        'versi'
     ];
 }

@@ -37,10 +37,8 @@ Route::prefix('v1')->group(function () {
     Route::get('/matkul_jenis', [Ctr\MatakuliahJenisController::class, 'index']);
     // Range Nilai
     Route::get('/rangenilai', [Ctr\RangeNilaiController::class, 'index']);
-    Route::get('/rangenilai/{id}', [Ctr\RangeNilaiController::class, 'show']);
+    Route::get('/rangenilai/history', [Ctr\RangeNilaiController::class, 'history']);
     Route::post('/rangenilai', [Ctr\RangeNilaiController::class, 'store']);
-    Route::put('/rangenilai/{id}', [Ctr\RangeNilaiController::class, 'update']);
-    Route::delete('/rangenilai/{id}', [Ctr\RangeNilaiController::class, 'destroy']);
     // Jurusan
     Route::get('/jurusan', [Ctr\JurusanController::class, 'index']);
     Route::get('/jurusan/{id}', [Ctr\JurusanController::class, 'show']);
