@@ -12,12 +12,6 @@
 	margin-left: auto;
 	margin-right: auto;
 }
-.form-control.readonly{
-	pointer-events: none;
-	opacity: 1;
-	background-color: #e9ecef;
-	color: #041f2f;
-}
 </style>
 <!-- Page content -->
 <section class="page-content container-fluid">
@@ -132,7 +126,7 @@
 
 @section('js')
 <script>
-	var dataFilter, countData, id_dosen;
+	var dataFilter, countData, id_dosen, range;
 	var searchParams = new URLSearchParams(window.location.search);
 	var id_dosen = searchParams.get('nim') ? null : dataGlobal['user']['nomor'];
 	var nama = dataGlobal['user']['nama'];
@@ -173,11 +167,12 @@
 				data: {},
 				success: function(res) {
 					var data = res.data.data;
-					var range = res.data.range_nilai;
+					range = res.data.range_nilai;
 					var persentase = res.data.persentase_nilai;
 					if (res.status=="success") {
-						setSiswa(data)
-						setPersentase(res.data.persentase_nilai)
+						setSiswa(data);
+						setPersentase(res.data.persentase_nilai);
+						persen_nilai();
 						$.each(range,function (key,row) {
 							var html = `
 							<span class="font-weight-bold text-danger ml-1">
@@ -349,10 +344,10 @@ function setSiswa(data) {
 			<input type="text" class="form-control" onkeyup="persen_nilai()" id="praktikum_${i}" value="${row.praktikum}">
 		</td>
 		<td class="text-center px-3">
-			<input type="text" class="form-control readonly" id="na_${i}" value="${row.na}" readonly="readonly">
+			<input type="text" class="form-control" id="na_${i}" value="${row.na}" disabled>
 		</td>
 		<td class="text-center px-3">
-			<input type="text" class="form-control" id="up_${i}" disabled>
+			<input type="text" class="form-control" id="up_${i}" value="${row.her}" disabled>
 		</td>
 		<td class="text-center px-3">
 			<input type="text" class="form-control" id="nhu_${i}" value="${row.nhu}" disabled>
@@ -368,8 +363,8 @@ function setSiswa(data) {
 	})
 	$('.text-range').css('display','block')
 	$('#btn_setting').attr('hidden','false')
-	persen_nilai();
 	countData = i;
+	return true;
 }
 
 function setPersentase(obj_persentase) {
@@ -379,6 +374,7 @@ function setPersentase(obj_persentase) {
 		else if(i==='total') $('#table-persentase input#total_persentase').val(obj_persentase[i]);
 		else $('#table-persentase input#'+i).val(obj_persentase[i]);
 	}
+	return true;
 }
 
 $('.persentase-count').on('keyup',function (e) {
@@ -502,6 +498,20 @@ function persen_nilai() {
 			const value_nilai = Number($('#'+i+'_'+k).val());
 			_na += (init_persen * value_nilai / 100);
 		}
+		
+		// set nilai yang lain
+		for(const i of range){
+			if(_na >= Number(i.na) && _na <= Number(i.na_atas)){
+				$('#nh_'+k).val(i.nh);
+			}
+			const val_up = $('#up_'+k).val();
+			let _up = Number(val_up);
+			_up = (val_up === '' || val_up === null || val_up < 1 )  ? _na : _up;
+			if(_up >= Number(i.na) && _up <= Number(i.na_atas)){
+				$('#nhu_'+k).val(i.nh);	
+			}
+		}
+
 		$('#na_'+k).val(round(_na, 2));
 	});
 	return true;
