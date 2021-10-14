@@ -493,17 +493,14 @@ function set_edit(){
 }
 
 function persen_nilai() {
+	const arr_item = ['uts', 'uas', 'tugas', 'kuis', 'kehadiran', 'praktikum'];
 	$('#table-nilai-list tr').each(function(key, row){
 		const k = (key+1)
-		const arr_item = ['uts', 'uas', 'tugas', 'kuis', 'kehadiran', 'praktikum'];
-		const jml_item = arr_item.length;
-		let total_nilai = 0;
-		for(const i of arr_item) total_nilai += Number($('#'+i+'_'+k).val());
-
-			let _na = 0;
+		let _na = 0;
 		for(const i of arr_item){
 			const init_persen = Number($('#persentase_'+i).val());
-			_na += (init_persen * total_nilai / 100) / jml_item;
+			const value_nilai = Number($('#'+i+'_'+k).val());
+			_na += (init_persen * value_nilai / 100);
 		}
 		$('#na_'+k).val(round(_na, 2));
 	});
