@@ -28,13 +28,6 @@
               <span class="nav-link-text">Dashboard</span>
             </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link {{($title === "admin-dashboard") ? 'aktif' : ''}}"
-              href="{{ url('/admin/mahasiswa') }} ">
-              <i class="iconify" data-icon="bx-bx-home-circle"></i>
-              <span class="nav-link-text">Mahasiswa</span>
-            </a>
-          </li>
 
           <li class="nav-item">
             <div class="nav-link {{($title === "admin-master") ? 'aktif' : ''}}">
@@ -240,6 +233,15 @@
                 </a>
               </li>  -->
             </ul>
+          </li>
+
+
+          <li class="nav-item">
+            <a class="nav-link {{($title === "admin-dashboard") ? 'aktif' : ''}}"
+              href="{{ url('/admin/mahasiswa') }} ">
+              <i class="iconify" data-icon="bx:bxs-user" data-inline="false"></i>
+              <span class="nav-link-text">Mahasiswa</span>
+            </a>
           </li>
           <!-- ===================== -->
           
