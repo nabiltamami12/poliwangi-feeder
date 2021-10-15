@@ -192,6 +192,12 @@ Route::prefix('admin')->middleware(['aksesuntuk:admin'])->group(function () {
         ]);
     });
 
+    Route::get('/mahasiswa', function () {
+        return view('akademik.masterData/datamahasiswalama', [
+            "title" => "admin-mahasiswa",
+        ]);
+    });
+
     Route::prefix('master')->group(function () {
         Route::get('/dataperiode', function () {
             return view('akademik.masterData/dataperiode', [
@@ -397,14 +403,14 @@ Route::prefix('admin')->middleware(['aksesuntuk:admin'])->group(function () {
             ]);
         });
         Route::get('/datarangenilai/cu/', function () {
-            return view('akademik.masterData/curangenilai', [
+            return view('akademik.masterData/editrangenilai', [
                 "id" => null,
                 "title" => "akademik-master"
             ]);
         });
-        Route::get('/datarangenilai/cu/{id}', function ($id) {
-            return view('akademik.masterData/curangenilai', [
-                "id" => $id,
+        Route::get('/datarangenilai/history/', function () {
+            return view('akademik.masterData/historyrangenilai', [
+                "id" => null,
                 "title" => "akademik-master"
             ]);
         });
@@ -420,6 +426,13 @@ Route::prefix('admin')->middleware(['aksesuntuk:admin'])->group(function () {
         
         Route::get('/absensi/rekap', function () {
             return view('akademik.kuliah.rekapabsensimahasiswa', [
+                "page" => "admin",
+                "title" => "rekap-absensi-mahasiswa"
+            ]);
+        });
+
+        Route::get('/absensi/dosen', function () {
+            return view('admin.kuliah.absensidosen', [
                 "page" => "admin",
                 "title" => "rekap-absensi-mahasiswa"
             ]);

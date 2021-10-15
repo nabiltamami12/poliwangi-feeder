@@ -15,6 +15,13 @@ class RangeNilai extends Model
         'na',
         'nh',
         'akumulasi',
-        'na_atas'
+        'na_atas',
+        'versi'
     ];
+
+    public static function last_version()
+    {
+        $max_version = RangeNilai::max('versi');
+        return RangeNilai::orderBy('nh')->where('versi', $max_version)->get();
+    }
 }

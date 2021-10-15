@@ -136,6 +136,12 @@
                 </a>
               </li>
               <li class="nav-item">
+                <a class="nav-link {{($title === "rekap-absensi-dosen") ? 'aktif' : ''}}" href="{{url('admin/kuliah/absensi/dosen')}}">
+                  <span class="mini_icon">RD</span>
+                  <span class="nav-link-text ml-0">Rekap Presensi Dosen</span>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a class="nav-link {{($title === "rekap-nilai") ? 'aktif' : ''}}" href="{{url('admin/kuliah/rekap-nilai')}}">
                   <span class="mini_icon">RN</span>
                   <span class="nav-link-text ml-0">Rekap Nilai Mahasiswa</span>
@@ -184,7 +190,7 @@
             </ul>
           </li>
 
-          <!-- <li class="nav-item">
+          <li class="nav-item">
             <div class="nav-link {{($title === "admin-settingpmb") ? 'aktif' : ''}}">
               <i class="iconify-inline" data-icon="ant-design:setting-outlined"></i>
               <span class="nav-link-text">Setting PMB</span>
@@ -202,7 +208,7 @@
                   <span class="nav-link-text">Setting Jalur Syarat PMB</span>
                 </a>
               </li>
-              <li class="nav-item">
+              <!-- <li class="nav-item">
                 <a class="nav-link" href="{{ url('/admin/pmb/settingjurusanpilihan')}}">
                   <span class="mini_icon">JP</span>
                   <span class="nav-link-text">Setting Jurusan Pilihan</span>
@@ -225,9 +231,18 @@
                   <span class="mini_icon">JL</span>
                   <span class="nav-link-text">Setting Jurusan Linear</span>
                 </a>
-              </li> 
+              </li>  -->
             </ul>
-          </li> -->
+          </li>
+
+
+          <li class="nav-item">
+            <a class="nav-link {{($title === "admin-dashboard") ? 'aktif' : ''}}"
+              href="{{ url('/admin/mahasiswa') }} ">
+              <i class="iconify" data-icon="bx:bxs-user" data-inline="false"></i>
+              <span class="nav-link-text">Mahasiswa</span>
+            </a>
+          </li>
           <!-- ===================== -->
           
 

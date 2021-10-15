@@ -37,10 +37,8 @@ Route::prefix('v1')->group(function () {
     Route::get('/matkul_jenis', [Ctr\MatakuliahJenisController::class, 'index']);
     // Range Nilai
     Route::get('/rangenilai', [Ctr\RangeNilaiController::class, 'index']);
-    Route::get('/rangenilai/{id}', [Ctr\RangeNilaiController::class, 'show']);
+    Route::get('/rangenilai/history', [Ctr\RangeNilaiController::class, 'history']);
     Route::post('/rangenilai', [Ctr\RangeNilaiController::class, 'store']);
-    Route::put('/rangenilai/{id}', [Ctr\RangeNilaiController::class, 'update']);
-    Route::delete('/rangenilai/{id}', [Ctr\RangeNilaiController::class, 'destroy']);
     // Jurusan
     Route::get('/jurusan', [Ctr\JurusanController::class, 'index']);
     Route::get('/jurusan/{id}', [Ctr\JurusanController::class, 'show']);
@@ -64,6 +62,7 @@ Route::prefix('v1')->group(function () {
 
     //prodi
     Route::get('/prodi', '\App\Http\Controllers\API\ProdiController@index');
+    Route::get('/prodi-lama', '\App\Http\Controllers\API\ProdiController@index_lama');
     Route::get('/prodi/{id}', '\App\Http\Controllers\API\ProdiController@show');
     Route::post('/prodi', '\App\Http\Controllers\API\ProdiController@store');
     Route::put('/prodi/{id}', '\App\Http\Controllers\API\ProdiController@update');
@@ -120,6 +119,7 @@ Route::prefix('v1')->group(function () {
 
     // Mahasiswa
     Route::get('/mahasiswa', [Ctr\MahasiswaController::class, 'index']);
+    Route::get('/mahasiswa-lama', [Ctr\MahasiswaController::class, 'index_lama']);
     Route::get('/mahasiswa/{id}', [Ctr\MahasiswaController::class, 'show']);
     Route::get('/mahasiswa/nim/{nim}', [Ctr\MahasiswaController::class, 'by_nim']);
     Route::post('/mahasiswa', [Ctr\MahasiswaController::class, 'store']);
@@ -145,6 +145,7 @@ Route::prefix('v1')->group(function () {
     Route::get('/nilai/{tahun}&{mk}&{kls}&{prodi}', '\App\Http\Controllers\API\NilaiController@show');
     Route::post('/nilai', '\App\Http\Controllers\API\NilaiController@store');
     Route::put('/nilai/publish', '\App\Http\Controllers\API\NilaiController@publish');
+    Route::get('/nilai/get-nim', [Ctr\NilaiController::class, 'get_nim']);
     Route::delete('/nilai/{id}', '\App\Http\Controllers\API\NilaiController@destroy');
 
     // ABSENSI

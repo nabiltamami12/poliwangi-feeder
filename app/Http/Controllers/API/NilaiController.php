@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\Nilai;
 use App\Models\RangeNilai;
 use App\Models\PersentaseNilai;
+use App\Models\Mahasiswa;
 use DB;
 use Illuminate\Support\Carbon;
 use App\Http\Requests\ImportNilai;
@@ -31,7 +32,7 @@ class NilaiController extends Controller
         //
         $set_tahun = $request->get('tahun') ?? $this->tahun_aktif;
         try {
-            $rangenilai = RangeNilai::orderBy('nh')->get();
+            $rangenilai = RangeNilai::last_version();
             $persentase_nilai = PersentaseNilai::select('*','id as id_persentase')->where('matakuliah',$request->matakuliah)->first();
 
             $input = DB::table("mahasiswa as m")
@@ -270,6 +271,25 @@ class NilaiController extends Controller
                 $this->status = "failed";
                 $this->error = "data tidak ada";
             }
+        } catch (QueryException $e) {
+            $this->status = "failed";
+            $this->error = $e;
+        }
+        return response()->json([
+            "status" => $this->status,
+            "data" => $this->data,
+            "error" => $this->error
+        ]);
+    }
+
+    public function get_nim(Request $req)
+    {
+        try {
+            $obj = Mahasiswa::where('nrp', $req->nim)->first();
+            $this->status = "success";
+            $this->data = [
+                "program_studi" => $obj->programStudi->nomor ?? null
+            ];
         } catch (QueryException $e) {
             $this->status = "failed";
             $this->error = $e;

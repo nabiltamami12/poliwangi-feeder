@@ -35,6 +35,14 @@
               <label for="gradeA_end">Sampai</label>
               <input type="text" class="form-control" id="gradeA_end" value="81">
             </div>
+            <div class="col-sm d-flex align-items-center mt-2 mt-sm-0">
+              <label for="gradeA_end">Huruf</label>
+              <input type="text" class="form-control" id="gradeA_end" value="81">
+            </div>
+            <div class="col-sm d-flex align-items-center mt-2 mt-sm-0">
+              <label for="gradeA_end">Akumulasi</label>
+              <input type="text" class="form-control" id="gradeA_end" value="81">
+            </div>
           </div>
 
           <div class="form-row mt-4-5">

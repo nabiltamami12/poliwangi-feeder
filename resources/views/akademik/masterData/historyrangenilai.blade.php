@@ -18,13 +18,10 @@
             </div>
             <div class="col text-right">
 
-              <button type="button" class="btn btn-secondary" onclick="history_btn()">
-                History
+              <button type="button" class="btn btn-secondary" onclick="back_btn()">
+                Kembali
               </button>
               
-              <button type="button" class="btn btn-warning ml-md-2" onclick="add_btn()">
-                Edit
-              </button>
               </div>
             </div>
             
@@ -35,6 +32,7 @@
             <table id="datatable" class="table align-items-center table-flush table-borderless table-hover">
               <thead class="table-header">
                 <tr>
+                  <th scope="col">Versi</th>
                   <th scope="col">Nilai huruf</th>
                   <th scope="col">Nilai Angka</th>
                   <th scope="col">Nilai angka atas</th>
@@ -55,32 +53,39 @@
 <script>
   $(document).ready(function() {
   var nomor = 1;
-  dt_url = `${url_api}/rangenilai`;
+  dt_url = `${url_api}/rangenilai/history`;
 dt_opt = {
   "columnDefs": [
-      {
+    {
         "aTargets": [0],
         "mData": null,
         "mRender": function(data, type, full) {
-          res = data['nh'];
+          res = data['versi'];
           return res;
         }
       },{
         "aTargets": [1],
         "mData": null,
         "mRender": function(data, type, full) {
-          res = data['na'];
+          res = data['nh'];
           return res;
         }
       },{
         "aTargets": [2],
         "mData": null,
         "mRender": function(data, type, full) {
-          res = data['na_atas'];
+          res = data['na'];
           return res;
         }
       },{
         "aTargets": [3],
+        "mData": null,
+        "mRender": function(data, type, full) {
+          res = data['na_atas'];
+          return res;
+        }
+      },{
+        "aTargets": [4],
         "mData": null,
         "mRender": function(data, type, full) {
           res = data['akumulasi'];
@@ -90,8 +95,8 @@ dt_opt = {
     ]}
 } );
 
-function history_btn() {
-  window.location.href = window.location.href+"/history";
+function back_btn() {
+    window.history.go(-1);
 }
 </script>
 @endsection
