@@ -47,6 +47,52 @@ class MahasiswaController extends Controller
 		]);
 	}
 
+	public function index_lama(Request $request)
+	{
+		
+		DB::enableQueryLog();
+		$data = $request->all();
+		$where = [];
+		if ( isset($request->program) ) {
+			array_push($where,['k.program','=',$request->program]);
+		}
+		if ( isset($request->jurusan) ) {
+			array_push($where,['k.jurusan','=',$request->jurusan]);
+		}
+		if ( isset($request->kelas) ) {
+			array_push($where,['k.kelas','=',$request->kelas]);
+		}
+		array_push($where,['m.status','=',$request->status]);
+		try {
+		 
+			$data = DB::table('mahasiswa as m')
+			->select('m.nomor','m.nrp','m.nama','m.tgllahir','m.notelp','m.email',)
+			->join('kelas_old as k','m.kelas','=','k.nomor','left')
+			->join('program_old as p','k.program','=','p.nomor','left')
+			->join('jurusan_old as j','k.jurusan','=','j.nomor')
+			->where($where)
+			->get();
+
+			$this->data = $data;
+			$this->status = "success";
+		} catch (QueryException $e) {
+			$this->status = "failed";
+			$this->error = $e;
+		}
+		return response()->json([
+			"status" => $this->status,
+			"data" => $this->data,
+			"error" => $this->error
+		]);
+	}
+
+	// select `m`.`nomor`, `m`.`nrp`, `m`.`nama`, `m`.`tgllahir`, `m`.`notelp`, `m`.`email` 
+	// from `mahasiswa` as `m` 
+	// left join `kelas_old` as `k` on `m`.`kelas` = `k`.`nomor` 
+	// left join `program_old` as `p` on `k`.`program` = `p`.`nomor` 
+	// inner join `jurusan_old` as `j` on `k`.`jurusan` = `j`.`nomor` 
+	// where (`k`.`program` = ? and `k`.`jurusan` = ? and `m`.`kelas` is null and `m`.`status` = ? and `m`.`program_studi` = ?)"
+
 	public function store(Request $request)
 	{
 		$data = $request->all();

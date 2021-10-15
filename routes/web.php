@@ -192,6 +192,12 @@ Route::prefix('admin')->middleware(['aksesuntuk:admin'])->group(function () {
         ]);
     });
 
+    Route::get('/mahasiswa', function () {
+        return view('akademik.masterData/datamahasiswalama', [
+            "title" => "admin-mahasiswa",
+        ]);
+    });
+
     Route::prefix('master')->group(function () {
         Route::get('/dataperiode', function () {
             return view('akademik.masterData/dataperiode', [

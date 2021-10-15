@@ -62,6 +62,7 @@ Route::prefix('v1')->group(function () {
 
     //prodi
     Route::get('/prodi', '\App\Http\Controllers\API\ProdiController@index');
+    Route::get('/prodi-lama', '\App\Http\Controllers\API\ProdiController@index_lama');
     Route::get('/prodi/{id}', '\App\Http\Controllers\API\ProdiController@show');
     Route::post('/prodi', '\App\Http\Controllers\API\ProdiController@store');
     Route::put('/prodi/{id}', '\App\Http\Controllers\API\ProdiController@update');
@@ -118,6 +119,7 @@ Route::prefix('v1')->group(function () {
 
     // Mahasiswa
     Route::get('/mahasiswa', [Ctr\MahasiswaController::class, 'index']);
+    Route::get('/mahasiswa-lama', [Ctr\MahasiswaController::class, 'index_lama']);
     Route::get('/mahasiswa/{id}', [Ctr\MahasiswaController::class, 'show']);
     Route::get('/mahasiswa/nim/{nim}', [Ctr\MahasiswaController::class, 'by_nim']);
     Route::post('/mahasiswa', [Ctr\MahasiswaController::class, 'store']);
