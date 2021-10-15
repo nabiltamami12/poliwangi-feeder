@@ -34,7 +34,7 @@
           <li class="nav-item">
             <a class="nav-link {{($title === "keuangan-tarif") ? 'aktif' : ''}}" href="{{ url('/keuangan/tarif') }} ">
               <i class="iconify" data-icon="bx:bx-cog"></i>
-              <span class="nav-link-text">Tarif UKT & SPI</span>
+              <span class="nav-link-text">Tarif SPI dan UKT</span>
             </a>
           </li>
 
@@ -48,6 +48,12 @@
                 <a class="nav-link" href="{{ url('/keuangan/rekapitulasi/datapendaftar')}}">
                   <span class="mini_icon">PM</span>
                   <span class="nav-link-text">Pendaftar Mahasiswa Baru</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url('/keuangan/rekapitulasi/datamahasiswa')}}">
+                  <span class="mini_icon">MS</span>
+                  <span class="nav-link-text">Mahasiswa</span>
                 </a>
               </li>
               <li class="nav-item">

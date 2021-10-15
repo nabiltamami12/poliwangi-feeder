@@ -461,7 +461,7 @@ Route::prefix('admin')->middleware(['aksesuntuk:admin'])->group(function () {
 
     Route::prefix('keuangan')->group(function () {
         Route::get('/piutangmahasiswa', function () {
-            return view('keuangan.piutangMahasiswa', [
+            return view('keuangan.dataMahasiswa', [
                 "title" => "keuangan-rekapitulasi",
             ]);
         });
@@ -667,6 +667,12 @@ Route::prefix('keuangan')->middleware(['aksesuntuk:keuangan'])->group(function (
             ]);
         });
 
+        Route::get('/datamahasiswa', function () {
+            return view('keuangan.dataMahasiswa', [
+                "title" => "keuangan-rekapitulasi",
+            ]);
+        });
+
         Route::get('/spi', function () {
             return view('keuangan.spiMandiri', [
                 "title" => "keuangan-rekapitulasi",
@@ -681,8 +687,8 @@ Route::prefix('keuangan')->middleware(['aksesuntuk:keuangan'])->group(function (
             ]);
         });
 
-        Route::get('/piutangmahasiswa', function () {
-            return view('keuangan.piutangMahasiswa', [
+        Route::get('/piutangmahasiswa', function () { /*keuangan/dashboard*/
+            return view('keuangan.dashboardKeuangan', [
                 "title" => "keuangan-rekapitulasi",
             ]);
         });
