@@ -439,13 +439,13 @@ Route::prefix('admin')->middleware(['aksesuntuk:admin'])->group(function () {
         });
 
         Route::get('/rekap-nilai', function () {
-            return view('akademik.kuliah/datarekapnilai', [
+            return view('akademik.kuliah.datarekapnilai', [
                 "title" => "rekap-nilai"
             ]);
         });
 
         Route::get('/rekap-nilai/edit', function () {
-            return view('dosen.inputNilai', [
+            return view('admin.kuliah.nilai',[
                 "title" => "dosen-penilaian"
             ]);
         });

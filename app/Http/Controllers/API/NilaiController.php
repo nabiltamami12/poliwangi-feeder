@@ -5,14 +5,15 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Carbon;
+use App\Http\Requests\ImportNilai;
+use Illuminate\Database\QueryException;
+use DB;
 use App\Models\Nilai;
 use App\Models\RangeNilai;
 use App\Models\PersentaseNilai;
 use App\Models\Mahasiswa;
-use DB;
-use Illuminate\Support\Carbon;
-use App\Http\Requests\ImportNilai;
-use Illuminate\Database\QueryException;
+use App\Models\Program;
 
 class NilaiController extends Controller
 {
@@ -102,6 +103,7 @@ class NilaiController extends Controller
     {
         try {
             $set_tahun = $request->get('tahun') ?? $this->tahun_aktif;
+            $set_semester = $request->get('semester') ?? $this->semester_aktif;
             if ($request->nim) {
                 $data = DB::table('mahasiswa as m')
                             ->select('m.nrp','m.nama','mk.kode','mk.matakuliah','m.jumlah_sks','n.nomor' ,'n.nh','n.na', 'mk.nomor as nomor_matkul', 'kl.kelas')
@@ -110,7 +112,7 @@ class NilaiController extends Controller
                             ->join('matakuliah as mk','mk.nomor','=','kl.matakuliah')
                             ->join('nilai as n','n.kuliah','=','kl.nomor','left')
                             ->where('m.nrp',$request->nim)
-                            ->where('mk.semester',$this->semester_aktif)
+                            ->where('mk.semester', $set_semester)
                             ->where('kl.tahun', $set_tahun)
                             ->get();
             }else{
@@ -286,9 +288,12 @@ class NilaiController extends Controller
     {
         try {
             $obj = Mahasiswa::where('nrp', $req->nim)->first();
+            $program = Program::find($obj->programStudi->program);
             $this->status = "success";
             $this->data = [
-                "program_studi" => $obj->programStudi->nomor ?? null
+                "program_studi" => $program->program.' '.$obj->programStudi->program_studi ?? null,
+                "kelas" => 'obj kelas',
+                "matakuliah" => 'obj matakuliah'
             ];
         } catch (QueryException $e) {
             $this->status = "failed";
