@@ -47,6 +47,25 @@ class ProdiController extends Controller
             "error" => $this->error
         ]);
     }
+    
+    public function index_lama()
+    {
+        try {
+            $program = DB::table('program_old')->get();
+            $jurusan = DB::table('jurusan_old')->get();
+            $kelas = DB::table('kelas_old')->get();
+            $this->data = ['program'=>$program,'jurusan'=>$jurusan,'kelas'=>$kelas];
+            $this->status = "success";
+        } catch (QueryException $e) {
+            $this->status = "failed";
+            $this->error = $e;
+        }
+        return response()->json([
+            "status" => $this->status,
+            "data" => $this->data,
+            "error" => $this->error
+        ]);
+    }
 
     /**
      * Store a newly created resource in storage.

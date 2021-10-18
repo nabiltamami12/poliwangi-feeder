@@ -34,36 +34,69 @@
               <tr>
                 <th scope="col" class="text-center">No</th>
                 <th scope="col" class="text-center">No. VA</th>
-                <th scope="col" style="width: 25%">Nama</th>
-                <th scope="col" class="text-right" style="width: 25%">Nominal</th>
-                <th scope="col" style="width: 25%">Status Bayar</th>
+                <th scope="col">Nama</th>
+                <th scope="col" class="text-right">Nominal</th>
+                <th scope="col">Status Bayar</th>
+                <th scope="col">Aksi</th>
               </tr>
             </thead>
-
-            <tbody class="table-body">
-              <tr>
-                <td class="text-center">1</td>
-                <td class="text-center">1281928746273601</td>
-                <td class="font-weight-bold text-capitalize">Afkarina ferin verigia</td>
-                <td class="text-right">Rp. 100.000</td>
-                <td class="text-success text-uppercase font-weight-bold">lunas</td>
-              </tr>
-
-              <tr>
-                <td class="text-center">2</td>
-                <td class="text-center">1281928746273928</td>
-                <td class="font-weight-bold text-capitalize">Budi</td>
-                <td class="text-right">Rp. 100.000</td>
-                <td class="text-success text-uppercase font-weight-bold">lunas</td>
-              </tr>
-            </tbody>
           </table>
         </div>
 
       </div>
     </div>
   </div>
+
+  <div class="modal fade" id="setBiayaPendaftar" tabindex="-1" aria-labelledby="setBiayaPendaftarLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content padding--medium">
+        <div class="detail_cicilan">
+          <h1 class="modal-title text-center my-2">Atur Biaya SPI dan UKT</h1>
+          <form class="mt-4-5">
+            <div class="form-row mt-4-5">
+              <dl class="row">
+                <dt class="col-sm-5">Nama Pendaftar</dt>
+                <dd class="col-sm-7">Nama Pendaftar...</dd>
+                <dt class="col-sm-5">Program Studi Pilihan 1</dt>
+                <dd class="col-sm-7">Prodi pilihan 1</dd>
+                <dt class="col-sm-5">Program Studi Pilihan 2</dt>
+                <dd class="col-sm-7">Prodi pilihan 2</dd>
+                <dt class="col-sm-5">Program Studi Pilihan 3</dt>
+                <dd class="col-sm-7">Prodi pilihan 2 - Politeknik Negeri Bengkalis</dd>
+              </dl>
+              <div class="col-md-6 pr-0 pr-md-2">
+                <label for="nominal_spi">Nominal SPI</label>
+                <input type="text" class="form-control text-right" id="nominal_spi" placeholder="Rp. x.xxx.xxx">
+              </div>
+              <div class="col-md-6 pl-0 pl-md-2 mt-3 mt-md-0">
+                <label for="kelompok_ukt">Kelompok UKT
+                </label>
+                <select class="form-control" id="kelompok_ukt">
+                  <option value="">Rp500.000</option>
+                  <option value="">Rp750.000</option>
+                  <option value="">Rp900.000</option>
+                  <option value="">Rp1.200.000</option>
+                  <option value="">Rp1.750.000</option>
+                  <option value="">Rp2.500.000</option>
+                  <option value="">Rp3.500.000</option>
+                  <option value="">Rp4.000.000</option>
+                  <option value="">Rp5.000.000</option>
+                </select>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal_button mt-4-5 d-flex justify-content-between">
+          <button type="button" class="btn btn-outline-danger rounded-sm w-100 mr-2 mr-md-3"
+          data-dismiss="modal">Batal</button>
+          <button type="button" id="btn_simpan" class="btn btn-success rounded-sm w-100 ml-2 ml-md-3">Simpan</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </section>
+
 <script>
 
 function importFile() {
@@ -91,7 +124,7 @@ dt_opt = {
       "mData": null,
       "className": 'text-center',
       "mRender": function(data, type, full) {
-        return data['trx_id'];
+        return data['nomor_va'];
       }
     },{
       "aTargets": [2],
@@ -118,12 +151,49 @@ dt_opt = {
           return '<span style="color:red">Belum Lunas</span>'
         }
       }
-    }
+    },{
+        "aTargets": [5],
+        "mData": null,
+        "mRender": function(data, type, full) {
+          var btn_update = `<button type="button" class="btn btn-primary" onclick="setBiayaPendaftar(${data.nomor})">
+            <i class="iconify mr-1" data-icon="bx:bx-cloud-upload"></i>
+            <span class="text-white">Atur Biaya</span>
+          </button> `
+          return res = btn_update;
+        }
+      }
   ]}
 
 
 }
  
 );
+
+function setBiayaPendaftar(nomor,) {
+  console.log(nomor)
+  $('#setBiayaPendaftar').modal('show')
+  // $.ajax({
+  //   url: url_api+"/keuangan/detail?program_studi="+program_studi,
+  //   type: 'get',
+  //   dataType: 'json',
+  //   success: function(res) {
+  //     console.log(res)
+  //   }
+  // })
+  // $.ajax({
+  //   url: url_api+"/keuangan/detail?program_studi="+program_studi,
+  //   type: 'post',
+  //   dataType: 'json',
+  //   data: {
+  //     'tenor' : jml_bulan,
+  //     'id_mahasiswa' : id_mahasiswa,
+  //     'bulan' : arr_bulan,
+  //     'nominal' : arr_nominal,
+  //   },
+  //   success: function(res) {
+  //     console.log(res)
+  //   }
+  // })
+}
 </script>
 @endsection

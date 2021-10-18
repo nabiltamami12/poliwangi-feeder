@@ -22,7 +22,7 @@ class RangeNilaiController extends Controller
     public function index()
     {
         try {
-            $versi = DB::table('nh')->select(DB::raw('max(versi) as versi'))->first()->versi;
+            $versi = RangeNilai::max('versi');
             $rangenilai = RangeNilai::where('versi',$versi)->orderBy('nh')->get();
             $this->data = $rangenilai;
             $this->status = "success";

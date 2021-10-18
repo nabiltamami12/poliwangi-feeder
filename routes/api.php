@@ -62,6 +62,7 @@ Route::prefix('v1')->group(function () {
 
     //prodi
     Route::get('/prodi', '\App\Http\Controllers\API\ProdiController@index');
+    Route::get('/prodi-lama', '\App\Http\Controllers\API\ProdiController@index_lama');
     Route::get('/prodi/{id}', '\App\Http\Controllers\API\ProdiController@show');
     Route::post('/prodi', '\App\Http\Controllers\API\ProdiController@store');
     Route::put('/prodi/{id}', '\App\Http\Controllers\API\ProdiController@update');
@@ -118,6 +119,7 @@ Route::prefix('v1')->group(function () {
 
     // Mahasiswa
     Route::get('/mahasiswa', [Ctr\MahasiswaController::class, 'index']);
+    Route::get('/mahasiswa-lama', [Ctr\MahasiswaController::class, 'index_lama']);
     Route::get('/mahasiswa/{id}', [Ctr\MahasiswaController::class, 'show']);
     Route::get('/mahasiswa/nim/{nim}', [Ctr\MahasiswaController::class, 'by_nim']);
     Route::post('/mahasiswa', [Ctr\MahasiswaController::class, 'store']);
@@ -202,6 +204,7 @@ Route::prefix('v1')->group(function () {
     Route::post('/login', [Ctr\PendaftarController::class, 'login']);
     Route::post('/pendaftar/check', [Ctr\PendaftarController::class, 'is_lunas']);
     Route::get('/pendaftar/keuangan', [Ctr\PendaftarController::class, 'keuangan']);
+    Route::get('/pendaftar/mahasiswa', [Ctr\PendaftarController::class, 'mahasiswa']);
     // Route::post('/daftar/{id}', '\App\Http\Controllers\API\PendaftarController@update');
     // Route::delete('/daftar/{id}', '\App\Http\Controllers\API\PendaftarController@destroy');
 
@@ -217,6 +220,7 @@ Route::prefix('v1')->group(function () {
     Route::get('/keuangan/rekap_ukt/{id}', [Ctr\UktController::class, 'show']);
     Route::put('/keuangan/rekap_ukt/{id}', [Ctr\UktController::class, 'update']);
     Route::delete('/keuangan/rekap_ukt/{id}', [Ctr\UktController::class, 'destroy']);
+    Route::get('/keuangan/detail', [Ctr\UktController::class, 'details']);
 
 
     // SPI Mandiri
