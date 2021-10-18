@@ -1,0 +1,12 @@
+Piutang Mahasiswa alur
+0. Bu Yuli set template surat perjanjian
+--
+1. Siswa datang ke Bu Yuli memberikan surat pengajuan
+2. Bu Yuli upload surat pengajuan
+3. Siswa donlod surat perjanjian - isi - ttd - upload
+4. Bu Yuli menyetujui perjanjian yg sudah diupload dengan set list cicilan dan jatuh tempo - menu cicilan di mahasiswa tampil
+
+
+--
+Mahasiswa
+- Jika mengajukan cicilan, harus bayar lewat menu cicilan. Tidak bisa lewat menu pembayaran yg langsung lunas

@@ -7,7 +7,37 @@
 <!-- Page content -->
 <section class="page-content page-content__keuangan container-fluid">
   <!-- Modal -->
-  <div class="modal fade" id="dokumenPiutangModal" tabindex="-1" aria-labelledby="dokumenPiutangModalLabel"
+  <div class="modal fade" id="templatePerjanjian" tabindex="-1" aria-labelledby="templatePerjanjianModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content padding--medium">
+
+        <h1 class="modal-title text-center mt-2">Template Perjanjian</h1>
+        <div class="detail_dokumen upload-perjanjian d-flex align-items-center justify-content-between mt-5">
+          <form>
+            <span>
+              <i class="iconify mr-2" data-icon="bx:bxs-file-pdf" data-inline="false"></i>
+              <input type="file" id="file" hidden />
+
+              <a id="nama_dokumen_perjanjian" class="nama_dokumen" target="_blank">No File</a>
+            </span>
+          </form>
+          <button type="button" id="custom-btn">
+            <i class="iconify text-primary" data-icon="bx:bx-cloud-upload" data-inline="false"></i>
+          </button>
+        </div>
+
+        <div class="modal_button mt-4-5 d-flex justify-content-between">
+          <button type="button" class="btn btn-outline-placeholder rounded-sm w-100 mr-2 mr-md-3"
+            data-dismiss="modal">Kembali</button>
+          <button type="button" class="btn btn-success rounded-sm w-100 ml-2 ml-md-3">Setujui</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- <div class="modal fade" id="dokumenPiutangModal" tabindex="-1" aria-labelledby="dokumenPiutangModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
       <div class="modal-content padding--medium">
@@ -38,9 +68,9 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 
-  <div class="modal fade" id="uploadPerjanjianModal" tabindex="-1" aria-labelledby="uploadPerjanjianModalLabel"
+  <!-- <div class="modal fade" id="uploadPerjanjianModal" tabindex="-1" aria-labelledby="uploadPerjanjianModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
       <div class="modal-content padding--medium">
@@ -95,7 +125,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 
   <div class="row equal-cols">
     <div class="col-sm-6 col-lg-4">
@@ -174,10 +204,10 @@
               <h2 class="mb-0 text-center text-md-left">Piutang Mahasiswa</h2>
             </div>
             <div class="col-12 col-md-9 text-center text-md-right">
-              {{-- <button type="button" class="btn btn-success mt-3 mt-md-0">
-                <i class="iconify-inline mr-1" data-icon="bx:bxs-plus-circle"></i>
-                Tambah
-              </button> --}}
+              <button id="template-perjanjian" type="button" class="btn btn-success mt-3 mt-md-0">
+                <i class="iconify-inline mr-1" data-icon="bx:bx-cloud-upload"></i>
+                Template Perjanjian
+              </button>
 
               <!-- <div class="dropdown">
                 <button class="btn btn-primary dropdown-toggle mt-3 mt-md-0 ml-0 ml-md-1" type="button"
@@ -292,10 +322,10 @@ dt_url = `${url_api}/keuangan/list_cicilan`;
           var id = data['id'];
           var id_mahasiswa = data['id_mahasiswa'];
           var btn_update = `
-                  <button type="button" class="btn btn-primary" onclick="perjanjianModal(${id},${id_mahasiswa},'${file_perjanjian}')">
-                    <i class="iconify mr-1" data-icon="bx:bx-cloud-upload"></i>
-                    <span class="text-white">Upload Perjanjian</span>
-                  </button> ` 
+                  <a class="btn btn-primary" href="{{url('')}}/keuangan/rekapitulasi/piutangmahasiswa/detail/${id}">
+                    <i class="iconify mr-1" data-icon="bx:bxs-user-detail"></i>
+                    <span class="text-white">Detail Piutang</span>
+                  </a>`
           return res = btn_update;
         }
       }
@@ -421,11 +451,9 @@ dt_url = `${url_api}/keuangan/list_cicilan`;
   function pengajuanModal() {
     $('#dokumenPiutangModal').modal('show')
   }
-  function perjanjianModal(id,id_mahasiswa,file_perjanjian) {
-    $('#id_piutang').val(id)
-    $('#id_mahasiswa').val(id_mahasiswa)
-    $('#nama_dokumen_perjanjian').prop('href',path_berkas+"/"+file_perjanjian)
-    $('#uploadPerjanjianModal').modal('show')
-  }
+
+  $('#template-perjanjian').on('click', function () {
+    $('#templatePerjanjian').modal('show')
+  })
 </script>
 @endsection

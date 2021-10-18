@@ -706,6 +706,13 @@ Route::prefix('keuangan')->middleware(['aksesuntuk:keuangan'])->group(function (
             ]);
         });
 
+        Route::get('/piutangmahasiswa/detail/{id}', function ($id) {
+            return view('keuangan.detailPiutang', [
+                'id' => $id,
+                "title" => "Detail Piutang",
+            ]);
+        });
+
         Route::get('/penyisihanpiutang', function () {
             return view('keuangan.penyisihanPiutang', [
                 "title" => "keuangan-rekapitulasi",

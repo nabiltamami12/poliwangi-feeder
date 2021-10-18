@@ -57,18 +57,32 @@ class BerkasKeuanganController extends Controller
         ]);
     }
 
-    public function detail_dokumen($id) {
+    public function detail_piutang($id) {
         $this->data = BK::select(
             DB::raw('right(path_perjanjian, 16) as dokumen_perjanjian,
                      right(path_pengajuan, 15) as dokumen_pengajuan')
         )->where('id_mahasiswa', $id)
         ->get();
+        $this->data = BK::select(
+            'keuangan_piutang.id', 
+            'keuangan_piutang.id_mahasiswa', 
+            'keuangan_piutang.path_perjanjian', 
+            'mahasiswa.nrp as nim',
+            'mahasiswa.nama',
+            DB::raw('CASE WHEN jenis = "spi" THEN total ELSE 0 END as SPI'),
+            DB::raw('CASE WHEN jenis = "ukt" THEN total ELSE 0 END as UKT'),
+            DB::raw('SUM(CASE WHEN id_mahasiswa = id_mahasiswa THEN `keuangan_piutang`.total END) as jumlah'),
+            'keuangan_piutang.status as status_piutang')
+            ->join('mahasiswa', 'mahasiswa.nomor', '=', 'keuangan_piutang.id_mahasiswa')
+            ->groupBy('keuangan_piutang.id_mahasiswa')
+            ->where('id_mahasiswa', $id)
+            ->get();
         $this->status = "success";
 
         return response()->json([
             "status" => $this->status,
             "data" => $this->data,
-            "error" => $this->err
+            "error" => $this->error
         ]);
     }
 
