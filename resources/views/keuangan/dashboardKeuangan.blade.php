@@ -77,21 +77,8 @@
             <div id="list_cicilan">
               <div class="form-row mt-4-5">
                 <div class="col-md-6 pr-0 pr-md-2">
-                  <label for="bulan">Bulan Cicilan Ke-1</label>
-                  <select class="form-control" id="bulan_1">
-                    <option value="1">Januari</option>
-                    <option value="2">Februari</option>
-                    <option value="3">Maret</option>
-                    <option value="4">April</option>
-                    <option value="5">Mei</option>
-                    <option value="6">Juni</option>
-                    <option value="7">Juli</option>
-                    <option value="8">Agustus</option>
-                    <option value="9">September</option>
-                    <option value="10">Oktober</option>
-                    <option value="11">November</option>
-                    <option value="12">Desember</option>
-                  </select>
+                  <label for="tanggal_1">Tanggal Jatuh Tempo ke-1</label>
+                  <input type="date" id="tanggal_1" class="form-control">
                 </div>
                 <div class="col-md-6 pl-0 pl-md-2 mt-3 mt-md-0">
                   <label for="nominal">Nominal Cicilan Ke-1</label>
@@ -212,7 +199,7 @@
             <thead class="table-header">
               <tr>
                 <th scope="col" class="text-center pl-2">No</th>
-                <th scope="col" class="pl-2">nim</th>
+                <th scope="col" class="pl-2">NIM</th>
                 <th scope="col" class="pl-2">Nama Debitur</th>
                 <th scope="col" class="text-right pl-2">UKT</th>
                 <th scope="col" class="text-right pl-2">SPI</th>
@@ -322,24 +309,11 @@ dt_url = `${url_api}/keuangan/list_cicilan`;
       for (let index = 1; index <= $(this).val(); index++) {
         html += `<div class="form-row mt-4-5">
               <div class="col-md-6 pr-0 pr-md-2">
-                <label for="bulan_${index}">Bulan Cicilan Ke-${index}</label>
-                <select class="form-control" id="bulan_${index}">
-                  <option value="1">Januari</option>
-                  <option value="2">Februari</option>
-                  <option value="3">Maret</option>
-                  <option value="4">April</option>
-                  <option value="5">Mei</option>
-                  <option value="6">Juni</option>
-                  <option value="7">Juli</option>
-                  <option value="8">Agustus</option>
-                  <option value="9">September</option>
-                  <option value="10">Oktober</option>
-                  <option value="11">November</option>
-                  <option value="12">Desember</option>
-                </select>
+                <label for="tanggal_${index}">Tanggal Jatuh Tempo ke-${index}</label>
+                <input type="date" id="tanggal_${index}" class="form-control">
               </div>
               <div class="col-md-6 pl-0 pl-md-2 mt-3 mt-md-0">
-                <label for="nominal_${index}">Nominal Cicilan Ke-${index}</label>
+                <label for="nominal_${index}">Nominal ke-${index}</label>
                 <input type="text" class="form-control text-right" id="nominal_${index}" placeholder="Rp. x.xxx.xxx">
               </div>
             </div>`
@@ -348,24 +322,24 @@ dt_url = `${url_api}/keuangan/list_cicilan`;
     })
 
     $('#btn_simpan').on('click',function (e) {
-      var arr_bulan = [];
+      var arr_tanggal = [];
       var arr_nominal = [];
-      var jml_bulan = $('#jumlah_cicilan').val();
+      var jml_tanggal = $('#jumlah_cicilan').val();
       var id_piutang = $('#id_piutang').val();
       var id_mahasiswa = $('#id_mahasiswa').val();
-      for (let index = 1; index <= jml_bulan; index++) {
-        var key = arr_bulan.indexOf($('#bulan_'+index).val());
+      for (let index = 1; index <= jml_tanggal; index++) {
+        var key = arr_tanggal.indexOf($('#tanggal_'+index).val());
         if(key !== -1){
           arr_nominal[key] = $('#nominal_'+index).val()
         } else{
-          arr_bulan.push($('#bulan_'+index).val());
+          arr_tanggal.push($('#tanggal_'+index).val());
           arr_nominal.push($('#nominal_'+index).val());
         }
       }
       var arr = {
-        'tenor' : jml_bulan,
+        'tenor' : jml_tanggal,
         'id_mahasiswa' : id_mahasiswa,
-        'bulan' : arr_bulan,
+        'tanggal' : arr_tanggal,
         'nominal' : arr_nominal,
       }
       $.ajax({
