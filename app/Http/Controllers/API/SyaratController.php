@@ -85,7 +85,7 @@ class SyaratController extends Controller
     {
         try {
             if ($id) {
-                $syarat = Syarat::where('id', $id)->get();
+                $syarat = Syarat::where('id', $id)->first();
             } else {
                 $syarat = Syarat::get();
             }
