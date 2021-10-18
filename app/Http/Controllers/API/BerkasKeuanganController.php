@@ -165,10 +165,10 @@ class BerkasKeuanganController extends Controller
             $tenor = $req->tenor;
             
             $final_nominal = array_map('intval', $req->nominal);
-            $final_bulan = array_map('intval', $req->bulan);
+            $final_tanggal = array_map('intval', $req->tanggal);
             $total = array_sum($final_nominal);
             $record->nominal = $final_nominal;
-            $record->bulan = $final_bulan;
+            $record->tanggal = $final_tanggal;
             $record->total = $total;
             $record->tenor = $tenor;
             $record->save();
@@ -177,14 +177,14 @@ class BerkasKeuanganController extends Controller
                 $check = DB::table('keuangan_pembayaran')->where([
                     'id_mahasiswa' => $req->id_mahasiswa,
                     'id_piutang' => $req->id_piutang,
-                    'bulan' => $final_bulan[$y],
+                    'tanggal' => $final_tanggal[$y],
                     'nominal' => $final_nominal[$y],
                 ])->first();
                 if ($check==null) {
                     $other = new KB;
                     $other->id_mahasiswa = $req->id_mahasiswa;
                     $other->id_piutang = $id;
-                    $other->bulan = $final_bulan[$y];
+                    $other->tanggal = $final_tanggal[$y];
                     $other->nominal = $final_nominal[$y];
                     $other->status = "belum_terbayar";
                     $other->keterangan = "pembayaran SPI";
