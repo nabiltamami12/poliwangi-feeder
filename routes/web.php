@@ -439,7 +439,7 @@ Route::prefix('admin')->middleware(['aksesuntuk:admin'])->group(function () {
         });
 
         Route::get('/rekap-nilai/edit', function () {
-            return view('dosen.inputNilai', [
+            return view('admin.kuliah.nilai',[
                 "title" => "dosen-penilaian"
             ]);
         });
