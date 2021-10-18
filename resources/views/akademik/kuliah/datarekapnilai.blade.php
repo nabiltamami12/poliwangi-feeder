@@ -22,16 +22,9 @@
         <hr class="my-4 mt">
         <form class="form-select rounded-0">
           <div class="form-row">
-            <div class="col-md-6 form-group">
+            <div class="col-md-12 form-group">
               <label for="jenjang-pendidikan">NIM Mahasiswa</label>
-              <input type="text" class="form-control" id="nim" value="111" readonly>
-              <!-- <select class="form-control" id="mahasiswa" name="mahasiswa">
-                
-              </select> -->
-            </div>
-            <div class="col-md-6 form-group">
-              <label for="jenjang-pendidikan">Nama Mahasiswa</label>
-              <input type="text" class="form-control" id="nim" value="zarkasy" readonly>
+              <select class="form-control" id="nim" name="nim"></select>
             </div>
             <div class="col-md-6 form-group">
               <label for="kelas">Tahun</label>
@@ -79,16 +72,43 @@
     $('#nim ').on('change',function (e) {
       var url = `${url_api}/nilai/rekap?nim=${$('#nim').val()}&tahun=${$('#tahun').val()}&semester=${$('#semester').val()}`;
       dt.ajax.url(url).load();
-    })  
+    });
     $('select').on('change',function (e) {
       var url = `${url_api}/nilai/rekap?nim=${$('#nim').val()}&tahun=${$('#tahun').val()}&semester=${$('#semester').val()}`;
       dt.ajax.url(url).load();
-    })  
+    });
+    $("#nim").select2({
+      ajax: {
+        url: '{{ url('api/v1/mahasiswa/option-nim') }}',
+        dataType: 'json',
+        delay: 1000,
+        data: function (params) {
+          return {
+            q: params.term,
+            page: params.page
+          };
+        },
+        processResults: function ({data}, params) {
+          params.page = params.page || 1;
+
+          return {
+            results: data.items,
+            pagination: {
+              more: (params.page * 15) < data.total_count
+            }
+          };
+        },
+        cache: true
+      },
+      placeholder: 'Cari NIM',
+      minimumInputLength: 3,
+    });
+
   });
 
   var nomor = 1;
   dt_url = `${url_api}/nilai/rekap?nim=${$('#nim').val()}&tahun=${$('#tahun').val()}&semester=${$('#semester').val()}`;
-dt_opt = {
+  dt_opt = {
   "columnDefs": [
         {
           "aTargets": [0],
