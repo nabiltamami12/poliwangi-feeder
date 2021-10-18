@@ -74,7 +74,7 @@ class Mahasiswa extends Model
         'nomor',
     ];
 
-    public function programStudi()
+    public function rProdi()
     {
         return $this->belongsTo(Prodi::class, 'program_studi', 'nomor');
     }

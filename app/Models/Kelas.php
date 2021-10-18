@@ -10,6 +10,7 @@ class Kelas extends Model
     use HasFactory;
     public $timestamps = false;
     public $table = "kelas";
+    protected $primaryKey = 'nomor';
     protected $fillable = [
         'nomor',
         'program_studi',
