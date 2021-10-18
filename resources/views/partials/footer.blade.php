@@ -76,9 +76,7 @@
     function loading(status) {
         if (status=="show") {
             $(".loaderScreen-wrapper").fadeIn("fast");
-            console.log('show')
         } else {
-            console.log('hide')
             $(".loaderScreen-wrapper").fadeOut("slow");
         }
     }

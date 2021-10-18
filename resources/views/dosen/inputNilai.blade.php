@@ -221,7 +221,7 @@
 				'tahun' : searchParams.get('tahun') || new Date().getFullYear()
 			}
 			localStorage.setItem('cetak-eval', JSON.stringify(arr));
-			window.open("{{url('dosen/cetak-evaluasi-nilai/')}}",'_blank');
+			window.open(`{{url('dosen/cetak-evaluasi-nilai')}}?${$.param(arr)}`,'_blank');
 		})
 
 		$('#btn_publish').on('click',function (e) {

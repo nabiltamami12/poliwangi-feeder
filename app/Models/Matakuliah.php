@@ -10,6 +10,7 @@ class Matakuliah extends Model
     use HasFactory;
     public $timestamps = false;
     public $table = "matakuliah";
+    protected $primaryKey = 'nomor';
     protected $fillable = [
         'nomor',
         'program_studi',
@@ -28,6 +29,10 @@ class Matakuliah extends Model
         'tanggal_akhir_efektif',
         'matakuliah_jenis',
         'masuk_penilaian'
-
     ];
+
+    public function rProdi()
+    {
+        return $this->belongsTo(Prodi::class, 'program_studi', 'nomor');
+    }
 }

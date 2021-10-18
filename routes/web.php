@@ -439,13 +439,13 @@ Route::prefix('admin')->middleware(['aksesuntuk:admin'])->group(function () {
         });
 
         Route::get('/rekap-nilai', function () {
-            return view('akademik.kuliah/datarekapnilai', [
+            return view('admin.kuliah.datarekapnilai', [
                 "title" => "rekap-nilai"
             ]);
         });
 
         Route::get('/rekap-nilai/edit', function () {
-            return view('dosen.inputNilai', [
+            return view('admin.kuliah.nilai',[
                 "title" => "dosen-penilaian"
             ]);
         });
@@ -474,7 +474,7 @@ Route::prefix('admin')->middleware(['aksesuntuk:admin'])->group(function () {
 
     Route::prefix('keuangan')->group(function () {
         Route::get('/piutangmahasiswa', function () {
-            return view('keuangan.piutangMahasiswa', [
+            return view('keuangan.dataMahasiswa', [
                 "title" => "keuangan-rekapitulasi",
             ]);
         });
@@ -680,6 +680,12 @@ Route::prefix('keuangan')->middleware(['aksesuntuk:keuangan'])->group(function (
             ]);
         });
 
+        Route::get('/datamahasiswa', function () {
+            return view('keuangan.dataMahasiswa', [
+                "title" => "keuangan-rekapitulasi",
+            ]);
+        });
+
         Route::get('/spi', function () {
             return view('keuangan.spiMandiri', [
                 "title" => "keuangan-rekapitulasi",
@@ -694,8 +700,8 @@ Route::prefix('keuangan')->middleware(['aksesuntuk:keuangan'])->group(function (
             ]);
         });
 
-        Route::get('/piutangmahasiswa', function () {
-            return view('keuangan.piutangMahasiswa', [
+        Route::get('/piutangmahasiswa', function () { /*keuangan/dashboard*/
+            return view('keuangan.dashboardKeuangan', [
                 "title" => "keuangan-rekapitulasi",
             ]);
         });

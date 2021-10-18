@@ -242,4 +242,30 @@ class MahasiswaController extends Controller
 			"error" => $this->error
 		]);
 	}
+
+	public function select_option(Request $req)
+	{
+		try {
+			$q = $req->input('q');
+			$page = $req->input('page') ?? 1;
+			$limit = 15;
+			$offset = ($page - 1) * $limit;
+			$obj = Mhs::select(DB::raw('nomor as id, CONCAT( nrp," (",nama,")" ) as text'))
+				->where('nrp', '=', $q)
+				->offset($offset)
+				->limit($limit)
+				->get();
+			$obj_count = Mhs::where('nrp', '=', $q)->count();
+			$this->data = array('items' => $obj, 'total_count' => $obj_count);
+			$this->status = "success";
+		} catch (QueryException $e) {
+			$this->status = "failed";
+			$this->error = $e;
+		}
+		return response()->json([
+			"status" => $this->status,
+			"data" => $this->data,
+			"error" => $this->error
+		]);
+	}
 }

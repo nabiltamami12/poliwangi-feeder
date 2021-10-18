@@ -9,7 +9,8 @@ class Nilai extends Model
 {
     use HasFactory;
     public $timestamps = false;
-public $table = "nilai";
+    public $table = "nilai";
+    protected $primaryKey = 'nomor';
     protected $fillable = [
         'nomor',
         'kuliah',
@@ -27,4 +28,14 @@ public $table = "nilai";
         'kuis',
         'praktikum',
     ];
+
+    public function rKuliah()
+    {
+        return $this->belongsTo(Kuliah::class, 'kuliah', 'nomor');
+    }
+
+    public function rMahasiswa()
+    {
+        return $this->belongsTo(Mahasiswa::class, 'mahasiswa', 'nomor');
+    }
 }
