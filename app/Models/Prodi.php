@@ -10,6 +10,7 @@ class Prodi extends Model
     use HasFactory;
     public $timestamps = false;
     public $table = "program_studi";
+    protected $primaryKey = 'nomor';
     protected $fillable = [
         'nomor',
         'program',
@@ -19,4 +20,9 @@ class Prodi extends Model
         'jurusan',
         'alias'
     ];
+
+    public function rProgram()
+    {
+        return $this->belongsTo(Program::class, 'program', 'nomor');
+    }
 }

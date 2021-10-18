@@ -13,7 +13,6 @@ use App\Models\Nilai;
 use App\Models\RangeNilai;
 use App\Models\PersentaseNilai;
 use App\Models\Mahasiswa;
-use App\Models\Program;
 
 class NilaiController extends Controller
 {
@@ -101,22 +100,16 @@ class NilaiController extends Controller
      */
     public function rekap(Request $request)
     {
+        /** versi 2 **/
         try {
             $set_tahun = $request->get('tahun') ?? $this->tahun_aktif;
             $set_semester = $request->get('semester') ?? $this->semester_aktif;
-            if ($request->nim) {
-                $data = DB::table('mahasiswa as m')
-                            ->select('m.nrp','m.nama','mk.kode','mk.matakuliah','m.jumlah_sks','n.nomor' ,'n.nh','n.na', 'mk.nomor as nomor_matkul', 'kl.kelas')
-                            ->join('kelas as k','k.nomor','=','m.kelas')
-                            ->join('kuliah as kl','kl.kelas','=','k.nomor')
-                            ->join('matakuliah as mk','mk.nomor','=','kl.matakuliah')
-                            ->join('nilai as n','n.kuliah','=','kl.nomor','left')
-                            ->where('m.nrp',$request->nim)
-                            ->where('mk.semester', $set_semester)
-                            ->where('kl.tahun', $set_tahun)
+            $data = [];
+            if ($request->nomor) {
+                $data = Nilai::where('mahasiswa', '=', $request->nomor)
+                            ->whereRelation('rKuliah', 'semester', '=', $set_semester)
+                            ->whereRelation('rKuliah', 'tahun', '=', $set_tahun)
                             ->get();
-            }else{
-                $data = [];
             }
             $this->data = $data;
             $this->status = "success";
@@ -129,6 +122,35 @@ class NilaiController extends Controller
             "data" => $this->data,
             "error" => $this->error
         ]);
+
+        /** versi 1 **/
+        // try {
+        //     $set_tahun = $request->get('tahun') ?? $this->tahun_aktif;
+        //     $set_semester = $request->get('semester') ?? $this->semester_aktif;
+        //     $data = [];
+        //     if ($request->nim) {
+        //         $data = DB::table('mahasiswa as m')
+        //                     ->select('m.nrp','m.nama','mk.kode','mk.matakuliah','m.jumlah_sks','n.nomor' ,'n.nh','n.na', 'mk.nomor as nomor_matkul', 'kl.kelas', 'n.nomor as nomor_nilai')
+        //                     ->join('kelas as k','k.nomor','=','m.kelas')
+        //                     ->join('kuliah as kl','kl.kelas','=','k.nomor')
+        //                     ->join('matakuliah as mk','mk.nomor','=','kl.matakuliah')
+        //                     ->join('nilai as n','n.kuliah','=','kl.nomor','left')
+        //                     ->where('m.nrp',$request->nim)
+        //                     ->where('mk.semester', $set_semester)
+        //                     ->where('kl.tahun', $set_tahun)
+        //                     ->get();
+        //     }
+        //     $this->data = $data;
+        //     $this->status = "success";
+        // } catch (QueryException $e) {
+        //     $this->status = "failed";
+        //     $this->error = $e;
+        // }
+        // return response()->json([
+        //     "status" => $this->status,
+        //     "data" => $this->data,
+        //     "error" => $this->error
+        // ]);
     }
 
     /**
@@ -287,13 +309,55 @@ class NilaiController extends Controller
     public function get_nim(Request $req)
     {
         try {
-            $obj = Mahasiswa::where('nrp', $req->nim)->first();
-            $program = Program::find($obj->programStudi->program);
+            $nomor_nilai = $req->nomor_nilai;
+            $obj = Nilai::find($nomor_nilai);
+            $prodi = null;
+            $kelas = null;
+            $matakuliah = null;
+            $nilai = [];
+            $persentase_nilai = null;
+            $range = [];
+            if ($obj) {
+                $range = RangeNilai::last_version();
+                $persentase_nilai = PersentaseNilai::where('matakuliah', '=', $obj->rKuliah->matakuliah)
+                    ->orderBy('updated_at', 'desc')
+                    ->first();
+
+                $prodi = $obj->rMahasiswa->rProdi;
+                $prodi = $prodi->rProgram->program.' '.$prodi->program_studi;
+
+                $kelas = $obj->rKuliah->rKelas->kode;
+                $matakuliah = $obj->rKuliah->rMatkul->matakuliah;
+                
+                $nilai[] = [
+                    'nim' => $obj->rMahasiswa->nrp,
+                    'nama' => $obj->rMahasiswa->nama,
+                    'nomor' => $obj->nomor,
+                    'id_kuliah' => $obj->kuliah,
+                    'id_mahasiswa' => $obj->mahasiswa,
+                    'quis1' => $obj->quis1 ?? '',
+                    'quis2' => $obj->quis2 ?? '',
+                    'tugas' => $obj->tugas ?? '',
+                    'ujian' => $obj->ujian ?? '',
+                    'na' => $obj->na ?? '',
+                    'her' => $obj->her ?? '',
+                    'nh' => $obj->nh ?? '',
+                    'keterangan' => $obj->keterangan ?? '',
+                    'nhu' => $obj->nhu ?? '',
+                    'nsp' => $obj->nsp ?? '',
+                    'kuis' => $obj->kuis ?? '',
+                    'praktikum' => $obj->praktikum ?? '',
+                ];
+            }
+
             $this->status = "success";
             $this->data = [
-                "program_studi" => $program->program.' '.$obj->programStudi->program_studi ?? null,
-                "kelas" => 'obj kelas',
-                "matakuliah" => 'obj matakuliah'
+                "program_studi" => $prodi,
+                "kelas" => $kelas,
+                "matakuliah" => $matakuliah,
+                "nilai" => $nilai,
+                "persentase" => $persentase_nilai,
+                "range" => $range
             ];
         } catch (QueryException $e) {
             $this->status = "failed";

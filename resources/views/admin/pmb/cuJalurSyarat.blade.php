@@ -1,4 +1,4 @@
-@extends('layouts.mainAkademik')
+@extends('layouts.main')
 
 @section('content')
 <!-- Header -->
@@ -12,7 +12,7 @@
         <div class="card-header padding--medium">
           <div class="row align-items-center">
             <div class="col-12">
-              <h2 class="mb-0 text-center text-sm-left">{{ ($id==null)?"TAMBAH":"UBAH" }} Jalur Syarat Mahasiswa Baru</h2>
+              <h2 class="mb-0 text-center text-sm-left text-capitalize">{{ ($id==null)?"TAMBAH":"UBAH" }} Syarat Pendaftaran</h2>
             </div>
           </div>
         </div>
@@ -20,13 +20,12 @@
 
         <div class="card-body padding--medium">
           <form id="form_cu">
-            <h1 class="mr-4">Jalur Syarat: </h1>
-            <label class="sr-only" for="nama">Jalur Syarat</label>
+            <label>Syarat Pendaftaran</label>
             <input type="text" class="form-control flex-grow-1" id="nama" name="nama">
             <hr class="mt-4 mb-3">
             <div class="row">
               <div class="col">
-                <button type="submit" class="btn btn-primary w-100 rounded-sm mt-3">{{ ($id==null)?"Tambah":"Ubah" }}Simpan</button>
+                <button type="submit" class="btn btn-primary w-100 rounded-sm mt-3">{{ ($id==null)?"Tambah":"Ubah" }}</button>
               </div>
             </div>
         </div>
@@ -39,9 +38,8 @@
 
 @section('js')
 <script>
-  $(document).ready(function() {
     var id = "{{$id}}";
-    getData(id);
+  $(document).ready(function() {
 
     if (id != "") {
       getData(id);
@@ -70,7 +68,7 @@
         },
         success: function(res) {
           if (res.status == "success") {
-            window.location.href = "{{url('/admin/settingpmb/settingjalursyarat')}}";
+            window.history.go(-1);
           } else {
             // alert gagal
           }

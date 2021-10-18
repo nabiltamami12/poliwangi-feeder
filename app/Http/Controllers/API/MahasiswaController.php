@@ -243,14 +243,14 @@ class MahasiswaController extends Controller
 		]);
 	}
 
-	public function option_nim(Request $req)
+	public function select_option(Request $req)
 	{
 		try {
 			$q = $req->input('q');
 			$page = $req->input('page') ?? 1;
 			$limit = 15;
 			$offset = ($page - 1) * $limit;
-			$obj = Mhs::select(DB::raw('nrp as id, CONCAT( nrp," (",nama,")" ) as text'))
+			$obj = Mhs::select(DB::raw('nomor as id, CONCAT( nrp," (",nama,")" ) as text'))
 				->where('nrp', '=', $q)
 				->offset($offset)
 				->limit($limit)

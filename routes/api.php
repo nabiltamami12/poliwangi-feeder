@@ -119,7 +119,7 @@ Route::prefix('v1')->group(function () {
 
     // Mahasiswa
     Route::get('/mahasiswa', [Ctr\MahasiswaController::class, 'index']);
-    Route::get('/mahasiswa/option-nim', [Ctr\MahasiswaController::class, 'option_nim']);
+    Route::get('/mahasiswa/select-option', [Ctr\MahasiswaController::class, 'select_option']);
     Route::get('/mahasiswa-lama', [Ctr\MahasiswaController::class, 'index_lama']);
     Route::get('/mahasiswa/{id}', [Ctr\MahasiswaController::class, 'show']);
     Route::get('/mahasiswa/nim/{nim}', [Ctr\MahasiswaController::class, 'by_nim']);
