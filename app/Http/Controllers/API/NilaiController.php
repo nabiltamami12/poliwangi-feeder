@@ -16,357 +16,349 @@ use App\Models\Mahasiswa;
 
 class NilaiController extends Controller
 {
-    protected $status = null;
-    protected $error = null;
-    protected $data = null;
+	protected $status = null;
+	protected $error = null;
+	protected $data = null;
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    
-    public function index(Request $request)
-    {
-        DB::enableQueryLog();
-        //
-        $set_tahun = $request->get('tahun') ?? $this->tahun_aktif;
-        try {
-            $rangenilai = RangeNilai::last_version();
-            $persentase_nilai = PersentaseNilai::select('*','id as id_persentase')->where('matakuliah',$request->matakuliah)->first();
+	/**
+	 * Display a listing of the resource.
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
+	
+	public function index(Request $request)
+	{
+		DB::enableQueryLog();
+		//
+		$set_tahun = $request->get('tahun') ?? $this->tahun_aktif;
+		try {
+			$rangenilai = RangeNilai::last_version();
+			$persentase_nilai = PersentaseNilai::select('*','id as id_persentase')->where('matakuliah',$request->matakuliah)->first();
 
-            $input = DB::table("mahasiswa as m")
-                ->select(
-                    "m.nomor as id_mahasiswa",
-                    "m.nama",
-                    "m.nrp as nim",
-                    "kl.nomor as id_kuliah",
-                    // "n.*"
-                )
-                ->join("kuliah as kl", "kl.kelas", "=", "m.kelas")
-                // ->join("nilai as n", "n.kuliah", "=", "kl.nomor",'left')
-                ->where('kl.tahun', $set_tahun)
-                ->where('kl.kelas', $request->kelas)
-                ->where('kl.matakuliah', $request->matakuliah)
-                ->get();
+			$input = DB::table("mahasiswa as m")
+			->select(
+				"m.nomor as id_mahasiswa",
+				"m.nama",
+				"m.nrp as nim",
+				"kl.nomor as id_kuliah",
+					// "n.*"
+			)
+			->join("kuliah as kl", "kl.kelas", "=", "m.kelas")
+				// ->join("nilai as n", "n.kuliah", "=", "kl.nomor",'left')
+			->where('kl.tahun', $set_tahun)
+			->where('kl.kelas', $request->kelas)
+			->where('kl.matakuliah', $request->matakuliah)
+			->get();
 
-                $data=[];
-            foreach ($input as $key => $value) {
-                $nilai = DB::table('nilai')->where([
-                    'kuliah' => $value->id_kuliah,
-                    'mahasiswa' => $value->id_mahasiswa,
-                ])->first();
-                $arr = [
-                    'id_kuliah' => $value->id_kuliah,
-                    'id_mahasiswa' => $value->id_mahasiswa,
-                    'is_published' => $nilai->is_published,
-                    'publisher' => $nilai->publisher,
-                    'tgl_publish' => $nilai->tgl_publish,
-                    'nim' => $value->nim,
-                    'nama' => $value->nama,
-                    'nomor' => ($nilai->nomor==null)?0:$nilai->nomor,
-                    'quis1' => ($nilai->quis1==null)?0:$nilai->quis1,
-                    'quis2' => ($nilai->quis2==null)?0:$nilai->quis2,
-                    'tugas' => ($nilai->tugas==null)?0:$nilai->tugas,
-                    'ujian' => ($nilai->ujian==null)?0:$nilai->ujian,
-                    'na' => ($nilai->na==null)?0:$nilai->na,
-                    'her' => ($nilai->her==null)?0:$nilai->her,
-                    'nh' => ($nilai->nh==null)?"":$nilai->nh,
-                    'keterangan' => ($nilai->keterangan==null)?"":$nilai->keterangan,
-                    'nhu' => ($nilai->nhu==null)?"":$nilai->nhu,
-                    'nsp' => ($nilai->nsp==null)?0:$nilai->nsp,
-                    'kuis' => ($nilai->kuis==null)?0:$nilai->kuis,
-                    'praktikum' => ($nilai->praktikum==null)?0:$nilai->praktikum,
-                ];
-                array_push($data,$arr);
-            }
-            $this->data = ['persentase_nilai'=>$persentase_nilai,'range_nilai'=> $rangenilai,'data'=>$data];
-            $this->status = "success";
-        } catch (QueryException $e) {
-            $this->status = "failed";
-            $this->error = $e;
-        }
-        return response()->json([
-            "status" => $this->status,
-            "data" => $this->data,
-            "error" => $this->error
-        ]);
-    }
+			$data=[];
+			foreach ($input as $key => $value) {
+				$nilai = DB::table('nilai')->where([
+					'kuliah' => $value->id_kuliah,
+					'mahasiswa' => $value->id_mahasiswa,
+				])->first();
+				$arr = [
+					'id_kuliah' => $value->id_kuliah,
+					'id_mahasiswa' => $value->id_mahasiswa,
+					'is_published' => $nilai->is_published,
+					'publisher' => $nilai->publisher,
+					'tgl_publish' => $nilai->tgl_publish,
+					'nim' => $value->nim,
+					'nama' => $value->nama,
+					'nomor' => ($nilai->nomor==null)?0:$nilai->nomor,
+					'quis1' => ($nilai->quis1==null)?0:$nilai->quis1,
+					'quis2' => ($nilai->quis2==null)?0:$nilai->quis2,
+					'tugas' => ($nilai->tugas==null)?0:$nilai->tugas,
+					'ujian' => ($nilai->ujian==null)?0:$nilai->ujian,
+					'na' => ($nilai->na==null)?0:$nilai->na,
+					'her' => ($nilai->her==null)?0:$nilai->her,
+					'nh' => ($nilai->nh==null)?"":$nilai->nh,
+					'keterangan' => ($nilai->keterangan==null)?"":$nilai->keterangan,
+					'nhu' => ($nilai->nhu==null)?"":$nilai->nhu,
+					'nsp' => ($nilai->nsp==null)?0:$nilai->nsp,
+					'kuis' => ($nilai->kuis==null)?0:$nilai->kuis,
+					'praktikum' => ($nilai->praktikum==null)?0:$nilai->praktikum,
+				];
+				array_push($data,$arr);
+			}
+			$this->data = ['persentase_nilai'=>$persentase_nilai,'range_nilai'=> $rangenilai,'data'=>$data];
+			$this->status = "success";
+		} catch (QueryException $e) {
+			$this->status = "failed";
+			$this->error = $e;
+		}
+		return response()->json([
+			"status" => $this->status,
+			"data" => $this->data,
+			"error" => $this->error
+		]);
+	}
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function rekap(Request $request)
-    {
-        /** versi 2 **/
-        try {
-            $set_tahun = $request->get('tahun') ?? $this->tahun_aktif;
-            $set_semester = $request->get('semester') ?? $this->semester_aktif;
-            $data = [];
-            if ($request->nomor) {
-                $data = Nilai::where('mahasiswa', '=', $request->nomor)
-                            ->whereRelation('rKuliah', 'semester', '=', $set_semester)
-                            ->whereRelation('rKuliah', 'tahun', '=', $set_tahun)
-                            ->get();
-            }
-            $this->data = $data;
-            $this->status = "success";
-        } catch (QueryException $e) {
-            $this->status = "failed";
-            $this->error = $e;
-        }
-        return response()->json([
-            "status" => $this->status,
-            "data" => $this->data,
-            "error" => $this->error
-        ]);
+	/**
+	 * Show the form for creating a new resource.
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
+	public function rekap(Request $request)
+	{
+		try {
+			$set_tahun = $request->get('tahun') ?? $this->tahun_aktif;
+			$set_semester = $request->get('semester') ?? $this->semester_aktif;
+			$data = [];
+			if ($request->nomor) {
+				$res = Nilai::
+					with([
+						'rKuliah' => function($query) {
+							$query->with('rKelas:nomor,kode')
+								->with('rMatkul:nomor,matakuliah,kode,sks')
+						        ->select('nomor', 'kelas', 'matakuliah');
+						},
+					])
+					->select('nomor', 'kuliah', 'mahasiswa', 'na', 'nh')
+					->where('mahasiswa', '=', $request->nomor)
+					->whereRelation('rKuliah', 'semester', '=', $set_semester)
+					->whereRelation('rKuliah', 'tahun', '=', $set_tahun)
+					->get();
+				foreach ($res as $key => $value) {
+					$data[] = [
+						"nomor" => $value->nomor,
+						"kode_matakuliah" => $value->rKuliah->rMatkul->kode,
+						"kelas" => $value->rKuliah->rKelas->kode,
+						"matakuliah" => $value->rKuliah->rMatkul->matakuliah,
+						"na" => $value->na,
+						"sks" => $value->rKuliah->rMatkul->sks,
+						"nh" => $value->nh,
+						"up" => $value->up
+					];
+				}
+			}
+			$this->data = $data;
+			$this->status = "success";
+		} catch (QueryException $e) {
+			$this->status = "failed";
+			$this->error = $e;
+		}
+		return response()->json([
+			"status" => $this->status,
+			"data" => $this->data,
+			"error" => $this->error
+		]);
+	}
 
-        /** versi 1 **/
-        // try {
-        //     $set_tahun = $request->get('tahun') ?? $this->tahun_aktif;
-        //     $set_semester = $request->get('semester') ?? $this->semester_aktif;
-        //     $data = [];
-        //     if ($request->nim) {
-        //         $data = DB::table('mahasiswa as m')
-        //                     ->select('m.nrp','m.nama','mk.kode','mk.matakuliah','m.jumlah_sks','n.nomor' ,'n.nh','n.na', 'mk.nomor as nomor_matkul', 'kl.kelas', 'n.nomor as nomor_nilai')
-        //                     ->join('kelas as k','k.nomor','=','m.kelas')
-        //                     ->join('kuliah as kl','kl.kelas','=','k.nomor')
-        //                     ->join('matakuliah as mk','mk.nomor','=','kl.matakuliah')
-        //                     ->join('nilai as n','n.kuliah','=','kl.nomor','left')
-        //                     ->where('m.nrp',$request->nim)
-        //                     ->where('mk.semester', $set_semester)
-        //                     ->where('kl.tahun', $set_tahun)
-        //                     ->get();
-        //     }
-        //     $this->data = $data;
-        //     $this->status = "success";
-        // } catch (QueryException $e) {
-        //     $this->status = "failed";
-        //     $this->error = $e;
-        // }
-        // return response()->json([
-        //     "status" => $this->status,
-        //     "data" => $this->data,
-        //     "error" => $this->error
-        // ]);
-    }
+	/**
+	 * Store a newly created resource in storage.
+	 *
+	 * @param  \Illuminate\Http\Request  $request
+	 * @return \Illuminate\Http\Response
+	 */
+	public function store(Request $request)
+	{
+		try {
+			$data = $request->data;
+			$result = [];
+			foreach ($data as $d) {
+				if ($d['nomor']==0) {
+					$result[] = Nilai::create($d);
+				}else{
+					$query = Nilai::where('nomor',$d['nomor']);
+					$nilai = $query->update($d);
+					$result[] = $query->get();
+				}
+			}
+			$this->data = $result;
+			$this->status = "success";
+		} catch (QueryException $e) {
+			$this->status = "failed";
+			$this->error = $e;
+		}
+		return response()->json([
+			"status" => $this->status,
+			"data" => $this->data,
+			"error" => $this->error
+		]);
+	}
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        try {
-            $data = $request->data;
-            $result = [];
-            foreach ($data as $d) {
-                if ($d['nomor']==0) {
-                    $result[] = Nilai::create($d);
-                }else{
-                    $query = Nilai::where('nomor',$d['nomor']);
-                    $nilai = $query->update($d);
-                    $result[] = $query->get();
-                }
-            }
-            $this->data = $result;
-            $this->status = "success";
-        } catch (QueryException $e) {
-            $this->status = "failed";
-            $this->error = $e;
-        }
-        return response()->json([
-            "status" => $this->status,
-            "data" => $this->data,
-            "error" => $this->error
-        ]);
-    }
+	/**
+	 * Display the specified resource.
+	 *
+	 * @param  int  $id
+	 * @return \Illuminate\Http\Response
+	 */
+	public function show($tahun, $mk, $kls, $prodi)
+	{
+		try {
+			$input = DB::table("nilai")
+			->select(
+				"matakuliah.matakuliah",
+				"mahasiswa.nama",
+				"kuliah.tahun",
+				"kelas.kode",
+				"nilai.nomor",
+				"nilai.kuliah",
+				"nilai.mahasiswa",
+				"nilai.quis1",
+				"nilai.quis2",
+				"nilai.tugas",
+				"nilai.ujian",
+				"nilai.na",
+				"nilai.her",
+				"nilai.nh",
+				"nilai.keterangan",
+				"nilai.nhu",
+				"nilai.nsp",
+				"nilai.kuis",
+				"nilai.praktikum"
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($tahun, $mk, $kls, $prodi)
-    {
-        try {
-            $input = DB::table("nilai")
-                ->select(
-                    "matakuliah.matakuliah",
-                    "mahasiswa.nama",
-                    "kuliah.tahun",
-                    "kelas.kode",
-                    "nilai.nomor",
-                    "nilai.kuliah",
-                    "nilai.mahasiswa",
-                    "nilai.quis1",
-                    "nilai.quis2",
-                    "nilai.tugas",
-                    "nilai.ujian",
-                    "nilai.na",
-                    "nilai.her",
-                    "nilai.nh",
-                    "nilai.keterangan",
-                    "nilai.nhu",
-                    "nilai.nsp",
-                    "nilai.kuis",
-                    "nilai.praktikum"
-    
-                )
-                ->join("mahasiswa", "mahasiswa.nomor", "=", "nilai.mahasiswa")
-                ->join("kuliah", "kuliah.nomor", "=", "nilai.kuliah")
-                ->join("kelas", "kelas.nomor", "=", "mahasiswa.kelas")
-                ->join("matakuliah", "matakuliah.nomor", "=", "kuliah.matakuliah")
-                ->where('kuliah.tahun', $tahun)
-                ->where('kuliah.matakuliah', $mk)
-                ->where('mahasiswa.kelas', $kls)
-                ->where('matakuliah.program', $prodi)
-                ->get();
-            $this->data = $input;
-            $this->status = "success";
-        } catch (QueryException $e) {
-            $this->status = "failed";
-            $this->error = $e;
-        }
-        return response()->json([
-            "status" => $this->status,
-            "data" => $this->data,
-            "error" => $this->error
-        ]);
-    }
+			)
+			->join("mahasiswa", "mahasiswa.nomor", "=", "nilai.mahasiswa")
+			->join("kuliah", "kuliah.nomor", "=", "nilai.kuliah")
+			->join("kelas", "kelas.nomor", "=", "mahasiswa.kelas")
+			->join("matakuliah", "matakuliah.nomor", "=", "kuliah.matakuliah")
+			->where('kuliah.tahun', $tahun)
+			->where('kuliah.matakuliah', $mk)
+			->where('mahasiswa.kelas', $kls)
+			->where('matakuliah.program', $prodi)
+			->get();
+			$this->data = $input;
+			$this->status = "success";
+		} catch (QueryException $e) {
+			$this->status = "failed";
+			$this->error = $e;
+		}
+		return response()->json([
+			"status" => $this->status,
+			"data" => $this->data,
+			"error" => $this->error
+		]);
+	}
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function publish(Request $request)
-    {
-        
-        $data = $request->data;
-        date_default_timezone_set('Asia/Jakarta');
-        Carbon::setLocale('id');
+	/**
+	 * Update the specified resource in storage.
+	 *
+	 * @param  \Illuminate\Http\Request  $request
+	 * @param  int  $id
+	 * @return \Illuminate\Http\Response
+	 */
+	public function publish(Request $request)
+	{
+		
+		$data = $request->data;
+		date_default_timezone_set('Asia/Jakarta');
+		Carbon::setLocale('id');
 
-        $date_now = Carbon::now();
-        try {
-            $result = [];
-            foreach ($data as $d) {
-                $d['tgl_publish'] = $date_now->toDateTimeString();
-                $query = Nilai::where('nomor',$d['nomor']);
-                $nilai = $query->update($d);
-                $result[] = $query->get();
-            }
-            $this->data = $result;
-            $this->status = "success";
-        } catch (QueryException $e) {
-            $this->status = "failed";
-            $this->error = $e;
-        }
-        return response()->json([
-            "status" => $this->status,
-            "data" => $this->data,
-            "error" => $this->error
-        ]);
-    }
+		$date_now = Carbon::now();
+		try {
+			$result = [];
+			foreach ($data as $d) {
+				$d['tgl_publish'] = $date_now->toDateTimeString();
+				$query = Nilai::where('nomor',$d['nomor']);
+				$nilai = $query->update($d);
+				$result[] = $query->get();
+			}
+			$this->data = $result;
+			$this->status = "success";
+		} catch (QueryException $e) {
+			$this->status = "failed";
+			$this->error = $e;
+		}
+		return response()->json([
+			"status" => $this->status,
+			"data" => $this->data,
+			"error" => $this->error
+		]);
+	}
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        try {
-            $check = Nilai::where('nomor', $id);
-    
-            if ($check) {
-                $this->status = "success";
-                $this->data = $check->get();
-                $check->delete();
-            } else {
-                $this->status = "failed";
-                $this->error = "data tidak ada";
-            }
-        } catch (QueryException $e) {
-            $this->status = "failed";
-            $this->error = $e;
-        }
-        return response()->json([
-            "status" => $this->status,
-            "data" => $this->data,
-            "error" => $this->error
-        ]);
-    }
+	/**
+	 * Remove the specified resource from storage.
+	 *
+	 * @param  int  $id
+	 * @return \Illuminate\Http\Response
+	 */
+	public function destroy($id)
+	{
+		try {
+			$check = Nilai::where('nomor', $id);
 
-    public function get_nim(Request $req)
-    {
-        try {
-            $nomor_nilai = $req->nomor_nilai;
-            $obj = Nilai::find($nomor_nilai);
-            $prodi = null;
-            $kelas = null;
-            $matakuliah = null;
-            $nilai = [];
-            $persentase_nilai = null;
-            $range = [];
-            if ($obj) {
-                $range = RangeNilai::last_version();
-                $persentase_nilai = PersentaseNilai::where('matakuliah', '=', $obj->rKuliah->matakuliah)
-                    ->orderBy('updated_at', 'desc')
-                    ->first();
+			if ($check) {
+				$this->status = "success";
+				$this->data = $check->get();
+				$check->delete();
+			} else {
+				$this->status = "failed";
+				$this->error = "data tidak ada";
+			}
+		} catch (QueryException $e) {
+			$this->status = "failed";
+			$this->error = $e;
+		}
+		return response()->json([
+			"status" => $this->status,
+			"data" => $this->data,
+			"error" => $this->error
+		]);
+	}
 
-                $prodi = $obj->rMahasiswa->rProdi;
-                $prodi = $prodi->rProgram->program.' '.$prodi->program_studi;
+	public function get_nim(Request $req)
+	{
+		try {
+			$nomor_nilai = $req->nomor_nilai;
+			$obj = Nilai::find($nomor_nilai);
+			$prodi = null;
+			$kelas = null;
+			$matakuliah = null;
+			$nilai = [];
+			$persentase_nilai = null;
+			$range = [];
+			if ($obj) {
+				$range = RangeNilai::last_version();
+				$persentase_nilai = PersentaseNilai::where('matakuliah', '=', $obj->rKuliah->matakuliah)
+				->orderBy('updated_at', 'desc')
+				->first();
 
-                $kelas = $obj->rKuliah->rKelas->kode;
-                $matakuliah = $obj->rKuliah->rMatkul->matakuliah;
-                
-                $nilai[] = [
-                    'nim' => $obj->rMahasiswa->nrp,
-                    'nama' => $obj->rMahasiswa->nama,
-                    'nomor' => $obj->nomor,
-                    'id_kuliah' => $obj->kuliah,
-                    'id_mahasiswa' => $obj->mahasiswa,
-                    'quis1' => $obj->quis1 ?? '',
-                    'quis2' => $obj->quis2 ?? '',
-                    'tugas' => $obj->tugas ?? '',
-                    'ujian' => $obj->ujian ?? '',
-                    'na' => $obj->na ?? '',
-                    'her' => $obj->her ?? '',
-                    'nh' => $obj->nh ?? '',
-                    'keterangan' => $obj->keterangan ?? '',
-                    'nhu' => $obj->nhu ?? '',
-                    'nsp' => $obj->nsp ?? '',
-                    'kuis' => $obj->kuis ?? '',
-                    'praktikum' => $obj->praktikum ?? '',
-                ];
-            }
+				$prodi = $obj->rMahasiswa->rProdi;
+				$prodi = $prodi->rProgram->program.' '.$prodi->program_studi;
 
-            $this->status = "success";
-            $this->data = [
-                "program_studi" => $prodi,
-                "kelas" => $kelas,
-                "matakuliah" => $matakuliah,
-                "nilai" => $nilai,
-                "persentase" => $persentase_nilai,
-                "range" => $range
-            ];
-        } catch (QueryException $e) {
-            $this->status = "failed";
-            $this->error = $e;
-        }
-        return response()->json([
-            "status" => $this->status,
-            "data" => $this->data,
-            "error" => $this->error
-        ]);
-    }
+				$kelas = $obj->rKuliah->rKelas->kode;
+				$matakuliah = $obj->rKuliah->rMatkul->matakuliah;
+				
+				$nilai[] = [
+					'nim' => $obj->rMahasiswa->nrp,
+					'nama' => $obj->rMahasiswa->nama,
+					'nomor' => $obj->nomor,
+					'id_kuliah' => $obj->kuliah,
+					'id_mahasiswa' => $obj->mahasiswa,
+					'quis1' => $obj->quis1 ?? '',
+					'quis2' => $obj->quis2 ?? '',
+					'tugas' => $obj->tugas ?? '',
+					'ujian' => $obj->ujian ?? '',
+					'na' => $obj->na ?? '',
+					'her' => $obj->her ?? '',
+					'nh' => $obj->nh ?? '',
+					'keterangan' => $obj->keterangan ?? '',
+					'nhu' => $obj->nhu ?? '',
+					'nsp' => $obj->nsp ?? '',
+					'kuis' => $obj->kuis ?? '',
+					'praktikum' => $obj->praktikum ?? '',
+					'up' => $obj->up ?? ''
+				];
+			}
+
+			$this->status = "success";
+			$this->data = [
+				"program_studi" => $prodi,
+				"kelas" => $kelas,
+				"matakuliah" => $matakuliah,
+				"nilai" => $nilai,
+				"persentase" => $persentase_nilai,
+				"range" => $range
+			];
+		} catch (QueryException $e) {
+			$this->status = "failed";
+			$this->error = $e;
+		}
+		return response()->json([
+			"status" => $this->status,
+			"data" => $this->data,
+			"error" => $this->error
+		]);
+	}
 }

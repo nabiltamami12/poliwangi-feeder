@@ -24,6 +24,7 @@ class Nilai extends Model
         'nh',
         'keterangan',
         'nhu',
+        'up',
         'nsp',
         'kuis',
         'praktikum',

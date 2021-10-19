@@ -97,11 +97,11 @@ Route::prefix('mahasiswa')->middleware(['aksesuntuk:mahasiswa'])->group(function
         ]);
     });
 
-    Route::get('/rekap-nilai', function () {
-        return view('akademik.kuliah/datarekapnilai', [
-            "title" => "rekap-nilai"
-        ]);
-    });
+    // Route::get('/rekap-nilai', function () {
+    //     return view('akademik.kuliah/datarekapnilai', [
+    //         "title" => "rekap-nilai"
+    //     ]);
+    // });
 
 });
 
@@ -152,8 +152,13 @@ Route::prefix('akademik')->middleware(['aksesuntuk:akademik'])->group(function (
     Route::prefix('kuliah')->group(function () {
         
         Route::get('/rekap-nilai', function () {
-            return view('akademik.kuliah/datarekapnilai', [
+            return view('admin.kuliah.datarekapnilai', [
                 "title" => "rekap-nilai"
+            ]);
+        });
+        Route::get('/rekap-nilai/edit', function () {
+            return view('admin.kuliah.nilai',[
+                "title" => "dosen-penilaian"
             ]);
         });
 
@@ -163,6 +168,7 @@ Route::prefix('akademik')->middleware(['aksesuntuk:akademik'])->group(function (
                 "title" => "rekap-absensi-mahasiswa"
             ]);
         });
+
         Route::get('/absensi/rekap-mahasiswa/{kelas}/{matkul}', function ($kelas, $matkul) {
             return view('akademik.kuliah.rekapabsensikelasmahasiswa', [
                 "page" => "akademik",
