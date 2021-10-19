@@ -249,11 +249,14 @@ Route::prefix('v1')->group(function () {
     // Berkas Keuangan
     Route::get('keuangan/list_cicilan', [Ctr\BerkasKeuanganController::class, 'index']);
     Route::get('keuangan/stats', [Ctr\BerkasKeuanganController::class, 'statistik']);
-    Route::get('keuangan/detail_dokumen/{id}', [Ctr\BerkasKeuanganController::class, 'detail_dokumen']);
+    Route::get('keuangan/detail-piutang/{id}', [Ctr\BerkasKeuanganController::class, 'detail_piutang']);
     Route::post('keuangan/pengajuan-cicilan', [Ctr\BerkasKeuanganController::class, 'store']);
     Route::get('keuangan/approve/{id}', [Ctr\BerkasKeuanganController::class, 'approve']);
     Route::post('keuangan/perjanjian/{id}', [Ctr\BerkasKeuanganController::class, 'perjanjian']);
     Route::post('keuangan/cicilan/{id}', [Ctr\BerkasKeuanganController::class, 'detail_cicilan']);
+    Route::post('keuangan/template-perjanjian', [Ctr\BerkasKeuanganController::class, 'template_perjanjian']);
+    Route::get('keuangan/template-perjanjian', [Ctr\BerkasKeuanganController::class, 'check_template_perjanjian']);
+    Route::get('download/template-perjanjian', [Ctr\BerkasKeuanganController::class, 'download_template_perjanjian']);
 
     Route::get('/keuangan/rekapitulasi/penyisihanpiutang', [Ctr\BerkasKeuanganController::class, 'penyisihanpiutang']);
     Route::get('/keuangan/export/rekap-piutang', [Ctr\BerkasKeuanganController::class, 'export_piutang']);

@@ -56,6 +56,7 @@
                 <th scope="col" class="text-center">Nilai Angka</th>
                 <th scope="col" class="text-center">SKS</th>
                 <th scope="col" class="text-center">Nilai Huruf</th>
+                <th scope="col">Kelas</th>
                 <th scope="col" class="text-center">Aksi</th>
               </tr>
             </thead>
@@ -109,62 +110,28 @@
   var nomor = 1;
   dt_url = `${url_api}/nilai/rekap?nomor=${$('#nomor').val()}&tahun=${$('#tahun').val()}&semester=${$('#semester').val()}`;
   dt_opt = {
-  "columnDefs": [
-        {
-          "aTargets": [0],
-          "mData": null,
-          "mRender": function(data, type, full) {
-            res = nomor++;
-            return res;
-          }
-        },{
-          "aTargets": [1],
-          "mData": null,
-          "mRender": function(data, type, full) {
-            res = data['kode'];
-            return (res==null)?"-":res;
-          }
-        },{
-          "aTargets": [2],
-          "mData": null,
-          "mRender": function(data, type, full) {
-            res = data['matakuliah'];
-            return (res==null)?"-":res;
-          }
-        },{
-          "aTargets": [3],
-          "mData": null,
-          "mRender": function(data, type, full) {
-            res = data['na'];
-            return (res==null)?"-":res;
-          }
-        },{
-          "aTargets": [4],
-          "mData": null,
-          "mRender": function(data, type, full) {
-            res = data['jumlah_sks'];
-            return (res==null)?"-":res;
-          }
-        },{
-          "aTargets": [5],
-          "mData": null,
-          "mRender": function(data, type, full) {
-            res = data['nh'];
-            return (res==null)?"-":res;
-          }
-        },{
-          "aTargets": [6],
-          "mData": null,
-          "mRender": function(data, type, full) {
-            var id = data['nomor'];
-            var text_hapus = data['kode']+" - "+data['matakuliah'];
-            var btn_update = `<span class="iconify edit-icon text-primary" onclick="update_nilai('${data['nomor']}')" data-icon="bx:bx-edit-alt" ></span>` 
-            var btn_delete = `<span class="iconify delete-icon text-primary" data-icon="bx:bx-trash"  onclick='delete_btn(${id},"nilai","nilai matakuliah ","${text_hapus}")'></span>`; 
-            res = (id==null)?'': btn_update+btn_delete;
-            return res;
-          }
-        },
-      ]}
+    "columns": [
+      {
+        "data" : null,
+        "render": ( data, type, row, meta ) => meta.row+1
+      },
+      {"data" : "kode_matakuliah"},
+      {"data" : "matakuliah"},
+      {"data" : "na", className: 'text-center'},
+      {"data" : "sks", className: 'text-center'},
+      {"data" : "nh", className: 'text-center'},
+      {"data" : "kelas"},
+      {
+        "data" : "nomor",
+        "render": ( data, type, row, meta) => {
+          let text_hapus = row['kode_matakuliah']+" - "+row['matakuliah'];
+          let btn_update = `<span class="iconify edit-icon text-primary" onclick="update_nilai('${data}')" data-icon="bx:bx-edit-alt" ></span>` 
+          let btn_delete = `<span class="iconify delete-icon text-primary" data-icon="bx:bx-trash"  onclick='delete_btn(${data},"nilai","nilai matakuliah ","${text_hapus}")'></span>`;
+          return btn_update+btn_delete;
+        }
+      }
+    ]
+  }
 
   function update_nilai(nomor_nilai) {
     window.location.href = window.location.href+`/edit?nomor_nilai=${nomor_nilai}&tahun=${$('#tahun').val()}`;
