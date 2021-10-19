@@ -19,33 +19,13 @@ class Jalurpmb extends Model
     protected $fillable = [
         "id",
         "jalur_daftar",
-        "biaya",
+        "jml_seleksi",
         "is_active",
         "tahun",
         "kuota",
-        "tanggal_tes",
-        "tanggal_awal",
-        "tanggal_akhir",
+        "tanggal_buka",
+        "tanggal_tutup",
         "syarat"
     ];
 
-
-    public function getTanggalAwalAttribute()
-    {
-        return Carbon::parse($this->attributes['tanggal_awal'])
-            ->isoFormat('D MMMM Y');
-    }
-    public function getTanggalAkhirAttribute()
-    {
-        return Carbon::parse($this->attributes['tanggal_akhir'])
-            ->isoFormat('D MMMM Y');
-    }
-    public function setTanggalAwalAttribute($value)
-    {
-        $this->attributes['tanggal_awal'] = Carbon::parse($value)->format('Y-m-d');
-    }
-    public function setTanggalAkhirAttribute($value)
-    {
-        $this->attributes['tanggal_akhir'] = Carbon::parse($value)->format('Y-m-d');
-    }
 }

@@ -7,7 +7,37 @@
 <!-- Page content -->
 <section class="page-content page-content__keuangan container-fluid">
   <!-- Modal -->
-  <div class="modal fade" id="dokumenPiutangModal" tabindex="-1" aria-labelledby="dokumenPiutangModalLabel"
+  <div class="modal fade" id="templatePerjanjian" tabindex="-1" aria-labelledby="templatePerjanjianModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content padding--medium">
+
+        <h1 class="modal-title text-center mt-2">Template Perjanjian</h1>
+        <div class="detail_dokumen upload-perjanjian d-flex align-items-center justify-content-between mt-5">
+          <form>
+            <span>
+              <i class="iconify mr-2" data-icon="bx:bxs-file-pdf" data-inline="false"></i>
+              <input type="file" id="file" hidden />
+
+              <a id="nama_dokumen_perjanjian" class="nama_dokumen" target="_blank">No File</a>
+            </span>
+          </form>
+          <button type="button" id="custom-btn">
+            <i class="iconify text-primary" data-icon="bx:bx-cloud-upload" data-inline="false"></i>
+          </button>
+        </div>
+
+        <div class="modal_button mt-4-5 d-flex justify-content-between">
+          <button type="button" class="btn btn-outline-placeholder rounded-sm w-100 mr-2 mr-md-3"
+            data-dismiss="modal">Kembali</button>
+          <button type="button" class="btn btn-success rounded-sm w-100 ml-2 ml-md-3">Setujui</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- <div class="modal fade" id="dokumenPiutangModal" tabindex="-1" aria-labelledby="dokumenPiutangModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
       <div class="modal-content padding--medium">
@@ -38,9 +68,9 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 
-  <div class="modal fade" id="uploadPerjanjianModal" tabindex="-1" aria-labelledby="uploadPerjanjianModalLabel"
+  <!-- <div class="modal fade" id="uploadPerjanjianModal" tabindex="-1" aria-labelledby="uploadPerjanjianModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
       <div class="modal-content padding--medium">
@@ -77,21 +107,8 @@
             <div id="list_cicilan">
               <div class="form-row mt-4-5">
                 <div class="col-md-6 pr-0 pr-md-2">
-                  <label for="bulan">Bulan Cicilan Ke-1</label>
-                  <select class="form-control" id="bulan_1">
-                    <option value="1">Januari</option>
-                    <option value="2">Februari</option>
-                    <option value="3">Maret</option>
-                    <option value="4">April</option>
-                    <option value="5">Mei</option>
-                    <option value="6">Juni</option>
-                    <option value="7">Juli</option>
-                    <option value="8">Agustus</option>
-                    <option value="9">September</option>
-                    <option value="10">Oktober</option>
-                    <option value="11">November</option>
-                    <option value="12">Desember</option>
-                  </select>
+                  <label for="tanggal_1">Tanggal Jatuh Tempo ke-1</label>
+                  <input type="date" id="tanggal_1" class="form-control">
                 </div>
                 <div class="col-md-6 pl-0 pl-md-2 mt-3 mt-md-0">
                   <label for="nominal">Nominal Cicilan Ke-1</label>
@@ -108,7 +125,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 
   <div class="row equal-cols">
     <div class="col-sm-6 col-lg-4">
@@ -187,10 +204,10 @@
               <h2 class="mb-0 text-center text-md-left">Piutang Mahasiswa</h2>
             </div>
             <div class="col-12 col-md-9 text-center text-md-right">
-              {{-- <button type="button" class="btn btn-success mt-3 mt-md-0">
-                <i class="iconify-inline mr-1" data-icon="bx:bxs-plus-circle"></i>
-                Tambah
-              </button> --}}
+              <button id="template-perjanjian" type="button" class="btn btn-success mt-3 mt-md-0">
+                <i class="iconify-inline mr-1" data-icon="bx:bx-cloud-upload"></i>
+                Template Perjanjian
+              </button>
 
               <!-- <div class="dropdown">
                 <button class="btn btn-primary dropdown-toggle mt-3 mt-md-0 ml-0 ml-md-1" type="button"
@@ -212,7 +229,7 @@
             <thead class="table-header">
               <tr>
                 <th scope="col" class="text-center pl-2">No</th>
-                <th scope="col" class="pl-2">nim</th>
+                <th scope="col" class="pl-2">NIM</th>
                 <th scope="col" class="pl-2">Nama Debitur</th>
                 <th scope="col" class="text-right pl-2">UKT</th>
                 <th scope="col" class="text-right pl-2">SPI</th>
@@ -305,10 +322,10 @@ dt_url = `${url_api}/keuangan/list_cicilan`;
           var id = data['id'];
           var id_mahasiswa = data['id_mahasiswa'];
           var btn_update = `
-                  <button type="button" class="btn btn-primary" onclick="perjanjianModal(${id},${id_mahasiswa},'${file_perjanjian}')">
-                    <i class="iconify mr-1" data-icon="bx:bx-cloud-upload"></i>
-                    <span class="text-white">Upload Perjanjian</span>
-                  </button> ` 
+                  <a class="btn btn-primary" href="{{url('')}}/keuangan/rekapitulasi/piutangmahasiswa/detail/${id}">
+                    <i class="iconify mr-1" data-icon="bx:bxs-user-detail"></i>
+                    <span class="text-white">Detail Piutang</span>
+                  </a>`
           return res = btn_update;
         }
       }
@@ -322,24 +339,11 @@ dt_url = `${url_api}/keuangan/list_cicilan`;
       for (let index = 1; index <= $(this).val(); index++) {
         html += `<div class="form-row mt-4-5">
               <div class="col-md-6 pr-0 pr-md-2">
-                <label for="bulan_${index}">Bulan Cicilan Ke-${index}</label>
-                <select class="form-control" id="bulan_${index}">
-                  <option value="1">Januari</option>
-                  <option value="2">Februari</option>
-                  <option value="3">Maret</option>
-                  <option value="4">April</option>
-                  <option value="5">Mei</option>
-                  <option value="6">Juni</option>
-                  <option value="7">Juli</option>
-                  <option value="8">Agustus</option>
-                  <option value="9">September</option>
-                  <option value="10">Oktober</option>
-                  <option value="11">November</option>
-                  <option value="12">Desember</option>
-                </select>
+                <label for="tanggal_${index}">Tanggal Jatuh Tempo ke-${index}</label>
+                <input type="date" id="tanggal_${index}" class="form-control">
               </div>
               <div class="col-md-6 pl-0 pl-md-2 mt-3 mt-md-0">
-                <label for="nominal_${index}">Nominal Cicilan Ke-${index}</label>
+                <label for="nominal_${index}">Nominal ke-${index}</label>
                 <input type="text" class="form-control text-right" id="nominal_${index}" placeholder="Rp. x.xxx.xxx">
               </div>
             </div>`
@@ -348,24 +352,24 @@ dt_url = `${url_api}/keuangan/list_cicilan`;
     })
 
     $('#btn_simpan').on('click',function (e) {
-      var arr_bulan = [];
+      var arr_tanggal = [];
       var arr_nominal = [];
-      var jml_bulan = $('#jumlah_cicilan').val();
+      var jml_tanggal = $('#jumlah_cicilan').val();
       var id_piutang = $('#id_piutang').val();
       var id_mahasiswa = $('#id_mahasiswa').val();
-      for (let index = 1; index <= jml_bulan; index++) {
-        var key = arr_bulan.indexOf($('#bulan_'+index).val());
+      for (let index = 1; index <= jml_tanggal; index++) {
+        var key = arr_tanggal.indexOf($('#tanggal_'+index).val());
         if(key !== -1){
           arr_nominal[key] = $('#nominal_'+index).val()
         } else{
-          arr_bulan.push($('#bulan_'+index).val());
+          arr_tanggal.push($('#tanggal_'+index).val());
           arr_nominal.push($('#nominal_'+index).val());
         }
       }
       var arr = {
-        'tenor' : jml_bulan,
+        'tenor' : jml_tanggal,
         'id_mahasiswa' : id_mahasiswa,
-        'bulan' : arr_bulan,
+        'tanggal' : arr_tanggal,
         'nominal' : arr_nominal,
       }
       $.ajax({
@@ -447,11 +451,9 @@ dt_url = `${url_api}/keuangan/list_cicilan`;
   function pengajuanModal() {
     $('#dokumenPiutangModal').modal('show')
   }
-  function perjanjianModal(id,id_mahasiswa,file_perjanjian) {
-    $('#id_piutang').val(id)
-    $('#id_mahasiswa').val(id_mahasiswa)
-    $('#nama_dokumen_perjanjian').prop('href',path_berkas+"/"+file_perjanjian)
-    $('#uploadPerjanjianModal').modal('show')
-  }
+
+  $('#template-perjanjian').on('click', function () {
+    $('#templatePerjanjian').modal('show')
+  })
 </script>
 @endsection

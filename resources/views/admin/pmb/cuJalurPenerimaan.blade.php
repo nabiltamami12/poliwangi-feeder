@@ -27,11 +27,11 @@
 
             <div class="row jalurPMB_pendaftaran">
               <div class="col-lg-6">
-                <h2 class="card_title mb-2 font-weight-500">Tanggal Pendaftaran</h2>
-                <div class="d-sm-flex align-items-center">
-                  <div class="form-group">
+                <div class="row">
+                  <div class="col-lg-6 mt-3 mb-3">
+                    <h2 class="card_title mb-2 font-weight-500">Tanggal Buka</h2>
                     <div class="d-flex align-items-center date_picker">
-                      <input id="tanggal_awal" type="text" class="form-control date-input" name="tanggal_awal" />
+                      <input id="tanggal_buka" type="text" class="form-control date-input" name="tanggal_buka" />
                       <label class="input-group-btn" for="txtDate1">
                         <span class="date_button">
                           <i class="iconify" data-icon="bx:bx-calendar" data-inline="false"></i>
@@ -39,10 +39,10 @@
                       </label>
                     </div>
                   </div>
-                  <p class="mx-3 font-weight-500 text-center my-3">Sampai</p>
-                  <div class="form-group">
+                  <div class="col-lg-6 mt-3 mb-3">
+                    <h2 class="card_title mb-2 font-weight-500">Tanggal Tutup</h2>
                     <div class="d-flex align-items-center date_picker">
-                      <input id="tanggal_akhir" type="text" class="form-control date-input" name="tanggal_akhir" />
+                      <input id="tanggal_tutup" type="text" class="form-control date-input" name="tanggal_tutup" />
                       <label class="input-group-btn" for="txtDate2">
                         <span class="date_button">
                           <i class="iconify" data-icon="bx:bx-calendar" data-inline="false"></i>
@@ -50,28 +50,24 @@
                       </label>
                     </div>
                   </div>
-                </div>
-
-                <div class="form-group mt-4 biaya_pendaftaran">
-                  <h2 class="card_title mb-2 font-weight-500">Biaya Pendaftaran</h2>
-                  <label class="sr-only" for="biaya_pendaftaran">Biaya Pendaftaran</label>
-                  <input type="text" class="form-control text-right" id="biaya" name="biaya">
-                </div>
-
-                <div class="form-group mt-4">
-                  <h2 class="card_title mb-2 font-weight-500">Kuota</h2>
-                  <label class="sr-only" for="kuota">Kuota</label>
-                  <input type="text" class="form-control" id="kuota" name="kuota">
+                  <div class="col-lg-6 mt-3 mb-3">
+                    <h2 class="card_title mb-2 font-weight-500">Jumlah Jurusan Pilihan</h2>
+                    <input type="number" class="form-control" id="jml_seleksi" name="jml_seleksi">
+                  </div>
+                  <div class="col-lg-6 mt-3 mb-3">
+                    <h2 class="card_title mb-2 font-weight-500">Kuota</h2>
+                    <input type="number" class="form-control" id="kuota" name="kuota">
+                  </div>
                 </div>
 
               </div>
 
               <div class="col-lg-6 pl-3 mt-4 mt-lg-0">
                 <h2 class="card_title font-weight-500">Syarat Pendaftaran</h2>
-                <div class="py-3 d-flex">
-                  <i class="iconify text-success mr-3" data-icon="akar-icons:circle-check-fill"></i>
-                  <p class="d-inline-block">Ijazah SMA/SMK/MA/Sederajat</p>
+                <div id="list_syarat">
+
                 </div>
+<!--                 
                 <div class="py-3 d-flex">
                   <i class="iconify text-success mr-3" data-icon="akar-icons:circle-check-fill"></i>
                   <p class="d-inline-block">Surat Keterangan Hasil Ujian</p>
@@ -95,7 +91,7 @@
                 <div class="py-3 d-flex">
                   <i class="iconify text-success mr-3" data-icon="akar-icons:circle-check-fill"></i>
                   <p class="d-inline-block">Upload Dokumen Pengajuan Keringanan <span class="text-primary">(Optional)</span></p>
-                </div>
+                </div> -->
               </div>
             </div>
             <div class="row">
@@ -113,6 +109,7 @@
 
 @section('js')
 <script>
+  var arr_syarat = [];
   $(function() {
     $(".date-input").datepicker({
       format: "D M Y",
@@ -121,8 +118,7 @@
 
   $(document).ready(function() {
     var id = "{{$id}}";
-    getData(id);
-
+    getSyarat();
     if (id != "") {
       getData(id);
     }
@@ -130,19 +126,21 @@
     $("#form_cu").submit(function(e) {
       e.preventDefault();
       var data = $('#form_cu').serialize();
-      if (id != "") {
-        var url = url_api + "/jalurpmb/" + id;
-        var type = "put";
-      } else {
-        var url = url_api + "/jalurpmb";
-        var type = "post";
-
+      var url = url_api + "/jalurpmb/" + id;
+      var type = "put";
+      var data = {
+        'jalur_daftar' : $('#jalur_daftar').val(),
+        'tanggal_buka' : $('#tanggal_buka').val(),
+        'tanggal_tutup' : $('#tanggal_tutup').val(),
+        'kuota' : $('#kuota').val(),
+        'jml_seleksi' : $('#jml_seleksi').val(),
       }
+      
       $.ajax({
         url: url,
         type: type,
         dataType: 'json',
-        data: data,
+        data:{'data':data,'syarat':arr_syarat},
         success: function(res) {
           if (res.status == "success") {
             window.location.href = "{{url('/admin/settingpmb/settingjalurpenerimaan')}}";
@@ -156,37 +154,50 @@
     });
   });
 
+  function getSyarat() {
+    $.ajax({
+      url: url_api + "/syarat",
+      type: 'get',
+      dataType: 'json',
+      data: {},
+      success: function(res) {
+        if (res.status == "success") {
+          var data = res.data;
+          var html = '';
+          $.each(data,function (key,row) {
+            html = `<div class="py-3 d-flex">
+                  <i onclick="func_centang(this)" style="cursor:pointer" id="centang_${row.id}" data-id="${row.id}" class="iconify text-placeholder mr-3" data-icon="akar-icons:circle-check-fill"></i>
+                  <p class="d-inline-block">${row.nama}</p>
+                </div>`
+            $('#list_syarat').append(html)
+          })
+        } else {
+          // alert gagal
+        }
+        
+
+      }
+    });
+  }
+
+  function func_centang(e) {
+    var id_syarat = $(e).data('id')
+    var check = $(e).hasClass('text-placeholder');
+    if(check){
+      $(e).removeClass('text-placeholder')
+      $(e).addClass('text-success')
+      arr_syarat.push(id_syarat);
+    }else{
+      $(e).addClass('text-placeholder')
+      $(e).removeClass('text-success')
+      var index = arr_syarat.indexOf(id_syarat);
+      if (index > -1) { //if found
+        arr_syarat.splice(index, 1);
+      }
+    }
+  }
+
   function getData(id) {
-    var optJalur_daftar = `<option value=""> - </option>`;
-    $.each(dataGlobal['jalur_daftar'], function(key, row) {
-      optJalur_daftar += `<option value="${row.nomor}">${row.nama}</option>`
-    })
-    $('#jalur_daftar').append(optJalur_daftar)
-
-    var optTanggal_awal = `<option value=""> - </option>`;
-    $.each(dataGlobal['tanggal_awal'], function(key, row) {
-      optTanggal_awal += `<option value="${row.nomor}">${row.nama}</option>`
-    })
-    $('#tanggal_awal').append(optTanggal_awal)
-
-    var optTanggal_akhir = `<option value=""> - </option>`;
-    $.each(dataGlobal['tanggal_akhir'], function(key, row) {
-      optTanggal_akhir += `<option value="${row.nomor}">${row.nama}</option>`
-    })
-    $('#tanggal_akhir').append(optTanggal_akhir)
-
-    var optBiaya = `<option value=""> - </option>`;
-    $.each(dataGlobal['biaya'], function(key, row) {
-      optBiaya += `<option value="${row.nomor}">${row.nama}</option>`
-    })
-    $('#biaya').append(optBiaya)
-
-    var optKuota = `<option value=""> - </option>`;
-    $.each(dataGlobal['kuota'], function(key, row) {
-      optKuota += `<option value="${row.nomor}">${row.nama}</option>`
-    })
-    $('#kuota').append(optKuota)
-
     $.ajax({
       url: url_api + "/jalurpmb/" + id,
       type: 'get',
@@ -194,15 +205,20 @@
       data: {},
       success: function(res) {
         if (res.status == "success") {
-          var data = res['data'];
+          var data = res.data.data;
           $.each(data, function(key, row) {
             $('#' + key).val(row);
+          })
+
+          var syarat = res.data.syarat;
+          $.each(syarat,function (key,row) {
+            console.log(row)
+            $('#centang_'+row.id_syarat).removeClass("text-placeholder")
+            $('#centang_'+row.id_syarat).addClass("text-success")
           })
         } else {
           // alert gagal
         }
-        
-
       }
     });
   }
