@@ -80,6 +80,8 @@ Route::prefix('v1')->group(function () {
 
 
     //matakuliah
+    Route::get('/matakuliah/select-option', [Ctr\MatakuliahController::class, 'select_option']);
+
     Route::get('/matakuliah/', '\App\Http\Controllers\API\MatakuliahController@index');
     Route::get('/matakuliah/{id}', '\App\Http\Controllers\API\MatakuliahController@show');
     Route::post('/matakuliah', '\App\Http\Controllers\API\MatakuliahController@store');

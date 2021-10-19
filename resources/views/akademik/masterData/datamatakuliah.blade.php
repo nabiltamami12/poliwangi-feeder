@@ -32,7 +32,7 @@
                 <th scope="col">Kode</th>
                 <th scope="col">Matakuliah</th>
                 <th scope="col" class="text-center">Jenis</th>
-                <th scope="col" class="text-center">Semester</th>
+                <!-- <th scope="col" class="text-center">Semester</th> -->
                 <th scope="col" class="text-center">Aksi</th>
               </tr>
             </thead>
@@ -77,15 +77,17 @@ dt_opt = {
           res = data['nama_mk_jenis'];
           return res;
         }
-      },{
+      },
+      // {
+      //   "aTargets": [4],
+      //   "mData": null,
+      //   "mRender": function(data, type, full) {
+      //     res = (data['semester']==1)?"gasal":"genap";
+      //     return res;
+      //   }
+      // },
+      {
         "aTargets": [4],
-        "mData": null,
-        "mRender": function(data, type, full) {
-          res = (data['semester']==1)?"gasal":"genap";
-          return res;
-        }
-      },{
-        "aTargets": [5],
         "mData": null,
         "mRender": function(data, type, full) {
           var id = data['nomor'];

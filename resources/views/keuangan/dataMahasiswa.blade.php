@@ -107,7 +107,7 @@
 	}
 	function setDatatable() {
 		var nomor = 1;
-		dt_url = `${url_api}/pendaftar/mahasiswa?program_studi=${$('#program_studi').val()}&status=${$('#status').val()}&kelas=${$('#kelas').val()}`;
+		dt_url = `${url_api}/pendaftar/mahasiswa?program_studi=${$('#program_studi').val()}&status=A&kelas=${$('#kelas').val()}`;
 		dt_opt = {
 			"columnDefs": [
 			{

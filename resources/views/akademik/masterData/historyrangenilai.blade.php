@@ -32,7 +32,7 @@
             <table id="datatable" class="table align-items-center table-flush table-borderless table-hover">
               <thead class="table-header">
                 <tr>
-                  <th scope="col">Versi</th>
+                  <th scope="col">Tanggal</th>
                   <th scope="col">Nilai huruf</th>
                   <th scope="col">Nilai Angka</th>
                   <th scope="col">Nilai angka atas</th>
@@ -60,7 +60,7 @@ dt_opt = {
         "aTargets": [0],
         "mData": null,
         "mRender": function(data, type, full) {
-          res = data['versi'];
+          res = formatTanggal( data['created_at']);
           return res;
         }
       },{

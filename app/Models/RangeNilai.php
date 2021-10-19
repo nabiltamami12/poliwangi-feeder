@@ -16,7 +16,9 @@ class RangeNilai extends Model
         'nh',
         'akumulasi',
         'na_atas',
-        'versi'
+        'versi',
+        'tanggal_awal',
+        'tanggal_akhir'
     ];
 
     public static function last_version()
