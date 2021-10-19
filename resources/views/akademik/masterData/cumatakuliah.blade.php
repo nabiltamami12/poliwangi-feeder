@@ -28,7 +28,7 @@
             <div class="col-sm-12 col-12">
               <div class="form-group row mb-0">
                 <label>Matakuliah</label>
-                <input type="text" class="form-control" id="matakuliah" name="matakuliah">
+                <input type="text" class="form-control" id="matakuliah" placeholder="Nama Matakuliah" name="matakuliah">
               </div>
             </div>
             <div class="col-sm-6 col-12">
@@ -40,7 +40,7 @@
               </div>
             </div>
             
-            <div class="col-sm-6 col-12">
+            <!-- <div class="col-sm-6 col-12">
               <div class="form-group row mb-0">
                 <label>Semester</label>
                 <select class="form-control" id="semester" name="semester" required>
@@ -48,26 +48,39 @@
                   <option value="2">Genap</option>
                 </select>
               </div>
-            </div>
+            </div> -->
             <div class="col-sm-6 col-12">
               <div class="form-group row mb-0">
                 <label>Kode</label>
-                <input type="text" class="form-control" id="kode" name="kode">
+                <input type="text" class="form-control" placeholder="Kode Matakuliah" id="kode" name="kode">
               </div>
             </div>
             <div class="col-sm-6 col-12">
               <div class="form-group row mb-0">
                 <label>SKS</label>
-                <input type="text" class="form-control" id="sks" name="sks" required>
+                <input type="text" class="form-control" id="sks" placeholder="Jumlah SKS" name="sks" required>
               </div>
             </div>
             <div class="col-sm-6 col-12">
               <div class="form-group row mb-0">
                 <label>Bobot</label>
-                <input type="text" class="form-control" id="bobot" name="bobot" required>
+                <input type="text" class="form-control" id="bobot" placeholder="Bobot Matakuliah" name="bobot" required>
+              </div>
+            </div>
+           
+            <div class="col-sm-6 col-12">
+              <div class="form-group row mb-0">
+                <label>Matakuliah Inggris</label>
+                <input type="text" class="form-control" id="matakuliah_inggris" placeholder="Nama Inggris Matakuliah" name="matakuliah_inggris">
               </div>
             </div>
             <div class="col-sm-6 col-12">
+              <div class="form-group row mb-0">
+                <label>Matakuliah Singkatan</label>
+                <input type="text" class="form-control" id="matakuliah_singkatan" placeholder="Nama Singkatan Matakuliah" name="matakuliah_singkatan">
+              </div>
+            </div>
+            <div class="col-sm-4 col-12">
               <div class="form-group row mb-0">
                 <label>Matakuliah Wajib</label>
                 <select class="form-control" id="mk_wajib" name="mk_wajib">
@@ -76,19 +89,7 @@
                 </select>
               </div>
             </div>
-            <div class="col-sm-6 col-12">
-              <div class="form-group row mb-0">
-                <label>Matakuliah Inggris</label>
-                <input type="text" class="form-control" id="matakuliah_inggris" name="matakuliah_inggris">
-              </div>
-            </div>
-            <div class="col-sm-6 col-12">
-              <div class="form-group row mb-0">
-                <label>Matakuliah Singkatan</label>
-                <input type="text" class="form-control" id="matakuliah_singkatan" name="matakuliah_singkatan">
-              </div>
-            </div>
-            <div class="col-sm-6 col-12">
+            <div class="col-sm-4 col-12">
               <div class="form-group row mb-0">
                 <label>Matakuliah Jenis</label>
                 <select class="form-control" id="matakuliah_jenis" name="matakuliah_jenis" required>
@@ -96,7 +97,7 @@
                 </select>
               </div>
             </div>
-            <div class="col-sm-6 col-12">
+            <div class="col-sm-4 col-12">
               <div class="form-group row mb-0">
                 <label>Masuk Penilaian</label>
                 <select class="form-control" id="masuk_penilaian" name="masuk_penilaian">
