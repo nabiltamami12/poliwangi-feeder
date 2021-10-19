@@ -26,24 +26,24 @@
         <hr class="my-4 mt">
         <form class="form-select rounded-0">
           <div class="form-row">
-            <div class="col-md-4 form-group">
+            <div class="col-md-6 form-group">
               <label for="jenjang-pendidikan">Jenjang Pendidikan</label>
               <select class="form-control" id="program_studi" name="program_studi">
                 
               </select>
             </div>
-            <div class="col-md-4 form-group">
+            <div class="col-md-6 form-group">
               <label for="kelas">Kelas</label>
               <select class="form-control" id="kelas" name="kelas">
                 
               </select>
             </div>
-            <div class="col-md-4 form-group mt-3 mt-md-0">
+            <!-- <div class="col-md-4 form-group mt-3 mt-md-0">
               <label for="status-mahasiswa">Status Mahasiswa</label>
               <select class="form-control" id="status" name="status">
                 
               </select>
-            </div>
+            </div> -->
           </div>
         </form>
         <hr class="mt">
@@ -86,7 +86,7 @@
     $('#kelas').append(optKelas); 
   })
   $('select').on('change',function (e) {
-    var url = `${url_api}/mahasiswa?program_studi=${$('#program_studi').val()}&status=${$('#status').val()}&kelas=${$('#kelas').val()}`;
+    var url = `${url_api}/mahasiswa?program_studi=${$('#program_studi').val()}&status=A&kelas=${$('#kelas').val()}`;
     dt.ajax.url(url).load();
   })
 } );
