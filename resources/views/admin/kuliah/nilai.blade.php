@@ -65,25 +65,25 @@
 									<input type="hidden" id="id_persentase" name="id">
 								</td>
 								<td class="text-center px-3">
-									<input type="text" class="form-control persentase-count" placeholder="0" id="persentase_uts" >
+									<input type="text" class="form-control persentase-count" placeholder="0" id="persentase_uts" disabled="disabled">
 								</td>
 								<td class="text-center px-3">
-									<input type="text" class="form-control persentase-count" placeholder="0" id="persentase_uas" >
+									<input type="text" class="form-control persentase-count" placeholder="0" id="persentase_uas" disabled="disabled">
 								</td>
 								<td class="text-center px-3">
-									<input type="text" class="form-control persentase-count" placeholder="0" id="persentase_tugas" >
+									<input type="text" class="form-control persentase-count" placeholder="0" id="persentase_tugas" disabled="disabled">
 								</td>
 								<td class="text-center px-3">
-									<input type="text" class="form-control persentase-count" placeholder="0" id="persentase_kuis" >
+									<input type="text" class="form-control persentase-count" placeholder="0" id="persentase_kuis" disabled="disabled">
 								</td>
 								<td class="text-center px-3">
-									<input type="text" class="form-control persentase-count" placeholder="0" id="persentase_kehadiran">
+									<input type="text" class="form-control persentase-count" placeholder="0" id="persentase_kehadiran" disabled="disabled">
 								</td>
 								<td class="text-center px-3">
-									<input type="text" class="form-control persentase-count" placeholder="0" id="persentase_praktikum" >
+									<input type="text" class="form-control persentase-count" placeholder="0" id="persentase_praktikum" disabled="disabled">
 								</td>
 								<td class="text-center px-3">
-									<input type="text" class="form-control persentase-count" placeholder="0%" id="total_persentase"  disabled>
+									<input type="text" class="form-control persentase-count" placeholder="0%" id="total_persentase"  disabled="disabled">
 								</td>
 								<td colspan="4"></td>
 							</tr>
@@ -124,7 +124,8 @@ $(document).ready(function() {
 				// 'her' : $('#her_'+index).val(),
 				'nh' : $('#nh_'+index).val(),
 				'keterangan' : $('#keterangan_'+index).val(),
-				'nhu' : $('#nhu_'+index).val(),
+				'up' : $('#up_'+index).val(),
+				// 'nhu' : $('#nhu_'+index).val(),
 				// 'nsp' : $('#nsp_'+index).val(),
 				'kuis' : $('#kuis_'+index).val(),
 				'praktikum' : $('#praktikum_'+index).val(),
@@ -164,7 +165,6 @@ function setSiswa(data) {
 		<th scope="col" class="text-center px-1">Praktikum</th>
 		<th scope="col" class="text-center px-1">NA</th>
 		<th scope="col" class="text-center px-1">UP</th>
-		<th scope="col" class="text-center px-1">NHU</th>
 		<th scope="col" class="text-center px-1">NH</th>
 		<th scope="col" class="text-center px-2">Keterangan</th>
 		</tr>`)
@@ -207,10 +207,7 @@ function setSiswa(data) {
 			<input type="text" class="form-control" id="na_${i}" value="${row.na}" disabled>
 		</td>
 		<td class="text-center px-3">
-			<input type="text" class="form-control" id="up_${i}" value="${row.her}" disabled>
-		</td>
-		<td class="text-center px-3">
-			<input type="text" class="form-control" id="nhu_${i}" value="${row.nhu}" disabled>
+			<input type="text" class="form-control" onkeyup="rgx_nilai_huruf(${i})" id="up_${i}" value="${row.up}">
 		</td>
 		<td class="text-center px-3">
 			<input type="text" class="form-control" id="nh_${i}" value="${row.nh}" disabled>
@@ -330,16 +327,25 @@ function persen_nilai() {
 				$('#nh_'+k).val(i.nh);
 			}
 			const val_up = $('#up_'+k).val();
-			let _up = Number(val_up);
-			_up = (val_up === '' || val_up === null || val_up < 1 )  ? _na : _up;
-			if(_up >= Number(i.na) && _up <= Number(i.na_atas)){
-				$('#nhu_'+k).val(i.nh); 
-			}
+			if (val_up !== '') $('#nh_'+k).val(val_up);
 		}
 
 		$('#na_'+k).val(round(_na, 2));
 	});
 	return true;
+}
+
+function rgx_nilai_huruf(idx) {
+	const up = document.getElementById('up_'+idx);
+	const nh = document.getElementById('nh_'+idx);
+	const str = up.value.toUpperCase();
+	let result = str.replace(/[^A-D]/gm, '').substring(0, 2);
+	up.value = result;
+	if (up.value !== '') {
+		nh.value = result;
+	} else {
+		persen_nilai();
+	}
 }
 </script>
 @endsection
