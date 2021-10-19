@@ -250,6 +250,83 @@ class BerkasKeuanganController extends Controller
         ]);
     }
 
+    public function template_perjanjian(Request $request) {
+        try {
+            $data = $request->all();
+            $validator = Validator::make(
+                $data,
+                [
+                    'file' => 'required|mimes:doc,docx,pdf|max:2048',
+                ]
+            );
+    
+            if ($validator->fails()) {
+                return response()->json(['error' => $validator->errors(), 'data' => $data], 401);
+            }
+
+            if ($request->hasFile('file')) {
+                $nilai = date('YmdHi').$request->file->getClientOriginalName();
+                if($request->file->storeAs('template', $nilai)){
+                    $setting = DB::table('setting')->where('nama', 'like', 'template_perjanjian_%')->orderByDesc('nama')->limit(1)->get();
+                    if (!isset($setting[0])) {
+                        DB::table('setting')->insert([
+                            'nama' => 'template_perjanjian_1',
+                            'nilai' => $nilai,
+                            'keterangan' => 'Template Perjanjian',
+                        ]);
+                        $this->data = ['file' => 'template_perjanjian_1'];
+                    }else{
+                        $version = intval(str_replace('template_perjanjian_', '', $setting[0]->nama))+1;
+                        DB::table('setting')->insert([
+                            'nama' => 'template_perjanjian_'.$version,
+                            'nilai' => $nilai,
+                            'keterangan' => 'Template Perjanjian',
+                        ]);
+                        $this->data = ['file' => 'template_perjanjian_'.$version];
+
+                    }
+                    $this->status = "success";
+                }
+            }
+        } catch (QueryException $e) {
+            $this->status = "failed";
+            $this->error = $e;
+        }
+        return response()->json([
+                "status" => $this->status,
+                "data" => $this->data,
+                'error' => $this->error,
+        ]);
+    }
+
+    public function download_template_perjanjian()
+    {
+        $template_perjanjian = DB::table('setting')->where('nama', 'like', 'template_perjanjian_%')->orderByDesc('nama')->get();
+        if (!isset($template_perjanjian[0])) {
+            abort(404);
+        }
+        $pathToFile = storage_path('app/template/' . $template_perjanjian[0]->nilai);
+        return response()->download($pathToFile);
+    }
+
+    public function check_template_perjanjian()
+    {
+        $template_perjanjian = DB::table('setting')->where('nama', 'like', 'template_perjanjian_%')->orderByDesc('nama')->get();
+        $this->data = null;
+        $this->status = "error";
+        $this->error = 'File not found!';
+        if (isset($template_perjanjian[0])) {
+            $this->data = url('/api/v1/download/template-perjanjian');
+            $this->status = "success";
+            $this->error = null;
+        }
+        return response()->json([
+                "status" => $this->status,
+                "data" => $this->data,
+                'error' => $this->error,
+        ]);
+    }
+
     public function perjanjian(Request $request, $id) {
         try {
             $record = BK::findOrFail($id);

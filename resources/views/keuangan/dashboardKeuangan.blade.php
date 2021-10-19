@@ -7,35 +7,32 @@
 <!-- Page content -->
 <section class="page-content page-content__keuangan container-fluid">
   <!-- Modal -->
-  <div class="modal fade" id="templatePerjanjian" tabindex="-1" aria-labelledby="templatePerjanjianModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-      <div class="modal-content padding--medium">
-
-        <h1 class="modal-title text-center mt-2">Template Perjanjian</h1>
-        <div class="detail_dokumen upload-perjanjian d-flex align-items-center justify-content-between mt-5">
-          <form>
-            <span>
-              <i class="iconify mr-2" data-icon="bx:bxs-file-pdf" data-inline="false"></i>
-              <input type="file" id="file" hidden />
-
-              <a id="nama_dokumen_perjanjian" class="nama_dokumen" target="_blank">No File</a>
-            </span>
-          </form>
-          <button type="button" id="custom-btn">
-            <i class="iconify text-primary" data-icon="bx:bx-cloud-upload" data-inline="false"></i>
-          </button>
-        </div>
-
-        <div class="modal_button mt-4-5 d-flex justify-content-between">
-          <button type="button" class="btn btn-outline-placeholder rounded-sm w-100 mr-2 mr-md-3"
-            data-dismiss="modal">Kembali</button>
-          <button type="button" class="btn btn-success rounded-sm w-100 ml-2 ml-md-3">Setujui</button>
-        </div>
-
+  <div class="modal fade" id="templatePerjanjian" tabindex="-1" aria-labelledby="templatePerjanjianModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content padding--medium">
+      <h1 class="modal-title text-center mt-2">Template Surat Perjanjian</h1>
+      <div class="detail_dokumen upload-perjanjian d-flex align-items-center justify-content-between mt-5">
+        <form action="{{url('/')}}api/v1/keuangan/template-perjanjian" method="POST" enctype="multipart/form-data">
+          <span>
+            <i class="iconify mr-2" data-icon="bx:bxs-file-pdf" data-inline="false"></i>
+            <input type="file" name="file" class="file" hidden />
+            <a class="nama_dokumen" target="_blank">No File</a>
+          </span>
+        </form>
+        <button type="button" class="custom-btn">
+          <i class="iconify text-primary" data-icon="bx:bx-cloud-upload" data-inline="false"></i>
+        </button>
+      </div>
+      <label class="mt-3">File saat ini: <span class="status_perjanjian">Sedang dicek...</span></label>
+      <label>Silahkan upload lagi untuk mengubah.</label>
+      <div class="modal_button mt-4-5 d-flex justify-content-between">
+        <button type="button" class="btn btn-outline-placeholder rounded-sm w-100 mr-2 mr-md-3"
+        data-dismiss="modal">Kembali</button>
+        <button type="button" class="submit btn btn-success rounded-sm w-100 ml-2 ml-md-3">Simpan</button>
       </div>
     </div>
   </div>
+</div>
 
   <!-- <div class="modal fade" id="dokumenPiutangModal" tabindex="-1" aria-labelledby="dokumenPiutangModalLabel"
     aria-hidden="true">
@@ -384,25 +381,36 @@ dt_url = `${url_api}/keuangan/list_cicilan`;
       })
     })
   })
-  const inputFile = document.getElementById("file");
-  const customBtn = document.getElementById("custom-btn");
-  const customText = document.getElementById("nama_dokumen_perjanjian");
-  // const formUpload = document.querySelector(".upload-perjanjian form");
-  // const formWrapper = document.querySelector('.upload-perjanjian');
 
-  customBtn.addEventListener("click", function () {
-    inputFile.click();
-  });
+  $('#templatePerjanjian .custom-btn').on('click', function () {
+    $('#templatePerjanjian [name="file"]').click()
+  })
+  $('#templatePerjanjian [name="file"]').on('change', function () {
+    let fileName = this.value.match(/[0-9a-zA-Z\^\&\'\@\{\}\[\]\,\$\=\!\-\#\(\)\.\%\+\~\_ ]+$/)[0];
+    $('#templatePerjanjian .nama_dokumen').text(fileName)
+  })
 
-  inputFile.addEventListener("change", function () {
-    if (inputFile.value) {
-      let fileName = inputFile.value.match(/[0-9a-zA-Z\^\&\'\@\{\}\[\]\,\$\=\!\-\#\(\)\.\%\+\~\_ ]+$/)[0];
-      customText.innerHTML = fileName;
-      uploadPerjanjian()
-    } else {
-      customText.innerHTML = "tidak ada file dipilih";
-    }
-  });
+  $('#templatePerjanjian .submit').on('click', function () {
+    var file_data = $('#templatePerjanjian [name="file"]').prop('files')[0];   
+    var form_data = new FormData();                  
+    form_data.append('file', file_data);
+
+    $.ajax({
+        url: url_api+"/keuangan/template-perjanjian",
+        dataType: 'json',
+        cache: false,
+        contentType: false,
+        processData: false,
+        data: form_data,                         
+        type: 'post',
+        success: function(res){
+          $('#templatePerjanjian .nama_dokumen').html('Upload sukses: <a href="'+url_api+'/download/template-perjanjian" target="_blank">Lihat</a>')
+          check_file_perjanjian()
+        }
+    });
+
+  })
+
   function getInfo() {
     $.ajax({
         url: url_api+"/keuangan/stats",
@@ -410,8 +418,6 @@ dt_url = `${url_api}/keuangan/list_cicilan`;
         dataType: 'json',
         data: {},
         beforeSend: function(text) {
-                // loading func
-                console.log("loading")
                 loading('show')
         },
         success: function(res) {
@@ -428,32 +434,25 @@ dt_url = `${url_api}/keuangan/list_cicilan`;
     })
   }
 
-  function uploadPerjanjian(){
-      var id_piutang = $('#id_piutang').val();
-      var file_data = $('#file').prop('files')[0];   
-      var form_data = new FormData();                  
-      form_data.append('file', file_data);
-
-      $.ajax({
-          url: url_api+"/keuangan/perjanjian/"+id_piutang,
-          dataType: 'json',
-          cache: false,
-          contentType: false,
-          processData: false,
-          data: form_data,                         
-          type: 'post',
-          success: function(res){
-              location.reload()
+  function check_file_perjanjian() {
+    $.ajax({
+        url: url_api+"/keuangan/template-perjanjian",
+        dataType: 'json',
+        cache: false,
+        type: 'get',
+        success: function(res){
+          if (res.status == 'success') {
+            $('.status_perjanjian').html('<a href="'+res.data+'" target="_blank">Telah diupload</a>')
+          }else{
+            $('.status_perjanjian').html('Belum diupload')
           }
-      });
-  }
-
-  function pengajuanModal() {
-    $('#dokumenPiutangModal').modal('show')
+        }
+    });
   }
 
   $('#template-perjanjian').on('click', function () {
     $('#templatePerjanjian').modal('show')
+    check_file_perjanjian()
   })
 </script>
 @endsection
