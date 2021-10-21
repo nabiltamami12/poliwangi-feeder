@@ -8,121 +8,61 @@
 <section class="page-content page-content__keuangan container-fluid">
   <!-- Modal -->
   <div class="modal fade" id="templatePerjanjian" tabindex="-1" aria-labelledby="templatePerjanjianModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-lg">
-    <div class="modal-content padding--medium">
-      <h1 class="modal-title text-center mt-2">Template Surat Perjanjian</h1>
-      <div class="detail_dokumen upload-perjanjian d-flex align-items-center justify-content-between mt-5">
-        <form action="{{url('/')}}api/v1/keuangan/template-perjanjian" method="POST" enctype="multipart/form-data">
-          <span>
-            <i class="iconify mr-2" data-icon="bx:bxs-file-pdf" data-inline="false"></i>
-            <input type="file" name="file" class="file" hidden />
-            <a class="nama_dokumen" target="_blank">No File</a>
-          </span>
-        </form>
-        <button type="button" class="custom-btn">
-          <i class="iconify text-primary" data-icon="bx:bx-cloud-upload" data-inline="false"></i>
-        </button>
-      </div>
-      <label class="mt-3">File saat ini: <span class="status_perjanjian">Sedang dicek...</span></label>
-      <label>Silahkan upload lagi untuk mengubah.</label>
-      <div class="modal_button mt-4-5 d-flex justify-content-between">
-        <button type="button" class="btn btn-outline-placeholder rounded-sm w-100 mr-2 mr-md-3"
-        data-dismiss="modal">Kembali</button>
-        <button type="button" class="submit btn btn-success rounded-sm w-100 ml-2 ml-md-3">Simpan</button>
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content padding--medium">
+        <h1 class="modal-title text-center mt-2">Template Surat Perjanjian</h1>
+        <div class="detail_dokumen d-flex align-items-center justify-content-between mt-5">
+          <form>
+            <span>
+              <i class="iconify mr-2" data-icon="bx:bxs-file-pdf" data-inline="false"></i>
+              <input type="file" name="file" class="file" hidden />
+              <a class="nama_dokumen" target="_blank">No File</a>
+            </span>
+          </form>
+
+          <button type="button" class="custom-btn">
+            <i class="iconify text-primary" data-icon="bx:bx-cloud-upload" data-inline="false"></i>
+          </button>
+        </div>
+        <label class="mt-3">File saat ini: <span class="status_perjanjian">Sedang dicek...</span></label>
+        <p>Silahkan upload lagi untuk mengubah.</p>
+        <div class="modal_button mt-4-5 d-flex justify-content-between">
+          <button type="button" class="btn btn-outline-placeholder rounded-sm w-100 mr-2 mr-md-3"
+          data-dismiss="modal">Kembali</button>
+          <button type="button" class="submit btn btn-success rounded-sm w-100 ml-2 ml-md-3">Simpan</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-  <!-- <div class="modal fade" id="dokumenPiutangModal" tabindex="-1" aria-labelledby="dokumenPiutangModalLabel"
-    aria-hidden="true">
+  <div class="modal fade" id="masukkanMahasiswa" tabindex="-1" aria-labelledby="masukkanMahasiswaModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
       <div class="modal-content padding--medium">
-        <div class="dokumen_pengajuan">
-          <h1 class="modal-title text-center my-2">Dokumen Pengajuan Piutang</h1>
-          <div class="detail_dokumen d-flex align-items-center justify-content-between mt-5 mb-2">
+        <h1 class="modal-title text-center mt-2">Masukkan Mahasiswa dalam Daftar Piutang</h1>
+        <div class="form-row mt-5">
+          <label for="nim">Pilih Mahasiswa</label>
+          <select class="form-control" id="nim" name="nim"></select>
+        </div>
+        <div class="detail_dokumen d-flex align-items-center justify-content-between mt-3">
+          <form>
             <span>
               <i class="iconify mr-2" data-icon="bx:bxs-file-pdf" data-inline="false"></i>
-              <span class="nama_dokumen">Dokumen_Bryan_Wijaya.pdf</span>
+              <input type="file" name="file" class="file" hidden />
+              <a class="nama_dokumen" target="_blank">No File</a>
             </span>
-            <i class="iconify text-primary" data-icon="bx:bx-cloud-download" data-inline="false"></i>
-          </div>
-        </div>
-        <div class="dokumen_perjanjian">
-          <h1 class="modal-title text-center mt-5 mb-2">Dokumen Perjanjian Piutang</h1>
-          <div class="detail_dokumen d-flex align-items-center justify-content-between mt-5">
-            <span>
-              <i class="iconify mr-2" data-icon="bx:bxs-file-pdf" data-inline="false"></i>
-              <span class="nama_dokumen">Dokumen_Bryan_Wijaya.pdf</span>
-            </span>
-            <i class="iconify text-primary" data-icon="bx:bx-cloud-download" data-inline="false"></i>
-          </div>
-        </div>
-        <div class="modal_button mt-4-5 d-flex justify-content-between">
-          <button type="button" class="btn btn-outline-placeholder rounded-sm w-100 mr-2 mr-md-3"
-            data-dismiss="modal">Kembali</button>
-          <button type="button" class="btn btn-success rounded-sm w-100 ml-2 ml-md-3">Setujui</button>
-        </div>
-      </div>
-    </div>
-  </div> -->
-
-  <!-- <div class="modal fade" id="uploadPerjanjianModal" tabindex="-1" aria-labelledby="uploadPerjanjianModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-      <div class="modal-content padding--medium">
-        <div class="perjanjian_pembayaran">
-          <h1 class="modal-title text-center mt-2">Upload Perjanjian Pembayaran</h1>
-          <div class="detail_dokumen upload-perjanjian d-flex align-items-center justify-content-between mt-5">
-            <form>
-              <span>
-                <i class="iconify mr-2" data-icon="bx:bxs-file-pdf" data-inline="false"></i>
-                <input type="file" id="file" hidden />
-                <input type="text" id="id_piutang" hidden />
-                <input type="text" id="id_mahasiswa" hidden />
-
-                <a id="nama_dokumen_perjanjian" class="nama_dokumen" target="_blank">No File</a>
-              </span>
-            </form>
-            <button type="button" id="custom-btn">
-              <i class="iconify text-primary" data-icon="bx:bx-cloud-upload" data-inline="false"></i>
-            </button>
-          </div>
-        </div>
-        <hr class="my-4-5">
-        <div class="detail_cicilan">
-          <h1 class="modal-title text-center my-2">Detail Cicilan Pembayaran</h1>
-          <form class="mt-4-5">
-            <div class="form-row">
-              <label for="">Jumlah Cicilan</label>
-              <select class="form-control" id="jumlah_cicilan">
-                <?php for ($i=1; $i <= 12 ; $i++) { ?>
-                  <option value="{{$i}}">{{$i}}</option>
-                <?php } ?>
-              </select>
-            </div>
-            <div id="list_cicilan">
-              <div class="form-row mt-4-5">
-                <div class="col-md-6 pr-0 pr-md-2">
-                  <label for="tanggal_1">Tanggal Jatuh Tempo ke-1</label>
-                  <input type="date" id="tanggal_1" class="form-control">
-                </div>
-                <div class="col-md-6 pl-0 pl-md-2 mt-3 mt-md-0">
-                  <label for="nominal">Nominal Cicilan Ke-1</label>
-                  <input type="text" class="form-control text-right" id="nominal_1" placeholder="Rp. x.xxx.xxx">
-                </div>
-              </div>
-            </div>
           </form>
+          <button type="button" class="custom-btn">
+            <i class="iconify text-primary" data-icon="bx:bx-cloud-upload" data-inline="false"></i>
+          </button>
         </div>
+        <p class="mt-3">Kedua bidang di atas harus diisi.<br>Status piutang mahasiswa akan <b>pending</b> sampai mahasiswa upload berkas surat perjanjian dan keuangan memasukkan data cicilan.</p>
         <div class="modal_button mt-4-5 d-flex justify-content-between">
-          <button type="button" class="btn btn-outline-danger rounded-sm w-100 mr-2 mr-md-3"
-            data-dismiss="modal">Batal</button>
-          <button type="button" id="btn_simpan" class="btn btn-success rounded-sm w-100 ml-2 ml-md-3">Simpan</button>
+          <button type="button" class="btn btn-outline-placeholder rounded-sm w-100 mr-2 mr-md-3" data-dismiss="modal">Kembali</button>
+          <button onclick="simpanPiutangBaru()" class="submit btn btn-success rounded-sm w-100 ml-2 ml-md-3">Simpan</button>
         </div>
       </div>
     </div>
-  </div> -->
+  </div>
 
   <div class="row equal-cols">
     <div class="col-sm-6 col-lg-4">
@@ -205,6 +145,10 @@
                 <i class="iconify-inline mr-1" data-icon="bx:bx-cloud-upload"></i>
                 Template Perjanjian
               </button>
+              <a href="javascript:masukkanMahasiswa()" class="btn btn-primary mt-3 mt-md-0">
+                <i class="iconify-inline mr-1" data-icon="carbon:download-study"></i>
+                Masukkan Mahasiswa
+              </a>
 
               <!-- <div class="dropdown">
                 <button class="btn btn-primary dropdown-toggle mt-3 mt-md-0 ml-0 ml-md-1" type="button"
@@ -380,6 +324,34 @@ dt_url = `${url_api}/keuangan/list_cicilan`;
           }
       })
     })
+
+    $("#nim").select2({
+      ajax: {
+        url: '{{ url('api/v1/mahasiswa/select-option') }}',
+        dataType: 'json',
+        delay: 1000,
+        data: function (params) {
+          return {
+            q: params.term,
+            page: params.page
+          };
+        },
+        processResults: function ({data}, params) {
+          params.page = params.page || 1;
+
+          return {
+            results: data.items,
+            pagination: {
+              more: (params.page * 15) < data.total_count
+            }
+          };
+        },
+        cache: true
+      },
+      placeholder: 'Cari NIM',
+      minimumInputLength: 3,
+    });
+
   })
 
   $('#templatePerjanjian .custom-btn').on('click', function () {
@@ -454,5 +426,42 @@ dt_url = `${url_api}/keuangan/list_cicilan`;
     $('#templatePerjanjian').modal('show')
     check_file_perjanjian()
   })
+
+  function masukkanMahasiswa(){
+    $('#masukkanMahasiswa').modal('show')
+  }
+
+  $('#masukkanMahasiswa .custom-btn').on('click', function () {
+    $('#masukkanMahasiswa [name="file"]').click()
+  })
+  $('#masukkanMahasiswa [name="file"]').on('change', function () {
+    let fileName = this.value.match(/[0-9a-zA-Z\^\&\'\@\{\}\[\]\,\$\=\!\-\#\(\)\.\%\+\~\_ ]+$/)[0];
+    $('#masukkanMahasiswa .nama_dokumen').text(fileName)
+  })
+
+  function simpanPiutangBaru() {
+    if ($('#masukkanMahasiswa [name="nim"]').val() == null || $('#masukkanMahasiswa [name="file"]').prop('files')[0] == undefined) {
+      return false
+    }
+    var file_data = $('#masukkanMahasiswa [name="file"]').prop('files')[0];   
+    var id_mahasiswa = $('#masukkanMahasiswa [name="nim"]').val();   
+    var form_data = new FormData();                  
+    form_data.append('file', file_data);
+    console.log(form_data)
+    return false
+
+
+    // $.ajax({
+    //     url: url_api+"/keuangan/template-perjanjian",
+    //     dataType: 'json',
+    //     cache: false,
+    //     contentType: false,
+    //     processData: false,
+    //     data: form_data,                         
+    //     type: 'post',
+    //     success: function(res){
+    //     }
+    // });
+  }
 </script>
 @endsection

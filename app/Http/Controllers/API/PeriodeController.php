@@ -38,6 +38,23 @@ class PeriodeController extends Controller
         ]);
     }
 
+    public function aktif()
+    {
+        try {
+            $periode = Periode::select('tahun')->orderByDesc('status')->orderByDesc('tahun')->limit(1)->get();
+            $this->data = $periode[0]->tahun;
+            $this->status = "success";
+        } catch (QueryException $e) {
+            $this->status = "failed";
+            $this->error = $e;
+        }
+        return response()->json([
+            "status" => $this->status,
+            "data" => $this->data,
+            "error" => $this->error
+        ]);
+    }
+
     /**
      * Store a newly created resource in storage.
      *
