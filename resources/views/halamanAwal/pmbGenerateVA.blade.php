@@ -144,7 +144,7 @@
       success: function(res) {
         if (res.status=="success") {
           if (res.data.is_lunas == 1) {
-            window.location.href = "{{url('/mahasiswabaru/verifikasidata')}}"
+            window.location.href = "{{url('/mahasiswabaru/dashboard')}}"
           }else{
             $('#va-aktif').val(res.data.virtual_account)
             $('#va-aktif-intruksi').text(res.data.virtual_account)
