@@ -170,6 +170,10 @@ Route::prefix('v1')->group(function () {
     Route::put('/absensi/{id}', [Ctr\AbsensiController::class, 'update']);
     Route::delete('/absensi/{id}', [Ctr\AbsensiController::class, 'destroy']);
 
+    // ABSENSI DOSEN
+    Route::get('/absensi-dosen/rekap', [Ctr\AbsensiDosenController::class, 'list_data']);
+    Route::get('/absensi-dosen/list-tahun', [Ctr\AbsensiDosenController::class, 'tahun_kelas_mengajar']);
+
     // KELAS MENGAJAR
     Route::post('/kelas-mengajar', [Ctr\AbsensiController::class, 'kelas_mengajar']);
 
@@ -259,7 +263,7 @@ Route::prefix('v1')->group(function () {
     Route::get('keuangan/detail-piutang/{id}', [Ctr\BerkasKeuanganController::class, 'detail_piutang']);
     Route::post('keuangan/pengajuan-cicilan', [Ctr\BerkasKeuanganController::class, 'store']);
     Route::get('keuangan/approve/{id}', [Ctr\BerkasKeuanganController::class, 'approve']);
-    Route::post('keuangan/perjanjian/{id}', [Ctr\BerkasKeuanganController::class, 'perjanjian']);
+    Route::post('keuangan/perjanjian', [Ctr\BerkasKeuanganController::class, 'perjanjian']);
     Route::post('keuangan/cicilan/{id}', [Ctr\BerkasKeuanganController::class, 'detail_cicilan']);
     Route::post('keuangan/template-perjanjian', [Ctr\BerkasKeuanganController::class, 'template_perjanjian']);
     Route::get('keuangan/template-perjanjian', [Ctr\BerkasKeuanganController::class, 'check_template_perjanjian']);

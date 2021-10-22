@@ -440,7 +440,7 @@ Route::prefix('admin')->middleware(['aksesuntuk:admin'])->group(function () {
         Route::get('/absensi/dosen', function () {
             return view('admin.kuliah.absensidosen', [
                 "page" => "admin",
-                "title" => "rekap-absensi-mahasiswa"
+                "title" => "rekap-absensi-dosen"
             ]);
         });
 
