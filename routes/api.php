@@ -167,6 +167,10 @@ Route::prefix('v1')->group(function () {
     Route::put('/absensi/{id}', [Ctr\AbsensiController::class, 'update']);
     Route::delete('/absensi/{id}', [Ctr\AbsensiController::class, 'destroy']);
 
+    // ABSENSI DOSEN
+    Route::get('/absensi-dosen/rekap', [Ctr\AbsensiDosenController::class, 'list_data']);
+    Route::get('/absensi-dosen/list-tahun', [Ctr\AbsensiDosenController::class, 'tahun_kelas_mengajar']);
+
     // KELAS MENGAJAR
     Route::post('/kelas-mengajar', [Ctr\AbsensiController::class, 'kelas_mengajar']);
 
