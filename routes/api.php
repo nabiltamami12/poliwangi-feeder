@@ -253,7 +253,7 @@ Route::prefix('v1')->group(function () {
     Route::get('keuangan/detail-piutang/{id}', [Ctr\BerkasKeuanganController::class, 'detail_piutang']);
     Route::post('keuangan/pengajuan-cicilan', [Ctr\BerkasKeuanganController::class, 'store']);
     Route::get('keuangan/approve/{id}', [Ctr\BerkasKeuanganController::class, 'approve']);
-    Route::post('keuangan/perjanjian/{id}', [Ctr\BerkasKeuanganController::class, 'perjanjian']);
+    Route::post('keuangan/perjanjian', [Ctr\BerkasKeuanganController::class, 'perjanjian']);
     Route::post('keuangan/cicilan/{id}', [Ctr\BerkasKeuanganController::class, 'detail_cicilan']);
     Route::post('keuangan/template-perjanjian', [Ctr\BerkasKeuanganController::class, 'template_perjanjian']);
     Route::get('keuangan/template-perjanjian', [Ctr\BerkasKeuanganController::class, 'check_template_perjanjian']);

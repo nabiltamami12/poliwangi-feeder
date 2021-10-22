@@ -14,6 +14,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Database\QueryException;
 use App\Imports\BukuBesarImport;
 use App\Exports\PiutangExport;
+use App\Models\Periode;
 
 class BerkasKeuanganController extends Controller
 {
@@ -30,16 +31,20 @@ class BerkasKeuanganController extends Controller
     public function index()
     {
         try {
+            $periode = Periode::select('tahun', 'semester')->orderByDesc('status')->orderByDesc('tahun')->limit(1)->get();
             $data = BK::select(
             'keuangan_piutang.id', 
             'keuangan_piutang.id_mahasiswa', 
             'keuangan_piutang.path_perjanjian', 
             'mahasiswa.nrp as nim',
             'mahasiswa.nama',
+            'mahasiswa.ukt_nominal as ukt',
             DB::raw('CASE WHEN jenis = "spi" THEN total ELSE 0 END as SPI'),
-            DB::raw('CASE WHEN jenis = "ukt" THEN total ELSE 0 END as UKT'),
+            // DB::raw('CASE WHEN jenis = "ukt" THEN total ELSE 0 END as UKT'),
             DB::raw('SUM(CASE WHEN id_mahasiswa = id_mahasiswa THEN `keuangan_piutang`.total END) as jumlah'),
             'keuangan_piutang.status as status_piutang')
+            ->where('tahun','=',$periode[0]->tahun)
+            ->where('keuangan_piutang.semester','=',$periode[0]->semester)
             ->join('mahasiswa', 'mahasiswa.nomor', '=', 'keuangan_piutang.id_mahasiswa')
             ->groupBy('keuangan_piutang.id_mahasiswa')
             ->get();
@@ -327,37 +332,36 @@ class BerkasKeuanganController extends Controller
         ]);
     }
 
-    public function perjanjian(Request $request, $id) {
+    public function perjanjian(Request $request) {
         try {
-            $record = BK::findOrFail($id);
             $data = $request->all();
             $validator = Validator::make(
                 $data,
                 [
                     'file' => 'required|mimes:doc,docx,pdf,txt|max:2048',
+                    'id_mahasiswa' => 'required'
                 ]
             );
     
             if ($validator->fails()) {
                 return response()->json(['error' => $validator->errors(), 'data' => $data], 401);
             }
-            $files = $request->file('file');
-    
-            $namafile = $record->id_mahasiswa.'_'.$files->getClientOriginalName();
-            $record->path_perjanjian = '/berkas_keuangan/perjanjian/'.$namafile;
-            $path = public_path(). '/berkas_keuangan/perjanjian/'.$namafile;
-            $check = file_exists($path);
-    
-            if ($check) {
-                $delete = File::delete($path);
-                $files->storeAs('berkas_keuangan/perjanjian', $namafile, 'public');
-            } else {
-                $files->move(public_path() . '/berkas_keuangan/perjanjian', $namafile);
+            $periode = Periode::select('tahun', 'semester')->orderByDesc('status')->orderByDesc('tahun')->limit(1)->get();
+            $current_data = BK::select('id')->where('id_mahasiswa','=',$data['id_mahasiswa'])->where('tahun','=',$periode[0]->tahun)->where('semester','=',$periode[0]->semester)->limit(1)->get();
+            if (!isset($current_data[0]) && $request->hasFile('file')) {
+                $path_pengajuan = $data['id_mahasiswa'].'_'.$periode[0]->tahun.'_'.$request->file->getClientOriginalName();
+                if($request->file->storeAs('piutang', $path_pengajuan)){
+                    $document = new BK();
+                    $document->path_pengajuan = '/piutang/'.$path_pengajuan;
+                    $document->id_mahasiswa = $data['id_mahasiswa'];
+                    $document->tahun = $periode[0]->tahun;
+                    $document->semester = $periode[0]->semester;
+                    $document->status = "pending";
+                    $document->save();
+                    $this->data = $document;
+                    $this->status = "success";
+                }
             }
-    
-            $record->save();
-            $this->status = "success";
-            $this->data = $record;
         } catch (QueryException $e) {
             $this->status = "failed";
             $this->error = $e;
