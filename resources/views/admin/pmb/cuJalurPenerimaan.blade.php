@@ -209,6 +209,8 @@
           $.each(data, function(key, row) {
             $('#' + key).val(row);
           })
+          $('#tanggal_buka').val(formatTanggal(data.tanggal_buka));
+          $('#tanggal_tutup').val(formatTanggal(data.tanggal_tutup));
 
           var syarat = res.data.syarat;
           $.each(syarat,function (key,row) {

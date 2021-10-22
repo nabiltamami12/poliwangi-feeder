@@ -199,6 +199,9 @@ Route::prefix('v1')->group(function () {
     Route::put('/syarat/{id}', '\App\Http\Controllers\API\SyaratController@update');
     Route::delete('/syarat/{id}', '\App\Http\Controllers\API\SyaratController@destroy');
 
+    // PENDAFTAR
+    Route::get('pendaftar/dashboard', '\App\Http\Controllers\API\PendaftarController@dashboard');
+
     Route::get('admin/pendaftar', '\App\Http\Controllers\API\PendaftarController@index');
     Route::put('admin/pendaftar/verifikasi/{id}', '\App\Http\Controllers\API\PendaftarController@verifikasi_pendaftar');
     Route::get('/pendaftar/va', '\App\Http\Controllers\API\PendaftarController@va');

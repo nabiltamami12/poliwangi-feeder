@@ -53,6 +53,43 @@ class PendaftarController extends Controller
 		]);
 	}
 
+	public function dashboard(Request $request)
+	{
+		$token = $request->header('token');
+		try {
+			$id = Crypt::decrypt($token);
+			$jurusan_pilihan = DB::table('jurusan_pilihan')->where('id_pendaftar',$id)->orderBy('urutan')->get();
+			$arr_poliwangi = [];
+			$poltek_lain = null;
+			foreach ($jurusan_pilihan as $key => $value) {
+				if ($value->jenis=="poliwangi") {
+					$prodi = DB::table('program_studi as ps')
+					->select(DB::raw('CONCAT(p.program," ",ps.program_studi) as prodi'))
+					->join('program as p','p.nomor','=','ps.program')
+					->where('ps.nomor',$value->program_studi)
+					->first();
+					array_push($arr_poliwangi,$prodi->prodi);
+				} else {
+					$poltek_lain = DB::table('politeknik as p')
+					->select('p.politeknik',DB::raw('CONCAT(pj.jenjang," ",pj.jurusan) as prodi'))
+					->join('politeknik_jurusan as pj','p.id','=','pj.id_politeknik')
+					->where('pj.id',$value->program_studi)
+					->first();
+				}	
+			}
+			$this->data = ['poliwangi'=>$arr_poliwangi,'poltek_lain'=>$poltek_lain];
+			$this->status = "success";
+		} catch (QueryException $e) {
+			$this->status = "failed";
+			$this->error = $e;
+		}
+		return response()->json([
+			"status" => $this->status,
+			"data" => $this->data,
+			"error" => $this->error
+		]);
+	}
+
 	public function verifikasi_pendaftar($id)
 	{
 		DB::enableQueryLog();
@@ -112,7 +149,7 @@ class PendaftarController extends Controller
 
 		$validator = Validator::make($data, [
 			'jalur_daftar' => 'required|exists:jalur_penerimaan,id',
-			'program_studi' => 'required|exists:program_studi,nomor',
+			// 'program_studi' => 'required|exists:program_studi,nomor',
 			'nama' => 'required|string|max:100',
 			'tgllahir' => 'required|date',
 			'smu' => 'required|string|max:50',
@@ -123,7 +160,7 @@ class PendaftarController extends Controller
 			'email' => 'required|email',
 			// 'password' => ['required', 'confirmed', Password::min(8)],
 		]);
-
+		
 		if ($validator->fails()) {
 			return response(
 				[
@@ -157,6 +194,28 @@ class PendaftarController extends Controller
 			$check = Pendaftar::where('nomor', $document->id);
 			$check->update($update_data);
 		}
+
+		for ($i=0; $i < $data['jml_seleksi'] ; $i++) { 
+			$arr = [
+				'id_pendaftar' => $document->id,
+				'politeknik' => 1,
+				'program_studi' => $data["program_studi_$i"],
+				'urutan' => $i+1,
+				'jenis' => 'poliwangi',
+			];
+			DB::table('jurusan_pilihan')->insert($arr);
+		}
+		if ($data['politeknik_lain']) {
+			$arr = [
+				'id_pendaftar' => $document->id,
+				'politeknik' => $data['politeknik_lain'],
+				'program_studi' => $data["program_studi_lain"],
+				'urutan' => $i+1,
+				'jenis' => 'poltek_lain',
+			];
+			DB::table('jurusan_pilihan')->insert($arr);
+		}
+		
 
 		return response()->json([
 			"status" => 'success',
