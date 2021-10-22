@@ -61,8 +61,53 @@
       </div>
     </div>
   </div>
+  <div class="modal fade" id="konfirmModal" tabindex="-1" aria-labelledby="konfirmModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content p-0 padding--medium">
+        <input type="hidden" id="id_delete">
+        <input type="hidden" id="endpoint">
+
+        <div class="modal-header">
+            <p class="text-center">
+                <h5 class="modal-title text-warning text-center">Detail Pendaftar</h5>
+            </p>
+        </div>
+        <div class="modal-body">
+          <h4 class="mb-0 mb-2" id="prodi">Nomor Pendaftar</h4>
+          <h5 class="mb-0 mb-3" style="font-weight:400;">201231248</h5>
+          <h4 class="mb-0 mb-2" id="prodi">Nama Pendaftar</h4>
+          <h5 class="mb-0 mb-3" style="font-weight:400;">201231248</h5>
+          <h4 class="mb-0 mb-2" id="prodi">Jalur Penerimaan</h4>
+          <h5 class="mb-0 mb-3" style="font-weight:400;">201231248</h5>
+          <h4 class="mb-0 mb-2" id="prodi">Diterima di :</h4>
+          <div class="mb-3" id="list_pilihan">
+            <div id="list_poliwangi">
+
+            </div>
+            <div id="list_poltek">
+
+            </div>
+            <div class="d-flex" onclick="func_centang(this,0)" style="cursor:pointer">
+              <i id="" class="iconify centang-pilihan text-placeholder mt-1 mr-3" data-icon="akar-icons:circle-check-fill"></i>
+              <p class="d-inline-block font-weight-bold">Tidak Lolos</p>
+            </div> 
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+                <button type="button" class="btn btn-modal-cancel w-100" data-dismiss="modal">Batal</button>
+            </div>
+            <div class="col-md-6">
+                <button type="button" class="btn btn-primary w-100" onclick="func_simpan()">Simpan</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
 </section>
 <script>
+  var pilihan_selected;
   $(document).ready(function() {
   getData();
 
@@ -81,8 +126,10 @@
 } );
 async function getData() {
     var optProgram,optJurusan,optKelas,optStatus;
+    console.log(dataGlobal['prodi'])
+    optProgram = `<option value=""> - </option>`
     $.each(dataGlobal['prodi'],function (key,row) {
-        optProgram = `<option value="${row.nomor}">${row.nama_program} ${row.program_studi}</option>`
+        optProgram += `<option value="${row.nomor}">${row.nama_program} ${row.program_studi}</option>`
     })
     $('#program_studi').append(optProgram)
 
@@ -92,6 +139,85 @@ async function getData() {
     })
     $('#jalur_penerimaan').append(optStatus)
     setDatatable();
+}
+function func_centang(e,id_selected) {
+  console.log($(e).find('.centang-pilihan'))
+  $('.centang-pilihan').removeClass('text-success')
+  $('.centang-pilihan').addClass('text-placeholder')
+  $(e).find('.centang-pilihan').removeClass('text-placeholder')
+  $(e).find('.centang-pilihan').addClass('text-success')
+  pilihan_selected = $(e)
+  // var id_syarat = $(e).data('id')
+  // var check = $(e).hasClass('text-placeholder');
+  // $('.centang-pilihan').removeClass('text-success')
+  // $('.centang-pilihan').addClass('text-placeholder')
+  // $(e).find('.centang-pilihan').addClass('text-success')
+}
+
+function func_simpan() {
+    var id_pendaftar = $(this).data('id');
+
+    // $.ajax({
+    //     url: url_api+"/admin/pendaftar/verifikasi/"+id_pendaftar,
+    //     type: 'put',
+    //     dataType: 'json',
+    //     data: {},
+    //     success: function(res) {
+    //         console.log(res)
+    //         if (res.status=="success") {
+    //             if ($('#btn_'+id).hasClass('badge-danger')) {
+    //                 $('#btn_'+id).html('');
+    //                 $('#btn_'+id).removeClass('badge-danger')
+    //                 $('#btn_'+id).addClass('badge-success')
+    //                 $('#btn_'+id).append(`<i class="iconify-inline mr-1" data-icon="akar-icons:circle-check-fill"></i>
+    //                             <span class="text-capitalize" style="color:#fff">Diterima</span>`);
+    //             }else{
+    //                 $('#btn_'+id).html('');
+    //                 $('#btn_'+id).removeClass('badge-success')
+    //                 $('#btn_'+id).addClass('badge-danger')
+    //                 $('#btn_'+id).append(`<i class="iconify-inline mr-1" data-icon="bi:x-circle-fill"></i>
+    //                             <span class="text-capitalize" style="color:#fff">Tidak Diterima</span>`);
+    //             }           
+    //         } else {
+    //             // alert gagal
+    //         }
+            
+
+    //     }
+    // });
+}
+
+function func_modal(id) {
+  $.ajax({
+    url: url_api+"/admin/pendaftar-konfirmasi/"+id,
+    type: 'get',
+    dataType: 'json',
+    data: {},
+    headers: {},
+    success: function(res) {
+      if (res.status=="success") {
+        $.each(res.data.poliwangi,function (key,row) {
+          var html = `          
+            <div class="d-flex" onclick="func_centang(this,${row.id})" style="cursor:pointer">
+              <i id="centang_${row.id}" class="iconify centang-pilihan text-placeholder mt-1 mr-3" data-icon="akar-icons:circle-check-fill"></i>
+              <p class="d-inline-block font-weight-bold">Politeknik Neger Banyuwangi - ${row}</p>
+            </div>`
+          $('#list_poliwangi').append(html);
+        })
+
+        if (res.data.poltek_lain != null) {
+          var html = `  
+            <div class="d-flex" onclick="func_centang(this,${row.id})" style="cursor:pointer">
+              <i id="centang_${row.id}" class="iconify centang-pilihan text-placeholder mt-1 mr-3" data-icon="akar-icons:circle-check-fill"></i>
+              <p class="d-inline-block font-weight-bold">${res.data.poltek_lain.politeknik} - ${res.data.poltek_lain.prodi}</p>
+            </div>`
+          $('#list_poltek').append(html);
+        }
+      }
+      $('#konfirmModal').modal('show')
+
+    }
+  });
 }
 function setDatatable() {
     if ($('#jalur_penerimaan').val()=="") {
@@ -136,48 +262,54 @@ dt_opt = {
           "mData": null,
           "mRender": function(data, type, full) {
             var id = data['nomor']
-            var status_belum = `<span id="btn_${id}" data-id="${id}" class="btn-pendaftar badge badge-danger">
-                    <i class="iconify-inline mr-1" data-icon="bi:x-circle-fill"></i>
-                    <span class="text-capitalize" style="color:#fff">Tidak Diterima</span>
-                  </span>`
-            var status_sudah = `<span id="btn_${id}" data-id="${id}" class="badge badge-success">
-                    <i class="iconify-inline mr-1" data-icon="akar-icons:circle-check-fill"></i>
-                    <span class="text-capitalize" style="color:#fff">Diterima</span>
+            // var status_belum = `<span id="btn_${id}" data-id="${id}" class="btn-pendaftar badge badge-danger">
+            //         <i class="iconify-inline mr-1" data-icon="bi:x-circle-fill"></i>
+            //         <span class="text-capitalize" style="color:#fff">Tidak Diterima</span>
+            //       </span>`
+            var status_sudah = `
+            
+                  <span id="btn_${id}" onclick="func_modal(${id})" data-id="${id}" class="badge btn-info_transparent text-primary">
+                    <i class="iconify-inline mr-1 text-primary" data-icon="akar-icons:circle-check-fill"></i>
+                    <span class="text-capitalize text-primary">Konfirmasi</span>
                   </span>`
 
-            res = (data['is_lunas']==1)?status_sudah:status_belum;
-            $('#btn_'+id).on('click',function (e) {
-                var id_pendaftar = $(this).data('id');
+            res = status_sudah;
+            // res = (data['is_lunas']==1)?status_sudah:status_belum;
+            
+            // $('#btn_'+id).on('click',function (e) {
+            // })
+            // $('#btn_'+id).on('click',function (e) {
+            //     var id_pendaftar = $(this).data('id');
 
-                $.ajax({
-                    url: url_api+"/admin/pendaftar/verifikasi/"+id_pendaftar,
-                    type: 'put',
-                    dataType: 'json',
-                    data: {},
-                    success: function(res) {
-                        console.log(res)
-                        if (res.status=="success") {
-                            if ($('#btn_'+id).hasClass('badge-danger')) {
-                                $('#btn_'+id).html('');
-                                $('#btn_'+id).removeClass('badge-danger')
-                                $('#btn_'+id).addClass('badge-success')
-                                $('#btn_'+id).append(`<i class="iconify-inline mr-1" data-icon="akar-icons:circle-check-fill"></i>
-                                            <span class="text-capitalize" style="color:#fff">Diterima</span>`);
-                            }else{
-                                $('#btn_'+id).html('');
-                                $('#btn_'+id).removeClass('badge-success')
-                                $('#btn_'+id).addClass('badge-danger')
-                                $('#btn_'+id).append(`<i class="iconify-inline mr-1" data-icon="bi:x-circle-fill"></i>
-                                            <span class="text-capitalize" style="color:#fff">Tidak Diterima</span>`);
-                            }           
-                        } else {
-                            // alert gagal
-                        }
+            //     $.ajax({
+            //         url: url_api+"/admin/pendaftar/verifikasi/"+id_pendaftar,
+            //         type: 'put',
+            //         dataType: 'json',
+            //         data: {},
+            //         success: function(res) {
+            //             console.log(res)
+            //             if (res.status=="success") {
+            //                 if ($('#btn_'+id).hasClass('badge-danger')) {
+            //                     $('#btn_'+id).html('');
+            //                     $('#btn_'+id).removeClass('badge-danger')
+            //                     $('#btn_'+id).addClass('badge-success')
+            //                     $('#btn_'+id).append(`<i class="iconify-inline mr-1" data-icon="akar-icons:circle-check-fill"></i>
+            //                                 <span class="text-capitalize" style="color:#fff">Diterima</span>`);
+            //                 }else{
+            //                     $('#btn_'+id).html('');
+            //                     $('#btn_'+id).removeClass('badge-success')
+            //                     $('#btn_'+id).addClass('badge-danger')
+            //                     $('#btn_'+id).append(`<i class="iconify-inline mr-1" data-icon="bi:x-circle-fill"></i>
+            //                                 <span class="text-capitalize" style="color:#fff">Tidak Diterima</span>`);
+            //                 }           
+            //             } else {
+            //                 // alert gagal
+            //             }
                         
 
-                    }
-                });
-            })
+            //         }
+            //     });
+            // })
             return res;
           }
         },

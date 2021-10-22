@@ -5,9 +5,11 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Syarat;
+use App\Models\Jalursyarat;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Resources\SyaratResource;
-
+use Illuminate\Support\Facades\Crypt;
+use DB;
 class SyaratController extends Controller
 {
     protected $status = null;
@@ -100,6 +102,27 @@ class SyaratController extends Controller
             "data" => $this->data,
             "error" => $this->error
         ]);
+    }
+
+    public function get_syarat_pendaftar(Request $request)
+    {
+        $token = $request->header('token');
+		try {
+            $id = Crypt::decrypt($token);
+			$jalur_daftar = DB::table('pendaftar')->where('nomor',$id)->first()->jalur_daftar;
+            $jalur_syarat = Jalursyarat::select('jalur_syarat.*','syarat.nama')->join('syarat','syarat.id','=','jalur_syarat.id_syarat')->where('id_jalur',$jalur_daftar)->get();
+
+            $this->data = $jalur_syarat;
+			$this->status = "success";
+		} catch (QueryException $e) {
+			$this->status = "failed";
+			$this->error = $e;
+		}
+		return response()->json([
+			"status" => $this->status,
+			"data" => $this->data,
+			"error" => $this->error
+		]);
     }
 
     /**

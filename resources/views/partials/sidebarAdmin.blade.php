@@ -191,21 +191,27 @@
           </li>
 
           <li class="nav-item">
-            <div class="nav-link {{($title === "admin-settingpmb") ? 'aktif' : ''}}">
+            <div class="nav-link {{($title === "admin-pmb") ? 'aktif' : ''}}">
               <i class="iconify-inline" data-icon="ant-design:setting-outlined"></i>
-              <span class="nav-link-text">Setting PMB</span>
+              <span class="nav-link-text">PMB</span>
             </div>
             <ul class="nav-item-dropdown-content">
               <li class="nav-item">
+                <a class="nav-link" href="{{ url('/admin/pmb/datapendaftar')}}">
+                  <span class="mini_icon">DP</span>
+                  <span class="nav-link-text">Daftar Pendaftar</span>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a class="nav-link" href="{{ url('/admin/pmb/settingjalurpenerimaan')}}">
                   <span class="mini_icon">JP</span>
-                  <span class="nav-link-text">Jalur Penerimaan</span>
+                  <span class="nav-link-text">Setting Jalur Penerimaan</span>
                 </a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="{{ url('/admin/pmb/settingjalursyarat')}}">
                   <span class="mini_icon">SS</span>
-                  <span class="nav-link-text">Syarat</span>
+                  <span class="nav-link-text">Setting Syarat</span>
                 </a>
               </li>
               <!-- <li class="nav-item">

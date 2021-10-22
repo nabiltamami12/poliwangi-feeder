@@ -119,9 +119,9 @@
   <script src="{{ url('argon') }}/assets/js/argon.js?v=1.2.0"></script>
   <script type="text/javascript">
     var url_api = "{{ url('/api/v1') }}";
-    getGlobalData(1)
     $("#form").submit(function(e) {
       e.preventDefault();
+      getGlobalData(1)
       
       //sementara untuk demo saja
       let demo = check_demo(e.target);
@@ -191,7 +191,6 @@
       }
     }
     async function getGlobalData(id) {
-        console.log(id)
         await $.ajax({
             url: url_api+"/globaldata/"+id,
             type: 'get',

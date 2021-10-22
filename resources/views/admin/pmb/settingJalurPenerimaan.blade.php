@@ -28,6 +28,7 @@
                 <th scope="col" class="text-center px-2">No</th>
                 <th scope="col" style="width: 35%">Nama</th>
                 <th scope="col" class="text-center">Tanggal</th>
+                <th scope="col" class="text-center">Jumlah Pilihan</th>
                 <th scope="col" class="text-center">Kuota</th>
                 <th scope="col" class="text-center">Aksi</th>
               </tr>
@@ -77,7 +78,7 @@
         "aTargets": [3],
         "mData": null,
         "mRender": function(data, type, full) {
-          res = data['kuota'];
+          res = data['jml_seleksi'];
           return res;
         }
       }, {
