@@ -62,11 +62,11 @@ class BerkasKeuanganController extends Controller
         ]);
     }
 
-    public function detail_piutang($id) {
+    public function detail_piutang($id_piutang) {
         $this->data = BK::select(
             DB::raw('right(path_perjanjian, 16) as dokumen_perjanjian,
                      right(path_pengajuan, 15) as dokumen_pengajuan')
-        )->where('id_mahasiswa', $id)
+        )->where('id', $id_piutang)
         ->get();
         $this->data = BK::select(
             'keuangan_piutang.id', 
@@ -74,14 +74,18 @@ class BerkasKeuanganController extends Controller
             'keuangan_piutang.path_perjanjian', 
             'mahasiswa.nrp as nim',
             'mahasiswa.nama',
+            'mahasiswa.ukt_nominal as ukt',
             DB::raw('CASE WHEN jenis = "spi" THEN total ELSE 0 END as SPI'),
-            DB::raw('CASE WHEN jenis = "ukt" THEN total ELSE 0 END as UKT'),
+            // DB::raw('CASE WHEN jenis = "ukt" THEN total ELSE 0 END as UKT'),
             DB::raw('SUM(CASE WHEN id_mahasiswa = id_mahasiswa THEN `keuangan_piutang`.total END) as jumlah'),
             'keuangan_piutang.status as status_piutang')
             ->join('mahasiswa', 'mahasiswa.nomor', '=', 'keuangan_piutang.id_mahasiswa')
             ->groupBy('keuangan_piutang.id_mahasiswa')
-            ->where('id_mahasiswa', $id)
+            ->where('keuangan_piutang.id', $id_piutang)
             ->get();
+        $this->data[0]->cicilan = DB::table('keuangan_pembayaran')->where([
+            'id_piutang' => $id_piutang
+        ])->get();
         $this->status = "success";
 
         return response()->json([
@@ -365,6 +369,35 @@ class BerkasKeuanganController extends Controller
         } catch (QueryException $e) {
             $this->status = "failed";
             $this->error = $e;
+        }
+        return response()->json([
+                "status" => $this->status,
+                "data" => $this->data,
+                'error' => $this->error,
+        ]);
+    }
+
+    public function cicilan_piutang(Request $request)
+    {
+        $data = $request->all();
+        $total = count($data['cicilan']);
+
+        for ($i = 0; $i < $total; $i++) {
+            $check = DB::table('keuangan_pembayaran')->where([
+                'id_mahasiswa' => $data['id_mahasiswa'],
+                'id_piutang' => $data['id_piutang'],
+                'tanggal' => $data['jatuh_tempo'][$i],
+            ])->first();
+            if ($check==null) {
+                $other = new KB;
+                $other->id_mahasiswa = $data['id_mahasiswa'];
+                $other->id_piutang = $data['id_piutang'];
+                $other->tanggal = $data['jatuh_tempo'][$i];
+                $other->nominal = $data['cicilan'][$i];
+                $other->keterangan = "UKT";
+                $other->save();
+                $this->status = 'success';
+            }
         }
         return response()->json([
                 "status" => $this->status,
