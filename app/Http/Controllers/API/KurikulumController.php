@@ -96,7 +96,12 @@ class KurikulumController extends Controller
     {
         try {
             $kurikulum = Kurikulum::where('id', $id)->get();
-            $kurikulum_matkul = DB::table('kurikulum_matkul')->where('kurikulum',$id)->get();
+            $kurikulum_matkul = DB::table('kurikulum_matkul as km')
+                                    ->select('km.*','m.matakuliah as nama_matkul','m.kode','m.sks',DB::raw('CONCAT( p.program," ",ps.program_studi ) as prodi'))
+                                    ->join('matakuliah as m','m.nomor','=','km.matakuliah')
+                                    ->join('program_studi as ps','m.program_studi','=','ps.nomor')
+                                    ->join('program as p','p.nomor','=','ps.program')
+                                    ->where('km.kurikulum',$id)->get();
             $this->data = [
                 'kurikulum' => $kurikulum,
                 'kurikulum_matkul' => $kurikulum_matkul

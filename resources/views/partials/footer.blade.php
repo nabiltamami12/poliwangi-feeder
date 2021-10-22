@@ -73,6 +73,15 @@
         }
     }
 
+    function formatTanggal(date) {
+        var list_bulan = ['January','February','March','April','May','Juny','July','August','September','October','November','December']
+        var new_date = new Date(date);
+        var tgl = (new_date.getDate().toString().length==1)? "0"+new_date.getDate() : new_date.getDate();
+        var bln = list_bulan[new_date.getMonth()];
+        var thn = new_date.getFullYear();
+        return tgl+" "+bln+" "+thn;
+    }
+
     function loading(status) {
         if (status=="show") {
             $(".loaderScreen-wrapper").fadeIn("fast");

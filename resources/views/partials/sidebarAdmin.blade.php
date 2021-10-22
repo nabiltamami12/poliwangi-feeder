@@ -77,12 +77,12 @@
                   <span class="nav-link-text ml-0">Data Dosen</span>
                 </a>
               </li>
-              <li class="nav-item">
+              <!-- <li class="nav-item">
                 <a class="nav-link" href="{{ url('/admin/master/datadosenpengampu')}}">
                   <span class="mini_icon">DD</span>
                   <span class="nav-link-text">Data Dosen Pengampu</span>
                 </a>
-              </li>
+              </li> -->
               <li class="nav-item">
                 <a class="nav-link" href="{{url('/admin/master/datajurusan')}}">
                   <span class="mini_icon">DJ</span>
@@ -199,13 +199,13 @@
               <li class="nav-item">
                 <a class="nav-link" href="{{ url('/admin/pmb/settingjalurpenerimaan')}}">
                   <span class="mini_icon">JP</span>
-                  <span class="nav-link-text">Setting Jalur Penerimaan PMB</span>
+                  <span class="nav-link-text">Jalur Penerimaan</span>
                 </a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="{{ url('/admin/pmb/settingjalursyarat')}}">
-                  <span class="mini_icon">JP</span>
-                  <span class="nav-link-text">Setting Jalur Syarat PMB</span>
+                  <span class="mini_icon">SS</span>
+                  <span class="nav-link-text">Syarat</span>
                 </a>
               </li>
               <!-- <li class="nav-item">

@@ -66,7 +66,11 @@
         "aTargets": [2],
         "mData": null,
         "mRender": function(data, type, full) {
-          res = data['tanggal_buka']+" - "+data['tanggal_tutup'];
+          if (data['tanggal_buka'] == null || data['tanggal_tutup'] == null) {
+            res = " - ";
+          }else{
+            res = formatTanggal(data['tanggal_buka'])+" - "+formatTanggal(data['tanggal_tutup']);
+          }
           return res;
         }
       }, {
@@ -76,9 +80,16 @@
           res = data['kuota'];
           return res;
         }
+      }, {
+        "aTargets": [4],
+        "mData": null,
+        "mRender": function(data, type, full) {
+          res = data['kuota'];
+          return res;
+        }
       }, 
       {
-        "aTargets": [4],
+        "aTargets": [5],
         "mData": null,
         "mRender": function(data, type, full) {
           var id = data['id'];

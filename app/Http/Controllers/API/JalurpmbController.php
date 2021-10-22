@@ -11,6 +11,9 @@ use Illuminate\Support\Carbon;
 use App\Models\Jalursyarat;
 use DB;
 use GuzzleHttp\Promise\Create;
+use App\Models\Jurusan;
+use App\Models\Prodi;
+
 
 class JalurpmbController extends Controller
 {
@@ -26,7 +29,27 @@ class JalurpmbController extends Controller
     public function index()
     {
         try {
-            $this->data = Jalurpmb::get();
+            $jalur_pmb = Jalurpmb::get();
+            $politeknik = DB::table('politeknik')->get();
+            $politeknik_jurusan = DB::table('politeknik_jurusan as pj')->select('pj.*','p.politeknik')->join('politeknik as p','p.id','=','pj.id_politeknik')->get();
+            $jurusan = Jurusan::where('jurusan', '!=', '')->get();
+            $prodi = Prodi::select(
+                "program_studi.*",
+                "program.program as nama_program",
+                "jurusan.jurusan as nama_jurusan",
+                "program_studi.alias",
+            )
+            ->join("program", "program_studi.program", "=", "program.NOMOR")
+            ->join("jurusan", "program_studi.jurusan", "=", "jurusan.NOMOR")
+            ->get();
+            
+            $this->data = [
+                'jalur_pmb' => $jalur_pmb,
+                'politeknik' => $politeknik,
+                'politeknik_jurusan' => $politeknik_jurusan,
+                'jurusan' => $jurusan,
+                'prodi' => $prodi,
+            ];
             $this->status = "success";
         } catch (QueryException $e) {
             $this->status = "failed";

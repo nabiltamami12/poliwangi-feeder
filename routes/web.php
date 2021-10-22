@@ -719,6 +719,12 @@ Route::prefix('keuangan')->middleware(['aksesuntuk:keuangan'])->group(function (
             ]);
         });
 
+        Route::get('/piutangmahasiswa/masukkan', function () {
+            return view('keuangan.masukkanPiutang', [
+                "title" => "Masukkan Mahasiswa pada Daftar Piutang",
+            ]);
+        });
+
         Route::get('/penyisihanpiutang', function () {
             return view('keuangan.penyisihanPiutang', [
                 "title" => "keuangan-rekapitulasi",

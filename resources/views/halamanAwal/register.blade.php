@@ -75,17 +75,26 @@
                 </div>
               </div>
 
+              <div class="card_inner mt-4" id="list_jurusan">
+                <h2>Pilihan Jurusan Politeknik Negeri Banyuwangi</h2>
+                <hr>
+                <input type="hidden" id="jml_seleksi" name="jml_seleksi">
+                
+              </div>
+
               <div class="card_inner mt-4">
+                <h2>Pilihan Politeknik Lainnya</h2>
+                <hr>
                 <div class="form-group mb-0">
-                  <label class="font-weight-bold">Pilih Jurusan</label>
-                  <select class="form-control" id="jurusan">
+                  <label class="font-weight-bold">Pilih Politeknik</label>
+                  <select class="form-control" id="politeknik_lain" name="politeknik_lain">
                   </select>
                 </div>
                 <div class="form-group mb-0 mt-3">
                   <label class="font-weight-bold">Pilih Program Studi</label>
-                  <select class="form-control" id="program_studi" name="program_studi">
+                  <select class="form-control" id="program_studi_lain"  name="program_studi_lain" >
                   </select>
-                </div>
+                </div>  
               </div>
 
               <div class="card_inner mt-4">
@@ -206,24 +215,29 @@
   <script src="{{ url('argon') }}/assets/js/argon.js?v=1.2.0"></script>
   <script type="text/javascript">
     var dataGlobal = ''
+    var politeknik = []
+    var politeknik_jurusan = []
+    var jurusan = []
+    var prodi = []
     $(document).ready(function(){
-      dataGlobal = JSON.parse(localStorage.getItem('globaldataRegister'))
       getData();
       $("#txtDate").datepicker({
         format: "dd MM yyyy",
       });
-      $('#jurusan').on('change',function (e) {
-        var jurusan = $(this).val()
-        var kelas = $.grep(dataGlobal['prodi'], function(e){ return e.jurusan == jurusan; });
-        $('#program_studi').html('')
-        var optKelas = `<option value=""> - </option>`;
-        $.each(kelas,function (key,row) {
-          optKelas += `<option value="${row.nomor}">${row.nama_program} ${row.program_studi}</option>`
+      
+      $('#politeknik_lain').on('change',function (e) {
+        var politeknik_lain = $(this).val()
+        var jurusan = $.grep(politeknik_jurusan, function(e){ return e.id_politeknik == politeknik_lain; });
+        $('#program_studi_lain').html('')
+        var optJurusanLain = `<option value=""> - </option>`;
+        $.each(jurusan,function (key,row) {
+          optJurusanLain += `<option value="${row.id}">${row.jenjang} ${row.jurusan}</option>`
         })
-        $('#program_studi').append(optKelas); 
+        $('#program_studi_lain').append(optJurusanLain); 
       })
       $("#form").submit(function(e) {
         e.preventDefault();
+        // console.log(e.target)
         $.ajax({
           url: url_api+"/pendaftar",
           type: 'post',
@@ -234,12 +248,13 @@
           beforeSend: function(text) {
           },
           success: function(res) {
-            if (res.status=="success") {
-              localStorage.setItem('pmb', res.data)
-              window.location.href = "{{url('/pmbgenerateva')}}"
-            } else {
-              alert('Error: '.res.data.message)
-            }
+            console.log(res)
+            // if (res.status=="success") {
+            //   localStorage.setItem('pmb', res.data)
+            //   window.location.href = "{{url('/pmbgenerateva')}}"
+            // } else {
+            //   alert('Error: '.res.data.message)
+            // }
           }
         });
       });
@@ -256,20 +271,62 @@
           if (dataGlobal == null) {
             dataGlobal = JSON.parse(localStorage.getItem('globaldataRegister'))
           }
+          var jalur_pmb = res.data.jalur_pmb
+          politeknik = res.data.politeknik
+          politeknik_jurusan = res.data.politeknik_jurusan
+          jurusan = res.data.jurusan
+          prodi = res.data.prodi
           if (res.status=="success") {
             var html = '';
-            html = '<option value="" disabled>Pilih Jalur</option>'
-            $.each(res.data,function (key,row) {
+            html = '<option value="">Pilih Jalur</option>'
+            $.each(jalur_pmb,function (key,row) {
               if (row.is_active==1) {
-                html = `<option value="${row.id}">${row.jalur_daftar}</option>`;
+                html = `<option data-jml="${row.jml_seleksi}" value="${row.id}">${row.jalur_daftar}</option>`;
                 $('#jalur_seleksi').append(html);
               }
             })
-            var optJurusan = `<option value=""> - </option>`;
-            $.each(dataGlobal['jurusan'],function (key,row) {
-              optJurusan += `<option value="${row.nomor}">${row.jurusan}</option>`
+            var jml_seleksi = $('#jalur_seleksi :selected').data('jml');
+            $("#jml_seleksi").val(jml_seleksi)
+            for (let index = 0; index < jml_seleksi; index++) {
+              var html = ``
+              html = `<div class="form-group mb-0">
+                  <label class="font-weight-bold">Pilih Jurusan Ke-${index+1}</label>
+                  <select class="form-control" id="jurusan_${index}" name="jurusan_${index}">
+                  </select>
+                </div>
+                <div class="form-group mb-0 mt-3">
+                  <label class="font-weight-bold">Pilih Program Studi Ke-${index+1}</label>
+                  <select class="form-control" id="program_studi_${index}" name="program_studi_${index}">
+                  </select>
+                </div>
+                <hr>`;
+              $('#list_jurusan').append(html);
+              var optJurusan = `<option value=""> - </option>`;
+              $.each(jurusan,function (key,row) {
+                optJurusan += `<option value="${row.nomor}">${row.jurusan}</option>`
+              })
+              $('#jurusan_'+index).append(optJurusan)
+              $('#jurusan_'+index).on('change',function (e) {
+              var jurusan = $(this).val()
+              var kelas = $.grep(prodi, function(e){ return e.jurusan == jurusan; });
+              $('#program_studi_'+index).html('')
+              var optKelas = `<option value=""> - </option>`;
+              $.each(kelas,function (key,row) {
+                optKelas += `<option value="${row.nomor}">${row.nama_program} ${row.program_studi}</option>`
+              })
+              $('#program_studi_'+index).append(optKelas); 
             })
-            $('#jurusan').append(optJurusan)
+            }
+
+            
+
+            var html = '<option value="">Pilih Politeknik</option>'
+            $.each(politeknik,function (key,row) {
+              if (row.id != 1) {
+                html += `<option value="${row.id}">${row.politeknik}</option>`;
+              }
+            })
+            $('#politeknik_lain').append(html);
           }
         }
       });

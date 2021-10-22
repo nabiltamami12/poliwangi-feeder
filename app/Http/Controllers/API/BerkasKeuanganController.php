@@ -14,6 +14,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Database\QueryException;
 use App\Imports\BukuBesarImport;
 use App\Exports\PiutangExport;
+use App\Models\Periode;
 
 class BerkasKeuanganController extends Controller
 {
@@ -30,16 +31,20 @@ class BerkasKeuanganController extends Controller
     public function index()
     {
         try {
+            $periode = Periode::select('tahun', 'semester')->orderByDesc('status')->orderByDesc('tahun')->limit(1)->get();
             $data = BK::select(
             'keuangan_piutang.id', 
             'keuangan_piutang.id_mahasiswa', 
             'keuangan_piutang.path_perjanjian', 
             'mahasiswa.nrp as nim',
             'mahasiswa.nama',
+            'mahasiswa.ukt_nominal as ukt',
             DB::raw('CASE WHEN jenis = "spi" THEN total ELSE 0 END as SPI'),
-            DB::raw('CASE WHEN jenis = "ukt" THEN total ELSE 0 END as UKT'),
+            // DB::raw('CASE WHEN jenis = "ukt" THEN total ELSE 0 END as UKT'),
             DB::raw('SUM(CASE WHEN id_mahasiswa = id_mahasiswa THEN `keuangan_piutang`.total END) as jumlah'),
             'keuangan_piutang.status as status_piutang')
+            ->where('tahun','=',$periode[0]->tahun)
+            ->where('keuangan_piutang.semester','=',$periode[0]->semester)
             ->join('mahasiswa', 'mahasiswa.nomor', '=', 'keuangan_piutang.id_mahasiswa')
             ->groupBy('keuangan_piutang.id_mahasiswa')
             ->get();
@@ -250,37 +255,113 @@ class BerkasKeuanganController extends Controller
         ]);
     }
 
-    public function perjanjian(Request $request, $id) {
+    public function template_perjanjian(Request $request) {
         try {
-            $record = BK::findOrFail($id);
             $data = $request->all();
             $validator = Validator::make(
                 $data,
                 [
-                    'file' => 'required|mimes:doc,docx,pdf,txt|max:2048',
+                    'file' => 'required|mimes:doc,docx,pdf|max:2048',
                 ]
             );
     
             if ($validator->fails()) {
                 return response()->json(['error' => $validator->errors(), 'data' => $data], 401);
             }
-            $files = $request->file('file');
-    
-            $namafile = $record->id_mahasiswa.'_'.$files->getClientOriginalName();
-            $record->path_perjanjian = '/berkas_keuangan/perjanjian/'.$namafile;
-            $path = public_path(). '/berkas_keuangan/perjanjian/'.$namafile;
-            $check = file_exists($path);
-    
-            if ($check) {
-                $delete = File::delete($path);
-                $files->storeAs('berkas_keuangan/perjanjian', $namafile, 'public');
-            } else {
-                $files->move(public_path() . '/berkas_keuangan/perjanjian', $namafile);
+
+            if ($request->hasFile('file')) {
+                $nilai = date('YmdHi').$request->file->getClientOriginalName();
+                if($request->file->storeAs('template', $nilai)){
+                    $setting = DB::table('setting')->where('nama', 'like', 'template_perjanjian_%')->orderByDesc('nama')->limit(1)->get();
+                    if (!isset($setting[0])) {
+                        DB::table('setting')->insert([
+                            'nama' => 'template_perjanjian_1',
+                            'nilai' => $nilai,
+                            'keterangan' => 'Template Perjanjian',
+                        ]);
+                        $this->data = ['file' => 'template_perjanjian_1'];
+                    }else{
+                        $version = intval(str_replace('template_perjanjian_', '', $setting[0]->nama))+1;
+                        DB::table('setting')->insert([
+                            'nama' => 'template_perjanjian_'.$version,
+                            'nilai' => $nilai,
+                            'keterangan' => 'Template Perjanjian',
+                        ]);
+                        $this->data = ['file' => 'template_perjanjian_'.$version];
+
+                    }
+                    $this->status = "success";
+                }
             }
-    
-            $record->save();
+        } catch (QueryException $e) {
+            $this->status = "failed";
+            $this->error = $e;
+        }
+        return response()->json([
+                "status" => $this->status,
+                "data" => $this->data,
+                'error' => $this->error,
+        ]);
+    }
+
+    public function download_template_perjanjian()
+    {
+        $template_perjanjian = DB::table('setting')->where('nama', 'like', 'template_perjanjian_%')->orderByDesc('nama')->get();
+        if (!isset($template_perjanjian[0])) {
+            abort(404);
+        }
+        $pathToFile = storage_path('app/template/' . $template_perjanjian[0]->nilai);
+        return response()->download($pathToFile);
+    }
+
+    public function check_template_perjanjian()
+    {
+        $template_perjanjian = DB::table('setting')->where('nama', 'like', 'template_perjanjian_%')->orderByDesc('nama')->get();
+        $this->data = null;
+        $this->status = "error";
+        $this->error = 'File not found!';
+        if (isset($template_perjanjian[0])) {
+            $this->data = url('/api/v1/download/template-perjanjian');
             $this->status = "success";
-            $this->data = $record;
+            $this->error = null;
+        }
+        return response()->json([
+                "status" => $this->status,
+                "data" => $this->data,
+                'error' => $this->error,
+        ]);
+    }
+
+    public function perjanjian(Request $request) {
+        try {
+            $data = $request->all();
+            $validator = Validator::make(
+                $data,
+                [
+                    'file' => 'required|mimes:doc,docx,pdf,txt|max:2048',
+                    'id_mahasiswa' => 'required'
+                ]
+            );
+    
+            if ($validator->fails()) {
+                return response()->json(['error' => $validator->errors(), 'data' => $data], 401);
+            }
+            $periode = Periode::select('tahun', 'semester')->orderByDesc('status')->orderByDesc('tahun')->limit(1)->get();
+            $current_data = BK::select('id')->where('id_mahasiswa','=',$data['id_mahasiswa'])->where('tahun','=',$periode[0]->tahun)->where('semester','=',$periode[0]->semester)->limit(1)->get();
+            if (!isset($current_data[0]) && $request->hasFile('file')) {
+                $path_pengajuan = $data['id_mahasiswa'].'_'.$periode[0]->tahun.'_'.$request->file->getClientOriginalName();
+                if($request->file->storeAs('piutang', $path_pengajuan)){
+                    $document = new BK();
+                    $document->path_pengajuan = '/piutang/'.$path_pengajuan;
+                    $document->id_mahasiswa = $data['id_mahasiswa'];
+                    $document->tahun = $periode[0]->tahun;
+                    $document->semester = $periode[0]->semester;
+                    $document->status = "pending";
+                    $document->save();
+                    $this->data = $document;
+                    $this->status = "success";
+                }
+            }
         } catch (QueryException $e) {
             $this->status = "failed";
             $this->error = $e;

@@ -219,4 +219,33 @@ class MatakuliahController extends Controller
             "error" => $this->error
         ]);
     }
+
+    public function select_option(Request $req)
+	{
+		try {
+			$q = $req->input('q');
+			$page = $req->input('page') ?? 1;
+			$limit = 15;
+			$offset = ($page - 1) * $limit;
+			$obj = DB::table('matakuliah as m')
+                ->select(DB::raw('m.nomor as id, CONCAT( m.kode," : ",m.matakuliah ) as text,m.program_studi,m.sks'))
+                ->join('kurikulum_matkul as km','km.matakuliah','=','m.nomor','left')
+				->where('m.kode','like', '%'.$q.'%')
+				->orWhere('m.matakuliah', 'like', '%'.$q.'%')
+				->offset($offset)
+				->limit($limit)
+				->get();
+			$obj_count = Matakuliah::where('kode', 'like', '%'.$q.'%')->orWhere('matakuliah','like', '%'.$q.'%')->count();
+			$this->data = array('items' => $obj, 'total_count' => $obj_count);
+			$this->status = "success";
+		} catch (QueryException $e) {
+			$this->status = "failed";
+			$this->error = $e;
+		}
+		return response()->json([
+			"status" => $this->status,
+			"data" => $this->data,
+			"error" => $this->error
+		]);
+	}
 }

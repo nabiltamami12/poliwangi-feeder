@@ -251,11 +251,11 @@ class MahasiswaController extends Controller
 			$limit = 15;
 			$offset = ($page - 1) * $limit;
 			$obj = Mhs::select(DB::raw('nomor as id, CONCAT( nrp," (",nama,")" ) as text'))
-				->where('nrp', '=', $q)
+				->where('nrp', 'like', '%'.$q.'%')
 				->offset($offset)
 				->limit($limit)
 				->get();
-			$obj_count = Mhs::where('nrp', '=', $q)->count();
+			$obj_count = Mhs::where('nrp', 'like', '%'.$q.'%')->count();
 			$this->data = array('items' => $obj, 'total_count' => $obj_count);
 			$this->status = "success";
 		} catch (QueryException $e) {

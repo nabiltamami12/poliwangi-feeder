@@ -80,6 +80,8 @@ Route::prefix('v1')->group(function () {
 
 
     //matakuliah
+    Route::get('/matakuliah/select-option', [Ctr\MatakuliahController::class, 'select_option']);
+
     Route::get('/matakuliah/', '\App\Http\Controllers\API\MatakuliahController@index');
     Route::get('/matakuliah/{id}', '\App\Http\Controllers\API\MatakuliahController@show');
     Route::post('/matakuliah', '\App\Http\Controllers\API\MatakuliahController@store');
@@ -95,6 +97,7 @@ Route::prefix('v1')->group(function () {
 
     //periode
     Route::get('/periode/', '\App\Http\Controllers\API\PeriodeController@index');
+    Route::get('/periode/aktif', '\App\Http\Controllers\API\PeriodeController@aktif');
     Route::put('/periode/change_status/{id}', '\App\Http\Controllers\API\PeriodeController@change_status');
     Route::put('/periode/change_semester/{id}/{semester}', '\App\Http\Controllers\API\PeriodeController@change_semester');
     Route::get('/periode/{id}', '\App\Http\Controllers\API\PeriodeController@show');
@@ -200,6 +203,9 @@ Route::prefix('v1')->group(function () {
     Route::put('/syarat/{id}', '\App\Http\Controllers\API\SyaratController@update');
     Route::delete('/syarat/{id}', '\App\Http\Controllers\API\SyaratController@destroy');
 
+    // PENDAFTAR
+    Route::get('pendaftar/dashboard', '\App\Http\Controllers\API\PendaftarController@dashboard');
+
     Route::get('admin/pendaftar', '\App\Http\Controllers\API\PendaftarController@index');
     Route::put('admin/pendaftar/verifikasi/{id}', '\App\Http\Controllers\API\PendaftarController@verifikasi_pendaftar');
     Route::get('/pendaftar/va', '\App\Http\Controllers\API\PendaftarController@va');
@@ -254,8 +260,11 @@ Route::prefix('v1')->group(function () {
     Route::get('keuangan/detail-piutang/{id}', [Ctr\BerkasKeuanganController::class, 'detail_piutang']);
     Route::post('keuangan/pengajuan-cicilan', [Ctr\BerkasKeuanganController::class, 'store']);
     Route::get('keuangan/approve/{id}', [Ctr\BerkasKeuanganController::class, 'approve']);
-    Route::post('keuangan/perjanjian/{id}', [Ctr\BerkasKeuanganController::class, 'perjanjian']);
+    Route::post('keuangan/perjanjian', [Ctr\BerkasKeuanganController::class, 'perjanjian']);
     Route::post('keuangan/cicilan/{id}', [Ctr\BerkasKeuanganController::class, 'detail_cicilan']);
+    Route::post('keuangan/template-perjanjian', [Ctr\BerkasKeuanganController::class, 'template_perjanjian']);
+    Route::get('keuangan/template-perjanjian', [Ctr\BerkasKeuanganController::class, 'check_template_perjanjian']);
+    Route::get('download/template-perjanjian', [Ctr\BerkasKeuanganController::class, 'download_template_perjanjian']);
 
     Route::get('/keuangan/rekapitulasi/penyisihanpiutang', [Ctr\BerkasKeuanganController::class, 'penyisihanpiutang']);
     Route::get('/keuangan/export/rekap-piutang', [Ctr\BerkasKeuanganController::class, 'export_piutang']);
