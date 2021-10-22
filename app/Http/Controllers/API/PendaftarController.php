@@ -30,15 +30,18 @@ class PendaftarController extends Controller
 	public function index(Request $request)
 	{
 		DB::enableQueryLog();
-		$table = DB::table('pendaftar');
-		$table->select('pendaftar.*','jalur_penerimaan.jalur_daftar as jalur_penerimaan');
-		$table->join('jalur_penerimaan','jalur_penerimaan.id','=','pendaftar.jalur_daftar');
+		$table = DB::table('pendaftar as p');
+		$table->select('p.*','jp.jalur_daftar as jp');
+		$table->join('jalur_penerimaan as jp','jp.id','=','p.jalur_daftar');
+		$table->join('jurusan_pilihan as jpl','jpl.id_pendaftar','=','p.nomor');
 		if ($request->program_studi) {
-			$query = $table->where('program_studi',$request->program_studi); 
+			$table->where('jpl.program_studi',$request->program_studi); 
 		}
 		if ($request->jalur) {
-			$query = $table->where('mahasiswa_jalur_penerimaan',$request->jalur);
+			$table->where('p.jalur_daftar',$request->jalur);
 		}
+		$table->groupBy('p.nomor');
+
 		try {
 			$this->data = $table->get();
 			$this->status = "success";
@@ -58,6 +61,41 @@ class PendaftarController extends Controller
 		$token = $request->header('token');
 		try {
 			$id = Crypt::decrypt($token);
+			$jurusan_pilihan = DB::table('jurusan_pilihan')->where('id_pendaftar',$id)->orderBy('urutan')->get();
+			$arr_poliwangi = [];
+			$poltek_lain = null;
+			foreach ($jurusan_pilihan as $key => $value) {
+				if ($value->jenis=="poliwangi") {
+					$prodi = DB::table('program_studi as ps')
+					->select(DB::raw('CONCAT(p.program," ",ps.program_studi) as prodi'))
+					->join('program as p','p.nomor','=','ps.program')
+					->where('ps.nomor',$value->program_studi)
+					->first();
+					array_push($arr_poliwangi,$prodi->prodi);
+				} else {
+					$poltek_lain = DB::table('politeknik as p')
+					->select('p.politeknik',DB::raw('CONCAT(pj.jenjang," ",pj.jurusan) as prodi'))
+					->join('politeknik_jurusan as pj','p.id','=','pj.id_politeknik')
+					->where('pj.id',$value->program_studi)
+					->first();
+				}	
+			}
+			$this->data = ['poliwangi'=>$arr_poliwangi,'poltek_lain'=>$poltek_lain];
+			$this->status = "success";
+		} catch (QueryException $e) {
+			$this->status = "failed";
+			$this->error = $e;
+		}
+		return response()->json([
+			"status" => $this->status,
+			"data" => $this->data,
+			"error" => $this->error
+		]);
+	}
+
+	public function konfirmasi_pendaftar($id)
+	{
+		try {
 			$jurusan_pilihan = DB::table('jurusan_pilihan')->where('id_pendaftar',$id)->orderBy('urutan')->get();
 			$arr_poliwangi = [];
 			$poltek_lain = null;

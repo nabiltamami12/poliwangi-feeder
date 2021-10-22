@@ -261,7 +261,7 @@
     })
     function getData() {
       $.ajax({
-        url: url_api+"/jalurpmb",
+        url: url_api+"/jalurpmb-register",
         type: 'get',
         dataType: 'json',
         data: {},
