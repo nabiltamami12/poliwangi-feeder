@@ -112,8 +112,8 @@ Route::prefix('dosen')->middleware(['aksesuntuk:dosen'])->group(function () {
         ]);
     });
 
-    Route::get('/presensi', function () {
-        return view('dosen.presensiDosen', [
+    Route::get('/presensi-mahasiswa', function () {
+        return view('dosen.presensidosenmahasiswa', [
             "title" => "dosen-presensi"
         ]);
     });

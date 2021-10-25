@@ -15,28 +15,28 @@
                 <h2 class="mb-0">Presensi Mahasiswa</h2>
               </div>
               <div class="col text-right">
-                <button type="button" id="btn_simpan" class="btn btn-primary">
-                  <i class="iconify-inline mr-1" data-icon="bx:bx-save"></i>
-                  Simpan
-                </button>
+               
               </div>
             </div>
           </div>
 
           <div class="card-body p-0">
-            <form class="form_absensiMhs">
-              <div class="form-row mt-4">
-                <div class="col-md-4 pr-md-4-5">
+            <form class="">
+              <div class="row mt-4">
+                <div class="col-md-4">
                   <label for="program-studi">Program Studi</label>
-                  <input type="text" class="form-control" readonly id="prodi"  />
+                  <select class="form-control" name="prodi" id="prodi"></select>
+                  <!-- <input type="text" class="form-control" readonly id="prodi"  /> -->
                 </div>
-                <div class="col-md-4 px-md-3 mt-3 mt-md-0">
-                  <label for="mata-kuliah">Mata Kuliah</label>
-                  <input type="text" class="form-control" readonly id="matakuliah"  />
-                </div>
-                <div class="col-md-4 pl-md-4-5 mt-3 mt-md-0">
+                <div class="col-md-4">
                   <label for="kelas">Kelas</label>
-                  <input type="text" class="form-control" readonly id="kelas"  />
+                  <select class="form-control" name="kelas" id="kelas"></select>
+                  <!-- <input type="text" class="form-control" readonly id="kelas"  /> -->
+                </div>
+                <div class="col-md-4">
+                  <label for="mata-kuliah">Mata Kuliah</label>
+                  <select class="form-control" name="matkul" id="matkul"></select>
+                  <!-- <input type="text" class="form-control" readonly id="matakuliah"  /> -->
                 </div>
               </div>
             </form>
@@ -86,134 +86,158 @@
 
 @section('js')
   <script>
+  	var dataFilter, countData, id_dosen, range;
     var kuliah = "";
-    var kelas = "{{$kelas}}";
-    var matakuliah = "{{$matkul}}";
+    // var kelas = "909";
+    // var matakuliah = "6462";
     var semester = dataGlobal['periode']['semester'];
     var tahun = dataGlobal['periode']['tahun'];
     var arr_mhs = [];
-    $(document).ready(function() {
-      getData();
-      $('#btn_simpan').on('click',function (e) {
-        console.log(arr_mhs)
-        $.ajax({
-          url: url_api+"/absensi-admin",
-          type: 'post',
-          dataType: 'json',
-          data: {'kuliah':kuliah,'data':arr_mhs},
-          success: function(res) {
-            console.log(res)
-              if (res.status=="success") {
-                window.location.href = "{{url('/admin/kuliah/absensi/rekap')}}";             
-              } else {
-                  // alert gagal
-              }
-              
+	var id_dosen = dataGlobal['user']['nomor'];
+	var nama = dataGlobal['user']['nama'];
 
-          }
-        });
-      })
+    $(document).ready(function() {
+        getFilter(id_dosen)
+    //   getData();
+        $('#prodi').on('change',function (e) {
+			var program_studi = $(this).val()
+			var semester = 1
+			getKelas(program_studi,semester)
+
+			return true;
+		})
+        $('#matkul').on('change',function (e) {
+			$('.table-body').html('')
+			var kelas = $('#kelas').val()
+			var matakuliah = $('#matkul').val()
+
+			$.ajax({
+                url: `{{url('/api/v1')}}/absensi/rekap-kelas-mahasiswa?kelas=${kelas}&tahun=${tahun}&semester=${semester}&matakuliah=${matakuliah}`,
+                type: 'get',
+                dataType: 'json',
+                data: {},
+                beforeSend: function(text) {
+                        // loading func
+                },
+                success: function(res) {
+                    var data = res.data.data;
+                    var info = res.data.info;
+                    kuliah = info.kuliah
+                    if (res.status=="success") {
+                        setMahasiswa(data)
+                    } else {
+                        // alert gagal
+                    }
+                }
+            })
+		})
+
+        $('#btn_simpan').on('click',function (e) {
+            console.log(arr_mhs)
+            $.ajax({
+            url: url_api+"/absensi-admin",
+            type: 'post',
+            dataType: 'json',
+            data: {'kuliah':kuliah,'data':arr_mhs},
+            success: function(res) {
+                console.log(res)
+                if (res.status=="success") {
+                    window.location.href = "{{url('/admin/kuliah/absensi/rekap')}}";             
+                } else {
+                    // alert gagal
+                }
+                
+
+            }
+            });
+        })
     })
 
-    function chooseColor() {
-      let conceptName = $(this).find(":selected").text();
-      if (conceptName === '-') {
-        $(this).css('background-color', '#FFF');
-        $(this).css('color', '#ADB5BD');
-        $(this).css('background-image',
-          'url("https://api.iconify.design/bx/bx-chevron-down.svg?color=%23ADB5BD")');
-        $(this).css('border', '1px solid #ADB5BD');
-      } else if (conceptName === 'H') {
-        $(this).css('background-color', '#34C38F');
-      } else if (conceptName === 'I') {
-        $(this).css('background-color', '#28A3EB');
-      } else if (conceptName === 'S') {
-        $(this).css('background-color', '#F1B44C');
-      } else if (conceptName === 'A') {
-        $(this).css('background-color', '#F46A6A');
-      }
+    async function getFilter(id_dosen) {
+        var semester = 1
+        $.ajax({
+            url: url_api+"/dosen/filter/"+id_dosen+"/"+semester,
+            type: 'get',
+            dataType: 'json',
+            data: {},
+            success: function(res) {
+                if (res.status=="success") {
+                    var data = res['data'];
+                    dataFilter = data;
+                    $('#prodi').html('')              
+                    var optProdi = `<option value=""> - </option>`;
+                    $.each(data['prodi'],function (key,row) {
+                        optProdi += `<option value="${row.nomor}">${row.nama_program} ${row.program_studi}</option>`
+                    })
+                    $('#prodi').append(optProdi)
+                } else {
+						// alert gagal
+                }
+                return true;
+            }
+        });
+    }
 
+    function getKelas(prodi,semester) {
+        var kelas = $.grep(dataFilter['kelas'], function(e){ return e.program_studi == prodi; });
+        $('#kelas').html('')
+        var optKelas = `<option value=""> - </option>`;
+        $.each(kelas,function (key,row) {
+            optKelas += `<option value="${row.nomor}">${row.kode}</option>`;
+        });
+        $('#kelas').append(optKelas);
+        return true;
     }
-    function getData() {
-      $.ajax({
-        url: `{{url('/api/v1')}}/absensi/rekap-kelas-mahasiswa?kelas=${kelas}&tahun=${tahun}&semester=${semester}&matakuliah=${matakuliah}`,
-        type: 'get',
-        dataType: 'json',
-        data: {},
-        beforeSend: function(text) {
-                // loading func
-        },
-        success: function(res) {
-          var data = res.data.data;
-          var info = res.data.info;
-          kuliah = info.kuliah
-          $('#prodi').val(info.prodi)
-          $('#matakuliah').val(info.matakuliah)
-          $('#kelas').val(info.kelas)
-          console.log(data)
-          if (res.status=="success") {
-              setMahasiswa(data)
-          } else {
-              // alert gagal
-          }
-        }
-      })
-    }
+
+    $('#kelas').on('change',function (e) {
+        var kelas = $(this).val()
+        var kelas = $.grep(dataFilter['matakuliah'], function(e){ return e.kelas == kelas; });
+
+        $('#matkul').html('')
+        var optMatkul = `<option value=""> - </option>`;
+        $.each(kelas,function (key,row) {
+            optMatkul += `<option value="${row.nomor}">${row.matakuliah}</option>`
+        })
+        $('#matkul').append(optMatkul)
+    })
+
     function setMahasiswa(data) {
         var html = '';
-      $.each(data,function (key,row) {
-        html +=  `<tr>
-                    <td class="text-center">${row.nim}</td>
-                    <td class="font-weight-bold text-capitalize">${row.nama}</td>`;
-        for (let index = 1; index <= 16; index++) {
-          html += `<td class="text-center px-1">
-                      <select class="form-control select-absen" data-absensi="${row.absensi[index]}" data-mhs="${row.mahasiswa}" data-pertemuan="${index}">
-                        <option ${(row.pertemuan[index]=="")?'selected':""} value="">-</option>
-                        <option ${(row.pertemuan[index]=="H")?'selected':""} value="H">H</option>
-                        <option ${(row.pertemuan[index]=="I")?'selected':""} value="I">I</option>
-                        <option ${(row.pertemuan[index]=="S")?'selected':""} value="S">S</option>
-                        <option ${(row.pertemuan[index]=="A")?'selected':""} value="A">A</option>
-                      </select>
-                    </td>`
-        }
-        html += `<td class="text-center px-1">${row.persentase}</td>`
-        html += `</tr>`;
-      })
-      $('.table-body').append(html);
-
-
-      $(".table_absensiMhs select").each(chooseColor);
-      $('.table_absensiMhs select').change(chooseColor);
-
-      function checkWidth() {
-        let elemWidth = $('.table_absensiMhs tr td:first-child').outerWidth();
-        console.log(elemWidth);
-        $('.table_absensiMhs tr td:nth-child(2),.table_absensiMhs .main_header th:nth-child(2)').css("left",
-          elemWidth + 'px');
-      }
-
-      let resizeObserver = new ResizeObserver(checkWidth);
-      resizeObserver.observe($(".main-content")[0]);
-
-      $(window).on('resize', checkWidth);
-
-      $('.select-absen').on('change',function (e) {
-        var status = $(this).val(); 
-        var mahasiswa = $(this).data('mhs'); 
-        var pertemuan = $(this).data('pertemuan'); 
-        var absensi = $(this).data('absensi'); 
-
-        check = "insert";
-        $.each(arr_mhs, function() { 
-            if(this.mahasiswa === mahasiswa && this.pertemuan===pertemuan){ 
-              this.status = status;
-              check = "update";
+        $.each(data,function (key,row) {
+            html +=  `<tr>
+                        <td class="text-center">${row.nim}</td>
+                        <td class="font-weight-bold text-capitalize">${row.nama}</td>`;
+            for (let index = 1; index <= 16; index++) {
+                html += `<td class="text-center px-1">`;
+                if (row.pertemuan[index]=="") {  
+                    html += `<input type="text" readonly class="form-control" style="width:30px;height:30px;background-color:#FFF;color:#000" value="-" />`
+                } else if (row.pertemuan[index]=="H") {
+                    html += `<input type="text" readonly class="form-control" style="width:30px;height:30px;background-color:#34C38F;color:#FFF" value="H" />`
+                } else if (row.pertemuan[index]=="I") {
+                    html += `<input type="text" readonly class="form-control" style="width:30px;height:30px;background-color:#28A3EB;color:#FFF" value="I" />`
+                } else if (row.pertemuan[index]=="S") {
+                    html += `<input type="text" readonly class="form-control" style="width:30px;height:30px;background-color:#F1B44C;color:#FFF" value="S" />`
+                } else if (row.pertemuan[index]=="A") {
+                    html += `<input type="text" readonly class="form-control" style="width:30px;height:30px;background-color:#F46A6A;color:#FFF" value="A" />`
+                } 
+                html += `</td>`
             }
-        }); 
-        if (check == "insert") {
-          arr_mhs.push({'nomor':absensi,'mahasiswa':mahasiswa,'kuliah':kuliah,'status':status,'pertemuan':pertemuan})
+            html += `<td class="text-center px-1">${row.persentase}</td>`
+            html += `</tr>`;
+        })
+        $('.table-body').append(html);
+
+        function checkWidth() {
+            let elemWidth = $('.table_absensiMhs tr td:first-child').outerWidth();
+            console.log(elemWidth);
+            $('.table_absensiMhs tr td:nth-child(2),.table_absensiMhs .main_header th:nth-child(2)').css("left",
+            elemWidth + 'px');
         }
-      })
+
+        let resizeObserver = new ResizeObserver(checkWidth);
+        resizeObserver.observe($(".main-content")[0]);
+
+        $(window).on('resize', checkWidth);
     }
   </script>
 @endsection
