@@ -121,6 +121,33 @@
 			</div>
 		</div>
 	</div>
+	<div class="modal fade" id="keteranganModal" tabindex="-1" aria-labelledby="keteranganModalLabel"
+    aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered modal-lg">
+		<div class="modal-content p-0 padding--medium">
+			<input type="hidden" id="id_delete">
+			<input type="hidden" id="endpoint">
+
+			<div class="modal-header">
+				<p class="text-center">
+					<h5 class="modal-title text-warning text-center">Keterangan</h5>
+				</p>
+			</div>
+			<div class="modal-body">
+			<input type="hidden" id="keterangan_index">
+			<textarea class="form-control mb-5" id="keterangan_modal"></textarea>
+			<div class="row">
+				<div class="col-md-6">
+					<button type="button" class="btn btn-modal-cancel w-100" data-dismiss="modal">Batal</button>
+				</div>
+				<div class="col-md-6">
+					<button type="button" class="btn btn-primary w-100" onclick="func_simpan()">Simpan</button>
+				</div>
+			</div>
+			</div>
+		</div>
+		</div>
+	</div>
 </section>
 @endsection
 
@@ -356,7 +383,7 @@ function setSiswa(data) {
 			<input type="text" class="form-control" id="nh_${i}" value="${row.nh}" disabled>
 		</td>
 		<td class="text-center px-3">
-			<input type="text" class="form-control" id="keterangan_${i}" value="${row.keterangan}">
+			<input type="text" class="form-control" id="keterangan_${i}" onclick="func_modal(${i},'${row.keterangan}')" value="${row.keterangan}">
 		</td>
 		</tr>`
 		$('.list-nilai').append(html)
@@ -365,6 +392,12 @@ function setSiswa(data) {
 	$('#btn_setting').attr('hidden','false')
 	countData = i;
 	return true;
+}
+
+function func_modal(index,keterangan) {
+	$('#keterangan_index').text(index)
+	$('#keterangan_modal').text(keterangan)
+	$('#keteranganModal').modal('show')
 }
 
 function setPersentase(obj_persentase) {

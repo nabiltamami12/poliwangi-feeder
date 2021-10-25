@@ -123,6 +123,15 @@ Route::prefix('dosen')->middleware(['aksesuntuk:dosen'])->group(function () {
             "title" => "dosen-penilaian"
         ]);
     });
+
+    Route::get('/absensi/kelas-dosen/', function () {
+        return view('dosen.presensiDosen', [
+            "id_kuliah" => $id_kuliah,
+            "pertemuan" => $pertemuan,
+            "title" => "absensi-dosen"
+        ]);
+    });
+
     Route::get('/absensi/kelas-dosen/{id_kuliah}/{pertemuan}', function ($id_kuliah, $pertemuan) {
         return view('dosen.presensiDosen', [
             "id_kuliah" => $id_kuliah,
