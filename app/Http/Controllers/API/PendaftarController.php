@@ -96,7 +96,7 @@ class PendaftarController extends Controller
 	public function konfirmasi_pendaftar($id)
 	{
 		try {
-			$pendaftar = DB::table('pendaftar as p')->select('p.nomor as id','p.nama','p.nodaftar','p.program_studi','p.program_studi_luar','jp.jalur_daftar')->join('jalur_penerimaan as jp','jp.id','=','p.jalur_daftar')->where('p.nomor',$id)->first();
+			$pendaftar = DB::table('pendaftar as p')->select('p.nomor as id','p.nama','p.nodaftar','p.status','p.program_studi','p.program_studi_luar','jp.jalur_daftar')->join('jalur_penerimaan as jp','jp.id','=','p.jalur_daftar')->where('p.nomor',$id)->first();
 			$jurusan_pilihan = DB::table('jurusan_pilihan')->where('id_pendaftar',$id)->orderBy('urutan')->get();
 			$arr_poliwangi = [];
 			$poltek_lain = null;
@@ -137,8 +137,54 @@ class PendaftarController extends Controller
 			$pendaftar = DB::table('pendaftar');
 			$data = $pendaftar->where('nomor',$id)->first();
 			if ($data->status=="Y") {
-				$status = null;
-				$delete = DB::table('mahasiswa')->where('no_pendaftaran',$data->nodaftar)->delete();
+				if ($request->program_studi==0) {
+					$data_update = [
+						'program_studi' => null,
+						'program_studi_luar' => null,
+						'status' => 'T'
+					];
+					$status = null;
+					$delete = DB::table('mahasiswa')->where('id_pendaftar',$id)->delete();
+				}else{
+					if ($request->poltek=="poliwangi") {
+						$data_update = [
+							'program_studi' => $request->program_studi,
+							'program_studi_luar' => null,
+							'status' => 'Y'
+						];
+						$cek = DB::table('mahasiswa')->where('id_pendaftar',$id)->get();
+						if (count($cek)>0) {
+							DB::table('mahasiswa')->where('id_pendaftar',$id)->update(['program_studi'=>$request->program_studi]);
+						}else{
+							$arr = [
+								'id_pendaftar' => $id,
+								'nama' => $data->nama,
+								'nik' => $data->nik,
+								'nisn' => $data->nisn,
+								'tmplahir' => $data->tempat_lahir,
+								'tgllahir' => $data->tgllahir,
+								'anak_ke' => $data->anak_ke,
+								'jenis_kelamin' => $data->sex,
+								'program_studi' => $request->program_studi,
+								'jumlah_anak' => $data->jumlah_anak,
+								'lulussmu' => $data->tahun_lulus_smu,
+								'smu' => $data->smu,
+								'alamat' => $data->alamat,
+								'status' => "B",
+								'jalur_daftar' => $data->jalur_daftar,
+							];
+							$insert = DB::table('mahasiswa')->insert($arr);
+						}
+					}else{
+						$data_update = [
+							'program_studi' => null,
+							'program_studi_luar' => $request->program_studi,
+							'status' => 'Y'
+						];
+						$status = null;
+						$delete = DB::table('mahasiswa')->where('id_pendaftar',$id)->delete();
+					}
+				}
 			}else{
 				if ($request->program_studi==0) {
 					$data_update = [
@@ -157,7 +203,7 @@ class PendaftarController extends Controller
 						];
 					}	
 					$arr = [
-						'no_pendaftaran' => $data->nodaftar,
+						'id_pendaftar' => $id,
 						'nama' => $data->nama,
 						'nik' => $data->nik,
 						'nisn' => $data->nisn,
@@ -165,7 +211,7 @@ class PendaftarController extends Controller
 						'tgllahir' => $data->tgllahir,
 						'anak_ke' => $data->anak_ke,
 						'jenis_kelamin' => $data->sex,
-						'program_studi' => $data->program_studi,
+						'program_studi' => $request->program_studi,
 						'jumlah_anak' => $data->jumlah_anak,
 						'lulussmu' => $data->tahun_lulus_smu,
 						'smu' => $data->smu,
