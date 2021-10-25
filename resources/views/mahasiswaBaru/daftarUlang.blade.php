@@ -57,21 +57,9 @@
             </thead>
 
             <tbody class="table-body table-body-lg">
-              <tr>
-                <td class="text-center px-2">1</td>
-                <td>
-                  <h2 class="mb-0">Ijazah SMA/SMK/MA/Sederajat</h2>
-                </td>
-                <td>
-                  <i class="iconify-inline mr-1 text-primary" data-icon="bx:bx-file-blank"></i>
-                  <span class="text-primary">dokumen terunggah</span>
-                </td>
-                <td class="text-center">
-                  <i class="iconify status-success" data-icon="fluent:clock-20-filled"></i>
-                </td>
-              </tr>
+              
 
-              <tr>
+              <!-- <tr>
                 <td class="text-center px-2">2</td>
                 <td>
                   <h2 class="mb-0">Surat Keterangan Hasil Ujian</h2>
@@ -165,7 +153,7 @@
                 <td class="text-center">
                   <i class="iconify status-pending" data-icon="fluent:clock-20-filled"></i>
                 </td>
-              </tr>
+              </tr> -->
             </tbody>
           </table>
         </div>
@@ -177,6 +165,46 @@
 
 @section('js')
 <script>
+
+$(document).ready(function () {
+  getData();
+});
+
+function getData() {
+  $.ajax({
+    url: url_api+"/syarat-pendaftar",
+    type: 'get',
+    dataType: 'json',
+    data: {},
+    headers: {
+      'token': localStorage.getItem('pmb')
+    },
+    success: function(res) {
+      if (res.status=="success") {
+        var i = 1;
+        $.each(res.data,function (key,row) {
+          var html = `          
+              <tr>
+                <td class="text-center px-2">${i++}</td>
+                <td>
+                  <h2 class="mb-0">${row.nama}</h2>
+                </td>
+                <td>
+                  <i class="iconify-inline mr-1 text-primary" data-icon="bx:bx-file-blank"></i>
+                  <span class="text-primary">dokumen terunggah</span>
+                </td>
+                <td class="text-center">
+                  <i class="iconify status-success" data-icon="fluent:clock-20-filled"></i>
+                </td>
+              </tr>`
+          $('.table-body').append(html);
+        })
+
+        
+      }
+    }
+  });
+}
   const inputFile = document.getElementById("file");
   const customBtn = document.getElementById("custom-btn");
   const customText = document.getElementById("custom-text");
@@ -202,6 +230,7 @@
     formWrapper.classList.remove('justify-content-center');
     formWrapper.classList.add('justify-content-between');
   }
+
 
 </script>
 @endsection

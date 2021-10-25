@@ -12,7 +12,7 @@
         <div class="card-header padding--big">
         <div class=" row align-items-center">
             <div class="col">
-              <h2 class="mb-0">Rekapitulasi Absensi</h2>
+              <h2 class="mb-0">Rekapitulasi Presensi</h2>
             </div>
           </div>
           <!-- <div class="row align-items-center">
@@ -45,6 +45,7 @@
                 <th scope="col" class="text-center">Kelas</th>
                 <th scope="col" class="text-center">JUMLAH KEHADIRAN</th>
                 <th scope="col" class="text-center">TIDAK HADIR</th>
+                <th scope="col" class="text-center">Persentase</th>
               </tr>
             </thead>
             <tbody>
@@ -102,6 +103,7 @@
           },{
             "aTargets": [3],
             "mData": null,
+            "className": "text-right",
             "mRender": function(data, type, full) {
               res = data['hadir'];
               return res;
@@ -109,9 +111,18 @@
           },{
             "aTargets": [4],
             "mData": null,
+            "className": "text-right",
             "mRender": function(data, type, full) {
               res = data['tidak_hadir'];
               return res;
+            }
+          },{
+            "aTargets": [5],
+            "mData": null,
+            "className": "text-right",
+            "mRender": function(data, type, full) {
+              res = (data['hadir']/16)*100;
+              return round(res)+"%";
             }
           }
         ]}

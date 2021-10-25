@@ -29,6 +29,13 @@
           </li>
 
           <li class="nav-item">
+            <a class="nav-link {{($title === "dosen-presensi") ? 'aktif' : ''}}" href="{{url('dosen/presensi-mahasiswa')}}">
+              <i class="iconify" data-icon="bx:bx-badge-check"></i>
+              <span class="nav-link-text">Presensi Mahasiswa</span>
+            </a>
+          </li>
+          
+          <li class="nav-item">
             <a class="nav-link {{($title === "dosen-penilaian") ? 'aktif' : ''}}" href="{{url('dosen/penilaian')}}">
               <i class="iconify" data-icon="bx:bx-badge-check"></i>
               <span class="nav-link-text">Penilaian</span>

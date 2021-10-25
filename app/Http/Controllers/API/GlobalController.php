@@ -46,9 +46,9 @@ class GlobalController extends Controller
                 'pegawai.nomor',
                 'pegawai.nip',
                 'pegawai.nama',
-                'pegawai.tgllahir',
-                'pegawai.notelp',
-                'pegawai.email',
+                // 'pegawai.tgllahir',
+                // 'pegawai.notelp',
+                // 'pegawai.email',
                 "staff.staff"
             )
             ->join("staff", "staff.nomor", "=", "pegawai.staff")

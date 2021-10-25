@@ -123,6 +123,15 @@ Route::prefix('dosen')->middleware(['aksesuntuk:dosen'])->group(function () {
             "title" => "dosen-penilaian"
         ]);
     });
+
+    Route::get('/absensi/kelas-dosen/', function () {
+        return view('dosen.presensiDosen', [
+            "id_kuliah" => $id_kuliah,
+            "pertemuan" => $pertemuan,
+            "title" => "absensi-dosen"
+        ]);
+    });
+
     Route::get('/absensi/kelas-dosen/{id_kuliah}/{pertemuan}', function ($id_kuliah, $pertemuan) {
         return view('dosen.presensiDosen', [
             "id_kuliah" => $id_kuliah,
@@ -539,77 +548,82 @@ Route::prefix('admin')->middleware(['aksesuntuk:admin'])->group(function () {
     });
 
     Route::prefix('pmb')->group(function () {
+        Route::get('/datapendaftar', function () {
+            return view('admin.pmb.dataPendaftar', [
+                "title" => "admin-pmb",
+            ]);
+        });
 
         Route::get('/settingjalurpenerimaan', function () {
             return view('admin.pmb.settingJalurPenerimaan', [
-                "title" => "admin-settingpmb"
+                "title" => "admin-pmb"
             ]);
         });
         Route::get('/settingjalurpenerimaan/cu/', function () {
             return view('admin.pmb/cuJalurPenerimaan', [
                 "id" => null,
-                "title" => "admin-settingpmb"
+                "title" => "admin-pmb"
             ]);
         });
         Route::get('/settingjalurpenerimaan/cu/{id}', function ($id) {
             return view('admin.pmb/cuJalurPenerimaan', [
                 "id" => $id,
-                "title" => "admin-settingpmb"
+                "title" => "admin-pmb"
             ]);
         });
         Route::get('/settingjalursyarat', function () {
             return view('admin.pmb.settingJalurSyarat', [
-                "title" => "admin-settingpmb"
+                "title" => "admin-pmb"
             ]);
         });
         Route::get('/settingjalursyarat/cu/', function () {
             return view('admin.pmb/cuJalurSyarat', [
                 "id" => null,
-                "title" => "admin-settingpmb"
+                "title" => "admin-pmb"
             ]);
         });
         Route::get('/settingjalursyarat/cu/{id}', function ($id) {
             return view('admin.pmb/cuJalurSyarat', [
                 "id" => $id,
-                "title" => "admin-settingpmb"
+                "title" => "admin-pmb"
             ]);
         });
         Route::get('/settingjurusanpilihan', function () {
             return view('admin.pmb.settingJurusanPilihan', [
-                "title" => "admin-settingpmb"
+                "title" => "admin-pmb"
             ]);
         });
         Route::get('/editjurusanpilihan', function () {
             return view('admin.pmb.editJurusanPilihan', [
-                "title" => "admin-settingpmb"
+                "title" => "admin-pmb"
             ]);
         });
 
         Route::get('/settingjadwalseleksi', function () {
             return view('admin.pmb.settingJadwalSeleksi', [
-                "title" => "admin-settingpmb"
+                "title" => "admin-pmb"
             ]);
         });
         Route::get('/editjadwalseleksi', function () {
             return view('admin.pmb.editJadwalSeleksi', [
-                "title" => "admin-settingpmb"
+                "title" => "admin-pmb"
             ]);
         });
 
         Route::get('/settingjurusanasal', function () {
             return view('admin.pmb.settingJurusanAsalPendaftar', [
-                "title" => "admin-settingpmb"
+                "title" => "admin-pmb"
             ]);
         });
         Route::get('/editjurusanasal', function () {
             return view('admin.pmb.editJurusanAsalPendaftar', [
-                "title" => "admin-settingpmb"
+                "title" => "admin-pmb"
             ]);
         });
 
         Route::get('/settingjurusanlinear', function () {
             return view('admin.pmb.settingJurusanLinear', [
-                "title" => "admin-settingpmb"
+                "title" => "admin-pmb"
             ]);
         });
     });

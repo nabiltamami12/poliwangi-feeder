@@ -185,6 +185,7 @@ Route::prefix('v1')->group(function () {
 
     //Jalur Pmb
     Route::get('/jalurpmb', '\App\Http\Controllers\API\JalurpmbController@index');
+    Route::get('/jalurpmb-register', '\App\Http\Controllers\API\JalurpmbController@get_register');
     Route::get('/jalurpmb/{id}', '\App\Http\Controllers\API\JalurpmbController@show');
     Route::post('/jalurpmb', '\App\Http\Controllers\API\JalurpmbController@store');
     Route::put('/jalurpmb/{pmb}', '\App\Http\Controllers\API\JalurpmbController@update');
@@ -198,6 +199,7 @@ Route::prefix('v1')->group(function () {
     Route::delete('/jurusanpilihan/{id}', '\App\Http\Controllers\API\JurusanpilihanController@destroy');
     //syarat
     Route::get('/syarat', '\App\Http\Controllers\API\SyaratController@index');
+    Route::get('/syarat-pendaftar', '\App\Http\Controllers\API\SyaratController@get_syarat_pendaftar');
     Route::get('/syarat/{id}', '\App\Http\Controllers\API\SyaratController@show');
     Route::post('/syarat', '\App\Http\Controllers\API\SyaratController@store');
     Route::put('/syarat/{id}', '\App\Http\Controllers\API\SyaratController@update');
@@ -205,6 +207,7 @@ Route::prefix('v1')->group(function () {
 
     // PENDAFTAR
     Route::get('pendaftar/dashboard', '\App\Http\Controllers\API\PendaftarController@dashboard');
+    Route::get('admin/pendaftar-konfirmasi/{id}', '\App\Http\Controllers\API\PendaftarController@konfirmasi_pendaftar');
 
     Route::get('admin/pendaftar', '\App\Http\Controllers\API\PendaftarController@index');
     Route::put('admin/pendaftar/verifikasi/{id}', '\App\Http\Controllers\API\PendaftarController@verifikasi_pendaftar');
@@ -265,6 +268,7 @@ Route::prefix('v1')->group(function () {
     Route::post('keuangan/template-perjanjian', [Ctr\BerkasKeuanganController::class, 'template_perjanjian']);
     Route::get('keuangan/template-perjanjian', [Ctr\BerkasKeuanganController::class, 'check_template_perjanjian']);
     Route::get('download/template-perjanjian', [Ctr\BerkasKeuanganController::class, 'download_template_perjanjian']);
+    Route::post('keuangan/cicilan-piutang', [Ctr\BerkasKeuanganController::class, 'cicilan_piutang']);
 
     Route::get('/keuangan/rekapitulasi/penyisihanpiutang', [Ctr\BerkasKeuanganController::class, 'penyisihanpiutang']);
     Route::get('/keuangan/export/rekap-piutang', [Ctr\BerkasKeuanganController::class, 'export_piutang']);

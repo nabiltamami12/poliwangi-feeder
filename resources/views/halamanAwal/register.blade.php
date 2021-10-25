@@ -92,7 +92,7 @@
                 </div>
                 <div class="form-group mb-0 mt-3">
                   <label class="font-weight-bold">Pilih Program Studi</label>
-                  <select class="form-control" id="program_studi_lain"  name="program_studi_lain" >
+                  <select class="form-control" id="program_studi_luar"  name="program_studi_luar" >
                   </select>
                 </div>  
               </div>
@@ -228,12 +228,12 @@
       $('#politeknik_lain').on('change',function (e) {
         var politeknik_lain = $(this).val()
         var jurusan = $.grep(politeknik_jurusan, function(e){ return e.id_politeknik == politeknik_lain; });
-        $('#program_studi_lain').html('')
+        $('#program_studi_luar').html('')
         var optJurusanLain = `<option value=""> - </option>`;
         $.each(jurusan,function (key,row) {
           optJurusanLain += `<option value="${row.id}">${row.jenjang} ${row.jurusan}</option>`
         })
-        $('#program_studi_lain').append(optJurusanLain); 
+        $('#program_studi_luar').append(optJurusanLain); 
       })
       $("#form").submit(function(e) {
         e.preventDefault();
@@ -261,7 +261,7 @@
     })
     function getData() {
       $.ajax({
-        url: url_api+"/jalurpmb",
+        url: url_api+"/jalurpmb-register",
         type: 'get',
         dataType: 'json',
         data: {},
