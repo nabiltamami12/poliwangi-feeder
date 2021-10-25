@@ -48,7 +48,8 @@
                 <th scope="col" class="text-center">No</th>
                 <th scope="col" class="text-center">No. Pendaftar</th>
                 <th scope="col" style="width: 25%">Nama</th>
-                <th scope="col" class="text-right" style="width: 25%">Jalur Penerimaan</th>
+                <th scope="col" style="width: 25%">Jalur Penerimaan</th>
+                <th scope="col" style="width: 25%">Status</th>
                 <th scope="col" style="width: 25%">Status Bayar</th>
               </tr>
             </thead>
@@ -74,12 +75,13 @@
             </p>
         </div>
         <div class="modal-body">
+          <input type="hidden" id="id_pendaftar">
           <h4 class="mb-0 mb-2" id="prodi">Nomor Pendaftar</h4>
-          <h5 class="mb-0 mb-3" style="font-weight:400;">201231248</h5>
+          <h5 class="mb-0 mb-3" id="nomor_pendaftar" style="font-weight:400;">201231248</h5>
           <h4 class="mb-0 mb-2" id="prodi">Nama Pendaftar</h4>
-          <h5 class="mb-0 mb-3" style="font-weight:400;">201231248</h5>
+          <h5 class="mb-0 mb-3" id="nama_pendaftar" style="font-weight:400;">201231248</h5>
           <h4 class="mb-0 mb-2" id="prodi">Jalur Penerimaan</h4>
-          <h5 class="mb-0 mb-3" style="font-weight:400;">201231248</h5>
+          <h5 class="mb-0 mb-3" id="jalur_pendaftar" style="font-weight:400;">201231248</h5>
           <h4 class="mb-0 mb-2" id="prodi">Diterima di :</h4>
           <div class="mb-3" id="list_pilihan">
             <div id="list_poliwangi">
@@ -88,7 +90,7 @@
             <div id="list_poltek">
 
             </div>
-            <div class="d-flex" onclick="func_centang(this,0)" style="cursor:pointer">
+            <div class="d-flex" onclick="func_centang(this,0,'')" style="cursor:pointer">
               <i id="" class="iconify centang-pilihan text-placeholder mt-1 mr-3" data-icon="akar-icons:circle-check-fill"></i>
               <p class="d-inline-block font-weight-bold">Tidak Lolos</p>
             </div> 
@@ -107,7 +109,7 @@
 </div>
 </section>
 <script>
-  var pilihan_selected;
+  var prodi_selected,poltek_selected;
   $(document).ready(function() {
   getData();
 
@@ -140,51 +142,46 @@ async function getData() {
     $('#jalur_penerimaan').append(optStatus)
     setDatatable();
 }
-function func_centang(e,id_selected) {
-  console.log($(e).find('.centang-pilihan'))
+function func_centang(e,id_selected,poltek) {
   $('.centang-pilihan').removeClass('text-success')
   $('.centang-pilihan').addClass('text-placeholder')
   $(e).find('.centang-pilihan').removeClass('text-placeholder')
   $(e).find('.centang-pilihan').addClass('text-success')
-  pilihan_selected = $(e)
-  // var id_syarat = $(e).data('id')
-  // var check = $(e).hasClass('text-placeholder');
-  // $('.centang-pilihan').removeClass('text-success')
-  // $('.centang-pilihan').addClass('text-placeholder')
-  // $(e).find('.centang-pilihan').addClass('text-success')
+  prodi_selected = id_selected;
+  poltek_selected = poltek;
 }
 
 function func_simpan() {
-    var id_pendaftar = $(this).data('id');
-
-    // $.ajax({
-    //     url: url_api+"/admin/pendaftar/verifikasi/"+id_pendaftar,
-    //     type: 'put',
-    //     dataType: 'json',
-    //     data: {},
-    //     success: function(res) {
-    //         console.log(res)
-    //         if (res.status=="success") {
-    //             if ($('#btn_'+id).hasClass('badge-danger')) {
-    //                 $('#btn_'+id).html('');
-    //                 $('#btn_'+id).removeClass('badge-danger')
-    //                 $('#btn_'+id).addClass('badge-success')
-    //                 $('#btn_'+id).append(`<i class="iconify-inline mr-1" data-icon="akar-icons:circle-check-fill"></i>
-    //                             <span class="text-capitalize" style="color:#fff">Diterima</span>`);
-    //             }else{
-    //                 $('#btn_'+id).html('');
-    //                 $('#btn_'+id).removeClass('badge-success')
-    //                 $('#btn_'+id).addClass('badge-danger')
-    //                 $('#btn_'+id).append(`<i class="iconify-inline mr-1" data-icon="bi:x-circle-fill"></i>
-    //                             <span class="text-capitalize" style="color:#fff">Tidak Diterima</span>`);
-    //             }           
-    //         } else {
-    //             // alert gagal
-    //         }
+    var id_pendaftar = $('#id_pendaftar').val();
+    
+    $.ajax({
+        url: url_api+"/admin/pendaftar/verifikasi/"+id_pendaftar,
+        type: 'put',
+        dataType: 'json',
+        data: {'program_studi':prodi_selected,'poltek':poltek_selected},
+        success: function(res) {
+            console.log(res)
+            if (res.status=="success") {
+                // if ($('#btn_'+id).hasClass('badge-danger')) {
+                //     $('#btn_'+id).html('');
+                //     $('#btn_'+id).removeClass('badge-danger')
+                //     $('#btn_'+id).addClass('badge-success')
+                //     $('#btn_'+id).append(`<i class="iconify-inline mr-1" data-icon="akar-icons:circle-check-fill"></i>
+                //                 <span class="text-capitalize" style="color:#fff">Diterima</span>`);
+                // }else{
+                //     $('#btn_'+id).html('');
+                //     $('#btn_'+id).removeClass('badge-success')
+                //     $('#btn_'+id).addClass('badge-danger')
+                //     $('#btn_'+id).append(`<i class="iconify-inline mr-1" data-icon="bi:x-circle-fill"></i>
+                //                 <span class="text-capitalize" style="color:#fff">Tidak Diterima</span>`);
+                // }           
+            } else {
+                // alert gagal
+            }
             
 
-    //     }
-    // });
+        }
+    });
 }
 
 function func_modal(id) {
@@ -196,18 +193,28 @@ function func_modal(id) {
     headers: {},
     success: function(res) {
       if (res.status=="success") {
+        $('#id_pendaftar').val(res.data.pendaftar.id);
+        $('#nama_pendaftar').text(res.data.pendaftar.nama);
+        $('#nomor_pendaftar').text(res.data.pendaftar.nodaftar);
+        $('#jalur_pendaftar').text(res.data.pendaftar.jalur_daftar);
         $.each(res.data.poliwangi,function (key,row) {
+          console.log(row)
           var html = `          
-            <div class="d-flex" onclick="func_centang(this,${row.id})" style="cursor:pointer">
+            <div class="d-flex" onclick="func_centang(this,${row.id},'poliwangi')" style="cursor:pointer">
               <i id="centang_${row.id}" class="iconify centang-pilihan text-placeholder mt-1 mr-3" data-icon="akar-icons:circle-check-fill"></i>
-              <p class="d-inline-block font-weight-bold">Politeknik Neger Banyuwangi - ${row}</p>
+              <p class="d-inline-block font-weight-bold">Politeknik Neger Banyuwangi - ${row.prodi}</p>
             </div>`
           $('#list_poliwangi').append(html);
+          if (row.program_studi==res.data.pendaftar.program_studi) {
+            console.log("sama")
+            $('.centang-pilihan').removeClass('text-placeholder');
+            $('.centang-pilihan').addClass('text-success');
+          }
         })
 
         if (res.data.poltek_lain != null) {
           var html = `  
-            <div class="d-flex" onclick="func_centang(this,${row.id})" style="cursor:pointer">
+            <div class="d-flex" onclick="func_centang(this,${row.id},'poltek')" style="cursor:pointer">
               <i id="centang_${row.id}" class="iconify centang-pilihan text-placeholder mt-1 mr-3" data-icon="akar-icons:circle-check-fill"></i>
               <p class="d-inline-block font-weight-bold">${res.data.poltek_lain.politeknik} - ${res.data.poltek_lain.prodi}</p>
             </div>`
@@ -259,6 +266,13 @@ dt_opt = {
           }
         },{
           "aTargets": [4],
+          "mData": null,
+          "mRender": function(data, type, full) {
+            res = (data['status']=="Y")?"<span class='text-success'>LOLOS</span>":(data['status']=="T")?"<span class='text-danger'>TIDAK LOLOS</span>":"<span class='text-warning'>MENUNGGU</span>";
+            return (res==null)?"-":res;
+          }
+        },{
+          "aTargets": [5],
           "mData": null,
           "mRender": function(data, type, full) {
             var id = data['nomor']

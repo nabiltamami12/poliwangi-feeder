@@ -31,7 +31,7 @@ class PendaftarController extends Controller
 	{
 		DB::enableQueryLog();
 		$table = DB::table('pendaftar as p');
-		$table->select('p.*','jp.jalur_daftar as jp');
+		$table->select('p.*','jp.jalur_daftar as jalur_penerimaan');
 		$table->join('jalur_penerimaan as jp','jp.id','=','p.jalur_daftar');
 		$table->join('jurusan_pilihan as jpl','jpl.id_pendaftar','=','p.nomor');
 		if ($request->program_studi) {
@@ -96,26 +96,27 @@ class PendaftarController extends Controller
 	public function konfirmasi_pendaftar($id)
 	{
 		try {
+			$pendaftar = DB::table('pendaftar as p')->select('p.nomor as id','p.nama','p.nodaftar','p.program_studi','p.program_studi_luar','jp.jalur_daftar')->join('jalur_penerimaan as jp','jp.id','=','p.jalur_daftar')->where('p.nomor',$id)->first();
 			$jurusan_pilihan = DB::table('jurusan_pilihan')->where('id_pendaftar',$id)->orderBy('urutan')->get();
 			$arr_poliwangi = [];
 			$poltek_lain = null;
 			foreach ($jurusan_pilihan as $key => $value) {
 				if ($value->jenis=="poliwangi") {
 					$prodi = DB::table('program_studi as ps')
-					->select(DB::raw('CONCAT(p.program," ",ps.program_studi) as prodi'))
+					->select('ps.nomor as id',DB::raw('CONCAT(p.program," ",ps.program_studi) as prodi'))
 					->join('program as p','p.nomor','=','ps.program')
 					->where('ps.nomor',$value->program_studi)
 					->first();
-					array_push($arr_poliwangi,$prodi->prodi);
+					array_push($arr_poliwangi,$prodi);
 				} else {
 					$poltek_lain = DB::table('politeknik as p')
-					->select('p.politeknik',DB::raw('CONCAT(pj.jenjang," ",pj.jurusan) as prodi'))
+					->select('pj.id as id','p.politeknik',DB::raw('CONCAT(pj.jenjang," ",pj.jurusan) as prodi'))
 					->join('politeknik_jurusan as pj','p.id','=','pj.id_politeknik')
 					->where('pj.id',$value->program_studi)
 					->first();
 				}	
 			}
-			$this->data = ['poliwangi'=>$arr_poliwangi,'poltek_lain'=>$poltek_lain];
+			$this->data = ['pendaftar'=>$pendaftar,'poliwangi'=>$arr_poliwangi,'poltek_lain'=>$poltek_lain];
 			$this->status = "success";
 		} catch (QueryException $e) {
 			$this->status = "failed";
@@ -128,9 +129,10 @@ class PendaftarController extends Controller
 		]);
 	}
 
-	public function verifikasi_pendaftar($id)
+	public function verifikasi_pendaftar(Request $request,$id)
 	{
 		DB::enableQueryLog();
+
 		try {
 			$pendaftar = DB::table('pendaftar');
 			$data = $pendaftar->where('nomor',$id)->first();
@@ -138,28 +140,43 @@ class PendaftarController extends Controller
 				$status = null;
 				$delete = DB::table('mahasiswa')->where('no_pendaftaran',$data->nodaftar)->delete();
 			}else{
-				$status = "Y";
-
-				$arr = [
-					'no_pendaftaran' => $data->nodaftar,
-					'nama' => $data->nama,
-					'nik' => $data->nik,
-					'nisn' => $data->nisn,
-					'tmplahir' => $data->tempat_lahir,
-					'tgllahir' => $data->tgllahir,
-					'anak_ke' => $data->anak_ke,
-					'jenis_kelamin' => $data->sex,
-					'program_studi' => $data->program_studi,
-					'jumlah_anak' => $data->jumlah_anak,
-					'lulussmu' => $data->tahun_lulus_smu,
-					'smu' => $data->smu,
-					'alamat' => $data->alamat,
-					'status' => "B",
-					'jalur_daftar' => $data->jalur_daftar,
-				];
-				$insert = DB::table('mahasiswa')->insert($arr);
+				if ($request->program_studi==0) {
+					$data_update = [
+						'status' => 'T'
+					];
+				} else {
+					if ($request->poltek=="poliwangi") {
+						$data_update = [
+							'program_studi' => $request->program_studi,
+							'status' => 'Y'
+						];
+					}else{
+						$data_update = [
+							'program_studi_luar' => $request->program_studi,
+							'status' => 'Y'
+						];
+					}	
+					$arr = [
+						'no_pendaftaran' => $data->nodaftar,
+						'nama' => $data->nama,
+						'nik' => $data->nik,
+						'nisn' => $data->nisn,
+						'tmplahir' => $data->tempat_lahir,
+						'tgllahir' => $data->tgllahir,
+						'anak_ke' => $data->anak_ke,
+						'jenis_kelamin' => $data->sex,
+						'program_studi' => $data->program_studi,
+						'jumlah_anak' => $data->jumlah_anak,
+						'lulussmu' => $data->tahun_lulus_smu,
+						'smu' => $data->smu,
+						'alamat' => $data->alamat,
+						'status' => "B",
+						'jalur_daftar' => $data->jalur_daftar,
+					];
+					$insert = DB::table('mahasiswa')->insert($arr);
+				}
 			}
-			$update = $pendaftar->where('nomor',$id)->update(['status'=> $status]);
+			$update = $pendaftar->where('nomor',$id)->update($data_update);
 
 			
 			$this->data = null;
@@ -247,7 +264,7 @@ class PendaftarController extends Controller
 			$arr = [
 				'id_pendaftar' => $document->id,
 				'politeknik' => $data['politeknik_lain'],
-				'program_studi' => $data["program_studi_lain"],
+				'program_studi' => $data["program_studi_luar"],
 				'urutan' => $i+1,
 				'jenis' => 'poltek_lain',
 			];
