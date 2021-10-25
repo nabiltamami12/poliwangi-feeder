@@ -125,9 +125,6 @@
     aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered modal-lg">
 		<div class="modal-content p-0 padding--medium">
-			<input type="hidden" id="id_delete">
-			<input type="hidden" id="endpoint">
-
 			<div class="modal-header">
 				<p class="text-center">
 					<h5 class="modal-title text-warning text-center">Keterangan</h5>
@@ -141,7 +138,7 @@
 					<button type="button" class="btn btn-modal-cancel w-100" data-dismiss="modal">Batal</button>
 				</div>
 				<div class="col-md-6">
-					<button type="button" class="btn btn-primary w-100" onclick="func_simpan()">Simpan</button>
+					<button type="button" class="btn btn-primary w-100" onclick="func_simpan_ket()">Simpan</button>
 				</div>
 			</div>
 			</div>
@@ -383,7 +380,7 @@ function setSiswa(data) {
 			<input type="text" class="form-control" id="nh_${i}" value="${row.nh}" disabled>
 		</td>
 		<td class="text-center px-3">
-			<input type="text" class="form-control" id="keterangan_${i}" onclick="func_modal(${i},'${row.keterangan}')" value="${row.keterangan}">
+			<input type="text" class="form-control" id="keterangan_${i}" data-index="${i}" onclick="func_modal(this)" value="${row.keterangan}">
 		</td>
 		</tr>`
 		$('.list-nilai').append(html)
@@ -394,10 +391,18 @@ function setSiswa(data) {
 	return true;
 }
 
-function func_modal(index,keterangan) {
-	$('#keterangan_index').text(index)
-	$('#keterangan_modal').text(keterangan)
+function func_modal(e) {
+	$('#keterangan_index').text($(e).data('index'))
+	$('#keterangan_modal').text($(e).val())
 	$('#keteranganModal').modal('show')
+}
+
+function func_simpan_ket() {
+	var index = $("#keterangan_index").text();
+	var keterangan = $("#keterangan_modal").val();
+
+	$('#keterangan_'+index).val(keterangan);
+	$('#keteranganModal').modal('hide')
 }
 
 function setPersentase(obj_persentase) {
