@@ -33,20 +33,10 @@ class AbsensiDosenController extends Controller
 	public function list_data(Request $req)
 	{
 		try {
-			$obj = KelasMengajar::with('rDosen:nomor,nip,nama')->get();
-			$data = [];
-			if ($obj) {
-				foreach ($obj as $k => $v) {
-					$data[] = [
-						"id" => $v->id,
-						"dosen" => $v->rDosen ? $v->rDosen->nama : '-',
-						"jumlah_matakuliah" => 0,
-						"kehadiran" => 0,
-						"tidak_hadir" => 0
-					];
-				}
-			}
-			$this->data = $data;
+			$this->data = (new KelasMengajar)->absensi_dosen([
+				'tahun' => $req->get('tahun'),
+				'semester' => $req->get('semester')
+			]);
 			$this->status = "success";
 		} catch (QueryException $e) {
 			$this->status = "failed";
