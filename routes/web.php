@@ -444,6 +444,16 @@ Route::prefix('admin')->middleware(['aksesuntuk:admin'])->group(function () {
             ]);
         });
 
+        Route::get('/absensi/dosen/{id}/{tahun}/{semester}', function ($id, $tahun, $semester) {
+            return view('admin.kuliah.rekapabsensidosen', [
+                "page" => "admin",
+                "dosen" => $id,
+                "tahun" => $tahun,
+                "semester" => $semester,
+                "title" => "rekap-absensi-dosen"
+            ]);
+        });
+
         Route::get('/rekap-nilai', function () {
             return view('admin.kuliah.datarekapnilai', [
                 "title" => "rekap-nilai"
@@ -470,8 +480,8 @@ Route::prefix('admin')->middleware(['aksesuntuk:admin'])->group(function () {
             return view('cetak.evaluasinilai', [
                 "title" => "dosen-penilaian"
             ]);
-        })
-        ;Route::get('/cetak-absensi-kelas', function () {
+        });
+        Route::get('/cetak-absensi-kelas', function () {
             return view('cetak.cetakabsensikelas', [
                 "title" => "dosen-penilaian"
             ]);
