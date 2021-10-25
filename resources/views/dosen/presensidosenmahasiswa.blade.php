@@ -99,6 +99,9 @@
     $(document).ready(function() {
         getFilter(id_dosen)
     //   getData();
+        $('select').on('change',function (e) {
+            $('.table-body').html('')
+        })
         $('#prodi').on('change',function (e) {
 			var program_studi = $(this).val()
 			var semester = 1
@@ -186,6 +189,7 @@
             optKelas += `<option value="${row.nomor}">${row.kode}</option>`;
         });
         $('#kelas').append(optKelas);
+        $('#matkul').html('')
         return true;
     }
 
