@@ -270,10 +270,7 @@ dt_opt = {
           "mData": null,
           "mRender": function(data, type, full) {
             var id = data['nomor']
-            // var status_belum = `<span id="btn_${id}" data-id="${id}" class="btn-pendaftar badge badge-danger">
-            //         <i class="iconify-inline mr-1" data-icon="bi:x-circle-fill"></i>
-            //         <span class="text-capitalize" style="color:#fff">Tidak Diterima</span>
-            //       </span>`
+            
             var status_sudah = `
             
                   <span id="btn_${id}" onclick="func_modal(${id})" data-id="${id}" class="badge btn-info_transparent text-primary">
@@ -282,42 +279,7 @@ dt_opt = {
                   </span>`
 
             res = status_sudah;
-            // res = (data['is_lunas']==1)?status_sudah:status_belum;
             
-            // $('#btn_'+id).on('click',function (e) {
-            // })
-            // $('#btn_'+id).on('click',function (e) {
-            //     var id_pendaftar = $(this).data('id');
-
-            //     $.ajax({
-            //         url: url_api+"/admin/pendaftar/verifikasi/"+id_pendaftar,
-            //         type: 'put',
-            //         dataType: 'json',
-            //         data: {},
-            //         success: function(res) {
-            //             console.log(res)
-            //             if (res.status=="success") {
-            //                 if ($('#btn_'+id).hasClass('badge-danger')) {
-            //                     $('#btn_'+id).html('');
-            //                     $('#btn_'+id).removeClass('badge-danger')
-            //                     $('#btn_'+id).addClass('badge-success')
-            //                     $('#btn_'+id).append(`<i class="iconify-inline mr-1" data-icon="akar-icons:circle-check-fill"></i>
-            //                                 <span class="text-capitalize" style="color:#fff">Diterima</span>`);
-            //                 }else{
-            //                     $('#btn_'+id).html('');
-            //                     $('#btn_'+id).removeClass('badge-success')
-            //                     $('#btn_'+id).addClass('badge-danger')
-            //                     $('#btn_'+id).append(`<i class="iconify-inline mr-1" data-icon="bi:x-circle-fill"></i>
-            //                                 <span class="text-capitalize" style="color:#fff">Tidak Diterima</span>`);
-            //                 }           
-            //             } else {
-            //                 // alert gagal
-            //             }
-                        
-
-            //         }
-            //     });
-            // })
             return res;
           }
         },

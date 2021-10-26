@@ -576,9 +576,10 @@ class PendaftarController extends Controller
 		try {
 		 
 			$data = DB::table('mahasiswa as m')
-			->select('m.nomor','m.nrp','m.nama','m.tgllahir','m.notelp','m.email',)
+			->select('m.nomor','m.nrp','m.nama','m.tgllahir','m.notelp','m.email','m.program_studi','m.ukt_kelompok',DB::raw('CONCAT(p.program," ",ps.program_studi) as prodi'))
 			->join('kelas as k','m.kelas','=','k.nomor','left')
 			->join('program_studi as ps','ps.nomor','=','m.program_studi')
+			->join('program as p','p.nomor','=','ps.program')
 			->where($where)
 			->get();
 			$this->data = $data;
