@@ -237,6 +237,7 @@ Route::prefix('v1')->group(function () {
     Route::put('/keuangan/rekap_ukt/{id}', [Ctr\UktController::class, 'update']);
     Route::delete('/keuangan/rekap_ukt/{id}', [Ctr\UktController::class, 'destroy']);
     Route::get('/keuangan/detail', [Ctr\UktController::class, 'details']);
+    Route::put('/keuangan/set-ukt/{id}', [Ctr\UktController::class, 'set_ukt_mahasiswa']);
 
 
     // SPI Mandiri

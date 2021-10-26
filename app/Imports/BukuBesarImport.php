@@ -31,7 +31,7 @@ class BukuBesarImport implements ToCollection, WithHeadingRow, WithCalculatedFor
         try {
             foreach ($rows as $i) {
                 DB::beginTransaction();
-                $cek_mhs = Mahasiswa::select('nomor','ukt_kelompok','ukt_nominal')
+                $cek_mhs = Mahasiswa::select('nomor','ukt_kelompok','ukt')
                     ->where('nrp', $i['nim'])
                     ->first();
                 if(!$cek_mhs){
@@ -43,7 +43,7 @@ class BukuBesarImport implements ToCollection, WithHeadingRow, WithCalculatedFor
                     Mahasiswa::where('nrp', $i['nim'])
                         ->update([
                             'ukt_kelompok' => $i['klp_ukt'],
-                            'ukt_nominal' => $i['tarif_ukt']
+                            'ukt' => $i['tarif_ukt']
                         ]);
                 }
                 // updateOrCreate

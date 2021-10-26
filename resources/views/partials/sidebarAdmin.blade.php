@@ -36,24 +36,6 @@
             </div>
             <ul class="nav-item-dropdown-content">
               <li class="nav-item">
-                <a class="nav-link" href="{{ url('/admin/master/dataperiode')}}">
-                  <span class="mini_icon">DP</span>
-                  <span class="nav-link-text">Data Periode Kuliah</span>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{{ url('/admin/master/datahariaktif')}}">
-                  <span class="mini_icon">DH</span>
-                  <span class="nav-link-text">Data Hari Aktif</span>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{{ url('/admin/master/datamahasiswa')}}">
-                  <span class="mini_icon">DM</span>
-                  <span class="nav-link-text">Data Mahasiswa</span>
-                </a>
-              </li>
-              <li class="nav-item">
                 <a class="nav-link" href="{{ url('/admin/master/datamatakuliah')}}">
                   <span class="mini_icon">DM</span>
                   <span class="nav-link-text">Data Matakuliah</span>
@@ -66,23 +48,17 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{{ url('/admin/master/datakelas')}}">
-                  <span class="mini_icon">DK</span>
-                  <span class="nav-link-text">Data Kelas</span>
+                <a class="nav-link" href="{{ url('/admin/master/dataperiode')}}">
+                  <span class="mini_icon">DP</span>
+                  <span class="nav-link-text">Data Periode Kuliah</span>
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{{ url('/admin/master/datadosen')}}">
-                  <span class="mini_icon">DD</span>
-                  <span class="nav-link-text ml-0">Data Dosen</span>
+                <a class="nav-link" href="{{ url('/admin/master/datahariaktif')}}">
+                  <span class="mini_icon">DH</span>
+                  <span class="nav-link-text">Data Hari Aktif</span>
                 </a>
               </li>
-              <!-- <li class="nav-item">
-                <a class="nav-link" href="{{ url('/admin/master/datadosenpengampu')}}">
-                  <span class="mini_icon">DD</span>
-                  <span class="nav-link-text">Data Dosen Pengampu</span>
-                </a>
-              </li> -->
               <li class="nav-item">
                 <a class="nav-link" href="{{url('/admin/master/datajurusan')}}">
                   <span class="mini_icon">DJ</span>
@@ -96,9 +72,9 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{{ url('/admin/master/dataruangan')}}">
-                  <span class="mini_icon">DR</span>
-                  <span class="nav-link-text">Data Ruangan</span>
+                <a class="nav-link" href="{{ url('/admin/master/datakelas')}}">
+                  <span class="mini_icon">DK</span>
+                  <span class="nav-link-text">Data Kelas</span>
                 </a>
               </li>
               <li class="nav-item">
@@ -113,13 +89,24 @@
                   <span class="nav-link-text">Data Range Nilai</span>
                 </a>
               </li>
-              <!-- <li class="nav-item">
-                <a class="nav-link" href="{{url('/admin/master/settingkuliah')}}">
-                  <span class="mini_icon">SK</span>
-                  <span class="nav-link-text">Setting Kuliah (FE)</span>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url('/admin/master/datadosen')}}">
+                  <span class="mini_icon">DD</span>
+                  <span class="nav-link-text ml-0">Data Dosen</span>
                 </a>
-              </li> -->
-
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url('/admin/master/datamahasiswa')}}">
+                  <span class="mini_icon">DM</span>
+                  <span class="nav-link-text">Data Mahasiswa</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url('/admin/master/dataruangan')}}">
+                  <span class="mini_icon">DR</span>
+                  <span class="nav-link-text">Data Ruangan</span>
+                </a>
+              </li>
             </ul>
           </li>
 

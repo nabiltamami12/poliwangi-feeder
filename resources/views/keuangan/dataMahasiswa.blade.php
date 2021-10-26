@@ -54,20 +54,54 @@
 								<th scope="col" class="text-center">Aksi</th>
 							</tr>
 						</thead>
-						<tbody></tbody>
+						<tbody class="table-body"></tbody>
 					</table>
 				</div>
 			</div>
 		</div>
 	</div>
+<div class="modal fade" id="konfirmModal" tabindex="-1" aria-labelledby="konfirmModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+		<div class="modal-content p-0 padding--medium">
+			<input type="hidden" id="id_delete">
+			<input type="hidden" id="endpoint">
+
+			<div class="modal-header">
+				<p class="text-center">
+					<h5 class="modal-title text-warning text-center">Detail Pendaftar</h5>
+				</p>
+			</div>
+			<div class="modal-body">
+			<input type="hidden" id="id_mahasiswa">
+				<h4 class="mb-0 mb-2" id="prodi">NIM Mahasiswa</h4>
+				<h5 class="mb-0 mb-3" id="nomor_mahasiswa" style="font-weight:400;">201231248</h5>
+				<h4 class="mb-0 mb-2" id="prodi">Nama Mahasiswa</h4>
+				<h5 class="mb-0 mb-3" id="nama_mahasiswa" style="font-weight:400;">201231248</h5>
+				<h4 class="mb-0 mb-2" id="prodi">Program Studi Mahasiswa</h4>
+				<h5 class="mb-0 mb-3" id="prodi_mahasiswa" style="font-weight:400;">201231248</h5>
+				<h4 class="mb-0 mb-2" id="prodi">Biaya SPI</h4>
+				<h5 class="mb-0 mb-3" id="spi_mahasiswa" style="font-weight:400;">201231248</h5>
+				<h4 class="mb-0 mb-2" id="prodi">Kelompok UKT</h4>
+				<select class="form-control mb-3" id="kelompok_ukt" name="kelompok_ukt">
+
+				</select>
+				<div class="row">
+					<div class="col-md-6">
+						<button type="button" class="btn btn-modal-cancel w-100" data-dismiss="modal">Batal</button>
+					</div>
+					<div class="col-md-6">
+						<button type="button" class="btn btn-primary w-100" onclick="func_simpan()">Simpan</button>
+					</div>
+				</div>
+			</div>
+		</div>
+    </div>
+</div>
 </section>
 <script>
 	$(document).ready(function() {
 		getData();
-
-		$('#searchdata').on('keyup', function() {
-			dt.search(this.value).draw();
-		});
 		$('#program_studi').on('change',function (e) {
 			var program_studi = $(this).val()
 			var kelas = $.grep(dataGlobal['kelas'], function(e){ return e.program_studi == program_studi; });
@@ -79,11 +113,81 @@
 			})
 			$('#kelas').append(optKelas); 
 		})
-		$('select').on('change',function (e) {
-			var url = `${url_api}/pendaftar/mahasiswa?program_studi=${$('#program_studi').val()}&status=${$('#status').val()}&kelas=${$('#kelas').val()}`;
-			dt.ajax.url(url).load();
-		})
+		// $('select').on('change',function (e) {
+		// 	var url = `${url_api}/pendaftar/mahasiswa?program_studi=${$('#program_studi').val()}&status=${$('#status').val()}&kelas=${$('#kelas').val()}`;
+		// 	dt.ajax.url(url).load();
+		// })
 	} );
+
+	function func_centang(e,id_selected,poltek) {
+		$('.centang-pilihan').removeClass('text-success')
+		$('.centang-pilihan').addClass('text-placeholder')
+		$(e).find('.centang-pilihan').removeClass('text-placeholder')
+		$(e).find('.centang-pilihan').addClass('text-success')
+		prodi_selected = id_selected;
+		poltek_selected = poltek;
+	}
+	function func_modal(id_prodi,id_mahasiswa,nim,nama,prodi,ukt_kelompok) {
+		$.ajax({
+			url: url_api+"/keuangan/detail?program_studi="+id_prodi,
+			type: 'get',
+			dataType: 'json',
+			data: {},
+			headers: {},
+			success: function(res) {
+				if (res.status=="success") {
+					$('#id_mahasiswa').val(id_mahasiswa);
+					$('#nama_mahasiswa').text(nama);
+					$('#nomor_mahasiswa').text(nim);
+					$('#prodi_mahasiswa').text(prodi);
+					$('#spi_mahasiswa').text(formatAngka(res.data[0].spi));
+					var html = `
+						<option data-nominal="${res.data[0].kelompok_1}" value="1">Kelompok 1 - ${formatAngka(res.data[0].kelompok_1)}</option>
+						<option data-nominal="${res.data[0].kelompok_2}" value="2">Kelompok 2 - ${formatAngka(res.data[0].kelompok_2)}</option>
+						<option data-nominal="${res.data[0].kelompok_3}" value="3">Kelompok 3 - ${formatAngka(res.data[0].kelompok_3)}</option>
+						<option data-nominal="${res.data[0].kelompok_4}" value="4">Kelompok 4 - ${formatAngka(res.data[0].kelompok_4)}</option>
+						<option data-nominal="${res.data[0].kelompok_5}" value="5">Kelompok 5 - ${formatAngka(res.data[0].kelompok_5)}</option>
+						<option data-nominal="${res.data[0].kelompok_6}" value="6">Kelompok 6 - ${formatAngka(res.data[0].kelompok_6)}</option>
+						<option data-nominal="${res.data[0].kelompok_7}" value="7">Kelompok 7 - ${formatAngka(res.data[0].kelompok_7)}</option>
+						<option data-nominal="${res.data[0].kelompok_8}" value="8">Kelompok 8 - ${formatAngka(res.data[0].kelompok_8)}</option>
+					`
+					$('#kelompok_ukt').append(html);
+						// console.log(index+" == "+res.data.pendaftar.program_studi)
+						// if (index==res.data.pendaftar.program_studi) {
+						// 	console.log("sama")
+						// 	$('#centang_'+row.id).removeClass('text-placeholder');
+						// 	$('#centang_'+row.id).addClass('text-success');
+						// }
+					
+				}
+				$('#konfirmModal').modal('show')
+			}
+		});
+	}
+
+	function func_simpan() {
+		var id_mahasiswa = $('#id_mahasiswa').val()
+		var kelompok_ukt = $('#kelompok_ukt').val()
+		var ukt = $('#kelompok_ukt :selected').data('nominal')
+
+		$.ajax({
+			url: url_api+"/keuangan/set-ukt/"+id_mahasiswa,
+			type: 'put',
+			dataType: 'json',
+			data: {'kelompok_ukt':kelompok_ukt,'ukt':ukt},
+			success: function(res) {
+				console.log(res)
+				if (res.status=="success") {
+					$('#konfirmModal').modal('hide');
+				} else {
+					// alert gagal
+				}
+				
+
+			}
+		});
+	}
+
 	async function getData() {
 		var optProgram,optJurusan,optKelas,optStatus;
 		$.each(dataGlobal['prodi'],function (key,row) {
@@ -156,11 +260,16 @@
 				"aTargets": [6],
 				"mData": null,
 				"mRender": function(data, type, full) {
-					var id = data['nomor'];
-					var text_hapus = data['nama'];
-					var btn_update = `<span class="iconify edit-icon text-primary" onclick='update_btn(${id})' data-icon="bx:bx-edit-alt" ></span>` 
-					var btn_delete = `<span class="iconify delete-icon text-primary" data-icon="bx:bx-trash"  onclick='delete_btn(${id},"mahasiswa","mahasiswa","${text_hapus}")'></span>`; 
-					res = btn_update+" "+btn_delete;
+					
+					var id = data['nomor']
+					var status_sudah = `
+					
+						<span id="btn_${id}" style="cursor:pointer" onclick="func_modal('${data['program_studi']}','${id}','${data['nrp']}','${data['nama']}','${data['prodi']}','${data['ukt_kelompok']}')" data-id="${id}" class="badge btn-info_transparent text-primary">
+							<i class="iconify-inline" data-icon="ant-design:setting-outlined"></i>
+							<span class="text-capitalize text-primary">Setting</span>
+						</span>`
+
+					res = status_sudah;
 					return res;
 				}
 			},

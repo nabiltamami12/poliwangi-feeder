@@ -991,36 +991,34 @@ class AbsensiController extends Controller
         
         $date = Carbon::now()->format('Y-m-d H:i:s');
 
-        $mhs = Abs::select(
+        $mhs = DB::table('mahasiswa')->select(
             'mahasiswa.nomor as mahasiswa',
             'mahasiswa.nrp as nim',
             'mahasiswa.nama',
             'kuliah.dosen',
             'kuliah.nomor as kuliah',
-            DB::raw("GROUP_CONCAT(absensi_mahasiswa.tanggal) as tanggal"),
-            DB::raw("GROUP_CONCAT(absensi_mahasiswa.minggu) as minggu"),
-            DB::raw("GROUP_CONCAT(absensi_mahasiswa.status) as status"),
-            DB::raw("GROUP_CONCAT(absensi_mahasiswa.nomor) as nomor_absensi"),
+            // DB::raw("GROUP_CONCAT(absensi_mahasiswa.tanggal) as tanggal"),
+            // DB::raw("GROUP_CONCAT(absensi_mahasiswa.minggu) as minggu"),
+            // DB::raw("GROUP_CONCAT(absensi_mahasiswa.status) as status"),
+            // DB::raw("GROUP_CONCAT(absensi_mahasiswa.nomor) as nomor_absensi"),
             DB::raw("CONCAT(program.program,' ',program_studi.program_studi) as prodi"),
             'kelas.kode as kelas',
             'matakuliah.matakuliah'
         )
-        ->join('kuliah', 'absensi_mahasiswa.kuliah', '=', 'kuliah.nomor')
+        ->join('kuliah', 'kuliah.kelas', '=', 'mahasiswa.kelas','left')
         ->join('matakuliah', 'kuliah.matakuliah', '=', 'matakuliah.nomor')
         ->join('kelas', 'kuliah.kelas', '=', 'kelas.nomor')
-        ->join('mahasiswa', 'absensi_mahasiswa.mahasiswa', '=', 'mahasiswa.nomor')
         ->join("program_studi","program_studi.nomor", "=", "mahasiswa.program_studi")
         ->join('program', 'program.nomor', '=', 'program_studi.program')
-        ->where('kelas.nomor', $request->kelas)
-        ->where('matakuliah.nomor', $request->matakuliah)
+        ->where('kuliah.kelas', $request->kelas)
+        ->where('kuliah.matakuliah', $request->matakuliah)
         ->where('kuliah.semester', $request->semester)
         ->where('kuliah.tahun', $request->tahun)
         ->groupBy('mahasiswa.nomor')
         ->orderBy('mahasiswa')
         ->orderBy('nama')
-        ->orderBy('minggu')
         ->get();
-        // die(json_encode(DB::getQueryLog()));
+
         $id_kuliah="";
         $id_mahasiswa="";
         $data = [];
@@ -1034,11 +1032,22 @@ class AbsensiController extends Controller
         $arr_check_mhs = [];
         $dosen = "";
         foreach ($mhs as $key => $value) {
+            $kuliah = DB::table('absensi_mahasiswa')->select(
+                DB::raw("GROUP_CONCAT(tanggal) as tanggal"),
+                DB::raw("GROUP_CONCAT(minggu) as minggu"),
+                DB::raw("GROUP_CONCAT(status) as status"),
+                DB::raw("GROUP_CONCAT(nomor) as nomor_absensi"),
+            )
+            ->where('kuliah', $value->kuliah)
+            ->where('mahasiswa', $value->mahasiswa)
+            ->orderBy('minggu')
+            ->first();
+           
             $dosen = $value->dosen;
-            $arr_minggu = explode(",",$value->minggu);
-            $arr_status = explode(',',$value->status);
-            $arr_nomor = explode(',',$value->nomor_absensi);
-            $arr_tanggal = explode(',',$value->tanggal);
+            $arr_minggu = explode(",",$kuliah->minggu);
+            $arr_status = explode(',',$kuliah->status);
+            $arr_nomor = explode(',',$kuliah->nomor_absensi);
+            $arr_tanggal = explode(',',$kuliah->tanggal);
             $data_minggu = [];
             $data_nomor = [];
             $x = 0;
@@ -1078,6 +1087,7 @@ class AbsensiController extends Controller
             $arr_check_mhs[$value->mahasiswa] =$arr_tanggal; 
             array_push($data,$arr);
         }
+        
         $edit_minggu = [];
         $y = 0;
         foreach ($arr_check_minggu as $key => $value) {

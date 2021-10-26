@@ -119,18 +119,7 @@ class UktController extends Controller
 			"error" => $this->err
 		]);
 	}
-
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return \Illuminate\Http\Response
-	 */
-	public function edit($id)
-	{
-		//
-	}
-
+	
 	/**
 	 * Update the specified resource in storage.
 	 *
@@ -210,6 +199,26 @@ class UktController extends Controller
 			"status" => $this->status,
 			"data" => $this->data,
 			"error" => $this->err
+		]);
+	}
+
+	public function set_ukt_mahasiswa(Request $request,$id_mahasiswa)
+	{
+
+		try {
+			$kelompok_ukt = $request->kelompok_ukt;
+			$ukt = $request->ukt;
+
+			$this->data = DB::table('mahasiswa')->where('nomor',$id_mahasiswa)->update(['ukt_kelompok'=>$kelompok_ukt,'ukt'=>$ukt]);
+            $this->status = "success";
+        } catch (QueryException $e) {
+            $this->status = "failed";
+            $this->err = $e;
+        }
+		return response()->json([
+			'status' => $this->status,
+			'data' => $this->data,
+			'error' => $this->err
 		]);
 	}
 }
