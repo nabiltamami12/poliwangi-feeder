@@ -151,6 +151,7 @@ function func_centang(e,id_selected,poltek) {
   poltek_selected = poltek;
 }
 
+
 function func_simpan() {
     var id_pendaftar = $('#id_pendaftar').val();
     
