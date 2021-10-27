@@ -15,7 +15,6 @@ class AlterMahasiswa1 extends Migration
     {
         Schema::table('mahasiswa', function (Blueprint $table) {
             $table->string('ukt_kelompok', '2')->nullable()->default(null);
-            $table->integer('ukt_nominal')->unsigned()->default(0);
         });
     }
 
@@ -28,7 +27,6 @@ class AlterMahasiswa1 extends Migration
     {
         Schema::table('mahasiswa', function (Blueprint $table) {
             $table->dropColumn('ukt_kelompok');
-            $table->dropColumn('ukt_nominal');
         });
     }
 }

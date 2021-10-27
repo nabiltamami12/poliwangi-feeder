@@ -91,7 +91,7 @@
 
             </div>
             <div class="d-flex" onclick="func_centang(this,0,'')" style="cursor:pointer">
-              <i id="" class="iconify centang-pilihan text-placeholder mt-1 mr-3" data-icon="akar-icons:circle-check-fill"></i>
+              <i id="centang_tidak_lolos" class="iconify centang-pilihan text-placeholder mt-1 mr-3" data-icon="akar-icons:circle-check-fill"></i>
               <p class="d-inline-block font-weight-bold">Tidak Lolos</p>
             </div> 
           </div>
@@ -162,19 +162,8 @@ function func_simpan() {
         success: function(res) {
             console.log(res)
             if (res.status=="success") {
-                // if ($('#btn_'+id).hasClass('badge-danger')) {
-                //     $('#btn_'+id).html('');
-                //     $('#btn_'+id).removeClass('badge-danger')
-                //     $('#btn_'+id).addClass('badge-success')
-                //     $('#btn_'+id).append(`<i class="iconify-inline mr-1" data-icon="akar-icons:circle-check-fill"></i>
-                //                 <span class="text-capitalize" style="color:#fff">Diterima</span>`);
-                // }else{
-                //     $('#btn_'+id).html('');
-                //     $('#btn_'+id).removeClass('badge-success')
-                //     $('#btn_'+id).addClass('badge-danger')
-                //     $('#btn_'+id).append(`<i class="iconify-inline mr-1" data-icon="bi:x-circle-fill"></i>
-                //                 <span class="text-capitalize" style="color:#fff">Tidak Diterima</span>`);
-                // }           
+                $('#konfirmModal').modal('hide');
+                dt.ajax.reload();    
             } else {
                 // alert gagal
             }
@@ -205,20 +194,25 @@ function func_modal(id) {
               <p class="d-inline-block font-weight-bold">Politeknik Neger Banyuwangi - ${row.prodi}</p>
             </div>`
           $('#list_poliwangi').append(html);
-          if (row.program_studi==res.data.pendaftar.program_studi) {
+          console.log(row.id+" == "+res.data.pendaftar.program_studi)
+          if (row.id==res.data.pendaftar.program_studi) {
             console.log("sama")
-            $('.centang-pilihan').removeClass('text-placeholder');
-            $('.centang-pilihan').addClass('text-success');
+            $('#centang_'+row.id).removeClass('text-placeholder');
+            $('#centang_'+row.id).addClass('text-success');
           }
         })
 
         if (res.data.poltek_lain != null) {
           var html = `  
-            <div class="d-flex" onclick="func_centang(this,${row.id},'poltek')" style="cursor:pointer">
-              <i id="centang_${row.id}" class="iconify centang-pilihan text-placeholder mt-1 mr-3" data-icon="akar-icons:circle-check-fill"></i>
+            <div class="d-flex" onclick="func_centang(this,${res.data.poltek_lain.id},'poltek')" style="cursor:pointer">
+              <i id="centang_${res.data.poltek_lain.id}" class="iconify centang-pilihan text-placeholder mt-1 mr-3" data-icon="akar-icons:circle-check-fill"></i>
               <p class="d-inline-block font-weight-bold">${res.data.poltek_lain.politeknik} - ${res.data.poltek_lain.prodi}</p>
             </div>`
           $('#list_poltek').append(html);
+        }
+        if (res.data.pendaftar.status=="T") {
+          $('#centang_tidak_lolos').removeClass('text-placeholder')
+          $('#centang_tidak_lolos').addClass('text-success')
         }
       }
       $('#konfirmModal').modal('show')
@@ -276,10 +270,7 @@ dt_opt = {
           "mData": null,
           "mRender": function(data, type, full) {
             var id = data['nomor']
-            // var status_belum = `<span id="btn_${id}" data-id="${id}" class="btn-pendaftar badge badge-danger">
-            //         <i class="iconify-inline mr-1" data-icon="bi:x-circle-fill"></i>
-            //         <span class="text-capitalize" style="color:#fff">Tidak Diterima</span>
-            //       </span>`
+            
             var status_sudah = `
             
                   <span id="btn_${id}" onclick="func_modal(${id})" data-id="${id}" class="badge btn-info_transparent text-primary">
@@ -288,42 +279,7 @@ dt_opt = {
                   </span>`
 
             res = status_sudah;
-            // res = (data['is_lunas']==1)?status_sudah:status_belum;
             
-            // $('#btn_'+id).on('click',function (e) {
-            // })
-            // $('#btn_'+id).on('click',function (e) {
-            //     var id_pendaftar = $(this).data('id');
-
-            //     $.ajax({
-            //         url: url_api+"/admin/pendaftar/verifikasi/"+id_pendaftar,
-            //         type: 'put',
-            //         dataType: 'json',
-            //         data: {},
-            //         success: function(res) {
-            //             console.log(res)
-            //             if (res.status=="success") {
-            //                 if ($('#btn_'+id).hasClass('badge-danger')) {
-            //                     $('#btn_'+id).html('');
-            //                     $('#btn_'+id).removeClass('badge-danger')
-            //                     $('#btn_'+id).addClass('badge-success')
-            //                     $('#btn_'+id).append(`<i class="iconify-inline mr-1" data-icon="akar-icons:circle-check-fill"></i>
-            //                                 <span class="text-capitalize" style="color:#fff">Diterima</span>`);
-            //                 }else{
-            //                     $('#btn_'+id).html('');
-            //                     $('#btn_'+id).removeClass('badge-success')
-            //                     $('#btn_'+id).addClass('badge-danger')
-            //                     $('#btn_'+id).append(`<i class="iconify-inline mr-1" data-icon="bi:x-circle-fill"></i>
-            //                                 <span class="text-capitalize" style="color:#fff">Tidak Diterima</span>`);
-            //                 }           
-            //             } else {
-            //                 // alert gagal
-            //             }
-                        
-
-            //         }
-            //     });
-            // })
             return res;
           }
         },

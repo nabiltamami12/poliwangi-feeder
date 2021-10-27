@@ -173,6 +173,8 @@ Route::prefix('v1')->group(function () {
     // ABSENSI DOSEN
     Route::get('/absensi-dosen/rekap', [Ctr\AbsensiDosenController::class, 'list_data']);
     Route::get('/absensi-dosen/list-tahun', [Ctr\AbsensiDosenController::class, 'tahun_kelas_mengajar']);
+    Route::get('/absensi-dosen/rekap-presensi/{id_dosen}', [Ctr\AbsensiDosenController::class, 'pertemuan_dosen']);
+    Route::post('/absensi-dosen/simpan', [Ctr\AbsensiDosenController::class, 'simpan']);
 
     // KELAS MENGAJAR
     Route::post('/kelas-mengajar', [Ctr\AbsensiController::class, 'kelas_mengajar']);
@@ -235,6 +237,7 @@ Route::prefix('v1')->group(function () {
     Route::put('/keuangan/rekap_ukt/{id}', [Ctr\UktController::class, 'update']);
     Route::delete('/keuangan/rekap_ukt/{id}', [Ctr\UktController::class, 'destroy']);
     Route::get('/keuangan/detail', [Ctr\UktController::class, 'details']);
+    Route::put('/keuangan/set-ukt/{id}', [Ctr\UktController::class, 'set_ukt_mahasiswa']);
 
 
     // SPI Mandiri

@@ -86,7 +86,7 @@ async function getGlobalData(id) {
     function formatAngka(number) {
         var number = Intl.NumberFormat("id-ID", { style : 'currency', currency:'IDR', minimumFractionDigits: 0 }).format(number);
         if (isNaN(number)) {
-            return number;
+            return number+",-";
         }else{
             return 0;
         }
