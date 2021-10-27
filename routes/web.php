@@ -212,6 +212,12 @@ Route::prefix('admin')->middleware(['aksesuntuk:admin'])->group(function () {
             "title" => "admin-mahasiswa",
         ]);
     });
+    Route::get('/mahasiswa/cu/{id}', function ($id) {
+        return view('akademik.masterData/cumahasiswa', [
+            "id" => $id,
+            "title" => "akademik-master"
+        ]);
+    });
 
     Route::prefix('master')->group(function () {
         Route::get('/dataperiode', function () {

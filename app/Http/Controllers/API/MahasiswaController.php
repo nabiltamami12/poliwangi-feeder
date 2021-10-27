@@ -4,7 +4,8 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Mahasiswa as Mhs;
+use App\Models\Mahasiswa;
+use App\Models\Datatables\MahasiswaDatatable;
 use App\Models\Nilai;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
@@ -27,7 +28,6 @@ class MahasiswaController extends Controller
 		array_push($where,['m.status','=',$request->status]);
 		
 		try {
-		 
 			$data = DB::table('mahasiswa as m')
 			->select('m.nomor','m.nrp','m.nama','m.tgllahir','m.notelp','m.email',)
 			->join('kelas as k','m.kelas','=','k.nomor','left')
@@ -49,32 +49,45 @@ class MahasiswaController extends Controller
 
 	public function index_lama(Request $request)
 	{
-		
-		DB::enableQueryLog();
-		$data = $request->all();
-		$where = [];
-		if ( isset($request->program) ) {
-			array_push($where,['k.program','=',$request->program]);
-		}
-		if ( isset($request->jurusan) ) {
-			array_push($where,['k.jurusan','=',$request->jurusan]);
-		}
-		if ( isset($request->kelas) ) {
-			array_push($where,['k.kelas','=',$request->kelas]);
-		}
-		array_push($where,['m.status','=',$request->status]);
 		try {
-		 
-			$data = DB::table('mahasiswa as m')
-			->select('m.nomor','m.nrp','m.nama','m.tgllahir','m.notelp','m.email',)
-			->join('kelas_old as k','m.kelas','=','k.nomor','left')
-			->join('program_old as p','k.program','=','p.nomor','left')
-			->join('jurusan_old as j','k.jurusan','=','j.nomor')
-			->where($where)
-			->get();
+			DB::enableQueryLog();
+			$data = $request->all();
+			$where = [];
+			if ( isset($request->program) ) {
+				array_push($where,['k.program','=',$request->program]);
+			}
+			if ( isset($request->jurusan) ) {
+				array_push($where,['k.jurusan','=',$request->jurusan]);
+			}
+			if ( isset($request->kelas) ) {
+				array_push($where,['k.kelas','=',$request->kelas]);
+			}
+			array_push($where,['m.status','=',$request->status]);
 
-			$this->data = $data;
-			$this->status = "success";
+			$obj = new MahasiswaDatatable($where);
+			$lists = $obj->get_datatables();
+			$data = [];
+			$no = $request->input("start");
+			foreach ($lists as $list) {
+				$no++;
+				$row = [];
+				$row[] = $no;
+				$row[] = $list->nrp;
+				$row[] = $list->nama;
+				$row[] = $list->tgllahir;
+				$row[] = $list->notelp;
+				$row[] = $list->email;
+				$row[] = '<span class="iconify edit-icon text-primary" onclick="update_btn('.$list->nomor.')" data-icon="bx:bx-edit-alt" ></span> <span class="iconify delete-icon text-primary" data-icon="bx:bx-trash"  onclick="delete_btn('.$list->nomor.',\'mahasiswa\',\'mahasiswa\',\''.$list->nama.'\')"></span>';
+				$data[] = $row;
+			}
+			return [
+				"draw" => $request->input('draw'),
+				"recordsTotal" => $obj->count_all_datatables(),
+				"recordsFiltered" => $obj->count_filtered_datatables(),
+				"data" => $data,
+				"status" => "success",
+				"error" => $this->error
+			];
 		} catch (QueryException $e) {
 			$this->status = "failed";
 			$this->error = $e;
@@ -104,7 +117,7 @@ class MahasiswaController extends Controller
 			$this->error = $validated->errors();
 		} else {
 			try {
-				$data = Mhs::create($data);
+				$data = Mahasiswa::create($data);
 				$this->data = $data;
 				$this->status = "success";
 			} catch (QueryException $e) {
@@ -123,7 +136,7 @@ class MahasiswaController extends Controller
 	public function show($id)
 	{
 		try {
-			$data = Mhs::where("nomor", $id)->get();
+			$data = Mahasiswa::where("nomor", $id)->get();
 			$this->data = $data;
 			$this->status = "success";
 		} catch (QueryException $e) {
@@ -139,11 +152,11 @@ class MahasiswaController extends Controller
 
 	public function update(Request $request, $id)
 	{
-		$check = Mhs::where('nomor', $id);
+		$check = Mahasiswa::where('nomor', $id);
 		$data = $request->all();
 
 		$validate = Validator::make($data, [
-		 
+
 		]);
 
 		if ($validate->fails()) {
@@ -173,7 +186,7 @@ class MahasiswaController extends Controller
 	public function destroy($id)
 	{
 		try {
-			$check = Mhs::where('NOMOR', $id);
+			$check = Mahasiswa::where('NOMOR', $id);
 
 			if ($check) {
 				$this->status = "success";
@@ -229,7 +242,7 @@ class MahasiswaController extends Controller
 	public function by_nim($nim)
 	{
 		try {
-			$data = Mhs::where("nrp", $nim)->first();
+			$data = Mahasiswa::where("nrp", $nim)->first();
 			$this->data = $data;
 			$this->status = "success";
 		} catch (QueryException $e) {
@@ -250,12 +263,12 @@ class MahasiswaController extends Controller
 			$page = $req->input('page') ?? 1;
 			$limit = 15;
 			$offset = ($page - 1) * $limit;
-			$obj = Mhs::select(DB::raw('nomor as id, CONCAT( nrp," (",nama,")" ) as text'))
-				->where('nrp', 'like', '%'.$q.'%')
-				->offset($offset)
-				->limit($limit)
-				->get();
-			$obj_count = Mhs::where('nrp', 'like', '%'.$q.'%')->count();
+			$obj = Mahasiswa::select(DB::raw('nomor as id, CONCAT( nrp," (",nama,")" ) as text'))
+			->where('nrp', 'like', '%'.$q.'%')
+			->offset($offset)
+			->limit($limit)
+			->get();
+			$obj_count = Mahasiswa::where('nrp', 'like', '%'.$q.'%')->count();
 			$this->data = array('items' => $obj, 'total_count' => $obj_count);
 			$this->status = "success";
 		} catch (QueryException $e) {
