@@ -1,13 +1,21 @@
 @extends('layouts.mainMaba')
 
 @section('content')
+<style>
+  .text-status{
+    text-align:center;
+    font-style:italic;
+    color:red;
+    font-weight:400;
+  }
+</style>
 <!-- Header -->
 <header class="header"></header>
 
 <!-- Page content -->
 <section class="page-content container-fluid" id="dashboard_maba">
   <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-12">
       <div id="pengumuman" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner shadow">
           <div class="carousel-item active" data-interval="2000">
@@ -16,7 +24,7 @@
         </div>
       </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-6">
       <div class="card shadow padding--medium card_presensi mt-0 mt-md-4">
         <div class="card-header p-0">
           <div class="row align-items-center">
@@ -35,6 +43,29 @@
           </div>
         </div>
           <button type="button" onclick="func_verifikasi()" class="btn btn-success w-100 mt-4 rounded-sm btn-no-jadwal">Verifikasi Data</button>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card shadow padding--medium card_presensi mt-0 mt-md-4">
+        <div class="card-header p-0">
+          <div class="row align-items-center">
+            <div class="col">
+              <h3 class="mb-0">Status Penerimaan</h3>
+            </div>
+          </div>
+          <hr class="my-4">
+        </div>
+        <div id="card_presensi" class="card-body p-0">
+          <p class="text-status">Sedang Dalam Proses</p>
+          <div id="info_penerimaan" hidden>
+            <h6 class="mb-0 mb-2">Diterima Di</h6>
+            <h5 class="mb-0 mb-3" id="poltek_pilihan"></h5>
+            <h6 class="mb-0 mb-2">Pada Program Studi</h6>
+            <h5 class="mb-0 mb-3" id="prodi_pilihan"></h5>
+            <h6 class="mb-0 mb-2">Status</h6>
+            <h5 class="mb-0 mb-3" id="status_pilihan"></h5>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -81,6 +112,16 @@ function getDashboard() {
               <h5 class="mb-0 mt-2" id="prodi"><span style="font-weight:700;">${res.data.poltek_lain.politeknik}</span></h5>
               <h5 class="mb-0 mt-2" id="prodi">${res.data.poltek_lain.prodi}</h5>`
           $('#list_poltek').append(html);
+        }
+        if (res.data.info.status!=null) {
+          if (res.data.info.status=="T") {
+            $('#info_penerimaan').attr('hidden',false);
+            $('.text-status').attr('hidden',true);
+            $('#poltek_pilihan').text('-')
+            $('#prodi_pilihan').text('-')
+            $('#status_pilihan').text('Tidak Lolos')
+            $('#status_pilihan').addClass('text-danger')
+          }
         }
       }
     }
