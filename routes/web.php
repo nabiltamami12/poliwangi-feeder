@@ -555,7 +555,7 @@ Route::prefix('admin')->middleware(['aksesuntuk:admin'])->group(function () {
 
     Route::prefix('pmb')->group(function () {
         Route::get('/datapendaftar', function () {
-            return view('admin.pmb.dataPendaftar', [
+            return view('admin.pmb.datapendaftar', [
                 "title" => "admin-pmb",
             ]);
         });
