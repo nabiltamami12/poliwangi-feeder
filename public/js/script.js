@@ -59,27 +59,28 @@ function _load_datatable(){
 			url: dt_url,
 			type: 'GET',
 			data: {},
+			...dt_src,
 			headers: {
 				"Authorization": window.localStorage.getItem('token')
 			}
 		},
 		...dt_opt,
-			// "dom": 'lfrtip',
-			"language": {
-				"paginate": {
-					"next": 'Next',
-					"previous": 'Previous'
-				},
-				"processing": "Proses ...",
-				"emptyTable": "Tidak ada data dalam tabel",
-				"info": "Menampilkan _START_ sampai _END_ dari _TOTAL_ total data",
-				"infoEmpty": "Menampilkan 0 sampai 0 dari 0 total data",
-				"infoFiltered": "(difilter dari _MAX_ total)",
-				"lengthMenu": "_MENU_ Data per halaman",
-				"search": "",
-				"searchPlaceholder": "Pencarian ..."
-			}
-		});
+		// "dom": 'lfrtip',
+		"language": {
+			"paginate": {
+				"next": 'Next',
+				"previous": 'Previous'
+			},
+			"processing": "Proses ...",
+			"emptyTable": "Tidak ada data dalam tabel",
+			"info": "Menampilkan _START_ sampai _END_ dari _TOTAL_ total data",
+			"infoEmpty": "Menampilkan 0 sampai 0 dari 0 total data",
+			"infoFiltered": "(difilter dari _MAX_ total)",
+			"lengthMenu": "_MENU_ Data per halaman",
+			"search": "",
+			"searchPlaceholder": "Pencarian ..."
+		}
+	});
 }
 
 moment.locale('id');
