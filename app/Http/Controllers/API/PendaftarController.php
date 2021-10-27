@@ -64,6 +64,7 @@ class PendaftarController extends Controller
 			$jurusan_pilihan = DB::table('jurusan_pilihan')->where('id_pendaftar',$id)->orderBy('urutan')->get();
 			$arr_poliwangi = [];
 			$poltek_lain = null;
+			$arr_info=[];
 			foreach ($jurusan_pilihan as $key => $value) {
 				if ($value->jenis=="poliwangi") {
 					$prodi = DB::table('program_studi as ps')
@@ -80,7 +81,28 @@ class PendaftarController extends Controller
 					->first();
 				}	
 			}
-			$this->data = ['poliwangi'=>$arr_poliwangi,'poltek_lain'=>$poltek_lain];
+			$info = DB::table('pendaftar')->select('status','program_studi','program_studi_luar')->where('nomor',$id)->first();
+			array_push($arr_info,$info);
+			if ($info->program_studi != null) {
+				$poltek = "Politeknik Negeri Banyuwangi";
+				$prodi = DB::table('program_studi as ps')
+				->select(DB::raw('CONCAT(p.program," ",ps.program_studi) as prodi'))
+				->join('program as p','p.nomor','=','ps.program')
+				->where('ps.nomor',$info->program_studi)
+				->first();
+				$arr = [
+					'politeknik' => $poltek,
+					'prodi' => $prodi->prodi
+				];
+			}else{
+				$arr = DB::table('politeknik as p')
+				->select('p.politeknik',DB::raw('CONCAT(pj.jenjang," ",pj.jurusan) as prodi'))
+				->join('politeknik_jurusan as pj','p.id','=','pj.id_politeknik')
+				->where('pj.id',$info->program_studi_luar)
+				->first();
+			}
+			array_push($arr_info,$arr);
+			$this->data = ['info'=>$info,'poliwangi'=>$arr_poliwangi,'poltek_lain'=>$poltek_lain];
 			$this->status = "success";
 		} catch (QueryException $e) {
 			$this->status = "failed";
