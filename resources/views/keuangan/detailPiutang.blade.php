@@ -57,6 +57,7 @@
               <div class="form-group row mb-0">
                 <label for="status_piutang">Status Piutang</label>
                 <select class="form-control" id="status_piutang" name="status_piutang">
+                  <option>Pending</option>
                   <option>Lancar</option>
                   <option>Kurang Lancar</option>
                   <option>Tidak Lancar</option>
@@ -68,6 +69,18 @@
           <div class="form-row daftar_cicilan"></div>
           <hr class="my-4">
           <button type="submit" class="btn btn-primary w-100 simpanData-btn ">Simpan</button>
+          <div class="form-row mt-3 riwayat_cicilan">
+            <h3>Riwayat Cicilan</h3>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Nominal</th><th>Tanggal</th><th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+              </tbody>
+            </table>
+          </div>
         </form>
 
       </div>
@@ -76,9 +89,11 @@
 </section>
 <script>
   var ukt = 0
+  var cicilan_belum_lunas = 0
   var id_mahasiswa = ''
   var id_piutang = '{{$id}}'
-  $(document).ready(function() {
+  var isset_cicilan = false
+  $(function(){
     $.ajax({
       url: url_api+"/keuangan/detail-piutang/{{$id}}",
       dataType: 'json',
@@ -88,14 +103,17 @@
         loading('show')
       },
       success: function(res){
-        $('#nim').text(res.data[0].nim)
-        $('#nama').text(res.data[0].nama)
-        $('#ukt').text(formatAngka(res.data[0].ukt))
-        ukt = parseInt(res.data[0].ukt)
-        id_mahasiswa = res.data[0].id_mahasiswa
-        list_cicilan = res.data[0].cicilan
+        $('#nim').text(res.data.nim)
+        $('#nama').text(res.data.nama)
+        $('#ukt').text(formatAngka(res.data.ukt))
+        $('#status_piutang').val(res.data.status_piutang)
+        ukt = parseInt(res.data.ukt)
+        id_mahasiswa = res.data.id_mahasiswa
+        list_cicilan = res.data.cicilan
         $('.daftar_cicilan').html('')
         for (var i = 1; i <= list_cicilan.length; i++) {
+          isset_cicilan = true
+          $("#jumlah_cicilan").prop('disabled', true)
           $('.daftar_cicilan').append(get_list_cicilan(i, true))
         }
         for (var i = 0; i < list_cicilan.length; i++) {
@@ -105,7 +123,29 @@
           var aa = newDate1.getFullYear() +"-" + (mm < 10? "0":"") +mm +"-" + (dd < 10? "0":"") + dd;
           $($("[name='cicilan[]']")[i]).val(list_cicilan[i].nominal)
           $($("[name='jatuh_tempo[]']")[i]).val(aa)
+          $($("[name='idkp[]']")[i]).val(list_cicilan[i].id)
+          $($("[name='cicilan[]']")[i]).prop('disabled', true)
+          if (list_cicilan[i].status == 1) {
+            $($("[name='jatuh_tempo[]']")[i]).prop('disabled', true)
+            $($("[name='idkp[]']")[i]).prop('disabled', true)
+            $(".status_bayar"+i).text('Lunas')
+          }
         }
+        for (var i = 0; i < res.data.riwayat.length; i++) {
+          res.data.riwayat[i]
+          list_riwayat_cicilan = res.data.riwayat[i].cicilan
+          for (var j = 0; j < list_riwayat_cicilan.length; j++) {
+            $(".riwayat_cicilan table tbody").append(`<tr><td>`+formatAngka(list_riwayat_cicilan[j].nominal)+`</td><td>`+list_riwayat_cicilan[j].tanggal+`</td><td>`+(list_riwayat_cicilan[j].status == 1 ? 'Lunas' : 'Belum Lunas')+`</td></tr>`)
+            if (list_riwayat_cicilan[j].status != '1') {
+              cicilan_belum_lunas+=parseInt(list_riwayat_cicilan[j].nominal)
+            }
+          }
+        }
+        ukt += cicilan_belum_lunas
+        if (cicilan_belum_lunas > 0) {
+          $(".riwayat_cicilan h3").text("Riwayat Cicilan (Belum Lunas: "+formatAngka(cicilan_belum_lunas)+")")
+        }
+        $('.number-format').number( true);
         loading('hide')
       }
     });
@@ -119,16 +159,16 @@
       status = `
       <div class="col-sm-`+col+` col-12">
         <div class="form-group row mb-0">
-          <label>Status Bayar</label>
-          <p></p>
+          <span class="status_bayar`+(urutan-1)+` mt-5">Belum Lunas</span>
         </div>
       </div>`
     }
     return `
+    <input type="hidden" name="idkp[]">
       <div class="col-sm-`+col+` col-12">
         <div class="form-group form-group_nominal row mb-0">
           <label>Nominal Cicilan ke-`+urutan+`</label>
-          <input type="number" class="form-control text-right input_field" name="cicilan[]" placeholder="0" required>
+          <input type="text" class="form-control text-right input_field number-format" name="cicilan[]" placeholder="0" required>
         </div>
       </div>
       <div class="col-sm-`+col+` col-12">
@@ -144,6 +184,7 @@
     for (var i = 1; i <= jumlah_cicilan; i++) {
       $('.daftar_cicilan').append(get_list_cicilan(i))
     }
+    $('.number-format').number( true);
   })
 
   $("form").submit(function(e) {
@@ -152,8 +193,8 @@
     $.each($('[name*="cicilan"]'), function( index, value ) {
       total_cicilan+=parseInt(value.value)
     });
-    if (total_cicilan != ukt) {
-      alert('Total cicilan tidak sama dengan UKT')
+    if (total_cicilan != ukt && !isset_cicilan) {
+      alert('Total cicilan tidak sama dengan UKT + Cicilan Belum Lunas')
       return false
     }
     var form_data = new FormData(this);
@@ -171,7 +212,7 @@
         loading('show')
       },
       success: function(res){
-        // console.log(res)
+        location.reload()
         loading('hide')
       }
     });
