@@ -427,6 +427,39 @@ Route::prefix('admin')->middleware(['aksesuntuk:admin'])->group(function () {
         });
     });
 
+    Route::prefix('kepegawaian')->group(function () {
+        //route pegawai
+        Route::get('/dataPegawai', function () {
+            return view('admin.masterKepegawaian.pegawai.index', [
+                "title" => "akademik-kepegawaian",
+            ]);
+        });
+        //route unit
+        Route::get('/dataUnit', function () {
+            return view('admin.masterKepegawaian.unit.index', [
+                "title" => "akademik-kepegawaian",
+            ]);
+        });
+        //route jabatan struktural
+        Route::get('/dataJabatanStruktural', function () {
+            return view('admin.masterKepegawaian.jabatanStruktural.index', [
+                "title" => "akademik-kepegawaian",
+            ]);
+        });
+        //route staff
+        Route::get('/dataStaff', function () {
+            return view('admin.masterKepegawaian.staff.index', [
+                "title" => "akademik-kepegawaian",
+            ]);
+        });
+        //route pangkat
+        Route::get('/dataPangkat', function () {
+            return view('admin.masterKepegawaian.pangkat.index', [
+                "title" => "akademik-kepegawaian",
+            ]);
+        });
+    });
+
 
     Route::prefix('kuliah')->group(function () {
         
