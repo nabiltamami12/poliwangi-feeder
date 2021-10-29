@@ -27,7 +27,9 @@
             <thead class="table-header">
               <tr>
                 <th scope="col">NO</th>
+                <th scope="col">Pegawai</th>
                 <th scope="col">Unit</th>
+                <th scope="col">Kepala</th>
                 <th scope="col">AKSI</th>
               </tr>
             </thead>
