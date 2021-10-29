@@ -249,7 +249,7 @@ Route::prefix('v1')->group(function () {
     //berkas
     Route::get('/berkas/{id}', [Ctr\BerkasController::class, 'show']);
     Route::post('/berkas', [Ctr\BerkasController::class, 'store']);
-    Route::post('/berkas/{id}', [Ctr\BerkasController::class, 'update']);
+    Route::post('/berkas_update', [Ctr\BerkasController::class, 'update']);
     Route::delete('/berkas/{id}', [Ctr\BerkasController::class, 'destroy']);
 
     // Generate Nomor VA <!-- Gunakan route Post --!>

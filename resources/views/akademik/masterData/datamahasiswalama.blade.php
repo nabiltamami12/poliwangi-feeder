@@ -32,13 +32,19 @@
 								
 							</select>
 						</div>
-						<div class="col-md-6 form-group">
-							<label for="kelas">Kelas</label>
-							<select class="form-control" id="kelas" name="kelas">
+						<div class="col-md-4 form-group">
+							<label for="jenjang-pendidikan">Tahun</label>
+							<select class="form-control" id="jurusan" name="jurusan">
 								
 							</select>
 						</div>
-						<div class="col-md-6 form-group mt-3 mt-md-0">
+						<div class="col-md-4 form-group">
+							<label for="jenjang-pendidikan">Semester</label>
+							<select class="form-control" id="jurusan" name="jurusan">
+								
+							</select>
+						</div>
+						<div class="col-md-4 form-group mt-3 mt-md-0">
 							<label for="status-mahasiswa">Status Mahasiswa</label>
 							<select class="form-control" id="status" name="status">
 								

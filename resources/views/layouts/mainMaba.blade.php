@@ -23,6 +23,7 @@
     href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css"
     type="text/css" />
   <!-- Custom CSS -->
+  <link rel="stylesheet" href="{{ asset('assets/core.css') }}">
   <link href="{{ asset('css/main.css') }}" rel="stylesheet">
   <script src="{{ url('argon') }}/assets/vendor/jquery/dist/jquery.min.js"></script>
   <script type="text/javascript">
@@ -52,6 +53,9 @@
 
 
 <body>
+  <div class="loaderScreen-wrapper" style="display: none;">
+    <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+  </div>
   @include('partials.sidebarMaba')
 
   <!-- Main content -->
