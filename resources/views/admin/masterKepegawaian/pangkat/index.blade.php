@@ -67,6 +67,31 @@
       </div>
     </div>
 </div>
+
+<!-- Modal Add -->
+<div class="modal fade" id="modalAdd" tabindex="-1" aria-labelledby="modalAddlLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalAddlLabel">Tambah Pangkat</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="#" method="POST">
+          @csrf
+          <label for="">Nama Pangkat</label>
+          <input type="text" class="form-control" name="nama_pangkat" placeholder="Nama pangkat" required>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 @endsection
 
 @section('js')
@@ -129,6 +154,10 @@ dt_opt = {
     },
   ]
 };
+
+function add_btn() {
+  $('#modalAdd').modal();
+}
 
 function change_status(id) {
     $('#konfirmModal').modal('show');
