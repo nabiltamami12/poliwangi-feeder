@@ -23,19 +23,19 @@
 
         <form id="form_cicilan" class="form-input">
           <input type="hidden" id="id" name="id" value="{{$id}}">
-          <div class="form-row">
-            <div class="col-sm-6 col-12">
+          <div class="form-row mt-0">
+            <div class="col-sm-4 col-12">
               <div class="form-group row mb-0">
                 <label>NIM: <b id="nim"></b></label>
 
               </div>
             </div>
-            <div class="col-sm-6 col-12">
+            <div class="col-sm-4 col-12">
               <div class="form-group row mb-0">
                 <label>Nama: <b id="nama"></b></label>
               </div>
             </div>
-            <div class="col-sm-6 col-12">
+            <div class="col-sm-4 col-12">
               <div class="form-group row mb-0">
                 <label>UKT: <b id="ukt"></b></label>
               </div>
@@ -53,7 +53,7 @@
                 </select>
               </div>
             </div>
-            <div class="col-sm-12 col-12">
+            <div class="col-sm-6 col-12">
               <div class="form-group row mb-0">
                 <label for="status_piutang">Status Piutang</label>
                 <select class="form-control" id="status_piutang" name="status_piutang">
@@ -145,7 +145,7 @@
         if (cicilan_belum_lunas > 0) {
           $(".riwayat_cicilan h3").text("Riwayat Cicilan (Belum Lunas: "+formatAngka(cicilan_belum_lunas)+")")
         }
-        $('.number-format').number( true);
+        // $('.number-format').number( true);
         loading('hide')
       }
     });
@@ -173,7 +173,7 @@
       </div>
       <div class="col-sm-`+col+` col-12">
         <div class="form-group row mb-0">
-          <label>Taggal Jatuh Tempo</label>
+          <label>Tanggal Jatuh Tempo</label>
           <input type="date" class="form-control" name="jatuh_tempo[]" required>
         </div>
       </div>`+status
@@ -184,7 +184,7 @@
     for (var i = 1; i <= jumlah_cicilan; i++) {
       $('.daftar_cicilan').append(get_list_cicilan(i))
     }
-    $('.number-format').number( true);
+    // $('.number-format').number( true);
   })
 
   $("form").submit(function(e) {

@@ -148,7 +148,7 @@
               </button>
               <a href="javascript:masukkanMahasiswa()" class="btn btn-primary mt-3 mt-md-0">
                 <i class="iconify-inline mr-1" data-icon="carbon:download-study"></i>
-                Masukkan Mahasiswa
+                Tambah Piutang
               </a>
 
               <!-- <div class="dropdown">
