@@ -344,7 +344,7 @@ class BerkasKeuanganController extends Controller
             $validator = Validator::make(
                 $data,
                 [
-                    'file' => 'required|mimes:doc,docx,pdf,txt|max:2048',
+                    // 'file' => 'required|mimes:doc,docx,pdf,txt|max:2048',
                     'id_mahasiswa' => 'required'
                 ]
             );
@@ -354,19 +354,19 @@ class BerkasKeuanganController extends Controller
             }
             $periode = Periode::select('tahun', 'semester')->orderByDesc('status')->orderByDesc('tahun')->limit(1)->get();
             $current_data = BK::select('id')->where('id_mahasiswa','=',$data['id_mahasiswa'])->where('tahun','=',$periode[0]->tahun)->where('semester','=',$periode[0]->semester)->limit(1)->get();
-            if (!isset($current_data[0]) && $request->hasFile('file')) {
-                $path_pengajuan = $data['id_mahasiswa'].'_'.$periode[0]->tahun.'_'.$request->file->getClientOriginalName();
-                if($request->file->storeAs('piutang', $path_pengajuan)){
+            if (!isset($current_data[0]) /*&& $request->hasFile('file')*/) {
+                // $path_pengajuan = $data['id_mahasiswa'].'_'.$periode[0]->tahun.'_'.$request->file->getClientOriginalName();
+                // if($request->file->storeAs('piutang', $path_pengajuan)){
                     $document = new BK();
-                    $document->path_pengajuan = '/piutang/'.$path_pengajuan;
+                    // $document->path_pengajuan = '/piutang/'.$path_pengajuan;
                     $document->id_mahasiswa = $data['id_mahasiswa'];
                     $document->tahun = $periode[0]->tahun;
                     $document->semester = $periode[0]->semester;
-                    $document->status = "pending";
+                    $document->status = "Pending";
                     $document->save();
                     $this->data = $document;
                     $this->status = "success";
-                }
+                // }
             }
         } catch (QueryException $e) {
             $this->status = "failed";
