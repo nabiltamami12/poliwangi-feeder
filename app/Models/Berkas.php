@@ -14,6 +14,7 @@ class Berkas extends Model
         'id',
         'id_syarat',
         'id_pendaftar',
-        'file'
+        'file',
+        'status'
     ];
 }
