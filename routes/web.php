@@ -434,6 +434,14 @@ Route::prefix('admin')->middleware(['aksesuntuk:admin'])->group(function () {
                 "title" => "akademik-kepegawaian",
             ]);
         });
+        Route::get('/dataPegawai/cu/', function () {
+            return view('admin.masterKepegawaian.pegawai.create', [
+                "id" => null,
+                "title" => "akademik-master"
+            ]);
+        });
+
+
         //route unit
         Route::get('/dataUnit', function () {
             return view('admin.masterKepegawaian.unit.index', [

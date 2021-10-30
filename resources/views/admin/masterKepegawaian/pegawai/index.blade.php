@@ -17,7 +17,7 @@
               <h2 class="mb-0">Data Kepegawaian</h2>
             </div>
             <div class="col text-right">
-              <button type="button" onclick="add_btn()" class="btn btn-primary"><i class="iconify-inline mr-1" data-icon='bx:bx-plus-circle'></i> Tambah</button>
+              <a href="{{url('admin/kepegawaian/dataPegawai/cu')}}" class="btn btn-primary"><i class="iconify-inline mr-1" data-icon='bx:bx-plus-circle'></i> Tambah</a>
             </div>
           </div>
         </div>
