@@ -74,7 +74,7 @@
             <table class="table">
               <thead>
                 <tr>
-                  <th>Nominal</th><th>Tanggal</th><th>Status</th>
+                  <th>Nominal</th><th>Tanggal</th><th>Status</th><th>Aksi</th>
                 </tr>
               </thead>
               <tbody>
@@ -135,13 +135,15 @@
           res.data.riwayat[i]
           list_riwayat_cicilan = res.data.riwayat[i].cicilan
           for (var j = 0; j < list_riwayat_cicilan.length; j++) {
-            $(".riwayat_cicilan table tbody").append(`<tr><td>`+formatAngka(list_riwayat_cicilan[j].nominal)+`</td><td>`+list_riwayat_cicilan[j].tanggal+`</td><td>`+(list_riwayat_cicilan[j].status == 1 ? 'Lunas' : 'Belum Lunas')+`</td></tr>`)
+            var aksi_bl = ''
             if (list_riwayat_cicilan[j].status != '1') {
+              aksi_bl = '<button type="button" class="btn btn-secondary btn-sm" style="height: 22px" onclick="simpanBl('+list_riwayat_cicilan[j].id+', \''+list_riwayat_cicilan[j].tanggal+'\')">Simpan</button>'
               cicilan_belum_lunas+=parseInt(list_riwayat_cicilan[j].nominal)
             }
+            $(".riwayat_cicilan table tbody").append(`<tr><td>`+formatAngka(list_riwayat_cicilan[j].nominal)+`</td><td>`+list_riwayat_cicilan[j].tanggal+`</td><td>`+(list_riwayat_cicilan[j].status == 1 ? 'Lunas' : 'Belum Lunas')+`</td><td>`+aksi_bl+`</td></tr>`)
           }
         }
-        ukt += cicilan_belum_lunas
+        // ukt += cicilan_belum_lunas
         if (cicilan_belum_lunas > 0) {
           $(".riwayat_cicilan h3").text("Riwayat Cicilan (Belum Lunas: "+formatAngka(cicilan_belum_lunas)+")")
         }
@@ -193,8 +195,12 @@
     $.each($('[name*="cicilan"]'), function( index, value ) {
       total_cicilan+=parseInt(value.value)
     });
+    if (cicilan_belum_lunas > 0) {
+      alert('Cicilan lama harus dilunasi terlebih dahulu')
+      return false
+    }
     if (total_cicilan != ukt && !isset_cicilan) {
-      alert('Total cicilan tidak sama dengan UKT + Cicilan Belum Lunas')
+      alert('Total cicilan tidak sama dengan UKT')
       return false
     }
     var form_data = new FormData(this);
@@ -217,6 +223,10 @@
       }
     });
   });
+
+  function simpanBl(id, tanggal) {
+    console.log(id, tanggal)
+  }
 
 //   $(document).ready(function() {
 //     var id = "{{$id}}";

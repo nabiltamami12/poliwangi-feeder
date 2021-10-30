@@ -394,11 +394,13 @@ class BerkasKeuanganController extends Controller
                 'id_piutang' => $data['id_piutang'],
             ])->first();
 
-            if ($check==null) {
-                KB::where('id_mahasiswa', '=', $data['id_mahasiswa'])->where('status', '=', null)->update([
-                    'nominal' => 0,
-                    'status' => 1
-                ]);
+            $belum_lunas = KB::where('id_mahasiswa', '=', $data['id_mahasiswa'])->where('status', '=', null)->first();
+
+            if ($check==null && $belum_lunas == null) {
+                // KB::where('id_mahasiswa', '=', $data['id_mahasiswa'])->where('status', '=', null)->update([
+                //     'nominal' => 0,
+                //     'status' => 1
+                // ]);
                 for ($i = 0; $i < $total; $i++) {
                     $other = new KB;
                     $other->id_mahasiswa = $data['id_mahasiswa'];
@@ -413,10 +415,12 @@ class BerkasKeuanganController extends Controller
         }
         if (isset($data['idkp'])) {
             foreach ($data['idkp'] as $key => $idkp) {
-                $kb = KB::find($idkp);
-                $kb->tanggal = $data['jatuh_tempo'][$key];
-                $kb->save();
-                $this->status = 'success';
+                if ($idkp) {
+                    $kb = KB::find($idkp);
+                    $kb->tanggal = $data['jatuh_tempo'][$key];
+                    $kb->save();
+                    $this->status = 'success';
+                }
             }
         }
         return response()->json([
