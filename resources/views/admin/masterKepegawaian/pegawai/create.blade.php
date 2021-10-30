@@ -25,29 +25,29 @@
                     <div class="row">
                         <div class="col-md-6">
                           <div class="form-group">
-                            <label class="form-control-label" for="example2cols1Input">NIP</label>
-                            <input type="text" class="form-control" id="example2cols1Input" placeholder="One of two cols">
+                            <label class="form-control-label" for="nip">NIP</label>
+                            <input type="text" name="nip" class="form-control" id="nip" placeholder="Masukan Nomor Induk Pegawai negeri sipil">
                           </div>
                         </div>
                         <div class="col-md-6">
                           <div class="form-group">
-                            <label class="form-control-label" for="example2cols2Input">NOID</label>
-                            <input type="text" class="form-control" id="example2cols2Input" placeholder="One of two cols">
+                            <label class="form-control-label" for="noid">NOID</label>
+                            <input type="text" class="form-control" id="noid" name="noid" placeholder="Masukan NOID">
                           </div>
                         </div>
                       </div>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="form-control-label" for="example3cols2Input">NPWP</label>
-                                <input type="text" class="form-control" id="example3cols2Input"
+                                <label class="form-control-label" for="npwp">NPWP</label>
+                                <input type="text" class="form-control" name="npwp" id="npwp"
                                     placeholder="One of three cols">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="form-control-label" for="example3cols3Input">NIDN</label>
-                                <input type="text" class="form-control" id="example3cols3Input"
+                                <label class="form-control-label" for="nidn">NIDN</label>
+                                <input type="text" class="form-control" name="nidn" id="nidn"
                                     placeholder="One of three cols">
                             </div>
                         </div>
@@ -55,15 +55,15 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="form-control-label" for="example3cols1Input">Nama Pegawai</label>
-                                <input type="text" class="form-control" id="example3cols1Input"
-                                    placeholder="One of three cols">
+                                <label class="form-control-label" for="nama">Nama Pegawai</label>
+                                <input type="text" class="form-control" id="nama"
+                                    placeholder="Masukan Nama Pegawai">
                             </div>
                         </div>        
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="form-control-label" for="example3cols1Input">NIP lama</label>
-                                <input type="text" class="form-control" id="example3cols1Input"
+                                <label class="form-control-label" for="nip_lama">NIP lama</label>
+                                <input type="text" class="form-control" id="nip_lama" name="nip_lama"
                                     placeholder="One of three cols">
                             </div>
                         </div>                
@@ -71,17 +71,33 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="form-control-label" for="example3cols1Input">Jurusan</label>
-                                <input type="text" class="form-control" id="example3cols1Input"
-                                    placeholder="One of three cols">
+                                <label class="form-control-label" for="jurusan">Jurusan</label>
+                                <input type="text" class="form-control" id="jurusan" name="jurusan"
+                                    placeholder="Masukan Jurusan">
                             </div>
                         </div>
                         
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="form-control-label" for="example3cols3Input">Agama</label>
-                                <input type="text" class="form-control" id="example3cols3Input"
-                                    placeholder="One of three cols">
+                                <label class="form-control-label" for="agama">Agama</label>
+                                <input type="text" class="form-control" id="agama" name="agama"
+                                    placeholder="Contoh : Islam">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-control-label" for="tmp_lahir">Tempat Lahir</label>
+                                <input type="text" class="form-control" id="tmp_lahir" name="tmp_lahir"
+                                    placeholder="Contoh : Jombang">
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-control-label" for="tgl_lahir">Tanggal Lahir</label>
+                                <input type="date" class="form-control" id="tgl_lahir" name="tgl_lahir">
                             </div>
                         </div>
                     </div>
@@ -114,9 +130,9 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="form-control-label" for="example3cols1Input">Nomor Telepon</label>
-                                <input type="text" class="form-control" id="example3cols1Input"
-                                    placeholder="One of three cols">
+                                <label class="form-control-label" for="nomor_tlp">Nomor Telepon</label>
+                                <input type="text" class="form-control" id="nomor_tlp" name="no_tlp"
+                                    placeholder="Contoh : 0865273944375">
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -133,56 +149,56 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="form-control-label" for="example3cols2Input">Shift</label>
-                                <input type="text" class="form-control" id="example3cols2Input"
-                                    placeholder="One of three cols">
+                                <label class="form-control-label" for="shift">Shift</label>
+                                <input type="text" class="form-control" id="shift" name="shift"
+                                    placeholder="Masukan shift">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="form-control-label" for="example3cols3Input">Golongan Darah</label>
-                                <input type="text" class="form-control" id="example3cols3Input"
-                                    placeholder="One of three cols">
+                                <label class="form-control-label" for="golongan_darah">Golongan Darah</label>
+                                <input type="text" class="form-control" id="golongan_darah" name="gol_darah"
+                                    placeholder="Contoh : B+">
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="form-control-label" for="example3cols1Input">Gelar Depan</label>
-                                <input type="text" class="form-control" id="example3cols1Input"
-                                    placeholder="One of three cols">
+                                <label class="form-control-label" for="gelar_dpn">Gelar Depan</label>
+                                <input type="text" class="form-control" id="gelar_dpn" name="gelar_dpn"
+                                    placeholder="Contoh : Prof">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="form-control-label" for="example3cols2Input">Gelar Belakang</label>
-                                <input type="text" class="form-control" id="example3cols2Input"
-                                    placeholder="One of three cols">
+                                <label class="form-control-label" for="gelar_belakang">Gelar Belakang</label>
+                                <input type="text" class="form-control" id="gelar_belakang" name="gelar_blk"
+                                    placeholder="Contoh : Amd">
                             </div>
                         </div>                       
                     </div>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="form-control-label" for="example3cols3Input">Status Kawin</label>
-                                <input type="text" class="form-control" id="example3cols3Input"
-                                    placeholder="One of three cols">
+                                <label class="form-control-label" for="status_kawin">Status Kawin</label>
+                                <input type="text" class="form-control" id="status_kawin" name="status_kawin"
+                                    placeholder="Contoh : Belum Kawin">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="form-control-label" for="example3cols1Input">Kelurahan</label>
-                                <input type="text" class="form-control" id="example3cols1Input"
-                                    placeholder="One of three cols">
+                                <label class="form-control-label" for="kelurahan">Kelurahan</label>
+                                <input type="text" class="form-control" id="kelurahan" name="kelurahan"
+                                    placeholder="Contoh : Rejosopinggir">
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="form-control-label" for="exampleFormControlSelect1">Kecamatan</label>
-                                <select class="form-control" id="exampleFormControlSelect1">
+                                <label class="form-control-label" for="kecamatan">Kecamatan</label>
+                                <select class="form-control" id="kecamatan">
                                   <option>1</option>
                                   <option>2</option>
                                   <option>3</option>
@@ -193,8 +209,8 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="form-control-label" for="exampleFormControlSelect1">Kota</label>
-                                <select class="form-control" id="exampleFormControlSelect1">
+                                <label class="form-control-label" for="kota">Kota</label>
+                                <select class="form-control" id="kota">
                                   <option>1</option>
                                   <option>2</option>
                                   <option>3</option>
@@ -207,8 +223,8 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="form-control-label" for="exampleFormControlSelect1">Provinsi</label>
-                                <select class="form-control" id="exampleFormControlSelect1">
+                                <label class="form-control-label" for="provinsi">Provinsi</label>
+                                <select class="form-control" id="provinsi">
                                     <option>1</option>
                                     <option>2</option>
                                     <option>3</option>
@@ -219,8 +235,8 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="form-control-label" for="example3cols1Input">Askes</label>
-                                <input type="text" class="form-control" id="example3cols1Input"
+                                <label class="form-control-label" for="askes">Askes</label>
+                                <input type="text" class="form-control" id="askes" name="askes"
                                     placeholder="One of three cols">
                             </div>
                         </div>
@@ -229,16 +245,16 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="form-control-label" for="example3cols1Input">Kode Dosen</label>
-                                <input type="text" class="form-control" id="example3cols1Input"
-                                    placeholder="One of three cols">
+                                <label class="form-control-label" for="kode_dsn">Kode Dosen</label>
+                                <input type="text" class="form-control" id="kode_dsn" name="kode_dosen"
+                                    placeholder="Masukan Kode Dosen">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="form-control-label" for="example3cols1Input">Departemen</label>
-                                <input type="text" class="form-control" id="example3cols1Input"
-                                    placeholder="One of three cols">
+                                <label class="form-control-label" for="departemen">Departemen</label>
+                                <input type="text" class="form-control" id="departemen" name="departemen"
+                                    placeholder="Masukan Departemen">
                             </div>
                         </div>
                       
@@ -246,32 +262,32 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="form-control-label" for="example3cols1Input">Praktisi</label>
-                                <input type="text" class="form-control" id="example3cols1Input"
-                                    placeholder="One of three cols">
+                                <label class="form-control-label" for="praktisi">Praktisi</label>
+                                <input type="text" class="form-control" id="praktisi" name="praktisi"
+                                    placeholder="Masukan Praktisi">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="form-control-label" for="example3cols1Input">Nama Instansi</label>
-                                <input type="text" class="form-control" id="example3cols1Input"
-                                    placeholder="One of three cols">
+                                <label class="form-control-label" for="nama_instansi">Nama Instansi</label>
+                                <input type="text" class="form-control" id="nama_instansi" name="nama_instansi"
+                                    placeholder="Masukan nama instansi">
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="form-control-label" for="example3cols1Input">Alamat Instansi</label>
-                                <input type="text" class="form-control" id="example3cols1Input"
-                                    placeholder="One of three cols">
+                                <label class="form-control-label" for="alamat_instansi">Alamat Instansi</label>
+                                <input type="text" class="form-control" id="alamat_instansi" name="alamat_instansi"
+                                    placeholder="Masukan alamat instansi">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="form-control-label" for="example3cols1Input">Pendidikan Terakhir</label>
-                                <input type="text" class="form-control" id="example3cols1Input"
-                                    placeholder="One of three cols">
+                                <label class="form-control-label" for="pendidikan">Pendidikan Terakhir</label>
+                                <input type="text" class="form-control" id="pendidikan" name="pendidikan_terakhir"
+                                    placeholder="Masukan Pendidikan Terakhir">
                             </div>
                         </div>
                     </div>

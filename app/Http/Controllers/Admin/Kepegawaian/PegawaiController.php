@@ -3,7 +3,12 @@
 namespace App\Http\Controllers\Admin\Kepegawaian;
 
 use App\Http\Controllers\Controller;
+use App\Models\Kepegawain\Jabatan_struktural;
+use App\Models\Kepegawain\Kecamatan;
+use App\Models\Kepegawain\Kota;
+use App\Models\Kepegawain\Pangkat;
 use App\Models\Kepegawain\Pegawai;
+use App\Models\Kepegawain\Provinsi;
 use Illuminate\Http\Request;
 
 class PegawaiController extends Controller
@@ -31,7 +36,21 @@ class PegawaiController extends Controller
      */
     public function create()
     {
-        return view('admin.masterKepegawaian.pegawai.create');
+        $kota = Kota::all();
+        $kecamatan = Kecamatan::all();
+        $provinsi = Provinsi::all();
+        $pangkat = Pangkat::all();
+        $jabatan = Jabatan_struktural::all();
+        return view('admin.masterKepegawaian.pegawai.create',[
+                "id" => null,
+                "title" => "akademik-kepegawaian",
+                "kota" => $kota,
+                "kecamatan" => $kecamatan,
+                "provinsi" => $provinsi,
+                "pangkat" => $pangkat,
+                "jabatan" => $jabatan,
+                
+        ]);
     }
 
     /**
