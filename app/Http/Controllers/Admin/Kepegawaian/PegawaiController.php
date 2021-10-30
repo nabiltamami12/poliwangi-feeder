@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Kepegawaian;
 
 use App\Http\Controllers\Controller;
+use App\Models\Kepegawain\Pegawai;
 use Illuminate\Http\Request;
 
 class PegawaiController extends Controller
@@ -14,7 +15,13 @@ class PegawaiController extends Controller
      */
     public function index()
     {
-        //
+        $pegawai = Pegawai::all();
+        return view('admin.masterKepegawaian.pegawai.index',
+        [
+            "title" => "akademik-kepegawaian",
+            'pegawai' => $pegawai
+        ]
+        );
     }
 
     /**
@@ -24,7 +31,7 @@ class PegawaiController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.masterKepegawaian.pegawai.create');
     }
 
     /**
