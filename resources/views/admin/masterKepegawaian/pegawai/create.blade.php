@@ -21,21 +21,59 @@
 
                 <hr class="my-4">
 
-                <form id="form_cu">
+                <form id="form_cu" action="{{route('dataPegawai.store')}}" method="POST">
+                    @csrf
                     <div class="row">
                         <div class="col-md-6">
-                          <div class="form-group">
-                            <label class="form-control-label" for="nip">NIP</label>
-                            <input type="text" name="nip" class="form-control" id="nip" placeholder="Masukan Nomor Induk Pegawai negeri sipil">
-                          </div>
+                            <div class="form-group">
+                                <label class="form-control-label" for="username">Username</label>
+                                <input type="text" name="name" class="form-control" id="username"
+                                    placeholder="Masukan Username">
+                            </div>
                         </div>
                         <div class="col-md-6">
-                          <div class="form-group">
-                            <label class="form-control-label" for="noid">NOID</label>
-                            <input type="text" class="form-control" id="noid" name="noid" placeholder="Masukan NOID">
-                          </div>
+                            <div class="form-group">
+                                <label class="form-control-label" for="email">Email</label>
+                                <input type="email" class="form-control" id="email" name="email"
+                                    placeholder="Masukan Email">
+                            </div>
                         </div>
-                      </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-control-label" for="password">Password</label>
+                                <input type="password" name="password" class="form-control" id="password"
+                                    placeholder="Masukan Password">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-control-label" for="password_confirmation">Konfirmasi
+                                    Password</label>
+                                <input type="password" class="form-control" id="password_confirmation"
+                                    name="password_confirmation" placeholder="Konfirmasi Password">
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="my-4">
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-control-label" for="nip">NIP</label>
+                                <input type="text" name="nip" class="form-control" id="nip"
+                                    placeholder="Masukan Nomor Induk Pegawai negeri sipil">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-control-label" for="noid">NOID</label>
+                                <input type="text" class="form-control" id="noid" name="noid"
+                                    placeholder="Masukan NOID">
+                            </div>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
@@ -56,17 +94,16 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="form-control-label" for="nama">Nama Pegawai</label>
-                                <input type="text" class="form-control" id="nama"
-                                    placeholder="Masukan Nama Pegawai">
+                                <input type="text" class="form-control" name="nama" id="nama" placeholder="Masukan Nama Pegawai">
                             </div>
-                        </div>        
+                        </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="form-control-label" for="nip_lama">NIP lama</label>
                                 <input type="text" class="form-control" id="nip_lama" name="nip_lama"
                                     placeholder="One of three cols">
                             </div>
-                        </div>                
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6">
@@ -76,7 +113,7 @@
                                     placeholder="Masukan Jurusan">
                             </div>
                         </div>
-                        
+
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="form-control-label" for="agama">Agama</label>
@@ -93,7 +130,7 @@
                                     placeholder="Contoh : Jombang">
                             </div>
                         </div>
-                        
+
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="form-control-label" for="tgl_lahir">Tanggal Lahir</label>
@@ -105,24 +142,21 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="form-control-label" for="exampleFormControlSelect1">Pangkat</label>
-                                <select class="form-control" id="exampleFormControlSelect1">
-                                  <option>1</option>
-                                  <option>2</option>
-                                  <option>3</option>
-                                  <option>6</option>
-                                  <option>5</option>
+                                <select class="form-control" id="exampleFormControlSelect1" name="id_pangkat">
+                                    @foreach ($pangkat as $item)
+                                    <option value="{{ $item->id }}">{{$item->nama_pangkat}}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="form-control-label" for="exampleFormControlSelect1">Jabatan Struktural</label>
-                                <select class="form-control" id="exampleFormControlSelect1">
-                                  <option>1</option>
-                                  <option>2</option>
-                                  <option>3</option>
-                                  <option>4</option>
-                                  <option>5</option>
+                                <label class="form-control-label" for="exampleFormControlSelect1">Jabatan
+                                    Struktural</label>
+                                <select class="form-control" data-toggle="select" name="id_jabatan" id="exampleFormControlSelect1">
+                                    @foreach ($jabatan as $item)
+                                    <option value="{{ $item->id }}">{{$item->nama_jabatan}}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
@@ -137,14 +171,14 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="form-control-label" for="exampleFormControlSelect1">Jenis Kelamin</label>
-                                <select class="form-control" id="exampleFormControlSelect1">
-                                  <option>Pilih Jenis Kelamin...</option>
-                                  <option value="L">Laki-laki</option>
-                                  <option value="P">Perempuan</option>
+                                <label class="form-control-label" for="Jk">Jenis Kelamin</label>
+                                <select class="form-control" id="Jk" name="jenis_kelamin">
+                                    <option>Pilih Jenis Kelamin...</option>
+                                    <option value="L">Laki-laki</option>
+                                    <option value="P">Perempuan</option>
                                 </select>
                             </div>
-                        </div>                       
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6">
@@ -176,7 +210,7 @@
                                 <input type="text" class="form-control" id="gelar_belakang" name="gelar_blk"
                                     placeholder="Contoh : Amd">
                             </div>
-                        </div>                       
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6">
@@ -198,24 +232,20 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="form-control-label" for="kecamatan">Kecamatan</label>
-                                <select class="form-control" id="kecamatan">
-                                  <option>1</option>
-                                  <option>2</option>
-                                  <option>3</option>
-                                  <option>4</option>
-                                  <option>5</option>
+                                <select class="form-control" id="kecamatan" name="kecamatan">
+                                    @foreach ($kecamatan as $item)
+                                    <option value="{{$item->id}}">{{$item->nama}}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="form-control-label" for="kota">Kota</label>
-                                <select class="form-control" id="kota">
-                                  <option>1</option>
-                                  <option>2</option>
-                                  <option>3</option>
-                                  <option>4</option>
-                                  <option>5</option>
+                                <select class="form-control" id="kota" name="kabupaten">
+                                    @foreach ($kota as $item)
+                                    <option value="{{ $item->id }}">{{$item->nama}}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
@@ -224,12 +254,10 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="form-control-label" for="provinsi">Provinsi</label>
-                                <select class="form-control" id="provinsi">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
+                                <select class="form-control" id="provinsi" name="provinsi">
+                                    @foreach ($provinsi as $item)
+                                    <option value="{{ $item->id }}">{{$item->nama}}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
@@ -257,7 +285,7 @@
                                     placeholder="Masukan Departemen">
                             </div>
                         </div>
-                      
+
                     </div>
                     <div class="row">
                         <div class="col-md-6">

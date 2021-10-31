@@ -42,9 +42,6 @@ class Pegawai extends Model
         'id_user',
         'id_jabatan',
         'id_pangkat',
-        'kecamatan',
-        'kota',
-        'provinsi',
     ];
     
     public function user() {
