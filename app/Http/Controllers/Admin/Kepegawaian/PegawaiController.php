@@ -211,6 +211,9 @@ class PegawaiController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $pgw = Pegawai::where('id', $id)->first();
+        $pgw->delete();
+         return back();
+        
     }
 }

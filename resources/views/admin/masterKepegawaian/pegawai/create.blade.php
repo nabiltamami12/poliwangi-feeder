@@ -265,7 +265,7 @@
                             <div class="form-group">
                                 <label class="form-control-label" for="askes">Askes</label>
                                 <input type="text" class="form-control" id="askes" name="askes"
-                                    placeholder="One of three cols">
+                                    placeholder="Masukan data Askes">
                             </div>
                         </div>
                     </div>
