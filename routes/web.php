@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\Kepegawaian\UnitController;
 use App\Http\Controllers\Admin\Kepegawaian\PegawaiController;
+use App\Http\Controllers\Admin\Kepegawaian\StaffController;
 
 /*
 |--------------------------------------------------------------------------
@@ -434,19 +435,15 @@ Route::prefix('admin')->middleware(['aksesuntuk:admin'])->group(function () {
         Route::resource('dataPegawai', PegawaiController::class);
         //route unit
         Route::resource('dataUnit', UnitController::class);
-       
+        //route staff
+        Route::resource('dataStaff', StaffController::class);
+        
 
 
         
         // //route jabatan struktural
         Route::get('/dataJabatanStruktural', function () {
             return view('admin.masterKepegawaian.jabatanStruktural.index', [
-                "title" => "akademik-kepegawaian",
-            ]);
-        });
-        //route staff
-        Route::get('/dataStaff', function () {
-            return view('admin.masterKepegawaian.staff.index', [
                 "title" => "akademik-kepegawaian",
             ]);
         });
