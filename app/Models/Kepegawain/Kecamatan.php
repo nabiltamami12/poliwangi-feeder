@@ -19,6 +19,6 @@ class Kecamatan extends Model
     }
 
     public function pegawai() {
-        return $this->hasOne(Pegawai::class);
+        return $this->hasOne(Pegawai::class, 'kecamatan');
     }
 }

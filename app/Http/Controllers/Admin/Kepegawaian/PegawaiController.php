@@ -139,7 +139,7 @@ class PegawaiController extends Controller
             'id_jabatan' =>$request->id_jabatan,
             'id_pangkat' =>$request->id_pangkat,
         ]);
-
+        // dd($user);
         $user->save();
         
 

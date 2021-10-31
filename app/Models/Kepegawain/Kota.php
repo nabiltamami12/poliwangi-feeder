@@ -21,6 +21,6 @@ class Kota extends Model
         return $this->belongsTo(Provinsi::class, 'id');
     }
     public function pegawai() {
-        return $this->hasOne(Pegawai::class);
+        return $this->hasOne(Pegawai::class, 'kota');
     }
 }
