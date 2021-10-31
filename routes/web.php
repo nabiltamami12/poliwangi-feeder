@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\Kepegawaian\PegawaiController;
+use App\Http\Controllers\Admin\Kepegawaian\PangkatController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -464,11 +465,13 @@ Route::prefix('admin')->middleware(['aksesuntuk:admin'])->group(function () {
             ]);
         });
         //route pangkat
-        Route::get('/dataPangkat', function () {
-            return view('admin.masterKepegawaian.pangkat.index', [
-                "title" => "akademik-kepegawaian",
-            ]);
-        });
+        Route::resource('/dataPangkat', PangkatController::class);
+        Route::get('/getPangkat', [PangkatController::class, 'getPangkat'])->name('get-pangkat');
+        // Route::get('/dataPangkat', function () {
+        //     return view('admin.masterKepegawaian.pangkat.index', [
+        //         "title" => "akademik-kepegawaian",
+        //     ]);
+        // });
     });
 
 
