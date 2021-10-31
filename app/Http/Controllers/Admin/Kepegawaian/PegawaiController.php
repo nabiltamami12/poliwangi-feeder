@@ -166,7 +166,25 @@ class PegawaiController extends Controller
      */
     public function edit($id)
     {
-        //
+        $kota = Kota::all();
+        $kecamatan = Kecamatan::paginate(5);
+        $provinsi = Provinsi::all();
+        $pangkat = Pangkat::all();
+        $jabatan = Jabatan_struktural::all();
+
+        $item = Pegawai::find($id);
+
+        return view('admin.masterKepegawaian.pegawai.edit',[
+                "id" => $id,
+                "title" => "akademik-kepegawaian",
+                "kota" => $kota,
+                "kecamatan" => $kecamatan,
+                "provinsi" => $provinsi,
+                "pangkat" => $pangkat,
+                "jabatan" => $jabatan,
+                "item" => $item
+                
+        ]);
     }
 
     /**
@@ -178,7 +196,11 @@ class PegawaiController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $pgw = Pegawai::find($id);
+        $pgw->update($request->all()); 
+
+
+        return redirect()->route('dataPegawai.index');
     }
 
     /**

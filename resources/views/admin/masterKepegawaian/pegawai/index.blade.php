@@ -40,6 +40,9 @@
                     <td>{{$pgw->nip}}</td>
                     <td>{{$pgw->noid}}</td>
                     <td>{{$pgw->nama}}</td>
+                    <td>                      
+                      <a href="{{ route('dataPegawai.edit', $pgw->id)}} " class="btn btn-success btn-sm">Edit</a>
+                    </td>
                   </tr>
               @endforeach
             </tbody>
