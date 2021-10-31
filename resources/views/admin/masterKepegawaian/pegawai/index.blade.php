@@ -17,7 +17,7 @@
               <h2 class="mb-0">Data Kepegawaian</h2>
             </div>
             <div class="col text-right">
-              <button type="button" onclick="add_btn()" class="btn btn-primary"><i class="iconify-inline mr-1" data-icon='bx:bx-plus-circle'></i> Tambah</button>
+              <a href="{{route('dataPegawai.create')}}" class="btn btn-primary"><i class="iconify-inline mr-1" data-icon='bx:bx-plus-circle'></i> Tambah</a>
             </div>
           </div>
         </div>
@@ -28,12 +28,21 @@
               <tr>
                 <th scope="col">NO</th>
                 <th scope="col">NIP</th>
+                <th scope="col">NOID</th>
                 <th scope="col">Nama</th>
-                <th scope="col">Staff</th>
                 <th scope="col">AKSI</th>
               </tr>
             </thead>
-            <tbody></tbody>
+            <tbody>
+              @foreach ($pegawai as $pgw)
+                  <tr>
+                    <td>{{$loop->iteration}}</td>
+                    <td>{{$pgw->nip}}</td>
+                    <td>{{$pgw->noid}}</td>
+                    <td>{{$pgw->nama}}</td>
+                  </tr>
+              @endforeach
+            </tbody>
           </table>
         </div>
 
@@ -70,7 +79,7 @@
     </div>
 </div>
 @endsection
-
+{{-- 
 @section('js')
 <script>
 var nomor = 1;
@@ -175,5 +184,5 @@ function change_semester(id,semester) {
         }
     });
 }
-</script>
-@endsection
+</script> --}}
+{{-- @endsection --}}
