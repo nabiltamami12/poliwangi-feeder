@@ -105,6 +105,8 @@ class StaffController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $item = Staff::findOrFail($id);
+        $item->delete();
+        return redirect()->route('dataStaff.index');
     }
 }
