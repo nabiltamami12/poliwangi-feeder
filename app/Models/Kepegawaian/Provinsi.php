@@ -1,24 +1,22 @@
 <?php
 
-namespace App\Models\Kepegawain;
+namespace App\Models\Kepegawaian;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Kecamatan extends Model
+class Provinsi extends Model
 {
     use HasFactory;
     protected $primaryKey = "id";
-    protected $table = "kecamatan";
+    protected $table = "provinsi";
     protected $fillable = [
-        'id_kota',
         'nama'
     ];
     public function kota() {
-        return $this->belongsTo(Kota::class, 'id');
+        return $this->hasMany(Kota::class, 'id_provinsi');
     }
-
     public function pegawai() {
-        return $this->hasOne(Pegawai::class, 'kecamatan');
+        return $this->hasOne(Pegawai::class, 'provinsi');
     }
 }

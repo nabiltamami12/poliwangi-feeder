@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Kepegawain;
+namespace App\Models\Kepegawaian;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Kepegawain;
+namespace App\Models\Kepegawaian;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;

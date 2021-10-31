@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\Admin\Kepegawaian\PegawaiController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\Kepegawaian\UnitController;
+use App\Http\Controllers\Admin\Kepegawaian\PegawaiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -431,27 +432,13 @@ Route::prefix('admin')->middleware(['aksesuntuk:admin'])->group(function () {
     Route::prefix('kepegawaian')->group(function () {
         //route pegawai
         Route::resource('dataPegawai', PegawaiController::class);
-
-        // Route::get('/dataPegawai', function () {
-        //     return view('admin.masterKepegawaian.pegawai.index', [
-        //         "title" => "akademik-kepegawaian",
-        //     ]);
-        // });
-        // Route::get('/dataPegawai/cu/', function () {
-        //     return view('admin.masterKepegawaian.pegawai.create', [
-        //         "id" => null,
-        //         "title" => "akademik-master"
-        //     ]);
-        // });
-
-
         //route unit
-        Route::get('/dataUnit', function () {
-            return view('admin.masterKepegawaian.unit.index', [
-                "title" => "akademik-kepegawaian",
-            ]);
-        });
-        //route jabatan struktural
+        Route::resource('dataUnit', UnitController::class);
+       
+
+
+        
+        // //route jabatan struktural
         Route::get('/dataJabatanStruktural', function () {
             return view('admin.masterKepegawaian.jabatanStruktural.index', [
                 "title" => "akademik-kepegawaian",

@@ -4,13 +4,13 @@ namespace App\Http\Controllers\Admin\Kepegawaian;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-use App\Models\Kepegawain\Kota;
-use App\Models\Kepegawain\Pangkat;
-use App\Models\Kepegawain\Pegawai;
-use App\Models\Kepegawain\Provinsi;
+use App\Models\Kepegawaian\Kota;
+use App\Models\Kepegawaian\Pangkat;
+use App\Models\Kepegawaian\Pegawai;
+use App\Models\Kepegawaian\Provinsi;
 use App\Http\Controllers\Controller;
-use App\Models\Kepegawain\Kecamatan;
-use App\Models\Kepegawain\Jabatan_struktural;
+use App\Models\Kepegawaian\Kecamatan;
+use App\Models\Kepegawaian\Jabatan_struktural;
 
 class PegawaiController extends Controller
 {
