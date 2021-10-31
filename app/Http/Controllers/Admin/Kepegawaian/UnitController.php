@@ -70,7 +70,14 @@ class UnitController extends Controller
      */
     public function edit($id)
     {
-        //
+        $pgw = Pegawai::all();
+        $item = Unit::find($id);
+        return view('admin.masterKepegawaian.unit.edit', [
+            "id" => $id,
+            "title" => "akademik-kepegawaian",
+            "item" => $item,
+            "pegawai" => $pgw
+        ]);
     }
 
     /**
@@ -82,7 +89,14 @@ class UnitController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $unit = Unit::find($id);
+        $unit->update([
+            'id_pegawai' => $request->id_pegawai,
+            'unit' => $request->unit,
+            'kepala' => $request->kepala,
+        ]);
+        return redirect()->route('dataUnit.index');
+
     }
 
     /**
