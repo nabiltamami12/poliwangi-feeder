@@ -107,6 +107,9 @@ class UnitController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $item = Unit::findOrFail($id);
+        $item->delete();
+        return redirect()->route('dataUnit.index');
+
     }
 }
