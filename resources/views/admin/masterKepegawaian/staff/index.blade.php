@@ -37,6 +37,19 @@
                             <tr>
                                 <td>{{$loop->iteration}}</td>
                                 <td>{{$item->staf}}</td>
+                                <td>                      
+                                  <a href="{{ route('dataStaff.edit', $item->id)}} " class="btn btn-success btn-sm">Edit</a>
+                
+                                  <a href="{{route('dataStaff.destroy',$item->id)}}" class="btn btn-danger text-white btn-sm"
+                                    onclick="event.preventDefault();
+                                document.getElementById('delete').submit();">
+                                    Hapus
+                                  </a>
+                                  <form id="delete" action="{{route('dataStaff.destroy',$item->id)}}" method="post" style="display: inline;">
+                                    @csrf
+                                    @method('delete')
+                                  </form>
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>

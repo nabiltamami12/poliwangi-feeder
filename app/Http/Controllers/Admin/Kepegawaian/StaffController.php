@@ -70,7 +70,14 @@ class StaffController extends Controller
      */
     public function edit($id)
     {
-        //
+        $pgw = Pegawai::all();
+        $item = Staff::find($id);
+        return view('admin.masterKepegawaian.staff.edit', [
+            "id" => $id,
+            "title" => "akademik-kepegawaian",
+            "item" => $item,
+            "pegawai" => $pgw
+        ]);
     }
 
     /**
@@ -82,7 +89,12 @@ class StaffController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $st = Staff::find($id);
+        $st->update([
+            'id_pegawai' => $request->id_pegawai,
+            'staf' => $request->staf,
+        ]);
+        return redirect()->route('dataStaff.index');
     }
 
     /**

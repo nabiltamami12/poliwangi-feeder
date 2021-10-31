@@ -14,14 +14,15 @@
                 <div class="card-header p-0">
                     <div class="row align-items-center">
                         <div class="col">
-                            <h2 class="mb-0">{{ ($id==null)?"TAMBAH":"UBAH" }} DATA UNIT</h2>
+                            <h2 class="mb-0">{{ ($id==null)?"TAMBAH":"UBAH" }} DATA STAFF</h2>
                         </div>
                     </div>
                 </div>
 
                 <hr class="my-4">
 
-                <form id="form_cu" action="{{route('dataUnit.store')}}" method="POST">
+                <form id="form_cu" action="{{route('dataStaff.update', $item->id)}}" method="POST">
+                    @method('put')
                     @csrf
                     <div class="form-row">
                         <div class="col-sm-12 col-12">
@@ -35,12 +36,8 @@
                                 </select>
                             </div>
                             <div class="form-group row mb-0">
-                                <label>Unit</label>
-                                <input type="text" class="form-control" id="unit" name="unit">
-                            </div>
-                            <div class="form-group row mb-0">
-                                <label>Kepala</label>
-                                <input type="text" class="form-control" id="kepala" name="kepala">
+                                <label>Staff</label>
+                                <input type="text" class="form-control" id="staf" name="staf">
                             </div>
                         </div>
 
