@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Kepegawaian;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 use App\Models\Kepegawain\Pangkat;
 
@@ -27,7 +28,7 @@ class PangkatController extends Controller
         return \DataTables::of($data)
             ->addColumn('Aksi', function($data) {
                 return '<button type="button" class="btn btn-success btn-sm" id="getEditPangkatData" data-id="'.$data->id.'">Edit</button>
-                    <button type="button" data-id="'.$data->id.'" data-toggle="modal" data-target="#DeletePangkatModal" class="btn btn-danger btn-sm" id="getDeleteId">Delete</button>';
+                    <button type="button" data-id="'.$data->id.'" onclick="delete_btn()" class="btn btn-danger btn-sm" id="getDeleteId">Delete</button>';
             })
             ->rawColumns(['Aksi'])
             ->make(true);
@@ -52,10 +53,10 @@ class PangkatController extends Controller
     public function store(Request $request, Pangkat $pangkat)
     {
         //
-        $validator = \Validator::make($request->all(), [
+        $validator = Validator::make($request->all(), [
             'nama_pangkat' => 'required',
             'golongan' => 'required',
-            'urut' => 'required',
+            'urut' => 'required|numeric',
         ]);
          
         if ($validator->fails()) {
@@ -99,7 +100,7 @@ class PangkatController extends Controller
                 </div>
                 <div class="form-group">
                     <label for="">Urut</label>
-                    <input type="text" class="form-control" name="urut" id="editUrut" value="'.$data->urut.'">
+                    <input type="number" class="form-control" name="urut" id="editUrut" value="'.$data->urut.'">
                 </div>';
  
         return response()->json(['html'=>$html]);
@@ -115,10 +116,10 @@ class PangkatController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $validator = \Validator::make($request->all(), [
+        $validator = Validator::make($request->all(), [
             'nama_pangkat' => 'required',
             'golongan' => 'required',
-            'urut' => 'required',
+            'urut' => 'required|numeric',
         ]);
          
         if ($validator->fails()) {
