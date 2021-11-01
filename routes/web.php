@@ -1,14 +1,10 @@
 <?php
 
-<<<<<<< HEAD
-=======
 use App\Http\Controllers\Admin\Kepegawaian\PegawaiController;
 use App\Http\Controllers\Admin\Kepegawaian\PangkatController;
 use App\Http\Controllers\Admin\Kepegawaian\JabatanStrukturalController;
->>>>>>> adit-kp
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\Kepegawaian\UnitController;
-use App\Http\Controllers\Admin\Kepegawaian\PegawaiController;
 use App\Http\Controllers\Admin\Kepegawaian\StaffController;
 
 /*
@@ -446,12 +442,7 @@ Route::prefix('admin')->middleware(['aksesuntuk:admin'])->group(function () {
         
 
 
-<<<<<<< HEAD
-        
-        // //route jabatan struktural
-        Route::get('/dataJabatanStruktural', function () {
-            return view('admin.masterKepegawaian.jabatanStruktural.index', [
-=======
+
         //route unit
         Route::get('/dataUnit', function () {
             return view('admin.masterKepegawaian.unit.index', [
@@ -469,7 +460,7 @@ Route::prefix('admin')->middleware(['aksesuntuk:admin'])->group(function () {
         //route staff
         Route::get('/dataStaff', function () {
             return view('admin.masterKepegawaian.staff.index', [
->>>>>>> adit-kp
+
                 "title" => "akademik-kepegawaian",
             ]);
         });

@@ -11,6 +11,7 @@ use App\Models\Kepegawaian\Provinsi;
 use App\Http\Controllers\Controller;
 use App\Models\Kepegawaian\Kecamatan;
 use App\Models\Kepegawaian\Jabatan_struktural;
+use App\Models\Kepegawaian\JabatanStruktural;
 
 class PegawaiController extends Controller
 {
@@ -41,7 +42,7 @@ class PegawaiController extends Controller
         $kecamatan = Kecamatan::paginate(5);
         $provinsi = Provinsi::all();
         $pangkat = Pangkat::all();
-        $jabatan = Jabatan_struktural::all();
+        $jabatan = JabatanStruktural::all();
         return view('admin.masterKepegawaian.pegawai.create',[
                 "id" => null,
                 "title" => "akademik-kepegawaian",
@@ -170,7 +171,7 @@ class PegawaiController extends Controller
         $kecamatan = Kecamatan::paginate(5);
         $provinsi = Provinsi::all();
         $pangkat = Pangkat::all();
-        $jabatan = Jabatan_struktural::all();
+        $jabatan = JabatanStruktural::all();
 
         $item = Pegawai::find($id);
 

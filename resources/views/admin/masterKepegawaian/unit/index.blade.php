@@ -17,11 +17,7 @@
               <h2 class="mb-0">Data Unit</h2>
             </div>
             <div class="col text-right">
-<<<<<<< HEAD
               <a href="{{route('dataUnit.create')}}" class="btn btn-primary"><i class="iconify-inline mr-1" data-icon='bx:bx-plus-circle'></i> Tambah</a>
-=======
-              <button type="button" class="btn btn-primary" onclick="add_btn()"><i class="iconify-inline mr-1" data-icon='bx:bx-plus-circle'></i> Tambah</button>
->>>>>>> adit-kp
             </div>
           </div>
         </div>
@@ -30,12 +26,7 @@
           <table id="datatable" class="table align-items-center table-flush table-borderless table-hover">
             <thead class="table-header">
               <tr>
-<<<<<<< HEAD
                 <th scope="col">No</th>
-=======
-                <th scope="col">NO</th>
-                <th scope="col">Pegawai</th>
->>>>>>> adit-kp
                 <th scope="col">Unit</th>
                 <th scope="col">Kepala</th>
                 <th scope="col">AKSI</th>
