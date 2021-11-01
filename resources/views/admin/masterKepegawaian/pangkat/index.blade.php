@@ -293,8 +293,8 @@
         "order": [[ 0, "desc" ]],
         ajax: '{{ route('get-pangkat') }}',
         columns: [
-            {data: null, name: 'no', render: function(data, type, row) {return no++;}},
-            {data: 'nama_pangkat', name: 'pangkat'},
+            {data: null, name: 'no', sortable: false, render: function(data, type, row, meta) {return meta.row + meta.settings._iDisplayStart + 1;}},
+            {data: 'nama_pangkat', name: 'nama_pangkat'},
             {data: 'golongan', name: 'golongan'},
             {data: 'urut', name: 'urut'},
             {data: 'Aksi', name: 'Aksi',orderable:false,serachable:false,sClass:'text-center'},
@@ -361,7 +361,6 @@
         });
     });
 
-    // Update article Ajax request.
     $('#SubmitEditForm').click(function(e) {
         e.preventDefault();
         $.ajaxSetup({
@@ -398,7 +397,6 @@
         });
     });
 
-    // Delete article Ajax request.
     var deleteID;
     $('body').on('click', '#getDeleteId', function(){
         deleteID = $(this).data('id');

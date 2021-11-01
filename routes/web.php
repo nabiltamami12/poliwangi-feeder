@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\Kepegawaian\PegawaiController;
 use App\Http\Controllers\Admin\Kepegawaian\PangkatController;
+use App\Http\Controllers\Admin\Kepegawaian\JabatanStrukturalController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -453,11 +454,13 @@ Route::prefix('admin')->middleware(['aksesuntuk:admin'])->group(function () {
             ]);
         });
         //route jabatan struktural
-        Route::get('/dataJabatanStruktural', function () {
-            return view('admin.masterKepegawaian.jabatanStruktural.index', [
-                "title" => "akademik-kepegawaian",
-            ]);
-        });
+        Route::resource('/dataJabatanStruktural', JabatanStrukturalController::class);
+        Route::get('/getJabatan', [JabatanStrukturalController::class, 'getJabatan'])->name('get-jabatan');
+        // Route::get('/dataJabatanStruktural', function () {
+        //     return view('admin.masterKepegawaian.jabatanStruktural.index', [
+        //         "title" => "akademik-kepegawaian",
+        //     ]);
+        // });
         //route staff
         Route::get('/dataStaff', function () {
             return view('admin.masterKepegawaian.staff.index', [

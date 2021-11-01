@@ -79,19 +79,78 @@
         </button>
       </div>
       <div class="modal-body">
-        <form action="#" method="POST">
-          @csrf
+          <div class="alert alert-danger alert-dismissible fade show" role="alert" style="display: none;">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="alert alert-success alert-dismissible fade show" role="alert" style="display: none;">
+              <strong>Berhasil ! </strong>Jabatan Struktural berhasil ditambahkan.
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
           <div class="form-group">
             <label for="">Jabatan Struktural</label>
-            <input type="text" class="form-control" name="nama_jabatan" placeholder="Nama jabatan" required>
+            <input type="text" class="form-control" name="nama_jabatan" id="namaJabatan" placeholder="Nama jabatan" required>
           </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
+        <button type="submit" class="btn btn-primary" id="SubmitAddForm">Submit</button>
       </div>
     </div>
+  </div>
+</div>
+
+<!-- Edit Modal -->
+<div class="modal" id="modalEdit" tabindex="-1" aria-labelledby="modalEditlLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h4 class="modal-title">Edit Jabatan Struktural</h4>
+              <button type="button" class="close modelClose" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+              <div class="alert alert-danger alert-dismissible fade show" role="alert" style="display: none;">
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+              </div>
+              <div class="alert alert-success alert-dismissible fade show" role="alert" style="display: none;">
+                  <strong>Berhasil ! </strong>Jabatan Struktural berhasil diperbarui.
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+              </div>
+              <div id="EditModalBody">
+                    
+              </div>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-primary" id="SubmitEditForm">Update</button>
+              <button type="button" class="btn btn-danger modelClose" data-dismiss="modal">Close</button>
+          </div>
+      </div>
+  </div>
+</div>
+ 
+<!-- Delete Modal -->
+<div class="modal fade" id="modalDelete" tabindex="-1" aria-labelledby="modalDeletelLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h4 class="modal-title">Hapus Jabatan Struktural</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+              <h4>Apakah anda yakin menghapus jabatan struktural?</h4>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-danger" id="SubmitDeleteForm">Iya</button>
+              <button type="button" class="btn btn-default" data-dismiss="modal">Tidak</button>
+          </div>
+      </div>
   </div>
 </div>
 
@@ -158,10 +217,6 @@
     ]
   };
 
-  function add_btn() {
-    $('#modalAdd').modal();
-  }
-
   function change_status(id) {
       $('#konfirmModal').modal('show');
       $('#id_konfirm').val(id)
@@ -205,5 +260,150 @@
           }
       });
   }
+
+  function add_btn() {
+    $('#modalAdd').modal();
+  }
+
+  function delete_btn() {
+    $('#modalDelete').modal();
+  }
+
+  $(document).ready(function() {
+
+    var no = 1;
+    var dataTable = $('#datatable').DataTable({
+        processing: true,
+        serverSide: true,
+        autoWidth: false,
+        // pageLength: 5,
+        // scrollX: true,
+        "order": [[ 0, "desc" ]],
+        ajax: '{{ route('get-jabatan') }}',
+        columns: [
+            {data: null, name: 'no', sortable: false, render: function(data, type, row, meta) {return meta.row + meta.settings._iDisplayStart + 1;}},
+            {data: 'nama_jabatan', name: 'nama_jabatan'},
+            {data: 'Aksi', name: 'Aksi',orderable:false,serachable:false,sClass:'text-center'},
+        ]
+    });
+
+    $('#SubmitAddForm').click(function(e) {
+        e.preventDefault();
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            url: "{{ route('dataJabatanStruktural.store') }}",
+            method: 'post',
+            data: {
+                nama_jabatan: $('#namaJabatan').val(),
+            },
+            success: function(result) {
+                if(result.errors) {
+                    $('.alert-danger').html('');
+                    $.each(result.errors, function(key, value) {
+                        $('.alert-danger').show();
+                        $('.alert-danger').append('<strong><li>'+value+'</li></strong>');
+                    });
+                } else {
+                    $('.alert-danger').hide();
+                    $('.alert-success').show();
+                    $('#datatable').DataTable().ajax.reload();
+                    setInterval(function(){ 
+                        $('.alert-success').hide();
+                        $('#modalAdd').modal('hide');
+                        location.reload();
+                    }, 1000);
+                }
+            }
+        });
+    });
+
+    $('.modelClose').on('click', function(){
+        $('#modalEdit').hide();
+    });
+
+    var id;
+    $('body').on('click', '#getEditJabatanData', function(e) {
+        // e.preventDefault();
+        $('.alert-danger').html('');
+        $('.alert-danger').hide();
+        id = $(this).data('id');
+        $.ajax({
+            url: "dataJabatanStruktural/"+id+"/edit",
+            method: 'GET',
+            // data: {
+            //     id: id,
+            // },
+            success: function(result) {
+                console.log(result);
+                $('#EditModalBody').html(result.html);
+                $('#modalEdit').show();
+            }
+        });
+    });
+
+    $('#SubmitEditForm').click(function(e) {
+        e.preventDefault();
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            url: "dataJabatanStruktural/"+id,
+            method: 'PUT',
+            data: {
+                nama_jabatan: $('#editNamaJabatan').val(),
+            },
+            success: function(result) {
+                if(result.errors) {
+                    $('.alert-danger').html('');
+                    $.each(result.errors, function(key, value) {
+                        $('.alert-danger').show();
+                        $('.alert-danger').append('<strong><li>'+value+'</li></strong>');
+                    });
+                } else {
+                    $('.alert-danger').hide();
+                    $('.alert-success').show();
+                    $('#datatable').DataTable().ajax.reload();
+                    setInterval(function(){ 
+                        $('.alert-success').hide();
+                        $('#modalEdit').hide();
+                        location.reload();
+                    }, 1000);
+                }
+            }
+        });
+    });
+
+    var deleteID;
+    $('body').on('click', '#getDeleteId', function(){
+        deleteID = $(this).data('id');
+    })
+    $('#SubmitDeleteForm').click(function(e) {
+        e.preventDefault();
+        var id = deleteID;
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            url: "dataJabatanStruktural/"+id,
+            method: 'DELETE',
+            success: function(result) {
+                setInterval(function(){ 
+                    $('#modalDelete').modal('hide');
+                    $('#datatable').DataTable().ajax.reload();
+                    location.reload();
+                }, 1000);
+            }
+        });
+    });
+
+  });
 </script>
 @endsection
