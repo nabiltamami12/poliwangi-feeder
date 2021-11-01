@@ -23,19 +23,19 @@
 
         <form id="form_cicilan" class="form-input">
           <input type="hidden" id="id" name="id" value="{{$id}}">
-          <div class="form-row">
-            <div class="col-sm-6 col-12">
+          <div class="form-row mt-0">
+            <div class="col-sm-4 col-12">
               <div class="form-group row mb-0">
                 <label>NIM: <b id="nim"></b></label>
 
               </div>
             </div>
-            <div class="col-sm-6 col-12">
+            <div class="col-sm-4 col-12">
               <div class="form-group row mb-0">
                 <label>Nama: <b id="nama"></b></label>
               </div>
             </div>
-            <div class="col-sm-6 col-12">
+            <div class="col-sm-4 col-12">
               <div class="form-group row mb-0">
                 <label>UKT: <b id="ukt"></b></label>
               </div>
@@ -53,7 +53,7 @@
                 </select>
               </div>
             </div>
-            <div class="col-sm-12 col-12">
+            <div class="col-sm-6 col-12">
               <div class="form-group row mb-0">
                 <label for="status_piutang">Status Piutang</label>
                 <select class="form-control" id="status_piutang" name="status_piutang">
@@ -74,7 +74,7 @@
             <table class="table">
               <thead>
                 <tr>
-                  <th>Nominal</th><th>Tanggal</th><th>Status</th>
+                  <th>Nominal</th><th>Tanggal</th><th>Status</th><th>Aksi</th>
                 </tr>
               </thead>
               <tbody>
@@ -135,17 +135,19 @@
           res.data.riwayat[i]
           list_riwayat_cicilan = res.data.riwayat[i].cicilan
           for (var j = 0; j < list_riwayat_cicilan.length; j++) {
-            $(".riwayat_cicilan table tbody").append(`<tr><td>`+formatAngka(list_riwayat_cicilan[j].nominal)+`</td><td>`+list_riwayat_cicilan[j].tanggal+`</td><td>`+(list_riwayat_cicilan[j].status == 1 ? 'Lunas' : 'Belum Lunas')+`</td></tr>`)
+            var aksi_bl = ''
             if (list_riwayat_cicilan[j].status != '1') {
+              aksi_bl = '<button type="button" class="btn btn-secondary btn-sm" style="height: 22px" onclick="simpanBl('+list_riwayat_cicilan[j].id+', \''+list_riwayat_cicilan[j].tanggal+'\')">Simpan</button>'
               cicilan_belum_lunas+=parseInt(list_riwayat_cicilan[j].nominal)
             }
+            $(".riwayat_cicilan table tbody").append(`<tr><td>`+formatAngka(list_riwayat_cicilan[j].nominal)+`</td><td>`+list_riwayat_cicilan[j].tanggal+`</td><td>`+(list_riwayat_cicilan[j].status == 1 ? 'Lunas' : 'Belum Lunas')+`</td><td>`+aksi_bl+`</td></tr>`)
           }
         }
-        ukt += cicilan_belum_lunas
+        // ukt += cicilan_belum_lunas
         if (cicilan_belum_lunas > 0) {
           $(".riwayat_cicilan h3").text("Riwayat Cicilan (Belum Lunas: "+formatAngka(cicilan_belum_lunas)+")")
         }
-        $('.number-format').number( true);
+        // $('.number-format').number( true);
         loading('hide')
       }
     });
@@ -173,7 +175,7 @@
       </div>
       <div class="col-sm-`+col+` col-12">
         <div class="form-group row mb-0">
-          <label>Taggal Jatuh Tempo</label>
+          <label>Tanggal Jatuh Tempo</label>
           <input type="date" class="form-control" name="jatuh_tempo[]" required>
         </div>
       </div>`+status
@@ -184,7 +186,7 @@
     for (var i = 1; i <= jumlah_cicilan; i++) {
       $('.daftar_cicilan').append(get_list_cicilan(i))
     }
-    $('.number-format').number( true);
+    // $('.number-format').number( true);
   })
 
   $("form").submit(function(e) {
@@ -193,8 +195,12 @@
     $.each($('[name*="cicilan"]'), function( index, value ) {
       total_cicilan+=parseInt(value.value)
     });
+    if (cicilan_belum_lunas > 0) {
+      alert('Cicilan lama harus dilunasi terlebih dahulu')
+      return false
+    }
     if (total_cicilan != ukt && !isset_cicilan) {
-      alert('Total cicilan tidak sama dengan UKT + Cicilan Belum Lunas')
+      alert('Total cicilan tidak sama dengan UKT')
       return false
     }
     var form_data = new FormData(this);
@@ -217,6 +223,10 @@
       }
     });
   });
+
+  function simpanBl(id, tanggal) {
+    console.log(id, tanggal)
+  }
 
 //   $(document).ready(function() {
 //     var id = "{{$id}}";

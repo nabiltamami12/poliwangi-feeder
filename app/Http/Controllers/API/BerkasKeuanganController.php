@@ -344,7 +344,7 @@ class BerkasKeuanganController extends Controller
             $validator = Validator::make(
                 $data,
                 [
-                    'file' => 'required|mimes:doc,docx,pdf,txt|max:2048',
+                    // 'file' => 'required|mimes:doc,docx,pdf,txt|max:2048',
                     'id_mahasiswa' => 'required'
                 ]
             );
@@ -354,19 +354,19 @@ class BerkasKeuanganController extends Controller
             }
             $periode = Periode::select('tahun', 'semester')->orderByDesc('status')->orderByDesc('tahun')->limit(1)->get();
             $current_data = BK::select('id')->where('id_mahasiswa','=',$data['id_mahasiswa'])->where('tahun','=',$periode[0]->tahun)->where('semester','=',$periode[0]->semester)->limit(1)->get();
-            if (!isset($current_data[0]) && $request->hasFile('file')) {
-                $path_pengajuan = $data['id_mahasiswa'].'_'.$periode[0]->tahun.'_'.$request->file->getClientOriginalName();
-                if($request->file->storeAs('piutang', $path_pengajuan)){
+            if (!isset($current_data[0]) /*&& $request->hasFile('file')*/) {
+                // $path_pengajuan = $data['id_mahasiswa'].'_'.$periode[0]->tahun.'_'.$request->file->getClientOriginalName();
+                // if($request->file->storeAs('piutang', $path_pengajuan)){
                     $document = new BK();
-                    $document->path_pengajuan = '/piutang/'.$path_pengajuan;
+                    // $document->path_pengajuan = '/piutang/'.$path_pengajuan;
                     $document->id_mahasiswa = $data['id_mahasiswa'];
                     $document->tahun = $periode[0]->tahun;
                     $document->semester = $periode[0]->semester;
-                    $document->status = "pending";
+                    $document->status = "Pending";
                     $document->save();
                     $this->data = $document;
                     $this->status = "success";
-                }
+                // }
             }
         } catch (QueryException $e) {
             $this->status = "failed";
@@ -394,11 +394,13 @@ class BerkasKeuanganController extends Controller
                 'id_piutang' => $data['id_piutang'],
             ])->first();
 
-            if ($check==null) {
-                KB::where('id_mahasiswa', '=', $data['id_mahasiswa'])->where('status', '=', null)->update([
-                    'nominal' => 0,
-                    'status' => 1
-                ]);
+            $belum_lunas = KB::where('id_mahasiswa', '=', $data['id_mahasiswa'])->where('status', '=', null)->first();
+
+            if ($check==null && $belum_lunas == null) {
+                // KB::where('id_mahasiswa', '=', $data['id_mahasiswa'])->where('status', '=', null)->update([
+                //     'nominal' => 0,
+                //     'status' => 1
+                // ]);
                 for ($i = 0; $i < $total; $i++) {
                     $other = new KB;
                     $other->id_mahasiswa = $data['id_mahasiswa'];
@@ -413,10 +415,12 @@ class BerkasKeuanganController extends Controller
         }
         if (isset($data['idkp'])) {
             foreach ($data['idkp'] as $key => $idkp) {
-                $kb = KB::find($idkp);
-                $kb->tanggal = $data['jatuh_tempo'][$key];
-                $kb->save();
-                $this->status = 'success';
+                if ($idkp) {
+                    $kb = KB::find($idkp);
+                    $kb->tanggal = $data['jatuh_tempo'][$key];
+                    $kb->save();
+                    $this->status = 'success';
+                }
             }
         }
         return response()->json([

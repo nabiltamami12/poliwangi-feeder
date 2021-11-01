@@ -15,7 +15,7 @@
           <h5 class="modal-title my-3 mx-auto">Upload Surat Keterangan Hasil Ujian</h5>
         </div>
         <div class="modal-body">
-          <div class="form-group detail_dokumen d-flex justify-content-center align-items-center p-4">
+          <div class="form-group detail_dokumen d-flex justify-content-center align-items-center p-4" id="trigger-browse" style="cursor: pointer;">
             <form class="d-none" onchange="showfilename()">
               <i class="iconify mr-2" data-icon="bx:bxs-file-pdf" data-inline="false"></i>
               <input type="file" id="file" hidden />
@@ -28,7 +28,7 @@
           <p class="mt-2 mb-0 font-italic jenis_dokumen">Upload Document dengan format .pdf (Max size 2MB)</p>
         </div>
         <div class="modal-footer pt-3">
-          <button type="button" class="btn btn-primary w-100 rounded-sm">Upload</button>
+          <button type="button" class="btn btn-primary w-100 rounded-sm" id="btn-upload">Upload</button>
         </div>
       </div>
     </div>
@@ -56,105 +56,7 @@
               </tr>
             </thead>
 
-            <tbody class="table-body table-body-lg">
-              
-
-              <!-- <tr>
-                <td class="text-center px-2">2</td>
-                <td>
-                  <h2 class="mb-0">Surat Keterangan Hasil Ujian</h2>
-                </td>
-                <td>
-                  <span data-toggle="modal" data-target="#daftarUlang_unggahDokumen">
-                    <i class="iconify-inline mr-1 text-primary" data-icon="bx:bx-cloud-upload"></i>
-                    <span class="text-primary">Unggah Dokumen</span>
-                  </span>
-                </td>
-                <td class="text-center">
-                  <i class="iconify status-pending" data-icon="fluent:clock-20-filled"></i>
-                </td>
-              </tr>
-
-              <tr>
-                <td class="text-center px-2">3</td>
-                <td>
-                  <h2 class="mb-0">Bukti Pembayaran Pendaftaran</h2>
-                </td>
-                <td>
-                  <i class="iconify-inline mr-1 text-primary" data-icon="bx:bx-file-blank"></i>
-                  <span class="text-primary">dokumen terunggah</span>
-                </td>
-                <td class="text-center">
-                  <i class="iconify status-success" data-icon="fluent:clock-20-filled"></i>
-                </td>
-              </tr>
-
-              <tr>
-                <td class="text-center px-2">4</td>
-                <td>
-                  <h2 class="mb-0">Bukti Telah Diterima di Politeknik Negeri Banyuwangi</h2>
-                </td>
-                <td>
-                  <span data-toggle="modal" data-target="#daftarUlang_unggahDokumen">
-                    <i class="iconify-inline mr-1 text-primary" data-icon="bx:bx-cloud-upload"></i>
-                    <span class="text-primary">Unggah Ulang Dokumen</span>
-                  </span>
-                </td>
-                <td class="text-center">
-                  <i class="iconify status-rejected" data-icon="bi:x-circle-fill"></i>
-                </td>
-              </tr>
-
-              <tr>
-                <td class="text-center px-2">5</td>
-                <td>
-                  <h2 class="mb-0">Surat Pernyataan Taat Peraturan</h2>
-                </td>
-                <td>
-                  <span data-toggle="modal" data-target="#daftarUlang_unggahDokumen">
-                    <i class="iconify-inline mr-1 text-primary" data-icon="bx:bx-cloud-upload"></i>
-                    <span class="text-primary">Unggah Ulang Dokumen</span>
-                  </span>
-                </td>
-                <td class="text-center">
-                  <i class="iconify status-rejected" data-icon="bi:x-circle-fill"></i>
-                </td>
-              </tr>
-
-              <tr>
-                <td class="text-center px-2">6</td>
-                <td>
-                  <h2 class="mb-0">Upload Foto dengan Almamater</h2>
-                </td>
-                <td>
-                  <span data-toggle="modal" data-target="#daftarUlang_unggahDokumen">
-                    <i class="iconify-inline mr-1 text-primary" data-icon="bx:bx-cloud-upload"></i>
-                    <span class="text-primary">Unggah Ulang Dokumen</span>
-                  </span>
-                </td>
-                <td class="text-center">
-                  <i class="iconify status-rejected" data-icon="bi:x-circle-fill"></i>
-                </td>
-              </tr>
-
-              <tr>
-                <td class="text-center px-2">7</td>
-                <td>
-                  <h2 class="mb-0 d-inline">Upload Dokumen Pengajuan Keringanan
-                    <h2 class="d-inline text-warning">(Optional)</span>
-                    </h2>
-                </td>
-                <td>
-                  <span data-toggle="modal" data-target="#daftarUlang_unggahDokumen">
-                    <i class="iconify-inline mr-1 text-primary" data-icon="bx:bx-cloud-upload"></i>
-                    <span class="text-primary">Unggah Dokumen</span>
-                  </span>
-                </td>
-                <td class="text-center">
-                  <i class="iconify status-pending" data-icon="fluent:clock-20-filled"></i>
-                </td>
-              </tr> -->
-            </tbody>
+            <tbody class="table-body table-body-lg"></tbody>
           </table>
         </div>
       </div>
@@ -181,10 +83,11 @@ function getData() {
     },
     success: function(res) {
       if (res.status=="success") {
-        var i = 1;
+        let i = 1;
         $.each(res.data,function (key,row) {
-          var html = `          
-              <tr>
+          let html = '';
+          if(row.status === '1'){
+            html = `<tr>
                 <td class="text-center px-2">${i++}</td>
                 <td>
                   <h2 class="mb-0">${row.nama}</h2>
@@ -196,7 +99,40 @@ function getData() {
                 <td class="text-center">
                   <i class="iconify status-success" data-icon="fluent:clock-20-filled"></i>
                 </td>
-              </tr>`
+              </tr>`;
+          } else if (row.status === null) {
+            html = `<tr>
+                <td class="text-center px-2">${i++}</td>
+                <td>
+                  <h2 class="mb-0">Surat Keterangan Hasil Ujian</h2>
+                </td>
+                <td>
+                  <span onclick="show_modal('${row.id_syarat}')" style="cursor: pointer;">
+                    <i class="iconify-inline mr-1 text-primary" data-icon="bx:bx-cloud-upload"></i>
+                    <span class="text-primary">Unggah Dokumen</span>
+                  </span>
+                </td>
+                <td class="text-center">
+                  <i class="iconify status-pending" data-icon="fluent:clock-20-filled"></i>
+                </td>
+              </tr>`;
+          } else {
+            html = `<tr>
+                <td class="text-center px-2">${i++}</td>
+                <td>
+                  <h2 class="mb-0">Upload Foto dengan Almamater</h2>
+                </td>
+                <td>
+                  <span onclick="show_modal('${row.id_syarat}', 'put')" style="cursor: pointer;">
+                    <i class="iconify-inline mr-1 text-primary" data-icon="bx:bx-cloud-upload"></i>
+                    <span class="text-primary">Unggah Ulang Dokumen</span>
+                  </span>
+                </td>
+                <td class="text-center">
+                  <i class="iconify status-rejected" data-icon="bi:x-circle-fill"></i>
+                </td>
+              </tr>`;
+          }
           $('.table-body').append(html);
         })
 
@@ -205,9 +141,47 @@ function getData() {
     }
   });
 }
+
+function show_modal(syarat, action = 'post') {
+  $('#file').val("");
+  customText.innerHTML = "tidak ada file dipilih";
+  $('#btn-upload').attr("onclick", `send('${syarat}', '${action}')`);
+  $('#daftarUlang_unggahDokumen').modal('show');
+}
+
+function send(syarat, action) {
+  const fileupload = $('#file').prop('files')[0];
+  if (fileupload && fileupload!="" && Number(syarat) > 0) {
+    let formData = new FormData();
+    formData.append('syarat', syarat);
+    formData.append('file', fileupload);
+    $.ajax({
+      type: 'POST',
+      url: url_api+`/berkas${(action === 'post') ? '' : '_update'}`,
+      data: formData,
+      cache: false,
+      processData: false,
+      contentType: false,
+      headers: {
+        'token': localStorage.getItem('pmb')
+      },
+      success: function (res) {
+        window.location.reload();
+      },
+      error: function () {
+        alert("Data Gagal Diupload");
+      }
+    });
+  }
+}
+
   const inputFile = document.getElementById("file");
   const customBtn = document.getElementById("custom-btn");
   const customText = document.getElementById("custom-text");
+
+  document.getElementById('trigger-browse').addEventListener('click', function () {
+    inputFile.click();
+  })
 
   customBtn.addEventListener("click", function () {
     inputFile.click();
