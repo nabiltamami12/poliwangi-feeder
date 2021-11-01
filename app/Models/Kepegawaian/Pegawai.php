@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Models\Kepegawain;
+namespace App\Models\Kepegawaian;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Pegawai extends Model
 {
@@ -89,12 +90,12 @@ class Pegawai extends Model
 
     // wilayah
     public function kecamatan() {
-        return $this->belongsTo(Kecamatan::class);
+        return $this->belongsTo(Kecamatan::class, 'id');
      }
      public function kota() {
-        return $this->belongsTo(Kota::class);
+        return $this->belongsTo(Kota::class, 'id');
      }
      public function provinsi() {
-        return $this->belongsTo(Provinsi::class);
+        return $this->belongsTo(Provinsi::class, 'id');
      }
 }

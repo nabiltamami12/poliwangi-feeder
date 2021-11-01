@@ -3,6 +3,8 @@
 use App\Http\Controllers\Admin\Kepegawaian\PegawaiController;
 use App\Http\Controllers\Admin\Kepegawaian\PangkatController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\Kepegawaian\UnitController;
+use App\Http\Controllers\Admin\Kepegawaian\StaffController;
 
 /*
 |--------------------------------------------------------------------------
@@ -432,38 +434,23 @@ Route::prefix('admin')->middleware(['aksesuntuk:admin'])->group(function () {
     Route::prefix('kepegawaian')->group(function () {
         //route pegawai
         Route::resource('dataPegawai', PegawaiController::class);
+        //route unit
+        Route::resource('dataUnit', UnitController::class);
+        //route staff
+        Route::resource('dataStaff', StaffController::class);
+        
 
-        // Route::get('/dataPegawai', function () {
-        //     return view('admin.masterKepegawaian.pegawai.index', [
+
+        
+        // //route jabatan struktural
+        Route::resource('/dataJabatanStruktural', JabatanStrukturalController::class);
+        Route::get('/getJabatan', [JabatanStrukturalController::class, 'getJabatan'])->name('get-jabatan');
+        // Route::get('/dataJabatanStruktural', function () {
+        //     return view('admin.masterKepegawaian.jabatanStruktural.index', [
         //         "title" => "akademik-kepegawaian",
         //     ]);
         // });
-        // Route::get('/dataPegawai/cu/', function () {
-        //     return view('admin.masterKepegawaian.pegawai.create', [
-        //         "id" => null,
-        //         "title" => "akademik-master"
-        //     ]);
-        // });
 
-
-        //route unit
-        Route::get('/dataUnit', function () {
-            return view('admin.masterKepegawaian.unit.index', [
-                "title" => "akademik-kepegawaian",
-            ]);
-        });
-        //route jabatan struktural
-        Route::get('/dataJabatanStruktural', function () {
-            return view('admin.masterKepegawaian.jabatanStruktural.index', [
-                "title" => "akademik-kepegawaian",
-            ]);
-        });
-        //route staff
-        Route::get('/dataStaff', function () {
-            return view('admin.masterKepegawaian.staff.index', [
-                "title" => "akademik-kepegawaian",
-            ]);
-        });
         //route pangkat
         Route::resource('/dataPangkat', PangkatController::class);
         Route::get('/getPangkat', [PangkatController::class, 'getPangkat'])->name('get-pangkat');

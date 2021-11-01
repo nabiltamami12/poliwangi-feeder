@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Kepegawain;
+namespace App\Models\Kepegawaian;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -21,6 +21,6 @@ class Kota extends Model
         return $this->belongsTo(Provinsi::class, 'id');
     }
     public function pegawai() {
-        return $this->hasOne(Pegawai::class);
+        return $this->hasOne(Pegawai::class, 'kota');
     }
 }

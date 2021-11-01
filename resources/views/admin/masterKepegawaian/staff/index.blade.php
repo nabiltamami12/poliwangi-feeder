@@ -7,9 +7,9 @@
 
 <!-- Page content -->
 <section class="page-content container-fluid">
-  <div class="row">
-    <div class="col-xl-12">
-      <div class="card padding--small">
+    <div class="row">
+        <div class="col-xl-12">
+            <div class="card padding--small">
 
         <div class="card-header p-0">
           <div class="row align-items-center">
@@ -60,12 +60,43 @@
                 <div class="col-md-6">
                     <button type="button" class="btn btn-modal-cancel w-100" data-dismiss="modal">Batal</button>
                 </div>
-                <div class="col-md-6">
-                    <button type="button" class="btn btn-primary w-100" id="btn_modal_hapus" onclick="konfirm_func()">Yakin</button>
+                <hr class="mt">
+                <div class="table-responsive">
+                    <table id="datatable" class="table align-items-center table-flush table-borderless table-hover">
+                        <thead class="table-header">
+                            <tr>
+                                <th scope="col">NO</th>
+                                <th scope="col">Staff</th>
+                                <th scope="col">AKSI</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($staf as $item)
+                            <tr>
+                                <td>{{$loop->iteration}}</td>
+                                <td>{{$item->staf}}</td>
+                                <td>                      
+                                  <a href="{{ route('dataStaff.edit', $item->id)}} " class="btn btn-success btn-sm">Edit</a>
+                
+                                  <a href="{{route('dataStaff.destroy',$item->id)}}" class="btn btn-danger text-white btn-sm"
+                                    onclick="event.preventDefault();
+                                document.getElementById('delete').submit();">
+                                    Hapus
+                                  </a>
+                                  <form id="delete" action="{{route('dataStaff.destroy',$item->id)}}" method="post" style="display: inline;">
+                                    @csrf
+                                    @method('delete')
+                                  </form>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
+
+
             </div>
         </div>
-      </div>
     </div>
 </div>
 

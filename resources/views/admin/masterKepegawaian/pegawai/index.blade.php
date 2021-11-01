@@ -40,6 +40,19 @@
                     <td>{{$pgw->nip}}</td>
                     <td>{{$pgw->noid}}</td>
                     <td>{{$pgw->nama}}</td>
+                    <td>                      
+                      <a href="{{ route('dataPegawai.edit', $pgw->id)}} " class="btn btn-success btn-sm">Edit</a>
+
+                      <a href="{{route('dataPegawai.destroy',$pgw->id)}}" class="btn btn-danger text-white btn-sm"
+                        onclick="event.preventDefault();
+                    document.getElementById('delete').submit();">
+                        Hapus
+                      </a>
+                      <form id="delete" action="{{route('dataPegawai.destroy',$pgw->id)}}" method="post" style="display: inline;">
+                        @csrf
+                        @method('delete')
+                      </form>
+                    </td>
                   </tr>
               @endforeach
             </tbody>

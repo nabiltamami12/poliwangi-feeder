@@ -17,7 +17,11 @@
               <h2 class="mb-0">Data Unit</h2>
             </div>
             <div class="col text-right">
+<<<<<<< HEAD
               <button type="button" class="btn btn-primary" onclick="add_btn()"><i class="iconify-inline mr-1" data-icon='bx:bx-plus-circle'></i> Tambah</button>
+=======
+              <a href="{{route('dataUnit.create')}}" class="btn btn-primary"><i class="iconify-inline mr-1" data-icon='bx:bx-plus-circle'></i> Tambah</a>
+>>>>>>> 90957374a7ba3e9db022fe4847b26293081a44e3
             </div>
           </div>
         </div>
@@ -26,14 +30,39 @@
           <table id="datatable" class="table align-items-center table-flush table-borderless table-hover">
             <thead class="table-header">
               <tr>
+<<<<<<< HEAD
                 <th scope="col">NO</th>
                 <th scope="col">Pegawai</th>
+=======
+                <th scope="col">No</th>
+>>>>>>> 90957374a7ba3e9db022fe4847b26293081a44e3
                 <th scope="col">Unit</th>
                 <th scope="col">Kepala</th>
                 <th scope="col">AKSI</th>
               </tr>
             </thead>
-            <tbody></tbody>
+            <tbody>
+              @foreach ($unit as $item)
+              <tr>
+                <td>{{$loop->iteration}}</td>
+                <td>{{$item->unit}}</td>
+                <td>{{$item->kepala}}</td>
+                <td>                      
+                  <a href="{{ route('dataUnit.edit', $item->id)}} " class="btn btn-success btn-sm">Edit</a>
+
+                  <a href="{{route('dataUnit.destroy',$item->id)}}" class="btn btn-danger text-white btn-sm"
+                    onclick="event.preventDefault();
+                document.getElementById('delete').submit();">
+                    Hapus
+                  </a>
+                  <form id="delete" action="{{route('dataUnit.destroy',$item->id)}}" method="post" style="display: inline;">
+                    @csrf
+                    @method('delete')
+                  </form>
+                </td>
+              </tr>
+              @endforeach
+            </tbody>
           </table>
         </div>
 

@@ -21,55 +21,21 @@
 
                 <hr class="my-4">
 
-                <form id="form_cu" action="{{route('dataPegawai.store')}}" method="POST">
+                <form id="form_cu" action="{{route('dataPegawai.update', $item->id)}}" method="POST">
+                    @method('put')
                     @csrf
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="form-control-label" for="username">Username</label>
-                                <input type="text" name="name" class="form-control" id="username"
-                                    placeholder="Masukan Username">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="form-control-label" for="email">Email</label>
-                                <input type="email" class="form-control" id="email" name="email"
-                                    placeholder="Masukan Email">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="form-control-label" for="password">Password</label>
-                                <input type="password" name="password" class="form-control" id="password"
-                                    placeholder="Masukan Password">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="form-control-label" for="password_confirmation">Konfirmasi
-                                    Password</label>
-                                <input type="password" class="form-control" id="password_confirmation"
-                                    name="password_confirmation" placeholder="Konfirmasi Password">
-                            </div>
-                        </div>
-                    </div>
-                    <hr class="my-4">
-
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
                                 <label class="form-control-label" for="nip">NIP</label>
-                                <input type="text" name="nip" class="form-control" id="nip"
+                                <input type="text" name="nip" class="form-control" value="{{ $item->nip }}" id="nip"
                                     placeholder="Masukan Nomor Induk Pegawai negeri sipil">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="form-control-label" for="noid">NOID</label>
-                                <input type="text" class="form-control" id="noid" name="noid"
+                                <input type="text" class="form-control" value="{{ $item->noid }}" id="noid" name="noid"
                                     placeholder="Masukan NOID">
                             </div>
                         </div>
@@ -78,14 +44,14 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="form-control-label" for="npwp">NPWP</label>
-                                <input type="text" class="form-control" name="npwp" id="npwp"
+                                <input type="text" class="form-control" value="{{ $item->npwp }}" name="npwp" id="npwp"
                                     placeholder="One of three cols">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="form-control-label" for="nidn">NIDN</label>
-                                <input type="text" class="form-control" name="nidn" id="nidn"
+                                <input type="text" class="form-control" value="{{ $item->nidn }}" name="nidn" id="nidn"
                                     placeholder="One of three cols">
                             </div>
                         </div>
@@ -94,13 +60,13 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="form-control-label" for="nama">Nama Pegawai</label>
-                                <input type="text" class="form-control" name="nama" id="nama" placeholder="Masukan Nama Pegawai">
+                                <input type="text" class="form-control" value="{{ $item->nama }}" name="nama" id="nama" placeholder="Masukan Nama Pegawai">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="form-control-label" for="nip_lama">NIP lama</label>
-                                <input type="text" class="form-control" id="nip_lama" name="nip_lama"
+                                <input type="text" class="form-control" value="{{ $item->nip_lama }}" id="nip_lama" name="nip_lama"
                                     placeholder="One of three cols">
                             </div>
                         </div>
@@ -109,7 +75,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="form-control-label" for="jurusan">Jurusan</label>
-                                <input type="text" class="form-control" id="jurusan" name="jurusan"
+                                <input type="text" class="form-control" value="{{ $item->jurusan }}" id="jurusan" name="jurusan"
                                     placeholder="Masukan Jurusan">
                             </div>
                         </div>
@@ -117,7 +83,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="form-control-label" for="agama">Agama</label>
-                                <input type="text" class="form-control" id="agama" name="agama"
+                                <input type="text" class="form-control" value="{{ $item->agama }}" id="agama" name="agama"
                                     placeholder="Contoh : Islam">
                             </div>
                         </div>
@@ -126,7 +92,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="form-control-label" for="tmp_lahir">Tempat Lahir</label>
-                                <input type="text" class="form-control" id="tmp_lahir" name="tmp_lahir"
+                                <input type="text" class="form-control" value="{{ $item->tmp_lahir }}" id="tmp_lahir" name="tmp_lahir"
                                     placeholder="Contoh : Jombang">
                             </div>
                         </div>
@@ -134,7 +100,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="form-control-label" for="tgl_lahir">Tanggal Lahir</label>
-                                <input type="date" class="form-control" id="tgl_lahir" name="tgl_lahir">
+                                <input type="date" class="form-control" value="{{ $item->tgl_lahir }}" id="tgl_lahir" name="tgl_lahir">
                             </div>
                         </div>
                     </div>
@@ -142,7 +108,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="form-control-label" for="exampleFormControlSelect1">Pangkat</label>
-                                <select class="form-control" id="exampleFormControlSelect1" name="id_pangkat">
+                                <select class="form-control"  id="exampleFormControlSelect1" name="id_pangkat">
                                     @foreach ($pangkat as $item)
                                     <option value="{{ $item->id }}">{{$item->nama_pangkat}}</option>
                                     @endforeach
@@ -165,7 +131,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="form-control-label" for="nomor_tlp">Nomor Telepon</label>
-                                <input type="text" class="form-control" id="nomor_tlp" name="no_tlp"
+                                <input type="text" class="form-control" value="{{ $item->no_tlp }}" id="nomor_tlp" name="no_tlp"
                                     placeholder="Contoh : 0865273944375">
                             </div>
                         </div>
@@ -184,14 +150,14 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="form-control-label" for="shift">Shift</label>
-                                <input type="text" class="form-control" id="shift" name="shift"
+                                <input type="text" class="form-control" value="{{ $item->shift }}" id="shift" name="shift"
                                     placeholder="Masukan shift">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="form-control-label" for="golongan_darah">Golongan Darah</label>
-                                <input type="text" class="form-control" id="golongan_darah" name="gol_darah"
+                                <input type="text" class="form-control" value="{{ $item->gol_darah }}" id="golongan_darah" name="gol_darah"
                                     placeholder="Contoh : B+">
                             </div>
                         </div>
@@ -200,14 +166,14 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="form-control-label" for="gelar_dpn">Gelar Depan</label>
-                                <input type="text" class="form-control" id="gelar_dpn" name="gelar_dpn"
+                                <input type="text" class="form-control" value="{{ $item->gelar_dpn }}" id="gelar_dpn" name="gelar_dpn"
                                     placeholder="Contoh : Prof">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="form-control-label" for="gelar_belakang">Gelar Belakang</label>
-                                <input type="text" class="form-control" id="gelar_belakang" name="gelar_blk"
+                                <input type="text" class="form-control" value="{{ $item->gelar_blk }}" id="gelar_belakang" name="gelar_blk"
                                     placeholder="Contoh : Amd">
                             </div>
                         </div>
@@ -216,14 +182,14 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="form-control-label" for="status_kawin">Status Kawin</label>
-                                <input type="text" class="form-control" id="status_kawin" name="status_kawin"
+                                <input type="text" class="form-control" value="{{ $item->status_kawin }}" id="status_kawin" name="status_kawin"
                                     placeholder="Contoh : Belum Kawin">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="form-control-label" for="kelurahan">Kelurahan</label>
-                                <input type="text" class="form-control" id="kelurahan" name="kelurahan"
+                                <input type="text" class="form-control" value="{{ $item->kelurahan }}" id="kelurahan" name="kelurahan"
                                     placeholder="Contoh : Rejosopinggir">
                             </div>
                         </div>
@@ -232,7 +198,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="form-control-label" for="kecamatan">Kecamatan</label>
-                                <select class="form-control" id="kecamatan" name="kecamatan">
+                                <select class="form-control" value="{{ $item->kecamatan }}" id="kecamatan" name="kecamatan">
                                     @foreach ($kecamatan as $item)
                                     <option value="{{$item->id}}">{{$item->nama}}</option>
                                     @endforeach
@@ -242,7 +208,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="form-control-label" for="kota">Kota</label>
-                                <select class="form-control" id="kota" name="kabupaten">
+                                <select class="form-control" value="{{ $item->kota }}" id="kota" name="kabupaten">
                                     @foreach ($kota as $item)
                                     <option value="{{ $item->id }}">{{$item->nama}}</option>
                                     @endforeach
@@ -254,7 +220,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="form-control-label" for="provinsi">Provinsi</label>
-                                <select class="form-control" id="provinsi" name="provinsi">
+                                <select class="form-control" value="{{ $item->provinsi }}" id="provinsi" name="provinsi">
                                     @foreach ($provinsi as $item)
                                     <option value="{{ $item->id }}">{{$item->nama}}</option>
                                     @endforeach
@@ -264,7 +230,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="form-control-label" for="askes">Askes</label>
-                                <input type="text" class="form-control" id="askes" name="askes"
+                                <input type="text" class="form-control" value="{{ $item->askes }}" id="askes" name="askes"
                                     placeholder="Masukan data Askes">
                             </div>
                         </div>
@@ -274,14 +240,14 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="form-control-label" for="kode_dsn">Kode Dosen</label>
-                                <input type="text" class="form-control" id="kode_dsn" name="kode_dosen"
+                                <input type="text" class="form-control" value="{{ $item->kode_dosen }}" id="kode_dsn" name="kode_dosen"
                                     placeholder="Masukan Kode Dosen">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="form-control-label" for="departemen">Departemen</label>
-                                <input type="text" class="form-control" id="departemen" name="departemen"
+                                <input type="text" class="form-control" value="{{ $item->departemen }}" id="departemen" name="departemen"
                                     placeholder="Masukan Departemen">
                             </div>
                         </div>
@@ -291,14 +257,14 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="form-control-label" for="praktisi">Praktisi</label>
-                                <input type="text" class="form-control" id="praktisi" name="praktisi"
+                                <input type="text" class="form-control" value="{{ $item->praktisi }}" id="praktisi" name="praktisi"
                                     placeholder="Masukan Praktisi">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="form-control-label" for="nama_instansi">Nama Instansi</label>
-                                <input type="text" class="form-control" id="nama_instansi" name="nama_instansi"
+                                <input type="text" class="form-control" value="{{ $item->nama_instansi }}" id="nama_instansi" name="nama_instansi"
                                     placeholder="Masukan nama instansi">
                             </div>
                         </div>
@@ -307,14 +273,14 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="form-control-label" for="alamat_instansi">Alamat Instansi</label>
-                                <input type="text" class="form-control" id="alamat_instansi" name="alamat_instansi"
+                                <input type="text" class="form-control" value="{{ $item->alamat_instansi }}" id="alamat_instansi" name="alamat_instansi"
                                     placeholder="Masukan alamat instansi">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="form-control-label" for="pendidikan">Pendidikan Terakhir</label>
-                                <input type="text" class="form-control" id="pendidikan" name="pendidikan_terakhir"
+                                <input type="text" class="form-control" value="{{ $item->pendidikan_terakhir }}" id="pendidikan" name="pendidikan_terakhir"
                                     placeholder="Masukan Pendidikan Terakhir">
                             </div>
                         </div>

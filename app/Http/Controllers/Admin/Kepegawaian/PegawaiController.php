@@ -4,13 +4,13 @@ namespace App\Http\Controllers\Admin\Kepegawaian;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-use App\Models\Kepegawain\Kota;
-use App\Models\Kepegawain\Pangkat;
-use App\Models\Kepegawain\Pegawai;
-use App\Models\Kepegawain\Provinsi;
+use App\Models\Kepegawaian\Kota;
+use App\Models\Kepegawaian\Pangkat;
+use App\Models\Kepegawaian\Pegawai;
+use App\Models\Kepegawaian\Provinsi;
 use App\Http\Controllers\Controller;
-use App\Models\Kepegawain\Kecamatan;
-use App\Models\Kepegawain\Jabatan_struktural;
+use App\Models\Kepegawaian\Kecamatan;
+use App\Models\Kepegawaian\Jabatan_struktural;
 
 class PegawaiController extends Controller
 {
@@ -139,7 +139,7 @@ class PegawaiController extends Controller
             'id_jabatan' =>$request->id_jabatan,
             'id_pangkat' =>$request->id_pangkat,
         ]);
-
+        // dd($user);
         $user->save();
         
 
@@ -166,7 +166,25 @@ class PegawaiController extends Controller
      */
     public function edit($id)
     {
-        //
+        $kota = Kota::all();
+        $kecamatan = Kecamatan::paginate(5);
+        $provinsi = Provinsi::all();
+        $pangkat = Pangkat::all();
+        $jabatan = Jabatan_struktural::all();
+
+        $item = Pegawai::find($id);
+
+        return view('admin.masterKepegawaian.pegawai.edit',[
+                "id" => $id,
+                "title" => "akademik-kepegawaian",
+                "kota" => $kota,
+                "kecamatan" => $kecamatan,
+                "provinsi" => $provinsi,
+                "pangkat" => $pangkat,
+                "jabatan" => $jabatan,
+                "item" => $item
+                
+        ]);
     }
 
     /**
@@ -178,7 +196,11 @@ class PegawaiController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $pgw = Pegawai::find($id);
+        $pgw->update($request->all()); 
+
+
+        return redirect()->route('dataPegawai.index');
     }
 
     /**
@@ -189,6 +211,9 @@ class PegawaiController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $pgw = Pegawai::where('id', $id)->first();
+        $pgw->delete();
+         return back();
+        
     }
 }
