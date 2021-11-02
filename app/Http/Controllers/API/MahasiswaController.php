@@ -20,16 +20,15 @@ class MahasiswaController extends Controller
 	protected $data = null;
 	public function index(Request $request)
 	{
-		$data = $request->all();
-		$where = [];
+		$where = [
+			['m.status','=','A']
+		];
 		if ( $request->program_studi != null ||  !isset($request->program_studi) ) {
 			array_push($where,['m.program_studi','=',$request->program_studi]);
 		}
-		array_push($where,['m.status','=',$request->status]);
-		
 		try {
 			$data = DB::table('mahasiswa as m')
-			->select('m.nomor','m.nrp','m.nama','m.tgllahir','m.notelp','m.email',)
+			->select('m.nomor','m.nrp','m.nama',DB::raw('DATE_FORMAT(m.tgllahir, "%Y-%m-%d") as tgllahir'),'m.notelp','m.email',)
 			->join('kelas as k','m.kelas','=','k.nomor','left')
 			->join('program_studi as ps','ps.nomor','=','m.program_studi')
 			->where($where)
