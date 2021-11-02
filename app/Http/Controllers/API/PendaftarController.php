@@ -58,6 +58,7 @@ class PendaftarController extends Controller
 
 	public function dashboard(Request $request)
 	{
+		DB::enableQueryLog();
 		$token = $request->header('token');
 		try {
 			$id = Crypt::decrypt($token);
@@ -81,6 +82,7 @@ class PendaftarController extends Controller
 					->first();
 				}	
 			}
+
 			$info = DB::table('pendaftar')->select('status','program_studi','program_studi_luar')->where('nomor',$id)->first();
 			array_push($arr_info,$info);
 			if ($info->program_studi != null) {
@@ -90,18 +92,32 @@ class PendaftarController extends Controller
 				->join('program as p','p.nomor','=','ps.program')
 				->where('ps.nomor',$info->program_studi)
 				->first();
-				$arr = [
-					'politeknik' => $poltek,
-					'prodi' => $prodi->prodi
-				];
+				$tanggungan = DB::table('mahasiswa as m')
+								->select('m.ukt_kelompok','m.ukt','tk.spi')
+								->join('tarif_kelompok as tk','tk.program_studi','=','m.program_studi')
+								->where('m.id_pendaftar',$id)
+								->first();
+				$info->ukt_kelompok = $tanggungan->ukt_kelompok;
+				$info->ukt = $tanggungan->ukt;
+				$info->spi = $tanggungan->spi;
+				$info->politeknik = $poltek;
+				$info->prodi = $prodi->prodi;
+				// $arr = [
+				// 	'politeknik' => $poltek,
+				// 	'prodi' => $prodi->prodi
+				// ];
 			}else{
-				$arr = DB::table('politeknik as p')
-				->select('p.politeknik',DB::raw('CONCAT(pj.jenjang," ",pj.jurusan) as prodi'))
-				->join('politeknik_jurusan as pj','p.id','=','pj.id_politeknik')
-				->where('pj.id',$info->program_studi_luar)
-				->first();
+				if ($info->program_studi_luar!=null) {
+					$arr = DB::table('politeknik as p')
+					->select('p.politeknik',DB::raw('CONCAT(pj.jenjang," ",pj.jurusan) as prodi'))
+					->join('politeknik_jurusan as pj','p.id','=','pj.id_politeknik')
+					->where('pj.id',$info->program_studi_luar)
+					->first();
+					$info->politeknik = $arr->politeknik;
+					$info->prodi = $arr->prodi;
+				}
 			}
-			array_push($arr_info,$arr);
+
 			$this->data = ['info'=>$info,'poliwangi'=>$arr_poliwangi,'poltek_lain'=>$poltek_lain];
 			$this->status = "success";
 		} catch (QueryException $e) {
