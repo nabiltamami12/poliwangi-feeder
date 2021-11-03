@@ -430,6 +430,21 @@ class BerkasKeuanganController extends Controller
         ]);
     }
 
+    public function update_jatuh_tempo(Request $request)
+    {
+        if (isset($request->tgl) && isset($request->id)) {
+            $kb = KB::find($request->id);
+            $kb->tanggal = $request->tgl;
+            $kb->save();
+            $this->status = 'success';
+        }
+        return response()->json([
+            "status" => $this->status,
+            "data" => $this->data,
+            'error' => $this->error,
+        ]);
+    }
+
     public function upload_buku_besar(Request $request)
     {
         try {
