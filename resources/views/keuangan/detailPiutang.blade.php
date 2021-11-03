@@ -74,7 +74,7 @@
             <table class="table">
               <thead>
                 <tr>
-                  <th>Nominal</th><th>Tanggal</th><th>Status</th><th>Aksi</th>
+                  <th>Nominal</th><th>Tanggal Jatuh Tempo</th><th>Status</th><th>Aksi</th>
                 </tr>
               </thead>
               <tbody>
@@ -136,11 +136,17 @@
           list_riwayat_cicilan = res.data.riwayat[i].cicilan
           for (var j = 0; j < list_riwayat_cicilan.length; j++) {
             var aksi_bl = ''
+            var tgl_bl = list_riwayat_cicilan[j].tanggal
             if (list_riwayat_cicilan[j].status != '1') {
-              aksi_bl = '<button type="button" class="btn btn-secondary btn-sm" style="height: 22px" onclick="simpanBl('+list_riwayat_cicilan[j].id+', \''+list_riwayat_cicilan[j].tanggal+'\')">Simpan</button>'
+              aksi_bl = '<button type="button" class="btn btn-secondary btn-sm" style="height: 22px" onclick="simpanBl('+list_riwayat_cicilan[j].id+', \''+j+'\')">Simpan</button>'
+              var newDate2 = new Date(list_riwayat_cicilan[j].tanggal);
+              var mm2 = newDate2.getMonth();
+              var dd2 = newDate2.getDate();
+              var aa2 = newDate2.getFullYear() +"-" + (mm2 < 10? "0":"") +mm2 +"-" + (dd2 < 10? "0":"") + dd2;
+              tgl_bl = '<input class="tgl_bl'+j+'" type="date" value="'+aa2+'">'
               cicilan_belum_lunas+=parseInt(list_riwayat_cicilan[j].nominal)
             }
-            $(".riwayat_cicilan table tbody").append(`<tr><td>`+formatAngka(list_riwayat_cicilan[j].nominal)+`</td><td>`+list_riwayat_cicilan[j].tanggal+`</td><td>`+(list_riwayat_cicilan[j].status == 1 ? 'Lunas' : 'Belum Lunas')+`</td><td>`+aksi_bl+`</td></tr>`)
+            $(".riwayat_cicilan table tbody").append(`<tr><td>`+formatAngka(list_riwayat_cicilan[j].nominal)+`</td><td>`+tgl_bl+`</td><td>`+(list_riwayat_cicilan[j].status == 1 ? 'Lunas' : 'Belum Lunas')+`</td><td>`+aksi_bl+`</td></tr>`)
           }
         }
         // ukt += cicilan_belum_lunas
@@ -224,8 +230,27 @@
     });
   });
 
-  function simpanBl(id, tanggal) {
-    console.log(id, tanggal)
+  function simpanBl(id, k) {
+    var tgl = $('.tgl_bl'+k).val()
+    var form_data = new FormData();
+    form_data.append('id', id)
+    form_data.append('tgl', tgl)
+    $.ajax({
+      url: url_api+"/keuangan/update-jatuh-tempo",
+      dataType: 'json',
+      cache: false,
+      contentType: false,
+      processData: false,
+      data: form_data,                         
+      type: 'post',
+      beforeSend: function(text) {
+        // loading('show')
+      },
+      success: function(res){
+        // location.reload()
+        // loading('hide')
+      }
+    });
   }
 
 //   $(document).ready(function() {
