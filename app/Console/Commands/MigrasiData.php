@@ -133,7 +133,6 @@ class MigrasiData extends Command
     private function add_prodi_mahasiswa()
     {
         $this->info("[Proses] Add program_studi mahasiswa");
-        $this->info("[...]");
         $this->warn('*mungkin akan membutuhkan waktu lama');
         $obj = DB::select(DB::raw('
             SELECT m.nomor, m.nrp, m.nama, m.kelas, m.kelas_lama, m.program_studi, ko.kode ko_kode, k.kode k_kode, k.program_studi program_studi_kelas
@@ -144,13 +143,17 @@ class MigrasiData extends Command
         '));
 
         // yang di update pada tabel "mahasiswa" hanya field program_studi saja
+        $progressBar = $this->output->createProgressBar(count($obj));
+        $progressBar->start();
         foreach ($obj as $k => $v) {
-            DB::beginTransaction();
+            sleep(3);
+            $progressBar->advance();
+            if (!$v->program_studi_kelas) continue;
 
+            DB::beginTransaction();
             DB::table('mahasiswa')->where('nomor', '=', $v->nomor)->update([
                 "program_studi" => $v->program_studi_kelas
             ]);
-
             DB::table('tmp_backup_migration_mahasiswa')->insert([
                 "nomor" => $v->nomor,
                 "nrp" => $v->nrp,
@@ -159,10 +162,10 @@ class MigrasiData extends Command
                 "kelas_lama" => $v->kelas_lama,
                 "program_studi" => $v->program_studi
             ]);
-
             DB::commit();
         }
-        $this->info("[Selesai] Add program_studi mahasiswa");
+        $progressBar->finish();
+        $this->info("\n[Selesai] Add program_studi mahasiswa");
         return true;
     }
 }
