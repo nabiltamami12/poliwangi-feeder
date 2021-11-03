@@ -26,7 +26,8 @@ class Controller extends BaseController
         // cari "kelas" yang tidak ada pada "program_studi", kemudian cari di "kelas_old" untuk mengisi "kelas"
         // mengambil kode "kelas" yang tidak ada di "program_studi" kemudian mencocokan dengan "kelas_old"
         $cek_program_studi_null = DB::select(DB::raw('
-            SELECT * FROM kelas_old ko 
+            SELECT ko.jurusan, ko.program, jo.jurusan as nama_jurusan, ko.kode FROM kelas_old ko 
+            LEFT JOIN jurusan_old jo ON ko.jurusan = jo.nomor 
             WHERE ko.kode IN (
                 SELECT k.kode FROM kelas k 
                 LEFT JOIN program_studi ps  on k.program_studi = ps.nomor 
@@ -79,7 +80,27 @@ class Controller extends BaseController
             }
         }
 
-        return $jurusan_old;
+        if ($cek_program_studi_null) {
+            // update atau create ke tabel "program_studi"
+            foreach ($cek_program_studi_null as $k => $v) {
+                \App\Models\Prodi::updateOrCreate(
+                    ['jurusan' => $v->jurusan, 'program' => $v->program, 'program_studi' => $v->nama_jurusan],
+                    ['jurusan' => $v->jurusan, 'program' => $v->program, 'program_studi' => $v->nama_jurusan]
+                );
+            }
+
+            // update field program_sutdi di tabel "kelas"
+            foreach ($cek_program_studi_null as $k => $v) {
+                $nomor_prodi = \App\Models\Prodi::select('nomor')->where([
+                    ['program', '=', $v->program],
+                    ['jurusan', '=', $v->jurusan],
+                    ['program_studi', '=', $v->nama_jurusan]
+                ])->first();
+                if(!$nomor_prodi) continue;
+                \App\Models\Kelas::where('kode', '=', $v->kode)->update(['program_studi' => $nomor_prodi->nomor]);
+            }
+        }
+
         return $cek_program_studi_null;
 
         /**
