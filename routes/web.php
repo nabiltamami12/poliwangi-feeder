@@ -21,8 +21,6 @@ use Illuminate\Support\Facades\Route;
 //     'Authorization' => 'Bearer '.$accessToken,
 // ])->get('http://127.0.0.1:8000/admin/master-fakultas');
 
-Route::get('/migration_mahasiswa/{aksi}', [\App\Http\Controllers\Controller::class, 'migration_data_mahasiswa'] );
-
 Route::get('/', function () {
     return view('halamanAwal.login');
 })->name('login');
