@@ -146,23 +146,22 @@ class MigrasiData extends Command
         $progressBar = $this->output->createProgressBar(count($obj));
         $progressBar->start();
         foreach ($obj as $k => $v) {
-            sleep(3);
+            if ($v->program_studi_kelas){
+                DB::beginTransaction();
+                DB::table('mahasiswa')->where('nomor', '=', $v->nomor)->update([
+                    "program_studi" => $v->program_studi_kelas
+                ]);
+                DB::table('tmp_backup_migration_mahasiswa')->insert([
+                    "nomor" => $v->nomor,
+                    "nrp" => $v->nrp,
+                    "nama" => $v->nama,
+                    "kelas" => $v->kelas,
+                    "kelas_lama" => $v->kelas_lama,
+                    "program_studi" => $v->program_studi
+                ]);
+                DB::commit();
+            }
             $progressBar->advance();
-            if (!$v->program_studi_kelas) continue;
-
-            DB::beginTransaction();
-            DB::table('mahasiswa')->where('nomor', '=', $v->nomor)->update([
-                "program_studi" => $v->program_studi_kelas
-            ]);
-            DB::table('tmp_backup_migration_mahasiswa')->insert([
-                "nomor" => $v->nomor,
-                "nrp" => $v->nrp,
-                "nama" => $v->nama,
-                "kelas" => $v->kelas,
-                "kelas_lama" => $v->kelas_lama,
-                "program_studi" => $v->program_studi
-            ]);
-            DB::commit();
         }
         $progressBar->finish();
         $this->info("\n[Selesai] Add program_studi mahasiswa");
