@@ -16,11 +16,12 @@ class AddTmpLogMigrationMhs extends Migration
         Schema::create('tmp_backup_migration_mahasiswa', function (Blueprint $table) {
             $table->increments('nomor');
             $table->string('nrp', 20);
-            $table->string('nama', 100);
-            $table->smallInteger('kelas');
-            $table->smallInteger('kelas_lama');
-            $table->integer('program_studi');
-            $table->timestamps();
+            $table->string('nama', 100)->nullable()->default(null);
+            $table->smallInteger('kelas')->nullable()->default(null);
+            $table->smallInteger('kelas_lama')->nullable()->default(null);
+            $table->integer('program_studi')->nullable()->default(null);
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->nullable()->default(null)->useCurrentOnUpdate();
         });
     }
 

@@ -21,7 +21,31 @@ class Controller extends BaseController
         $this->semester_aktif = $data->semester;
     }
 
-    public function migration_data_mahasiswa()
+    public function migration_data_mahasiswa($aksi=null)
+    {
+        switch ($aksi) {
+            case '_sync':
+                // step 1
+                return $this->sync_kelas_dan_prodi();
+                break;
+            case '_prodi_mhs':
+                // step 2
+                return $this->add_prodi_mahasiswa();
+                break;
+            case '_all':
+                $step_1 = $this->sync_kelas_dan_prodi(); // step 1
+                echo $step_1.'<br>';
+                $step_2 = $this->add_prodi_mahasiswa(); // step 2
+                echo $step_2.'<br>';
+                return "(migrasi data mahasiswa : proses selesai).";
+                break;
+            default:
+                break;
+        }
+    }
+
+    // step 1
+    private function sync_kelas_dan_prodi()
     {
         // cari "kelas" yang tidak ada pada "program_studi", kemudian cari di "kelas_old" untuk mengisi "kelas"
         // mengambil kode "kelas" yang tidak ada di "program_studi" kemudian mencocokan dengan "kelas_old"
@@ -100,31 +124,39 @@ class Controller extends BaseController
                 \App\Models\Kelas::where('kode', '=', $v->kode)->update(['program_studi' => $nomor_prodi->nomor]);
             }
         }
+        return "(Sinkron data kelas dan program_studi : proses selesai).";
+    }
 
-        return $cek_program_studi_null;
+    // step 2
+    private function add_prodi_mahasiswa()
+    {
+        $obj = DB::select(DB::raw('
+            SELECT m.nomor, m.nrp, m.nama, m.kelas, m.kelas_lama, m.program_studi, ko.kode ko_kode, k.kode k_kode, k.program_studi program_studi_kelas
+            FROM mahasiswa m
+            LEFT JOIN kelas_old ko ON m.kelas = ko.nomor
+            LEFT JOIN kelas k ON ko.kode = k.kode 
+            WHERE m.program_studi = 0 OR m.program_studi IS NULL
+        '));
 
-        /**
-        $data = DB::table('mahasiswa as x')
-            ->selectRaw('x.nomor, x.nrp, x.nama, x.program_studi, x.kelas, x.kelas_lama')
-            ->leftJoin('kelas_old as ko', 'x.kelas', '=', 'ko.nomor')
-            ->where(function($query) {
-                $query->whereNull('x.program_studi')
-                      ->orWhere('x.program_studi', '=', 0);
-            })
-            ->whereNotNull('ko.nomor')
-            ->get();
-
-        foreach ($data as $k => $v) {
+        // yang di update pada tabel "mahasiswa" hanya field program_studi saja
+        foreach ($obj as $k => $v) {
             DB::beginTransaction();
-            try {
 
-                DB::commit();
-            } catch (\Exception $e) {
-                DB::rollback();
-            } catch (\Throwable $e) {
-                DB::rollback();
-            }
+            DB::table('mahasiswa')->where('nomor', '=', $v->nomor)->update([
+                "program_studi" => $v->program_studi_kelas
+            ]);
+
+            DB::table('tmp_backup_migration_mahasiswa')->insert([
+                "nomor" => $v->nomor,
+                "nrp" => $v->nrp,
+                "nama" => $v->nama,
+                "kelas" => $v->kelas,
+                "kelas_lama" => $v->kelas_lama,
+                "program_studi" => $v->program_studi
+            ]);
+
+            DB::commit();
         }
-        */
+        return "(add program_studi mahasiswa : proses selesai).";
     }
 }
