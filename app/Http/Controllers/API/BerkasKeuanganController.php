@@ -533,4 +533,46 @@ class BerkasKeuanganController extends Controller
         ini_set('max_execution_time', '-1');
         return Excel::download(new PiutangExport, 'Rekap Piutang Mahasiswa.xlsx');
     }
+
+    public function mahasiswa_pembayaran_tagihan(Request $request)
+    {
+        $request->validate([
+            'id_mahasiswa' => 'required'
+        ]);
+        $this->status = 'success';
+        $id_mahasiswa = $request->id_mahasiswa;
+        $kb = KB::select('nominal', 'tanggal', 'trx_id', 'nomor_va')->where('id_mahasiswa', $id_mahasiswa)->where('status', null)->where('id_piutang', 'NOT', null)->orderBy('tanggal')->first();
+        $data = (object)[];
+        $data->tipe = 'ukt';
+        if (isset($kb->nominal)) {
+            $data = $kb;
+            $data->tipe = 'cicilan';
+        }else{
+            $mhs = DB::table('mahasiswa')->select('ukt', 'tglmasuk')->where('nomor', $id_mahasiswa)->first();
+            $data->nominal = $mhs->ukt;
+            $periode = Periode::select('tahun', 'semester')->orderByDesc('status')->orderByDesc('tahun')->limit(1)->first();
+            $semester = $periode->tahun.$periode->semester;
+            $angkatan = date('Y', strtotime($mhs->tglmasuk));
+            $semesterke = \App\Helpers\CoreHelper::hitung_semester($semester, $angkatan);
+            $kb = KB::select('nominal', 'tanggal', 'trx_id', 'nomor_va', 'status')->where('id_mahasiswa', $id_mahasiswa)->where('semester', $semesterke)->first();
+            if (isset($kb->status) && $kb->status == 1) {
+                $data->tipe = 'lunas';
+            }else{
+                if (isset($kb->nomor_va)) {
+                    $data->nomor_va = $kb->nomor_va;
+                }else{
+                    $data->nomor_va = null;
+                }
+            }
+        }
+        if (isset($request->generate_va) && $request->generate_va == 1) {
+            $data->nomor_va = '8277087781881441';
+        }
+        $this->data = $data;
+        return response()->json([
+            "status" => $this->status,
+            "data" => $this->data,
+            "error" => $this->error
+        ]);
+    }
 }
