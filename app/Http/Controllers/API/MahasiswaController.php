@@ -56,13 +56,10 @@ class MahasiswaController extends Controller
 			$data = $request->all();
 			$where = [];
 			if ( isset($request->program) ) {
-				array_push($where,['k.program','=',$request->program]);
+				array_push($where,['ps.program','=',$request->program]);
 			}
 			if ( isset($request->jurusan) ) {
-				array_push($where,['k.jurusan','=',$request->jurusan]);
-			}
-			if ( isset($request->kelas) ) {
-				array_push($where,['k.kelas','=',$request->kelas]);
+				array_push($where,['ps.jurusan','=',$request->jurusan]);
 			}
 			array_push($where,['m.status','=',$request->status]);
 
