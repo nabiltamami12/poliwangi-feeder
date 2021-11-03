@@ -26,6 +26,9 @@ class MahasiswaController extends Controller
 		if ( $request->program_studi != null ||  !isset($request->program_studi) ) {
 			array_push($where,['m.program_studi','=',$request->program_studi]);
 		}
+		if ($request->kelas) {
+			array_push($where,['m.kelas','=',$request->kelas]);	
+		}
 		try {
 			$data = DB::table('mahasiswa as m')
 			->select('m.nomor','m.nrp','m.nama',DB::raw('DATE_FORMAT(m.tgllahir, "%Y-%m-%d") as tgllahir'),'m.notelp','m.email',)
