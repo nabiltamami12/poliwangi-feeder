@@ -26,6 +26,9 @@ class MahasiswaController extends Controller
 		if ( $request->program_studi != null ||  !isset($request->program_studi) ) {
 			array_push($where,['m.program_studi','=',$request->program_studi]);
 		}
+		if ($request->kelas) {
+			array_push($where,['m.kelas','=',$request->kelas]);	
+		}
 		try {
 			$data = DB::table('mahasiswa as m')
 			->select('m.nomor','m.nrp','m.nama',DB::raw('DATE_FORMAT(m.tgllahir, "%Y-%m-%d") as tgllahir'),'m.notelp','m.email',)
@@ -53,13 +56,10 @@ class MahasiswaController extends Controller
 			$data = $request->all();
 			$where = [];
 			if ( isset($request->program) ) {
-				array_push($where,['k.program','=',$request->program]);
+				array_push($where,['ps.program','=',$request->program]);
 			}
 			if ( isset($request->jurusan) ) {
-				array_push($where,['k.jurusan','=',$request->jurusan]);
-			}
-			if ( isset($request->kelas) ) {
-				array_push($where,['k.kelas','=',$request->kelas]);
+				array_push($where,['ps.jurusan','=',$request->jurusan]);
 			}
 			array_push($where,['m.status','=',$request->status]);
 

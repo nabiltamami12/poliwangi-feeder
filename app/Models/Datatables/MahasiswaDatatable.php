@@ -14,7 +14,7 @@ class MahasiswaDatatable extends Datatable
 
     // datatable
     protected $table_datatables = 'mahasiswa as m';
-    protected $select = array('m.nomor','m.nrp','m.nama','m.tgllahir','m.notelp','m.email');
+    protected $select = array('m.nomor','m.nrp','m.nama','DATE_FORMAT(m.tgllahir, "%Y-%m-%d") as tgllahir','m.notelp','m.email');
     protected $column_order = array('m.nomor','m.nrp','m.nama','m.tgllahir','m.notelp','m.email', null);
     protected $column_search = array('m.nrp','m.nama','m.tgllahir','m.notelp','m.email');
     protected $order = array('m.nomor' => 'desc');
@@ -25,13 +25,13 @@ class MahasiswaDatatable extends Datatable
     }
     public function extra_datatables()
     {
-        $this->dt->join('kelas_old as k','m.kelas','=','k.nomor','left')
-            ->join('program_old as p','k.program','=','p.nomor','left')
-            ->join('jurusan_old as j','k.jurusan','=','j.nomor')
+        $this->dt->join('program_studi as ps','m.program_studi','=','ps.nomor','left')
+            ->join('program as p','ps.program','=','p.nomor','left')
+            ->join('jurusan as j','ps.jurusan','=','j.nomor')
             ->where($this->where);
 
-        $this->dtc->join('kelas_old as k','m.kelas','=','k.nomor','left')
-            ->join('jurusan_old as j','k.jurusan','=','j.nomor')
+        $this->dtc->join('program_studi as ps','m.program_studi','=','ps.nomor','left')
+            ->join('jurusan as j','ps.jurusan','=','j.nomor')
             ->where($this->where);
     }
     // end datatable

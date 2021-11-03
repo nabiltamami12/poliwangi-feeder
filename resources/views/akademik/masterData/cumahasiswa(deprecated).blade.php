@@ -9,7 +9,7 @@
   <section class="page-content container-fluid" id="akademik_datajurusan">
     <div class="row">
       <div class="col-xl-12">
-        {{-- <div class="card shadow padding--small card_step">
+        <div class="card shadow padding--small card_step">
           <hr class="d-none d-md-block">
           <div class='tab-buttons'>
             <span class='content1'>Biodata Diri</span>
@@ -17,7 +17,7 @@
             <span class='content3'>Data Orang Tua</span>
             <span class='content4'>Sekolah Asal</span>
           </div>
-        </div> --}}
+        </div>
 
         <div class="card shadow padding--small tab-content">
           <form id="form_cu" class="form-input mt-0">
@@ -561,21 +561,21 @@
       });
 
       // Tab
-      // $('.tab-buttons span').first().addClass('active');
-      // $('.content').hide();
-      // $('.tab-content .content1').show();
-      // $('.tab-buttons span').click(function() {
-      //   $('.tab-buttons span').removeClass('active');
-      //   const getClass = $(this).attr('class').split(' ')[0];
-      //   $(this).addClass('active');
-      //   $('.content').each(function() {
-      //     if ($(this).hasClass(getClass)) {
-      //       $(this).fadeIn(500);
-      //     } else {
-      //       $(this).hide();
-      //     }
-      //   });
-      // });
+      $('.tab-buttons span').first().addClass('active');
+      $('.content').hide();
+      $('.tab-content .content1').show();
+      $('.tab-buttons span').click(function() {
+        $('.tab-buttons span').removeClass('active');
+        const getClass = $(this).attr('class').split(' ')[0];
+        $(this).addClass('active');
+        $('.content').each(function() {
+          if ($(this).hasClass(getClass)) {
+            $(this).fadeIn(500);
+          } else {
+            $(this).hide();
+          }
+        });
+      });
     });
 
     async function getData(id) {
