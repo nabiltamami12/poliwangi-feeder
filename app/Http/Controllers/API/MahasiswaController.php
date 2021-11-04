@@ -5,7 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Mahasiswa;
-use App\Models\Datatables\MahasiswaDatatable;
+use App\Datatables\MahasiswaDatatable;
 use App\Models\Nilai;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
@@ -31,7 +31,7 @@ class MahasiswaController extends Controller
 		}
 
 		try {
-			$obj = new \App\Models\Datatables\MahasiswaMasterDatatable($where);
+			$obj = new \App\Datatables\MahasiswaMasterDatatable($where);
 			$lists = $obj->get_datatables();
 			$data = [];
 			$no = $request->input("start");
