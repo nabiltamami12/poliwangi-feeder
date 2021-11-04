@@ -40,6 +40,14 @@
 			}else{
 				$('.lunas').show()
 			}
+			for (var i = 0; i < res.data.riwayat.length; i++) {
+				
+				$('table.riwayat tbody').append(`
+							<tr>
+								<td>`+formatTanggal(res.data.riwayat[i].tanggal)+`</td>
+								<td>`+formatAngka(res.data.riwayat[i].nominal)+`</td>
+							</tr>`)
+			}
 			// console.log(res)
 			// location.reload()
 			// loading('hide')
@@ -61,7 +69,7 @@
 						</div>
 					</div>
 				</div>
-				<hr class="my-4">
+				<hr class="my-2">
 				<div class="card-body p-0 lunas">
 					Lunas
 				</div>
@@ -87,7 +95,7 @@
 					<hr class="mt-4">
 					<div class="va_aktif">
 						<div class="form-group">
-							<label class="mt-4-5">VA Aktif Saat Ini</label>
+							<label class="mt-3-5">VA Aktif Saat Ini</label>
 							<div class="field_kode mt-2">
 								<input type="text" class="form-control pl-2" id="va-aktif" value="1281928746273601" readonly>
 								<button class="salin_kode btn btn-primary">Salin Kode</button>
@@ -107,6 +115,25 @@
 						</div>
 						<h6 class="mb-0 font-italic mt-3">Konfirmasi Pembayaran akan dicek secara otomatis 10 menit setelah pembayaran berhasil</h6>
 					</div>
+				</div>
+				<div class="card-header p-0 pt-3">
+					<div class="row">
+						<div class="col">
+							<h3 class="mb-0 font-weight-bold">Riwayat Pembayaran</h3>
+						</div>
+					</div>
+				</div>
+				<div class="card-body p-0">
+					<table class="table riwayat">
+						<thead>
+							<tr>
+								<th>Tanggal Bayar</th>
+								<th>Jumlah</th>
+							</tr>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>
 				</div>
 			</div>
 		</div>

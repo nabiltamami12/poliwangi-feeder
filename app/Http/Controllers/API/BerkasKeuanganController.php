@@ -541,7 +541,7 @@ class BerkasKeuanganController extends Controller
         ]);
         $this->status = 'success';
         $id_mahasiswa = $request->id_mahasiswa;
-        $kb = KB::select('nominal', 'tanggal', 'trx_id', 'nomor_va')->where('id_mahasiswa', $id_mahasiswa)->where('status', null)->where('id_piutang', 'NOT', null)->orderBy('tanggal')->first();
+        $kb = KB::select('nominal', 'tanggal', 'trx_id', 'nomor_va')->where('id_mahasiswa', $id_mahasiswa)->where('status', null)->where('id_piutang', '!=', null)->orderBy('tanggal')->first();
         $data = (object)[];
         $data->tipe = 'ukt';
         if (isset($kb->nominal)) {
@@ -568,6 +568,8 @@ class BerkasKeuanganController extends Controller
         if (isset($request->generate_va) && $request->generate_va == 1) {
             $data->nomor_va = '8277087781881441';
         }
+        $riwayat = KB::select('tanggal', 'nominal', 'id_piutang')->where('id_mahasiswa', $id_mahasiswa)->where('status', 1)->orderByDesc('tanggal')->get();
+        $data->riwayat = $riwayat;
         $this->data = $data;
         return response()->json([
             "status" => $this->status,
