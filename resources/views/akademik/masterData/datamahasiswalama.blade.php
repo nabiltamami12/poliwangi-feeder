@@ -79,12 +79,9 @@
 	</div>
 </section>
 <script>
-	$(document).ready(function() {
+$(document).ready(function() {
 	getData();
 
-	// $('#searchdata').on('keyup', function() {
-	//   dt.search(this.value).draw();
-	// });
 //   $('#program_studi').on('change',function (e) {
 //     var program_studi = $(this).val()
 //     var kelas = $.grep(dataGlobal['kelas'], function(e){ return e.program_studi == program_studi; });
@@ -96,7 +93,7 @@
 //     })
 //     $('#kelas').append(optKelas); 
 //   })
-} );
+});
 function cari_btn() {
 		var where = `status=${$('#status').val()}`;
 		if ($('#program').val() != "-") {
@@ -131,11 +128,6 @@ async function getData() {
 								optJurusan += `<option value="${row.nomor}">${row.jurusan} </option>`
 						})
 						$('#jurusan').append(optJurusan)
-						var optKelas = `<option value="-"> - </option>`;
-						$.each(res.data.kelas,function (key,row) {
-								optKelas += `<option value="${row.nomor}">${row.kelas} ${row.pararel} </option>`
-						})
-						$('#kelas').append(optKelas)
 				} else {
 						// alert gagal
 				}
