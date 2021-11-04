@@ -48,7 +48,7 @@
 								<th scope="col" class="text-center px-2">No</th>
 								<th scope="col">NIM</th>
 								<th scope="col">Nama</th>
-								<th scope="col" class="text-center">Tanggal Lahir</th>
+								<th scope="col" class="align-right">UKT</th>
 								<th scope="col" class="text-center">No. Telp</th>
 								<th scope="col" class="text-center">Email</th>
 								<th scope="col" class="text-center">Aksi</th>
@@ -114,7 +114,7 @@
 			$('#kelas').append(optKelas); 
 		})
 		$('.select-filter').on('change',function (e) {
-			var url = `${url_api}/pendaftar/mahasiswa?program_studi=${$('#program_studi').val()}&status=${$('#status').val()}&kelas=${$('#kelas').val()}`;
+			var url = `${url_api}/keuangan/atur-mahasiswa?program_studi=${$('#program_studi').val()}&status=${$('#status').val()}&kelas=${$('#kelas').val()}`;
 			dt.ajax.url(url).load();
 		})
 	} );
@@ -212,7 +212,7 @@
 	}
 	function setDatatable() {
 		var nomor = 1;
-		dt_url = `${url_api}/pendaftar/mahasiswa?program_studi=${$('#program_studi').val()}&status=A&kelas=${$('#kelas').val()}`;
+		dt_url = `${url_api}/keuangan/atur-mahasiswa?program_studi=${$('#program_studi').val()}&status=A&kelas=${$('#kelas').val()}`;
 		dt_opt = {
 			"columnDefs": [
 			{
@@ -240,7 +240,7 @@
 				"aTargets": [3],
 				"mData": null,
 				"mRender": function(data, type, full) {
-					res = data['tgllahir'];
+					res = formatAngka(data['ukt']);
 					return (res==null)?"-":res;
 				}
 			},{
