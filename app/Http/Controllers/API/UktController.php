@@ -19,7 +19,7 @@ class UktController extends Controller
 	 */
 
 	protected $status = null;
-	protected $err = null;
+	protected $error = null;
 	protected $data = null;
 
 	public function index()
@@ -52,7 +52,7 @@ class UktController extends Controller
 		return response()->json([
 			"status" => $this->status,
 			"data" => $this->data,
-			"error" => $this->err,
+			"error" => $this->error,
 		]);
 	}
 
@@ -90,7 +90,7 @@ class UktController extends Controller
 		return response()->json([
 			'status' => $this->status,
 			'data' => $this->data,
-			'error' => $this->err
+			'error' => $this->error
 		]);
 	}
 
@@ -116,7 +116,7 @@ class UktController extends Controller
 		return response()->json([
 			"status" => $this->status,
 			"data" => $this->data,
-			"error" => $this->err
+			"error" => $this->error
 		]);
 	}
 	
@@ -152,7 +152,7 @@ class UktController extends Controller
 		return response()->json([
 			'status' => $this->status,
 			'data' => $this->data,
-			'error' => $this->err
+			'error' => $this->error
 		]);
 	}
 
@@ -177,7 +177,7 @@ class UktController extends Controller
 		return response()->json([
 			'status' => $this->status,
 			'data' => $this->data,
-			'error' => $this->err
+			'error' => $this->error
 		]);
 	}
 
@@ -198,7 +198,7 @@ class UktController extends Controller
 		return response()->json([
 			"status" => $this->status,
 			"data" => $this->data,
-			"error" => $this->err
+			"error" => $this->error
 		]);
 	}
 
@@ -213,12 +213,43 @@ class UktController extends Controller
             $this->status = "success";
         } catch (QueryException $e) {
             $this->status = "failed";
-            $this->err = $e;
+            $this->error = $e;
         }
 		return response()->json([
 			'status' => $this->status,
 			'data' => $this->data,
-			'error' => $this->err
+			'error' => $this->error
 		]);
 	}
+
+    public function atur_mahasiswa(Request $request)
+    {
+        $data = $request->all();
+        $where = [];
+        if ( $request->program_studi != null ||  !isset($request->program_studi) ) {
+            array_push($where,['m.program_studi','=',$request->program_studi]);
+        }
+        array_push($where,['m.status','=',$request->status]);
+        
+        try {
+         
+            $data = DB::table('mahasiswa as m')
+            ->select('m.nomor','m.nrp','m.nama','m.ukt','m.notelp','m.email','m.program_studi','m.ukt_kelompok',DB::raw('CONCAT(p.program," ",ps.program_studi) as prodi'))
+            ->join('kelas as k','m.kelas','=','k.nomor','left')
+            ->join('program_studi as ps','ps.nomor','=','m.program_studi')
+            ->join('program as p','p.nomor','=','ps.program')
+            ->where($where)
+            ->get();
+            $this->data = $data;
+            $this->status = "success";
+        } catch (QueryException $e) {
+            $this->status = "failed";
+            $this->error = $e;
+        }
+        return response()->json([
+            "status" => $this->status,
+            "data" => $this->data,
+            "error" => $this->error
+        ]);
+    }
 }
