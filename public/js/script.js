@@ -1,6 +1,6 @@
 // SIDEBAR - submenu
 jQuery(function ($) {
-	if (typeof dataGlobal !== 'undefined') {
+	if (dataGlobal !== null) {
 		$('#txt_semester_topnav').html((dataGlobal['periode']['semester']==1)?"Semester Gasal":"Semester Genap");
 		$('#txt_tahun_topnav').html(dataGlobal['periode']['tahun']+"/"+(Number(dataGlobal['periode']['tahun'])+1));
 	}

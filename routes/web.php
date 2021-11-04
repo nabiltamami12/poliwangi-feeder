@@ -21,7 +21,6 @@ use Illuminate\Support\Facades\Route;
 //     'Authorization' => 'Bearer '.$accessToken,
 // ])->get('http://127.0.0.1:8000/admin/master-fakultas');
 
-
 Route::get('/', function () {
     return view('halamanAwal.login');
 })->name('login');
@@ -734,10 +733,9 @@ Route::prefix('keuangan')->middleware(['aksesuntuk:keuangan'])->group(function (
             ]);
         });
 
-        Route::get('/spi/detail/{id}/{nama}', function ($id, $nama) {
+        Route::get('/spi/detail/{id}', function ($id) {
             return view('keuangan.detailSPI', [
                 "id" => $id,
-                'nama' => $nama,
                 "title" => "keuangan-rekapitulasi",
             ]);
         });

@@ -15,6 +15,7 @@ use Illuminate\Database\QueryException;
 use App\Imports\BukuBesarImport;
 use App\Exports\PiutangExport;
 use App\Models\Periode;
+use Illuminate\Validation\Rule;
 
 class BerkasKeuanganController extends Controller
 {
@@ -67,6 +68,7 @@ class BerkasKeuanganController extends Controller
             'keuangan_piutang.id', 
             'keuangan_piutang.id_mahasiswa', 
             'keuangan_piutang.path_perjanjian', 
+            'keuangan_piutang.path_pengajuan', 
             'mahasiswa.nrp as nim',
             'mahasiswa.nama',
             'mahasiswa.ukt',
@@ -430,6 +432,21 @@ class BerkasKeuanganController extends Controller
         ]);
     }
 
+    public function update_jatuh_tempo(Request $request)
+    {
+        if (isset($request->tgl) && isset($request->id)) {
+            $kb = KB::find($request->id);
+            $kb->tanggal = $request->tgl;
+            $kb->save();
+            $this->status = 'success';
+        }
+        return response()->json([
+            "status" => $this->status,
+            "data" => $this->data,
+            'error' => $this->error,
+        ]);
+    }
+
     public function upload_buku_besar(Request $request)
     {
         try {
@@ -517,5 +534,87 @@ class BerkasKeuanganController extends Controller
         ini_set('memory_limit', '-1');
         ini_set('max_execution_time', '-1');
         return Excel::download(new PiutangExport, 'Rekap Piutang Mahasiswa.xlsx');
+    }
+
+    public function mahasiswa_pembayaran_tagihan(Request $request)
+    {
+        $request->validate([
+            'id_mahasiswa' => 'required'
+        ]);
+        $this->status = 'success';
+        $id_mahasiswa = $request->id_mahasiswa;
+        $kb = KB::select('nominal', 'tanggal', 'trx_id', 'nomor_va')->where('id_mahasiswa', $id_mahasiswa)->where('status', null)->where('id_piutang', '!=', null)->orderBy('tanggal')->first();
+        $data = (object)[];
+        $data->tipe = 'ukt';
+        if (isset($kb->nominal)) {
+            $data = $kb;
+            $data->tipe = 'cicilan';
+        }else{
+            $mhs = DB::table('mahasiswa')->select('ukt', 'tglmasuk')->where('nomor', $id_mahasiswa)->first();
+            $data->nominal = $mhs->ukt;
+            $periode = Periode::select('tahun', 'semester')->orderByDesc('status')->orderByDesc('tahun')->limit(1)->first();
+            $semester = $periode->tahun.$periode->semester;
+            $angkatan = date('Y', strtotime($mhs->tglmasuk));
+            $semesterke = \App\Helpers\CoreHelper::hitung_semester($semester, $angkatan);
+            $kb = KB::select('nominal', 'tanggal', 'trx_id', 'nomor_va', 'status')->where('id_mahasiswa', $id_mahasiswa)->where('semester', $semesterke)->first();
+            if (isset($kb->status) && $kb->status == 1) {
+                $data->tipe = 'lunas';
+            }else{
+                if (isset($kb->nomor_va)) {
+                    $data->nomor_va = $kb->nomor_va;
+                }else{
+                    $data->nomor_va = null;
+                }
+            }
+        }
+        if (isset($request->generate_va) && $request->generate_va == 1) {
+            $data->nomor_va = '8277087781881441';
+        }
+        $riwayat = KB::select('tanggal', 'nominal', 'id_piutang')->where('id_mahasiswa', $id_mahasiswa)->where('status', 1)->orderByDesc('tanggal')->get();
+        $data->riwayat = $riwayat;
+        $this->data = $data;
+        return response()->json([
+            "status" => $this->status,
+            "data" => $this->data,
+            "error" => $this->error
+        ]);
+    }
+
+    public function dokumen_mahasiswa(Request $request) {
+        try {
+            $data = $request->all();
+            $validator = Validator::make(
+                $data,
+                [
+                    'tipe' => ['required', Rule::in(['pengajuan', 'perjanjian'])],
+                    'file' => 'required|mimes:doc,docx,pdf,txt|max:4096',
+                    'id_mahasiswa' => 'required'
+                ]
+            );
+    
+            if ($validator->fails()) {
+                return response()->json(['error' => $validator->errors(), 'data' => $data], 401);
+            }
+
+            $periode = Periode::select('tahun', 'semester')->orderByDesc('status')->orderByDesc('tahun')->first();
+            $current_data = BK::select('id', 'status')->where('id_mahasiswa','=',$request->id_mahasiswa)->where('tahun','=',$periode->tahun)->where('semester','=',$periode->semester)->first();
+            if (isset($current_data) && strtolower($current_data->status) == 'pending' && $request->hasFile('file')) {
+                $path = $data['id_mahasiswa'].'_'.$periode->tahun.$periode->semester.'_'.$request->file->getClientOriginalName();
+                if($request->file->storeAs($request->tipe, $path)){
+                    $kb = BK::find($current_data->id);
+                    $kb->{'path_'.$request->tipe} = '/'.$request->tipe.'/'.$path;
+                    $kb->save();
+                    $this->status = "success";
+                }
+            }
+        } catch (QueryException $e) {
+            $this->status = "failed";
+            $this->error = $e;
+        }
+        return response()->json([
+                "status" => $this->status,
+                "data" => $this->data,
+                'error' => $this->error,
+        ]);
     }
 }

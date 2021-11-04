@@ -240,6 +240,7 @@ Route::prefix('v1')->group(function () {
     Route::delete('/keuangan/rekap_ukt/{id}', [Ctr\UktController::class, 'destroy']);
     Route::get('/keuangan/detail', [Ctr\UktController::class, 'details']);
     Route::put('/keuangan/set-ukt/{id}', [Ctr\UktController::class, 'set_ukt_mahasiswa']);
+    Route::get('keuangan/atur-mahasiswa', [Ctr\UktController::class, 'atur_mahasiswa']); //keuangan/rekapitulasi/datamahasiswa
 
 
     // SPI Mandiri
@@ -274,6 +275,10 @@ Route::prefix('v1')->group(function () {
     Route::get('keuangan/template-perjanjian', [Ctr\BerkasKeuanganController::class, 'check_template_perjanjian']);
     Route::get('download/template-perjanjian', [Ctr\BerkasKeuanganController::class, 'download_template_perjanjian']);
     Route::post('keuangan/cicilan-piutang', [Ctr\BerkasKeuanganController::class, 'cicilan_piutang']);
+    Route::post('keuangan/update-jatuh-tempo', [Ctr\BerkasKeuanganController::class, 'update_jatuh_tempo']);
+    Route::post('keuangan/dokumen-piutang', [Ctr\BerkasKeuanganController::class, 'dokumen_mahasiswa']);
+
+    Route::post('keuangan/tagihan-mahasiswa', [Ctr\BerkasKeuanganController::class, 'mahasiswa_pembayaran_tagihan']); //mahasiswa/pembayaran, termasuk generate va
 
     Route::get('/keuangan/rekapitulasi/penyisihanpiutang', [Ctr\BerkasKeuanganController::class, 'penyisihanpiutang']);
     Route::get('/keuangan/export/rekap-piutang', [Ctr\BerkasKeuanganController::class, 'export_piutang']);

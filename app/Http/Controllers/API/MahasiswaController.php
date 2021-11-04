@@ -5,13 +5,26 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Mahasiswa;
-use App\Models\Datatables\MahasiswaDatatable;
+use App\Datatables\MahasiswaDatatable;
 use App\Models\Nilai;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\QueryException;
 use BNI;
 
+/** --Status Mahasiswa--
+ * "A" = Aktif - temporary
+ * "B" = Mahasiswa Baru - temporary
+ * "C" = Cuti - permanent
+ * "D" = DO - permanent
+ * "H" = Punya SPTH - temporary
+ * "K" = Mengundurkan Diri - permanent
+ * "L" = Lulus - permanent
+ * "M" = Meninggal - permanent
+ * "P" = Pendaftar - temporary
+ * "R" = Tugas Akhir - temporary
+ * "T" = Tanpa Keterangan - temporary
+*/
 class MahasiswaController extends Controller
 {
 
@@ -20,22 +33,44 @@ class MahasiswaController extends Controller
 	protected $data = null;
 	public function index(Request $request)
 	{
-		$data = $request->all();
-		$where = [];
+		$where = [
+			['m.status','=','A']
+		];
 		if ( $request->program_studi != null ||  !isset($request->program_studi) ) {
 			array_push($where,['m.program_studi','=',$request->program_studi]);
 		}
-		array_push($where,['m.status','=',$request->status]);
-		
+		if ($request->kelas) {
+			array_push($where,['m.kelas','=',$request->kelas]);	
+		}
+
 		try {
-			$data = DB::table('mahasiswa as m')
-			->select('m.nomor','m.nrp','m.nama','m.tgllahir','m.notelp','m.email',)
-			->join('kelas as k','m.kelas','=','k.nomor','left')
-			->join('program_studi as ps','ps.nomor','=','m.program_studi')
-			->where($where)
-			->get();
-			$this->data = $data;
-			$this->status = "success";
+			$obj = new \App\Datatables\MahasiswaMasterDatatable($where);
+			$lists = $obj->get_datatables();
+			$data = [];
+			$no = $request->input("start");
+			foreach ($lists as $list) {
+				$no++;
+				$row = [];
+				$row[] = $no;
+				$row[] = $list->nrp;
+				$row[] = $list->nama;
+				$row[] = $list->tgllahir;
+				$row[] = $list->notelp;
+				$row[] = $list->email;
+
+				$btn_update = '<span class="iconify edit-icon text-primary" onclick="update_btn('.$list->nomor.')" data-icon="bx:bx-edit-alt" ></span>';
+				$btn_delete = '<span class="iconify delete-icon text-primary" data-icon="bx:bx-trash"  onclick="delete_btn('.$list->nomor.',"mahasiswa","mahasiswa",\''.$list->nama.'\')"></span>';
+				$row[] = $btn_update.$btn_delete;
+				$data[] = $row;
+			}
+			return [
+				"draw" => $request->input('draw'),
+				"recordsTotal" => $obj->count_all_datatables(),
+				"recordsFiltered" => $obj->count_filtered_datatables(),
+				"data" => $data,
+				"status" => "success",
+				"error" => $this->error
+			];
 		} catch (QueryException $e) {
 			$this->status = "failed";
 			$this->error = $e;
@@ -54,13 +89,10 @@ class MahasiswaController extends Controller
 			$data = $request->all();
 			$where = [];
 			if ( isset($request->program) ) {
-				array_push($where,['k.program','=',$request->program]);
+				array_push($where,['ps.program','=',$request->program]);
 			}
 			if ( isset($request->jurusan) ) {
-				array_push($where,['k.jurusan','=',$request->jurusan]);
-			}
-			if ( isset($request->kelas) ) {
-				array_push($where,['k.kelas','=',$request->kelas]);
+				array_push($where,['ps.jurusan','=',$request->jurusan]);
 			}
 			array_push($where,['m.status','=',$request->status]);
 

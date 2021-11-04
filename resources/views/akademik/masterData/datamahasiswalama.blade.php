@@ -79,12 +79,9 @@
 	</div>
 </section>
 <script>
-	$(document).ready(function() {
+$(document).ready(function() {
 	getData();
 
-	// $('#searchdata').on('keyup', function() {
-	//   dt.search(this.value).draw();
-	// });
 //   $('#program_studi').on('change',function (e) {
 //     var program_studi = $(this).val()
 //     var kelas = $.grep(dataGlobal['kelas'], function(e){ return e.program_studi == program_studi; });
@@ -96,7 +93,7 @@
 //     })
 //     $('#kelas').append(optKelas); 
 //   })
-} );
+});
 function cari_btn() {
 		var where = `status=${$('#status').val()}`;
 		if ($('#program').val() != "-") {
@@ -131,11 +128,6 @@ async function getData() {
 								optJurusan += `<option value="${row.nomor}">${row.jurusan} </option>`
 						})
 						$('#jurusan').append(optJurusan)
-						var optKelas = `<option value="-"> - </option>`;
-						$.each(res.data.kelas,function (key,row) {
-								optKelas += `<option value="${row.nomor}">${row.kelas} ${row.pararel} </option>`
-						})
-						$('#kelas').append(optKelas)
 				} else {
 						// alert gagal
 				}
@@ -173,29 +165,7 @@ function setDatatable() {
 	dt_url = `${url_api}/mahasiswa-lama?${where}`;
 	dt_opt = {
 		serverSide: true,
-		// "columns": [
-		// 	{
-		// 		"searchable": false , "defaultContent": "",
-		// 		"data": null,
-		// 		"render": ( data, type, row, meta ) => meta.row+1,
-		// 	},
-		// 	{ "searchable": false , "defaultContent": "", "data": 'nrp' },
-		// 	{ "searchable": false , "defaultContent": "", "data": 'nama' },
-		// 	{ "searchable": false , "defaultContent": "", "data": 'tgllahir' },
-		// 	{ "searchable": false , "defaultContent": "", "data": 'notelp' },
-		// 	{ "searchable": false , "defaultContent": "", "data": 'email' },
-		// 	{
-		// 		"searchable": false , "defaultContent": "",
-		// 		"data": 'nomor',
-		// 		"render": ( id, type, row, meta ) => {
-		// 			var text_hapus = row['nama'];
-		// 			var btn_update = `<span class="iconify edit-icon text-primary" onclick='update_btn(${id})' data-icon="bx:bx-edit-alt" ></span>` 
-		// 			var btn_delete = `<span class="iconify delete-icon text-primary" data-icon="bx:bx-trash"  onclick='delete_btn(${id},"mahasiswa","mahasiswa","${text_hapus}")'></span>`; 
-		// 			res = btn_update+" "+btn_delete;
-		// 			return res;
-		// 		}
-		// 	},
-		// ]
+		order: [[0, 'desc']]
 	}
 }
 </script>
