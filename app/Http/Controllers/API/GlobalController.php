@@ -46,6 +46,7 @@ class GlobalController extends Controller
                 'pegawai.nomor',
                 'pegawai.nip',
                 'pegawai.nama',
+                'pegawai.gelar_blk',
                 // 'pegawai.tgllahir',
                 // 'pegawai.notelp',
                 // 'pegawai.email',
