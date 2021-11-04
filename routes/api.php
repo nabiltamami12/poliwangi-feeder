@@ -212,6 +212,7 @@ Route::prefix('v1')->group(function () {
     Route::get('admin/pendaftar-konfirmasi/{id}', [Ctr\PendaftarController::class, 'konfirmasi_pendaftar']);
 
     Route::get('admin/pendaftar', [Ctr\PendaftarController::class, 'index']);
+    Route::get('admin/pendaftar/generate-nim', [Ctr\PendaftarController::class, 'get_prodi_nim']);
     Route::put('admin/pendaftar/verifikasi/{id}', [Ctr\PendaftarController::class, 'verifikasi_pendaftar']);
     Route::get('/pendaftar/va', [Ctr\PendaftarController::class, 'va']);
     Route::get('/pendaftar', [Ctr\PendaftarController::class, 'show']);
@@ -221,6 +222,7 @@ Route::prefix('v1')->group(function () {
     Route::post('/pendaftar/check', [Ctr\PendaftarController::class, 'is_lunas']);
     Route::get('/pendaftar/keuangan', [Ctr\PendaftarController::class, 'keuangan']);
     Route::get('/pendaftar/mahasiswa', [Ctr\PendaftarController::class, 'mahasiswa']);
+    Route::post('admin/pendaftar/generate-nim', [Ctr\PendaftarController::class, 'generate_nim']);
     // Route::post('/daftar/{id}', [Ctr\PendaftarController::class, 'update']);
     // Route::delete('/daftar/{id}', [Ctr\PendaftarController::class, 'destroy']);
 

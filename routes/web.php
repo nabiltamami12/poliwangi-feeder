@@ -560,6 +560,12 @@ Route::prefix('admin')->middleware(['aksesuntuk:admin'])->group(function () {
             ]);
         });
 
+        Route::get('/generatenim', function () {
+            return view('admin.pmb.generatenim', [
+                "title" => "admin-pmb",
+            ]);
+        });
+
         Route::get('/settingjalurpenerimaan', function () {
             return view('admin.pmb.settingJalurPenerimaan', [
                 "title" => "admin-pmb"

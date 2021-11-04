@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Crypt;
 use Illuminate\Contracts\Encryption\DecryptException;
 use BNI;
 use DB;
+use Illuminate\Support\Carbon;
 
 class PendaftarController extends Controller
 {
@@ -171,6 +172,7 @@ class PendaftarController extends Controller
 	{
 		DB::enableQueryLog();
 
+		$year = Carbon::now()->isoformat('Y');
 		try {
 			$pendaftar = DB::table('pendaftar');
 			$data = $pendaftar->where('nomor',$id)->first();
@@ -206,11 +208,15 @@ class PendaftarController extends Controller
 								'program_studi' => $request->program_studi,
 								'jumlah_anak' => $data->jumlah_anak,
 								'lulussmu' => $data->tahun_lulus_smu,
+								'tahunmasuk_pt' => $year,
+								'semester_masuk' => 1,
 								'smu' => $data->smu,
 								'alamat' => $data->alamat,
 								'status' => "B",
 								'jalur_daftar' => $data->jalur_daftar,
 							];
+							echo json_encode($arr);
+							die();
 							$insert = DB::table('mahasiswa')->insert($arr);
 						}
 					}else{
@@ -252,6 +258,8 @@ class PendaftarController extends Controller
 						'program_studi' => $request->program_studi,
 						'jumlah_anak' => $data->jumlah_anak,
 						'lulussmu' => $data->tahun_lulus_smu,
+						'tahunmasuk_pt' => $year,
+						'semester_masuk' => 1,
 						'smu' => $data->smu,
 						'alamat' => $data->alamat,
 						'status' => "B",
@@ -621,6 +629,71 @@ class PendaftarController extends Controller
 			->where($where)
 			->get();
 			$this->data = $data;
+			$this->status = "success";
+		} catch (QueryException $e) {
+			$this->status = "failed";
+			$this->error = $e;
+		}
+		return response()->json([
+			"status" => $this->status,
+			"data" => $this->data,
+			"error" => $this->error
+		]);
+	}
+
+	public function get_prodi_nim(Request $request)
+	{
+		try {
+			$table = DB::table('program_studi as ps')
+				->select(
+					'ps.nomor',
+					DB::raw('CONCAT(p.program," ",ps.program_studi) as prodi'),
+					'ps.kode_epsbed',
+					DB::raw('(select count(*) from pendaftar where program_studi = ps.nomor) as jml_pendaftar'))
+				->join('program as p','p.nomor','=','ps.program')
+				->orderBy(DB::raw('(select count(*) from pendaftar where program_studi = ps.nomor)'),"desc")
+				->get();
+			$this->data = $table;
+			$this->status = "success";
+		} catch (QueryException $e) {
+			$this->status = "failed";
+			$this->error = $e;
+		}
+		return response()->json([
+			"status" => $this->status,
+			"data" => $this->data,
+			"error" => $this->error
+		]);
+	}
+
+	public function generate_nim(Request $request)
+	{
+		try {
+			$year_now = Carbon::now()->isoformat('Y');
+			$sk_poltek = '36';
+			$year = Carbon::now()->isoformat('YY');
+			$kode_prodi = DB::table('program_studi')->where('nomor',$request->program_studi)->first()->kode_epsbed;
+			$list_pendaftar = DB::table('mahasiswa')
+									->where('program_studi',$request->program_studi)
+									->where('tahunmasuk_pt',$year_now)
+									->get();
+			
+			$i = 1;
+			foreach ($list_pendaftar as $key => $value) {
+				if (strlen($i)==1) {
+					$urutan_mhs = "000".$i;
+				}elseif (strlen($i)==2) {
+					$urutan_mhs = "00".$i;
+				}elseif (strlen($i)==3) {
+					$urutan_mhs = "0".$i;
+				}else{
+					$urutan_mhs = $i;
+				}
+				$nim = $sk_poltek.$year.$kode_prodi.$urutan_mhs;
+				$i++;
+				DB::table('mahasiswa')->where('nomor',$value->nomor)->update(['nrp'=>$nim]);
+			}
+			$this->data = null;
 			$this->status = "success";
 		} catch (QueryException $e) {
 			$this->status = "failed";
