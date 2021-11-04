@@ -101,62 +101,18 @@
 		var nomor = 1;
 		dt_url = `${url_api}/mahasiswa?program_studi=${$('#program_studi').val()}&kelas=${$('#kelas').val()}`;
 		dt_opt = {
-			"columnDefs": [
-			{
-				"aTargets": [0],
-				"mData": null,
-				"mRender": function(data, type, full) {
-					res = nomor++;
-					return (res==null)?"-":res;
-				}
-			},{
-				"aTargets": [1],
-				"mData": null,
-				"mRender": function(data, type, full) {
-					res = data['nrp'];
-					return (res==null)?"-":res;
-				}
-			},{
-				"aTargets": [2],
-				"mData": null,
-				"mRender": function(data, type, full) {
-					res = data['nama'];
-					return (res==null)?"-":res;
-				}
-			},{
-				"aTargets": [3],
-				"mData": null,
-				"mRender": function(data, type, full) {
-					res = data['tgllahir'];
-					return (res==null)?"-":res;
-				}
-			},{
-				"aTargets": [4],
-				"mData": null,
-				"mRender": function(data, type, full) {
-					res = data['notelp'];
-					return (res==null)?"-":res;
-				}
-			},{
-				"aTargets": [5],
-				"mData": null,
-				"mRender": function(data, type, full) {
-					res = data['email'];
-					return (res==null)?"-":res;
-				}
-			},{
-				"aTargets": [6],
-				"mData": null,
-				"mRender": function(data, type, full) {
-					var id = data['nomor'];
-					var text_hapus = data['nama'];
-					var btn_update = `<span class="iconify edit-icon text-primary" onclick='update_btn(${id})' data-icon="bx:bx-edit-alt" ></span>` 
-					var btn_delete = `<span class="iconify delete-icon text-primary" data-icon="bx:bx-trash"  onclick='delete_btn(${id},"mahasiswa","mahasiswa","${text_hapus}")'></span>`; 
-					res = btn_update+" "+btn_delete;
-					return res;
-				}
-			},
-			]}
+			serverSide: true,
+			// 	"aTargets": [6],
+			// 	"mData": null,
+			// 	"mRender": function(data, type, full) {
+			// 		var id = data['nomor'];
+			// 		var text_hapus = data['nama'];
+			// 		var btn_update = `<span class="iconify edit-icon text-primary" onclick='update_btn(${id})' data-icon="bx:bx-edit-alt" ></span>` 
+			// 		var btn_delete = `<span class="iconify delete-icon text-primary" data-icon="bx:bx-trash"  onclick='delete_btn(${id},"mahasiswa","mahasiswa","${text_hapus}")'></span>`
+			// 		res = btn_update+" "+btn_delete;
+			// 		return res;
+			// 	}
 		}
+	}
 	</script>
 	@endsection
