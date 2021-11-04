@@ -12,6 +12,19 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Database\QueryException;
 use BNI;
 
+/** --Status Mahasiswa--
+ * "A" = Aktif - temporary
+ * "B" = Mahasiswa Baru - temporary
+ * "C" = Cuti - permanent
+ * "D" = DO - permanent
+ * "H" = Punya SPTH - temporary
+ * "K" = Mengundurkan Diri - permanent
+ * "L" = Lulus - permanent
+ * "M" = Meninggal - permanent
+ * "P" = Pendaftar - temporary
+ * "R" = Tugas Akhir - temporary
+ * "T" = Tanpa Keterangan - temporary
+*/
 class MahasiswaController extends Controller
 {
 

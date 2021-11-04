@@ -31,3 +31,6 @@ sudo chown -R www-data:www-data storage
 Enable extension php pada file /etc/php/php.ini
 1. ext-iconv
 2. ext-gd
+
+### sync folder public
+rsync -a --exclude 'index.php' ../laravel_folder/* ../public_html;
