@@ -126,7 +126,6 @@ class ProdiController extends Controller
                 "program_studi.*",
                 "program.program as nama_program",
                 "jurusan.jurusan as nama_jurusan",
-                DB::raw("CONCAT(pegawai.nama,', ',pegawai.gelar_blk) as kaprodi"),
             )
             ->join("program", "program_studi.program", "=", "program.nomor")
             ->join("jurusan", "program_studi.jurusan", "=", "jurusan.nomor")
