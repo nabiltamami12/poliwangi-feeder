@@ -5,7 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Mahasiswa;
-use App\Models\Datatables\MahasiswaDatatable;
+use App\Datatables\MahasiswaDatatable;
 use App\Models\Nilai;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
@@ -29,15 +29,35 @@ class MahasiswaController extends Controller
 		if ($request->kelas) {
 			array_push($where,['m.kelas','=',$request->kelas]);	
 		}
+
 		try {
-			$data = DB::table('mahasiswa as m')
-			->select('m.nomor','m.nrp','m.nama',DB::raw('DATE_FORMAT(m.tgllahir, "%Y-%m-%d") as tgllahir'),'m.notelp','m.email',)
-			->join('kelas as k','m.kelas','=','k.nomor','left')
-			->join('program_studi as ps','ps.nomor','=','m.program_studi')
-			->where($where)
-			->get();
-			$this->data = $data;
-			$this->status = "success";
+			$obj = new \App\Datatables\MahasiswaMasterDatatable($where);
+			$lists = $obj->get_datatables();
+			$data = [];
+			$no = $request->input("start");
+			foreach ($lists as $list) {
+				$no++;
+				$row = [];
+				$row[] = $no;
+				$row[] = $list->nrp;
+				$row[] = $list->nama;
+				$row[] = $list->tgllahir;
+				$row[] = $list->notelp;
+				$row[] = $list->email;
+
+				$btn_update = '<span class="iconify edit-icon text-primary" onclick="update_btn('.$list->nomor.')" data-icon="bx:bx-edit-alt" ></span>';
+				$btn_delete = '<span class="iconify delete-icon text-primary" data-icon="bx:bx-trash"  onclick="delete_btn('.$list->nomor.',"mahasiswa","mahasiswa",\''.$list->nama.'\')"></span>';
+				$row[] = $btn_update.$btn_delete;
+				$data[] = $row;
+			}
+			return [
+				"draw" => $request->input('draw'),
+				"recordsTotal" => $obj->count_all_datatables(),
+				"recordsFiltered" => $obj->count_filtered_datatables(),
+				"data" => $data,
+				"status" => "success",
+				"error" => $this->error
+			];
 		} catch (QueryException $e) {
 			$this->status = "failed";
 			$this->error = $e;

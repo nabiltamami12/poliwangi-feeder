@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Datatables;
+namespace App\Datatables;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Lib\Datatable;

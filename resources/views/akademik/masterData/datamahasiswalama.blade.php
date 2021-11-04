@@ -173,6 +173,7 @@ function setDatatable() {
 	dt_url = `${url_api}/mahasiswa-lama?${where}`;
 	dt_opt = {
 		serverSide: true,
+		order: [[0, 'desc']]
 	}
 }
 </script>
