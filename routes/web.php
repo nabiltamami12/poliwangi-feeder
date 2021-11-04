@@ -727,10 +727,9 @@ Route::prefix('keuangan')->middleware(['aksesuntuk:keuangan'])->group(function (
             ]);
         });
 
-        Route::get('/spi/detail/{id}/{nama}', function ($id, $nama) {
+        Route::get('/spi/detail/{id}', function ($id) {
             return view('keuangan.detailSPI', [
                 "id" => $id,
-                'nama' => $nama,
                 "title" => "keuangan-rekapitulasi",
             ]);
         });
