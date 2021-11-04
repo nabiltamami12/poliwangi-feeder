@@ -163,6 +163,9 @@ function func_simpan() {
         success: function(res) {
             console.log(res)
             if (res.status=="success") {
+
+                $('#centang_tidak_lolos').removeClass('text-success')
+                $('#centang_tidak_lolos').addClass('text-placeholder')
                 $('#konfirmModal').modal('hide');
                 dt.ajax.reload();    
             } else {
