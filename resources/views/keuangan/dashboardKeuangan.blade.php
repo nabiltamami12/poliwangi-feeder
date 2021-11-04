@@ -65,7 +65,7 @@
     </div>
   </div>
 
-  <div class="row equal-cols">
+  <div class="row equal-cols" style="display: none">
     <div class="col-sm-6 col-lg-4">
       <div class="card card-stats mb-0">
         <div class="card-body">

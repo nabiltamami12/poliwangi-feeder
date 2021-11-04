@@ -15,6 +15,7 @@ use Illuminate\Database\QueryException;
 use App\Imports\BukuBesarImport;
 use App\Exports\PiutangExport;
 use App\Models\Periode;
+use Illuminate\Validation\Rule;
 
 class BerkasKeuanganController extends Controller
 {
@@ -67,6 +68,7 @@ class BerkasKeuanganController extends Controller
             'keuangan_piutang.id', 
             'keuangan_piutang.id_mahasiswa', 
             'keuangan_piutang.path_perjanjian', 
+            'keuangan_piutang.path_pengajuan', 
             'mahasiswa.nrp as nim',
             'mahasiswa.nama',
             'mahasiswa.ukt',
@@ -575,6 +577,44 @@ class BerkasKeuanganController extends Controller
             "status" => $this->status,
             "data" => $this->data,
             "error" => $this->error
+        ]);
+    }
+
+    public function dokumen_mahasiswa(Request $request) {
+        try {
+            $data = $request->all();
+            $validator = Validator::make(
+                $data,
+                [
+                    'tipe' => ['required', Rule::in(['pengajuan', 'perjanjian'])],
+                    'file' => 'required|mimes:doc,docx,pdf,txt|max:4096',
+                    'id_mahasiswa' => 'required'
+                ]
+            );
+    
+            if ($validator->fails()) {
+                return response()->json(['error' => $validator->errors(), 'data' => $data], 401);
+            }
+
+            $periode = Periode::select('tahun', 'semester')->orderByDesc('status')->orderByDesc('tahun')->first();
+            $current_data = BK::select('id', 'status')->where('id_mahasiswa','=',$request->id_mahasiswa)->where('tahun','=',$periode->tahun)->where('semester','=',$periode->semester)->first();
+            if (isset($current_data) && strtolower($current_data->status) == 'pending' && $request->hasFile('file')) {
+                $path = $data['id_mahasiswa'].'_'.$periode->tahun.$periode->semester.'_'.$request->file->getClientOriginalName();
+                if($request->file->storeAs($request->tipe, $path)){
+                    $kb = BK::find($current_data->id);
+                    $kb->{'path_'.$request->tipe} = '/'.$request->tipe.'/'.$path;
+                    $kb->save();
+                    $this->status = "success";
+                }
+            }
+        } catch (QueryException $e) {
+            $this->status = "failed";
+            $this->error = $e;
+        }
+        return response()->json([
+                "status" => $this->status,
+                "data" => $this->data,
+                'error' => $this->error,
         ]);
     }
 }
