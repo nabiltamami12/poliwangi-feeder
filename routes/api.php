@@ -209,6 +209,7 @@ Route::prefix('v1')->group(function () {
 
     // DASHBOARD
     Route::get('admin/dashboard/', [Ctr\DashboardController::class, 'index_admin']);
+    Route::get('akademik/dashboard/', [Ctr\DashboardController::class, 'index_akademik']);
 
 
     // PENDAFTAR

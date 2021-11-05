@@ -9,56 +9,60 @@ var dataPieAlumni = [];
 var dataPieDosen = [];
 var dataPiePegawai = [];
 
-var mahasiswaPerTahun = document.getElementById("mahasiswa-per-tahun").getContext("2d");
+var mahasiswaPerTahun = document.getElementById("mahasiswa-bar").getContext("2d");
 var piechartMhs = document.getElementById("piechart-mahasiswa").getContext("2d");
 var piechartAlumni = document.getElementById("piechart-alumni").getContext("2d");
 var piechartDosen = document.getElementById("piechart-dosen").getContext("2d");
 var piechartPegawai = document.getElementById("piechart-pegawai").getContext("2d");
 
-$.ajax({
-    url: url_api + "/admin/dashboard",
-    type: 'get',
-    dataType: 'json',
-    data: {},
-    success: function(res) {
-      if (res.status == "success") {
-        dataJson = res.data
-        $.each(dataJson.tahun,function (key,row) {
-            dataTahun.push(row.angkatan)
-            dataPria.push(row.jml_pria)
-            dataWanita.push(row.jml_wanita)
-        })
-        
-        // SETTING BAR CHART
-        var laki = {
-            label: "Laki-Laki",
-            data: dataPria,
-            backgroundColor: "#73C3F2",
-            borderWidth: 0,
-            barPercentage: 1.0,
-        };
+function getDataChart(type) {
+    $.ajax({
+        url: url_api + `/${type}/dashboard`,
+        type: 'get',
+        dataType: 'json',
+        data: {},
+        success: function(res) {
+          if (res.status == "success") {
+            dataJson = res.data
+            $.each(dataJson.tahun,function (key,row) {
+                dataTahun.push(row.title)
+                dataPria.push(row.jml_pria)
+                dataWanita.push(row.jml_wanita)
+            })
+            
+            // SETTING BAR CHART
+            var laki = {
+                label: "Laki-Laki",
+                data: dataPria,
+                backgroundColor: "#73C3F2",
+                borderWidth: 0,
+                barPercentage: 1.0,
+            };
+    
+            var perempuan = {
+                label: "Perempuan",
+                data: dataWanita,
+                backgroundColor: "#F27373",
+                borderWidth: 0,
+                barPercentage: 1.0,
+            };
+    
+            var mahasiswaTahun = {
+                labels: dataTahun,
+                datasets: [laki, perempuan],
+            };
+    
+            setBarChart(mahasiswaTahun)
+            setPieChart(dataJson)
+          } else {
+            // alert gagal
+          }
+          
+        }
+    });
+}
 
-        var perempuan = {
-            label: "Perempuan",
-            data: dataWanita,
-            backgroundColor: "#F27373",
-            borderWidth: 0,
-            barPercentage: 1.0,
-        };
 
-        var mahasiswaTahun = {
-            labels: dataTahun,
-            datasets: [laki, perempuan],
-        };
-
-        setBarChart(mahasiswaTahun)
-        setPieChart(dataJson)
-      } else {
-        // alert gagal
-      }
-      
-    }
-});
 
 function setBarChart(data) {
     var barChartMahasiswaTahun = new Chart(mahasiswaPerTahun, {

@@ -34,7 +34,7 @@
 
       <div class="my-4-5">
         <h2 class="card_title mb-3">Mahasiswa Per Tahun</h2>
-        <canvas id="mahasiswa-per-tahun"></canvas>
+        <canvas id="mahasiswa-bar"></canvas>
       </div>
     </div>
   </div>
@@ -47,5 +47,8 @@
   src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.0.0-rc.1/chartjs-plugin-datalabels.min.js"
   integrity="sha512-+UYTD5L/bU1sgAfWA0ELK5RlQ811q8wZIocqI7+K0Lhh8yVdIoAMEs96wJAIbgFvzynPm36ZCXtkydxu1cs27w=="
   crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="{{ asset('js/chart-dashboard-admin.js') }}"></script>
+<script src="{{ asset('js/chart-dashboard.js') }}"></script>
+<script>
+  getDataChart('admin');
+</script>
 @endsection

@@ -34,11 +34,11 @@
 
       <div class="mt-4-5">
         <h2 class="card_title mb-3">Mahasiswa Per Prodi</h2>
-        <canvas id="mahasiswa-per-prodi"></canvas>
+        <canvas id="mahasiswa-bar"></canvas>
       </div>
 
 
-      <div class="card shadow">
+      <!-- <div class="card shadow">
         <div class="table-responsive table_dashboardAkademik">
           <table class="table align-items-center table-borderless table-flush table-hover">
             <thead class="table-header">
@@ -117,7 +117,7 @@
             </tbody>
           </table>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </section>
@@ -129,7 +129,11 @@
   src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.0.0-rc.1/chartjs-plugin-datalabels.min.js"
   integrity="sha512-+UYTD5L/bU1sgAfWA0ELK5RlQ811q8wZIocqI7+K0Lhh8yVdIoAMEs96wJAIbgFvzynPm36ZCXtkydxu1cs27w=="
   crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="{{ asset('js/piechart.js') }}"></script>
-<script src="{{ asset('js/barchartMahasiswaProdi.js') }}"></script>
+<!-- <script src="{{ asset('js/piechart.js') }}"></script> -->
+<script src="{{ asset('js/chart-dashboard.js') }}"></script>
 <script src="{{ asset('js/loading.js') }}"></script>
+<script>
+  getDataChart('akademik');
+</script>
+
 @endsection
