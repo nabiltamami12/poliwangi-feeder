@@ -208,7 +208,7 @@ class PendaftarController extends Controller
 								'program_studi' => $request->program_studi,
 								'jumlah_anak' => $data->jumlah_anak,
 								'lulussmu' => $data->tahun_lulus_smu,
-								'tahunmasuk_pt' => $year,
+								'angkatan' => $year,
 								'semester_masuk' => 1,
 								'smu' => $data->smu,
 								'alamat' => $data->alamat,
@@ -258,7 +258,7 @@ class PendaftarController extends Controller
 						'program_studi' => $request->program_studi,
 						'jumlah_anak' => $data->jumlah_anak,
 						'lulussmu' => $data->tahun_lulus_smu,
-						'tahunmasuk_pt' => $year,
+						'angkatan' => $year,
 						'semester_masuk' => 1,
 						'smu' => $data->smu,
 						'alamat' => $data->alamat,
@@ -675,7 +675,7 @@ class PendaftarController extends Controller
 			$kode_prodi = DB::table('program_studi')->where('nomor',$request->program_studi)->first()->kode_epsbed;
 			$list_pendaftar = DB::table('mahasiswa')
 									->where('program_studi',$request->program_studi)
-									->where('tahunmasuk_pt',$year_now)
+									->where('angkatan',$year_now)
 									->get();
 			
 			$i = 1;
