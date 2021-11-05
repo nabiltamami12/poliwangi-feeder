@@ -281,6 +281,8 @@ Route::prefix('v1')->group(function () {
     Route::post('keuangan/cicilan-piutang', [Ctr\BerkasKeuanganController::class, 'cicilan_piutang']);
     Route::post('keuangan/update-jatuh-tempo', [Ctr\BerkasKeuanganController::class, 'update_jatuh_tempo']);
     Route::post('keuangan/dokumen-piutang', [Ctr\BerkasKeuanganController::class, 'dokumen_mahasiswa']);
+    Route::get('keuangan/dokumen-piutang/{id}', [Ctr\BerkasKeuanganController::class, 'dokumen_piutang_mahasiswa']);
+    Route::get('download/dokumen-piutang/{id}/{tipe}', [Ctr\BerkasKeuanganController::class, 'download_dokumen_piutang']);
 
     Route::post('keuangan/tagihan-mahasiswa', [Ctr\BerkasKeuanganController::class, 'mahasiswa_pembayaran_tagihan']); //mahasiswa/pembayaran, termasuk generate va
 
