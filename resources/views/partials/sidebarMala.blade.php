@@ -10,7 +10,7 @@
       beforeSend: function(text) {
       },
       success: function(res){
-        if (res.data.status) {
+        if (res.data != null) {
           $('.pengajuan-cicilan').show()
         }
       }

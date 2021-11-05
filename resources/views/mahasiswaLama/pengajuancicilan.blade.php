@@ -249,7 +249,7 @@
       data: form_data,
       type: 'post',
       success: function(res){
-        console.log(res)
+        location.reload()
       }
     });
 
@@ -290,7 +290,7 @@
       data: form_data,
       type: 'post',
       success: function(res){
-        console.log(res)
+        location.reload()
       }
     });
 
