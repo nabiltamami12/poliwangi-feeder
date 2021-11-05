@@ -151,7 +151,7 @@
     <div class="col-xl-6">
       <div class="card shadow padding--small">
         <div class="card_header">
-          <h2 class="aside_title mb-0">Upload Surat Pengajuan Cicilan</h2>
+          <h2 class="aside_title mb-0 pengajuan">Upload Surat Pengajuan Cicilan</h2>
           <hr class="mt-3 mb-4">
         </div>
         <div class="card_content">
@@ -171,7 +171,7 @@
       </div>
       <div class="card shadow padding--small">
         <div class="card_header">
-          <h2 class="aside_title mb-0">Upload Surat Perjanjian</h2>
+          <h2 class="aside_title mb-0 perjanjian">Upload Surat Perjanjian</h2>
           <hr class="mt-3 mb-4">
         </div>
         <div class="card_content">
@@ -205,30 +205,9 @@
             </div> -->
             <div class="col-xl-12">
               <div class="form-group">
-                <div class="row">
-                  <div class="col-xl-3">
-                    <p>Tenor</p>
-                  </div>
-                  <div class="col-xl-9">
-                    <p>: 3 Bulan</p>
-                  </div>
-                  <div class="col-xl-3">
-                    <p>Januari</p>
-                  </div>
-                  <div class="col-xl-9">
-                    <p>: Rp 3.000.000,-</p>
-                  </div>
-                  <div class="col-xl-3">
-                    <p>Februari</p>
-                  </div>
-                  <div class="col-xl-9">
-                    <p>: Rp 3.000.000,-</p>
-                  </div>
-                  <div class="col-xl-3">
-                    <p>Maret</p>
-                  </div>
-                  <div class="col-xl-9">
-                    <p>: Rp 3.000.000,-</p>
+                <div class="row list-cicilan">
+                  <div class="col-xl-12">
+                    <p id="cicilan_total"></p>
                   </div>
                 </div>
 
@@ -334,13 +313,32 @@ $(document).ready(function () {
 
 $(function(){
     $.ajax({
-      url: url_api+"/keuangan/detail-piutang/"+id_mahasiswa,
+      url: url_api+"/keuangan/dokumen-piutang/"+id_mahasiswa,
       dataType: 'json',
       cache: false,
       type: 'get',
       beforeSend: function(text) {
       },
       success: function(res){
+        if (res.data == null) {
+          window.location.href = "{{url('/mahasiswa/dashboard')}}";
+        }
+        if (res.data.path_pengajuan) {
+          $('.pengajuan').append(' <span style="color:green">(Telah diupload)</span>')
+        }
+        if (res.data.path_perjanjian) {
+          $('.perjanjian').append(' <span style="color:green">(Telah diupload)</span>')
+        }
+        $('#cicilan_total').text('Cicilan '+res.data.cicilan.length+' kali')
+        for (var i = 0; i < res.data.cicilan.length; i++) {
+          $('.list-cicilan').append(`
+                  <div class="col-xl-4">
+                    <p>`+formatAngka(res.data.cicilan[i].nominal)+`</p>
+                  </div>
+                  <div class="col-xl-8">
+                    <p>Jatuh Tempo `+formatTanggal(res.data.cicilan[i].tanggal)+`</p>
+                  </div>`)
+        }
       }
     });
   })

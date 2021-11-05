@@ -40,13 +40,23 @@
                 <label>UKT: <b id="ukt"></b></label>
               </div>
             </div>
+            <div class="col-sm-6 col-6">
+              <div class="form-group row mb-0">
+                <label>File Pengajuan: <b id="file_pengajuan"></b></label>
+              </div>
+            </div>
+            <div class="col-sm-6 col-6">
+              <div class="form-group row mb-0">
+                <label>File Perjanjian: <b id="file_perjanjian"></b></label>
+              </div>
+            </div>
             <div class="col-sm-6 col-12">
               <div class="form-group row mb-0">
                 <label for="jumlah_cicilan">Jumlah Cicilan</label>
                 <select class="form-control" id="jumlah_cicilan">
                   <option value="0">Pilih Jumlah Cicilan</option>
                   <?php
-                  for ($i=1; $i <= 6; $i++) {
+                  for ($i=2; $i <= 6; $i++) {
                     echo '<option value="'.$i.'">'.$i.'</option>';
                   }
                   ?>
@@ -56,12 +66,12 @@
             <div class="col-sm-6 col-12">
               <div class="form-group row mb-0">
                 <label for="status_piutang">Status Piutang</label>
-                <select class="form-control" id="status_piutang" name="status_piutang">
-                  <option>Pending</option>
+                <select class="form-control" id="status_piutang" name="status_piutang" required>
                   <option>Lancar</option>
                   <option>Kurang Lancar</option>
                   <option>Tidak Lancar</option>
                   <option>Macet</option>
+                  <option>Pending</option>
                 </select>
               </div>
             </div>
@@ -107,6 +117,19 @@
         $('#nama').text(res.data.nama)
         $('#ukt').text(formatAngka(res.data.ukt))
         $('#status_piutang').val(res.data.status_piutang)
+        if ($('#status_piutang').val() == null) {
+          $('#status_piutang').val('Pending')
+        }
+        if (res.data.path_pengajuan) {
+          $('#file_pengajuan').html('<a href="'+url_api+'/download/dokumen-piutang/{{$id}}/pengajuan'+'">Download File Pengajuan</a>')
+        }else{
+          $('#file_pengajuan').text('File belum diupload')
+        }
+        if (res.data.path_perjanjian) {
+          $('#file_perjanjian').html('<a href="'+url_api+'/download/dokumen-piutang/{{$id}}/perjanjian'+'">Download File Perjanjian</a>')
+        }else{
+          $('#file_perjanjian').text('File belum diupload')
+        }
         ukt = parseInt(res.data.ukt)
         id_mahasiswa = res.data.id_mahasiswa
         list_cicilan = res.data.cicilan
@@ -146,14 +169,14 @@
               tgl_bl = '<input class="tgl_bl'+j+'" type="date" value="'+aa2+'">'
               cicilan_belum_lunas+=parseInt(list_riwayat_cicilan[j].nominal)
             }
-            $(".riwayat_cicilan table tbody").append(`<tr><td>`+formatAngka(list_riwayat_cicilan[j].nominal)+`</td><td>`+tgl_bl+`</td><td>`+(list_riwayat_cicilan[j].status == 1 ? 'Lunas' : 'Belum Lunas')+`</td><td>`+aksi_bl+`</td></tr>`)
+            $(".riwayat_cicilan table tbody").append(`<tr><td>`+formatAngka(list_riwayat_cicilan[j].nominal)+`</td><td>`+formatTanggal(tgl_bl)+`</td><td>`+(list_riwayat_cicilan[j].status == 1 ? 'Lunas' : 'Belum Lunas')+`</td><td>`+aksi_bl+`</td></tr>`)
           }
         }
         // ukt += cicilan_belum_lunas
         if (cicilan_belum_lunas > 0) {
           $(".riwayat_cicilan h3").text("Riwayat Cicilan (Belum Lunas: "+formatAngka(cicilan_belum_lunas)+")")
         }
-        // $('.number-format').number( true);
+        $('.number-format').number( true);
         loading('hide')
       }
     });
@@ -192,14 +215,19 @@
     for (var i = 1; i <= jumlah_cicilan; i++) {
       $('.daftar_cicilan').append(get_list_cicilan(i))
     }
-    // $('.number-format').number( true);
+    $('.number-format').number( true);
   })
 
   $("form").submit(function(e) {
     e.preventDefault();
+    if ($('#status_piutang').val().toLowerCase() == 'pending') {
+      alert('Status Piutang harus selain Pending')
+      return false
+    }
+    $('.number-format').number( true, 0, '', '');
     var total_cicilan = 0
     $.each($('[name*="cicilan"]'), function( index, value ) {
-      total_cicilan+=parseInt(value.value)
+      total_cicilan+=parseInt($(value).val())
     });
     if (cicilan_belum_lunas > 0) {
       alert('Cicilan lama harus dilunasi terlebih dahulu')
@@ -252,99 +280,5 @@
       }
     });
   }
-
-//   $(document).ready(function() {
-//     var id = "{{$id}}";
-//     var optDosen = `<option value=""> - </option>`;
-//     $.each(dataGlobal['prodi'],function (key,row) {
-//         optDosen += `<option value="${row.nomor}">${row.program_studi}</option>`
-//     })
-//     $('#program_studi').append(optDosen)
-
-//     if (id!="") {
-//         getData(id);        
-//     }
-
-//     // form tambah data
-//     $("#form_cu").submit(function(e) {
-//         e.preventDefault();
-//         var data = $('#form_cu').serialize();
-//         if (id!="") {
-//             var url = url_api+"/keuangan/rekap_ukt/"+id;
-//             var type = "put";
-//         } else {
-//             var url = url_api+"/keuangan/rekap_ukt";
-//             var type = "post";
-//         }
-//         $.ajax({
-//             url: url,
-//             type: type,
-//             dataType: 'json',
-//             data: data,
-//             success: function(res) {
-//                 if (res.status=="success") {
-//                     window.location.href = "{{url('/akademik/keuangan/tarif')}}";                    
-//                 } else {
-//                     console.log("Gagal");
-//                 }
-                
-//             }
-//         });
-//     });
-
-//     set_rp();
-// } );
-
-// function getData(id) {
-    
-//     $.ajax({
-//         url: url_api+"/keuangan/rekap_ukt/"+id,
-//         type: 'get',
-//         dataType: 'json',
-//         data: {},
-//         success: function(res) {
-//             if (res.status=="success") {
-//                 var data = res['data'][0];
-//                 $.each(data,function (key,row) {
-//                     $('#'+key).val(row);
-//                 })
-//                 set_rp();         
-//             } else {
-//                 // alert gagal
-//             }
-            
-
-//         }
-//     });
-// }
-
-// const inputElements = document.querySelectorAll(".input_field");
-// const prefixElements = document.querySelectorAll(".input_prefix");
-
-// function set_rp() {
-//   for(let i=0 ; i<prefixElements.length; i++){
-//     inputElements[i].addEventListener("input", updateSuffix);
-//     updateSuffix();
-
-//     function updateSuffix() {
-//       if(window.innerWidth > 768){
-//         const width = getTextWidth(inputElements[i].value, "14px Montserrat");
-//         prefixElements[i].style.right = (width+20)+ "px";
-//       }
-//       else{
-//         const width = getTextWidth(inputElements[i].value, "12px Montserrat");
-//         prefixElements[i].style.right = (width+7)+ "px";
-//       }
-//     }
-
-//     function getTextWidth(text, font) {
-//       var canvas = getTextWidth.canvas || (getTextWidth.canvas = document.createElement("canvas"));
-//       var context = canvas.getContext("2d");
-//       context.font = font;
-//       var metrics = context.measureText(text);
-//       return metrics.width;
-//     }
-//   }
-// }
 </script>
 @endsection
