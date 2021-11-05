@@ -207,6 +207,10 @@ Route::prefix('v1')->group(function () {
     Route::put('/syarat/{id}', [Ctr\SyaratController::class, 'update']);
     Route::delete('/syarat/{id}', [Ctr\SyaratController::class, 'destroy']);
 
+    // DASHBOARD
+    Route::get('admin/dashboard/', [Ctr\DashboardController::class, 'index_admin']);
+
+
     // PENDAFTAR
     Route::get('pendaftar/dashboard', [Ctr\PendaftarController::class, 'dashboard']);
     Route::get('admin/pendaftar-konfirmasi/{id}', [Ctr\PendaftarController::class, 'konfirmasi_pendaftar']);

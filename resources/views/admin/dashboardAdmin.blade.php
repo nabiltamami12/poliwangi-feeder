@@ -47,6 +47,5 @@
   src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.0.0-rc.1/chartjs-plugin-datalabels.min.js"
   integrity="sha512-+UYTD5L/bU1sgAfWA0ELK5RlQ811q8wZIocqI7+K0Lhh8yVdIoAMEs96wJAIbgFvzynPm36ZCXtkydxu1cs27w=="
   crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="{{ asset('js/piechart.js') }}"></script>
-<script src="{{ asset('js/barchartMahasiswaTahun.js') }}"></script>
+<script src="{{ asset('js/chart-dashboard-admin.js') }}"></script>
 @endsection
