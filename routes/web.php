@@ -84,13 +84,13 @@ Route::prefix('mahasiswa')->middleware(['aksesuntuk:mahasiswa'])->group(function
             "title" => "Pembayaran"
         ]);
     });
-    
+
     Route::get('/pengajuan/cicilan', function () {
         return view('mahasiswaLama.pengajuancicilan', [
             "title" => "pmb-pendaftar",
         ]);
     });
-    
+
     Route::get('/presensi', function () {
         return view('mahasiswaLama.presensi', [
             "title" => "Presensi"
@@ -115,6 +115,12 @@ Route::prefix('dosen')->middleware(['aksesuntuk:dosen'])->group(function () {
     Route::get('/presensi-mahasiswa', function () {
         return view('dosen.presensidosenmahasiswa', [
             "title" => "dosen-presensi"
+        ]);
+    });
+
+    Route::get('/perwalian', function () {
+        return view('dosen.perwalian', [
+            "title" => "dosen-perwalian"
         ]);
     });
 
@@ -143,8 +149,8 @@ Route::prefix('dosen')->middleware(['aksesuntuk:dosen'])->group(function () {
         return view('cetak.evaluasinilai', [
             "title" => "dosen-penilaian"
         ]);
-    })
-    ;Route::get('/cetak-absensi-kelas', function () {
+    });
+    Route::get('/cetak-absensi-kelas', function () {
         return view('cetak.cetakabsensikelas', [
             "title" => "dosen-penilaian"
         ]);
@@ -159,14 +165,14 @@ Route::prefix('akademik')->middleware(['aksesuntuk:akademik'])->group(function (
     });
 
     Route::prefix('kuliah')->group(function () {
-        
+
         Route::get('/rekap-nilai', function () {
             return view('admin.kuliah.datarekapnilai', [
                 "title" => "rekap-nilai"
             ]);
         });
         Route::get('/rekap-nilai/edit', function () {
-            return view('admin.kuliah.nilai',[
+            return view('admin.kuliah.nilai', [
                 "title" => "dosen-penilaian"
             ]);
         });
@@ -191,8 +197,8 @@ Route::prefix('akademik')->middleware(['aksesuntuk:akademik'])->group(function (
             return view('cetak.evaluasinilai', [
                 "title" => "dosen-penilaian"
             ]);
-        })
-        ;Route::get('/cetak-absensi-kelas', function () {
+        });
+        Route::get('/cetak-absensi-kelas', function () {
             return view('cetak.cetakabsensikelas', [
                 "title" => "dosen-penilaian"
             ]);
@@ -438,7 +444,13 @@ Route::prefix('admin')->middleware(['aksesuntuk:admin'])->group(function () {
 
 
     Route::prefix('kuliah')->group(function () {
-        
+
+        Route::get('/perwalian', function () {
+            return view('admin.kuliah.perwalian', [
+                "page" => "admin",
+                "title" => "admin-perwalian"
+            ]);
+        });
         Route::get('/absensi/rekap', function () {
             return view('akademik.kuliah.rekapabsensimahasiswa', [
                 "page" => "admin",
@@ -470,7 +482,7 @@ Route::prefix('admin')->middleware(['aksesuntuk:admin'])->group(function () {
         });
 
         Route::get('/rekap-nilai/edit', function () {
-            return view('admin.kuliah.nilai',[
+            return view('admin.kuliah.nilai', [
                 "title" => "dosen-penilaian"
             ]);
         });
@@ -627,7 +639,7 @@ Route::prefix('admin')->middleware(['aksesuntuk:admin'])->group(function () {
             ]);
         });
     });
-    
+
     Route::prefix('report')->group(function () {
         Route::get('/cuti', function () {
             return view('akademik.report.reportcuti', [
@@ -672,8 +684,6 @@ Route::prefix('admin')->middleware(['aksesuntuk:admin'])->group(function () {
             ]);
         });
     });
-
-    
 });
 
 Route::prefix('keuangan')->middleware(['aksesuntuk:keuangan'])->group(function () {
@@ -683,7 +693,7 @@ Route::prefix('keuangan')->middleware(['aksesuntuk:keuangan'])->group(function (
         ]);
     });
 
-    Route::prefix('tarif')->group(function() {
+    Route::prefix('tarif')->group(function () {
         Route::get('/', function () {
             return view('keuangan.tarif_UKT_SPI', [
                 "title" => "keuangan-tarif",
@@ -783,4 +793,4 @@ Route::prefix('keuangan')->middleware(['aksesuntuk:keuangan'])->group(function (
     });
 });
 
-require_once(__DIR__.'/web_slicing.php');
+require_once(__DIR__ . '/web_slicing.php');
