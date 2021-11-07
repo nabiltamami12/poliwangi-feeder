@@ -67,7 +67,7 @@
                             <label>Status</label>
                             <select name="status" id="status" class="form-control">
                                 <option value="1">Aktif</option>
-                                <option value="1">Tidak Aktif</option>
+                                <option value="0">Tidak Aktif</option>
                             </select>
                           </div>
                         </div>
