@@ -121,6 +121,12 @@ Route::prefix('dosen')->middleware(['aksesuntuk:dosen'])->group(function () {
         ]);
     });
 
+    Route::get('/perwalian', function () {
+        return view('dosen.perwalian', [
+            "title" => "dosen-perwalian"
+        ]);
+    });
+
     Route::get('/penilaian', function () {
         return view('dosen.inputNilai', [
             "title" => "dosen-penilaian"
@@ -146,8 +152,8 @@ Route::prefix('dosen')->middleware(['aksesuntuk:dosen'])->group(function () {
         return view('cetak.evaluasinilai', [
             "title" => "dosen-penilaian"
         ]);
-    })
-    ;Route::get('/cetak-absensi-kelas', function () {
+    });
+    Route::get('/cetak-absensi-kelas', function () {
         return view('cetak.cetakabsensikelas', [
             "title" => "dosen-penilaian"
         ]);
@@ -169,7 +175,7 @@ Route::prefix('akademik')->middleware(['aksesuntuk:akademik'])->group(function (
             ]);
         });
         Route::get('/rekap-nilai/edit', function () {
-            return view('admin.kuliah.nilai',[
+            return view('admin.kuliah.nilai', [
                 "title" => "dosen-penilaian"
             ]);
         });
@@ -194,8 +200,8 @@ Route::prefix('akademik')->middleware(['aksesuntuk:akademik'])->group(function (
             return view('cetak.evaluasinilai', [
                 "title" => "dosen-penilaian"
             ]);
-        })
-        ;Route::get('/cetak-absensi-kelas', function () {
+        });
+        Route::get('/cetak-absensi-kelas', function () {
             return view('cetak.cetakabsensikelas', [
                 "title" => "dosen-penilaian"
             ]);
@@ -256,14 +262,14 @@ Route::prefix('admin')->middleware(['aksesuntuk:admin'])->group(function () {
                 "periode" => Periode::where('tahun', '>=', date('Y'))->get()
             ]);
         });
-        Route::get('/datakurikulum/{id}/matakuliah', function($id){
+        Route::get('/datakurikulum/{id}/matakuliah', function ($id) {
             return view('akademik.masterData/matakuliah-kurikulum', [
                 "id" => $id,
                 "kurikulum" => Kurikulum::where('id', $id)->first(),
                 "title" => "akademik-master"
             ]);
         });
-        Route::get('/datakurikulum/{id}/matakuliah/cu', function($id){
+        Route::get('/datakurikulum/{id}/matakuliah/cu', function ($id) {
             $kurikulum = Kurikulum::where('id', $id)->first();
             return view('akademik.masterData/tambahmatakuliah-kurikulum', [
                 "id" => $id,
@@ -462,6 +468,12 @@ Route::prefix('admin')->middleware(['aksesuntuk:admin'])->group(function () {
 
     Route::prefix('kuliah')->group(function () {
 
+        Route::get('/perwalian', function () {
+            return view('admin.kuliah.perwalian', [
+                "page" => "admin",
+                "title" => "admin-perwalian"
+            ]);
+        });
         Route::get('/absensi/rekap', function () {
             return view('akademik.kuliah.rekapabsensimahasiswa', [
                 "page" => "admin",
@@ -493,7 +505,7 @@ Route::prefix('admin')->middleware(['aksesuntuk:admin'])->group(function () {
         });
 
         Route::get('/rekap-nilai/edit', function () {
-            return view('admin.kuliah.nilai',[
+            return view('admin.kuliah.nilai', [
                 "title" => "dosen-penilaian"
             ]);
         });
@@ -695,8 +707,6 @@ Route::prefix('admin')->middleware(['aksesuntuk:admin'])->group(function () {
             ]);
         });
     });
-
-
 });
 
 Route::prefix('keuangan')->middleware(['aksesuntuk:keuangan'])->group(function () {
@@ -706,7 +716,7 @@ Route::prefix('keuangan')->middleware(['aksesuntuk:keuangan'])->group(function (
         ]);
     });
 
-    Route::prefix('tarif')->group(function() {
+    Route::prefix('tarif')->group(function () {
         Route::get('/', function () {
             return view('keuangan.tarif_UKT_SPI', [
                 "title" => "keuangan-tarif",
@@ -806,4 +816,4 @@ Route::prefix('keuangan')->middleware(['aksesuntuk:keuangan'])->group(function (
     });
 });
 
-require_once(__DIR__.'/web_slicing.php');
+require_once(__DIR__ . '/web_slicing.php');
