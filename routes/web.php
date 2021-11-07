@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Models\Kurikulum;
+use App\Models\Prodi;
+use App\Models\Periode;
 
 /*
 |--------------------------------------------------------------------------
@@ -246,13 +249,33 @@ Route::prefix('admin')->middleware(['aksesuntuk:admin'])->group(function () {
         Route::get('/datakurikulum/cu/', function () {
             return view('akademik.masterData/tambahkurikulum', [
                 "id" => null,
-                "title" => "akademik-master"
+                "title" => "akademik-master",
+                "prodi" => Prodi::all(),
+                "periode" => Periode::where('tahun', '>=', date('Y'))->get()
             ]);
         });
         Route::get('/datakurikulum/cu/{id}', function ($id) {
             return view('akademik.masterData/updatekurikulum', [
                 "id" => $id,
+                "title" => "akademik-master",
+                "prodi" => Prodi::all(),
+                "periode" => Periode::where('tahun', '>=', date('Y'))->get()
+            ]);
+        });
+        Route::get('/datakurikulum/{id}/matakuliah', function ($id) {
+            return view('akademik.masterData/matakuliah-kurikulum', [
+                "id" => $id,
+                "kurikulum" => Kurikulum::where('id', $id)->first(),
                 "title" => "akademik-master"
+            ]);
+        });
+        Route::get('/datakurikulum/{id}/matakuliah/cu', function ($id) {
+            $kurikulum = Kurikulum::where('id', $id)->first();
+            return view('akademik.masterData/tambahmatakuliah-kurikulum', [
+                "id" => $id,
+                "kurikulum" => $kurikulum,
+                "title" => "akademik-master",
+                "matkul" => DB::table('matakuliah')->where('program_studi', '=', $kurikulum->prodi_id)->get()
             ]);
         });
 
