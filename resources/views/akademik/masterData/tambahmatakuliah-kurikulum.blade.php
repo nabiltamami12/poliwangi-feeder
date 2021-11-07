@@ -57,6 +57,30 @@
     </div>
   </div>
 </section>
+
+<div class="modal fade" id="alert" tabindex="-1" aria-labelledby="konfirmModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content p-0 padding--medium">
+        <input type="hidden" id="id_konfirm">
+
+        <div class="modal-header">
+            <p class="text-center">
+                <h5 class="modal-title text-warning text-center">Peringatan</h5>
+            </p>
+        </div>
+        <div class="modal-body">
+          <p class="text-center font-weight-bold" id="text_alert"></p>
+          <div class="row">
+                <div class="col-md-6 mx-auto">
+                    <button type="button" class="btn btn-primary w-100" id="close_modal">Oke</button>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+</div>
+
 <script>
   $(document).ready(function() {
     var id = "{{$id}}";
@@ -116,7 +140,12 @@
                 if (res.status=="success") {
                     window.location.href = "{{url('/admin/master/datakurikulum/'. $id. '/matakuliah')}}";
                 } else {
-                    // alert gagal
+                    $('#text_alert').html(res.error.message)
+                    $('#alert').modal('show')
+
+                    $('#close_modal').click(function(){
+                        $('#alert').modal('hide')
+                    })
                 }
 
             }
