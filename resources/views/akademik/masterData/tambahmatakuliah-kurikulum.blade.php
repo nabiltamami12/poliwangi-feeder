@@ -14,7 +14,7 @@
         <div class="card-header p-0">
           <div class="row align-items-center">
             <div class="col">
-              <h2 class="mb-0">{{ ($id==null)?"TAMBAH":"UBAH" }} DATA KURIKULUM KULIAH</h2>
+              <h2 class="mb-0">TAMBAH MATA KULIAH KE DALAM KURIKULUM</h2>
             </div>
           </div>
         </div>
@@ -26,48 +26,23 @@
           <div class="form-row">
             <div class="col-sm-12 col-12">
               <div class="form-group row mb-0">
-                <label>Nama Kurikulum</label>
-                <input type="text" class="form-control" id="kurikulum" name="kurikulum">
-              </div>
-              <div class="form-group row mb-0">
-                <label>Pilih Prodi / Jurusan</label>
-                <select name="prodi_id" id="" class="form-control">
-                    @foreach($prodi as $prodi)
-                        <option value="{{ $prodi->nomor }}">{{ ucwords($prodi->program_studi) }}</option>
+                <label>Pilih Mata Kuliah</label>
+                <input type="hidden" name="kurikulum" value="{{ $id }}">
+                <select name="matakuliah" id="matakuliah" class="form-control">
+                    @foreach($matkul as $matkul)
+                        <option value="{{ $matkul->nomor }}">{{ ucwords($matkul->matakuliah) }}</option>
                     @endforeach
                 </select>
               </div>
               <div class="form-group row mb-0">
-                <label>Pilih Tahun Ajaran</label>
-                <select name="periode_id" id="" class="form-control">
-                    @foreach($periode as $periode)
-                        <option value="{{ $periode->nomor }}">{{ ucwords($periode->tahun) }} - Semester {{ $periode->semester }}</option>
-                    @endforeach
-                </select>
-              </div>
-              <div class="form-group row mb-0">
-                <label>Jumlah SKS Total</label>
-                <input type="number" value="0" class="form-control" id="totalSks" name="jumlah_sks" readonly>
-              </div>
-              <div class="form-group row mb-0">
-                <div class="col-md-6 col-sm-6 col-12 mb-2 p-0 pr-2">
-                    <label>Jumlah SKS Wajib</label>
-                    <input type="number" value="0" class="form-control" id="sksWajib" name="sks_wajib" min="0" required>
-                </div>
-                <div class="col-md-6 col-sm-6 col-12 mb-2 p-0 pl-2">
-                    <label>Jumlah SKS Pilihan</label>
-                    <input type="number" value="0" class="form-control" id="sksPilihan" name="sks_pilihan" min="0" required>
-                </div>
-              </div>
-              <div class="form-group row mb-0">
-                <label>Keterangan</label>
-                <textarea name="keterangan" id="" rows="3" class="form-control"></textarea>
+                <label>Semester</label>
+                <input type="number" value="0" class="form-control" id="totalSks" name="semester">
               </div>
               <div class="form-group row mb-0">
                 <label>Status</label>
                 <select name="status" id="" class="form-control">
-                    <option value="1">Aktif</option>
-                    <option value="1">Tidak Aktif</option>
+                    <option value="wajib">Wajib</option>
+                    <option value="pilihan">Pilihan</option>
                 </select>
               </div>
             </div>
@@ -75,8 +50,7 @@
           </div>
           <hr class="my-4">
 
-          <button type="submit" class="btn btn-primary w-100 simpanData-btn ">{{ ($id==null)?"Tambah":"Ubah" }}
-            Data</button>
+          <button type="submit" class="btn btn-primary w-100 simpanData-btn ">Tambah Mata Kuliah</button>
         </form>
 
       </div>
@@ -91,6 +65,8 @@
     }else{
         $('#status').val(0)
     }
+
+    $('#matakuliah').select2()
 
     $('#sksWajib').keyup(function(){
         var jumlahWajib = $(this).val(),
@@ -127,13 +103,8 @@
     // form tambah data
     $("#form_cu").submit(function(e) {
         e.preventDefault();
-        if (id!="") {
-            var url = url_api+"/kurikulum/"+id;
-            var type = "put";
-        } else {
-            var url = url_api+"/kurikulum";
-            var type = "post";
-        }
+        var url = url_api+"/kurikulum/"+ id +"/matakuliah";
+        var type = "post";
         $.ajax({
             url: url,
             type: type,
@@ -143,7 +114,7 @@
             processData: false,
             success: function(res) {
                 if (res.status=="success") {
-                    window.location.href = "{{url('/admin/master/datakurikulum')}}";
+                    window.location.href = "{{url('/admin/master/datakurikulum/'. $id. '/matakuliah')}}";
                 } else {
                     // alert gagal
                 }

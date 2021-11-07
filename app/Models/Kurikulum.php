@@ -10,9 +10,10 @@ class Kurikulum extends Model
     use HasFactory;
     public $timestamps = false;
     public $table = "kurikulum";
-    protected $fillable = [
-        'id',
-        'kurikulum',
-        'status',
-    ];
+    protected $guarded = [];
+
+    public function prodi()
+    {
+        return $this->belongsTo(Prodi::class, 'prodi_id', 'nomor');
+    }
 }

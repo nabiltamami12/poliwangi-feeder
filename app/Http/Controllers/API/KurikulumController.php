@@ -26,7 +26,9 @@ class KurikulumController extends Controller
         try {
             $kurikulum = Kurikulum::select(
                             'kurikulum.*',
-                            DB::raw("(select count(*) from kurikulum_matkul mk where mk.kurikulum = kurikulum.id) as jumlah_matkul"),
+                            DB::raw("(select sum((select sks from matakuliah where matakuliah.nomor=mk.matakuliah)) from kurikulum_matkul mk where mk.kurikulum = kurikulum.id) as jumlah_matkul"),
+                            DB::raw("(select program_studi from program_studi p where p.nomor=kurikulum.prodi_id) as prodi"),
+                            DB::raw("(select tahun from periode p where p.nomor=kurikulum.periode_id) as periode"),
                             )
                             ->get();
             $this->data = $kurikulum;
@@ -54,6 +56,8 @@ class KurikulumController extends Controller
 
         $validator = Validator::make($data, [
             'kurikulum' => 'required',
+            'prodi_id' => 'required',
+            'periode_id' => 'required',
             'status' => 'required'
         ]);
 
@@ -118,6 +122,28 @@ class KurikulumController extends Controller
         ]);
     }
 
+    public function matakuliah($id)
+    {
+        try {
+            $kurikulum_matkul = DB::table('kurikulum_matkul as km')
+                                    ->select('km.*','m.matakuliah as nama_matkul','m.kode','m.sks',DB::raw('CONCAT( p.program," ",ps.program_studi ) as prodi'))
+                                    ->join('matakuliah as m','m.nomor','=','km.matakuliah')
+                                    ->join('program_studi as ps','m.program_studi','=','ps.nomor')
+                                    ->join('program as p','p.nomor','=','ps.program')
+                                    ->where('km.kurikulum',$id)->get();
+            $this->data = $kurikulum_matkul;
+            $this->status = "success";
+        } catch (QueryException $e) {
+            $this->status = "failed";
+            $this->error = $e;
+        }
+        return response()->json([
+            "status" => $this->status,
+            "data" => $this->data,
+            "error" => $this->error
+        ]);
+    }
+
     /**
      * Update the specified resource in storage.
      *
@@ -142,27 +168,7 @@ class KurikulumController extends Controller
             $this->error = "Data not found";
         } else {
             try {
-                if ($request->matkul) {
-                    foreach ($request->matkul as $key => $value) {
-                        
-                        if ($key=="hapus") {
-                            foreach ($value as $key_hapus => $value_hapus) {
-                                DB::table('kurikulum_matkul')->where('id',$value_hapus['id'])->delete();
-                            }
-                        }
-                        if ($key=="tambah") {
-                            foreach ($value as $key_tambah => $value_tambah) {
-                                DB::table('kurikulum_matkul')->insert($value_tambah);
-                            }
-                        }
-                        if ($key=="update") {
-                            foreach ($value as $key_update => $value_update) {
-                                DB::table('kurikulum_matkul')->where('id',$value_update)->update($value_update);
-                            }
-                        }
-                    }
-                } 
-                $kurikulum->update(['kurikulum'=>$request->kurikulum]);
+                $kurikulum->update($data);
                 $this->data = $kurikulum->get();
                 $this->status = "success";
             } catch (QueryException $e) {
@@ -177,12 +183,47 @@ class KurikulumController extends Controller
         ]);
     }
 
+    public function tambahMatkul(Request $request){
+        $request->validate([
+            'matakuliah' => 'required',
+            'semester' => 'required|min:1',
+            'status' => 'required'
+        ]);
+
+        try {
+            $check = DB::table('kurikulum_matkul')->where(['kurikulum' => $request->kurikulum, 'matakuliah' => $request->matakuliah, 'semester' => $request->semester]);
+
+            if($check->count() == 0){
+                $matakuliah = DB::table('kurikulum_matkul')->insert([
+                    'id' => null,
+                    'kurikulum' => $request->kurikulum,
+                    'matakuliah' => $request->matakuliah,
+                    'semester' => $request->semester,
+                    'status' => $request->status
+                ]);
+
+                $this->data = $matakuliah;
+            }
+
+            $this->status = "success";
+        } catch(QueryException $e){
+            $this->status = "failed";
+            $this->error = $e;
+        }
+
+        return response()->json([
+            "status" => $this->status,
+            "data" => $this->data,
+            "error" => $this->error
+        ]);
+    }
+
     public function change_status($id)
     {
         try {
-            $kurikulum = DB::table('kurikulum')->update(['status'=>0]);
+            // $kurikulum = DB::table('kurikulum')->update(['status'=>0]);
             $kurikulum = Kurikulum::where('id',$id)->update(['status'=>1]);
-    
+
             $this->data = [];
             $this->status = "success";
         } catch (QueryException $e) {
@@ -207,7 +248,26 @@ class KurikulumController extends Controller
         try {
             $kurikulum = Kurikulum::where('id', $id);
             $kurikulum->delete();
-      
+
+            $this->data = [];
+            $this->status = "success";
+        } catch (QueryException $e) {
+            $this->status = "failed";
+            $this->error = $e;
+        }
+        return response()->json([
+            "status" => $this->status,
+            "data" => $this->data,
+            "error" => $this->error
+        ]);
+    }
+
+    public function deleteMatkul($id)
+    {
+        try {
+            $kurikulum_matkul = DB::table('kurikulum_matkul')->where('id', $id);
+            $kurikulum_matkul->delete();
+
             $this->data = [];
             $this->status = "success";
         } catch (QueryException $e) {
