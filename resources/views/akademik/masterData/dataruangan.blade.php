@@ -31,6 +31,7 @@
                 <th scope="col">RUANGAN</th>
                 <th scope="col">KODE</th>
                 <th scope="col">KAPASITAS</th>
+                <th scope="col">RUANG UJIAN?</th>
                 <th scope="col">KETERANGAN</th>
                 <th scope="col">AKSI</th>
               </tr>
@@ -81,11 +82,18 @@ dt_opt = {
         "aTargets": [4],
         "mData": null,
         "mRender": function(data, type, full) {
-          res = data['keterangan'];
+          res = data["ruang_ujian"] == "0" ? "Tidak" : "Iya";
           return res;
         }
       },{
         "aTargets": [5],
+        "mData": null,
+        "mRender": function(data, type, full) {
+          res = data['keterangan'];
+          return res;
+        }
+      },{
+        "aTargets": [6],
         "mData": null,
         "mRender": function(data, type, full) {
           var id = data['nomor'];

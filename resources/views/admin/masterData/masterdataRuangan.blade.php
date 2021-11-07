@@ -76,6 +76,7 @@
                 <th scope="col" style="width: 40%">Ruang</th>
                 <th scope="col" class="text-center">Kode</th>
                 <th scope="col" class="text-center">kapasitas</th>
+                <th scope="col" class="text-center">Ruang Ujian?</th>
                 <th scope="col" class="text-center">Keterangan</th>
                 <th scope="col" class="text-center">aksi</th>
               </tr>
@@ -87,6 +88,7 @@
                 <td class="font-weight-bold text-capitalize">Kelas 1</td>
                 <td class="text-center">G001</td>
                 <td class="text-center">24</td>
+                <td class="text-center">Tidak</td>
                 <td class="text-center text-lowercase">kelas besar</td>
                 <td class="text-center">
                   <a href="/admin/masterdata/dataruangan/updatedata"><i class="iconify edit-icon mr-2"
@@ -101,6 +103,7 @@
                 <td class="font-weight-bold text-capitalize">Kelas 1</td>
                 <td class="text-center">G002</td>
                 <td class="text-center">40</td>
+                <td class="text-center">Tidak</td>
                 <td class="text-center text-lowercase">kelas besar</td>
                 <td class="text-center">
                   <a href="/admin/masterdata/dataruangan/updatedata"><i class="iconify edit-icon mr-2"
@@ -115,6 +118,7 @@
                 <td class="font-weight-bold text-capitalize">Kelas 1</td>
                 <td class="text-center">G003</td>
                 <td class="text-center">25</td>
+                <td class="text-center">Tidak</td>
                 <td class="text-center text-lowercase">kelas besar</td>
                 <td class="text-center">
                   <a href="/admin/masterdata/dataruangan/updatedata"><i class="iconify edit-icon mr-2"
@@ -129,6 +133,7 @@
                 <td class="font-weight-bold text-capitalize">Kelas 1</td>
                 <td class="text-center">G004</td>
                 <td class="text-center">35</td>
+                <td class="text-center">Tidak</td>
                 <td class="text-center text-lowercase">kelas besar</td>
                 <td class="text-center">
                   <a href="/admin/masterdata/dataruangan/updatedata"><i class="iconify edit-icon mr-2"
@@ -143,6 +148,7 @@
                 <td class="font-weight-bold text-capitalize">Kelas 1</td>
                 <td class="text-center">G005</td>
                 <td class="text-center">40</td>
+                <td class="text-center">Tidak</td>
                 <td class="text-center text-lowercase">kelas besar</td>
                 <td class="text-center">
                   <a href="/admin/masterdata/dataruangan/updatedata"><i class="iconify edit-icon mr-2"
@@ -157,6 +163,7 @@
                 <td class="font-weight-bold text-capitalize">Kelas 1</td>
                 <td class="text-center">G006</td>
                 <td class="text-center">24</td>
+                <td class="text-center">Tidak</td>
                 <td class="text-center text-lowercase">kelas besar</td>
                 <td class="text-center">
                   <a href="/admin/masterdata/dataruangan/updatedata"><i class="iconify edit-icon mr-2"
@@ -171,6 +178,7 @@
                 <td class="font-weight-bold text-capitalize">Kelas 1</td>
                 <td class="text-center">G007</td>
                 <td class="text-center">50</td>
+                <td class="text-center">Tidak</td>
                 <td class="text-center text-lowercase">kelas besar</td>
                 <td class="text-center">
                   <a href="/admin/masterdata/dataruangan/updatedata"><i class="iconify edit-icon mr-2"
@@ -185,6 +193,7 @@
                 <td class="font-weight-bold text-capitalize">Kelas 1</td>
                 <td class="text-center">G008</td>
                 <td class="text-center">50</td>
+                <td class="text-center">Tidak</td>
                 <td class="text-center text-lowercase">kelas besar</td>
                 <td class="text-center">
                   <a href="/admin/masterdata/dataruangan/updatedata"><i class="iconify edit-icon mr-2"
@@ -199,6 +208,7 @@
                 <td class="font-weight-bold text-capitalize">Kelas 1</td>
                 <td class="text-center">G009</td>
                 <td class="text-center">50</td>
+                <td class="text-center">Tidak</td>
                 <td class="text-center text-lowercase">kelas besar</td>
                 <td class="text-center">
                   <a href="/admin/masterdata/dataruangan/updatedata"><i class="iconify edit-icon mr-2"
