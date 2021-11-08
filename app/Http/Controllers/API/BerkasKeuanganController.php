@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\KeuanganPembayaran as KB;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Database\QueryException;
-use App\Imports\BukuBesarImport;
+use App\Imports\RiwayatImport;
 use App\Exports\PiutangExport;
 use App\Models\Periode;
 use Illuminate\Validation\Rule;
@@ -443,10 +443,10 @@ class BerkasKeuanganController extends Controller
         ]);
     }
 
-    public function upload_buku_besar(Request $request)
+    public function upload_riwayat(Request $request)
     {
         try {
-            $import = new BukuBesarImport;
+            $import = new RiwayatImport;
             Excel::import($import, $request->file);
             
             $this->status = "success";
