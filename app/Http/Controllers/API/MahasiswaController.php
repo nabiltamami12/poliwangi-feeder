@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\QueryException;
 use BNI;
+use App\Events\LogMahasiswaStatus;
 
 /** --Status Mahasiswa--
  * "A" = Aktif - temporary
@@ -94,6 +95,9 @@ class MahasiswaController extends Controller
 			if ( isset($request->jurusan) ) {
 				array_push($where,['ps.jurusan','=',$request->jurusan]);
 			}
+			if ( isset($request->angkatan) ) {
+				array_push($where,['m.angkatan','=',$request->angkatan]);
+			}
 			array_push($where,['m.status','=',$request->status]);
 
 			$obj = new MahasiswaDatatable($where);
@@ -150,6 +154,12 @@ class MahasiswaController extends Controller
 		} else {
 			try {
 				$data = Mahasiswa::create($data);
+				LogMahasiswaStatus::dispatch([
+					"mahasiswa" => $data['nomor'],
+					"status" => $data['status'],
+					"tahun" => $this->tahun_aktif,
+					"semester" => $this->semester_aktif
+				]);
 				$this->data = $data;
 				$this->status = "success";
 			} catch (QueryException $e) {
@@ -202,6 +212,12 @@ class MahasiswaController extends Controller
 			try {
 				$check->update($data);
 				$this->data = $check->get();
+				LogMahasiswaStatus::dispatch([
+					"mahasiswa" => $this->data[0]->nomor,
+					"status" => $this->data[0]->status,
+					"tahun" => $this->tahun_aktif,
+					"semester" => $this->semester_aktif
+				]);
 				$this->status = "success";
 			} catch (QueryException $e) {
 				$this->status = "failed";
@@ -302,6 +318,37 @@ class MahasiswaController extends Controller
 			->get();
 			$obj_count = Mahasiswa::where('nrp', 'like', '%'.$q.'%')->count();
 			$this->data = array('items' => $obj, 'total_count' => $obj_count);
+			$this->status = "success";
+		} catch (QueryException $e) {
+			$this->status = "failed";
+			$this->error = $e;
+		}
+		return response()->json([
+			"status" => $this->status,
+			"data" => $this->data,
+			"error" => $this->error
+		]);
+	}
+
+	public function mahasiswa_angkatan(Request $req)
+	{
+		try {
+			$where = [];
+			if ($req->status) {
+				$where[] = ['mahasiswa.status', '=', $req->status];
+			}
+			if ($req->program) {
+				$where[] = ['ps.program', '=', $req->program];
+			}
+			if ($req->jurusan) {
+				$where[] = ['ps.jurusan', '=', $req->jurusan];
+			}
+
+			$this->data = Mahasiswa::select('mahasiswa.angkatan')
+				->leftJoin('program_studi as ps', 'mahasiswa.program_studi', '=', 'ps.nomor')
+				->where($where)
+				->groupBy('mahasiswa.angkatan')
+				->get();
 			$this->status = "success";
 		} catch (QueryException $e) {
 			$this->status = "failed";
