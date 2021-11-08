@@ -77,7 +77,7 @@
   </div>
 </section>
 <script>
-// var id_mahasiswa = 31570;
+// var id_mahasiswa = 31575;
 var status_mahasiswa = "Aktif";
 var bulan = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
 var dt = new Date();

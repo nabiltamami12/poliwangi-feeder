@@ -22,13 +22,13 @@
 		</div>
 	</div>
 
-	<div class="modal fade" id="bukuBesarModal" tabindex="-1" aria-labelledby="uploadPerjanjianModalLabel"
+	<div class="modal fade" id="importDataModal" tabindex="-1" aria-labelledby="uploadPerjanjianModalLabel"
 		aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered modal-lg">
 			<div class="modal-content padding--medium">
 				<div class="perjanjian_pembayaran">
 					<h1 class="modal-title text-center mt-2">Upload Pembayaran UKT</h1>
-					<div onclick="bukuBesarModal()" style="cursor: pointer;" class="detail_dokumen upload-perjanjian d-flex align-items-center justify-content-between mt-5">
+					<div onclick="importDataModal()" style="cursor: pointer;" class="detail_dokumen upload-perjanjian d-flex align-items-center justify-content-between mt-5">
 						<form>
 							<span>
 								<i class="iconify mr-2" data-icon="bx:bxs-file-pdf" data-inline="false"></i>
@@ -44,7 +44,7 @@
 				<div class="modal_button mt-4-5 d-flex justify-content-between">
 					<button type="button" class="btn btn-outline-danger rounded-sm w-100 mr-2 mr-md-3"
 						data-dismiss="modal">Batal</button>
-					<button type="button" onclick="submitBukuBesar()" class="btn btn-success rounded-sm w-100 ml-2 ml-md-3">Simpan</button>
+					<button type="button" onclick="importDataUKT()" class="btn btn-success rounded-sm w-100 ml-2 ml-md-3">Simpan</button>
 				</div>
 			</div>
 		</div>
@@ -63,7 +63,7 @@
 								<i class="iconify-inline mr-1" data-icon="bx:bx-filter-alt"></i>
 								Filter
 							</button> --}}
-							<button type="button" onclick="bukuBesarModal()" class="btn btn-info_transparent mt-3 mt-md-0 ml-md-2 text-primary">
+							<button type="button" onclick="importDataModal()" class="btn btn-info_transparent mt-3 mt-md-0 ml-md-2 text-primary">
 								<i class="iconify-inline mr-1" data-icon="bx:bx-download"></i>
 								Import
 							</button>
@@ -159,7 +159,7 @@
 
 	inputBukuBesar = document.getElementById('file_buku_besar');
 	namaBukuBesar = document.getElementById('nama_buku_besar');
-	function bukuBesarModal() {
+	function importDataModal() {
 		inputBukuBesar.click();
 	}
 	inputBukuBesar.addEventListener("change", function () {
@@ -169,15 +169,15 @@
 		} else {
 			namaBukuBesar.innerHTML = "tidak ada file dipilih";
 		}
-		$('#bukuBesarModal').modal('show');
+		$('#importDataModal').modal('show');
 	});
-	function submitBukuBesar() {
+	function importDataUKT() {
 		let file_data = $('#file_buku_besar').prop('files')[0];   
 		let form_data = new FormData();                  
 		form_data.append('file', file_data);
 
 		$.ajax({
-				url: url_api+"/keuangan/upload-buku-besar",
+				url: url_api+"/keuangan/upload-riwayat",
 				dataType: 'json',
 				cache: false,
 				contentType: false,

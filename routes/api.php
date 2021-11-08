@@ -296,7 +296,7 @@ Route::prefix('v1')->group(function () {
     Route::get('/keuangan/export/rekap-piutang', [Ctr\BerkasKeuanganController::class, 'export_piutang']);
 
     // Riwayat Pembayaran
-    Route::post('/keuangan/upload-buku-besar', [Ctr\BerkasKeuanganController::class, 'upload_buku_besar']);
+    Route::post('/keuangan/upload-riwayat', [Ctr\BerkasKeuanganController::class, 'upload_riwayat']);
     Route::get('/keuangan/riwayat-pembayaran', [Ctr\RiwayatPembayaranController::class, 'index']);
     
 
