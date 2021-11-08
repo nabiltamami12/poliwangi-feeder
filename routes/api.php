@@ -298,6 +298,7 @@ Route::prefix('v1')->group(function () {
 
     // Riwayat Pembayaran
     Route::post('/keuangan/upload-riwayat', [Ctr\BerkasKeuanganController::class, 'upload_riwayat']);
+    Route::post('/keuangan/upload-riwayat-cicilan', [Ctr\BerkasKeuanganController::class, 'upload_riwayat_cicilan']);
     Route::get('/keuangan/riwayat-pembayaran', [Ctr\RiwayatPembayaranController::class, 'index']);
     
 
