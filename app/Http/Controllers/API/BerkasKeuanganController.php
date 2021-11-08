@@ -15,6 +15,7 @@ use Illuminate\Database\QueryException;
 use App\Imports\BukuBesarImport;
 use App\Exports\PiutangExport;
 use App\Models\Periode;
+use Illuminate\Validation\Rule;
 
 class BerkasKeuanganController extends Controller
 {
@@ -67,6 +68,7 @@ class BerkasKeuanganController extends Controller
             'keuangan_piutang.id', 
             'keuangan_piutang.id_mahasiswa', 
             'keuangan_piutang.path_perjanjian', 
+            'keuangan_piutang.path_pengajuan', 
             'mahasiswa.nrp as nim',
             'mahasiswa.nama',
             'mahasiswa.ukt',
@@ -394,13 +396,9 @@ class BerkasKeuanganController extends Controller
                 'id_piutang' => $data['id_piutang'],
             ])->first();
 
-            $belum_lunas = KB::where('id_mahasiswa', '=', $data['id_mahasiswa'])->where('status', '=', null)->first();
+            $belum_lunas = KB::where('id_mahasiswa', '=', $data['id_mahasiswa'])->where('status', '=', null)->where('id_piutang', '!=', null)->first();
 
             if ($check==null && $belum_lunas == null) {
-                // KB::where('id_mahasiswa', '=', $data['id_mahasiswa'])->where('status', '=', null)->update([
-                //     'nominal' => 0,
-                //     'status' => 1
-                // ]);
                 for ($i = 0; $i < $total; $i++) {
                     $other = new KB;
                     $other->id_mahasiswa = $data['id_mahasiswa'];
@@ -576,5 +574,80 @@ class BerkasKeuanganController extends Controller
             "data" => $this->data,
             "error" => $this->error
         ]);
+    }
+
+    public function dokumen_mahasiswa(Request $request) {
+        try {
+            $data = $request->all();
+            $validator = Validator::make(
+                $data,
+                [
+                    'tipe' => ['required', Rule::in(['pengajuan', 'perjanjian'])],
+                    'file' => 'required|mimes:doc,docx,pdf,txt|max:4096',
+                    'id_mahasiswa' => 'required'
+                ]
+            );
+    
+            if ($validator->fails()) {
+                return response()->json(['error' => $validator->errors(), 'data' => $data], 401);
+            }
+
+            $periode = Periode::select('tahun', 'semester')->orderByDesc('status')->orderByDesc('tahun')->first();
+            $current_data = BK::select('id', 'status')->where('id_mahasiswa','=',$request->id_mahasiswa)->where('tahun','=',$periode->tahun)->where('semester','=',$periode->semester)->first();
+            if (isset($current_data) && strtolower($current_data->status) == 'pending' && $request->hasFile('file')) {
+                $path = $request->id_mahasiswa.'_'.$periode->tahun.$periode->semester.'_'.$request->file->getClientOriginalName();
+                if($request->file->storeAs($request->tipe, $path)){
+                    $kb = BK::find($current_data->id);
+                    $kb->{'path_'.$request->tipe} = '/'.$request->tipe.'/'.$path;
+                    $kb->save();
+                    $this->status = "success";
+                }
+            }
+        } catch (QueryException $e) {
+            $this->status = "failed";
+            $this->error = $e;
+        }
+        return response()->json([
+                "status" => $this->status,
+                "data" => $this->data,
+                'error' => $this->error,
+        ]);
+    }
+
+    public function dokumen_piutang_mahasiswa($id_mahasiswa) {
+        try {
+            $periode = Periode::select('tahun', 'semester')->orderByDesc('status')->orderByDesc('tahun')->first();
+            $data = BK::select('id', 'status', 'path_perjanjian', 'path_pengajuan')->where('id_mahasiswa','=',$id_mahasiswa)->where('tahun','=',$periode->tahun)->where('semester','=',$periode->semester)->first();
+            if (isset($data->id)) {
+                $this->status = "success";
+                $data->cicilan = KB::where('id_piutang', $data->id)->get();
+            }
+            $this->data = $data;
+        } catch (QueryException $e) {
+            $this->status = "failed";
+            $this->error = $e;
+        }
+        return response()->json([
+                "status" => $this->status,
+                "data" => $this->data,
+                'error' => $this->error,
+        ]);
+    }
+
+    public function download_dokumen_piutang($id_piutang, $tipe)
+    {
+        if (!in_array($tipe, ['perjanjian', 'pengajuan'])) {
+            abort(404);
+        }
+        $data = BK::select('path_perjanjian', 'path_pengajuan')->where('id','=',$id_piutang)->first();
+        $path = $data->path_pengajuan;
+        if ($tipe == 'perjanjian') {
+            $path = $data->path_perjanjian;
+        }
+        if ($path == null) {
+            abort(404);
+        }
+        $pathToFile = storage_path('app/' . $path);
+        return response()->download($pathToFile);
     }
 }

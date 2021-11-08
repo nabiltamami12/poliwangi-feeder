@@ -210,11 +210,17 @@ Route::prefix('v1')->group(function () {
     Route::put('/syarat/{id}', [Ctr\SyaratController::class, 'update']);
     Route::delete('/syarat/{id}', [Ctr\SyaratController::class, 'destroy']);
 
+    // DASHBOARD
+    Route::get('admin/dashboard/', [Ctr\DashboardController::class, 'index_admin']);
+    Route::get('akademik/dashboard/', [Ctr\DashboardController::class, 'index_akademik']);
+
+
     // PENDAFTAR
     Route::get('pendaftar/dashboard', [Ctr\PendaftarController::class, 'dashboard']);
     Route::get('admin/pendaftar-konfirmasi/{id}', [Ctr\PendaftarController::class, 'konfirmasi_pendaftar']);
 
     Route::get('admin/pendaftar', [Ctr\PendaftarController::class, 'index']);
+    Route::get('admin/pendaftar/generate-nim', [Ctr\PendaftarController::class, 'get_prodi_nim']);
     Route::put('admin/pendaftar/verifikasi/{id}', [Ctr\PendaftarController::class, 'verifikasi_pendaftar']);
     Route::get('/pendaftar/va', [Ctr\PendaftarController::class, 'va']);
     Route::get('/pendaftar', [Ctr\PendaftarController::class, 'show']);
@@ -223,6 +229,8 @@ Route::prefix('v1')->group(function () {
     Route::post('/login', [Ctr\PendaftarController::class, 'login']);
     Route::post('/pendaftar/check', [Ctr\PendaftarController::class, 'is_lunas']);
     Route::get('/pendaftar/keuangan', [Ctr\PendaftarController::class, 'keuangan']);
+    Route::get('/pendaftar/mahasiswa', [Ctr\PendaftarController::class, 'mahasiswa']);
+    Route::post('admin/pendaftar/generate-nim', [Ctr\PendaftarController::class, 'generate_nim']);
     // Route::post('/daftar/{id}', [Ctr\PendaftarController::class, 'update']);
     // Route::delete('/daftar/{id}', [Ctr\PendaftarController::class, 'destroy']);
 
@@ -276,6 +284,9 @@ Route::prefix('v1')->group(function () {
     Route::get('download/template-perjanjian', [Ctr\BerkasKeuanganController::class, 'download_template_perjanjian']);
     Route::post('keuangan/cicilan-piutang', [Ctr\BerkasKeuanganController::class, 'cicilan_piutang']);
     Route::post('keuangan/update-jatuh-tempo', [Ctr\BerkasKeuanganController::class, 'update_jatuh_tempo']);
+    Route::post('keuangan/dokumen-piutang', [Ctr\BerkasKeuanganController::class, 'dokumen_mahasiswa']);
+    Route::get('keuangan/dokumen-piutang/{id}', [Ctr\BerkasKeuanganController::class, 'dokumen_piutang_mahasiswa']);
+    Route::get('download/dokumen-piutang/{id}/{tipe}', [Ctr\BerkasKeuanganController::class, 'download_dokumen_piutang']);
 
     Route::post('keuangan/tagihan-mahasiswa', [Ctr\BerkasKeuanganController::class, 'mahasiswa_pembayaran_tagihan']); //mahasiswa/pembayaran, termasuk generate va
 

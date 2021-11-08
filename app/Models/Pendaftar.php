@@ -84,6 +84,7 @@ class Pendaftar extends Model
         'status_kawin',
         'ukuran_baju',
         'pernahpt',
+        'angkatan',
         'tahunmasuk_pt',
         'jumlah_sks',
         'pt_asal',

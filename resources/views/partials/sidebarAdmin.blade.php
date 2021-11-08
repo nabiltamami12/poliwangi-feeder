@@ -190,6 +190,12 @@
                 </a>
               </li>
               <li class="nav-item">
+                <a class="nav-link" href="{{ url('/admin/pmb/generatenim')}}">
+                  <span class="mini_icon">GN</span>
+                  <span class="nav-link-text">Generate NIM</span>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a class="nav-link" href="{{ url('/admin/pmb/settingjalurpenerimaan')}}">
                   <span class="mini_icon">JP</span>
                   <span class="nav-link-text">Setting Jalur Penerimaan</span>
