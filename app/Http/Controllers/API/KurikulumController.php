@@ -25,12 +25,13 @@ class KurikulumController extends Controller
     {
         try {
             $kurikulum = Kurikulum::select(
-                            'kurikulum.*',
-                            DB::raw("(select sum((select sks from matakuliah where matakuliah.nomor=mk.matakuliah)) from kurikulum_matkul mk where mk.kurikulum = kurikulum.id) as jumlah_matkul"),
-                            DB::raw("(select program_studi from program_studi p where p.nomor=kurikulum.prodi_id) as prodi"),
-                            DB::raw("(select tahun from periode p where p.nomor=kurikulum.periode_id) as periode"),
-                            )
-                            ->get();
+                'kurikulum.*',
+                DB::raw("(select sum((select sks from matakuliah where matakuliah.nomor=mk.matakuliah)) from kurikulum_matkul mk where mk.kurikulum = kurikulum.id) as jumlah_matkul"),
+                DB::raw("(select program_studi from program_studi p where p.nomor=kurikulum.prodi_id) as prodi"),
+                DB::raw("(select tahun from periode p where p.nomor=kurikulum.periode_id) as periode"),
+                DB::raw("(select semester from periode p where p.nomor=kurikulum.periode_id) as semester"),
+            )
+            ->get();
             $this->data = $kurikulum;
             $this->status = "success";
         } catch (QueryException $e) {

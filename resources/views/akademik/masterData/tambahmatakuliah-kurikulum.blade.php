@@ -30,7 +30,7 @@
                 <input type="hidden" name="kurikulum" value="{{ $id }}">
                 <select name="matakuliah" id="matakuliah" class="form-control">
                     @foreach($matkul as $matkul)
-                        <option value="{{ $matkul->nomor }}">{{ ucwords($matkul->matakuliah) }}</option>
+                        <option value="{{ $matkul->nomor }}">{{ $matkul->kode }} - {{ ucwords($matkul->matakuliah) }}</option>
                     @endforeach
                 </select>
               </div>
