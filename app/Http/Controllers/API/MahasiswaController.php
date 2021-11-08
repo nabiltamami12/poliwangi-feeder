@@ -343,11 +343,45 @@ class MahasiswaController extends Controller
 			if ($req->jurusan) {
 				$where[] = ['ps.jurusan', '=', $req->jurusan];
 			}
+			if ($req->program_studi) {
+				$where[] = ['mahasiswa.program_studi', '=', $req->program_studi];
+			}
 
 			$this->data = Mahasiswa::select('mahasiswa.angkatan')
 				->leftJoin('program_studi as ps', 'mahasiswa.program_studi', '=', 'ps.nomor')
 				->where($where)
 				->groupBy('mahasiswa.angkatan')
+				->get();
+			$this->status = "success";
+		} catch (QueryException $e) {
+			$this->status = "failed";
+			$this->error = $e;
+		}
+		return response()->json([
+			"status" => $this->status,
+			"data" => $this->data,
+			"error" => $this->error
+		]);
+	}
+
+	public function mahasiswa_kelas(Request $req)
+	{
+		try {
+			$where = [];
+			if ($req->status) {
+				$where[] = ['mahasiswa.status', '=', $req->status];
+			}
+			if ($req->program_studi) {
+				$where[] = ['mahasiswa.program_studi', '=', $req->program_studi];
+			}
+			if ($req->angkatan) {
+				$where[] = ['mahasiswa.angkatan', '=', $req->angkatan];
+			}
+
+			$this->data = Mahasiswa::select('mahasiswa.kelas', 'k.kode')
+				->leftJoin('kelas as k', 'mahasiswa.kelas', '=', 'k.nomor')
+				->where($where)
+				->groupBy('mahasiswa.kelas')
 				->get();
 			$this->status = "success";
 		} catch (QueryException $e) {

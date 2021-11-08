@@ -20,22 +20,28 @@
 				<hr class="my-4 mt">
 				<form class="form-select rounded-0">
 					<div class="form-row">
-						<div class="col-md-4 form-group">
-							<label for="jenjang-pendidikan">Jenjang Pendidikan</label>
-							<select class="form-control select-filter" id="program_studi" name="program_studi">
-
-							</select>
-						</div>
-						<div class="col-md-4 form-group">
-							<label for="kelas">Kelas</label>
-							<select class="form-control select-filter" id="kelas" name="kelas">
-
-							</select>
-						</div>
 						<div class="col-md-4 form-group mt-3 mt-md-0">
 							<label for="status-mahasiswa">Status Mahasiswa</label>
-							<select class="form-control select-filter" id="status" name="status">
+							<select class="form-control select-filter" id="status" name="status" onchange="reset_filter(['program_studi','angkatan', 'kelas']);get_prodi();">
 
+							</select>
+						</div>
+						<div class="col-md-4 form-group">
+							<label for="jenjang-pendidikan">Jenjang Pendidikan</label>
+							<select class="form-control select-filter" disabled id="program_studi" name="program_studi" onchange="reset_filter(['angkatan', 'kelas']);get_angkatan();">
+								<option value=""> - </option>
+							</select>
+						</div>
+						<div class="col-md-2 form-group">
+							<label for="jenjang-pendidikan">Angkatan</label>
+							<select class="form-control" disabled id="angkatan" name="angkatan" onchange="reset_filter(['kelas']);get_kelas();">
+								<option value=""> - </option>
+							</select>
+						</div>
+						<div class="col-md-2 form-group">
+							<label for="kelas">Kelas</label>
+							<select class="form-control select-filter" disabled id="kelas" name="kelas">
+								<option value=""> - </option>
 							</select>
 						</div>
 					</div>
@@ -100,24 +106,26 @@
 </div>
 </section>
 <script>
+	var f_status = document.getElementById('status');
+	var f_prodi = document.getElementById('program_studi');
+	var f_angkatan = document.getElementById('angkatan');
+	var f_kelas = document.getElementById('kelas');
 	$(document).ready(function() {
-		getData();
-		$('#program_studi').on('change',function (e) {
-			var program_studi = $(this).val()
-			var kelas = $.grep(dataGlobal['kelas'], function(e){ return e.program_studi == program_studi; });
-
-			$('#kelas').html('')
-			var optKelas = `<option value=""> - </option>`;
-			$.each(kelas,function (key,row) {
-				optKelas += `<option value="${row.nomor}">${row.kode}</option>`
-			})
-			$('#kelas').append(optKelas); 
+		// set status option
+		let optStatus;
+		$.each(dataGlobal['status'],function (key,row) {
+			optStatus += `<option value="${row.kode}">${row.status} - ${row.jenis}</option>`
 		})
+		$('#status').append(optStatus);
+
+		get_prodi();
+		setDatatable();
+
 		$('.select-filter').on('change',function (e) {
-			var url = `${url_api}/keuangan/atur-mahasiswa?program_studi=${$('#program_studi').val()}&status=${$('#status').val()}&kelas=${$('#kelas').val()}`;
+			var url = `${url_api}/keuangan/atur-mahasiswa?program_studi=${f_prodi.value}&status=${f_status.value}&kelas=${f_kelas.value}&angkatan=${f_angkatan.value}`;
 			dt.ajax.url(url).load();
 		})
-	} );
+	});
 
 	function func_centang(e,id_selected,poltek) {
 		$('.centang-pilihan').removeClass('text-success')
@@ -189,27 +197,6 @@
 		});
 	}
 
-	async function getData() {
-		var optProgram,optJurusan,optKelas,optStatus;
-		$.each(dataGlobal['prodi'],function (key,row) {
-			optProgram += `<option value="${row.nomor}">${row.nama_program} ${row.program_studi}</option>`
-		})
-		$('#program_studi').append(optProgram)
-
-		var kelas = $.grep(dataGlobal['kelas'], function(e){ return e.program_studi == $('#program_studi').val(); });
-		$('#kelas').html('')
-		var optKelas = `<option value=""> - </option>`;
-		$.each(kelas,function (key,row) {
-			optKelas += `<option value="${row.nomor}">${row.kode}</option>`
-		})
-		$('#kelas').append(optKelas); 
-
-		$.each(dataGlobal['status'],function (key,row) {
-			optStatus += `<option value="${row.kode}">${row.status} - ${row.jenis}</option>`
-		})
-		$('#status').append(optStatus)
-		setDatatable();
-	}
 	function setDatatable() {
 		var nomor = 1;
 		dt_url = `${url_api}/keuangan/atur-mahasiswa?program_studi=${$('#program_studi').val()}&status=A&kelas=${$('#kelas').val()}`;
@@ -275,6 +262,70 @@
 				}
 			},
 			]
+		}
+	}
+	function get_prodi() {
+		$.ajax({
+			url: url_api + `/prodi-mahasiswa?status=${f_status.value}`,
+			type: 'get',
+			dataType: 'json',
+			success: function(res) {
+				if (res.status == "success") {
+					let optProdi = `<option value=""> - </option>`;
+					$.each(res.data,function (key,row) {
+						optProdi += `<option value="${row.program_studi}">${row.program} ${row.jurusan}</option>`
+					})
+					$('#program_studi').html(optProdi)
+					f_prodi.disabled = false;
+				}
+				return true;
+			}
+		});
+		return true;
+	}
+	function get_angkatan() {
+		$.ajax({
+			url: url_api + `/mahasiswa-angkatan?status=${f_status.value}&program_studi=${f_prodi.value}`,
+			type: 'get',
+			dataType: 'json',
+			success: function(res) {
+				if (res.status == "success") {
+					let optAngkatan = `<option value=""> - </option>`;
+					$.each(res.data,function (key,row) {
+						optAngkatan += `<option value="${row.angkatan}">${row.angkatan} </option>`
+					})
+					$('#angkatan').html(optAngkatan);
+					f_angkatan.disabled = false;
+				}
+				return true;
+			}
+		});
+		return true;
+	}
+	function get_kelas() {
+		$.ajax({
+			url: url_api + `/mahasiswa-kelas?status=${f_status.value}&program_studi=${f_prodi.value}&angkatan=${f_angkatan.value}`,
+			type: 'get',
+			dataType: 'json',
+			success: function(res) {
+				if (res.status == "success") {
+					let optKelas = `<option value=""> - </option>`;
+					$.each(res.data,function (key,row) {
+						optKelas += `<option value="${row.kelas}">${row.kode}</option>`
+					})
+					$('#kelas').html(optKelas);
+					f_kelas.disabled = false;
+				}
+				return true;
+			}
+		});
+		return true;
+	}
+	function reset_filter(opt){
+		for(const i of opt){
+			let obj = document.getElementById(i);
+			obj.disabled = true;
+			obj.selectedIndex = 0;
 		}
 	}
 </script>

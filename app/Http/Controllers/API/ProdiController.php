@@ -206,4 +206,31 @@ class ProdiController extends Controller
         ]);
 
     }
+
+    public function prodi_mahasiswa(Request $req)
+    {
+        try {
+            $where = [];
+            if ($req->status) {
+                $where[] = ['mahasiswa.status', '=', $req->status];
+            }
+
+            $this->data = \App\Models\Mahasiswa::select('mahasiswa.program_studi', 'p.program', 'j.jurusan')
+                ->leftJoin('program_studi as ps', 'mahasiswa.program_studi', '=', 'ps.nomor')
+                ->leftJoin('program as p', 'ps.program', '=', 'p.nomor')
+                ->leftJoin('jurusan as j', 'ps.jurusan', '=', 'j.nomor')
+                ->where($where)
+                ->groupBy('mahasiswa.program_studi')
+                ->get();
+            $this->status = "success";
+        } catch (QueryException $e) {
+            $this->status = "failed";
+            $this->error = $e;
+        }
+        return response()->json([
+            "status" => $this->status,
+            "data" => $this->data,
+            "error" => $this->error
+        ]);
+    }
 }

@@ -52,7 +52,7 @@
 				</form>
 				<hr class="mt">
 				<div class="table-responsive">
-					<table id="datatable-pending" class="table align-items-center table-flush table-borderless table-hover">
+					<table id="datatable-pending" class="table align-items-center table-flush table-borderless table-hover" style="width: 100%;">
 						<thead class="table-header">
 							<tr>
 								<th scope="col" class="text-center px-2">No</th>
