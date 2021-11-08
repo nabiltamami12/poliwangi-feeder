@@ -20,29 +20,35 @@
 				<hr class="my-4 mt">
 				<form class="form-select rounded-0">
 					<div class="form-row">
-						<div class="col-md-4 form-group">
-							<label for="jenjang-pendidikan">Jenjang Pendidikan</label>
-							<select class="form-control select-filter" id="program_studi" name="program_studi">
-
-							</select>
-						</div>
-						<div class="col-md-4 form-group">
-							<label for="kelas">Kelas</label>
-							<select class="form-control select-filter" id="kelas" name="kelas">
-
-							</select>
-						</div>
 						<div class="col-md-4 form-group mt-3 mt-md-0">
 							<label for="status-mahasiswa">Status Mahasiswa</label>
-							<select class="form-control select-filter" id="status" name="status">
+							<select class="form-control select-filter" id="status" name="status" onchange="reset_filter(['program_studi','angkatan', 'kelas']);get_prodi();">
 
+							</select>
+						</div>
+						<div class="col-md-4 form-group">
+							<label for="jenjang-pendidikan">Jenjang Pendidikan</label>
+							<select class="form-control select-filter" disabled id="program_studi" name="program_studi" onchange="reset_filter(['angkatan', 'kelas']);get_angkatan();">
+								<option value=""> - </option>
+							</select>
+						</div>
+						<div class="col-md-2 form-group">
+							<label for="jenjang-pendidikan">Angkatan</label>
+							<select class="form-control select-filter" disabled id="angkatan" name="angkatan" onchange="reset_filter(['kelas']);get_kelas();">
+								<option value=""> - </option>
+							</select>
+						</div>
+						<div class="col-md-2 form-group">
+							<label for="kelas">Kelas</label>
+							<select class="form-control select-filter" disabled id="kelas" name="kelas">
+								<option value=""> - </option>
 							</select>
 						</div>
 					</div>
 				</form>
 				<hr class="mt">
 				<div class="table-responsive">
-					<table id="datatable" class="table align-items-center table-flush table-borderless table-hover">
+					<table id="datatable-pending" class="table align-items-center table-flush table-borderless table-hover">
 						<thead class="table-header">
 							<tr>
 								<th scope="col" class="text-center px-2">No</th>
@@ -61,8 +67,8 @@
 		</div>
 	</div>
 <div class="modal fade" id="konfirmModal" tabindex="-1" aria-labelledby="konfirmModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
+	aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered modal-lg">
 		<div class="modal-content p-0 padding--medium">
 			<input type="hidden" id="id_delete">
 			<input type="hidden" id="endpoint">
@@ -96,28 +102,30 @@
 				</div>
 			</div>
 		</div>
-    </div>
+	</div>
 </div>
 </section>
 <script>
+	var f_status = document.getElementById('status');
+	var f_prodi = document.getElementById('program_studi');
+	var f_angkatan = document.getElementById('angkatan');
+	var f_kelas = document.getElementById('kelas');
 	$(document).ready(function() {
-		getData();
-		$('#program_studi').on('change',function (e) {
-			var program_studi = $(this).val()
-			var kelas = $.grep(dataGlobal['kelas'], function(e){ return e.program_studi == program_studi; });
-
-			$('#kelas').html('')
-			var optKelas = `<option value=""> - </option>`;
-			$.each(kelas,function (key,row) {
-				optKelas += `<option value="${row.nomor}">${row.kode}</option>`
-			})
-			$('#kelas').append(optKelas); 
+		// set status option
+		let optStatus;
+		$.each(dataGlobal['status'],function (key,row) {
+			optStatus += `<option value="${row.kode}">${row.status} - ${row.jenis}</option>`
 		})
+		$('#status').append(optStatus);
+
+		get_prodi();
+		setDatatable();
+
 		$('.select-filter').on('change',function (e) {
-			var url = `${url_api}/keuangan/atur-mahasiswa?program_studi=${$('#program_studi').val()}&status=${$('#status').val()}&kelas=${$('#kelas').val()}`;
+			var url = `${url_api}/keuangan/atur-mahasiswa?status=${f_status.value}&program_studi=${f_prodi.value}&angkatan=${f_angkatan.value}&kelas=${f_kelas.value}`;
 			dt.ajax.url(url).load();
 		})
-	} );
+	});
 
 	function func_centang(e,id_selected,poltek) {
 		$('.centang-pilihan').removeClass('text-success')
@@ -183,98 +191,86 @@
 				} else {
 					// alert gagal
 				}
-				
-
 			}
 		});
 	}
 
-	async function getData() {
-		var optProgram,optJurusan,optKelas,optStatus;
-		$.each(dataGlobal['prodi'],function (key,row) {
-			optProgram += `<option value="${row.nomor}">${row.nama_program} ${row.program_studi}</option>`
-		})
-		$('#program_studi').append(optProgram)
-
-		var kelas = $.grep(dataGlobal['kelas'], function(e){ return e.program_studi == $('#program_studi').val(); });
-		$('#kelas').html('')
-		var optKelas = `<option value=""> - </option>`;
-		$.each(kelas,function (key,row) {
-			optKelas += `<option value="${row.nomor}">${row.kode}</option>`
-		})
-		$('#kelas').append(optKelas); 
-
-		$.each(dataGlobal['status'],function (key,row) {
-			optStatus += `<option value="${row.kode}">${row.status} - ${row.jenis}</option>`
-		})
-		$('#status').append(optStatus)
-		setDatatable();
-	}
 	function setDatatable() {
-		var nomor = 1;
-		dt_url = `${url_api}/keuangan/atur-mahasiswa?program_studi=${$('#program_studi').val()}&status=A&kelas=${$('#kelas').val()}`;
+		dt_url = `${url_api}/keuangan/atur-mahasiswa?status=${f_status.value}&program_studi=${f_prodi.value}&angkatan=${f_angkatan.value}&kelas=${f_kelas.value}`;
 		dt_opt = {
-			"columnDefs": [
-			{
-				"aTargets": [0],
-				"mData": null,
-				"mRender": function(data, type, full) {
-					res = nomor++;
-					return (res==null)?"-":res;
+			serverSide: true,
+			order: [[0, 'desc']],
+			columnDefs: [{
+				"render": function (data, type, row) {
+					return formatAngka(data);
+				},
+				"targets": [3]
+			}]
+		};
+		load_datatable();
+	}
+	function get_prodi() {
+		$.ajax({
+			url: url_api + `/prodi-mahasiswa?status=${f_status.value}`,
+			type: 'get',
+			dataType: 'json',
+			success: function(res) {
+				if (res.status == "success") {
+					let optProdi = `<option value=""> - </option>`;
+					$.each(res.data,function (key,row) {
+						optProdi += `<option value="${row.program_studi}">${row.program} ${row.jurusan}</option>`
+					})
+					$('#program_studi').html(optProdi)
+					f_prodi.disabled = false;
 				}
-			},{
-				"aTargets": [1],
-				"mData": null,
-				"mRender": function(data, type, full) {
-					res = data['nrp'];
-					return (res==null)?"-":res;
+				return true;
+			}
+		});
+		return true;
+	}
+	function get_angkatan() {
+		$.ajax({
+			url: url_api + `/mahasiswa-angkatan?status=${f_status.value}&program_studi=${f_prodi.value}`,
+			type: 'get',
+			dataType: 'json',
+			success: function(res) {
+				if (res.status == "success") {
+					let optAngkatan = `<option value=""> - </option>`;
+					$.each(res.data,function (key,row) {
+						optAngkatan += `<option value="${row.angkatan}">${row.angkatan} </option>`
+					})
+					$('#angkatan').html(optAngkatan);
+					f_angkatan.disabled = false;
 				}
-			},{
-				"aTargets": [2],
-				"mData": null,
-				"mRender": function(data, type, full) {
-					res = data['nama'];
-					return (res==null)?"-":res;
+				return true;
+			}
+		});
+		return true;
+	}
+	function get_kelas() {
+		$.ajax({
+			url: url_api + `/mahasiswa-kelas?status=${f_status.value}&program_studi=${f_prodi.value}&angkatan=${f_angkatan.value}`,
+			type: 'get',
+			dataType: 'json',
+			success: function(res) {
+				if (res.status == "success") {
+					let optKelas = `<option value=""> - </option>`;
+					$.each(res.data,function (key,row) {
+						optKelas += `<option value="${row.kelas}">${row.kode}</option>`
+					})
+					$('#kelas').html(optKelas);
+					f_kelas.disabled = false;
 				}
-			},{
-				"aTargets": [3],
-				"mData": null,
-				"mRender": function(data, type, full) {
-					res = formatAngka(data['ukt']);
-					return (res==null)?"-":res;
-				}
-			},{
-				"aTargets": [4],
-				"mData": null,
-				"mRender": function(data, type, full) {
-					res = data['notelp'];
-					return (res==null)?"-":res;
-				}
-			},{
-				"aTargets": [5],
-				"mData": null,
-				"mRender": function(data, type, full) {
-					res = data['email'];
-					return (res==null)?"-":res;
-				}
-			},{
-				"aTargets": [6],
-				"mData": null,
-				"mRender": function(data, type, full) {
-					
-					var id = data['nomor']
-					var status_sudah = `
-					
-						<span id="btn_${id}" style="cursor:pointer" onclick="func_modal('${data['program_studi']}','${id}','${data['nrp']}','${data['nama']}','${data['prodi']}','${data['ukt_kelompok']}')" data-id="${id}" class="badge btn-info_transparent text-primary">
-							<i class="iconify-inline" data-icon="ant-design:setting-outlined"></i>
-							<span class="text-capitalize text-primary">Setting</span>
-						</span>`
-
-					res = status_sudah;
-					return res;
-				}
-			},
-			]
+				return true;
+			}
+		});
+		return true;
+	}
+	function reset_filter(opt){
+		for(const i of opt){
+			let obj = document.getElementById(i);
+			obj.disabled = true;
+			obj.selectedIndex = 0;
 		}
 	}
 </script>

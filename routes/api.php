@@ -69,6 +69,7 @@ Route::prefix('v1')->group(function () {
     Route::post('/prodi', [Ctr\ProdiController::class, 'store']);
     Route::put('/prodi/{id}', [Ctr\ProdiController::class, 'update']);
     Route::delete('/prodi/{id}', [Ctr\ProdiController::class, 'destroy']);
+    Route::get('/prodi-mahasiswa', [Ctr\ProdiController::class, 'prodi_mahasiswa']);
 
     //ruangan
     Route::get('/ruangan', [Ctr\RuanganController::class, 'index']);
@@ -132,6 +133,7 @@ Route::prefix('v1')->group(function () {
     Route::put('/mahasiswa/{id}', [Ctr\MahasiswaController::class, 'update']);
     Route::delete('/mahasiswa/{id}', [Ctr\MahasiswaController::class, 'destroy']);
     Route::get('/mahasiswa-angkatan', [Ctr\MahasiswaController::class, 'mahasiswa_angkatan']);
+    Route::get('/mahasiswa-kelas', [Ctr\MahasiswaController::class, 'mahasiswa_kelas']);
 
 
     // Dosen Pengampu

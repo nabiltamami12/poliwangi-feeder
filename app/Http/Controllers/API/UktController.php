@@ -224,28 +224,52 @@ class UktController extends Controller
 
     public function atur_mahasiswa(Request $request)
     {
-        $data = $request->all();
-        $where = [];
-        if ( $request->program_studi != null ||  !isset($request->program_studi) ) {
-            array_push($where,['m.program_studi','=',$request->program_studi]);
-        }
-        array_push($where,['m.status','=',$request->status]);
-        
         try {
-         
-            $data = DB::table('mahasiswa as m')
-            ->select('m.nomor','m.nrp','m.nama','m.ukt','m.notelp','m.email','m.program_studi','m.ukt_kelompok',DB::raw('CONCAT(p.program," ",ps.program_studi) as prodi'))
-            ->join('kelas as k','m.kelas','=','k.nomor','left')
-            ->join('program_studi as ps','ps.nomor','=','m.program_studi')
-            ->join('program as p','p.nomor','=','ps.program')
-            ->where($where)
-            ->get();
-            $this->data = $data;
-            $this->status = "success";
-        } catch (QueryException $e) {
-            $this->status = "failed";
-            $this->error = $e;
-        }
+        	DB::enableQueryLog();
+			$data = $request->all();
+	        $where = [];
+	        if ( $request->program_studi ) {
+	            array_push($where,['m.program_studi','=',$request->program_studi]);
+	        }
+			if ( $request->angkatan ) {
+				array_push($where,['m.angkatan','=',$request->angkatan]);
+			}
+			if ( $request->kelas ) {
+				array_push($where,['m.kelas','=',$request->kelas]);
+			}
+			array_push($where,['m.status','=',$request->status]);
+
+			$obj = new \App\Datatables\MahasiswaUktDatatable($where);
+			$lists = $obj->get_datatables();
+			$data = [];
+			$no = $request->input("start");
+			foreach ($lists as $list) {
+				$no++;
+				$row = [];
+				$row[] = $no;
+				$row[] = $list->nrp;
+				$row[] = $list->nama;
+				$row[] = $list->ukt;
+				$row[] = $list->notelp;
+				$row[] = $list->email;
+				$row[] = '<span id="btn_'.$list->nomor.'" style="cursor:pointer" onclick="func_modal(\''.$list->program_studi.'\',\''.$list->nomor.'\',\''.$list->nrp.'\',\''.$list->nama.'\',\''.$list->prodi.'\',\''.$list->ukt_kelompok.'\')" data-id="'.$list->nomor.'" class="badge btn-info_transparent text-primary">
+					<i class="iconify-inline" data-icon="ant-design:setting-outlined"></i>
+					<span class="text-capitalize text-primary">Setting</span>
+				</span>';
+				$data[] = $row;
+			}
+			return [
+				"draw" => $request->input('draw'),
+				"recordsTotal" => $obj->count_all_datatables(),
+				"recordsFiltered" => $obj->count_filtered_datatables(),
+				"data" => $data,
+				"status" => "success",
+				"error" => $this->error
+			];
+		} catch (QueryException $e) {
+			$this->status = "failed";
+			$this->error = $e;
+		}
         return response()->json([
             "status" => $this->status,
             "data" => $this->data,
