@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Database\QueryException;
 use BNI;
 use App\Events\LogMahasiswaStatus;
+use Maatwebsite\Excel\Facades\Excel;
 
 /** --Status Mahasiswa--
  * "A" = Aktif - temporary
@@ -393,5 +394,24 @@ class MahasiswaController extends Controller
 			"data" => $this->data,
 			"error" => $this->error
 		]);
+	}
+
+	public function mahasiswa_export(Request $request)
+	{
+		ini_set('memory_limit', '-1');
+    ini_set('max_execution_time', '-1');
+    $where = [];
+    if ( $request->program ) {
+			array_push($where,['ps.program','=',$request->program]);
+		}
+		if ( $request->jurusan ) {
+			array_push($where,['ps.jurusan','=',$request->jurusan]);
+		}
+		if ( $request->angkatan ) {
+			array_push($where,['mahasiswa.angkatan','=',$request->angkatan]);
+		}
+		array_push($where,['mahasiswa.status','=',$request->status]);
+
+    return Excel::download(new \App\Exports\MahasiswaExport($where), 'Rekap Mahasiswa.xlsx');
 	}
 }

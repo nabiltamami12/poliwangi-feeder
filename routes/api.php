@@ -134,6 +134,7 @@ Route::prefix('v1')->group(function () {
     Route::delete('/mahasiswa/{id}', [Ctr\MahasiswaController::class, 'destroy']);
     Route::get('/mahasiswa-angkatan', [Ctr\MahasiswaController::class, 'mahasiswa_angkatan']);
     Route::get('/mahasiswa-kelas', [Ctr\MahasiswaController::class, 'mahasiswa_kelas']);
+    Route::get('/mahasiswa-export', [Ctr\MahasiswaController::class, 'mahasiswa_export']);
 
 
     // Dosen Pengampu

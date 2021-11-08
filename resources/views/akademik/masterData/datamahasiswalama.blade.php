@@ -15,6 +15,12 @@
 						<div class="col-12 col-md-6">
 							<h2 class="mb-0 text-center text-md-left">Data Mahasiswa</h2>
 						</div>
+						<div class="col-12 col-md-3 offset-md-3 text-center text-md-right mt-3 mt-md-0">
+              <button type="button" onclick="cetak()" class="btn btn-warning">
+                <i class="iconify-inline mr-1" data-icon="bx:bx-printer"></i>
+                Cetak Data
+              </button>
+            </div>
 					</div>
 				</div>
 				<hr class="my-4 mt">
@@ -165,6 +171,9 @@
 			obj.disabled = true;
 			obj.selectedIndex = 0;
 		}
+	}
+	function cetak() {
+		window.open(url_api+"/mahasiswa-export?"+where(),'_blank');
 	}
 </script>
 @endsection
