@@ -24,24 +24,24 @@
        
 
         <div class="table-responsive">
-          <table class="table align-items-center table-flush table-borderless table-hover" id="datatable">
+          <table class="table align-items-center table-flush table-borderless table-hover" id="datatable" style="width:100%">
             <thead class="table-header">
               <tr>
                 <th rowspan="2" scope="col" class="text-center px-2">No</th>
                 <th rowspan="2" scope="col" class="text-center px-2">Prodi</th>
-                <th rowspan="2" scope="col" class="text-center px-2">Sumbangan<br>pembangunan<br>institusi</th>
-                <th colspan="8" scope="col" class="text-center px-2">Tarif UKT</th>
+                <th rowspan="2" scope="col" class="text-center px-2">SPI</th>
+                <th colspan="8" scope="col" class="text-center px-2">Kelompok Tarif UKT</th>
                 <th rowspan="2" scope="col" class="text-center px-2">Aksi</th>
               </tr>
               <tr>
-                <th colspan="1" scope="col" class="text-center px-2">Kelompok<br>1</th>
-                <th colspan="1" scope="col" class="text-center px-2">Kelompok<br>2</th>
-                <th colspan="1" scope="col" class="text-center px-2">Kelompok<br>3</th>
-                <th colspan="1" scope="col" class="text-center px-2">Kelompok<br>4</th>
-                <th colspan="1" scope="col" class="text-center px-2">Kelompok<br>5</th>
-                <th colspan="1" scope="col" class="text-center px-2">Kelompok<br>6</th>
-                <th colspan="1" scope="col" class="text-center px-2">Kelompok<br>7</th>
-                <th colspan="1" scope="col" class="text-center px-2">Kelompok<br>8</th>
+                <th colspan="1" scope="col" class="text-center px-2">1</th>
+                <th colspan="1" scope="col" class="text-center px-2">2</th>
+                <th colspan="1" scope="col" class="text-center px-2">3</th>
+                <th colspan="1" scope="col" class="text-center px-2">4</th>
+                <th colspan="1" scope="col" class="text-center px-2">5</th>
+                <th colspan="1" scope="col" class="text-center px-2">6</th>
+                <th colspan="1" scope="col" class="text-center px-2">7</th>
+                <th colspan="1" scope="col" class="text-center px-2">8</th>
               </tr>
             </thead>
 
@@ -104,7 +104,7 @@ $(document).ready(function() {
         "mData": null,
         "className": 'text-center px-2',
         "mRender": function(data, type, full) {
-          res = formatAngka(data['spi']);
+          res = formatAngkaSimple(data['spi']);
           return res;
         }
       },{
@@ -112,7 +112,7 @@ $(document).ready(function() {
         "mData": null,
         "className": 'text-center px-2',
         "mRender": function(data, type, full) {
-          res = formatAngka(data['kelompok_1']);
+          res = formatAngkaSimple(data['kelompok_1']);
           return res;
         }
       },{
@@ -120,7 +120,7 @@ $(document).ready(function() {
         "mData": null,
         "className": 'text-center px-2',
         "mRender": function(data, type, full) {
-          res = formatAngka(data['kelompok_2']);
+          res = formatAngkaSimple(data['kelompok_2']);
           return res;
         }
       },{
@@ -128,7 +128,7 @@ $(document).ready(function() {
         "mData": null,
         "className": 'text-center px-2',
         "mRender": function(data, type, full) {
-          res = formatAngka(data['kelompok_3']);
+          res = formatAngkaSimple(data['kelompok_3']);
           return res;
         }
       },{
@@ -136,7 +136,7 @@ $(document).ready(function() {
         "mData": null,
         "className": 'text-center px-2',
         "mRender": function(data, type, full) {
-          res = formatAngka(data['kelompok_4']);
+          res = formatAngkaSimple(data['kelompok_4']);
           return res;
         }
       },{
@@ -144,7 +144,7 @@ $(document).ready(function() {
         "mData": null,
         "className": 'text-center px-2',
         "mRender": function(data, type, full) {
-          res = formatAngka(data['kelompok_5']);
+          res = formatAngkaSimple(data['kelompok_5']);
           return res;
         }
       },{
@@ -152,7 +152,7 @@ $(document).ready(function() {
         "mData": null,
         "className": 'text-center px-2',
         "mRender": function(data, type, full) {
-          res = formatAngka(data['kelompok_6']);
+          res = formatAngkaSimple(data['kelompok_6']);
           return res;
         }
       },{
@@ -160,7 +160,7 @@ $(document).ready(function() {
         "mData": null,
         "className": 'text-center px-2',
         "mRender": function(data, type, full) {
-          res = formatAngka(data['kelompok_7']);
+          res = formatAngkaSimple(data['kelompok_7']);
           return res;
         }
       },{
@@ -168,7 +168,7 @@ $(document).ready(function() {
         "mData": null,
         "className": 'text-center px-2',
         "mRender": function(data, type, full) {
-          res = formatAngka(data['kelompok_8']);
+          res = formatAngkaSimple(data['kelompok_8']);
           return res;
         }
       },{

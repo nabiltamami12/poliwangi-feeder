@@ -264,7 +264,7 @@ dt_url = `${url_api}/keuangan/list_cicilan`;
           var id = data['id'];
           var id_mahasiswa = data['id_mahasiswa'];
           var btn_update = `
-                  <a class="btn btn-primary" href="{{url('')}}/keuangan/rekapitulasi/piutangmahasiswa/detail/${id}">
+                  <a class="btn btn-sm btn-primary" href="{{url('')}}/keuangan/rekapitulasi/piutangmahasiswa/detail/${id}">
                     <i class="iconify mr-1" data-icon="bx:bxs-user-detail"></i>
                     <span class="text-white">Detail Piutang</span>
                   </a>`
