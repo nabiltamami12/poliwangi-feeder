@@ -34,7 +34,7 @@
 						</div>
 						<div class="col-md-2 form-group">
 							<label for="jenjang-pendidikan">Angkatan</label>
-							<select class="form-control" disabled id="angkatan" name="angkatan" onchange="reset_filter(['kelas']);get_kelas();">
+							<select class="form-control select-filter" disabled id="angkatan" name="angkatan" onchange="reset_filter(['kelas']);get_kelas();">
 								<option value=""> - </option>
 							</select>
 						</div>
@@ -48,7 +48,7 @@
 				</form>
 				<hr class="mt">
 				<div class="table-responsive">
-					<table id="datatable" class="table align-items-center table-flush table-borderless table-hover">
+					<table id="datatable-pending" class="table align-items-center table-flush table-borderless table-hover">
 						<thead class="table-header">
 							<tr>
 								<th scope="col" class="text-center px-2">No</th>
@@ -67,8 +67,8 @@
 		</div>
 	</div>
 <div class="modal fade" id="konfirmModal" tabindex="-1" aria-labelledby="konfirmModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
+	aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered modal-lg">
 		<div class="modal-content p-0 padding--medium">
 			<input type="hidden" id="id_delete">
 			<input type="hidden" id="endpoint">
@@ -102,7 +102,7 @@
 				</div>
 			</div>
 		</div>
-    </div>
+	</div>
 </div>
 </section>
 <script>
@@ -122,7 +122,7 @@
 		setDatatable();
 
 		$('.select-filter').on('change',function (e) {
-			var url = `${url_api}/keuangan/atur-mahasiswa?program_studi=${f_prodi.value}&status=${f_status.value}&kelas=${f_kelas.value}&angkatan=${f_angkatan.value}`;
+			var url = `${url_api}/keuangan/atur-mahasiswa?status=${f_status.value}&program_studi=${f_prodi.value}&angkatan=${f_angkatan.value}&kelas=${f_kelas.value}`;
 			dt.ajax.url(url).load();
 		})
 	});
@@ -191,78 +191,23 @@
 				} else {
 					// alert gagal
 				}
-				
-
 			}
 		});
 	}
 
 	function setDatatable() {
-		var nomor = 1;
-		dt_url = `${url_api}/keuangan/atur-mahasiswa?program_studi=${$('#program_studi').val()}&status=A&kelas=${$('#kelas').val()}`;
+		dt_url = `${url_api}/keuangan/atur-mahasiswa?status=${f_status.value}&program_studi=${f_prodi.value}&angkatan=${f_angkatan.value}&kelas=${f_kelas.value}`;
 		dt_opt = {
-			"columnDefs": [
-			{
-				"aTargets": [0],
-				"mData": null,
-				"mRender": function(data, type, full) {
-					res = nomor++;
-					return (res==null)?"-":res;
-				}
-			},{
-				"aTargets": [1],
-				"mData": null,
-				"mRender": function(data, type, full) {
-					res = data['nrp'];
-					return (res==null)?"-":res;
-				}
-			},{
-				"aTargets": [2],
-				"mData": null,
-				"mRender": function(data, type, full) {
-					res = data['nama'];
-					return (res==null)?"-":res;
-				}
-			},{
-				"aTargets": [3],
-				"mData": null,
-				"mRender": function(data, type, full) {
-					res = formatAngka(data['ukt']);
-					return (res==null)?"-":res;
-				}
-			},{
-				"aTargets": [4],
-				"mData": null,
-				"mRender": function(data, type, full) {
-					res = data['notelp'];
-					return (res==null)?"-":res;
-				}
-			},{
-				"aTargets": [5],
-				"mData": null,
-				"mRender": function(data, type, full) {
-					res = data['email'];
-					return (res==null)?"-":res;
-				}
-			},{
-				"aTargets": [6],
-				"mData": null,
-				"mRender": function(data, type, full) {
-					
-					var id = data['nomor']
-					var status_sudah = `
-					
-						<span id="btn_${id}" style="cursor:pointer" onclick="func_modal('${data['program_studi']}','${id}','${data['nrp']}','${data['nama']}','${data['prodi']}','${data['ukt_kelompok']}')" data-id="${id}" class="badge btn-info_transparent text-primary">
-							<i class="iconify-inline" data-icon="ant-design:setting-outlined"></i>
-							<span class="text-capitalize text-primary">Setting</span>
-						</span>`
-
-					res = status_sudah;
-					return res;
-				}
-			},
-			]
-		}
+			serverSide: true,
+			order: [[0, 'desc']],
+			columnDefs: [{
+				"render": function (data, type, row) {
+					return formatAngka(data);
+				},
+				"targets": [3]
+			}]
+		};
+		load_datatable();
 	}
 	function get_prodi() {
 		$.ajax({

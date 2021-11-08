@@ -89,13 +89,13 @@ class MahasiswaController extends Controller
 			DB::enableQueryLog();
 			$data = $request->all();
 			$where = [];
-			if ( isset($request->program) ) {
+			if ( isset($request->program) && $request->program ) {
 				array_push($where,['ps.program','=',$request->program]);
 			}
-			if ( isset($request->jurusan) ) {
+			if ( isset($request->jurusan) && $request->jurusan ) {
 				array_push($where,['ps.jurusan','=',$request->jurusan]);
 			}
-			if ( isset($request->angkatan) ) {
+			if ( isset($request->angkatan) && $request->angkatan ) {
 				array_push($where,['m.angkatan','=',$request->angkatan]);
 			}
 			array_push($where,['m.status','=',$request->status]);
