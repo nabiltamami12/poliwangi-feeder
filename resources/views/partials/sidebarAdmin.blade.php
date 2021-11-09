@@ -112,7 +112,7 @@
 
           <li class="nav-item">
             <div class="nav-link {{($title === "admin-kuliah") ? 'aktif' : ''}}">
-              <i class="iconify" data-icon="bx:bx-file-blank"></i>
+              <i class="iconify" data-icon="bx:bx-book-bookmark"></i>
               <span class="nav-link-text">Kuliah</span>
             </div>
             <ul class="nav-item-dropdown-content">

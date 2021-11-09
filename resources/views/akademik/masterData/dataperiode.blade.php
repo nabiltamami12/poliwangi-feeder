@@ -103,18 +103,20 @@ dt_opt = {
     },{
       "targets": [3],
       "data": null,
+      className: "font-weight-bold",
       "render": function(data, type, full) {
-        var ganjil = (data['semester']==1)?'<span class="text-success">Gasal <i class="iconify-inline mr-1" style="font-size:12px;" data-icon="akar-icons:circle-check-fill"></i></span>' : `<span class="text-warning" style="cursor:pointer;" onclick="change_semester(${data['nomor']},1)">Gasal</span>`
-        var genap = (data['semester']==2)?'<span class="text-success">Genap <i class="iconify-inline mr-1" style="font-size:12px;" data-icon="akar-icons:circle-check-fill"></i></span>' : `<span class="text-warning" style="cursor:pointer;" onclick="change_semester(${data['nomor']},2)">Genap</span>`
-        res = (data['status']=="1")? ganjil+"  ||  "+genap:"-";
+        var ganjil = (data['semester']==1)?'<span class="text-success">GASAL <i class="iconify-inline mr-1" style="font-size:16px;" data-icon="akar-icons:circle-check-fill"></i></span>' : `<span class="text-muted" style="cursor:pointer;" onclick="change_semester(${data['nomor']},1)">GASAL</span>`
+        var genap = (data['semester']==2)?'<span class="text-success">GENAP <i class="iconify-inline mr-1" style="font-size:16px;" data-icon="akar-icons:circle-check-fill"></i></span>' : `<span class="text-muted" style="cursor:pointer;" onclick="change_semester(${data['nomor']},2)">GENAP</span>`
+        res = (data['status']=="1")? ganjil+"  /  "+genap:"-";
         return res;
       }
     },{
       "targets": [4],
       "data": null,
+      className: "font-weight-bold",
       "render": function(data, type, full) {
-        var aktif = "<span class='text-success' style='font-size:12px;font-weight:600;'>aktif <i class='iconify-inline mr-1' style='font-size:12px;' data-icon='akar-icons:circle-check-fill'></i></span>"
-        var non_aktif = `<button class="btn btn-warning btn-sm" onclick="change_status(${data['nomor']})"><i class="iconify-inline mr-1" style="font-size:12px;" data-icon="akar-icons:circle-check-fill"></i>aktifkan</button>`
+        var aktif = "<span class='text-success'>Aktif <i class='iconify-inline mr-1' style='font-size:16px;' data-icon='akar-icons:circle-check-fill'></i></span>"
+        var non_aktif = `<button class="btn btn-warning btn-sm" style="font-size: 12px;" onclick="change_status(${data['nomor']})"><i class="iconify-inline mr-1" style="font-size:16px;" data-icon="akar-icons:circle-check-fill"></i>Aktifkan</button>`
         res = (data['status']=="1")?aktif:non_aktif;
         return res;
       }
