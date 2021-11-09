@@ -122,7 +122,7 @@
 				<hr class="mt-4">
 
 				<div class="table-responsive">
-					<table class="table align-items-center table-flush table-borderless table-hover" id="datatable">
+					<table class="table align-items-center table-flush table-borderless table-hover" id="datatable" style="width: 100%;">
 						<thead class="table-header">
 							<tr>
 								<th scope="col" class="text-center">Tanggal</th>
