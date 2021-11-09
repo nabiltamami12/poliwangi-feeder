@@ -28,7 +28,7 @@
 			<div class="modal-content padding--medium">
 				<div class="perjanjian_pembayaran">
 					<h1 class="modal-title text-center mt-2">Import Pembayaran UKT</h1>
-					<p class="mt-5"><a target="_blank" href="{{url('/template/Template Upload UKT.xlsx')}}">Download Template Upload UKT</a></p>
+					<p class="mt-5"><a target="_blank" href="{{url('/template/template-upload-ukt.xlsx')}}">Download Template Upload UKT</a></p>
 					<div style="cursor: pointer;" class="pilih-file detail_dokumen upload-perjanjian d-flex align-items-center justify-content-between">
 						<form>
 							<span>
@@ -101,7 +101,7 @@
 								<i class="iconify-inline mr-1" data-icon="bx:bx-upload"></i>
 								Import
 							</button>
-							{{--  <a class="btn btn-success mt-3 mt-md-0" target="_blank" href="{{url('/template/Template Upload UKT.xlsx')}}">
+							{{--  <a class="btn btn-success mt-3 mt-md-0" target="_blank" href="{{url('/template/template-upload-ukt.xlsx')}}">
 								<i class="iconify-inline mr-1" data-icon="bx:bx-download"></i>
 								Template Import UKT
 							</a> --}}
