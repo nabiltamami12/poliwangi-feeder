@@ -38,7 +38,7 @@ class MahasiswaController extends Controller
 		$where = [
 			['m.status','=','A']
 		];
-		if ( $request->program_studi != null ||  !isset($request->program_studi) ) {
+		if ( $request->program_studi != null && $request->program_studi ) {
 			array_push($where,['m.program_studi','=',$request->program_studi]);
 		}
 		if ($request->kelas) {

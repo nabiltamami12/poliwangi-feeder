@@ -171,6 +171,7 @@
 			obj.disabled = true;
 			obj.selectedIndex = 0;
 		}
+		return true;
 	}
 	function cetak() {
 		window.open(url_api+"/mahasiswa-export?"+where(),'_blank');

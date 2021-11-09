@@ -272,6 +272,7 @@
 			obj.disabled = true;
 			obj.selectedIndex = 0;
 		}
+		return true;
 	}
 </script>
 @endsection
