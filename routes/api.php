@@ -32,6 +32,7 @@ Route::prefix('v1')->group(function () {
     Route::get('/list-kelurahan/{id_kecamatan}', [Ctr\GlobalController::class, 'get_kelurahan']);
     // Program
     Route::get('/program', [Ctr\ProgramController::class, 'index']);
+    Route::get('/program-mahasiswa', [Ctr\ProgramController::class, 'program_mahasiswa']);
     // Program
     // Matakuliah jenis
     Route::get('/matkul_jenis', [Ctr\MatakuliahJenisController::class, 'index']);
@@ -45,6 +46,7 @@ Route::prefix('v1')->group(function () {
     Route::post('/jurusan', [Ctr\JurusanController::class, 'store']);
     Route::put('/jurusan/{id}', [Ctr\JurusanController::class, 'update']);
     Route::delete('/jurusan/{id}', [Ctr\JurusanController::class, 'destroy']);
+    Route::get('/jurusan-mahasiswa', [Ctr\JurusanController::class, 'jurusan_mahasiswa']);
     // Kelas
     Route::get('/kelas', [Ctr\KelasController::class, 'index']);
     Route::get('/kelas/dosen/{id}', [Ctr\KelasController::class, 'dosen']);
@@ -54,26 +56,27 @@ Route::prefix('v1')->group(function () {
     Route::delete('/kelas/{id}', [Ctr\KelasController::class, 'destroy']);
 
     //Jamkuliah
-    Route::get('/jamkuliah/', '\App\Http\Controllers\API\JamkuliahController@index');
-    Route::get('/jamkuliah/{id}', '\App\Http\Controllers\API\JamkuliahController@show');
-    Route::post('/jamkuliah', '\App\Http\Controllers\API\JamkuliahController@store');
-    Route::put('/jamkuliah/{id}', '\App\Http\Controllers\API\JamkuliahController@update');
-    Route::delete('/jamkuliah/{id}', '\App\Http\Controllers\API\JamkuliahController@destroy');
+    Route::get('/jamkuliah/', [Ctr\JamkuliahController::class, 'index']);
+    Route::get('/jamkuliah/{id}', [Ctr\JamkuliahController::class, 'show']);
+    Route::post('/jamkuliah', [Ctr\JamkuliahController::class, 'store']);
+    Route::put('/jamkuliah/{id}', [Ctr\JamkuliahController::class, 'update']);
+    Route::delete('/jamkuliah/{id}', [Ctr\JamkuliahController::class, 'destroy']);
 
     //prodi
-    Route::get('/prodi', '\App\Http\Controllers\API\ProdiController@index');
-    Route::get('/prodi-lama', '\App\Http\Controllers\API\ProdiController@index_lama');
-    Route::get('/prodi/{id}', '\App\Http\Controllers\API\ProdiController@show');
-    Route::post('/prodi', '\App\Http\Controllers\API\ProdiController@store');
-    Route::put('/prodi/{id}', '\App\Http\Controllers\API\ProdiController@update');
-    Route::delete('/prodi/{id}', '\App\Http\Controllers\API\ProdiController@destroy');
+    Route::get('/prodi', [Ctr\ProdiController::class, 'index']);
+    Route::get('/prodi-lama', [Ctr\ProdiController::class, 'index_lama']);
+    Route::get('/prodi/{id}', [Ctr\ProdiController::class, 'show']);
+    Route::post('/prodi', [Ctr\ProdiController::class, 'store']);
+    Route::put('/prodi/{id}', [Ctr\ProdiController::class, 'update']);
+    Route::delete('/prodi/{id}', [Ctr\ProdiController::class, 'destroy']);
+    Route::get('/prodi-mahasiswa', [Ctr\ProdiController::class, 'prodi_mahasiswa']);
 
     //ruangan
-    Route::get('/ruangan', '\App\Http\Controllers\API\RuanganController@index');
-    Route::get('/ruangan/{id}', '\App\Http\Controllers\API\RuanganController@show');
-    Route::post('/ruangan', '\App\Http\Controllers\API\RuanganController@store');
-    Route::put('/ruangan/{id}', '\App\Http\Controllers\API\RuanganController@update');
-    Route::delete('/ruangan/{id}', '\App\Http\Controllers\API\RuanganController@destroy');
+    Route::get('/ruangan', [Ctr\RuanganController::class, 'index']);
+    Route::get('/ruangan/{id}', [Ctr\RuanganController::class, 'show']);
+    Route::post('/ruangan', [Ctr\RuanganController::class, 'store']);
+    Route::put('/ruangan/{id}', [Ctr\RuanganController::class, 'update']);
+    Route::delete('/ruangan/{id}', [Ctr\RuanganController::class, 'destroy']);
 
     // Dosen
     Route::get('dosen/filter/{id}/{semester}', [Ctr\DosenController::class, 'filter']);
@@ -82,11 +85,11 @@ Route::prefix('v1')->group(function () {
     //matakuliah
     Route::get('/matakuliah/select-option', [Ctr\MatakuliahController::class, 'select_option']);
 
-    Route::get('/matakuliah/', '\App\Http\Controllers\API\MatakuliahController@index');
-    Route::get('/matakuliah/{id}', '\App\Http\Controllers\API\MatakuliahController@show');
-    Route::post('/matakuliah', '\App\Http\Controllers\API\MatakuliahController@store');
-    Route::put('/matakuliah/{id}', '\App\Http\Controllers\API\MatakuliahController@update');
-    Route::delete('/matakuliah/{id}', '\App\Http\Controllers\API\MatakuliahController@destroy');
+    Route::get('/matakuliah/', [Ctr\MatakuliahController::class, 'index']);
+    Route::get('/matakuliah/{id}', [Ctr\MatakuliahController::class, 'show']);
+    Route::post('/matakuliah', [Ctr\MatakuliahController::class, 'store']);
+    Route::put('/matakuliah/{id}', [Ctr\MatakuliahController::class, 'update']);
+    Route::delete('/matakuliah/{id}', [Ctr\MatakuliahController::class, 'destroy']);
 
     // Dosen Matkul
     Route::get('/dosenmk', [Ctr\DosenMatkulController::class, 'index']);
@@ -96,14 +99,14 @@ Route::prefix('v1')->group(function () {
     Route::delete('dosenmk/{id}', [Ctr\DosenMatkulController::class, 'destroy']);
 
     //periode
-    Route::get('/periode/', '\App\Http\Controllers\API\PeriodeController@index');
-    Route::get('/periode/aktif', '\App\Http\Controllers\API\PeriodeController@aktif');
-    Route::put('/periode/change_status/{id}', '\App\Http\Controllers\API\PeriodeController@change_status');
-    Route::put('/periode/change_semester/{id}/{semester}', '\App\Http\Controllers\API\PeriodeController@change_semester');
-    Route::get('/periode/{id}', '\App\Http\Controllers\API\PeriodeController@show');
-    Route::post('/periode', '\App\Http\Controllers\API\PeriodeController@store');
-    Route::put('/periode/{id}', '\App\Http\Controllers\API\PeriodeController@update');
-    Route::delete('/periode/{id}', '\App\Http\Controllers\API\PeriodeController@destroy');
+    Route::get('/periode/', [Ctr\PeriodeController::class, 'index']);
+    Route::get('/periode/aktif', [Ctr\PeriodeController::class, 'aktif']);
+    Route::put('/periode/change_status/{id}', [Ctr\PeriodeController::class, 'change_status']);
+    Route::put('/periode/change_semester/{id}/{semester}', [Ctr\PeriodeController::class, 'change_semester']);
+    Route::get('/periode/{id}', [Ctr\PeriodeController::class, 'show']);
+    Route::post('/periode', [Ctr\PeriodeController::class, 'store']);
+    Route::put('/periode/{id}', [Ctr\PeriodeController::class, 'update']);
+    Route::delete('/periode/{id}', [Ctr\PeriodeController::class, 'destroy']);
 
     //periode
     Route::get('/kurikulum/', '\App\Http\Controllers\API\KurikulumController@index');
@@ -117,10 +120,10 @@ Route::prefix('v1')->group(function () {
     Route::delete('/kurikulum/matakuliah/{id}', '\App\Http\Controllers\API\KurikulumController@deleteMatkul');
 
     //hariakitfkuliah
-    Route::get('/hariaktifkuliah/', '\App\Http\Controllers\API\HariaktifkuliahController@index');
-    Route::get('/hariaktifkuliah/{id}&{tahun}', '\App\Http\Controllers\API\HariaktifkuliahController@show');
-    Route::post('/hariaktifkuliah', '\App\Http\Controllers\API\HariaktifkuliahController@store');
-    Route::post('/hariaktifkuliah/upload', '\App\Http\Controllers\API\HariaktifkuliahController@upload');
+    Route::get('/hariaktifkuliah/', [Ctr\HariaktifkuliahController::class, 'index']);
+    Route::get('/hariaktifkuliah/{id}&{tahun}', [Ctr\HariaktifkuliahController::class, 'show']);
+    Route::post('/hariaktifkuliah', [Ctr\HariaktifkuliahController::class, 'store']);
+    Route::post('/hariaktifkuliah/upload', [Ctr\HariaktifkuliahController::class, 'upload']);
 
 
     // Mahasiswa
@@ -132,6 +135,9 @@ Route::prefix('v1')->group(function () {
     Route::post('/mahasiswa', [Ctr\MahasiswaController::class, 'store']);
     Route::put('/mahasiswa/{id}', [Ctr\MahasiswaController::class, 'update']);
     Route::delete('/mahasiswa/{id}', [Ctr\MahasiswaController::class, 'destroy']);
+    Route::get('/mahasiswa-angkatan', [Ctr\MahasiswaController::class, 'mahasiswa_angkatan']);
+    Route::get('/mahasiswa-kelas', [Ctr\MahasiswaController::class, 'mahasiswa_kelas']);
+    Route::get('/mahasiswa-export', [Ctr\MahasiswaController::class, 'mahasiswa_export']);
 
 
     // Dosen Pengampu
@@ -142,18 +148,18 @@ Route::prefix('v1')->group(function () {
     Route::delete('dosenpengampu/{id}', [Ctr\DosenPengampuController::class, 'destroy']);
 
     //PERSENTASE NILAI
-    Route::get('/persentase-nilai/{id}', '\App\Http\Controllers\API\PersentaseNilaiController@show');
-    Route::post('/persentase-nilai', '\App\Http\Controllers\API\PersentaseNilaiController@store');
+    Route::get('/persentase-nilai/{id}', [Ctr\PersentaseNilaiController::class, 'show']);
+    Route::post('/persentase-nilai', [Ctr\PersentaseNilaiController::class, 'store']);
 
 
     //NILAIDOSEN
-    Route::get('/nilai/', '\App\Http\Controllers\API\NilaiController@index');
-    Route::get('/nilai/rekap', '\App\Http\Controllers\API\NilaiController@rekap');
-    Route::get('/nilai/{tahun}&{mk}&{kls}&{prodi}', '\App\Http\Controllers\API\NilaiController@show');
-    Route::post('/nilai', '\App\Http\Controllers\API\NilaiController@store');
-    Route::put('/nilai/publish', '\App\Http\Controllers\API\NilaiController@publish');
+    Route::get('/nilai/', [Ctr\NilaiController::class, 'index']);
+    Route::get('/nilai/rekap', [Ctr\NilaiController::class, 'rekap']);
+    Route::get('/nilai/{tahun}&{mk}&{kls}&{prodi}', [Ctr\NilaiController::class, 'show']);
+    Route::post('/nilai', [Ctr\NilaiController::class, 'store']);
+    Route::put('/nilai/publish', [Ctr\NilaiController::class, 'publish']);
     Route::get('/nilai/get-nim', [Ctr\NilaiController::class, 'get_nim']);
-    Route::delete('/nilai/{id}', '\App\Http\Controllers\API\NilaiController@destroy');
+    Route::delete('/nilai/{id}', [Ctr\NilaiController::class, 'destroy']);
 
     // ABSENSI
     Route::get('/absensi', [Ctr\AbsensiController::class, 'index']);
@@ -176,60 +182,69 @@ Route::prefix('v1')->group(function () {
     // ABSENSI DOSEN
     Route::get('/absensi-dosen/rekap', [Ctr\AbsensiDosenController::class, 'list_data']);
     Route::get('/absensi-dosen/list-tahun', [Ctr\AbsensiDosenController::class, 'tahun_kelas_mengajar']);
+    Route::get('/absensi-dosen/rekap-presensi/{id_dosen}', [Ctr\AbsensiDosenController::class, 'pertemuan_dosen']);
+    Route::post('/absensi-dosen/simpan', [Ctr\AbsensiDosenController::class, 'simpan']);
 
     // KELAS MENGAJAR
     Route::post('/kelas-mengajar', [Ctr\AbsensiController::class, 'kelas_mengajar']);
 
     //FILE UPLOAD HARI AKTIF
-    Route::get('/filehari/{nama}', '\App\Http\Controllers\API\HariAktifController@show');
-    Route::post('/filehari', '\App\Http\Controllers\API\HariAktifController@store');
-    Route::put('/filehari/{nama}', '\App\Http\Controllers\API\HariAktifController@update');
-    Route::delete('/filehari/{nama}', '\App\Http\Controllers\API\HariAktifController@destroy');
+    Route::get('/filehari/{nama}', [Ctr\HariAktifController::class, 'show']);
+    Route::post('/filehari', [Ctr\HariAktifController::class, 'store']);
+    Route::put('/filehari/{nama}', [Ctr\HariAktifController::class, 'update']);
+    Route::delete('/filehari/{nama}', [Ctr\HariAktifController::class, 'destroy']);
 
     //Jalur Pmb
-    Route::get('/jalurpmb', '\App\Http\Controllers\API\JalurpmbController@index');
-    Route::get('/jalurpmb-register', '\App\Http\Controllers\API\JalurpmbController@get_register');
-    Route::get('/jalurpmb/{id}', '\App\Http\Controllers\API\JalurpmbController@show');
-    Route::post('/jalurpmb', '\App\Http\Controllers\API\JalurpmbController@store');
-    Route::put('/jalurpmb/{pmb}', '\App\Http\Controllers\API\JalurpmbController@update');
-    Route::delete('/jalurpmb/{id}', '\App\Http\Controllers\API\JalurpmbController@destroy');
+    Route::get('/jalurpmb', [Ctr\JalurpmbController::class, 'index']);
+    Route::get('/jalurpmb-register', [Ctr\JalurpmbController::class, 'get_register']);
+    Route::get('/jalurpmb/{id}', [Ctr\JalurpmbController::class, 'show']);
+    Route::post('/jalurpmb', [Ctr\JalurpmbController::class, 'store']);
+    Route::put('/jalurpmb/{pmb}', [Ctr\JalurpmbController::class, 'update']);
+    Route::delete('/jalurpmb/{id}', [Ctr\JalurpmbController::class, 'destroy']);
 
     //JURUSAN PILIHAN
-    Route::get('/jurusanpilihan/{id}', '\App\Http\Controllers\API\JurusanpilihanController@show');
-    Route::get('/jurusanpilihan', '\App\Http\Controllers\API\JurusanpilihanController@index');
-    Route::post('/jurusanpilihan', '\App\Http\Controllers\API\JurusanpilihanController@store');
-    Route::put('/jurusanpilihan/{id}', '\App\Http\Controllers\API\JurusanpilihanController@update');
-    Route::delete('/jurusanpilihan/{id}', '\App\Http\Controllers\API\JurusanpilihanController@destroy');
+    Route::get('/jurusanpilihan/{id}', [Ctr\JurusanpilihanController::class, 'show']);
+    Route::get('/jurusanpilihan', [Ctr\JurusanpilihanController::class, 'index']);
+    Route::post('/jurusanpilihan', [Ctr\JurusanpilihanController::class, 'store']);
+    Route::put('/jurusanpilihan/{id}', [Ctr\JurusanpilihanController::class, 'update']);
+    Route::delete('/jurusanpilihan/{id}', [Ctr\JurusanpilihanController::class, 'destroy']);
     //syarat
-    Route::get('/syarat', '\App\Http\Controllers\API\SyaratController@index');
-    Route::get('/syarat-pendaftar', '\App\Http\Controllers\API\SyaratController@get_syarat_pendaftar');
-    Route::get('/syarat/{id}', '\App\Http\Controllers\API\SyaratController@show');
-    Route::post('/syarat', '\App\Http\Controllers\API\SyaratController@store');
-    Route::put('/syarat/{id}', '\App\Http\Controllers\API\SyaratController@update');
-    Route::delete('/syarat/{id}', '\App\Http\Controllers\API\SyaratController@destroy');
+    Route::get('/syarat', [Ctr\SyaratController::class, 'index']);
+    Route::get('/syarat-pendaftar', [Ctr\SyaratController::class,'get_syarat_pendaftar']);
+    Route::get('/syarat/{id}', [Ctr\SyaratController::class, 'show']);
+    Route::post('/syarat', [Ctr\SyaratController::class, 'store']);
+    Route::put('/syarat/{id}', [Ctr\SyaratController::class, 'update']);
+    Route::delete('/syarat/{id}', [Ctr\SyaratController::class, 'destroy']);
+
+    // DASHBOARD
+    Route::get('admin/dashboard/', [Ctr\DashboardController::class, 'index_admin']);
+    Route::get('akademik/dashboard/', [Ctr\DashboardController::class, 'index_akademik']);
+
 
     // PENDAFTAR
-    Route::get('pendaftar/dashboard', '\App\Http\Controllers\API\PendaftarController@dashboard');
-    Route::get('admin/pendaftar-konfirmasi/{id}', '\App\Http\Controllers\API\PendaftarController@konfirmasi_pendaftar');
+    Route::get('pendaftar/dashboard', [Ctr\PendaftarController::class, 'dashboard']);
+    Route::get('admin/pendaftar-konfirmasi/{id}', [Ctr\PendaftarController::class, 'konfirmasi_pendaftar']);
 
-    Route::get('admin/pendaftar', '\App\Http\Controllers\API\PendaftarController@index');
-    Route::put('admin/pendaftar/verifikasi/{id}', '\App\Http\Controllers\API\PendaftarController@verifikasi_pendaftar');
-    Route::get('/pendaftar/va', '\App\Http\Controllers\API\PendaftarController@va');
-    Route::get('/pendaftar', '\App\Http\Controllers\API\PendaftarController@show');
-    Route::post('/pendaftar', '\App\Http\Controllers\API\PendaftarController@store');
-    Route::post('/pendaftar/update', '\App\Http\Controllers\API\PendaftarController@update');
+    Route::get('admin/pendaftar', [Ctr\PendaftarController::class, 'index']);
+    Route::get('admin/pendaftar/generate-nim', [Ctr\PendaftarController::class, 'get_prodi_nim']);
+    Route::put('admin/pendaftar/verifikasi/{id}', [Ctr\PendaftarController::class, 'verifikasi_pendaftar']);
+    Route::get('/pendaftar/va', [Ctr\PendaftarController::class, 'va']);
+    Route::get('/pendaftar', [Ctr\PendaftarController::class, 'show']);
+    Route::post('/pendaftar', [Ctr\PendaftarController::class, 'store']);
+    Route::post('/pendaftar/update', [Ctr\PendaftarController::class, 'update']);
     Route::post('/login', [Ctr\PendaftarController::class, 'login']);
     Route::post('/pendaftar/check', [Ctr\PendaftarController::class, 'is_lunas']);
     Route::get('/pendaftar/keuangan', [Ctr\PendaftarController::class, 'keuangan']);
     Route::get('/pendaftar/mahasiswa', [Ctr\PendaftarController::class, 'mahasiswa']);
-    // Route::post('/daftar/{id}', '\App\Http\Controllers\API\PendaftarController@update');
-    // Route::delete('/daftar/{id}', '\App\Http\Controllers\API\PendaftarController@destroy');
+    Route::post('admin/pendaftar/generate-nim', [Ctr\PendaftarController::class, 'generate_nim']);
+    // Route::post('/daftar/{id}', [Ctr\PendaftarController::class, 'update']);
+    // Route::delete('/daftar/{id}', [Ctr\PendaftarController::class, 'destroy']);
 
     //jalur_pendaftar
-    Route::get('/daftar/{id}', '\App\Http\Controllers\API\JalurpendaftarController@show');
-    Route::post('/daftar', '\App\Http\Controllers\API\JalurpendaftarController@store');
-    Route::put('/daftar/{id}', '\App\Http\Controllers\API\JalurpendaftarController@update');
-    Route::delete('/daftar/{id}', '\App\Http\Controllers\API\JalurpendaftarController@destroy');
+    Route::get('/daftar/{id}', [Ctr\JalurpendaftarController::class, 'show']);
+    Route::post('/daftar', [Ctr\JalurpendaftarController::class, 'store']);
+    Route::put('/daftar/{id}', [Ctr\JalurpendaftarController::class, 'update']);
+    Route::delete('/daftar/{id}', [Ctr\JalurpendaftarController::class, 'destroy']);
 
     // Rekap Tarif UKT
     Route::get('/keuangan/rekap_ukt', [Ctr\UktController::class, 'index']);
@@ -239,6 +254,7 @@ Route::prefix('v1')->group(function () {
     Route::delete('/keuangan/rekap_ukt/{id}', [Ctr\UktController::class, 'destroy']);
     Route::get('/keuangan/detail', [Ctr\UktController::class, 'details']);
     Route::put('/keuangan/set-ukt/{id}', [Ctr\UktController::class, 'set_ukt_mahasiswa']);
+    Route::get('keuangan/atur-mahasiswa', [Ctr\UktController::class, 'atur_mahasiswa']); //keuangan/rekapitulasi/datamahasiswa
 
 
     // SPI Mandiri
@@ -248,10 +264,10 @@ Route::prefix('v1')->group(function () {
     Route::get('/keuangan/spi/{id}', [Ctr\SpiController::class, 'show']);
 
     //berkas
-    Route::get('/berkas/{id}', '\App\Http\Controllers\API\BerkasController@show');
-    Route::post('/berkas', '\App\Http\Controllers\API\BerkasController@store');
-    Route::post('/berkas/{id}', '\App\Http\Controllers\API\BerkasController@update');
-    Route::delete('/berkas/{id}', '\App\Http\Controllers\API\BerkasController@destroy');
+    Route::get('/berkas/{id}', [Ctr\BerkasController::class, 'show']);
+    Route::post('/berkas', [Ctr\BerkasController::class, 'store']);
+    Route::post('/berkas_update', [Ctr\BerkasController::class, 'update']);
+    Route::delete('/berkas/{id}', [Ctr\BerkasController::class, 'destroy']);
 
     // Generate Nomor VA <!-- Gunakan route Post --!>
     Route::get('/nomor_va', [Ctr\NovaController::class, 'index']);
@@ -273,12 +289,19 @@ Route::prefix('v1')->group(function () {
     Route::get('keuangan/template-perjanjian', [Ctr\BerkasKeuanganController::class, 'check_template_perjanjian']);
     Route::get('download/template-perjanjian', [Ctr\BerkasKeuanganController::class, 'download_template_perjanjian']);
     Route::post('keuangan/cicilan-piutang', [Ctr\BerkasKeuanganController::class, 'cicilan_piutang']);
+    Route::post('keuangan/update-jatuh-tempo', [Ctr\BerkasKeuanganController::class, 'update_jatuh_tempo']);
+    Route::post('keuangan/dokumen-piutang', [Ctr\BerkasKeuanganController::class, 'dokumen_mahasiswa']);
+    Route::get('keuangan/dokumen-piutang/{id}', [Ctr\BerkasKeuanganController::class, 'dokumen_piutang_mahasiswa']);
+    Route::get('download/dokumen-piutang/{id}/{tipe}', [Ctr\BerkasKeuanganController::class, 'download_dokumen_piutang']);
+
+    Route::post('keuangan/tagihan-mahasiswa', [Ctr\BerkasKeuanganController::class, 'mahasiswa_pembayaran_tagihan']); //mahasiswa/pembayaran, termasuk generate va
 
     Route::get('/keuangan/rekapitulasi/penyisihanpiutang', [Ctr\BerkasKeuanganController::class, 'penyisihanpiutang']);
     Route::get('/keuangan/export/rekap-piutang', [Ctr\BerkasKeuanganController::class, 'export_piutang']);
 
     // Riwayat Pembayaran
-    Route::post('/keuangan/upload-buku-besar', [Ctr\BerkasKeuanganController::class, 'upload_buku_besar']);
+    Route::post('/keuangan/upload-riwayat', [Ctr\BerkasKeuanganController::class, 'upload_riwayat']);
+    Route::post('/keuangan/upload-riwayat-cicilan', [Ctr\BerkasKeuanganController::class, 'upload_riwayat_cicilan']);
     Route::get('/keuangan/riwayat-pembayaran', [Ctr\RiwayatPembayaranController::class, 'index']);
 
 

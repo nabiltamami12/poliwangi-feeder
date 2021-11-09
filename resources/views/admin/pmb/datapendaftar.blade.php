@@ -151,6 +151,7 @@ function func_centang(e,id_selected,poltek) {
   poltek_selected = poltek;
 }
 
+
 function func_simpan() {
     var id_pendaftar = $('#id_pendaftar').val();
     
@@ -162,6 +163,9 @@ function func_simpan() {
         success: function(res) {
             console.log(res)
             if (res.status=="success") {
+
+                $('#centang_tidak_lolos').removeClass('text-success')
+                $('#centang_tidak_lolos').addClass('text-placeholder')
                 $('#konfirmModal').modal('hide');
                 dt.ajax.reload();    
             } else {
@@ -186,29 +190,39 @@ function func_modal(id) {
         $('#nama_pendaftar').text(res.data.pendaftar.nama);
         $('#nomor_pendaftar').text(res.data.pendaftar.nodaftar);
         $('#jalur_pendaftar').text(res.data.pendaftar.jalur_daftar);
+        $('#list_poliwangi').html('');
+        var i = 0;
         $.each(res.data.poliwangi,function (key,row) {
           console.log(row)
           var html = `          
             <div class="d-flex" onclick="func_centang(this,${row.id},'poliwangi')" style="cursor:pointer">
-              <i id="centang_${row.id}" class="iconify centang-pilihan text-placeholder mt-1 mr-3" data-icon="akar-icons:circle-check-fill"></i>
+              <i id="centang_${i}" class="iconify centang-pilihan text-placeholder mt-1 mr-3" data-icon="akar-icons:circle-check-fill"></i>
               <p class="d-inline-block font-weight-bold">Politeknik Neger Banyuwangi - ${row.prodi}</p>
             </div>`
           $('#list_poliwangi').append(html);
-          console.log(row.id+" == "+res.data.pendaftar.program_studi)
+          console.log(i+" == "+res.data.pendaftar.program_studi)
           if (row.id==res.data.pendaftar.program_studi) {
             console.log("sama")
-            $('#centang_'+row.id).removeClass('text-placeholder');
-            $('#centang_'+row.id).addClass('text-success');
+            $('#centang_'+i).removeClass('text-placeholder');
+            $('#centang_'+i).addClass('text-success');
           }
+          i++;
         })
 
+        $('#list_poltek').html('');
         if (res.data.poltek_lain != null) {
           var html = `  
             <div class="d-flex" onclick="func_centang(this,${res.data.poltek_lain.id},'poltek')" style="cursor:pointer">
-              <i id="centang_${res.data.poltek_lain.id}" class="iconify centang-pilihan text-placeholder mt-1 mr-3" data-icon="akar-icons:circle-check-fill"></i>
+              <i id="centang_${i}" class="iconify centang-pilihan text-placeholder mt-1 mr-3" data-icon="akar-icons:circle-check-fill"></i>
               <p class="d-inline-block font-weight-bold">${res.data.poltek_lain.politeknik} - ${res.data.poltek_lain.prodi}</p>
             </div>`
           $('#list_poltek').append(html);
+          if (res.data.poltek_lain.id==res.data.pendaftar.program_studi_luar) {
+            console.log("sama")
+            $('#centang_'+i).removeClass('text-placeholder');
+            $('#centang_'+i).addClass('text-success');
+          }
+
         }
         if (res.data.pendaftar.status=="T") {
           $('#centang_tidak_lolos').removeClass('text-placeholder')

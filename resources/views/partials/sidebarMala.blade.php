@@ -1,4 +1,22 @@
 <!-- Sidenav -->
+
+<script type="text/javascript">
+  $(function(){
+    $.ajax({
+      url: url_api+"/keuangan/dokumen-piutang/"+id_mahasiswa,
+      dataType: 'json',
+      cache: false,
+      type: 'get',
+      beforeSend: function(text) {
+      },
+      success: function(res){
+        if (res.data != null) {
+          $('.pengajuan-cicilan').show()
+        }
+      }
+    });
+  })
+</script>
 <nav class="sidenav navbar navbar-vertical fixed-left navbar-expand-xs navbar-light" id="sidenav-main">
   <div class="scrollbar-inner">
     <!-- Sidebar Header -->
@@ -29,13 +47,13 @@
             </a>
           </li>
 
-          <!-- <li class="nav-item">
+          <li class="nav-item">
             <a class="nav-link {{($title === "mala-pembayaran") ? 'aktif' : ''}}"
               href="{{ url('/mahasiswa/pembayaran')}}">
               <i class="iconify" data-icon="bx:bx-dollar-circle"></i>
               <span class="nav-link-text">Pembayaran</span>
             </a>
-          </li> -->
+          </li>
 
           <li class="nav-item">
             <a class="nav-link {{($title === "mala-presensi") ? 'aktif' : ''}}"
@@ -44,7 +62,7 @@
               <span class="nav-link-text">Presensi</span>
             </a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item pengajuan-cicilan" style="display: none">
             <a class="nav-link {{($title === "mala-pengajuan") ? 'aktif' : ''}}"
               href="{{ url('/mahasiswa/pengajuan/cicilan')}}">
               <i class="iconify" data-icon="bx:bx-file-blank"></i>

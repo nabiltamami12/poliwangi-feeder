@@ -26,7 +26,7 @@
         <hr class="mt">
 
         <div class="table-responsive">
-          <table id="datatable" class="table align-items-center table-flush table-borderless table-hover">
+          <table id="datatable" class="table align-items-center table-flush table-borderless table-hover" style="width: 100%;">
 
             <thead class="table-header">
               <tr>

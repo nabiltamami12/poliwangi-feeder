@@ -295,13 +295,14 @@ function set_edit(){
 				setSiswa(res.data.nilai);
 				setPersentase(res.data.persentase);
 				range = res.data.range;
+				let html = '';
 				$.each(range,function (key,row) {
-					var html = `
+					html += `
 						<span class="font-weight-bold text-danger ml-1">
 							${row.nh} = ${row.na}-${row.na_atas}${(key+1) < range.length ? ',' : ''} 
 						</span>`;
-					$('#list_range').append(html);
 				})
+				$('#list_range').html(html);
 			} else {
 				alert('Silahkan cek ulang program studi mahasiswa.')
 			}

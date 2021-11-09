@@ -24,7 +24,6 @@ use App\Models\Periode;
 //     'Authorization' => 'Bearer '.$accessToken,
 // ])->get('http://127.0.0.1:8000/admin/master-fakultas');
 
-
 Route::get('/', function () {
     return view('halamanAwal.login');
 })->name('login');
@@ -219,6 +218,12 @@ Route::prefix('admin')->middleware(['aksesuntuk:admin'])->group(function () {
     Route::get('/mahasiswa', function () {
         return view('akademik.masterData/datamahasiswalama', [
             "title" => "admin-mahasiswa",
+        ]);
+    });
+    Route::get('/mahasiswa/cu/{id}', function ($id) {
+        return view('akademik.masterData/cumahasiswa', [
+            "id" => $id,
+            "title" => "akademik-master"
         ]);
     });
 
@@ -584,7 +589,13 @@ Route::prefix('admin')->middleware(['aksesuntuk:admin'])->group(function () {
 
     Route::prefix('pmb')->group(function () {
         Route::get('/datapendaftar', function () {
-            return view('admin.pmb.dataPendaftar', [
+            return view('admin.pmb.datapendaftar', [
+                "title" => "admin-pmb",
+            ]);
+        });
+
+        Route::get('/generatenim', function () {
+            return view('admin.pmb.generatenim', [
                 "title" => "admin-pmb",
             ]);
         });
@@ -755,10 +766,9 @@ Route::prefix('keuangan')->middleware(['aksesuntuk:keuangan'])->group(function (
             ]);
         });
 
-        Route::get('/spi/detail/{id}/{nama}', function ($id, $nama) {
+        Route::get('/spi/detail/{id}', function ($id) {
             return view('keuangan.detailSPI', [
                 "id" => $id,
-                'nama' => $nama,
                 "title" => "keuangan-rekapitulasi",
             ]);
         });

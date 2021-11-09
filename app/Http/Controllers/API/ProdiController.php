@@ -126,7 +126,6 @@ class ProdiController extends Controller
                 "program_studi.*",
                 "program.program as nama_program",
                 "jurusan.jurusan as nama_jurusan",
-                DB::raw("CONCAT(pegawai.nama,', ',pegawai.gelar_blk) as kaprodi"),
             )
             ->join("program", "program_studi.program", "=", "program.nomor")
             ->join("jurusan", "program_studi.jurusan", "=", "jurusan.nomor")
@@ -206,5 +205,32 @@ class ProdiController extends Controller
             "error" => $this->error
         ]);
 
+    }
+
+    public function prodi_mahasiswa(Request $req)
+    {
+        try {
+            $where = [];
+            if ($req->status) {
+                $where[] = ['mahasiswa.status', '=', $req->status];
+            }
+
+            $this->data = \App\Models\Mahasiswa::select('mahasiswa.program_studi', 'p.program', 'j.jurusan')
+                ->leftJoin('program_studi as ps', 'mahasiswa.program_studi', '=', 'ps.nomor')
+                ->leftJoin('program as p', 'ps.program', '=', 'p.nomor')
+                ->leftJoin('jurusan as j', 'ps.jurusan', '=', 'j.nomor')
+                ->where($where)
+                ->groupBy('mahasiswa.program_studi')
+                ->get();
+            $this->status = "success";
+        } catch (QueryException $e) {
+            $this->status = "failed";
+            $this->error = $e;
+        }
+        return response()->json([
+            "status" => $this->status,
+            "data" => $this->data,
+            "error" => $this->error
+        ]);
     }
 }

@@ -15,6 +15,9 @@ use Illuminate\Support\Facades\Crypt;
 use Illuminate\Contracts\Encryption\DecryptException;
 use BNI;
 use DB;
+use App\Events\LogMahasiswaStatus;
+use App\Models\Mahasiswa;
+use Illuminate\Support\Carbon;
 
 class PendaftarController extends Controller
 {
@@ -58,12 +61,14 @@ class PendaftarController extends Controller
 
 	public function dashboard(Request $request)
 	{
+		DB::enableQueryLog();
 		$token = $request->header('token');
 		try {
 			$id = Crypt::decrypt($token);
 			$jurusan_pilihan = DB::table('jurusan_pilihan')->where('id_pendaftar',$id)->orderBy('urutan')->get();
 			$arr_poliwangi = [];
 			$poltek_lain = null;
+			$arr_info=[];
 			foreach ($jurusan_pilihan as $key => $value) {
 				if ($value->jenis=="poliwangi") {
 					$prodi = DB::table('program_studi as ps')
@@ -80,7 +85,43 @@ class PendaftarController extends Controller
 					->first();
 				}	
 			}
-			$this->data = ['poliwangi'=>$arr_poliwangi,'poltek_lain'=>$poltek_lain];
+
+			$info = DB::table('pendaftar')->select('status','program_studi','program_studi_luar')->where('nomor',$id)->first();
+			array_push($arr_info,$info);
+			if ($info->program_studi != null) {
+				$poltek = "Politeknik Negeri Banyuwangi";
+				$prodi = DB::table('program_studi as ps')
+				->select(DB::raw('CONCAT(p.program," ",ps.program_studi) as prodi'))
+				->join('program as p','p.nomor','=','ps.program')
+				->where('ps.nomor',$info->program_studi)
+				->first();
+				$tanggungan = DB::table('mahasiswa as m')
+								->select('m.ukt_kelompok','m.ukt','tk.spi')
+								->join('tarif_kelompok as tk','tk.program_studi','=','m.program_studi')
+								->where('m.id_pendaftar',$id)
+								->first();
+				$info->ukt_kelompok = $tanggungan->ukt_kelompok;
+				$info->ukt = $tanggungan->ukt;
+				$info->spi = $tanggungan->spi;
+				$info->politeknik = $poltek;
+				$info->prodi = $prodi->prodi;
+				// $arr = [
+				// 	'politeknik' => $poltek,
+				// 	'prodi' => $prodi->prodi
+				// ];
+			}else{
+				if ($info->program_studi_luar!=null) {
+					$arr = DB::table('politeknik as p')
+					->select('p.politeknik',DB::raw('CONCAT(pj.jenjang," ",pj.jurusan) as prodi'))
+					->join('politeknik_jurusan as pj','p.id','=','pj.id_politeknik')
+					->where('pj.id',$info->program_studi_luar)
+					->first();
+					$info->politeknik = $arr->politeknik;
+					$info->prodi = $arr->prodi;
+				}
+			}
+
+			$this->data = ['info'=>$info,'poliwangi'=>$arr_poliwangi,'poltek_lain'=>$poltek_lain];
 			$this->status = "success";
 		} catch (QueryException $e) {
 			$this->status = "failed";
@@ -133,6 +174,7 @@ class PendaftarController extends Controller
 	{
 		DB::enableQueryLog();
 
+		$year = Carbon::now()->isoformat('Y');
 		try {
 			$pendaftar = DB::table('pendaftar');
 			$data = $pendaftar->where('nomor',$id)->first();
@@ -168,12 +210,22 @@ class PendaftarController extends Controller
 								'program_studi' => $request->program_studi,
 								'jumlah_anak' => $data->jumlah_anak,
 								'lulussmu' => $data->tahun_lulus_smu,
+								'angkatan' => $year,
+								'semester_masuk' => 1,
 								'smu' => $data->smu,
 								'alamat' => $data->alamat,
 								'status' => "B",
 								'jalur_daftar' => $data->jalur_daftar,
 							];
-							$insert = DB::table('mahasiswa')->insert($arr);
+							echo json_encode($arr);
+							die();
+							$insert = Mahasiswa::create($arr);
+							LogMahasiswaStatus::dispatch([
+								"mahasiswa" => $insert['nomor'],
+								"status" => $insert['status'],
+								"tahun" => $this->tahun_aktif,
+								"semester" => $this->semester_aktif
+							]);
 						}
 					}else{
 						$data_update = [
@@ -214,12 +266,20 @@ class PendaftarController extends Controller
 						'program_studi' => $request->program_studi,
 						'jumlah_anak' => $data->jumlah_anak,
 						'lulussmu' => $data->tahun_lulus_smu,
+						'angkatan' => $year,
+						'semester_masuk' => 1,
 						'smu' => $data->smu,
 						'alamat' => $data->alamat,
 						'status' => "B",
 						'jalur_daftar' => $data->jalur_daftar,
 					];
-					$insert = DB::table('mahasiswa')->insert($arr);
+					$insert = Mahasiswa::create($arr);
+					LogMahasiswaStatus::dispatch([
+						"mahasiswa" => $insert['nomor'],
+						"status" => $insert['status'],
+						"tahun" => $this->tahun_aktif,
+						"semester" => $this->semester_aktif
+					]);
 				}
 			}
 			$update = $pendaftar->where('nomor',$id)->update($data_update);
@@ -583,6 +643,71 @@ class PendaftarController extends Controller
 			->where($where)
 			->get();
 			$this->data = $data;
+			$this->status = "success";
+		} catch (QueryException $e) {
+			$this->status = "failed";
+			$this->error = $e;
+		}
+		return response()->json([
+			"status" => $this->status,
+			"data" => $this->data,
+			"error" => $this->error
+		]);
+	}
+
+	public function get_prodi_nim(Request $request)
+	{
+		try {
+			$table = DB::table('program_studi as ps')
+				->select(
+					'ps.nomor',
+					DB::raw('CONCAT(p.program," ",ps.program_studi) as prodi'),
+					'ps.kode_epsbed',
+					DB::raw('(select count(*) from pendaftar where program_studi = ps.nomor) as jml_pendaftar'))
+				->join('program as p','p.nomor','=','ps.program')
+				->orderBy(DB::raw('(select count(*) from pendaftar where program_studi = ps.nomor)'),"desc")
+				->get();
+			$this->data = $table;
+			$this->status = "success";
+		} catch (QueryException $e) {
+			$this->status = "failed";
+			$this->error = $e;
+		}
+		return response()->json([
+			"status" => $this->status,
+			"data" => $this->data,
+			"error" => $this->error
+		]);
+	}
+
+	public function generate_nim(Request $request)
+	{
+		try {
+			$year_now = Carbon::now()->isoformat('Y');
+			$sk_poltek = '36';
+			$year = Carbon::now()->isoformat('YY');
+			$kode_prodi = DB::table('program_studi')->where('nomor',$request->program_studi)->first()->kode_epsbed;
+			$list_pendaftar = DB::table('mahasiswa')
+									->where('program_studi',$request->program_studi)
+									->where('angkatan',$year_now)
+									->get();
+			
+			$i = 1;
+			foreach ($list_pendaftar as $key => $value) {
+				if (strlen($i)==1) {
+					$urutan_mhs = "000".$i;
+				}elseif (strlen($i)==2) {
+					$urutan_mhs = "00".$i;
+				}elseif (strlen($i)==3) {
+					$urutan_mhs = "0".$i;
+				}else{
+					$urutan_mhs = $i;
+				}
+				$nim = $sk_poltek.$year.$kode_prodi.$urutan_mhs;
+				$i++;
+				DB::table('mahasiswa')->where('nomor',$value->nomor)->update(['nrp'=>$nim]);
+			}
+			$this->data = null;
 			$this->status = "success";
 		} catch (QueryException $e) {
 			$this->status = "failed";

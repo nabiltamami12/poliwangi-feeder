@@ -12,6 +12,9 @@
 	margin-left: auto;
 	margin-right: auto;
 }
+.input-nilai{
+	width: 82px;
+}
 </style>
 <!-- Page content -->
 <section class="page-content container-fluid">
@@ -85,28 +88,31 @@
 									Setting Persentase
 									<input type="hidden" id="id_persentase" name="id">
 								</td>
-								<td class="text-center px-3">
+								<td class="text-center px-3 input-nilai">
 									<input type="text" class="form-control persentase-count" placeholder="0" id="persentase_uts" >
 								</td>
-								<td class="text-center px-3">
+								<td class="text-center px-3 input-nilai">
 									<input type="text" class="form-control persentase-count" placeholder="0" id="persentase_uas" >
 								</td>
-								<td class="text-center px-3">
+								<td class="text-center px-3 input-nilai">
 									<input type="text" class="form-control persentase-count" placeholder="0" id="persentase_tugas" >
 								</td>
-								<td class="text-center px-3">
+								<td class="text-center px-3 input-nilai">
 									<input type="text" class="form-control persentase-count" placeholder="0" id="persentase_kuis" >
 								</td>
-								<td class="text-center px-3">
+								<td class="text-center px-3 input-nilai">
 									<input type="text" class="form-control persentase-count" placeholder="0" id="persentase_kehadiran">
 								</td>
-								<td class="text-center px-3">
+								<td class="text-center px-3 input-nilai">
 									<input type="text" class="form-control persentase-count" placeholder="0" id="persentase_praktikum" >
 								</td>
-								<td class="text-center px-3">
+								<td class="text-center px-3 input-nilai">
 									<input type="text" class="form-control persentase-count" placeholder="0%" id="total_persentase"  disabled>
 								</td>
-								<td colspan="4"></td>
+								<td class="input-nilai"></td>
+								<td class="input-nilai"></td>
+								<td class="input-nilai"></td>
+								<td class="input-nilai"></td>
 							</tr>
 						</thead>
 						<thead class="table-header">
@@ -197,13 +203,14 @@
 						setSiswa(data);
 						setPersentase(res.data.persentase_nilai);
 						persen_nilai();
+						let html = '';
 						$.each(range,function (key,row) {
-							var html = `
+							html += `
 							<span class="font-weight-bold text-danger ml-1">
 							${row.nh} = ${row.na}-${row.na_atas}${(key+1) < range.length ? ',' : ''} 
 							</span>`;
-							$('#list_range').append(html);
 						})
+						$('#list_range').html(html);
 						$.each(persentase,function (key,row) {
 							$('#'+key).val(row)
 						})

@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use DB;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Crypt;
 
 class BerkasController extends Controller
 {
@@ -38,13 +39,15 @@ class BerkasController extends Controller
      */
     public function store(Request $request)
     {
+        $token = $request->header('token');
+        $id_pendaftar = Crypt::decrypt($token);
+
         $data = $request->all();
         $validator = Validator::make(
             $data,
             [
                 'file' => 'required|mimes:doc,docx,pdf,txt|max:2048',
-                'id_syarat' => 'required',
-                'id_pendaftar' => 'required',
+                'syarat' => 'required',
             ]
         );
 
@@ -54,12 +57,13 @@ class BerkasController extends Controller
 
 
         if ($files = $request->file('file')) {
-            $namafile = $files->getClientOriginalName();
+            $namafile = 'brks_pdftr_'.\App\Helpers\CoreHelper::base64url_encode($id_pendaftar).'_'.time().'.'.$files->getClientOriginalExtension();
             $document = new Berkas();
             $document->file = $namafile;
-            $document->id_syarat = $request->id_syarat;
-            $document->id_pendaftar = $request->id_pendaftar;
-            $files->move(public_path() . '/berkas', $namafile);
+            $document->id_syarat = $request->syarat;
+            $document->id_pendaftar = $id_pendaftar;
+            $document->status = '1';
+            $files->move(public_path('/berkas/persyaratan_pendaftar/'), $namafile);
             $document->save();
 
 
@@ -120,11 +124,10 @@ class BerkasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'id_pendaftar' => 'required',
-            'id_syarat' => 'required',
+            'syarat' => 'required',
             'file' => 'nullable|mimes:doc,docx,pdf,txt|max:2048'
         ]);
         if ($validator->fails()) {
@@ -135,16 +138,21 @@ class BerkasController extends Controller
                 'data' => []
             ]);
         } else {
-            $berkas = Berkas::find($id);
-            $berkas->id_pendaftar = $request->id_pendaftar;
-            $berkas->id_syarat = $request->id_syarat;
-            if ($request->file && $request->file->isValid()) {
-                $file_name = $request->file->getClientOriginalName();
-                $request->file->move(public_path('berkas'), $file_name);
-                $path = $file_name;
-                $berkas->file = $path;
+            $token = $request->header('token');
+            $id_pendaftar = Crypt::decrypt($token);
+
+            $berkas = Berkas::where('id_pendaftar', $id_pendaftar)->where('id_syarat', $request->syarat);
+            $files = $request->file('file');
+            if ($files && $request->file->isValid()) {
+                $file_lama = $berkas->first()->file ? public_path('berkas/persyaratan_pendaftar/'.$berkas->first()->file) : null;
+                if ($file_lama && file_exists($file_lama)) unlink($file_lama);
+                $file_name = 'brks_pdftr_'.\App\Helpers\CoreHelper::base64url_encode($id_pendaftar).'_'.time().'.'.$files->getClientOriginalExtension();
+                $files->move(public_path('berkas/persyaratan_pendaftar'), $file_name);
+                $berkas->update([
+                    "file" => $file_name,
+                    "status" => '1'
+                ]);
             }
-            $berkas->update();
             return response()->json([
                 'status' => 'success',
                 'data' => $berkas,

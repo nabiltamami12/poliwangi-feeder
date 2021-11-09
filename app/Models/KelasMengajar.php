@@ -11,6 +11,15 @@ class KelasMengajar extends Model
     use HasFactory;
     public $timestamps = false;
     public $table = "kelas_mengajar";
+    protected $fillable = [
+        'tahun',
+        'dosen',
+        'kuliah',
+        'pertemuan',
+        'jam_mulai',
+        'status',
+        'status_kelas'
+    ];
 
     public function rDosen()
     {
@@ -41,6 +50,19 @@ class KelasMengajar extends Model
                       ->orWhere('kelas_mengajar.status', '=', 'mengajar');
             })
             ->groupBy('kelas_mengajar.dosen')
+            ->get();
+    }
+
+    public function absensi_pertemuan_dosen($arr)
+    {
+        return $this->select(DB::raw('kelas_mengajar.kuliah, kl.kode as kelas, m.matakuliah, GROUP_CONCAT(kelas_mengajar.pertemuan,"=",kelas_mengajar.id,"=",kelas_mengajar.status) detail'))
+            ->leftJoin('kuliah as k', 'kelas_mengajar.kuliah', '=', 'k.nomor')
+            ->leftJoin('matakuliah as m', 'k.matakuliah', '=', 'm.nomor')
+            ->leftJoin('kelas as kl', 'k.kelas', '=', 'kl.nomor')
+            ->where('kelas_mengajar.tahun', '=', $arr['tahun'])
+            ->where('k.semester', '=', $arr['semester'])
+            ->where('kelas_mengajar.dosen', '=', $arr['dosen'])
+            ->groupBy('kelas_mengajar.kuliah')
             ->get();
     }
 }

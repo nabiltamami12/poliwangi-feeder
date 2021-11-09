@@ -186,4 +186,34 @@ class JurusanController extends Controller
             "error" => $this->error
         ]);
     }
+
+
+    public function jurusan_mahasiswa(Request $req)
+    {
+        try {
+            $where = [];
+            if ($req->status) {
+                $where[] = ['mahasiswa.status', '=', $req->status];
+            }
+            if ($req->program) {
+                $where[] = ['ps.program', '=', $req->program];
+            }
+
+            $this->data = \App\Models\Mahasiswa::select('j.nomor', 'j.jurusan')
+                ->leftJoin('program_studi as ps', 'mahasiswa.program_studi', '=', 'ps.nomor')
+                ->leftJoin('jurusan as j', 'ps.jurusan', '=', 'j.nomor')
+                ->where($where)
+                ->groupBy('ps.jurusan')
+                ->get();
+            $this->status = "success";
+        } catch (QueryException $e) {
+            $this->status = "failed";
+            $this->error = $e;
+        }
+        return response()->json([
+            "status" => $this->status,
+            "data" => $this->data,
+            "error" => $this->error
+        ]);
+    }
 }
