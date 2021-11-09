@@ -408,9 +408,9 @@ class MahasiswaController extends Controller
 			array_push($where,['ps.jurusan','=',$request->jurusan]);
 		}
 		if ( $request->angkatan ) {
-			array_push($where,['mahasiswa.angkatan','=',$request->angkatan]);
+			array_push($where,['m.angkatan','=',$request->angkatan]);
 		}
-		array_push($where,['mahasiswa.status','=',$request->status]);
+		array_push($where,['m.status','=',$request->status]);
 
     return Excel::download(new \App\Exports\MahasiswaExport($where), 'Rekap Mahasiswa.xlsx');
 	}
