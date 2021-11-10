@@ -92,6 +92,10 @@
                 </select>
               </div>
             </div>
+            <div class="form-group form-check">
+              <input type="checkbox" class="form-check-input" id="ruang_ujian" name="ruang_ujian" value="0">
+              <label class="form-check-label" for="ruang_ujian">Ruang Ujian?</label>
+            </div>
           </div>
           <hr class="my-4">
 
@@ -105,12 +109,23 @@
 <script>
   $(document).ready(function() {
     var id = "{{$id}}";
-    getData(id);        
+    getData(id);
+    
+    $('#ruang_ujian').on('change', function() {
+      if ($('#ruang_ujian').val() == "0") {
+        $('#ruang_ujian').val("1");
+      } else {
+        $('#ruang_ujian').val("0");
+      }
+    })
 
     // form tambah data
     $("#form_cu").submit(function(e) {
         e.preventDefault();
         var data = $('#form_cu').serialize();
+        if ($('#ruang_ujian').val() == "0") {
+          data += "&ruang_ujian=0";
+        }
         if (id!="") {
             var url = url_api+"/ruangan/"+id;
             var type = "put";
@@ -179,6 +194,9 @@ async function getData(id) {
                     $('#kepala').val(data.kepala).change();
                     $('#teknisi').val(data.teknisi).change();
                     $('#asisten').val(data.asisten).change();
+                    if (data.ruang_ujian != "0") {
+                      $('#ruang_ujian').prop('checked', true);
+                    }
                 } else {
                     // alert gagal
                 }
