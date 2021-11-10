@@ -109,12 +109,15 @@ Route::prefix('v1')->group(function () {
     Route::delete('/periode/{id}', [Ctr\PeriodeController::class, 'destroy']);
 
     //periode
-    Route::get('/kurikulum/', [Ctr\KurikulumController::class, 'index']);
-    Route::put('/kurikulum/change_status/{id}', [Ctr\KurikulumController::class, 'change_status']);
-    Route::get('/kurikulum/{id}', [Ctr\KurikulumController::class, 'show']);
-    Route::post('/kurikulum', [Ctr\KurikulumController::class, 'store']);
-    Route::put('/kurikulum/{id}', [Ctr\KurikulumController::class, 'update']);
-    Route::delete('/kurikulum/{id}', [Ctr\KurikulumController::class, 'destroy']);
+    Route::get('/kurikulum/', '\App\Http\Controllers\API\KurikulumController@index');
+    Route::put('/kurikulum/change_status/{id}', '\App\Http\Controllers\API\KurikulumController@change_status');
+    Route::get('/kurikulum/{id}', '\App\Http\Controllers\API\KurikulumController@show');
+    Route::get('/kurikulum/{id}/matakuliah', '\App\Http\Controllers\API\KurikulumController@matakuliah');
+    Route::post('/kurikulum/{id}/matakuliah', '\App\Http\Controllers\API\KurikulumController@tambahMatkul');
+    Route::post('/kurikulum', '\App\Http\Controllers\API\KurikulumController@store');
+    Route::put('/kurikulum/{id}', '\App\Http\Controllers\API\KurikulumController@update');
+    Route::delete('/kurikulum/{id}', '\App\Http\Controllers\API\KurikulumController@destroy');
+    Route::delete('/kurikulum/matakuliah/{id}', '\App\Http\Controllers\API\KurikulumController@deleteMatkul');
 
     //hariakitfkuliah
     Route::get('/hariaktifkuliah/', [Ctr\HariaktifkuliahController::class, 'index']);
@@ -185,7 +188,7 @@ Route::prefix('v1')->group(function () {
     // KELAS MENGAJAR
     Route::post('/kelas-mengajar', [Ctr\AbsensiController::class, 'kelas_mengajar']);
 
-    //FILE UPLOAD HARI AKTIF 
+    //FILE UPLOAD HARI AKTIF
     Route::get('/filehari/{nama}', [Ctr\HariAktifController::class, 'show']);
     Route::post('/filehari', [Ctr\HariAktifController::class, 'store']);
     Route::put('/filehari/{nama}', [Ctr\HariAktifController::class, 'update']);
@@ -224,6 +227,7 @@ Route::prefix('v1')->group(function () {
 
     Route::get('admin/pendaftar', [Ctr\PendaftarController::class, 'index']);
     Route::get('admin/pendaftar/generate-nim', [Ctr\PendaftarController::class, 'get_prodi_nim']);
+    Route::get('admin/pendaftar/list-generate-nim', [Ctr\PendaftarController::class, 'list_generate_nim']);
     Route::put('admin/pendaftar/verifikasi/{id}', [Ctr\PendaftarController::class, 'verifikasi_pendaftar']);
     Route::get('/pendaftar/va', [Ctr\PendaftarController::class, 'va']);
     Route::get('/pendaftar', [Ctr\PendaftarController::class, 'show']);
@@ -300,7 +304,7 @@ Route::prefix('v1')->group(function () {
     Route::post('/keuangan/upload-riwayat', [Ctr\BerkasKeuanganController::class, 'upload_riwayat']);
     Route::post('/keuangan/upload-riwayat-cicilan', [Ctr\BerkasKeuanganController::class, 'upload_riwayat_cicilan']);
     Route::get('/keuangan/riwayat-pembayaran', [Ctr\RiwayatPembayaranController::class, 'index']);
-    
+
 
     // example use bni api
     Route::get('/test', [Ctr\MahasiswaController::class, 'create_va']);

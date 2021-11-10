@@ -54,7 +54,7 @@
                 <input type="text" class="form-control" id="kode_kelas_absen" name="kode_kelas_absen">
               </div>
             </div>
-            <div class="col-sm-6 col-12">
+            <div class="col-sm-6 col-12 d-none">
               <div class="form-group row mb-0">
                 <label>Kode EPSBED</label>
                 <input type="text" class="form-control" id="kode_epsbed" name="kode_epsbed">
@@ -84,7 +84,7 @@
 <script>
   $(document).ready(function() {
     var id = "{{$id}}";
-    getData(id);        
+    getData(id);
 
     $('#program_studi').on('change',function (e) {
         var program_studi = $(this).val()
@@ -96,9 +96,9 @@
         $.each(kelas,function (key,row) {
         optKelas += `<option value="${row.nomor}">${row.kode}</option>`
         })
-        $('#kelas').append(optKelas); 
+        $('#kelas').append(optKelas);
     })
-     
+
 
     // form tambah data
     $("#form_cu").submit(function(e) {
@@ -119,11 +119,11 @@
             data: data,
             success: function(res) {
                 if (res.status=="success") {
-                    window.location.href = "{{url('/admin/master/datakelas')}}";                    
+                    window.location.href = "{{url('/admin/master/datakelas')}}";
                 } else {
                     // alert gagal
                 }
-                
+
             }
         });
     });
@@ -140,7 +140,7 @@
 } );
 
 async function getData(id) {
-    
+
 
     var optProdi = `<option value=""> - </option>`;
     $.each(dataGlobal['prodi'],function (key,row) {
@@ -154,7 +154,7 @@ async function getData(id) {
     $.each(kelas,function (key,row) {
       optKelas += `<option value="${row.nomor}">${row.kode}</option>`
     })
-    $('#kelas').append(optKelas); 
+    $('#kelas').append(optKelas);
 
     var optDosen = `<option value=""> - </option>`;
     $.each(dataGlobal['dosen'],function (key,row) {
@@ -173,9 +173,9 @@ async function getData(id) {
                     var data = res['data'][0];
                     $.each(data,function (key,row) {
                         $('#'+key).val(row);
-                    })                
+                    })
                     var jurusan = $.grep(dataGlobal['prodi'], function(e){ return e.program == data.program; });
-                    $('#jurusan').html('')              
+                    $('#jurusan').html('')
                     var optJurusan = `<option value=""> - </option>`;
                     $.each(dataGlobal['jurusan'],function (key,row) {
                       if (row.nomor == data.jurusan) {
@@ -191,7 +191,7 @@ async function getData(id) {
                 } else {
                     // alert gagal
                 }
-                
+
             }
         });
     }

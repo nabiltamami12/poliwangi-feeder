@@ -41,6 +41,12 @@
               <span class="nav-link-text">Penilaian</span>
             </a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link {{($title === "dosen-perwalian") ? 'aktif' : ''}}" href="{{url('dosen/perwalian')}}">
+              <i class="iconify" data-icon="ant-design:user-switch-outlined"></i>
+              <span class="nav-link-text">Perwalian</span>
+            </a>
+          </li>
         </ul>
       </div>
     </div>

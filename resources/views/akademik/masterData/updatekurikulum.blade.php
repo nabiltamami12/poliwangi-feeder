@@ -24,22 +24,61 @@
                 <form id="form_cu">
                     <input type="hidden" id="id" name="id">
                     <div class="form-row">
-                        <div class="col-sm-6 col-12">
-                            <div class="form-group row mb-0">
-                                <label>Kurikulum</label>
-                                <input type="text" class="form-control" id="kurikulum" name="kurikulum">
-                                <input type="hidden" id="status" name="status">
+                        <div class="col-sm-12 col-12">
+                          <div class="form-group row mb-0">
+                            <label>Nama Kurikulum</label>
+                            <input type="text" class="form-control" id="kurikulum" name="kurikulum">
+                          </div>
+                          <div class="form-group row mb-0">
+                            <label>Pilih Prodi / Jurusan</label>
+                            <select name="prodi_id" id="prodi_id" class="form-control">
+                                @foreach($prodi as $prodi)
+                                    <option value="{{ $prodi->nomor }}">{{ ucwords($prodi->program_studi) }}</option>
+                                @endforeach
+                            </select>
+                          </div>
+                          <div class="form-group row mb-0">
+                            <label>Pilih Tahun Ajaran</label>
+                            <select name="periode_id" id="periode_id" class="form-control">
+                                @foreach($periode as $periode)
+                                    <option value="{{ $periode->nomor }}">{{ ucwords($periode->tahun) }} - Semester {{ $periode->semester }}</option>
+                                @endforeach
+                            </select>
+                          </div>
+                          <div class="form-group row mb-0">
+                            <label>Jumlah SKS Total</label>
+                            <input type="number" value="0" class="form-control" id="jumlah_sks" name="jumlah_sks" readonly>
+                          </div>
+                          <div class="form-group row mb-0">
+                            <div class="col-md-6 col-sm-6 col-12 mb-2 p-0 pr-2">
+                                <label>Jumlah SKS Wajib</label>
+                                <input type="number" value="0" class="form-control" id="sks_wajib" name="sks_wajib" min="0" required>
                             </div>
-                        </div>
-                        <div class="col-sm-6 col-12">
-                            <div class="form-group row mb-0">
-                                <label>&nbsp;</label>
-                                <button type="submit" class="btn btn-primary w-100 simpanData-btn ">Simpan Data</button>
+                            <div class="col-md-6 col-sm-6 col-12 mb-2 p-0 pl-2">
+                                <label>Jumlah SKS Pilihan</label>
+                                <input type="number" value="0" class="form-control" id="sks_pilihan" name="sks_pilihan" min="0" required>
                             </div>
+                          </div>
+                          <div class="form-group row mb-0">
+                            <label>Keterangan</label>
+                            <textarea name="keterangan" id="keterangan" rows="3" class="form-control"></textarea>
+                          </div>
+                          <div class="form-group row mb-0">
+                            <label>Status</label>
+                            <select name="status" id="status" class="form-control">
+                                <option value="1">Aktif</option>
+                                <option value="0">Tidak Aktif</option>
+                            </select>
+                          </div>
                         </div>
-                    </div>
+
+                      </div>
+                      <hr class="my-4">
+
+                      <button type="submit" class="btn btn-primary w-100 simpanData-btn ">{{ ($id==null)?"Tambah":"Ubah" }}
+                        Data</button>
                 </form>
-                <hr class="my-4">
+                {{-- <hr class="my-4">
                 <div class="col-sm-12 col-12">
                     <div class="form-row row-matkul-tambah">
                         <div class="col-sm-12 col-12">
@@ -87,8 +126,8 @@
                 </div>
 
                 <div class="col-sm-12 col-12 row-matkul">
-                        
-                </div>
+
+                </div> --}}
             </div>
         </div>
     </div>
@@ -107,7 +146,7 @@
     })
   $(document).ready(function() {
     if (id!="") {
-        getData(id);        
+        getData(id);
     }else{
         $('#status').val(0)
     }
@@ -158,17 +197,14 @@
             url: url,
             type: type,
             dataType: 'json',
-            data: {
-                'kurikulum':$('#kurikulum').val(),
-                'matkul':arr_matkul
-            },
+            data: data,
             success: function(res) {
                 if (res.status=="success") {
-                    window.location.href = "{{url('/admin/master/datakurikulum')}}";                    
+                    window.location.href = "{{url('/admin/master/datakurikulum')}}";
                 } else {
                     // alert gagal
                 }
-                
+
             }
         });
     });
@@ -180,9 +216,9 @@
         var sks = $('#tambah_sks').val()
         var semester = $('#tambah_semester').val()
 
-        arr_matkul['tambah'].push({'id':'','kurikulum' : id,'matakuliah' : id_matkul,'semester': semester}); 
+        arr_matkul['tambah'].push({'id':'','kurikulum' : id,'matakuliah' : id_matkul,'semester': semester});
         var html = `
-        <div class="form-row" id="row_${count}"> 
+        <div class="form-row" id="row_${count}">
                         <div class="col-sm-12 col-12">
                             <div class="form-group row mb-0">
                                 <label>Matakuliah</label>
@@ -232,10 +268,10 @@ function fun_hapus(index,id_kur_matkul,id_matkul) {
             if (row.matakuliah==id_matkul) {
                 arr_matkul['tambah'].splice(key, 1);
                 return false;
-            } 
+            }
         })
     } else {
-        arr_matkul['hapus'].push({'id':id_kur_matkul,'kurikulum' : id,'matakuliah' : id_matkul}); 
+        arr_matkul['hapus'].push({'id':id_kur_matkul,'kurikulum' : id,'matakuliah' : id_matkul});
     }
     $('#row_'+index).remove()
     $('#tambah_matkul [value='+id_matkul+']').attr('disabled',false);
@@ -255,10 +291,43 @@ function getData(id) {
                 $.each(data_kurikulum,function (key,row) {
                     $('#'+key).val(row);
                 })
+
+                $('#sks_wajib').keyup(function(){
+                    var jumlahWajib = $(this).val(),
+                        jumlahPilihan = $('#sks_pilihan').val(),
+                        totalSks = parseInt(jumlahWajib) + parseInt(jumlahPilihan)
+
+                    $('#jumlah_sks').val(totalSks)
+                })
+
+                $('#sks_wajib').click(function(){
+                    var jumlahWajib = $(this).val(),
+                        jumlahPilihan = $('#sks_pilihan').val(),
+                        totalSks = parseInt(jumlahWajib) + parseInt(jumlahPilihan)
+
+                    $('#jumlah_sks').val(totalSks)
+                })
+
+                $('#sks_pilihan').keyup(function(){
+                    var jumlahWajib = $('#sks_wajib').val(),
+                        jumlahPilihan = $(this).val(),
+                        totalSks = parseInt(jumlahWajib) + parseInt(jumlahPilihan)
+
+                    $('#jumlah_sks').val(totalSks)
+                })
+
+                $('#sks_pilihan').click(function(){
+                    var jumlahWajib = $('#sks_wajib').val(),
+                        jumlahPilihan = $(this).val(),
+                        totalSks = parseInt(jumlahWajib) + parseInt(jumlahPilihan)
+
+                    $('#jumlah_sks').val(totalSks)
+                })
+
                 var data_matkul = data['kurikulum_matkul'];
                 $.each(data_matkul,function (key,row) {
                     html = `
-                    <div class="form-row" id="row_${count}"> 
+                    <div class="form-row" id="row_${count}">
                         <div class="col-sm-12 col-12">
                             <div class="form-group row mb-0">
                                 <label>Matakuliah</label>
@@ -290,15 +359,15 @@ function getData(id) {
                             </div>
                         </div>
                     </div>`
-                    
+
                     $('.row-matkul').append(html);
-                
+
                     count++;
                 })
             } else {
                 // alert gagal
             }
-            
+
         }
     });
 }
