@@ -1,7 +1,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
-  <meta name="author" content="Creative Tim">
+  <meta name="description" content="SIM Poliwangi adalah sistem informasi manajemen dari Poltek Banyuwangi">
+  <meta name="author" content="SIM Poliwangi">
   @php
   $judul = 'SIM Poliwangi | '.ucwords(preg_replace('/-/m', ' ', $title));
   @endphp
@@ -50,5 +50,7 @@
     var url = "{{ base_path() }}";
     var dataGlobal = JSON.parse(localStorage.getItem('globalData'))
     var dataJurusan, dataDosen, dataProgram;
-    var dt, dt_url, dt_opt;
+    var dt, dt_url, dt_opt, dt_src;
+    var id_mahasiswa = 31575
+    console.log(id_mahasiswa)
   </script>

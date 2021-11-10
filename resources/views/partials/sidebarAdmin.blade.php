@@ -112,10 +112,16 @@
 
           <li class="nav-item">
             <div class="nav-link {{($title === "admin-kuliah") ? 'aktif' : ''}}">
-              <i class="iconify" data-icon="bx:bx-file-blank"></i>
+              <i class="iconify" data-icon="bx:bx-book-bookmark"></i>
               <span class="nav-link-text">Kuliah</span>
             </div>
             <ul class="nav-item-dropdown-content">
+              <li class="nav-item">
+                <a class="nav-link {{($title === "admin-perwalian") ? 'aktif' : ''}}" href="{{url('admin/kuliah/perwalian')}}">
+                  <span class="mini_icon">PW</span>
+                  <span class="nav-link-text ml-0">Perwalian</span>
+                </a>
+              </li>
               <li class="nav-item">
                 <a class="nav-link {{($title === "rekap-absensi-mahasiswa") ? 'aktif' : ''}}" href="{{url('admin/kuliah/absensi/rekap')}}">
                   <span class="mini_icon">RA</span>
@@ -187,6 +193,12 @@
                 <a class="nav-link" href="{{ url('/admin/pmb/datapendaftar')}}">
                   <span class="mini_icon">DP</span>
                   <span class="nav-link-text">Daftar Pendaftar</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url('/admin/pmb/generatenim')}}">
+                  <span class="mini_icon">GN</span>
+                  <span class="nav-link-text">Generate NIM</span>
                 </a>
               </li>
               <li class="nav-item">

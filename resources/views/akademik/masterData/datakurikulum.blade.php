@@ -27,9 +27,13 @@
             <thead class="table-header">
               <tr>
                 <th scope="col">NO</th>
-                <th scope="col">Kurikulum</th>
-                <th scope="col">Jumlah Matakuliah</th>
+                <th scope="col">Nama Kurikulum</th>
+                <th scope="col">Program Studi</th>
+                <th scope="col">Tahun Ajaran</th>
+                <th scope="col">Jumlah SKS Kurikulum</th>
+                <th scope="col">Jumlah SKS MK</th>
                 <th scope="col">Status</th>
+                <th scope="col">Mata Kuliah</th>
                 <th scope="col">AKSI</th>
               </tr>
             </thead>
@@ -95,11 +99,32 @@ dt_opt = {
       "targets": [2],
       "data": null,
       "render": function(data, type, full) {
-        res = data['jumlah_matkul'];
+        res = data['prodi'];
         return res;
       }
     },{
       "targets": [3],
+      "data": null,
+      "render": function(data, type, full) {
+        res = `${data['periode']} - Semester ${data['semester']}`;
+        return res;
+      }
+    },{
+      "targets": [4],
+      "data": null,
+      "render": function(data, type, full) {
+        res = data['jumlah_sks'];
+        return res;
+      }
+    },{
+      "targets": [5],
+      "data": null,
+      "render": function(data, type, full) {
+        res = data['jumlah_matkul'] == null ? 0 : data['jumlah_matkul'];
+        return res;
+      }
+    },{
+      "targets": [6],
       "data": null,
       "render": function(data, type, full) {
         var aktif = "<span class='text-success' style='font-size:12px;font-weight:600;'>aktif <i class='iconify-inline mr-1' style='font-size:12px;' data-icon='akar-icons:circle-check-fill'></i></span>"
@@ -108,13 +133,21 @@ dt_opt = {
         return res;
       }
     },{
-      "targets": [4],
+      "targets": [7],
+      "data": null,
+      "render": function(data, type, full) {
+        var id = data['id']
+        var res = `<a href="{{ url('admin/master/datakurikulum/${id}/matakuliah') }}" class="btn btn-success btn-sm"><i class="iconify-inline mr-1" style="font-size:12px;" data-icon="akar-icons:search"></i>Mata Kuliah</a>`
+        return res;
+      }
+    },{
+      "targets": [8],
       "data": null,
       "render": function(data, type, full) {
         var id = data['id'];
         var text_hapus = data['kurikulum'];
-        var btn_update = `<span class="iconify edit-icon text-primary" onclick='update_btn(${id})' data-icon="bx:bx-edit-alt" data-inline="true"></span>` 
-        var btn_delete = `<span class="iconify delete-icon text-primary" data-icon="bx:bx-trash" data-inline="true" onclick='delete_btn(${id},"kurikulum","kurikulum","${text_hapus}")'></span>`; 
+        var btn_update = `<span class="iconify edit-icon text-primary" onclick='update_btn(${id})' data-icon="bx:bx-edit-alt" data-inline="true"></span>`
+        var btn_delete = `<span class="iconify delete-icon text-primary" data-icon="bx:bx-trash" data-inline="true" onclick='delete_btn(${id},"kurikulum","kurikulum","${text_hapus}")'></span>`;
         res = btn_update+" "+btn_delete;
         return res;
       }
@@ -136,7 +169,7 @@ function change_status(id) {
       success: function(res) {
         if (res.status=="success") {
               $('#konfirmModal').modal('hide');
-              dt.ajax.reload();                
+              dt.ajax.reload();
             } else {
               // alert gagal
             }

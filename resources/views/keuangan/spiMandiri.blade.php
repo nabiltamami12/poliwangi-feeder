@@ -141,7 +141,7 @@ dt_opt = {
       "mData": null,
       "className": 'text-center',
       "mRender": function(data, type, full) {
-        res = data['id_mahasiswa'];
+        res = data['nrp'];
         return res;
       }
     },{
@@ -190,8 +190,8 @@ dt_opt = {
       "className": 'font-weight-bold text-right',
       "mRender": function(data, type, full) {
         var id = data['id_mahasiswa'];
-        var test =  data['nama'];
-        var detail = `<a href="{{ url('akademik/keuangan/spi/detail/${id}/${test}') }}" class="font-weight-bold text-primary text-underline">Lihat Detail</a>`
+        var detail = `<a href="{{ url('keuangan/rekapitulasi/spi/detail/${id}') }}" class="btn btn-sm btn-primary"><i class="iconify mr-1" data-icon="bx:bxs-user-detail"></i>
+                    <span class="text-white">Lihat Detail</span></a>`
         res = detail;
         return res;
       }

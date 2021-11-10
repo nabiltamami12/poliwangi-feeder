@@ -11,7 +11,6 @@ use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithColumnWidths;
 use Maatwebsite\Excel\Concerns\WithCustomStartCell;
 use Maatwebsite\Excel\Concerns\WithStyles;
-use Maatwebsite\Excel\Concerns\WithDrawings;
 use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Events\AfterSheet;
@@ -24,7 +23,7 @@ use PhpOffice\PhpSpreadsheet\Shared\Date;
 
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
-class SpiExport implements WithHeadings, WithColumnWidths, WithStyles, WithDrawings, WithCustomStartCell, WithEvents, WithColumnFormatting, WithMapping, FromQuery
+class SpiExport implements WithHeadings, WithColumnWidths, WithStyles, WithCustomStartCell, WithEvents, WithColumnFormatting, WithMapping, FromQuery
 
 {
     /**
@@ -33,10 +32,14 @@ class SpiExport implements WithHeadings, WithColumnWidths, WithStyles, WithDrawi
     use Exportable;
     protected $tahun;
     protected $prodi;
+    protected $program_studi;
+    protected $number;
 
-    public function __construct($tahun, $prodi) {
+    public function __construct($tahun, $prodi, $program_studi) {
         $this->tahun = $tahun;
         $this->prodi = $prodi;
+        $this->program_studi = $program_studi;
+        $this->number = 1;
     }
 
     
@@ -52,13 +55,13 @@ class SpiExport implements WithHeadings, WithColumnWidths, WithStyles, WithDrawi
             'spi.piutang'
         )->where('spi.tahun', 'like', $this->tahun)
         ->where('mahasiswa.program_studi', 'like', $this->prodi)
-        ->join('mahasiswa', 'spi.id_mahasiswa', '=', 'mahasiswa.nrp');
+        ->join('mahasiswa', 'spi.id_mahasiswa', '=', 'mahasiswa.nomor');
     }
 
     public function map($spi): array{
         $date = Carbon::parse($spi->tanggal_pembayaran);
         return [
-            $spi->id,
+            $this->number++,
             $spi->id_mahasiswa,
             $spi->nama,
             $spi->tarif,
@@ -95,6 +98,9 @@ class SpiExport implements WithHeadings, WithColumnWidths, WithStyles, WithDrawi
 
     public function styles(Worksheet $sheet)
     {
+        $sheet->setCellValue('A1', 'REKAPITULASI SUMBANGAN PENGEMBANGAN INSTITUSI (SPI) JALUR MANDIRI');
+        $sheet->setCellValue('A2', 'PROGRAM STUDI '.$this->program_studi);
+        $sheet->setCellValue('A3', 'TAHUN AKADEMIK '.$this->tahun.'/'.($this->tahun+1));
         return [
             // Style the first row as bold text.
             5    => ['font' => ['bold' => true]],
@@ -108,19 +114,6 @@ class SpiExport implements WithHeadings, WithColumnWidths, WithStyles, WithDrawi
         ];
     }
 
-    public function drawings()
-    {
-        $drawing = new Drawing();
-        $drawing->setName('Logo');
-        $drawing->setDescription('This is my logo');
-        $drawing->setPath(public_path('/images/header-excel.png'));
-        $drawing->setHeight(85);
-        $drawing->setWidth(730);
-        $drawing->setCoordinates('A1');
-
-        return $drawing;
-    }
-
     public function startCell(): string{
         return 'A5';
     }
@@ -128,7 +121,7 @@ class SpiExport implements WithHeadings, WithColumnWidths, WithStyles, WithDrawi
     public function registerEvents(): array{
         return [
             AfterSheet::class => function(AfterSheet $event) {
-                $event->sheet->getStyle('A5:G5')->applyFromArray([
+                $event->sheet->getStyle('A1:G5')->applyFromArray([
                     'font' => [
                         'bold' => true,
                     ],
@@ -137,7 +130,7 @@ class SpiExport implements WithHeadings, WithColumnWidths, WithStyles, WithDrawi
                     ]
                 ]);
 
-                $event->sheet->getStyle('A5:G50')->applyFromArray([
+                $event->sheet->getStyle('A5:G'.$event->sheet->getHighestDataRow())->applyFromArray([
                     'borders' => [
                         'allBorders' => [
                             'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
@@ -145,6 +138,11 @@ class SpiExport implements WithHeadings, WithColumnWidths, WithStyles, WithDrawi
                         ]
                     ] 
                 ]);
+
+                $event->sheet->mergeCells('A1:G1');
+                $event->sheet->mergeCells('A2:G2');
+                $event->sheet->mergeCells('A3:G3');
+                $event->sheet->getColumnDimension('G')->setWidth(0);
             }
         ];
     }

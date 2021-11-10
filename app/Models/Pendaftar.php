@@ -10,6 +10,7 @@ class Pendaftar extends Model
     use HasFactory;
     public $timestamps = false;
     public $table = "pendaftar";
+    protected $primaryKey = "nomor";
     protected $fillable = [
         'nomor',
         'ummb',
@@ -83,6 +84,7 @@ class Pendaftar extends Model
         'status_kawin',
         'ukuran_baju',
         'pernahpt',
+        'angkatan',
         'tahunmasuk_pt',
         'jumlah_sks',
         'pt_asal',
@@ -125,4 +127,9 @@ class Pendaftar extends Model
         'prestasi',
 
     ];
+
+    public function rJalurSyarat()
+    {
+        return $this->hasMany(Jalursyarat::class, 'id_jalur', 'jalur_daftar');
+    }
 }

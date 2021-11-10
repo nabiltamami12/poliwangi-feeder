@@ -92,6 +92,11 @@ async function getGlobalData(id) {
         }
     }
 
+    function formatAngkaSimple(number) {
+        var formatter = new Intl.NumberFormat('de-DE');
+        return formatter.format(number);
+    }
+
     function formatTanggal(date) {
         var list_bulan = ['January','February','March','April','May','Juny','July','August','September','October','November','December']
         var new_date = new Date(date);

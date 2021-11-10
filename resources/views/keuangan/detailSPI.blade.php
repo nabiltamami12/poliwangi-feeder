@@ -26,7 +26,7 @@
             </div>
             <div class="form-group col-md-6 p-0 mt-3 mt-md-0">
               <label for="nama" class="mr-3">Nama</label>
-              <input type="text" class="form-control flex-grow-1" id="nama" value="{{$nama}}" disabled>
+              <input type="text" class="form-control flex-grow-1" id="nama" disabled>
             </div>
           </form>
 
@@ -72,48 +72,49 @@
     </div>
   </div>
 <script>
-$(document).ready(function() {
+  $(document).ready(function() {
 
-var id = "{{$id}}";
-console.log(id);
-dt_url = `${url_api}/keuangan/spi/`+id;
-console.log(dt_url);
-dt_opt = {
-"columnDefs": [
-    {
-      "aTargets": [0],
-      "mData": null,
-      "className": 'text-center pr-0',
-      "mRender": function(data, type, full) {
-        var date = new Date(data['tanggal_pembayaran']).toLocaleDateString();
-        res = date;
-        return res;
-      }
-    },{
-      "aTargets": [1],
-      "mData": null,
-      "className": 'text-right',
-      "mRender": function(data, type, full) {
-        res = formatAngka(data['pembayaran']);
-        return res;
-      }
-    },{
-      "aTargets": [2],
-      "mData": null,
-      "className": 'text-capitalize',
-      "mRender": function(data, type, full) {
-        res = data['keterangan'];
-        return res;
-      }
-    },
-  ], 
-  paging: false,
-  ordering: false,
-  searching: false,
-  info: false
-}
-} 
-);
+    var id = "{{$id}}";
+    dt_url = `${url_api}/keuangan/spi/`+id;
+    dt_opt = {
+      "columnDefs": [
+      {
+        "aTargets": [0],
+        "mData": null,
+        "className": 'text-center pr-0',
+        "mRender": function(data, type, full) {
+          var date = new Date(data['tanggal_pembayaran']).toLocaleDateString();
+          res = date;
+          return res;
+        }
+      },{
+        "aTargets": [1],
+        "mData": null,
+        "className": 'text-right',
+        "mRender": function(data, type, full) {
+          res = formatAngka(data['pembayaran']);
+          return res;
+        }
+      },{
+        "aTargets": [2],
+        "mData": null,
+        "className": 'text-capitalize',
+        "mRender": function(data, type, full) {
+          res = data['keterangan'];
+          if ($('#nama').val() == '') {
+            $('#nama').val(data['nama'])
+          }
+          return res;
+        }
+      },
+      ], 
+      paging: false,
+      ordering: false,
+      searching: false,
+      info: false
+    }
+  } 
+  );
 </script>
 </section>
 @endsection
