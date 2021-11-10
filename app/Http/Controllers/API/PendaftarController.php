@@ -343,7 +343,9 @@ class PendaftarController extends Controller
 		$document->notelp_ortu = $request->notelp_ortu;
 		$document->email = $request->email;
 		// $document->password = Hash::make($request->password);
-		$document->trx_amount = Jalurpmb::select('biaya')->where('id', $request->jalur_daftar)->get()->first()->biaya;
+		// $document->trx_amount = Jalurpmb::select('biaya')->where('id', $request->jalur_daftar)->get()->first()->biaya;
+		$document->trx_amount = \App\Models\SettingBiaya::where('nama', 'biaya-pendaftaran')->first()->nilai;
+		$document->tahun_ajaran = DB::table('periode')->select('tahun')->where('status', '1')->get()->first()->tahun;
 		$document->save();
 
 		if ($fotos = $request->file('foto')) {

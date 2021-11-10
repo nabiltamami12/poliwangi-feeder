@@ -22,7 +22,7 @@
               </form> -->
               
               <a href="{{url('/template/template-spi.xlsx')}}" class="btn btn-primary" target="_blank">
-                <i class="iconify-inline mr-1" data-icon="bx:bx-download"></i>
+                <i class="iconify-inline mr-1" data-icon="bx:bxs-download"></i>
                 Template Import
               </a>
               
