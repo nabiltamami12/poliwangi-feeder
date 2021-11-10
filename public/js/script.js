@@ -1,5 +1,6 @@
 // SIDEBAR - submenu
 jQuery(function ($) {
+	// Butuh Authentication
 	// $('#txt_semester_topnav').html((dataGlobal['periode']['semester']==1)?"Semester Gasal":"Semester Genap");
 	// $('#txt_tahun_topnav').html(dataGlobal['periode']['tahun']+"/"+(Number(dataGlobal['periode']['tahun'])+1));
 	// if (dataGlobal !== null) {

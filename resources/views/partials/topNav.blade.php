@@ -24,6 +24,7 @@
 			@endphp
 
 			<div class="navbar-title">
+				{{-- Butuh Authentication --}}
 				{{-- @if (Auth()->user()->name != "akademik" || Auth()->user()->name != "admin") --}}
 					{{-- <h1><span id="txt_semester_topnav"></span> <span id="txt_tahun_topnav"></span> Studi Ilmu Kedokteran Gigi Anak</h1> --}}
 				{{-- @else --}}
