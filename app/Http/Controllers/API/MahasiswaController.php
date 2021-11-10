@@ -4,13 +4,29 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Mahasiswa as Mhs;
+use App\Models\Mahasiswa;
+use App\Datatables\MahasiswaDatatable;
 use App\Models\Nilai;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\QueryException;
 use BNI;
+use App\Events\LogMahasiswaStatus;
+use Maatwebsite\Excel\Facades\Excel;
 
+/** --Status Mahasiswa--
+ * "A" = Aktif - temporary
+ * "B" = Mahasiswa Baru - temporary
+ * "C" = Cuti - permanent
+ * "D" = DO - permanent
+ * "H" = Punya SPTH - temporary
+ * "K" = Mengundurkan Diri - permanent
+ * "L" = Lulus - permanent
+ * "M" = Meninggal - permanent
+ * "P" = Pendaftar - temporary
+ * "R" = Tugas Akhir - temporary
+ * "T" = Tanpa Keterangan - temporary
+*/
 class MahasiswaController extends Controller
 {
 
@@ -19,23 +35,44 @@ class MahasiswaController extends Controller
 	protected $data = null;
 	public function index(Request $request)
 	{
-		$data = $request->all();
-		$where = [];
-		if ( $request->program_studi != null ||  !isset($request->program_studi) ) {
+		$where = [
+			['m.status','=','A']
+		];
+		if ( $request->program_studi != null && $request->program_studi ) {
 			array_push($where,['m.program_studi','=',$request->program_studi]);
 		}
-		array_push($where,['m.status','=',$request->status]);
-		
+		if ($request->kelas) {
+			array_push($where,['m.kelas','=',$request->kelas]);	
+		}
+
 		try {
-		 
-			$data = DB::table('mahasiswa as m')
-			->select('m.nomor','m.nrp','m.nama','m.tgllahir','m.notelp','m.email',)
-			->join('kelas as k','m.kelas','=','k.nomor','left')
-			->join('program_studi as ps','ps.nomor','=','m.program_studi')
-			->where($where)
-			->get();
-			$this->data = $data;
-			$this->status = "success";
+			$obj = new \App\Datatables\MahasiswaMasterDatatable($where);
+			$lists = $obj->get_datatables();
+			$data = [];
+			$no = $request->input("start");
+			foreach ($lists as $list) {
+				$no++;
+				$row = [];
+				$row[] = $no;
+				$row[] = $list->nrp;
+				$row[] = $list->nama;
+				$row[] = $list->tgllahir;
+				$row[] = $list->notelp;
+				$row[] = $list->email;
+
+				$btn_update = '<span class="iconify edit-icon text-primary" onclick="update_btn('.$list->nomor.')" data-icon="bx:bx-edit-alt" ></span>';
+				$btn_delete = '<span class="iconify delete-icon text-primary" data-icon="bx:bx-trash"  onclick="delete_btn('.$list->nomor.',"mahasiswa","mahasiswa",\''.$list->nama.'\')"></span>';
+				$row[] = $btn_update.$btn_delete;
+				$data[] = $row;
+			}
+			return [
+				"draw" => $request->input('draw'),
+				"recordsTotal" => $obj->count_all_datatables(),
+				"recordsFiltered" => $obj->count_filtered_datatables(),
+				"data" => $data,
+				"status" => "success",
+				"error" => $this->error
+			];
 		} catch (QueryException $e) {
 			$this->status = "failed";
 			$this->error = $e;
@@ -49,32 +86,45 @@ class MahasiswaController extends Controller
 
 	public function index_lama(Request $request)
 	{
-		
-		DB::enableQueryLog();
-		$data = $request->all();
-		$where = [];
-		if ( isset($request->program) ) {
-			array_push($where,['k.program','=',$request->program]);
-		}
-		if ( isset($request->jurusan) ) {
-			array_push($where,['k.jurusan','=',$request->jurusan]);
-		}
-		if ( isset($request->kelas) ) {
-			array_push($where,['k.kelas','=',$request->kelas]);
-		}
-		array_push($where,['m.status','=',$request->status]);
 		try {
-		 
-			$data = DB::table('mahasiswa as m')
-			->select('m.nomor','m.nrp','m.nama','m.tgllahir','m.notelp','m.email',)
-			->join('kelas_old as k','m.kelas','=','k.nomor','left')
-			->join('program_old as p','k.program','=','p.nomor','left')
-			->join('jurusan_old as j','k.jurusan','=','j.nomor')
-			->where($where)
-			->get();
+			DB::enableQueryLog();
+			$data = $request->all();
+			$where = [];
+			if ( isset($request->program) && $request->program ) {
+				array_push($where,['ps.program','=',$request->program]);
+			}
+			if ( isset($request->jurusan) && $request->jurusan ) {
+				array_push($where,['ps.jurusan','=',$request->jurusan]);
+			}
+			if ( isset($request->angkatan) && $request->angkatan ) {
+				array_push($where,['m.angkatan','=',$request->angkatan]);
+			}
+			array_push($where,['m.status','=',$request->status]);
 
-			$this->data = $data;
-			$this->status = "success";
+			$obj = new MahasiswaDatatable($where);
+			$lists = $obj->get_datatables();
+			$data = [];
+			$no = $request->input("start");
+			foreach ($lists as $list) {
+				$no++;
+				$row = [];
+				$row[] = $no;
+				$row[] = $list->nrp;
+				$row[] = $list->nama;
+				$row[] = $list->tgllahir;
+				$row[] = $list->notelp;
+				$row[] = $list->email;
+				$row[] = '<span class="iconify edit-icon text-primary" onclick="update_btn('.$list->nomor.')" data-icon="bx:bx-edit-alt" ></span> <span class="iconify delete-icon text-primary" data-icon="bx:bx-trash"  onclick="delete_btn('.$list->nomor.',\'mahasiswa\',\'mahasiswa\',\''.$list->nama.'\')"></span>';
+				$data[] = $row;
+			}
+			return [
+				"draw" => $request->input('draw'),
+				"recordsTotal" => $obj->count_all_datatables(),
+				"recordsFiltered" => $obj->count_filtered_datatables(),
+				"data" => $data,
+				"status" => "success",
+				"error" => $this->error
+			];
 		} catch (QueryException $e) {
 			$this->status = "failed";
 			$this->error = $e;
@@ -104,7 +154,13 @@ class MahasiswaController extends Controller
 			$this->error = $validated->errors();
 		} else {
 			try {
-				$data = Mhs::create($data);
+				$data = Mahasiswa::create($data);
+				LogMahasiswaStatus::dispatch([
+					"mahasiswa" => $data['nomor'],
+					"status" => $data['status'],
+					"tahun" => $this->tahun_aktif,
+					"semester" => $this->semester_aktif
+				]);
 				$this->data = $data;
 				$this->status = "success";
 			} catch (QueryException $e) {
@@ -123,7 +179,7 @@ class MahasiswaController extends Controller
 	public function show($id)
 	{
 		try {
-			$data = Mhs::where("nomor", $id)->get();
+			$data = Mahasiswa::where("nomor", $id)->get();
 			$this->data = $data;
 			$this->status = "success";
 		} catch (QueryException $e) {
@@ -139,11 +195,11 @@ class MahasiswaController extends Controller
 
 	public function update(Request $request, $id)
 	{
-		$check = Mhs::where('nomor', $id);
+		$check = Mahasiswa::where('nomor', $id);
 		$data = $request->all();
 
 		$validate = Validator::make($data, [
-		 
+
 		]);
 
 		if ($validate->fails()) {
@@ -157,6 +213,12 @@ class MahasiswaController extends Controller
 			try {
 				$check->update($data);
 				$this->data = $check->get();
+				LogMahasiswaStatus::dispatch([
+					"mahasiswa" => $this->data[0]->nomor,
+					"status" => $this->data[0]->status,
+					"tahun" => $this->tahun_aktif,
+					"semester" => $this->semester_aktif
+				]);
 				$this->status = "success";
 			} catch (QueryException $e) {
 				$this->status = "failed";
@@ -173,7 +235,7 @@ class MahasiswaController extends Controller
 	public function destroy($id)
 	{
 		try {
-			$check = Mhs::where('NOMOR', $id);
+			$check = Mahasiswa::where('NOMOR', $id);
 
 			if ($check) {
 				$this->status = "success";
@@ -229,7 +291,7 @@ class MahasiswaController extends Controller
 	public function by_nim($nim)
 	{
 		try {
-			$data = Mhs::where("nrp", $nim)->first();
+			$data = Mahasiswa::where("nrp", $nim)->first();
 			$this->data = $data;
 			$this->status = "success";
 		} catch (QueryException $e) {
@@ -250,12 +312,12 @@ class MahasiswaController extends Controller
 			$page = $req->input('page') ?? 1;
 			$limit = 15;
 			$offset = ($page - 1) * $limit;
-			$obj = Mhs::select(DB::raw('nomor as id, CONCAT( nrp," (",nama,")" ) as text'))
-				->where('nrp', 'like', '%'.$q.'%')
-				->offset($offset)
-				->limit($limit)
-				->get();
-			$obj_count = Mhs::where('nrp', 'like', '%'.$q.'%')->count();
+			$obj = Mahasiswa::select(DB::raw('nomor as id, CONCAT( nrp," (",nama,")" ) as text'))
+			->where('nrp', 'like', '%'.$q.'%')
+			->offset($offset)
+			->limit($limit)
+			->get();
+			$obj_count = Mahasiswa::where('nrp', 'like', '%'.$q.'%')->count();
 			$this->data = array('items' => $obj, 'total_count' => $obj_count);
 			$this->status = "success";
 		} catch (QueryException $e) {
@@ -267,5 +329,89 @@ class MahasiswaController extends Controller
 			"data" => $this->data,
 			"error" => $this->error
 		]);
+	}
+
+	public function mahasiswa_angkatan(Request $req)
+	{
+		try {
+			$where = [];
+			if ($req->status) {
+				$where[] = ['mahasiswa.status', '=', $req->status];
+			}
+			if ($req->program) {
+				$where[] = ['ps.program', '=', $req->program];
+			}
+			if ($req->jurusan) {
+				$where[] = ['ps.jurusan', '=', $req->jurusan];
+			}
+			if ($req->program_studi) {
+				$where[] = ['mahasiswa.program_studi', '=', $req->program_studi];
+			}
+
+			$this->data = Mahasiswa::select('mahasiswa.angkatan')
+				->leftJoin('program_studi as ps', 'mahasiswa.program_studi', '=', 'ps.nomor')
+				->where($where)
+				->groupBy('mahasiswa.angkatan')
+				->get();
+			$this->status = "success";
+		} catch (QueryException $e) {
+			$this->status = "failed";
+			$this->error = $e;
+		}
+		return response()->json([
+			"status" => $this->status,
+			"data" => $this->data,
+			"error" => $this->error
+		]);
+	}
+
+	public function mahasiswa_kelas(Request $req)
+	{
+		try {
+			$where = [];
+			if ($req->status) {
+				$where[] = ['mahasiswa.status', '=', $req->status];
+			}
+			if ($req->program_studi) {
+				$where[] = ['mahasiswa.program_studi', '=', $req->program_studi];
+			}
+			if ($req->angkatan) {
+				$where[] = ['mahasiswa.angkatan', '=', $req->angkatan];
+			}
+
+			$this->data = Mahasiswa::select('mahasiswa.kelas', 'k.kode')
+				->leftJoin('kelas as k', 'mahasiswa.kelas', '=', 'k.nomor')
+				->where($where)
+				->groupBy('mahasiswa.kelas')
+				->get();
+			$this->status = "success";
+		} catch (QueryException $e) {
+			$this->status = "failed";
+			$this->error = $e;
+		}
+		return response()->json([
+			"status" => $this->status,
+			"data" => $this->data,
+			"error" => $this->error
+		]);
+	}
+
+	public function mahasiswa_export(Request $request)
+	{
+		ini_set('memory_limit', '-1');
+    ini_set('max_execution_time', '-1');
+    $where = [];
+    if ( $request->program ) {
+			array_push($where,['ps.program','=',$request->program]);
+		}
+		if ( $request->jurusan ) {
+			array_push($where,['ps.jurusan','=',$request->jurusan]);
+		}
+		if ( $request->angkatan ) {
+			array_push($where,['m.angkatan','=',$request->angkatan]);
+		}
+		array_push($where,['m.status','=',$request->status]);
+
+    return Excel::download(new \App\Exports\MahasiswaExport($where), 'Rekap Mahasiswa.xlsx');
 	}
 }

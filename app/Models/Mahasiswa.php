@@ -72,6 +72,8 @@ class Mahasiswa extends Model
         'tahun_lulus',
         'lulussmu',
         'nomor',
+        'id_pendaftar',
+        'jumlah_anak'
     ];
 
     public function rProdi()

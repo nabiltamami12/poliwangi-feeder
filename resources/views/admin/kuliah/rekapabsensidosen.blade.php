@@ -12,7 +12,9 @@
           <div class="card-header p-0">
             <div class="row align-items-center">
               <div class="col">
-                <h2 class="mb-0">Presensi Dosen</h2>
+                <h2 class="mb-0">Presensi Dosen Tahun {{ $tahun }} Semester {{ ($semester %2 === 1) ? 'Gasal' : 'Genap' }}</h2>
+                
+                <div>Keterangan: B = Batal, H = Hadir</div>
               </div>
               <div class="col text-right">
                 <button type="button" id="btn_simpan" class="btn btn-primary">
@@ -25,38 +27,41 @@
 
           <div class="card-body p-0">
             <div class="table-responsive table_absensiMhs">
-              <table class="table align-items-center table-flush table-borderless table-hover">
-                <thead class="table-header">
-                  <tr class="main_header">
-                    <th rowspan="2" scope="col" class="text-center">NIM</th>
-                    <th rowspan="2" scope="col" class="text-center">NAMA</th>
-                    <th colspan="16" scope="col" class="text-center px-1">Pertemuan ke-</th>
-                    <th rowspan="2" scope="col" class="text-center px-1">Presentase</th>
-                  </tr>
-                  <tr>
-                    <th scope="col" class="text-center px-1">1</th>
-                    <th scope="col" class="text-center px-1">2</th>
-                    <th scope="col" class="text-center px-1">3</th>
-                    <th scope="col" class="text-center px-1">4</th>
-                    <th scope="col" class="text-center px-1">5</th>
-                    <th scope="col" class="text-center px-1">6</th>
-                    <th scope="col" class="text-center px-1">7</th>
-                    <th scope="col" class="text-center px-1">8</th>
-                    <th scope="col" class="text-center px-1">9</th>
-                    <th scope="col" class="text-center px-1">10</th>
-                    <th scope="col" class="text-center px-1">11</th>
-                    <th scope="col" class="text-center px-1">12</th>
-                    <th scope="col" class="text-center px-1">13</th>
-                    <th scope="col" class="text-center px-1">14</th>
-                    <th scope="col" class="text-center px-1">15</th>
-                    <th scope="col" class="text-center px-1">16</th>
-                  </tr>
-                </thead>
+              <form id="form-absensi">
+                {{ csrf_field() }}
+                <table class="table align-items-center table-flush table-borderless table-hover">
+                  <thead class="table-header">
+                    <tr class="main_header">
+                      <th rowspan="2" scope="col" class="text-center">Matakuliah</th>
+                      <th rowspan="2" scope="col" class="text-center">Kelas</th>
+                      <th colspan="16" scope="col" class="text-center px-1">Pertemuan ke-</th>
+                      <th rowspan="2" scope="col" class="text-center px-1">Presentase</th>
+                    </tr>
+                    <tr>
+                      <th scope="col" class="text-center px-1">1</th>
+                      <th scope="col" class="text-center px-1">2</th>
+                      <th scope="col" class="text-center px-1">3</th>
+                      <th scope="col" class="text-center px-1">4</th>
+                      <th scope="col" class="text-center px-1">5</th>
+                      <th scope="col" class="text-center px-1">6</th>
+                      <th scope="col" class="text-center px-1">7</th>
+                      <th scope="col" class="text-center px-1">8</th>
+                      <th scope="col" class="text-center px-1">9</th>
+                      <th scope="col" class="text-center px-1">10</th>
+                      <th scope="col" class="text-center px-1">11</th>
+                      <th scope="col" class="text-center px-1">12</th>
+                      <th scope="col" class="text-center px-1">13</th>
+                      <th scope="col" class="text-center px-1">14</th>
+                      <th scope="col" class="text-center px-1">15</th>
+                      <th scope="col" class="text-center px-1">16</th>
+                    </tr>
+                  </thead>
 
-                <tbody class="table-body">
-                   
-                </tbody>
-              </table>
+                  <tbody class="table-body">
+                     
+                  </tbody>
+                </table>
+              </form>
             </div>
           </div>
         </div>
@@ -67,28 +72,26 @@
 
 @section('js')
   <script>
-    var kuliah = "";
     var semester = '{{ $semester }}';
     var tahun = '{{ $tahun }}';
-    var arr_mhs = [];
+    var arr_data = [];
     $(document).ready(function() {
       getData();
       $('#btn_simpan').on('click',function (e) {
-        console.log(arr_mhs)
+        const dosen = '{{ $dosen }}';
+        const tahun = '{{ $tahun }}';
         $.ajax({
-          url: url_api+"/absensi-admin",
+          url: url_api+"/absensi-dosen/simpan",
           type: 'post',
           dataType: 'json',
-          data: {'kuliah':kuliah,'data':arr_mhs},
+          data: {dosen, tahun, arr_data},
           success: function(res) {
             console.log(res)
-              if (res.status=="success") {
-                window.location.href = "{{url('/admin/kuliah/absensi/rekap')}}";             
-              } else {
-                  // alert gagal
-              }
-              
+            if (res.status=="success") {
+              window.location.href = "{{url('/admin/kuliah/absensi/dosen')}}";             
+            } else {
 
+            }
           }
         });
       })
@@ -99,41 +102,26 @@
       if (conceptName === '-') {
         $(this).css('background-color', '#FFF');
         $(this).css('color', '#ADB5BD');
-        $(this).css('background-image',
-          'url("https://api.iconify.design/bx/bx-chevron-down.svg?color=%23ADB5BD")');
+        $(this).css('background-image', 'url("https://api.iconify.design/bx/bx-chevron-down.svg?color=%23ADB5BD")');
         $(this).css('border', '1px solid #ADB5BD');
       } else if (conceptName === 'H') {
         $(this).css('background-color', '#34C38F');
-      } else if (conceptName === 'I') {
-        $(this).css('background-color', '#28A3EB');
-      } else if (conceptName === 'S') {
-        $(this).css('background-color', '#F1B44C');
-      } else if (conceptName === 'A') {
+      } else if (conceptName === 'B') {
         $(this).css('background-color', '#F46A6A');
       }
 
     }
     function getData() {
       $.ajax({
-        url: `{{url('/api/v1')}}/absensi/rekap-kelas-mahasiswa?tahun=${tahun}&semester=${semester}`,
+        url: `{{url('/api/v1')}}/absensi-dosen/rekap-presensi/{{ $dosen }}?tahun=${tahun}&semester=${semester}`,
         type: 'get',
         dataType: 'json',
         data: {},
-        beforeSend: function(text) {
-                // loading func
-        },
         success: function(res) {
-          var data = res.data.data;
-          var info = res.data.info;
-          kuliah = info.kuliah
-          $('#prodi').val(info.prodi)
-          $('#matakuliah').val(info.matakuliah)
-          $('#kelas').val(info.kelas)
-          console.log(data)
           if (res.status=="success") {
-              setMahasiswa(data)
+            setMahasiswa(res.data)
           } else {
-              // alert gagal
+            // alert gagal
           }
         }
       })
@@ -141,24 +129,27 @@
     function setMahasiswa(data) {
         var html = '';
       $.each(data,function (key,row) {
+        let kehadiran = 0;
         html +=  `<tr>
-                    <td class="text-center">${row.nim}</td>
-                    <td class="font-weight-bold text-capitalize">${row.nama}</td>`;
-        for (let index = 1; index <= 16; index++) {
+                    <td class="text-center">${row.matakuliah}</td>
+                    <td class="font-weight-bold text-capitalize">${row.kelas}</td>`;
+        for (let idx = 1; idx <= 16; idx++) {
+          const pertemuan = row.detail[idx] ? row.detail[idx].pertemuan : '';
+          const nomor = row.detail[idx] ? row.detail[idx].nomor : '';
+          kehadiran += (['hadir', 'mengajar'].includes(pertemuan)) ? 1 : 0;
           html += `<td class="text-center px-1">
-                      <select class="form-control select-absen" data-absensi="${row.absensi[index]}" data-mhs="${row.mahasiswa}" data-pertemuan="${index}">
-                        <option ${(row.pertemuan[index]=="")?'selected':""} value="">-</option>
-                        <option ${(row.pertemuan[index]=="H")?'selected':""} value="H">H</option>
-                        <option ${(row.pertemuan[index]=="I")?'selected':""} value="I">I</option>
-                        <option ${(row.pertemuan[index]=="S")?'selected':""} value="S">S</option>
-                        <option ${(row.pertemuan[index]=="A")?'selected':""} value="A">A</option>
+                      <select class="form-control select-absen absen-idx-${row.kuliah}" data-kuliah="${row.kuliah}" data-p="${nomor}" data-pertemuan="${idx}">
+                        <option value="">-</option>
+                        <option ${(['hadir', 'mengajar'].includes(pertemuan))?'selected':""} value="hadir">H</option>
+                        <option ${(['batal'].includes(pertemuan))?'selected':""} value="batal">B</option>
                       </select>
-                    </td>`
+                    </td>`;
         }
-        html += `<td class="text-center px-1">${row.persentase}</td>`
+        const persen = (kehadiran*100)/16;
+        html += `<td class="text-center px-1" id="persen-${row.kuliah}">${persen} %</td>`;
         html += `</tr>`;
       })
-      $('.table-body').append(html);
+      $('.table-body').html(html);
 
 
       $(".table_absensiMhs select").each(chooseColor);
@@ -166,9 +157,7 @@
 
       function checkWidth() {
         let elemWidth = $('.table_absensiMhs tr td:first-child').outerWidth();
-        console.log(elemWidth);
-        $('.table_absensiMhs tr td:nth-child(2),.table_absensiMhs .main_header th:nth-child(2)').css("left",
-          elemWidth + 'px');
+        $('.table_absensiMhs tr td:nth-child(2),.table_absensiMhs .main_header th:nth-child(2)').css("left", elemWidth + 'px');
       }
 
       let resizeObserver = new ResizeObserver(checkWidth);
@@ -177,22 +166,29 @@
       $(window).on('resize', checkWidth);
 
       $('.select-absen').on('change',function (e) {
-        var status = $(this).val(); 
-        var mahasiswa = $(this).data('mhs'); 
-        var pertemuan = $(this).data('pertemuan'); 
-        var absensi = $(this).data('absensi'); 
-
-        check = "insert";
-        $.each(arr_mhs, function() { 
-            if(this.mahasiswa === mahasiswa && this.pertemuan===pertemuan){ 
-              this.status = status;
-              check = "update";
-            }
-        }); 
-        if (check == "insert") {
-          arr_mhs.push({'nomor':absensi,'mahasiswa':mahasiswa,'kuliah':kuliah,'status':status,'pertemuan':pertemuan})
+        const status = $(this).val(); 
+        const nomor = $(this).data('p');
+        const kuliah = $(this).data('kuliah');
+        const pertemuan = $(this).data('pertemuan');
+        const idx = arr_data.findIndex(e => e.nomor === nomor && e.kuliah === kuliah && e.pertemuan === pertemuan);
+        if (idx < 0 ) {
+          arr_data.push({nomor,kuliah,status,pertemuan});
+        } else {
+          arr_data[idx].status = status;
         }
+        set_persen(kuliah);
       })
+    }
+
+    function set_persen(idx){
+      let kehadiran = 0;
+      $(`.absen-idx-${idx}`).each(function(key, row){
+        if (['hadir', 'mengajar'].includes( row.value )) {
+          kehadiran += 1;
+        }
+      });
+      kehadiran = ( kehadiran * 100 ) / 16;
+      $(`#persen-${idx}`).html(`${kehadiran} %`);
     }
   </script>
 @endsection

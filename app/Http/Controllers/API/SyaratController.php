@@ -109,10 +109,19 @@ class SyaratController extends Controller
         $token = $request->header('token');
 		try {
             $id = Crypt::decrypt($token);
-			$jalur_daftar = DB::table('pendaftar')->where('nomor',$id)->first()->jalur_daftar;
-            $jalur_syarat = Jalursyarat::select('jalur_syarat.*','syarat.nama')->join('syarat','syarat.id','=','jalur_syarat.id_syarat')->where('id_jalur',$jalur_daftar)->get();
-
-            $this->data = $jalur_syarat;
+            $this->data = \App\Models\Pendaftar::where('nomor', $id)
+                ->selectRaw('pendaftar.nodaftar, s.nama, b.file, b.status, js.id_syarat')
+                ->rightJoin('jalur_syarat as js', 'pendaftar.jalur_daftar', '=', 'js.id_jalur')
+                ->leftJoin('syarat as s', 'js.id_syarat', '=', 's.id')
+                ->leftJoin('berkas as b', function ($join) {
+                    $join->on('js.id_syarat', '=', 'b.id_syarat')
+                        ->on('pendaftar.nomor', '=', 'b.id_pendaftar');
+                })
+                ->get();
+            foreach ($this->data as $key => $value) {
+                $file_lama = $value->file ? public_path('berkas/persyaratan_pendaftar/'.$value->file) : null;
+                if ($file_lama && !file_exists($file_lama)) $this->data[$key]->status = '0';
+            }
 			$this->status = "success";
 		} catch (QueryException $e) {
 			$this->status = "failed";

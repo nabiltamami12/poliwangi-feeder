@@ -127,7 +127,12 @@
 
     var optDosen = `<option value=""> - </option>`;
     $.each(dataGlobal['dosen'], function(key, row) {
-      optDosen += `<option value="${row.nomor}">${row.nama}</option>`
+      if (row.gelar_blk==null||row.gelar_blk=="") {
+        var nama = row.nama;
+      } else {
+        var nama = row.nama+", "+row.gelar_blk;
+      }
+      optDosen += `<option value="${row.nomor}">${nama}</option>`
     })
     $('#kepala').append(optDosen)
 
