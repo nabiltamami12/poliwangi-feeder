@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Admin\Kepegawaian;
 
 use Illuminate\Http\Request;
-use App\Models\Kepegawain\Pangkat;
-use App\Http\Controllers\Controller;
+use App\Models\Kepegawaian\Pangkat;
 
+use App\Http\Controllers\Controller;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Validator;
 
@@ -26,7 +26,7 @@ class PangkatController extends Controller
     public function getPangkat(Request $request)
     {
         $data = Pangkat::orderBy('id', 'desc')->get();
-        return \DataTables::of($data)
+        return DataTables::of($data)
             ->addColumn('Aksi', function($data) {
                 return '<button type="button" class="btn btn-success btn-sm" id="getEditPangkatData" data-id="'.$data->id.'">Edit</button>
                     <button type="button" data-id="'.$data->id.'" onclick="delete_btn()" class="btn btn-danger btn-sm" id="getDeleteId">Delete</button>';

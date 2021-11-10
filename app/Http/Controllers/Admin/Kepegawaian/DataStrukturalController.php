@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Admin\Kepegawaian;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Kepegawaian\Pegawai;
+use App\Http\Controllers\Controller;
+use Yajra\DataTables\Facades\DataTables;
 use App\Models\Kepegawain\DataStruktural;
-use App\Models\Kepegawain\Pegawai;
 use Illuminate\Support\Facades\Validator;
 
 
@@ -27,7 +28,7 @@ class DataStrukturalController extends Controller
     public function getData(Request $request)
     {
         $data = DataStruktural::orderBy('id', 'desc')->get();
-        return \DataTables::of($data)
+        return DataTables::of($data)
             ->addColumn('Aksi', function($data) {
                 return '<button type="button" class="btn btn-success btn-sm" id="getEditData" data-id="'.$data->id.'">Edit</button>
                 <button type="button" class="btn btn-secondary btn-sm" id="getDetailData" data-id="'.$data->id.'">Detail</button>
