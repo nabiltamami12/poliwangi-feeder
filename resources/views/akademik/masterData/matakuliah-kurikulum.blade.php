@@ -114,7 +114,8 @@ dt_opt = {
       "targets": [4],
       "data": null,
       "render": function(data, type, full) {
-        var res = `Wajib Program Studi`
+        var res = data['matakuliah_jenis']
+        var res = data['matakuliah_jenis']
         return res;
       }
     },{

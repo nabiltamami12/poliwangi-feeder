@@ -127,10 +127,11 @@ class KurikulumController extends Controller
     {
         try {
             $kurikulum_matkul = DB::table('kurikulum_matkul as km')
-                                    ->select('km.*','m.matakuliah as nama_matkul','m.kode','m.sks',DB::raw('CONCAT( p.program," ",ps.program_studi ) as prodi'))
+                                    ->select('km.*','m.matakuliah as nama_matkul','m.kode','m.sks',DB::raw('CONCAT( p.program," ",ps.program_studi ) as prodi'), 'mj.matakuliah_jenis')
                                     ->join('matakuliah as m','m.nomor','=','km.matakuliah')
                                     ->join('program_studi as ps','m.program_studi','=','ps.nomor')
                                     ->join('program as p','p.nomor','=','ps.program')
+                                    ->join('matakuliah_jenis as mj','mj.nomor','=','m.matakuliah_jenis')
                                     ->where('km.kurikulum',$id)->get();
             $this->data = $kurikulum_matkul;
             $this->status = "success";
