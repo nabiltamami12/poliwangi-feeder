@@ -30,6 +30,7 @@ class Ruangan extends Model
         'pemakai',
         'teknisi3',
         'teknisi4',
-        'teknisi5'
+        'teknisi5',
+        'ruang_ujian'
     ];
 }

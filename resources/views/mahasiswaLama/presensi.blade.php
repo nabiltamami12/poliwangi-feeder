@@ -12,7 +12,7 @@
         <div class="card-header padding--big">
         <div class=" row align-items-center">
             <div class="col">
-              <h2 class="mb-0">Rekapitulasi Absensi</h2>
+              <h2 class="mb-0">Rekapitulasi Presensi</h2>
             </div>
           </div>
           <!-- <div class="row align-items-center">
@@ -45,6 +45,7 @@
                 <th scope="col" class="text-center">Kelas</th>
                 <th scope="col" class="text-center">JUMLAH KEHADIRAN</th>
                 <th scope="col" class="text-center">TIDAK HADIR</th>
+                <th scope="col" class="text-center">Persentase</th>
               </tr>
             </thead>
             <tbody>
@@ -58,7 +59,7 @@
   </div>
 </section>
 <script>
-  var mahasiswa = 31570;
+  // var id_mahasiswa = 31575;
   var tahun = dataGlobal['periode']['tahun'];
   var semester = dataGlobal['periode']['semester'];
   var nomor = 1;
@@ -74,7 +75,7 @@
       resetFilter();
     })
 
-    dt_url = `${url_api}/absensi/rekap-matkul?mahasiswa=${mahasiswa}&tahun=${tahun}&semester=${semester}`;
+    dt_url = `${url_api}/absensi/rekap-matkul?mahasiswa=${id_mahasiswa}&tahun=${tahun}&semester=${semester}`;
     console.log(dt_url)
     dt_opt = {
       "columnDefs": [
@@ -102,6 +103,7 @@
           },{
             "aTargets": [3],
             "mData": null,
+            "className": "text-right",
             "mRender": function(data, type, full) {
               res = data['hadir'];
               return res;
@@ -109,15 +111,24 @@
           },{
             "aTargets": [4],
             "mData": null,
+            "className": "text-right",
             "mRender": function(data, type, full) {
               res = data['tidak_hadir'];
               return res;
+            }
+          },{
+            "aTargets": [5],
+            "mData": null,
+            "className": "text-right",
+            "mRender": function(data, type, full) {
+              res = (data['hadir']/16)*100;
+              return round(res)+"%";
             }
           }
         ]}
   })
   function resetFilter() {
-    var url = `${url_api}/absensi/rekap-matkul?mahasiswa=${mahasiswa}&tahun=${tahun}&semester=${semester}`;
+    var url = `${url_api}/absensi/rekap-matkul?mahasiswa=${id_mahasiswa}&tahun=${tahun}&semester=${semester}`;
     dt.ajax.url(url).load();
   }
   function getByFilter() {
@@ -127,7 +138,7 @@
     tanggal = date.getDate()  < 10 ? '0' + date.getDate()  : date.getDate(),
     dateFormat = tahun + '-' + bulan + '-' + tanggal;
 
-    var url = `${url_api}/absensi/rekap-matkul?mahasiswa=${mahasiswa}&tahun=${tahun}&semester=${semester}&tanggal=${dateFormat}`;
+    var url = `${url_api}/absensi/rekap-matkul?mahasiswa=${id_mahasiswa}&tahun=${tahun}&semester=${semester}&tanggal=${dateFormat}`;
     dt.ajax.url(url).load();
   }
 </script>

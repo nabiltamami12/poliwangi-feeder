@@ -12,6 +12,9 @@
 	margin-left: auto;
 	margin-right: auto;
 }
+.input-nilai{
+	width: 82px;
+}
 </style>
 <!-- Page content -->
 <section class="page-content container-fluid">
@@ -85,28 +88,31 @@
 									Setting Persentase
 									<input type="hidden" id="id_persentase" name="id">
 								</td>
-								<td class="text-center px-3">
+								<td class="text-center px-3 input-nilai">
 									<input type="text" class="form-control persentase-count" placeholder="0" id="persentase_uts" >
 								</td>
-								<td class="text-center px-3">
+								<td class="text-center px-3 input-nilai">
 									<input type="text" class="form-control persentase-count" placeholder="0" id="persentase_uas" >
 								</td>
-								<td class="text-center px-3">
+								<td class="text-center px-3 input-nilai">
 									<input type="text" class="form-control persentase-count" placeholder="0" id="persentase_tugas" >
 								</td>
-								<td class="text-center px-3">
+								<td class="text-center px-3 input-nilai">
 									<input type="text" class="form-control persentase-count" placeholder="0" id="persentase_kuis" >
 								</td>
-								<td class="text-center px-3">
+								<td class="text-center px-3 input-nilai">
 									<input type="text" class="form-control persentase-count" placeholder="0" id="persentase_kehadiran">
 								</td>
-								<td class="text-center px-3">
+								<td class="text-center px-3 input-nilai">
 									<input type="text" class="form-control persentase-count" placeholder="0" id="persentase_praktikum" >
 								</td>
-								<td class="text-center px-3">
+								<td class="text-center px-3 input-nilai">
 									<input type="text" class="form-control persentase-count" placeholder="0%" id="total_persentase"  disabled>
 								</td>
-								<td colspan="4"></td>
+								<td class="input-nilai"></td>
+								<td class="input-nilai"></td>
+								<td class="input-nilai"></td>
+								<td class="input-nilai"></td>
 							</tr>
 						</thead>
 						<thead class="table-header">
@@ -119,6 +125,30 @@
 					</table>
 				</div>
 			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="keteranganModal" tabindex="-1" aria-labelledby="keteranganModalLabel"
+    aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered modal-lg">
+		<div class="modal-content p-0 padding--medium">
+			<div class="modal-header">
+				<p class="text-center">
+					<h5 class="modal-title text-warning text-center">Keterangan</h5>
+				</p>
+			</div>
+			<div class="modal-body">
+			<input type="hidden" id="keterangan_index">
+			<textarea class="form-control mb-5" id="keterangan_modal"></textarea>
+			<div class="row">
+				<div class="col-md-6">
+					<button type="button" class="btn btn-modal-cancel w-100" data-dismiss="modal">Batal</button>
+				</div>
+				<div class="col-md-6">
+					<button type="button" class="btn btn-primary w-100" onclick="func_simpan_ket()">Simpan</button>
+				</div>
+			</div>
+			</div>
+		</div>
 		</div>
 	</div>
 </section>
@@ -173,13 +203,14 @@
 						setSiswa(data);
 						setPersentase(res.data.persentase_nilai);
 						persen_nilai();
+						let html = '';
 						$.each(range,function (key,row) {
-							var html = `
+							html += `
 							<span class="font-weight-bold text-danger ml-1">
 							${row.nh} = ${row.na}-${row.na_atas}${(key+1) < range.length ? ',' : ''} 
 							</span>`;
-							$('#list_range').append(html);
 						})
+						$('#list_range').html(html);
 						$.each(persentase,function (key,row) {
 							$('#'+key).val(row)
 						})
@@ -356,7 +387,7 @@ function setSiswa(data) {
 			<input type="text" class="form-control" id="nh_${i}" value="${row.nh}" disabled>
 		</td>
 		<td class="text-center px-3">
-			<input type="text" class="form-control" id="keterangan_${i}" value="${row.keterangan}">
+			<input type="text" class="form-control" id="keterangan_${i}" data-index="${i}" onclick="func_modal(this)" value="${row.keterangan}">
 		</td>
 		</tr>`
 		$('.list-nilai').append(html)
@@ -365,6 +396,20 @@ function setSiswa(data) {
 	$('#btn_setting').attr('hidden','false')
 	countData = i;
 	return true;
+}
+
+function func_modal(e) {
+	$('#keterangan_index').text($(e).data('index'))
+	$('#keterangan_modal').text($(e).val())
+	$('#keteranganModal').modal('show')
+}
+
+function func_simpan_ket() {
+	var index = $("#keterangan_index").text();
+	var keterangan = $("#keterangan_modal").val();
+
+	$('#keterangan_'+index).val(keterangan);
+	$('#keteranganModal').modal('hide')
 }
 
 function setPersentase(obj_persentase) {

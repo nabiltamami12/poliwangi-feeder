@@ -56,6 +56,8 @@ class Mahasiswa extends Model
         'tempat_lahir_ibu',
         'tanggal_lahir_ibu',
         'pendidikan_ibu',
+        'angkatan',
+        'semester_masuk',
         'notelp_ortu',
         'alamat_ortu',
         'jalan_ortu',
@@ -72,6 +74,8 @@ class Mahasiswa extends Model
         'tahun_lulus',
         'lulussmu',
         'nomor',
+        'id_pendaftar',
+        'jumlah_anak'
     ];
 
     public function rProdi()

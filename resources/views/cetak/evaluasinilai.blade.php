@@ -181,7 +181,8 @@
     $('#matakuliah').html(arr_cetak['matakuliah'])
     $('#dosen').html(arr_cetak['dosen'])
     $.ajax({
-      url: "{{url('/api/v1/nilai')}}?tahun="+arr_cetak['tahun']+"&kelas="+arr_cetak['id_kelas']+"&matakuliah="+arr_cetak['id_matakuliah'],
+
+      url: "{{url('/api/v1/nilai')}}?kelas="+arr_cetak['id_kelas']+"&matakuliah="+arr_cetak['id_matakuliah'],
       type: 'get',
       dataType: 'json',
       data: {},
@@ -192,7 +193,7 @@
         var data = res.data;
         console.log(data)
         if (res.status=="success") {
-            setSiswa(data)
+            setSiswa(data.data)
         } else {
             // alert gagal
         }
@@ -201,6 +202,7 @@
     function setSiswa(data) {
         var html = '';
         var i = 0;
+        console.log(data)
         $.each(data,function (key,row) {
             i++;
             html = `<tr>
@@ -209,7 +211,7 @@
                         <td>${row.nama}</td>
                         <td class="text-center px-1">${row.nh}</td>            
                     </tr>`
-            console.log(html)
+            // console.log(html)
             $('tbody').append(html)
         })
         countData = i;

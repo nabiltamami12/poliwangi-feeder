@@ -48,8 +48,9 @@
                 <th scope="col" class="text-center">No</th>
                 <th scope="col" class="text-center">No. Pendaftar</th>
                 <th scope="col" style="width: 25%">Nama</th>
-                <th scope="col" class="text-right" style="width: 25%">Jalur Penerimaan</th>
-                <th scope="col" style="width: 25%">Status Bayar</th>
+                <th scope="col" style="width: 25%">Jalur Penerimaan</th>
+                <th scope="col" style="width: 25%">Status</th>
+                <th scope="col" style="width: 25%">Aksi</th>
               </tr>
             </thead>
 
@@ -61,8 +62,54 @@
       </div>
     </div>
   </div>
+  <div class="modal fade" id="konfirmModal" tabindex="-1" aria-labelledby="konfirmModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content p-0 padding--medium">
+        <input type="hidden" id="id_delete">
+        <input type="hidden" id="endpoint">
+
+        <div class="modal-header">
+            <p class="text-center">
+                <h5 class="modal-title text-warning text-center">Detail Pendaftar</h5>
+            </p>
+        </div>
+        <div class="modal-body">
+          <input type="hidden" id="id_pendaftar">
+          <h4 class="mb-0 mb-2" id="prodi">Nomor Pendaftar</h4>
+          <h5 class="mb-0 mb-3" id="nomor_pendaftar" style="font-weight:400;">201231248</h5>
+          <h4 class="mb-0 mb-2" id="prodi">Nama Pendaftar</h4>
+          <h5 class="mb-0 mb-3" id="nama_pendaftar" style="font-weight:400;">201231248</h5>
+          <h4 class="mb-0 mb-2" id="prodi">Jalur Penerimaan</h4>
+          <h5 class="mb-0 mb-3" id="jalur_pendaftar" style="font-weight:400;">201231248</h5>
+          <h4 class="mb-0 mb-2" id="prodi">Diterima di :</h4>
+          <div class="mb-3" id="list_pilihan">
+            <div id="list_poliwangi">
+
+            </div>
+            <div id="list_poltek">
+
+            </div>
+            <div class="d-flex" onclick="func_centang(this,0,'')" style="cursor:pointer">
+              <i id="centang_tidak_lolos" class="iconify centang-pilihan text-placeholder mt-1 mr-3" data-icon="akar-icons:circle-check-fill"></i>
+              <p class="d-inline-block font-weight-bold">Tidak Lolos</p>
+            </div> 
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+                <button type="button" class="btn btn-modal-cancel w-100" data-dismiss="modal">Batal</button>
+            </div>
+            <div class="col-md-6">
+                <button type="button" class="btn btn-primary w-100" onclick="func_simpan()">Simpan</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
 </section>
 <script>
+  var prodi_selected,poltek_selected;
   $(document).ready(function() {
   getData();
 
@@ -81,8 +128,10 @@
 } );
 async function getData() {
     var optProgram,optJurusan,optKelas,optStatus;
+    console.log(dataGlobal['prodi'])
+    optProgram = `<option value=""> - </option>`
     $.each(dataGlobal['prodi'],function (key,row) {
-        optProgram = `<option value="${row.nomor}">${row.nama_program} ${row.program_studi}</option>`
+        optProgram += `<option value="${row.nomor}">${row.nama_program} ${row.program_studi}</option>`
     })
     $('#program_studi').append(optProgram)
 
@@ -92,6 +141,98 @@ async function getData() {
     })
     $('#jalur_penerimaan').append(optStatus)
     setDatatable();
+}
+function func_centang(e,id_selected,poltek) {
+  $('.centang-pilihan').removeClass('text-success')
+  $('.centang-pilihan').addClass('text-placeholder')
+  $(e).find('.centang-pilihan').removeClass('text-placeholder')
+  $(e).find('.centang-pilihan').addClass('text-success')
+  prodi_selected = id_selected;
+  poltek_selected = poltek;
+}
+
+
+function func_simpan() {
+    var id_pendaftar = $('#id_pendaftar').val();
+    
+    $.ajax({
+        url: url_api+"/admin/pendaftar/verifikasi/"+id_pendaftar,
+        type: 'put',
+        dataType: 'json',
+        data: {'program_studi':prodi_selected,'poltek':poltek_selected},
+        success: function(res) {
+            console.log(res)
+            if (res.status=="success") {
+
+                $('#centang_tidak_lolos').removeClass('text-success')
+                $('#centang_tidak_lolos').addClass('text-placeholder')
+                $('#konfirmModal').modal('hide');
+                dt.ajax.reload();    
+            } else {
+                // alert gagal
+            }
+            
+
+        }
+    });
+}
+
+function func_modal(id) {
+  $.ajax({
+    url: url_api+"/admin/pendaftar-konfirmasi/"+id,
+    type: 'get',
+    dataType: 'json',
+    data: {},
+    headers: {},
+    success: function(res) {
+      if (res.status=="success") {
+        $('#id_pendaftar').val(res.data.pendaftar.id);
+        $('#nama_pendaftar').text(res.data.pendaftar.nama);
+        $('#nomor_pendaftar').text(res.data.pendaftar.nodaftar);
+        $('#jalur_pendaftar').text(res.data.pendaftar.jalur_daftar);
+        $('#list_poliwangi').html('');
+        var i = 0;
+        $.each(res.data.poliwangi,function (key,row) {
+          console.log(row)
+          var html = `          
+            <div class="d-flex" onclick="func_centang(this,${row.id},'poliwangi')" style="cursor:pointer">
+              <i id="centang_${i}" class="iconify centang-pilihan text-placeholder mt-1 mr-3" data-icon="akar-icons:circle-check-fill"></i>
+              <p class="d-inline-block font-weight-bold">Politeknik Negeri Banyuwangi - ${row.prodi}</p>
+            </div>`
+          $('#list_poliwangi').append(html);
+          console.log(i+" == "+res.data.pendaftar.program_studi)
+          if (row.id==res.data.pendaftar.program_studi) {
+            console.log("sama")
+            $('#centang_'+i).removeClass('text-placeholder');
+            $('#centang_'+i).addClass('text-success');
+          }
+          i++;
+        })
+
+        $('#list_poltek').html('');
+        if (res.data.poltek_lain != null) {
+          var html = `  
+            <div class="d-flex" onclick="func_centang(this,${res.data.poltek_lain.id},'poltek')" style="cursor:pointer">
+              <i id="centang_${i}" class="iconify centang-pilihan text-placeholder mt-1 mr-3" data-icon="akar-icons:circle-check-fill"></i>
+              <p class="d-inline-block font-weight-bold">${res.data.poltek_lain.politeknik} - ${res.data.poltek_lain.prodi}</p>
+            </div>`
+          $('#list_poltek').append(html);
+          if (res.data.poltek_lain.id==res.data.pendaftar.program_studi_luar) {
+            console.log("sama")
+            $('#centang_'+i).removeClass('text-placeholder');
+            $('#centang_'+i).addClass('text-success');
+          }
+
+        }
+        if (res.data.pendaftar.status=="T") {
+          $('#centang_tidak_lolos').removeClass('text-placeholder')
+          $('#centang_tidak_lolos').addClass('text-success')
+        }
+      }
+      $('#konfirmModal').modal('show')
+
+    }
+  });
 }
 function setDatatable() {
     if ($('#jalur_penerimaan').val()=="") {
@@ -135,49 +276,24 @@ dt_opt = {
           "aTargets": [4],
           "mData": null,
           "mRender": function(data, type, full) {
+            res = (data['status']=="Y")?"<span class='text-success'>LOLOS</span>":(data['status']=="T")?"<span class='text-danger'>TIDAK LOLOS</span>":"<span class='text-warning'>MENUNGGU</span>";
+            return (res==null)?"-":res;
+          }
+        },{
+          "aTargets": [5],
+          "mData": null,
+          "mRender": function(data, type, full) {
             var id = data['nomor']
-            var status_belum = `<span id="btn_${id}" data-id="${id}" class="btn-pendaftar badge badge-danger">
-                    <i class="iconify-inline mr-1" data-icon="bi:x-circle-fill"></i>
-                    <span class="text-capitalize" style="color:#fff">Tidak Diterima</span>
+            
+            var status_sudah = `
+            
+                  <span id="btn_${id}" onclick="func_modal(${id})" data-id="${id}" class="badge btn-info_transparent text-primary">
+                    <i class="iconify-inline mr-1 text-primary" data-icon="akar-icons:circle-check-fill"></i>
+                    <span class="text-capitalize text-primary">Konfirmasi</span>
                   </span>`
-            var status_sudah = `<span id="btn_${id}" data-id="${id}" class="badge badge-success">
-                    <i class="iconify-inline mr-1" data-icon="akar-icons:circle-check-fill"></i>
-                    <span class="text-capitalize" style="color:#fff">Diterima</span>
-                  </span>`
 
-            res = (data['is_lunas']==1)?status_sudah:status_belum;
-            $('#btn_'+id).on('click',function (e) {
-                var id_pendaftar = $(this).data('id');
-
-                $.ajax({
-                    url: url_api+"/admin/pendaftar/verifikasi/"+id_pendaftar,
-                    type: 'put',
-                    dataType: 'json',
-                    data: {},
-                    success: function(res) {
-                        console.log(res)
-                        if (res.status=="success") {
-                            if ($('#btn_'+id).hasClass('badge-danger')) {
-                                $('#btn_'+id).html('');
-                                $('#btn_'+id).removeClass('badge-danger')
-                                $('#btn_'+id).addClass('badge-success')
-                                $('#btn_'+id).append(`<i class="iconify-inline mr-1" data-icon="akar-icons:circle-check-fill"></i>
-                                            <span class="text-capitalize" style="color:#fff">Diterima</span>`);
-                            }else{
-                                $('#btn_'+id).html('');
-                                $('#btn_'+id).removeClass('badge-success')
-                                $('#btn_'+id).addClass('badge-danger')
-                                $('#btn_'+id).append(`<i class="iconify-inline mr-1" data-icon="bi:x-circle-fill"></i>
-                                            <span class="text-capitalize" style="color:#fff">Tidak Diterima</span>`);
-                            }           
-                        } else {
-                            // alert gagal
-                        }
-                        
-
-                    }
-                });
-            })
+            res = status_sudah;
+            
             return res;
           }
         },

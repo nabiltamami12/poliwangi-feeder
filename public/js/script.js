@@ -1,7 +1,9 @@
 // SIDEBAR - submenu
 jQuery(function ($) {
-	$('#txt_semester_topnav').html((dataGlobal['periode']['semester']==1)?"Semester Gasal":"Semester Genap");
-	$('#txt_tahun_topnav').html(dataGlobal['periode']['tahun']+"/"+(Number(dataGlobal['periode']['tahun'])+1));
+	// 	if (dataGlobal !== null) {
+	// 		$('#txt_semester_topnav').html((dataGlobal['periode']['semester']==1)?"Semester Gasal":"Semester Genap");
+	// 		$('#txt_tahun_topnav').html(dataGlobal['periode']['tahun']+"/"+(Number(dataGlobal['periode']['tahun'])+1));
+	// 	}
 	$(".date-input").datepicker({
 		format: "dd MM yyyy",
 		autoclose: true
@@ -15,37 +17,10 @@ jQuery(function ($) {
 	  loading('show');
 	});
 
-	var dt_init = document.getElementById("datatable");
 	// datatable
-	if (dt_init) {
-		console.log(dt_url)
-		dt = $('#datatable').DataTable({
-			"processing": true,
-			"ajax": {
-				url: dt_url,
-				type: 'GET',
-				data: {},
-				headers: {
-					"Authorization": window.localStorage.getItem('token')
-				}
-			},
-			...dt_opt,
-			// "dom": 'lfrtip',
-			"language": {
-				"paginate": {
-					"next": 'Next',
-					"previous": 'Previous'
-				},
-				"processing": "Proses ...",
-				"emptyTable": "Tidak ada data dalam tabel",
-				"info": "Menampilkan _START_ sampai _END_ dari _TOTAL_ total data",
-				"infoEmpty": "Menampilkan 0 sampai 0 dari 0 total data",
-				"infoFiltered": "(difilter dari _MAX_ total)",
-				"lengthMenu": "_MENU_ Data per halaman",
-				"search": "",
-				"searchPlaceholder": "Pencarian ..."
-			}
-		});
+	var dt_init = document.getElementById("datatable");
+	if ( dt_init && !$.fn.DataTable.isDataTable('#datatable') ) {
+		_load_datatable();
 	}
 
 	// $(".nav-item-dropdown-content").css("display", "none");
@@ -76,4 +51,42 @@ jQuery(function ($) {
 	});
 });
 
-moment.locale('id');
+function load_datatable(){
+	document.getElementById('datatable-pending').setAttribute('id', 'datatable');
+	_load_datatable();
+}
+
+function _load_datatable(){
+	dt = $('#datatable').DataTable({
+		"processing": true,
+		"ajax": {
+			url: dt_url,
+			type: 'GET',
+			data: {},
+			...dt_src,
+			headers: {
+				"Authorization": window.localStorage.getItem('token')
+			}
+		},
+		...dt_opt,
+		// "dom": 'lfrtip',
+		"language": {
+			"paginate": {
+				"next": 'Next',
+				"previous": 'Previous'
+			},
+			"processing": "Proses ...",
+			"emptyTable": "Tidak ada data dalam tabel",
+			"info": "Menampilkan _START_ sampai _END_ dari _TOTAL_ total data",
+			"infoEmpty": "Menampilkan 0 sampai 0 dari 0 total data",
+			"infoFiltered": "(difilter dari _MAX_ total)",
+			"lengthMenu": "_MENU_ Data per halaman",
+			"search": "",
+			"searchPlaceholder": "Pencarian ..."
+		}
+	});
+}
+
+if (typeof moment !== 'undefined') {
+	moment.locale('id');
+}

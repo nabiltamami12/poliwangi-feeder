@@ -20,7 +20,7 @@
     color:#8898AA!important;
   }
   #status_saat_ini{
-    text-transform: uppercase;
+    text-transform: capitalize;
   }
 </style>
 <!-- Header -->
@@ -77,9 +77,8 @@
           <h6 class="mb-0">Mata Kuliah Saat Ini</h6>
           <select class="form-control" id="matkul_open"></select>
           <!-- <h5 class="mb-0 mt-2" id="matkul_saat_ini"></h5> -->
-          <h6 class="mb-0 mt-4">Pertemuan Ke- :</h6>
+          <h6 class="mb-0 mt-4">Pertemuan Ke- :<span class="text-danger text-sm" >  (pastikan sesuai)</span> </h6>
           <h5 class="mb-0 mt-2" id="pertemuan_saat_ini"></h5>
-          <p class="mb-0 mt-2 text-danger text-sm" >*pastikan pertemuan sesuai</p>
           <h6 class="mb-0 mt-4">Jumlah Mahasiswa :</h6>
           <h5 class="mb-0 mt-2" id="mahasiswa_saat_ini"></h5>
           <h6 class="mb-0 mt-4">Status Presensi</h6>
@@ -149,6 +148,7 @@ function getJadwal() {
     dataType: 'json',
     data: {},
     success: function(res) {
+      console.log(res)
       if (res.status=="success") {
           $('#tb_body_jadwal').html('');
           $('#tb_body_kelas').html('');
@@ -217,8 +217,8 @@ function getJadwal() {
               var kelas = $.grep(res.data.data, function(e){ return e.kuliah == row_kelas_open.kuliah; });
               opt += `<option data-status="${row_kelas_open.status}" data-pertemuan="${row_kelas_open.pertemuan}" data-jml="${kelas[0].jml_mhs}" value="${row_kelas_open.kuliah}">${row_kelas_open.matakuliah}</option>`;
               
-              $('#mahasiswa_saat_ini').html(kelas[0].jml_mhs)
-              $('#pertemuan_saat_ini').html(row_kelas_open.pertemuan)
+              $('#mahasiswa_saat_ini').html(kelas[0].jml_mhs+" Orang")
+              $('#pertemuan_saat_ini').html("Pertemuan ke-"+row_kelas_open.pertemuan)
               $('#status_saat_ini').html(row_kelas_open.status)
               
               $('#status_saat_ini').addClass('text-success');
@@ -254,8 +254,8 @@ function getJadwal() {
               var status = $('#matkul_open :selected').data('status');
               
               status = "Belum Presensi";
-              $('#mahasiswa_saat_ini').html(jml_kelas)
-              $('#pertemuan_saat_ini').html(pertemuan)
+              $('#mahasiswa_saat_ini').html(jml_kelas+" Orang")
+              $('#pertemuan_saat_ini').html("Pertemuan ke-"+pertemuan)
               $('#status_saat_ini').html(status)
               
               $('#status_saat_ini').removeClass('text-success');
@@ -271,7 +271,7 @@ function getJadwal() {
             var kuliah = $('#matkul_open').val();
             var pertemuan = $('#matkul_open :selected').data('pertemuan');
 
-            window.location = "{{ url('/dosen/kuliah/absensi/kelas-dosen/') }}"+"/"+kuliah+"/"+pertemuan;
+            window.location = "{{ url('/dosen/absensi/kelas-dosen/') }}"+"/"+kuliah+"/"+pertemuan;
           })
       } else {
           // alert gagal

@@ -123,6 +123,12 @@ Route::prefix('dosen')->middleware(['aksesuntuk:dosen'])->group(function () {
             "title" => "dosen-presensi"
         ]);
     });
+    
+    Route::get('/perwalian', function () {
+        return view('dosen.perwalian', [
+            "title" => "dosen-perwalian"
+        ]);
+    });
 
     Route::get('/penilaian', function () {
         return view('dosen.inputNilai', [

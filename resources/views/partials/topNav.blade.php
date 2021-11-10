@@ -52,6 +52,7 @@
 <script type="text/javascript">
 	function logout() {
 		localStorage.removeItem('pmb')
+		localStorage.removeItem('globalData')
 		window.location.href = "{{url('/')}}"
 	}
 </script>

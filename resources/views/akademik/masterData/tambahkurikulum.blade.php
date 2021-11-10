@@ -26,9 +26,49 @@
           <div class="form-row">
             <div class="col-sm-12 col-12">
               <div class="form-group row mb-0">
-                <label>Kurikulum</label>
+                <label>Nama Kurikulum</label>
                 <input type="text" class="form-control" id="kurikulum" name="kurikulum">
-                <input type="hidden" id="status" name="status">
+              </div>
+              <div class="form-group row mb-0">
+                <label>Pilih Prodi / Jurusan</label>
+                <select name="prodi_id" id="" class="form-control">
+                    @foreach($prodi as $prodi)
+                        <option value="{{ $prodi->nomor }}">{{ ucwords($prodi->program_studi) }}</option>
+                    @endforeach
+                </select>
+              </div>
+              <div class="form-group row mb-0">
+                <label>Pilih Tahun Ajaran</label>
+                <select name="periode_id" id="" class="form-control">
+                    @foreach($periode as $periode)
+                        <option value="{{ $periode->nomor }}">{{ ucwords($periode->tahun) }} - Semester {{ $periode->semester }}</option>
+                    @endforeach
+                </select>
+              </div>
+              <div class="form-group row mb-0">
+                <label>Jumlah SKS Total</label>
+                <input type="number" value="0" class="form-control" id="totalSks" name="jumlah_sks" readonly>
+              </div>
+              <div class="form-group row mb-0">
+                <div class="col-md-6 col-sm-6 col-12 mb-2 p-0 pr-2">
+                    <label>Jumlah SKS Wajib</label>
+                    <input type="number" value="0" class="form-control" id="sksWajib" name="sks_wajib" min="0" required>
+                </div>
+                <div class="col-md-6 col-sm-6 col-12 mb-2 p-0 pl-2">
+                    <label>Jumlah SKS Pilihan</label>
+                    <input type="number" value="0" class="form-control" id="sksPilihan" name="sks_pilihan" min="0" required>
+                </div>
+              </div>
+              <div class="form-group row mb-0">
+                <label>Keterangan</label>
+                <textarea name="keterangan" id="" rows="3" class="form-control"></textarea>
+              </div>
+              <div class="form-group row mb-0">
+                <label>Status</label>
+                <select name="status" id="" class="form-control">
+                    <option value="1">Aktif</option>
+                    <option value="0">Tidak Aktif</option>
+                </select>
               </div>
             </div>
 
@@ -47,15 +87,46 @@
   $(document).ready(function() {
     var id = "{{$id}}";
     if (id!="") {
-        getData(id);        
+        getData(id);
     }else{
         $('#status').val(0)
     }
 
+    $('#sksWajib').keyup(function(){
+        var jumlahWajib = $(this).val(),
+            jumlahPilihan = $('#sksPilihan').val(),
+            totalSks = parseInt(jumlahWajib) + parseInt(jumlahPilihan)
+
+        $('#totalSks').val(totalSks)
+    })
+
+    $('#sksWajib').click(function(){
+        var jumlahWajib = $(this).val(),
+            jumlahPilihan = $('#sksPilihan').val(),
+            totalSks = parseInt(jumlahWajib) + parseInt(jumlahPilihan)
+
+        $('#totalSks').val(totalSks)
+    })
+
+    $('#sksPilihan').keyup(function(){
+        var jumlahWajib = $('#sksWajib').val(),
+            jumlahPilihan = $(this).val(),
+            totalSks = parseInt(jumlahWajib) + parseInt(jumlahPilihan)
+
+        $('#totalSks').val(totalSks)
+    })
+
+    $('#sksPilihan').click(function(){
+        var jumlahWajib = $('#sksWajib').val(),
+            jumlahPilihan = $(this).val(),
+            totalSks = parseInt(jumlahWajib) + parseInt(jumlahPilihan)
+
+        $('#totalSks').val(totalSks)
+    })
+
     // form tambah data
     $("#form_cu").submit(function(e) {
         e.preventDefault();
-        var data = $('#form_cu').serialize();
         if (id!="") {
             var url = url_api+"/kurikulum/"+id;
             var type = "put";
@@ -67,14 +138,16 @@
             url: url,
             type: type,
             dataType: 'json',
-            data: data,
+            data: new FormData(this),
+            contentType: false,
+            processData: false,
             success: function(res) {
                 if (res.status=="success") {
-                    window.location.href = "{{url('/admin/master/datakurikulum')}}";                    
+                    window.location.href = "{{url('/admin/master/datakurikulum')}}";
                 } else {
                     // alert gagal
                 }
-                
+
             }
         });
     });
@@ -91,11 +164,11 @@ function getData(id) {
                 var data = res['data'][0];
                 $.each(data,function (key,row) {
                     $('#'+key).val(row);
-                })                
+                })
             } else {
                 // alert gagal
             }
-            
+
         }
     });
 }
