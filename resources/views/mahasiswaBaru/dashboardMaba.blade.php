@@ -141,7 +141,9 @@ function getDashboard() {
             $('#btn_berkas').attr('hidden',true);
   
           }else if (info.status=="Y") {
-
+            $('#btn_poltek_lain').attr('hidden',true);
+            $('#btn_verifikasi').attr('hidden',true);
+            $('#btn_berkas').attr('hidden',false);
             if (info.ukt_kelompok!=null) {
               $('#prodi_pilihan').html(info.prodi)
               $('#spi_pilihan').html(formatAngka(info.spi))
@@ -158,6 +160,11 @@ function getDashboard() {
             $('#status_pilihan').text('Lolos')
             $('#status_pilihan').addClass('text-success')
           }
+        }else{
+
+          $('#btn_poltek_lain').attr('hidden',true);
+          $('#btn_verifikasi').attr('hidden',false);
+          $('#btn_berkas').attr('hidden',true);
         }
       }
     }

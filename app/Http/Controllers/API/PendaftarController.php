@@ -712,7 +712,7 @@ class PendaftarController extends Controller
 					$i++;
 				}
 			}
-			$this->data = null;
+			$this->data = $i;
 			$this->status = "success";
 		} catch (QueryException $e) {
 			$this->status = "failed";

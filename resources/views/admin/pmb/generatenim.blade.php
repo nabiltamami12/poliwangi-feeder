@@ -176,7 +176,7 @@ function func_modal(id,prodi,jml_pendaftar) {
 }
 function func_modal_list(id,prodi,jml_pendaftar) {
     $.ajax({
-        url: url_api + "/admin/pendaftar/list-generate-nim/",
+        url: url_api + "/admin/pendaftar/list-generate-nim",
         type: 'get',
         dataType: 'json',
         data: {'program_studi':id},
@@ -212,7 +212,7 @@ function func_modal_list(id,prodi,jml_pendaftar) {
 }
 function func_generate() {
     $.ajax({
-        url: url_api + "/admin/pendaftar/generate-nim/",
+        url: url_api + "/admin/pendaftar/generate-nim",
         type: 'post',
         dataType: 'json',
         data: {'program_studi':$('#id_prodi').val()},
