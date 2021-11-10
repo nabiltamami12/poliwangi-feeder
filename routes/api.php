@@ -277,14 +277,11 @@ Route::prefix('v1')->group(function () {
     // Riwayat Pembayaran
     Route::post('/keuangan/upload-buku-besar', [Ctr\BerkasKeuanganController::class, 'upload_buku_besar']);
     Route::get('/keuangan/riwayat-pembayaran', [Ctr\RiwayatPembayaranController::class, 'index']);
-    
+
 
     // example use bni api
     Route::get('/test', [Ctr\MahasiswaController::class, 'create_va']);
     Route::post('/test/{id}', [Ctr\BerkasKeuanganController::class, 'detail_cicilan']);
-
-
-
 });
 
 Route::prefix('v1')->middleware('auth:api')->group(function () {

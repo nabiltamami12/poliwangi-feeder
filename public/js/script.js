@@ -1,7 +1,7 @@
 // SIDEBAR - submenu
 jQuery(function ($) {
-	$('#txt_semester_topnav').html((dataGlobal['periode']['semester']==1)?"Semester Gasal":"Semester Genap");
-	$('#txt_tahun_topnav').html(dataGlobal['periode']['tahun']+"/"+(Number(dataGlobal['periode']['tahun'])+1));
+	// $('#txt_semester_topnav').html((dataGlobal['periode']['semester']==1)?"Semester Gasal":"Semester Genap");
+	// $('#txt_tahun_topnav').html(dataGlobal['periode']['tahun']+"/"+(Number(dataGlobal['periode']['tahun'])+1));
 	$(".date-input").datepicker({
 		format: "dd MM yyyy",
 		autoclose: true
