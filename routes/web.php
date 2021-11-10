@@ -142,8 +142,8 @@ Route::prefix('dosen')->middleware(['aksesuntuk:dosen'])->group(function () {
         return view('cetak.evaluasinilai', [
             "title" => "dosen-penilaian"
         ]);
-    })
-    ;Route::get('/cetak-absensi-kelas', function () {
+    });
+    Route::get('/cetak-absensi-kelas', function () {
         return view('cetak.cetakabsensikelas', [
             "title" => "dosen-penilaian"
         ]);
@@ -190,8 +190,8 @@ Route::prefix('akademik')->middleware(['aksesuntuk:akademik'])->group(function (
             return view('cetak.evaluasinilai', [
                 "title" => "dosen-penilaian"
             ]);
-        })
-        ;Route::get('/cetak-absensi-kelas', function () {
+        });
+        Route::get('/cetak-absensi-kelas', function () {
             return view('cetak.cetakabsensikelas', [
                 "title" => "dosen-penilaian"
             ]);

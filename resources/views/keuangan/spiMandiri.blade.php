@@ -15,18 +15,23 @@
               <h2 class="mb-0 text-center text-md-left">Data Sumbangan Pengembangan Institusi</h2>
             </div>
             <div class="col-12 col-md-6 text-center text-md-right mt-3 mt-md-0">
-              <form id="form_cu" enctype="multipart/form-data">
+              <!-- <form id="form_cu" enctype="multipart/form-data">
                 @csrf
               <input type="file" name="file" id="file" onchange="clickButton()" hidden>
               <input type="submit" value="submit" id="submit" hidden>
-              </form>
+              </form> -->
+              
+              <a href="{{url('/template/template-spi.xlsx')}}" class="btn btn-primary" target="_blank">
+                <i class="iconify-inline mr-1" data-icon="bx:bx-download"></i>
+                Template Import
+              </a>
               
               <button type="button" class="btn btn-primary" onclick="importFile()">
                 <i class="iconify-inline mr-1" data-icon="bx:bx-download"></i>
                 Import
               </button>
               
-              <button type="button" class="btn btn-warning ml-md-2" onclick="exportModal()">
+              <button type="button" class="btn btn-warning" onclick="exportModal()">
                 <i class="iconify-inline mr-1" data-icon="bx:bx-upload"></i>
                 Eksport
               </button>
@@ -190,7 +195,8 @@ dt_opt = {
       "className": 'font-weight-bold text-right',
       "mRender": function(data, type, full) {
         var id = data['id_mahasiswa'];
-        var detail = `<a href="{{ url('keuangan/rekapitulasi/spi/detail/${id}') }}" class="font-weight-bold text-primary text-underline">Lihat Detail</a>`
+        var detail = `<a href="{{ url('keuangan/rekapitulasi/spi/detail/${id}') }}" class="btn btn-sm btn-primary"><i class="iconify mr-1" data-icon="bx:bxs-user-detail"></i>
+                    <span class="text-white">Lihat Detail</span></a>`
         res = detail;
         return res;
       }
@@ -209,7 +215,7 @@ dt_opt = {
             processData: false,
             success: function(res) {
                 if (res.status=="success") {
-                    window.location.href = "{{url('/akademik/keuangan/spi')}}";                    
+                    window.location.href = "{{url('/keuangan/rekapitulasi/spi')}}";                    
                 } else {
                     console.log("Gagal");
                 }

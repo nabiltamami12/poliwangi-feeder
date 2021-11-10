@@ -33,4 +33,4 @@ Enable extension php pada file /etc/php/php.ini
 2. ext-gd
 
 ### sync folder public
-rsync -a --exclude 'index.php' ../laravel_folder/* ../public_html;
+rsync -a --exclude 'index.php' ../folder_laravel/public/* ../folder_html/;

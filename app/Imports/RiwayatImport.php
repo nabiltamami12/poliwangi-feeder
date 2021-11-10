@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Mahasiswa;
 use App\Models\KeuanganPembayaran;
 
-class BukuBesarImport implements ToCollection, WithHeadingRow, WithCalculatedFormulas, SkipsEmptyRows
+class RiwayatImport implements ToCollection, WithHeadingRow, WithCalculatedFormulas, SkipsEmptyRows
 {
     private $res = [
         "error" => [],

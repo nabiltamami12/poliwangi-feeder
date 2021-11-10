@@ -19,7 +19,9 @@ jQuery(function ($) {
 
 	// datatable
 	var dt_init = document.getElementById("datatable");
-	if (dt_init) _load_datatable();
+	if ( dt_init && !$.fn.DataTable.isDataTable('#datatable') ) {
+		_load_datatable();
+	}
 
 	// $(".nav-item-dropdown-content").css("display", "none");
 	$(".nav-link").click(function () {

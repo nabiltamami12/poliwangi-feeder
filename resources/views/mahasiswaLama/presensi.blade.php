@@ -59,7 +59,7 @@
   </div>
 </section>
 <script>
-  var mahasiswa = 31570;
+  // var id_mahasiswa = 31575;
   var tahun = dataGlobal['periode']['tahun'];
   var semester = dataGlobal['periode']['semester'];
   var nomor = 1;
@@ -75,7 +75,7 @@
       resetFilter();
     })
 
-    dt_url = `${url_api}/absensi/rekap-matkul?mahasiswa=${mahasiswa}&tahun=${tahun}&semester=${semester}`;
+    dt_url = `${url_api}/absensi/rekap-matkul?mahasiswa=${id_mahasiswa}&tahun=${tahun}&semester=${semester}`;
     console.log(dt_url)
     dt_opt = {
       "columnDefs": [
@@ -128,7 +128,7 @@
         ]}
   })
   function resetFilter() {
-    var url = `${url_api}/absensi/rekap-matkul?mahasiswa=${mahasiswa}&tahun=${tahun}&semester=${semester}`;
+    var url = `${url_api}/absensi/rekap-matkul?mahasiswa=${id_mahasiswa}&tahun=${tahun}&semester=${semester}`;
     dt.ajax.url(url).load();
   }
   function getByFilter() {
@@ -138,7 +138,7 @@
     tanggal = date.getDate()  < 10 ? '0' + date.getDate()  : date.getDate(),
     dateFormat = tahun + '-' + bulan + '-' + tanggal;
 
-    var url = `${url_api}/absensi/rekap-matkul?mahasiswa=${mahasiswa}&tahun=${tahun}&semester=${semester}&tanggal=${dateFormat}`;
+    var url = `${url_api}/absensi/rekap-matkul?mahasiswa=${id_mahasiswa}&tahun=${tahun}&semester=${semester}&tanggal=${dateFormat}`;
     dt.ajax.url(url).load();
   }
 </script>

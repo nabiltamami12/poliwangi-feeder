@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\QueryException;
 use BNI;
+use App\Events\LogMahasiswaStatus;
+use Maatwebsite\Excel\Facades\Excel;
 
 /** --Status Mahasiswa--
  * "A" = Aktif - temporary
@@ -36,7 +38,7 @@ class MahasiswaController extends Controller
 		$where = [
 			['m.status','=','A']
 		];
-		if ( $request->program_studi != null ||  !isset($request->program_studi) ) {
+		if ( $request->program_studi != null && $request->program_studi ) {
 			array_push($where,['m.program_studi','=',$request->program_studi]);
 		}
 		if ($request->kelas) {
@@ -88,11 +90,14 @@ class MahasiswaController extends Controller
 			DB::enableQueryLog();
 			$data = $request->all();
 			$where = [];
-			if ( isset($request->program) ) {
+			if ( isset($request->program) && $request->program ) {
 				array_push($where,['ps.program','=',$request->program]);
 			}
-			if ( isset($request->jurusan) ) {
+			if ( isset($request->jurusan) && $request->jurusan ) {
 				array_push($where,['ps.jurusan','=',$request->jurusan]);
+			}
+			if ( isset($request->angkatan) && $request->angkatan ) {
+				array_push($where,['m.angkatan','=',$request->angkatan]);
 			}
 			array_push($where,['m.status','=',$request->status]);
 
@@ -150,6 +155,12 @@ class MahasiswaController extends Controller
 		} else {
 			try {
 				$data = Mahasiswa::create($data);
+				LogMahasiswaStatus::dispatch([
+					"mahasiswa" => $data['nomor'],
+					"status" => $data['status'],
+					"tahun" => $this->tahun_aktif,
+					"semester" => $this->semester_aktif
+				]);
 				$this->data = $data;
 				$this->status = "success";
 			} catch (QueryException $e) {
@@ -202,6 +213,12 @@ class MahasiswaController extends Controller
 			try {
 				$check->update($data);
 				$this->data = $check->get();
+				LogMahasiswaStatus::dispatch([
+					"mahasiswa" => $this->data[0]->nomor,
+					"status" => $this->data[0]->status,
+					"tahun" => $this->tahun_aktif,
+					"semester" => $this->semester_aktif
+				]);
 				$this->status = "success";
 			} catch (QueryException $e) {
 				$this->status = "failed";
@@ -312,5 +329,89 @@ class MahasiswaController extends Controller
 			"data" => $this->data,
 			"error" => $this->error
 		]);
+	}
+
+	public function mahasiswa_angkatan(Request $req)
+	{
+		try {
+			$where = [];
+			if ($req->status) {
+				$where[] = ['mahasiswa.status', '=', $req->status];
+			}
+			if ($req->program) {
+				$where[] = ['ps.program', '=', $req->program];
+			}
+			if ($req->jurusan) {
+				$where[] = ['ps.jurusan', '=', $req->jurusan];
+			}
+			if ($req->program_studi) {
+				$where[] = ['mahasiswa.program_studi', '=', $req->program_studi];
+			}
+
+			$this->data = Mahasiswa::select('mahasiswa.angkatan')
+				->leftJoin('program_studi as ps', 'mahasiswa.program_studi', '=', 'ps.nomor')
+				->where($where)
+				->groupBy('mahasiswa.angkatan')
+				->get();
+			$this->status = "success";
+		} catch (QueryException $e) {
+			$this->status = "failed";
+			$this->error = $e;
+		}
+		return response()->json([
+			"status" => $this->status,
+			"data" => $this->data,
+			"error" => $this->error
+		]);
+	}
+
+	public function mahasiswa_kelas(Request $req)
+	{
+		try {
+			$where = [];
+			if ($req->status) {
+				$where[] = ['mahasiswa.status', '=', $req->status];
+			}
+			if ($req->program_studi) {
+				$where[] = ['mahasiswa.program_studi', '=', $req->program_studi];
+			}
+			if ($req->angkatan) {
+				$where[] = ['mahasiswa.angkatan', '=', $req->angkatan];
+			}
+
+			$this->data = Mahasiswa::select('mahasiswa.kelas', 'k.kode')
+				->leftJoin('kelas as k', 'mahasiswa.kelas', '=', 'k.nomor')
+				->where($where)
+				->groupBy('mahasiswa.kelas')
+				->get();
+			$this->status = "success";
+		} catch (QueryException $e) {
+			$this->status = "failed";
+			$this->error = $e;
+		}
+		return response()->json([
+			"status" => $this->status,
+			"data" => $this->data,
+			"error" => $this->error
+		]);
+	}
+
+	public function mahasiswa_export(Request $request)
+	{
+		ini_set('memory_limit', '-1');
+    ini_set('max_execution_time', '-1');
+    $where = [];
+    if ( $request->program ) {
+			array_push($where,['ps.program','=',$request->program]);
+		}
+		if ( $request->jurusan ) {
+			array_push($where,['ps.jurusan','=',$request->jurusan]);
+		}
+		if ( $request->angkatan ) {
+			array_push($where,['m.angkatan','=',$request->angkatan]);
+		}
+		array_push($where,['m.status','=',$request->status]);
+
+    return Excel::download(new \App\Exports\MahasiswaExport($where), 'Rekap Mahasiswa.xlsx');
 	}
 }

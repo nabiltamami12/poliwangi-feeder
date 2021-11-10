@@ -44,10 +44,12 @@ class SpiController extends Controller
         $finalArr = array();
 
         foreach ($container as $key=>$value) {
+            $id_mahasiswa = DB::table('mahasiswa')->select('nomor')->where('nrp', $container[$key]['nim'])->first()->nomor;
+            Spi::where('id_mahasiswa', $id_mahasiswa)->delete();
             $container[$key]['tgl_pembayaran'] = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject( $container[$key]['tgl_pembayaran'])->format('Y-m-d');
 
             array_push($finalArr, [
-                'id_mahasiswa' => $container[$key]['nim'],
+                'id_mahasiswa' => $id_mahasiswa,
                 'tarif' => $container[$key]['tarif_spi'],
                 'pembayaran' => $container[$key]['pembayaran_spi'],
                 'tanggal_pembayaran' => $container[$key]['tgl_pembayaran'],

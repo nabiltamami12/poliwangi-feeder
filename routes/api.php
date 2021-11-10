@@ -32,6 +32,7 @@ Route::prefix('v1')->group(function () {
     Route::get('/list-kelurahan/{id_kecamatan}', [Ctr\GlobalController::class, 'get_kelurahan']);
     // Program
     Route::get('/program', [Ctr\ProgramController::class, 'index']);
+    Route::get('/program-mahasiswa', [Ctr\ProgramController::class, 'program_mahasiswa']);
     // Program
     // Matakuliah jenis
     Route::get('/matkul_jenis', [Ctr\MatakuliahJenisController::class, 'index']);
@@ -45,6 +46,7 @@ Route::prefix('v1')->group(function () {
     Route::post('/jurusan', [Ctr\JurusanController::class, 'store']);
     Route::put('/jurusan/{id}', [Ctr\JurusanController::class, 'update']);
     Route::delete('/jurusan/{id}', [Ctr\JurusanController::class, 'destroy']);
+    Route::get('/jurusan-mahasiswa', [Ctr\JurusanController::class, 'jurusan_mahasiswa']);
     // Kelas
     Route::get('/kelas', [Ctr\KelasController::class, 'index']);
     Route::get('/kelas/dosen/{id}', [Ctr\KelasController::class, 'dosen']);
@@ -67,6 +69,7 @@ Route::prefix('v1')->group(function () {
     Route::post('/prodi', [Ctr\ProdiController::class, 'store']);
     Route::put('/prodi/{id}', [Ctr\ProdiController::class, 'update']);
     Route::delete('/prodi/{id}', [Ctr\ProdiController::class, 'destroy']);
+    Route::get('/prodi-mahasiswa', [Ctr\ProdiController::class, 'prodi_mahasiswa']);
 
     //ruangan
     Route::get('/ruangan', [Ctr\RuanganController::class, 'index']);
@@ -129,6 +132,9 @@ Route::prefix('v1')->group(function () {
     Route::post('/mahasiswa', [Ctr\MahasiswaController::class, 'store']);
     Route::put('/mahasiswa/{id}', [Ctr\MahasiswaController::class, 'update']);
     Route::delete('/mahasiswa/{id}', [Ctr\MahasiswaController::class, 'destroy']);
+    Route::get('/mahasiswa-angkatan', [Ctr\MahasiswaController::class, 'mahasiswa_angkatan']);
+    Route::get('/mahasiswa-kelas', [Ctr\MahasiswaController::class, 'mahasiswa_kelas']);
+    Route::get('/mahasiswa-export', [Ctr\MahasiswaController::class, 'mahasiswa_export']);
 
 
     // Dosen Pengampu
@@ -291,7 +297,8 @@ Route::prefix('v1')->group(function () {
     Route::get('/keuangan/export/rekap-piutang', [Ctr\BerkasKeuanganController::class, 'export_piutang']);
 
     // Riwayat Pembayaran
-    Route::post('/keuangan/upload-buku-besar', [Ctr\BerkasKeuanganController::class, 'upload_buku_besar']);
+    Route::post('/keuangan/upload-riwayat', [Ctr\BerkasKeuanganController::class, 'upload_riwayat']);
+    Route::post('/keuangan/upload-riwayat-cicilan', [Ctr\BerkasKeuanganController::class, 'upload_riwayat_cicilan']);
     Route::get('/keuangan/riwayat-pembayaran', [Ctr\RiwayatPembayaranController::class, 'index']);
     
 

@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Crypt;
 use Illuminate\Contracts\Encryption\DecryptException;
 use BNI;
 use DB;
+use App\Events\LogMahasiswaStatus;
+use App\Models\Mahasiswa;
 use Illuminate\Support\Carbon;
 
 class PendaftarController extends Controller
@@ -217,7 +219,13 @@ class PendaftarController extends Controller
 							];
 							echo json_encode($arr);
 							die();
-							$insert = DB::table('mahasiswa')->insert($arr);
+							$insert = Mahasiswa::create($arr);
+							LogMahasiswaStatus::dispatch([
+								"mahasiswa" => $insert['nomor'],
+								"status" => $insert['status'],
+								"tahun" => $this->tahun_aktif,
+								"semester" => $this->semester_aktif
+							]);
 						}
 					}else{
 						$data_update = [
@@ -265,7 +273,13 @@ class PendaftarController extends Controller
 						'status' => "B",
 						'jalur_daftar' => $data->jalur_daftar,
 					];
-					$insert = DB::table('mahasiswa')->insert($arr);
+					$insert = Mahasiswa::create($arr);
+					LogMahasiswaStatus::dispatch([
+						"mahasiswa" => $insert['nomor'],
+						"status" => $insert['status'],
+						"tahun" => $this->tahun_aktif,
+						"semester" => $this->semester_aktif
+					]);
 				}
 			}
 			$update = $pendaftar->where('nomor',$id)->update($data_update);
