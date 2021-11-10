@@ -33,7 +33,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($staf as $item)
+                            @foreach ($stf as $item)
                             <tr>
                                 <td>{{$loop->iteration}}</td>
                                 <td>{{$item->staf}}</td>
