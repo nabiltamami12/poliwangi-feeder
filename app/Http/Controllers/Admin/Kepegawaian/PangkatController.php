@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Admin\Kepegawaian;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
-
 use App\Models\Kepegawain\Pangkat;
+use App\Http\Controllers\Controller;
+
+use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Facades\Validator;
 
 class PangkatController extends Controller
 {
