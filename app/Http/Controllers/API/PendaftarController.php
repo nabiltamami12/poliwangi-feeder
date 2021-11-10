@@ -707,7 +707,7 @@ class PendaftarController extends Controller
 				}
 				$nim = $sk_poltek.$year.$kode_prodi.$urutan_mhs;
 				$i++;
-				$update = DB::table('mahasiswa')->where('nomor',$value->nomor)->update(['nrp'=>$nim]);
+				$update = DB::table('mahasiswa')->where('nomor',$value->nomor)->update(['nrp'=>$nim,'status'=>"A"]);
 				if ($update) {
 					$i++;
 				}

@@ -42,7 +42,7 @@
 
           </div>
         </div>
-          <button type="button" id="btn_poltek_lain" class="btn w-100 mt-4 rounded-sm btn-info_transparent text-primary">*Segera lakukan verifikasi data pada Politeknik bersangkutan</button>
+          <button type="button" id="btn_poltek_lain" class="btn w-100 mt-4 rounded-sm btn-info_transparent text-primary" hidden>*Segera lakukan verifikasi data pada Politeknik bersangkutan</button>
           <button type="button" id="btn_verifikasi" onclick="func_verifikasi()" hidden class="btn btn-success w-100 mt-4 rounded-sm btn-no-jadwal">Verifikasi Data</button>
           <button type="button" id="btn_berkas" onclick="func_berkas()" hidden class="btn btn-success w-100 mt-4 rounded-sm btn-no-jadwal">Upload Berkas</button>
           <p id="text_poltek_luar" hidden class="">Silahkan lanjutkan untuk mendaftar ulang pada politeknik yang diterima</p>
@@ -93,7 +93,7 @@ getDashboard()
 function func_verifikasi() {
   window.location.href = "{{url('/mahasiswabaru/verifikasidata')}}"
 }
-function func_verifikasi() {
+function func_berkas() {
   window.location.href = "{{url('/mahasiswabaru/daftarulang')}}"
 }
 
@@ -116,6 +116,7 @@ function getDashboard() {
         })
 
         if (res.data.poltek_lain != null) {
+          
           var html = `  
               <h6 class="mb-0 mt-3">Pilihan Jurusan Poltek Lain</h6>
               <h5 class="mb-0 mt-2" id="prodi"><span style="font-weight:700;">${res.data.poltek_lain.politeknik}</span></h5>
@@ -124,8 +125,8 @@ function getDashboard() {
         }
         if (res.data.info.status!=null) {
           $('#btn_poltek_lain').attr('hidden',true);
-          $('#btn_verifikasi').attr('hidden',true);
-          $('#btn_berkas').attr('hidden',false);
+          $('#btn_verifikasi').attr('hidden',false);
+          $('#btn_berkas').attr('hidden',true);
           var info = res.data.info;
           if (info.status=="T") {
             $('#info_penerimaan').attr('hidden',false);
@@ -157,10 +158,6 @@ function getDashboard() {
             $('#status_pilihan').text('Lolos')
             $('#status_pilihan').addClass('text-success')
           }
-        }else{
-          $('#btn_verifikasi').attr('hidden',false);
-          $('#btn_berkas').attr('hidden',true);
-          $('#btn_poltek_lain').attr('hidden',true);
         }
       }
     }
