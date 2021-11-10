@@ -217,8 +217,6 @@ class PendaftarController extends Controller
 								'status' => "B",
 								'jalur_daftar' => $data->jalur_daftar,
 							];
-							echo json_encode($arr);
-							die();
 							$insert = Mahasiswa::create($arr);
 							LogMahasiswaStatus::dispatch([
 								"mahasiswa" => $insert['nomor'],
@@ -273,6 +271,8 @@ class PendaftarController extends Controller
 						'status' => "B",
 						'jalur_daftar' => $data->jalur_daftar,
 					];
+					
+					
 					$insert = Mahasiswa::create($arr);
 					LogMahasiswaStatus::dispatch([
 						"mahasiswa" => $insert['nomor'],
@@ -657,13 +657,15 @@ class PendaftarController extends Controller
 
 	public function get_prodi_nim(Request $request)
 	{
+		$year_now = Carbon::now()->isoformat('Y');
+
 		try {
 			$table = DB::table('program_studi as ps')
 				->select(
 					'ps.nomor',
 					DB::raw('CONCAT(p.program," ",ps.program_studi) as prodi'),
 					'ps.kode_epsbed',
-					DB::raw('(select count(*) from pendaftar where program_studi = ps.nomor) as jml_pendaftar'))
+					DB::raw('(select count(*) from mahasiswa where program_studi = ps.nomor and angkatan='.$year_now.') as jml_pendaftar'))
 				->join('program as p','p.nomor','=','ps.program')
 				->orderBy(DB::raw('(select count(*) from pendaftar where program_studi = ps.nomor)'),"desc")
 				->get();
@@ -691,7 +693,7 @@ class PendaftarController extends Controller
 									->where('program_studi',$request->program_studi)
 									->where('angkatan',$year_now)
 									->get();
-			
+
 			$i = 1;
 			foreach ($list_pendaftar as $key => $value) {
 				if (strlen($i)==1) {
@@ -705,9 +707,33 @@ class PendaftarController extends Controller
 				}
 				$nim = $sk_poltek.$year.$kode_prodi.$urutan_mhs;
 				$i++;
-				DB::table('mahasiswa')->where('nomor',$value->nomor)->update(['nrp'=>$nim]);
+				$update = DB::table('mahasiswa')->where('nomor',$value->nomor)->update(['nrp'=>$nim]);
+				if ($update) {
+					$i++;
+				}
 			}
 			$this->data = null;
+			$this->status = "success";
+		} catch (QueryException $e) {
+			$this->status = "failed";
+			$this->error = $e;
+		}
+		return response()->json([
+			"status" => $this->status,
+			"data" => $this->data,
+			"error" => $this->error
+		]);
+	}
+	public function list_generate_nim(Request $request)
+	{
+		try {
+			$year_now = Carbon::now()->isoformat('Y');
+			$list_pendaftar = DB::table('mahasiswa')
+									->where('program_studi',$request->program_studi)
+									->where('angkatan',$year_now)
+									->get();
+
+			$this->data = $list_pendaftar;
 			$this->status = "success";
 		} catch (QueryException $e) {
 			$this->status = "failed";

@@ -227,6 +227,7 @@ Route::prefix('v1')->group(function () {
 
     Route::get('admin/pendaftar', [Ctr\PendaftarController::class, 'index']);
     Route::get('admin/pendaftar/generate-nim', [Ctr\PendaftarController::class, 'get_prodi_nim']);
+    Route::get('admin/pendaftar/list-generate-nim', [Ctr\PendaftarController::class, 'list_generate_nim']);
     Route::put('admin/pendaftar/verifikasi/{id}', [Ctr\PendaftarController::class, 'verifikasi_pendaftar']);
     Route::get('/pendaftar/va', [Ctr\PendaftarController::class, 'va']);
     Route::get('/pendaftar', [Ctr\PendaftarController::class, 'show']);
