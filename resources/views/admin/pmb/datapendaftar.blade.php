@@ -50,7 +50,7 @@
                 <th scope="col" style="width: 25%">Nama</th>
                 <th scope="col" style="width: 25%">Jalur Penerimaan</th>
                 <th scope="col" style="width: 25%">Status</th>
-                <th scope="col" style="width: 25%">Status Bayar</th>
+                <th scope="col" style="width: 25%">Aksi</th>
               </tr>
             </thead>
 
@@ -197,7 +197,7 @@ function func_modal(id) {
           var html = `          
             <div class="d-flex" onclick="func_centang(this,${row.id},'poliwangi')" style="cursor:pointer">
               <i id="centang_${i}" class="iconify centang-pilihan text-placeholder mt-1 mr-3" data-icon="akar-icons:circle-check-fill"></i>
-              <p class="d-inline-block font-weight-bold">Politeknik Neger Banyuwangi - ${row.prodi}</p>
+              <p class="d-inline-block font-weight-bold">Politeknik Negeri Banyuwangi - ${row.prodi}</p>
             </div>`
           $('#list_poliwangi').append(html);
           console.log(i+" == "+res.data.pendaftar.program_studi)

@@ -334,17 +334,17 @@ class PendaftarController extends Controller
 
 		if ($fotos = $request->file('foto')) {
 			$update_data = [];
-			$namafile = md5($document->id.'f0to').'.'.$fotos->getClientOriginalExtension();
+			$namafile = md5($document->nomor.'f0to').'.'.$fotos->getClientOriginalExtension();
 			$update_data['foto'] = $namafile;
-			$update_data['nodaftar'] = date('Y').$document->id;
+			$update_data['nodaftar'] = date('Y').$document->nomor;
 			$fotos->move(public_path() . '/pendaftar', $namafile);
-			$check = Pendaftar::where('nomor', $document->id);
+			$check = Pendaftar::where('nomor', $document->nomor);
 			$check->update($update_data);
 		}
 
 		for ($i=0; $i < $data['jml_seleksi'] ; $i++) { 
 			$arr = [
-				'id_pendaftar' => $document->id,
+				'id_pendaftar' => $document->nomor,
 				'politeknik' => 1,
 				'program_studi' => $data["program_studi_$i"],
 				'urutan' => $i+1,
@@ -354,7 +354,7 @@ class PendaftarController extends Controller
 		}
 		if ($data['politeknik_lain']) {
 			$arr = [
-				'id_pendaftar' => $document->id,
+				'id_pendaftar' => $document->nomor,
 				'politeknik' => $data['politeknik_lain'],
 				'program_studi' => $data["program_studi_luar"],
 				'urutan' => $i+1,
@@ -366,7 +366,7 @@ class PendaftarController extends Controller
 
 		return response()->json([
 			"status" => 'success',
-			"data" => Crypt::encrypt($document->id),
+			"data" => Crypt::encrypt($document->nomor),
 			"message" => "Sukses"
 		]);
 	}
@@ -421,14 +421,14 @@ class PendaftarController extends Controller
 			$namafile = md5($id.'ijas4h').'.'.$ijasah->getClientOriginalExtension();
 			$update_data['ijasah'] = $namafile;
 			$ijasah->move(public_path() . '/pendaftar', $namafile);
-			// $check = Pendaftar::where('nomor', $document->id);
+			// $check = Pendaftar::where('nomor', $document->nomor);
 			// $check->update($update_data);
 		}
 		if ($foto_peraturan = $request->file('foto_peraturan')) {
 			$namafile = md5($id.'f0to_p3raturan').'.'.$foto_peraturan->getClientOriginalExtension();
 			$update_data['foto_peraturan'] = $namafile;
 			$foto_peraturan->move(public_path() . '/pendaftar', $namafile);
-			// $check = Pendaftar::where('nomor', $document->id);
+			// $check = Pendaftar::where('nomor', $document->nomor);
 			// $check->update($update_data);
 		}
 		if (count($update_data) > 0) {

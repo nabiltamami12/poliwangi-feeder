@@ -249,12 +249,12 @@
           },
           success: function(res) {
             console.log(res)
-            // if (res.status=="success") {
-            //   localStorage.setItem('pmb', res.data)
-            //   window.location.href = "{{url('/pmbgenerateva')}}"
-            // } else {
-            //   alert('Error: '.res.data.message)
-            // }
+            if (res.status=="success") {
+              localStorage.setItem('pmb', res.data)
+              window.location.href = "{{url('/pmbgenerateva')}}"
+            } else {
+              alert('Error: '.res.data.message)
+            }
           }
         });
       });
