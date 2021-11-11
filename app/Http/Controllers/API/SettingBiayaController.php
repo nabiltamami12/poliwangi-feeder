@@ -23,8 +23,12 @@ class SettingBiayaController extends Controller
     {
         try {
             if(isset($request->pendaftaran) && $request->pendaftaran == 1){
-                $data = SB::where('nama', 'biaya-pendaftaran')->first();
-                $this->data = $data->nilai;
+                $list = SB::where('nama', 'biaya-pendaftaran-smpbn')->orWhere('nama', 'biaya-pendaftaran-umpn')->get();
+                $data = [];
+                foreach ($list as $key => $value) {
+                    $data[$value->nama] = $value->nilai;
+                }
+                $this->data = $data;
                 $this->status = "success";
             }else{
                 $data = SB::where('nama', 'biaya_admin')->first();
@@ -66,7 +70,13 @@ class SettingBiayaController extends Controller
         $data = $request->all();
         $data['nama'] = "biaya_admin";
         if(isset($request->pendaftaran) && $request->pendaftaran == 1){
-            $data['nama'] = "biaya-pendaftaran";
+            SB::where('nama', 'biaya-pendaftaran-smpbn')->update(['nilai' => $request['biaya-pendaftaran-smpbn']]);
+            SB::where('nama', 'biaya-pendaftaran-umpn')->update(['nilai' => $request['biaya-pendaftaran-umpn']]);
+            return response()->json([
+                "status" => 'success',
+                "data" => $this->data,
+                "error" => $this->error,
+            ]);
         }
         $data['keterangan'] = "tambahan tagihan semua pembayaran";
         $validator = Validator::make($data, [

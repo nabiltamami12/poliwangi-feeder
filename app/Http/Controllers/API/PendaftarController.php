@@ -342,9 +342,11 @@ class PendaftarController extends Controller
 		$document->ibu = $request->ibu;
 		$document->notelp_ortu = $request->notelp_ortu;
 		$document->email = $request->email;
-		// $document->password = Hash::make($request->password);
-		// $document->trx_amount = Jalurpmb::select('biaya')->where('id', $request->jalur_daftar)->get()->first()->biaya;
-		$document->trx_amount = \App\Models\SettingBiaya::where('nama', 'biaya-pendaftaran')->first()->nilai;
+		if ($request->jalur_daftar == 1) {
+			$document->trx_amount = \App\Models\SettingBiaya::where('nama', 'biaya-pendaftaran-smpbn')->first()->nilai;
+		}else{
+			$document->trx_amount = \App\Models\SettingBiaya::where('nama', 'biaya-pendaftaran-umpn')->first()->nilai;
+		}		
 		$document->tahun_ajaran = DB::table('periode')->select('tahun')->where('status', '1')->get()->first()->tahun;
 		$document->save();
 
@@ -353,6 +355,7 @@ class PendaftarController extends Controller
 			$namafile = md5($document->nomor.'f0to').'.'.$fotos->getClientOriginalExtension();
 			$update_data['foto'] = $namafile;
 			$update_data['nodaftar'] = date('Y').$document->nomor;
+			$update_data['password'] = Hash::make(date('Y').$document->nomor);
 			$fotos->move(public_path() . '/pendaftar', $namafile);
 			$check = Pendaftar::where('nomor', $document->nomor);
 			$check->update($update_data);

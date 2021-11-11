@@ -78,7 +78,12 @@
           <h5 class="modal-title text-center">Setting Biaya Pendaftaran Mahasiswa Baru</h5>
         </div>
         <div class="modal-body">
-          <input type="text" class="form-control number-format" id="biaya_pendaftaran" placeholder="Biaya Pendaftaran" name="biaya_pendaftaran">
+          <dl class="row">
+            <dt class="col-sm-7">Biaya Pendaftaran SMPBN</dt>
+            <dd class="col-sm-5"><input type="text" class="form-control number-format" placeholder="100.000" name="biaya-pendaftaran-smpbn"></dd>
+            <dt class="col-sm-7">Biaya Pendaftaran UMPN Se-Indonesia</dt>
+            <dd class="col-sm-5"><input type="text" class="form-control number-format" placeholder="150.000" name="biaya-pendaftaran-umpn"></dd>
+          </dl>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-modal-cancel" data-dismiss="modal">Batal</button>
@@ -244,7 +249,9 @@ function setting_pendaftaran() {
     data: {},
     success: function(res) {
       if (res.status=="success") {
-        $('#biaya_pendaftaran').val(res.data);
+        $.each( res.data, function( key, value ) {
+          $('[name="'+key+'"]').val(value)
+        });
         $('.number-format').number( true);
       } else {
       }
@@ -257,7 +264,10 @@ function simpan_pendaftaran() {
     url: url_api+"/setting_biaya?pendaftaran=1",
     type: 'post',
     dataType: 'json',
-    data: {'nilai':$('#biaya_pendaftaran').val()},
+    data: {
+      'biaya-pendaftaran-smpbn':$('[name="biaya-pendaftaran-smpbn"]').val(),
+      'biaya-pendaftaran-umpn':$('[name="biaya-pendaftaran-umpn"]').val()
+    },
     success: function(res) {
       if (res.status=="success") {
         $('#biayaPendaftaranModal').modal('hide')              
