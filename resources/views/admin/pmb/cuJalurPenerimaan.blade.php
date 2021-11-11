@@ -12,7 +12,7 @@
         <div class="card-header padding--medium">
           <div class="row align-items-center">
             <div class="col-12">
-              <h2 class="mb-0 text-center text-sm-left">{{ ($id==null)?"TAMBAH":"UBAH" }} Jalur Penerimaan Mahasiswa Baru</h2>
+              <h2 class="mb-0 ml-3 text-center text-sm-left">{{ ($id==null)?"Tambah":"Ubah" }} Jalur Penerimaan Mahasiswa Baru</h2>
             </div>
           </div>
         </div>
@@ -20,78 +20,58 @@
 
         <div class="card-body padding--medium">
           <form id="form_cu">
-            <h1 class="mr-4">Jalur Penerimaan: </h1>
-            <label class="sr-only" for="jalur_daftar">Jalur Penerimaan</label>
-            <input type="text" class="form-control flex-grow-1" id="jalur_daftar" name="jalur_daftar">
-            <hr class="mt-4 mb-3">
-
+            <div class="form-group row">
+              <label for="staticEmail" class="col-sm-4 col-form-label"><h1 class="mr-4">Jalur Penerimaan: </h1></label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control flex-grow-1" id="jalur_daftar" name="jalur_daftar">
+              </div>
+            </div>
+            <hr class="m-4">
             <div class="row jalurPMB_pendaftaran">
-              <div class="col-lg-6">
-                <div class="row">
-                  <div class="col-lg-6 mt-3 mb-3">
-                    <h2 class="card_title mb-2 font-weight-500">Tanggal Buka</h2>
-                    <div class="d-flex align-items-center date_picker">
-                      <input id="tanggal_buka" type="text" class="form-control date-input" name="tanggal_buka" />
-                      <label class="input-group-btn" for="txtDate1">
-                        <span class="date_button">
-                          <i class="iconify" data-icon="bx:bx-calendar" data-inline="false"></i>
-                        </span>
-                      </label>
-                    </div>
+              <div class="col-lg-12 mb-2">
+                <div class="form-group row">
+                  <label for="staticEmail" class="col-sm-12 col-form-label"><h2 class="card_title mb-2 font-weight-500">Tanggal Pendaftaran</h2></label>
+                  <div class="col-md-5 d-flex align-items-center date_picker">
+                    <input id="tanggal_buka" type="text" class="form-control date-input" name="tanggal_buka" />
+                    <label class="input-group-btn" for="txtDate1">
+                      <span class="date_button" style="right: 16px;">
+                        <i class="iconify" data-icon="bx:bx-calendar" data-inline="false"></i>
+                      </span>
+                    </label>
                   </div>
-                  <div class="col-lg-6 mt-3 mb-3">
-                    <h2 class="card_title mb-2 font-weight-500">Tanggal Tutup</h2>
-                    <div class="d-flex align-items-center date_picker">
+                  <div class="col-md-2 d-flex align-items-center justify-content-center">Sampai</div>
+                  <div class="col-md-5 d-flex align-items-center date_picker">
                       <input id="tanggal_tutup" type="text" class="form-control date-input" name="tanggal_tutup" />
                       <label class="input-group-btn" for="txtDate2">
-                        <span class="date_button">
+                        <span class="date_button" style="right: 16px;">
                           <i class="iconify" data-icon="bx:bx-calendar" data-inline="false"></i>
                         </span>
                       </label>
                     </div>
-                  </div>
-                  <div class="col-lg-6 mt-3 mb-3">
-                    <h2 class="card_title mb-2 font-weight-500">Jumlah Jurusan Pilihan</h2>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <h2 class="card_title col-md-12 mb-2 font-weight-500">Jumlah Jurusan Pilihan</h2>
+                  <div class="col-md-12">
                     <input type="number" class="form-control" id="jml_seleksi" name="jml_seleksi">
                   </div>
-                  <div class="col-lg-6 mt-3 mb-3">
-                    <h2 class="card_title mb-2 font-weight-500">Kuota</h2>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <h2 class="card_title col-md-12 mb-2 font-weight-500">Kuota Mahasiswa Diterima</h2>
+                  <div class="col-md-12">
                     <input type="number" class="form-control" id="kuota" name="kuota">
                   </div>
                 </div>
-
               </div>
-
-              <div class="col-lg-6 pl-3 mt-4 mt-lg-0">
+            </div>
+            <hr class="m-4">
+            <div class="form-group row">
+              <div class="col-md-6 pl-3 mt-lg-0">
                 <h2 class="card_title font-weight-500">Syarat Pendaftaran</h2>
-                <div id="list_syarat">
-
-                </div>
-<!--                 
-                <div class="py-3 d-flex">
-                  <i class="iconify text-success mr-3" data-icon="akar-icons:circle-check-fill"></i>
-                  <p class="d-inline-block">Surat Keterangan Hasil Ujian</p>
-                </div>
-                <div class="py-3 d-flex">
-                  <i class="iconify text-success mr-3" data-icon="akar-icons:circle-check-fill"></i>
-                  <p class="d-inline-block">Bukti Pembayaran Pendaftaran</p>
-                </div>
-                <div class="py-3 d-flex">
-                  <i class="iconify text-placeholder mr-3" data-icon="akar-icons:circle-check-fill"></i>
-                  <p class="d-inline-block text-wrap">Bukti Telah Diterima di Politeknik Negeri Banyuwangi</p>
-                </div>
-                <div class="py-3 d-flex">
-                  <i class="iconify text-placeholder mr-3" data-icon="akar-icons:circle-check-fill"></i>
-                  <p class="d-inline-block">Surat Pernyataan Taat Peraturan</p>
-                </div>
-                <div class="py-3 d-flex">
-                  <i class="iconify text-placeholder mr-3" data-icon="akar-icons:circle-check-fill"></i>
-                  <p class="d-inline-block">Upload Foto dengan Almamater</p>
-                </div>
-                <div class="py-3 d-flex">
-                  <i class="iconify text-success mr-3" data-icon="akar-icons:circle-check-fill"></i>
-                  <p class="d-inline-block">Upload Dokumen Pengajuan Keringanan <span class="text-primary">(Optional)</span></p>
-                </div> -->
+                <div id="list_syarat"></div>
               </div>
             </div>
             <div class="row">
@@ -109,7 +89,6 @@
 
 @section('js')
 <script>
-  var arr_syarat = [];
   $(function() {
     $(".date-input").datepicker({
       format: "D M Y",
@@ -125,6 +104,10 @@
     // form tambah data
     $("#form_cu").submit(function(e) {
       e.preventDefault();
+      let arr_syarat = [];
+      $('.option-syarat.text-success').each(function(i, obj) {
+        arr_syarat.push(obj.dataset.id)
+      });
       var data = $('#form_cu').serialize();
       var url = url_api + "/jalurpmb/" + id;
       var type = "put";
@@ -165,9 +148,9 @@
           var data = res.data;
           var html = '';
           $.each(data,function (key,row) {
-            html = `<div class="py-3 d-flex">
-                  <i onclick="func_centang(this)" style="cursor:pointer" id="centang_${row.id}" data-id="${row.id}" class="iconify text-placeholder mr-3" data-icon="akar-icons:circle-check-fill"></i>
-                  <p class="d-inline-block">${row.nama}</p>
+            html = `<div class="py-3 d-flex align-items-center">
+                  <i onclick="func_centang('${row.id}')" style="cursor:pointer" id="centang_${row.id}" data-id="${row.id}" class="iconify text-placeholder mr-3 option-syarat" data-icon="akar-icons:circle-check-fill"></i>
+                  <span onclick="func_centang('${row.id}')" style="cursor:pointer" class="d-inline-block">${row.nama}</span>
                 </div>`
             $('#list_syarat').append(html)
           })
@@ -180,20 +163,16 @@
     });
   }
 
-  function func_centang(e) {
+  function func_centang(val) {
+    const e = '#centang_'+val;
     var id_syarat = $(e).data('id')
     var check = $(e).hasClass('text-placeholder');
     if(check){
       $(e).removeClass('text-placeholder')
       $(e).addClass('text-success')
-      arr_syarat.push(id_syarat);
     }else{
       $(e).addClass('text-placeholder')
       $(e).removeClass('text-success')
-      var index = arr_syarat.indexOf(id_syarat);
-      if (index > -1) { //if found
-        arr_syarat.splice(index, 1);
-      }
     }
   }
 
@@ -209,12 +188,11 @@
           $.each(data, function(key, row) {
             $('#' + key).val(row);
           })
-          $('#tanggal_buka').val(formatTanggal(data.tanggal_buka));
-          $('#tanggal_tutup').val(formatTanggal(data.tanggal_tutup));
+          $('#tanggal_buka').datepicker('setDate', new Date(data.tanggal_buka));
+          $('#tanggal_tutup').datepicker('setDate', new Date(data.tanggal_tutup));
 
           var syarat = res.data.syarat;
           $.each(syarat,function (key,row) {
-            console.log(row)
             $('#centang_'+row.id_syarat).removeClass("text-placeholder")
             $('#centang_'+row.id_syarat).addClass("text-success")
           })
