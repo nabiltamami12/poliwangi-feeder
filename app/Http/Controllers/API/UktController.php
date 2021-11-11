@@ -19,7 +19,7 @@ class UktController extends Controller
 	 */
 
 	protected $status = null;
-	protected $err = null;
+	protected $error = null;
 	protected $data = null;
 
 	public function index()
@@ -52,7 +52,7 @@ class UktController extends Controller
 		return response()->json([
 			"status" => $this->status,
 			"data" => $this->data,
-			"error" => $this->err,
+			"error" => $this->error,
 		]);
 	}
 
@@ -90,7 +90,7 @@ class UktController extends Controller
 		return response()->json([
 			'status' => $this->status,
 			'data' => $this->data,
-			'error' => $this->err
+			'error' => $this->error
 		]);
 	}
 
@@ -116,21 +116,10 @@ class UktController extends Controller
 		return response()->json([
 			"status" => $this->status,
 			"data" => $this->data,
-			"error" => $this->err
+			"error" => $this->error
 		]);
 	}
-
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return \Illuminate\Http\Response
-	 */
-	public function edit($id)
-	{
-		//
-	}
-
+	
 	/**
 	 * Update the specified resource in storage.
 	 *
@@ -163,7 +152,7 @@ class UktController extends Controller
 		return response()->json([
 			'status' => $this->status,
 			'data' => $this->data,
-			'error' => $this->err
+			'error' => $this->error
 		]);
 	}
 
@@ -188,7 +177,7 @@ class UktController extends Controller
 		return response()->json([
 			'status' => $this->status,
 			'data' => $this->data,
-			'error' => $this->err
+			'error' => $this->error
 		]);
 	}
 
@@ -209,7 +198,82 @@ class UktController extends Controller
 		return response()->json([
 			"status" => $this->status,
 			"data" => $this->data,
-			"error" => $this->err
+			"error" => $this->error
 		]);
 	}
+
+	public function set_ukt_mahasiswa(Request $request,$id_mahasiswa)
+	{
+
+		try {
+			$kelompok_ukt = $request->kelompok_ukt;
+			$ukt = $request->ukt;
+
+			$this->data = DB::table('mahasiswa')->where('nomor',$id_mahasiswa)->update(['ukt_kelompok'=>$kelompok_ukt,'ukt'=>$ukt]);
+            $this->status = "success";
+        } catch (QueryException $e) {
+            $this->status = "failed";
+            $this->error = $e;
+        }
+		return response()->json([
+			'status' => $this->status,
+			'data' => $this->data,
+			'error' => $this->error
+		]);
+	}
+
+    public function atur_mahasiswa(Request $request)
+    {
+        try {
+        	DB::enableQueryLog();
+			$data = $request->all();
+	        $where = [];
+	        if ( $request->program_studi ) {
+	            array_push($where,['m.program_studi','=',$request->program_studi]);
+	        }
+			if ( $request->angkatan ) {
+				array_push($where,['m.angkatan','=',$request->angkatan]);
+			}
+			if ( $request->kelas ) {
+				array_push($where,['m.kelas','=',$request->kelas]);
+			}
+			array_push($where,['m.status','=',$request->status]);
+
+			$obj = new \App\Datatables\MahasiswaUktDatatable($where);
+			$lists = $obj->get_datatables();
+			$data = [];
+			$no = $request->input("start");
+			foreach ($lists as $list) {
+				$no++;
+				$row = [];
+				$row[] = $no;
+				$row[] = $list->nrp;
+				$row[] = $list->nama;
+				$row[] = $list->ukt;
+				$row[] = $list->notelp;
+				$row[] = $list->email;
+				$row[] = '<span id="btn_'.$list->nomor.'" style="cursor:pointer" onclick="func_modal(\''.$list->program_studi.'\',\''.$list->nomor.'\',\''.$list->nrp.'\',\''.$list->nama.'\',\''.$list->prodi.'\',\''.$list->ukt_kelompok.'\')" data-id="'.$list->nomor.'" class="badge btn-info_transparent text-primary">
+					<i class="iconify-inline" data-icon="ant-design:setting-outlined"></i>
+					<span class="text-capitalize text-primary">Setting</span>
+				</span>';
+				$data[] = $row;
+			}
+			return [
+				"draw" => $request->input('draw'),
+				"recordsTotal" => $obj->count_all_datatables(),
+				"recordsFiltered" => $obj->count_filtered_datatables(),
+				"data" => $data,
+				"status" => "success",
+				"error" => $this->error
+			];
+		} catch (QueryException $e) {
+			$this->status = "failed";
+			$this->error = $e;
+		}
+        return response()->json([
+            "status" => $this->status,
+            "data" => $this->data,
+            "error" => $this->error
+        ]);
+    }
 }

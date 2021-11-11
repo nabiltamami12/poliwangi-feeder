@@ -16,10 +16,10 @@ class StaffController extends Controller
      */
     public function index()
     {
-        $staf = Staff::all();
+        $stf = Staff::all();
         return view('admin.masterKepegawaian.staff.index', [
                     "title" => "akademik-kepegawaian",
-                    "staf" => $staf,
+                    "stf" => $stf,
                 ]);
     }
 

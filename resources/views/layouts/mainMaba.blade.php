@@ -8,7 +8,7 @@
   <meta name="author" content="Creative Tim">
   <title>{{ $title }} | {{ config('app.name') }}</title>
   <!-- Favicon -->
-  <link rel="icon" href="{{ url('argon') }}/assets/img/brand/favicon.png" type="image/png">
+  <link rel="icon" href="{{ url('favicon.png') }}" type="image/png">
   <!-- Icons -->
   <link rel="stylesheet" href="{{ url('argon') }}/assets/vendor/nucleo/css/nucleo.css" type="text/css">
   <link rel="stylesheet" href="{{ url('argon') }}/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css"
@@ -23,6 +23,7 @@
     href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css"
     type="text/css" />
   <!-- Custom CSS -->
+  <link rel="stylesheet" href="{{ asset('assets/core.css') }}">
   <link href="{{ asset('css/main.css') }}" rel="stylesheet">
   <script src="{{ url('argon') }}/assets/vendor/jquery/dist/jquery.min.js"></script>
   <script type="text/javascript">
@@ -52,6 +53,9 @@
 
 
 <body>
+  <div class="loaderScreen-wrapper" style="display: none;">
+    <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+  </div>
   @include('partials.sidebarMaba')
 
   <!-- Main content -->

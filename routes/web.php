@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Admin\Kepegawaian\PegawaiController;
 use App\Http\Controllers\Admin\Kepegawaian\PangkatController;
+use App\Http\Controllers\Admin\Kepegawaian\JabatanStrukturalController;
+use App\Http\Controllers\Admin\Kepegawaian\DataStrukturalController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\Kepegawaian\UnitController;
 use App\Http\Controllers\Admin\Kepegawaian\StaffController;
@@ -119,6 +121,12 @@ Route::prefix('dosen')->middleware(['aksesuntuk:dosen'])->group(function () {
     Route::get('/presensi', function () {
         return view('dosen.presensiDosen', [
             "title" => "dosen-presensi"
+        ]);
+    });
+    
+    Route::get('/perwalian', function () {
+        return view('dosen.perwalian', [
+            "title" => "dosen-perwalian"
         ]);
     });
 
@@ -439,18 +447,9 @@ Route::prefix('admin')->middleware(['aksesuntuk:admin'])->group(function () {
         //route staff
         Route::resource('dataStaff', StaffController::class);
         
-
-
-        
-        // //route jabatan struktural
-        Route::resource('/dataJabatanStruktural', JabatanStrukturalController::class);
-        Route::get('/getJabatan', [JabatanStrukturalController::class, 'getJabatan'])->name('get-jabatan');
-        // Route::get('/dataJabatanStruktural', function () {
-        //     return view('admin.masterKepegawaian.jabatanStruktural.index', [
-        //         "title" => "akademik-kepegawaian",
-        //     ]);
-        // });
-
+        //route data struktural
+        Route::resource('/dataStruktural', DataStrukturalController::class);
+        Route::get('/getData', [DataStrukturalController::class, 'getData'])->name('get-data');
         //route pangkat
         Route::resource('/dataPangkat', PangkatController::class);
         Route::get('/getPangkat', [PangkatController::class, 'getPangkat'])->name('get-pangkat');

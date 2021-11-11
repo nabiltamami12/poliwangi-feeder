@@ -19,12 +19,18 @@ class SettingBiayaController extends Controller
     protected $error = null;
     protected $data = null;
 
-    public function index()
+    public function index(Request $request)
     {
         try {
-            $data = SB::where('nama', 'biaya_admin')->first();
-            $this->data = $data->nilai;
-            $this->status = "success";
+            if(isset($request->pendaftaran) && $request->pendaftaran == 1){
+                $data = SB::where('nama', 'biaya-pendaftaran')->first();
+                $this->data = $data->nilai;
+                $this->status = "success";
+            }else{
+                $data = SB::where('nama', 'biaya_admin')->first();
+                $this->data = $data->nilai;
+                $this->status = "success";
+            }
         
         } catch (QueryException $e) {
             $this->status = "failed";
@@ -59,6 +65,9 @@ class SettingBiayaController extends Controller
         // 
         $data = $request->all();
         $data['nama'] = "biaya_admin";
+        if(isset($request->pendaftaran) && $request->pendaftaran == 1){
+            $data['nama'] = "biaya-pendaftaran";
+        }
         $data['keterangan'] = "tambahan tagihan semua pembayaran";
         $validator = Validator::make($data, [
            'nilai' => "required"

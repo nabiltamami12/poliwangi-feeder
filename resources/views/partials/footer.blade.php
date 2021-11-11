@@ -64,13 +64,37 @@
         });
     }
 
+async function getGlobalData(id) {
+        await $.ajax({
+            url: url_api+"/globaldata/"+id,
+            type: 'get',
+            dataType: 'json',
+            data: {},
+            success: function(res) {
+                if (res.status=="success") {
+                    // return res['data'];
+                    localStorage.removeItem('globalData');
+                    localStorage.setItem('globalData', JSON.stringify(res['data']));
+                } else {
+                    // alert gagal
+                }
+                ;
+            }
+        });
+    }
+
     function formatAngka(number) {
         var number = Intl.NumberFormat("id-ID", { style : 'currency', currency:'IDR', minimumFractionDigits: 0 }).format(number);
         if (isNaN(number)) {
-            return number;
+            return number+",-";
         }else{
             return 0;
         }
+    }
+
+    function formatAngkaSimple(number) {
+        var formatter = new Intl.NumberFormat('de-DE');
+        return formatter.format(number);
     }
 
     function formatTanggal(date) {

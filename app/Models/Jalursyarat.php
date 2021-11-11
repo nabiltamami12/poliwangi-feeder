@@ -20,4 +20,9 @@ class Jalursyarat extends Model
         "id_jalur",
         "id_syarat"
     ];
+
+    public function rSyarat()
+    {
+        return $this->belongsTo(Syarat::class, 'id_syarat');
+    }
 }

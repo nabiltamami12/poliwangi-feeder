@@ -43,7 +43,8 @@
           <label for="nim">Pilih Mahasiswa</label>
           <select class="form-control" id="nim" name="nim"></select>
         </div>
-        <div class="detail_dokumen d-flex align-items-center justify-content-between mt-3">
+        <!-- <label class="mt-3">Pilih Surat Pengajuan</label>
+        <div class="detail_dokumen d-flex align-items-center justify-content-between">
           <form>
             <span>
               <i class="iconify mr-2" data-icon="bx:bxs-file-pdf" data-inline="false"></i>
@@ -54,8 +55,8 @@
           <button type="button" class="custom-btn">
             <i class="iconify text-primary" data-icon="bx:bx-cloud-upload" data-inline="false"></i>
           </button>
-        </div>
-        <p class="mt-3">Kedua bidang di atas harus diisi.<br>Status piutang mahasiswa akan <b>pending</b> sampai mahasiswa upload berkas surat perjanjian dan keuangan memasukkan data cicilan.</p>
+        </div> -->
+        <p class="mt-3">Status piutang mahasiswa akan <b>pending</b> sampai mahasiswa upload berkas surat perjanjian dan keuangan memasukkan data cicilan.</p>
         <div class="modal_button mt-4-5 d-flex justify-content-between">
           <button type="button" class="btn btn-outline-placeholder rounded-sm w-100 mr-2 mr-md-3" data-dismiss="modal">Kembali</button>
           <button onclick="simpanPiutangBaru()" class="submit btn btn-success rounded-sm w-100 ml-2 ml-md-3">Simpan</button>
@@ -64,7 +65,7 @@
     </div>
   </div>
 
-  <div class="row equal-cols">
+  <div class="row equal-cols" style="display: none">
     <div class="col-sm-6 col-lg-4">
       <div class="card card-stats mb-0">
         <div class="card-body">
@@ -147,7 +148,7 @@
               </button>
               <a href="javascript:masukkanMahasiswa()" class="btn btn-primary mt-3 mt-md-0">
                 <i class="iconify-inline mr-1" data-icon="carbon:download-study"></i>
-                Masukkan Mahasiswa
+                Tambah Piutang
               </a>
 
               <!-- <div class="dropdown">
@@ -217,7 +218,7 @@ dt_url = `${url_api}/keuangan/list_cicilan`;
       },{
         "aTargets": [2],
         "mData": null,
-        "className": 'text-center px-2',
+        "className": 'px-2',
         "mRender": function(data, type, full) {
           res = data['nama'];
           return res;
@@ -263,7 +264,7 @@ dt_url = `${url_api}/keuangan/list_cicilan`;
           var id = data['id'];
           var id_mahasiswa = data['id_mahasiswa'];
           var btn_update = `
-                  <a class="btn btn-primary" href="{{url('')}}/keuangan/rekapitulasi/piutangmahasiswa/detail/${id}">
+                  <a class="btn btn-sm btn-primary" href="{{url('')}}/keuangan/rekapitulasi/piutangmahasiswa/detail/${id}">
                     <i class="iconify mr-1" data-icon="bx:bxs-user-detail"></i>
                     <span class="text-white">Detail Piutang</span>
                   </a>`
@@ -274,56 +275,56 @@ dt_url = `${url_api}/keuangan/list_cicilan`;
   $(document).ready(function () {
     getInfo()
 
-    $('#jumlah_cicilan').on('change',function (e) {
-      $('#list_cicilan').html('')
-      var html = '';
-      for (let index = 1; index <= $(this).val(); index++) {
-        html += `<div class="form-row mt-4-5">
-              <div class="col-md-6 pr-0 pr-md-2">
-                <label for="tanggal_${index}">Tanggal Jatuh Tempo ke-${index}</label>
-                <input type="date" id="tanggal_${index}" class="form-control">
-              </div>
-              <div class="col-md-6 pl-0 pl-md-2 mt-3 mt-md-0">
-                <label for="nominal_${index}">Nominal ke-${index}</label>
-                <input type="text" class="form-control text-right" id="nominal_${index}" placeholder="Rp. x.xxx.xxx">
-              </div>
-            </div>`
-      }
-      $('#list_cicilan').append(html);
-    })
+    // $('#jumlah_cicilan').on('change',function (e) {
+    //   $('#list_cicilan').html('')
+    //   var html = '';
+    //   for (let index = 1; index <= $(this).val(); index++) {
+    //     html += `<div class="form-row mt-4-5">
+    //           <div class="col-md-6 pr-0 pr-md-2">
+    //             <label for="tanggal_${index}">Tanggal Jatuh Tempo ke-${index}</label>
+    //             <input type="date" id="tanggal_${index}" class="form-control">
+    //           </div>
+    //           <div class="col-md-6 pl-0 pl-md-2 mt-3 mt-md-0">
+    //             <label for="nominal_${index}">Nominal ke-${index}</label>
+    //             <input type="text" class="form-control text-right" id="nominal_${index}" placeholder="Rp. x.xxx.xxx">
+    //           </div>
+    //         </div>`
+    //   }
+    //   $('#list_cicilan').append(html);
+    // })
 
-    $('#btn_simpan').on('click',function (e) {
-      var arr_tanggal = [];
-      var arr_nominal = [];
-      var jml_tanggal = $('#jumlah_cicilan').val();
-      var id_piutang = $('#id_piutang').val();
-      var id_mahasiswa = $('#id_mahasiswa').val();
-      for (let index = 1; index <= jml_tanggal; index++) {
-        var key = arr_tanggal.indexOf($('#tanggal_'+index).val());
-        if(key !== -1){
-          arr_nominal[key] = $('#nominal_'+index).val()
-        } else{
-          arr_tanggal.push($('#tanggal_'+index).val());
-          arr_nominal.push($('#nominal_'+index).val());
-        }
-      }
-      var arr = {
-        'tenor' : jml_tanggal,
-        'id_mahasiswa' : id_mahasiswa,
-        'tanggal' : arr_tanggal,
-        'nominal' : arr_nominal,
-      }
-      $.ajax({
-          url: url_api+"/keuangan/cicilan/"+id_piutang,
-          type: 'post',
-          dataType: 'json',
-          data: arr,
-          success: function(res) {
-            console.log(res)
-            location.reload()
-          }
-      })
-    })
+    // $('#btn_simpan').on('click',function (e) {
+    //   var arr_tanggal = [];
+    //   var arr_nominal = [];
+    //   var jml_tanggal = $('#jumlah_cicilan').val();
+    //   var id_piutang = $('#id_piutang').val();
+    //   var id_mahasiswa = $('#id_mahasiswa').val();
+    //   for (let index = 1; index <= jml_tanggal; index++) {
+    //     var key = arr_tanggal.indexOf($('#tanggal_'+index).val());
+    //     if(key !== -1){
+    //       arr_nominal[key] = $('#nominal_'+index).val()
+    //     } else{
+    //       arr_tanggal.push($('#tanggal_'+index).val());
+    //       arr_nominal.push($('#nominal_'+index).val());
+    //     }
+    //   }
+    //   var arr = {
+    //     'tenor' : jml_tanggal,
+    //     'id_mahasiswa' : id_mahasiswa,
+    //     'tanggal' : arr_tanggal,
+    //     'nominal' : arr_nominal,
+    //   }
+    //   $.ajax({
+    //       url: url_api+"/keuangan/cicilan/"+id_piutang,
+    //       type: 'post',
+    //       dataType: 'json',
+    //       data: arr,
+    //       success: function(res) {
+    //         console.log(res)
+    //         location.reload()
+    //       }
+    //   })
+    // })
 
     $("#nim").select2({
       ajax: {
@@ -440,28 +441,26 @@ dt_url = `${url_api}/keuangan/list_cicilan`;
   })
 
   function simpanPiutangBaru() {
-    if ($('#masukkanMahasiswa [name="nim"]').val() == null || $('#masukkanMahasiswa [name="file"]').prop('files')[0] == undefined) {
+    if ($('#masukkanMahasiswa [name="nim"]').val() == null) {
       return false
     }
-    var file_data = $('#masukkanMahasiswa [name="file"]').prop('files')[0];   
+    // var file_data = $('#masukkanMahasiswa [name="file"]').prop('files')[0];   
     var id_mahasiswa = $('#masukkanMahasiswa [name="nim"]').val();   
     var form_data = new FormData();                  
-    form_data.append('file', file_data);
-    console.log(form_data)
-    return false
-
-
-    // $.ajax({
-    //     url: url_api+"/keuangan/template-perjanjian",
-    //     dataType: 'json',
-    //     cache: false,
-    //     contentType: false,
-    //     processData: false,
-    //     data: form_data,                         
-    //     type: 'post',
-    //     success: function(res){
-    //     }
-    // });
+    // form_data.append('file', file_data);
+    form_data.append('id_mahasiswa', id_mahasiswa);
+    $.ajax({
+        url: url_api+"/keuangan/perjanjian",
+        dataType: 'json',
+        cache: false,
+        contentType: false,
+        processData: false,
+        data: form_data,
+        type: 'post',
+        success: function(res){
+          location.reload()
+        }
+    });
   }
 </script>
 @endsection

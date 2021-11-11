@@ -1,9 +1,15 @@
 @extends('layouts.main')
 
+@section('style')
+  <link href="{{ asset('css/loading.css') }}" rel="stylesheet">
+@endsection
+
 @section('content')
 
 <!-- Header -->
 <header class="header"></header>
+
+<div id="loading"></div>
 
 <!-- Page content -->
 <section class="page-content container-fluid">
@@ -73,6 +79,7 @@
 
 <!-- Modal Add -->
 <div class="modal fade" id="modalAdd" tabindex="-1" aria-labelledby="modalAddlLabel" aria-hidden="true">
+  <div id="loadingAdd"></div>
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
@@ -116,6 +123,7 @@
 
 <!-- Edit Modal -->
 <div class="modal" id="modalEdit" tabindex="-1" aria-labelledby="modalEditlLabel" aria-hidden="true">
+  <div id="loadingEdit"></div>
   <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
           <div class="modal-header">
@@ -148,6 +156,7 @@
  
 <!-- Delete Modal -->
 <div class="modal fade" id="modalDelete" tabindex="-1" aria-labelledby="modalDeletelLabel" aria-hidden="true">
+  <div id="loadingDelete"></div>
   <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
           <div class="modal-header">
@@ -293,8 +302,8 @@
         "order": [[ 0, "desc" ]],
         ajax: '{{ route('get-pangkat') }}',
         columns: [
-            {data: null, name: 'no', render: function(data, type, row) {return no++;}},
-            {data: 'nama_pangkat', name: 'pangkat'},
+            {data: null, name: 'no', sortable: false, render: function(data, type, row, meta) {return meta.row + meta.settings._iDisplayStart + 1;}},
+            {data: 'nama_pangkat', name: 'nama_pangkat'},
             {data: 'golongan', name: 'golongan'},
             {data: 'urut', name: 'urut'},
             {data: 'Aksi', name: 'Aksi',orderable:false,serachable:false,sClass:'text-center'},
@@ -302,7 +311,9 @@
     });
 
     $('#SubmitAddForm').click(function(e) {
+        $("#loadingAdd").addClass("lds-dual-ring"); 
         e.preventDefault();
+        $("body").addClass("loading"); 
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -317,22 +328,23 @@
                 urut: $('#urut').val(),
             },
             success: function(result) {
-                if(result.errors) {
-                    $('.alert-danger').html('');
-                    $.each(result.errors, function(key, value) {
-                        $('.alert-danger').show();
-                        $('.alert-danger').append('<strong><li>'+value+'</li></strong>');
-                    });
-                } else {
-                    $('.alert-danger').hide();
-                    $('.alert-success').show();
-                    $('#datatable').DataTable().ajax.reload();
-                    setInterval(function(){ 
-                        $('.alert-success').hide();
-                        $('#modalAdd').modal('hide');
-                        location.reload();
-                    }, 1000);
-                }
+              if(result.errors) {
+                  $('.alert-danger').html('');
+                  $.each(result.errors, function(key, value) {
+                      $('.alert-danger').show();
+                      $('.alert-danger').append('<strong><li>'+value+'</li></strong>');
+                  });
+                  $("#loadingAdd").removeClass("lds-dual-ring"); 
+              } else {
+                  $('.alert-danger').hide();
+                  $('.alert-success').show();
+                  $('#datatable').DataTable().ajax.reload();
+                  setInterval(function(){ 
+                      $('.alert-success').hide();
+                      $('#modalAdd').modal('hide');
+                      location.reload();
+                  }, 1000);
+              }
             }
         });
     });
@@ -343,6 +355,7 @@
 
     var id;
     $('body').on('click', '#getEditPangkatData', function(e) {
+        $("#loading").addClass("lds-dual-ring"); 
         // e.preventDefault();
         $('.alert-danger').html('');
         $('.alert-danger').hide();
@@ -354,15 +367,15 @@
             //     id: id,
             // },
             success: function(result) {
-                console.log(result);
                 $('#EditModalBody').html(result.html);
+                $("#loading").removeClass("lds-dual-ring");
                 $('#modalEdit').show();
             }
         });
     });
 
-    // Update article Ajax request.
     $('#SubmitEditForm').click(function(e) {
+        $("#loadingEdit").addClass("lds-dual-ring"); 
         e.preventDefault();
         $.ajaxSetup({
             headers: {
@@ -380,6 +393,7 @@
             success: function(result) {
                 if(result.errors) {
                     $('.alert-danger').html('');
+                    $("#loading").removeClass("lds-dual-ring"); 
                     $.each(result.errors, function(key, value) {
                         $('.alert-danger').show();
                         $('.alert-danger').append('<strong><li>'+value+'</li></strong>');
@@ -398,12 +412,12 @@
         });
     });
 
-    // Delete article Ajax request.
     var deleteID;
     $('body').on('click', '#getDeleteId', function(){
         deleteID = $(this).data('id');
     })
     $('#SubmitDeleteForm').click(function(e) {
+        $("#loadingDelete").addClass("lds-dual-ring"); 
         e.preventDefault();
         var id = deleteID;
         $.ajaxSetup({

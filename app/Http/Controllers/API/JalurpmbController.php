@@ -30,6 +30,24 @@ class JalurpmbController extends Controller
     {
         try {
             $jalur_pmb = Jalurpmb::get();
+            
+            $this->data = $jalur_pmb;
+            $this->status = "success";
+        } catch (QueryException $e) {
+            $this->status = "failed";
+            $this->error = $e;
+        }
+        return response()->json([
+            "status" => $this->status,
+            "data" => $this->data,
+            "error" => $this->error
+        ]);
+    }
+
+    public function get_register()
+    {
+        try {
+            $jalur_pmb = Jalurpmb::get();
             $politeknik = DB::table('politeknik')->get();
             $politeknik_jurusan = DB::table('politeknik_jurusan as pj')->select('pj.*','p.politeknik')->join('politeknik as p','p.id','=','pj.id_politeknik')->get();
             $jurusan = Jurusan::where('jurusan', '!=', '')->get();
