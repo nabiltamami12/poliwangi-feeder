@@ -179,7 +179,15 @@ class MahasiswaController extends Controller
 	public function show($id)
 	{
 		try {
-			$data = Mahasiswa::where("nomor", $id)->get();
+			$data = Mahasiswa::where("nomor", $id)->first();
+			if ($data) {
+				$data->tglmasuk = $data->tglmasuk ? date('Y-m-d', strtotime($data->tglmasuk)) : '';
+				$data->tgllulus = $data->tgllulus ? date('Y-m-d', strtotime($data->tgllulus)) : '';
+				$data->tglterbit = $data->tglterbit ? date('Y-m-d', strtotime($data->tglterbit)) : '';
+				$data->tgllahir = $data->tgllahir ? date('Y-m-d', strtotime($data->tgllahir)) : '';
+				$data->tanggal_lahir_ayah = $data->tanggal_lahir_ayah ? date('Y-m-d', strtotime($data->tanggal_lahir_ayah)) : '';
+				$data->tanggal_lahir_ibu = $data->tanggal_lahir_ibu ? date('Y-m-d', strtotime($data->tanggal_lahir_ibu)) : '';
+			}
 			$this->data = $data;
 			$this->status = "success";
 		} catch (QueryException $e) {
