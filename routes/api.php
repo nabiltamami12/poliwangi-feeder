@@ -210,7 +210,7 @@ Route::prefix('v1')->group(function () {
     Route::delete('/jurusanpilihan/{id}', [Ctr\JurusanpilihanController::class, 'destroy']);
     //syarat
     Route::get('/syarat', [Ctr\SyaratController::class, 'index']);
-    Route::get('/syarat-pendaftar', [Ctr\SyaratController::class,'get_syarat_pendaftar']);
+    Route::get('/syarat-pendaftar', [Ctr\SyaratController::class, 'get_syarat_pendaftar']);
     Route::get('/syarat/{id}', [Ctr\SyaratController::class, 'show']);
     Route::post('/syarat', [Ctr\SyaratController::class, 'store']);
     Route::put('/syarat/{id}', [Ctr\SyaratController::class, 'update']);
@@ -308,6 +308,12 @@ Route::prefix('v1')->group(function () {
     // example use bni api
     Route::get('/test', [Ctr\MahasiswaController::class, 'create_va']);
     Route::post('/test/{id}', [Ctr\BerkasKeuanganController::class, 'detail_cicilan']);
+
+    // Perwalian Dosen
+    Route::get('/dosen/perwalian', [Ctr\PerwalianController::class, 'dosenPerwalian']);
+    Route::put('/dosen/perwalian/change_status/{id}', [Ctr\PerwalianController::class, 'change_status']);
+    // Perwalian Admin
+    Route::get('/admin/perwalian', [Ctr\PerwalianController::class, 'adminPerwalian']);
 });
 
 Route::prefix('v1')->middleware('auth:api')->group(function () {
