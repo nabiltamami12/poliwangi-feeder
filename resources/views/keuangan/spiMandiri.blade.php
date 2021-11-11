@@ -15,11 +15,11 @@
               <h2 class="mb-0 text-center text-md-left">Data Sumbangan Pengembangan Institusi</h2>
             </div>
             <div class="col-12 col-md-6 text-center text-md-right mt-3 mt-md-0">
-              <!-- <form id="form_cu" enctype="multipart/form-data">
+              <form id="form_cu" enctype="multipart/form-data">
                 @csrf
               <input type="file" name="file" id="file" onchange="clickButton()" hidden>
               <input type="submit" value="submit" id="submit" hidden>
-              </form> -->
+              </form>
               
               <a href="{{url('/template/template-spi.xlsx')}}" class="btn btn-primary" target="_blank">
                 <i class="iconify-inline mr-1" data-icon="bx:bxs-download"></i>
