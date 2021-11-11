@@ -44,13 +44,16 @@ class SpiController extends Controller
         $finalArr = array();
 
         foreach ($container as $key=>$value) {
-            $id_mahasiswa = DB::table('mahasiswa')->select('nomor')->where('nrp', $container[$key]['nim'])->first()->nomor;
+            $mhs = DB::table('mahasiswa')->select('nomor', 'program_studi')->where('nrp', $container[$key]['nim'])->first();
+            $id_mahasiswa = $mhs->nomor;
+            $program_studi = $mhs->program_studi;
+            $tarif_spi = DB::table('tarif_kelompok')->select('spi')->where('program_studi', $program_studi)->first()->spi;
             Spi::where('id_mahasiswa', $id_mahasiswa)->delete();
             $container[$key]['tgl_pembayaran'] = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject( $container[$key]['tgl_pembayaran'])->format('Y-m-d');
 
             array_push($finalArr, [
                 'id_mahasiswa' => $id_mahasiswa,
-                'tarif' => $container[$key]['tarif_spi'],
+                'tarif' => $tarif_spi,
                 'pembayaran' => $container[$key]['pembayaran_spi'],
                 'tanggal_pembayaran' => $container[$key]['tgl_pembayaran'],
                 'piutang' => $container[$key]['piutang']
@@ -83,8 +86,8 @@ class SpiController extends Controller
         ]);
     }
 
-    public function export($tahun,$prodi) {
-        if ($tahun == null || $prodi == null) {
+    public function export($prodi) {
+        if ($prodi == null) {
             return response()->json([
                 'status' => 'error', 
                 "data" => null, 
@@ -92,8 +95,8 @@ class SpiController extends Controller
         } else {
             $get = DB::table('program_studi')->select('program_studi')->where('nomor', $prodi)->get();
             $program_studi =  strtoupper($get[0]->program_studi);
-            $filename = "rekapspi_{$tahun}_".strtolower(str_replace(' ', '_',  $program_studi)).".xlsx";
-            return Excel::download(new SpiExport($tahun, $prodi, $program_studi), $filename);
+            $filename = "rekapspi_".strtolower(str_replace(' ', '_',  $program_studi)).".xlsx";
+            return Excel::download(new SpiExport($prodi, $program_studi), $filename);
         }
     }
 
