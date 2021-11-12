@@ -256,7 +256,8 @@ Route::prefix('v1')->group(function () {
     Route::delete('/keuangan/rekap_ukt/{id}', [Ctr\UktController::class, 'destroy']);
     Route::get('/keuangan/detail', [Ctr\UktController::class, 'details']);
     Route::put('/keuangan/set-ukt/{id}', [Ctr\UktController::class, 'set_ukt_mahasiswa']);
-    Route::get('keuangan/atur-mahasiswa', [Ctr\UktController::class, 'atur_mahasiswa']); //keuangan/rekapitulasi/datamahasiswa
+    Route::post('keuangan/atur-mahasiswa', [Ctr\UktController::class, 'atur_mahasiswa']); //keuangan/rekapitulasi/datamahasiswa
+    Route::get('/keuangan/rangkuman/{id}', [Ctr\UktController::class, 'rangkuman']);
 
 
     // SPI Mandiri
