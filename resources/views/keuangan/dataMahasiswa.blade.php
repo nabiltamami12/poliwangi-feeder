@@ -104,6 +104,44 @@
 		</div>
 	</div>
 </div>
+<div class="modal fade" id="rangkumanModal" tabindex="-1" aria-labelledby="rangkumanModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered modal-lg">
+		<div class="modal-content p-0 padding--medium">
+			<input type="hidden" id="id_delete">
+			<input type="hidden" id="endpoint">
+
+			<div class="modal-header">
+				<p class="text-center">
+					<h5 class="modal-title text-warning text-center">Rangkuman Pembayaran</h5>
+				</p>
+			</div>
+			<div class="modal-body">
+			<input type="hidden" id="id_mahasiswa">
+				<h4 class="mb-0 mb-2">NIM Mahasiswa</h4>
+				<h5 class="mb-0 mb-3 nomor_mahasiswa" style="font-weight:400;">201231248</h5>
+				<h4 class="mb-0 mb-2">Nama Mahasiswa</h4>
+				<h5 class="mb-0 mb-3 nama_mahasiswa" style="font-weight:400;">201231248</h5>
+				<h4 class="mb-0 mb-2">Program Studi Mahasiswa</h4>
+				<h5 class="mb-0 mb-3 prodi_mahasiswa" style="font-weight:400;">201231248</h5>
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Semester</th><th>Nominal</th><th>Tanggal</th>
+						</tr>
+					</thead>
+					<tbody>
+					</tbody>
+				</table>
+				<div class="row">
+					<div class="col-md-12">
+						<button type="button" class="btn btn-modal-cancel" data-dismiss="modal">Tutup</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 </section>
 <script>
 	var f_status = document.getElementById('status');
@@ -174,6 +212,27 @@
 		});
 	}
 
+	function rangkuman_modal(id_mahasiswa,nim,nama,prodi) {
+		$.ajax({
+			url: url_api+"/keuangan/rangkuman/"+id_mahasiswa,
+			type: 'get',
+			dataType: 'json',
+			data: {},
+			headers: {},
+			success: function(res) {
+				if (res.status=="success") {	
+					$('#rangkumanModal .nama_mahasiswa').text(nama)
+					$('#rangkumanModal .nomor_mahasiswa').text(nim)
+					$('#rangkumanModal .prodi_mahasiswa').text(prodi)
+					for (var i = res.data.length - 1; i >= 0; i--) {
+						$('#rangkumanModal table tbody').append('<tr><td>'+res.data[i].semester+'</td><td>'+res.data[i].nominal+'</td><td>'+res.data[i].created_at+'</td></tr>')	
+					}
+				}
+				$('#rangkumanModal').modal('show')
+			}
+		});
+	}
+
 	function func_simpan() {
 		var id_mahasiswa = $('#id_mahasiswa').val()
 		var kelompok_ukt = $('#kelompok_ukt').val()
@@ -194,8 +253,8 @@
 			}
 		});
 	}
-
 	function setDatatable() {
+		dt_type = 'post'
 		dt_url = `${url_api}/keuangan/atur-mahasiswa?status=${f_status.value}&program_studi=${f_prodi.value}&angkatan=${f_angkatan.value}&kelas=${f_kelas.value}`;
 		dt_opt = {
 			serverSide: true,

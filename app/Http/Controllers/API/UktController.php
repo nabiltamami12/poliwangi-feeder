@@ -255,6 +255,10 @@ class UktController extends Controller
 				$row[] = '<span id="btn_'.$list->nomor.'" style="cursor:pointer" onclick="func_modal(\''.$list->program_studi.'\',\''.$list->nomor.'\',\''.$list->nrp.'\',\''.$list->nama.'\',\''.$list->prodi.'\',\''.$list->ukt_kelompok.'\')" data-id="'.$list->nomor.'" class="badge btn-info_transparent text-primary">
 					<i class="iconify-inline" data-icon="ant-design:setting-outlined"></i>
 					<span class="text-capitalize text-primary">Setting</span>
+				</span>
+				<span id="rangkuman_'.$list->nomor.'" style="cursor:pointer" onclick="rangkuman_modal(\''.$list->nomor.'\',\''.$list->nrp.'\',\''.$list->nama.'\',\''.$list->prodi.'\')" data-id="'.$list->nomor.'" class="badge btn-info_transparent text-primary">
+					<i class="iconify-inline" data-icon="ant-design:eye-outlined"></i>
+					<span class="text-capitalize text-primary">Rangkuman</span>
 				</span>';
 				$data[] = $row;
 			}
@@ -272,6 +276,20 @@ class UktController extends Controller
 		}
         return response()->json([
             "status" => $this->status,
+            "data" => $this->data,
+            "error" => $this->error
+        ]);
+    }
+
+    public function rangkuman($id_mahasiswa)
+    {
+    	$this->data = DB::table('keuangan_pembayaran AS kpb')->select(
+    		DB::raw('CAST(IFNULL(kpb.semester, (SELECT hitung_semester(CONCAT(kp.tahun, kp.semester), (SELECT YEAR(tglmasuk) FROM mahasiswa WHERE nomor = kpb.id_mahasiswa)))) AS INTEGER) semester'),
+    		DB::raw('SUM(kpb.nominal) nominal'),
+    		DB::raw('MAX(kpb.created_at) created_at')
+    	)->leftJoin('keuangan_piutang AS kp', 'kp.id', '=', 'kpb.id_piutang')->where('kpb.id_mahasiswa', $id_mahasiswa)->where('kpb.status', '!=', null)->groupBy('kpb.semester')->orderByDesc('kpb.id')->get();
+    	return response()->json([
+            "status" => 'success',
             "data" => $this->data,
             "error" => $this->error
         ]);
