@@ -6,6 +6,34 @@
 
 <!-- Page content -->
 <section class="page-content container-fluid">
+  <!-- Modal -->
+  <div class="modal fade" id="daftarUlang_unggahDokumen" tabindex="-1" aria-labelledby="daftarUlang_unggahDokumenLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content p-0 padding--medium">
+        <div class="modal-header">
+          <h5 class="modal-title my-3 mx-auto">Upload Berkas</h5>
+        </div>
+        <div class="modal-body">
+          <div style="margin-top: 0px !important;" class="form-group detail_dokumen d-flex justify-content-center align-items-center p-4" id="trigger-browse" style="cursor: pointer;">
+            <form class="d-none" onchange="showfilename()">
+              <i class="iconify mr-2" data-icon="bx:bxs-file-pdf" data-inline="false"></i>
+              <input type="file" id="file" hidden />
+              <span id="custom-text" class="nama_dokumen">tidak ada file dipilih</span>
+            </form>
+            <button type="button" id="custom-btn">
+              <i class="iconify text-primary" data-icon="bx:bx-cloud-upload" data-inline="false"></i>
+            </button>
+          </div>
+          <p class="mt-2 mb-0 font-italic jenis_dokumen">Upload Document dengan format .pdf (Max size 10MB)</p>
+        </div>
+        <div class="modal-footer pt-3">
+          <button type="button" class="btn btn-primary w-100 rounded-sm" id="btn-upload">Upload</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="row">
     <div class="col-xl-12">
       <div class="card shadow padding--small card_step">
@@ -30,8 +58,7 @@
 
   <div class="tab-content" id="pills-tabContent">
     {{-- TAB DATA CALON PESERTA DIDIK --}}
-    <div class="tab-pane fade show active" id="pills-dataCalonPendaftar" role="tabpanel"
-    aria-labelledby="pills-dataCalonPendaftar-tab">
+    <div class="tab-pane fade show active" id="pills-dataCalonPendaftar" role="tabpanel"aria-labelledby="pills-dataCalonPendaftar-tab">
     <div class="row">
       <div class="col-xl-12">
         <div class="tab-body">
@@ -174,45 +201,67 @@
               <hr class="my-4">
             </div>
             <div class="card-body p-0">
-              <form class="form_data">
-                <div class="form-row">
-                  <div class="col-md-6 form-group pr-md-2">
-                    <label>Foto Calon Peserta Didik</label>
-                    <div class="input_file">
-                      <label for="file-input-foto">
-                        <i class="iconify fileUpload-icon" data-icon="bx:bx-image-add"></i>
-                      </label>
-                    </div>
-                    <input type="file" class="form-control-file" id="file-input-foto" name="foto" hidden>
-                  </div>
+              <div class="form-row table-responsive">
+                <table class="table align-items-center table-borderless table-flush table-hover">
+                  <thead class="table-header">
+                    <tr>
+                      <th scope="col" class="text-center px-2">No</th>
+                      <th scope="col" style="width: 58%">Keterangan</th>
+                      <th scope="col" class="text-center px-2">Tipe</th>
+                      <th scope="col">File</th>
+                      <th scope="col" class="text-center">Status</th>
+                    </tr>
+                  </thead>
+                  <tbody class="table-body table-body-lg">
 
-                  <div class="col-md-6 form-group mt-3 mt-md-0 pr-0 pr-md-1 pl-md-2">
-                    <label>Foto Ijazah</label>
-                    <div class="input_file">
-                      <label for="file-input-ijazah">
-                        <i class="iconify fileUpload-icon" data-icon="bx:bx-image-add"></i>
-                      </label>
-                    </div>
-                    <input type="file" class="form-control-file" id="file-input-ijazah" name="ijasah" hidden>
-                  </div>
-                </div>
+                    @php
+                      $arr_berkas = [
+                        [
+                          'title' => 'Foto Calon Peserta Didik',
+                          'tipe' => 'Gambar',
+                          'berkas' => 'foto',
+                        ],
+                        [
+                          'title' => 'Foto Ijazah',
+                          'tipe' => 'Gambar',
+                          'berkas' => 'ijasah',
+                        ],
+                        [
+                          'title' => 'Surat Pernyataan Taat Peraturan',
+                          'tipe' => 'Gambar',
+                          'berkas' => 'foto_peraturan',
+                        ],
+                      ];
+                      for ($i=1; $i < 7; $i++) { 
+                        $arr_berkas[] = [
+                          'title' => 'Rapor Semester '.$i,
+                          'tipe' => 'Gambar',
+                          'berkas' => 'rapor_smtr'.$i,
+                        ];
+                      }
+                    @endphp
+                    @foreach ($arr_berkas as $key => $el)
+                    <tr>
+                      <td class="text-center px-2">{{$key+1}}</td>
+                      <td>
+                        <h2 class="mb-0">{{ $el['title'] }}</h2>
+                      </td>
+                      <td class="text-center px-2">{{ $el['tipe'] }}</td>
+                      <td>
+                        <span onclick="show_modal('{{ $el['berkas'] }}')" style="cursor: pointer;">
+                          <i class="iconify-inline mr-1 text-primary" data-icon="bx:bx-cloud-upload"></i>
+                          <span class="text-primary">Unggah Dokumen</span>
+                        </span>
+                      </td>
+                      <td class="text-center" id="status_{{ $el['berkas'] }}">
+                        <i class="iconify status-rejected" data-icon="bi:x-circle-fill"></i>
+                      </td>
+                    </tr>
+                    @endforeach
 
-                <div class="form-row">
-                  <div class="col-md-12 form-group p-0 mt-4">
-                    <label>Surat Pernyataan Taat Peraturan</label>
-                    <div class="input_file">
-                      <label for="file-input-peraturan">
-                        <i class="iconify fileUpload-icon" data-icon="bx:bx-image-add"></i>
-                      </label>
-                    </div>
-                    <input type="file" class="form-control-file" id="file-input-peraturan" name="foto_peraturan" hidden>
-                  </div>
-                </div>
-                <div class="form_action mt-4">
-                  <a class="btn btn-info btnPrevious rounded-sm">Sebelumnya</a>
-                  <button type="submit" class="btn btn-primary rounded-sm" id="submit-2">Simpan</button>
-                </div>
-              </form>
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         </div>
@@ -225,6 +274,7 @@
 
 @section('js')
 <script>
+  const arr_berkas = [ 'foto', 'ijasah', 'foto_peraturan', 'rapor_smtr1', 'rapor_smtr2', 'rapor_smtr3', 'rapor_smtr4', 'rapor_smtr5', 'rapor_smtr6' ];
   $.ajax({
     url: url_api+"/pendaftar",
     type: 'get',
@@ -240,33 +290,11 @@
         if($("[name='"+index+"']").length != 0){
           if (index == 'tgllahir') {
             $("[name='"+index+"']").datepicker('setDate', new Date(item));
-          }else if (index == 'foto'){
-            $('#file-input-foto').parent().find('.input_file').css(
-              {
-                'backgroundImage': 'url({{url("/")}}/pendaftar/'+item+')',
-                'backgroundSize': 'cover',
-                'backgroundPosition': 'center'
-              }
-              )
-          }else if (index == 'foto_peraturan'){
-            $('#file-input-peraturan').parent().find('.input_file').css(
-              {
-                'backgroundImage': 'url({{url("/")}}/pendaftar/'+item+')',
-                'backgroundSize': 'cover',
-                'backgroundPosition': 'center'
-              }
-              )
-          }else if (index == 'ijasah'){
-            $('#file-input-ijazah').parent().find('.input_file').css(
-              {
-                'backgroundImage': 'url({{url("/")}}/pendaftar/'+item+')',
-                'backgroundSize': 'cover',
-                'backgroundPosition': 'center'
-              }
-              )
-          }else{
+          } else{
             $("[name='"+index+"']").val(item)
           } 
+        } else if (arr_berkas.includes(index) && item) {
+          $('#status_'+index).html(`<i class="iconify status-success" data-icon="fluent:clock-20-filled"></i>`)
         }
       });
     }
@@ -278,25 +306,6 @@
       type: 'post',
       dataType: 'json',
       data: new FormData($('.form_data')[0]),
-      headers: {
-        'token': localStorage.getItem('pmb')
-      },
-      processData: false,
-      contentType: false,
-      beforeSend: function(text) {
-      },
-      success: function(res) {
-      }
-    });
-  });
-
-  $("#submit-2").on('click', function(e) {
-    e.preventDefault();
-    $.ajax({
-      url: url_api+"/pendaftar/update",
-      type: 'post',
-      dataType: 'json',
-      data: new FormData($('.form_data')[1]),
       headers: {
         'token': localStorage.getItem('pmb')
       },
@@ -415,5 +424,64 @@
     });
   })
 
+  /** browse file */
+  const inputFile = document.getElementById("file");
+  const customBtn = document.getElementById("custom-btn");
+  const customText = document.getElementById("custom-text");
+  document.getElementById('trigger-browse').addEventListener('click', function () {
+    inputFile.click();
+  })
+  customBtn.addEventListener("click", function () {
+    inputFile.click();
+  });
+  inputFile.addEventListener("change", function () {
+    if (inputFile.value) {
+      let fileName = inputFile.value.match(/[0-9a-zA-Z\^\&\'\@\{\}\[\]\,\$\=\!\-\#\(\)\.\%\+\~\_ ]+$/)[0];
+      customText.innerHTML = fileName;
+    } else {
+      customText.innerHTML = "tidak ada file dipilih";
+    }
+  });
+  const formWrapper = document.querySelector('.detail_dokumen');
+  const formUpload = document.querySelector(".detail_dokumen form");
+  function showfilename(){
+    formUpload.classList.remove('d-none');
+    formWrapper.classList.remove('justify-content-center');
+    formWrapper.classList.add('justify-content-between');
+  }
+  /** end browse file */
+
+  function show_modal(berkas) {
+    $('#file').val("");
+    customText.innerHTML = "tidak ada file dipilih";
+    $('#btn-upload').attr("onclick", `send('${berkas}')`);
+    $('#daftarUlang_unggahDokumen').modal('show');
+  }
+
+  function send(berkas) {
+    const fileupload = $('#file').prop('files')[0];
+    if (fileupload && fileupload!="" && berkas) {
+      let formData = new FormData();
+      formData.append('nama', berkas);
+      formData.append('file', fileupload);
+      $.ajax({
+        type: 'POST',
+        url: url_api+"/pendaftar/update-berkas",
+        data: formData,
+        cache: false,
+        processData: false,
+        contentType: false,
+        headers: {
+          'token': localStorage.getItem('pmb')
+        },
+        success: function (res) {
+          window.location.reload();
+        },
+        error: function () {
+          alert("Data Gagal Diupload");
+        }
+      });
+    }
+  }
 </script>
 @endsection

@@ -233,6 +233,7 @@ Route::prefix('v1')->group(function () {
     Route::get('/pendaftar', [Ctr\PendaftarController::class, 'show']);
     Route::post('/pendaftar', [Ctr\PendaftarController::class, 'store']);
     Route::post('/pendaftar/update', [Ctr\PendaftarController::class, 'update']);
+    Route::post('/pendaftar/update-berkas', [Ctr\PendaftarController::class, 'update_berkas']);
     Route::post('/login', [Ctr\PendaftarController::class, 'login']);
     Route::post('/pendaftar/check', [Ctr\PendaftarController::class, 'is_lunas']);
     Route::get('/pendaftar/keuangan', [Ctr\PendaftarController::class, 'keuangan']);

@@ -403,6 +403,13 @@ class PendaftarController extends Controller
 			$id = Crypt::decrypt($token);
 			$document = Pendaftar::where('nomor', $id)->get()->first();
 			unset($document->nodaftar, $document->nomor, $document->password);
+			$arr_berkas = [ 'foto', 'ijasah', 'foto_peraturan', 'rapor_smtr1', 'rapor_smtr2', 'rapor_smtr3', 'rapor_smtr4', 'rapor_smtr5', 'rapor_smtr6' ];
+			foreach ($arr_berkas as $v) {
+				$berkas = $document->$v;
+				if ( !$berkas || !file_exists(public_path('pendaftar/'.$berkas)) ) {
+					$document->$v = null;
+				}
+			}
 			$this->data = $document;
 			$this->status = "success";
 		} catch (QueryException $e) {
@@ -459,6 +466,56 @@ class PendaftarController extends Controller
 			'status' => 'success',
 			'data' => $update_data,
 			'messagge' => 'data berhasil di update'
+		]);
+	}
+
+	public function update_berkas(Request $request)
+	{
+		try {
+			$validator = Validator::make($request->all(), [
+				'nama' => 'required',
+				'file' => 'nullable|mimes:jpg,jpeg,png|max:2048'
+			]);
+
+			if ($validator->fails()) {
+				$error = $validator->errors()->all()[0];
+				return response()->json([
+					'status' => 'failed',
+					'message' => $error,
+					'data' => []
+				]);
+			} else {
+				$token = $request->header('token');
+				$id = Crypt::decrypt($token);
+
+				$pendaftar = Pendaftar::where('nomor', $id);
+				$files = $request->file('file');
+				if ($files && $request->file->isValid()) {
+					$nama_field = $request->nama;
+					$file_db = $pendaftar->first()->$nama_field;
+					$file_lama = $file_db ? public_path('pendaftar/'.$file_db) : null;
+					if ($file_lama && file_exists($file_lama)) unlink($file_lama);
+					$file_name = 'f0t0_pdftr_'.$request->nama.'_'.\App\Helpers\CoreHelper::base64url_encode($id).'_'.time().'.'.$files->getClientOriginalExtension();
+					$files->move(public_path('pendaftar'), $file_name);
+					$pendaftar->update([
+						$request->nama => $file_name
+					]);
+				}
+				return response()->json([
+					'status' => 'success',
+					'data' => [$request->nama => 'uploaded'],
+					'messagge' => 'berkas berhasil di update'
+				]);
+			}
+			$this->status = "success";
+		} catch (QueryException $e) {
+			$this->status = "failed";
+			$this->error = $e;
+		}
+		return response()->json([
+			"status" => $this->status,
+			"data" => $this->data,
+			"error" => $this->error
 		]);
 	}
 
