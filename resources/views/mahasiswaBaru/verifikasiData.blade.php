@@ -1,6 +1,108 @@
 @extends('layouts.mainMaba')
 
 @section('content')
+@php
+  $field_db = [
+    ["field" => "ummb", "title" => "UMMB"],
+    ["field" => "jurusan", "title" => "Jurusan"],
+    ["field" => "program", "title" => "Program"],
+    ["field" => "program_studi", "title" => "Program Studi 1"],
+    ["field" => "program_studi_2", "title" => "Program Studi 2"],
+    ["field" => "program_studi_luar", "title" => "Program Studi Luar"],
+    ["field" => "agama", "title" => "Agama"],
+    ["field" => "telp", "title" => "Telepon"],
+    ["field" => "spi", "title" => "SPI"],
+    ["field" => "nrp", "title" => "NIM"],
+    ["field" => "tahun_ajaran", "title" => "Tahun Ajaran"],
+    ["field" => "semester", "title" => "Semester"],
+    ["field" => "warga", "title" => "Warga"],
+    ["field" => "penghasilan", "title" => "Penghasilan"],
+    ["field" => "el", "title" => "EL"],
+    ["field" => "pmdk", "title" => "PMDK"],
+    ["field" => "gelombang", "title" => "Gelombang"],
+    ["field" => "bebas_spp", "title" => "Bebas SPP"],
+    ["field" => "bebas_ikoma", "title" => "Bebas Ikoma"],
+    ["field" => "bebas_kemahasiswaan", "title" => "Bebas Kemahasiswaan"],
+    ["field" => "bebas_spi", "title" => "Bebas SPI"],
+    ["field" => "keterangan_bebas_spi", "title" => "Keterangan Bebas SPI"],
+    ["field" => "alamat_smu", "title" => "Alamat SMU"],
+    ["field" => "nilai_ijazah", "title" => "Nilai Ijazah"],
+    ["field" => "nilai_uan", "title" => "Nilai UAN"],
+    ["field" => "darah", "title" => "Darah"],
+    ["field" => "prestasi_olahraga", "title" => "Prestasi Olahraga"],
+    ["field" => "nun", "title" => "NUN"],
+    ["field" => "nijazah", "title" => "Nijazah"],
+    ["field" => "ayah", "title" => "Ayah"],
+    ["field" => "kerja_ayah", "title" => "Kerja Ayah"],
+    ["field" => "keterangan_ayah", "title" => "Keterangan Ayah"],
+    ["field" => "ibu", "title" => "Ibu"],
+    ["field" => "kerja_ibu", "title" => "Kerja Ibu"],
+    ["field" => "keterangan_ibu", "title" => "Keteragnan Ibu"],
+    ["field" => "penghasilan_ibu", "title" => "Penghasilan Ibu"],
+    ["field" => "alamat_ortu", "title" => "Alamat Orang Tua"],
+    ["field" => "notelp_ortu", "title" => "Telepon Orang Tua"],
+    ["field" => "tanggal_ubah", "title" => "Tanggal Ubah"],
+    ["field" => "cadangan", "title" => "Cadangan"],
+    ["field" => "ukt", "title" => "UKT"],
+    ["field" => "bebas_ukt", "title" => "Bebas UKT"],
+    ["field" => "sekolah", "title" => "Sekolah"],
+    ["field" => "kode_transaksi", "title" => "Kode Transaksi"],
+    ["field" => "publik", "title" => "Publik"],
+    ["field" => "mahasiswa_jalur_penerimaan", "title" => "Mahasiswa Jalur Penerimaan"],
+    ["field" => "kota", "title" => "Kota"],
+    ["field" => "kota_ortu", "title" => "Kota Orang Tua"],
+    ["field" => "pendaftaran", "title" => "Pendaftaran"],
+    ["field" => "ikoma", "title" => "Ikoma"],
+    ["field" => "kemahasiswaan", "title" => "Kemahasiswaan"],
+    ["field" => "subkampus", "title" => "Sub Kampus"],
+    ["field" => "tanggal_transfer_spp", "title" => "Tanggal Transfer SPP"],
+    ["field" => "email", "title" => "Email"],
+    ["field" => "kelas_pagi_sore", "title" => "Kelas Pagi Sore"],
+    ["field" => "status_kawin", "title" => "Status Kawin"],
+    ["field" => "ukuran_baju", "title" => "Ukuran Baju"],
+    ["field" => "pernahpt", "title" => "Pernah PT"],
+    ["field" => "tahunmasuk_pt", "title" => "Tahun Masuk PT"],
+    ["field" => "jumlah_sks", "title" => "Jumlah SKS"],
+    ["field" => "pt_asal", "title" => "PT Asal"],
+    ["field" => "nunmapel", "title" => "NUN Mapel"],
+    ["field" => "nijazahmapel", "title" => "Nijazah Mapel"],
+    ["field" => "status_smu", "title" => "Status SMU"],
+    ["field" => "jurusan_smu", "title" => "Jurusan SMU"],
+    ["field" => "thlahirayah", "title" => "Tahun Lahir Ayah"],
+    ["field" => "pendidikanayah", "title" => "Pendidikan Ayah"],
+    ["field" => "thlahiribu", "title" => "Tahun Lahir Ibu"],
+    ["field" => "pendidikanibu", "title" => "Pendidikan Ibu"],
+    ["field" => "sumberbiaya", "title" => "Sumber Biaya"],
+    ["field" => "lembaga", "title" => "Lembaga"],
+    ["field" => "jenis_lembaga", "title" => "Jenis Lembaga"],
+    ["field" => "jenis_tempattinggal", "title" => "Jenis Tempat Tinggal"],
+    ["field" => "transportasi", "title" => "Transportasi"],
+    ["field" => "minat", "title" => "Minat"],
+    ["field" => "infopolije", "title" => "Info Polije"],
+    ["field" => "biaya_lain", "title" => "Biaya Lain"],
+    ["field" => "ukt3", "title" => "UKT 3"],
+    ["field" => "ukt4", "title" => "UKT 4"],
+    ["field" => "ukt5", "title" => "UKT 5"],
+    ["field" => "feeder_wilayah", "title" => "Feeder Wilayah"],
+    ["field" => "nomor_ukt", "title" => "Nomor UKT"],
+    ["field" => "bidikmisi", "title" => "Bidikmisi"],
+    ["field" => "rata_sem_1", "title" => "Rata-rata Semester 1"],
+    ["field" => "rata_sem_2", "title" => "Rata-rata Semester 2"],
+    ["field" => "rata_sem_3", "title" => "Rata-rata Semester 3"],
+    ["field" => "rata_sem_4", "title" => "Rata-rata Semester 4"],
+    ["field" => "rata_sem_5", "title" => "Rata-rata Semester 5"],
+    ["field" => "rata_sem_6", "title" => "Rata-rata Semester 6"],
+    ["field" => "kap_bidikmisi", "title" => "Kap Bidikmisi"],
+    ["field" => "noref_bank", "title" => "Noref Bank"],
+    ["field" => "tanggal_transfer", "title" => "Tanggal Transfer"],
+    ["field" => "pembayaran", "title" => "Pembayaran"],
+    ["field" => "scan_pembayaran", "title" => "Scan Pembayaran"],
+    ["field" => "jurusan_asal", "title" => "Jurusan Asal"],
+    ["field" => "prestasi", "title" => "Prestasi"],
+    ["field" => "jalur_daftar", "title" => "Jalur Daftar"],
+  ];
+@endphp
+
 <!-- Header -->
 <header class="header"></header>
 
@@ -176,8 +278,26 @@
                       <input type="text" class="form-control" id="kode-pos" placeholder="65122">
                     </div>
                   </div>
-                  <a class="btn btn-success btnNext rounded-sm mt-4-5 w-100 text-white" id="submit-1">Selanjutnya</a>
                 </div>
+
+                <div class="alamat_calonMahasiswa">
+                  <div class="row mt-4-5">
+                    <div class="col">
+                      <h2 class="card_title">Data Diri</h2>
+                    </div>
+                  </div>
+                  <hr class="my-4">
+                  <div class="form-row">
+                    @foreach ($field_db as $e)
+                    <div class="col-md-6 p-0 form-group">
+                      <label for="alamat">{{ $e['title'] }}</label>
+                      <input type="text" class="form-control" id="{{ $e['field'] }}" name="{{ $e['field'] }}">
+                    </div>
+                    @endforeach
+                  </div>
+                </div>
+
+                <a class="btn btn-success btnNext rounded-sm mt-4-5 w-100 text-white" id="submit-1">Selanjutnya</a>
               </form>
             </div>
           </div>
