@@ -342,8 +342,12 @@ class PendaftarController extends Controller
 		$document->ibu = $request->ibu;
 		$document->notelp_ortu = $request->notelp_ortu;
 		$document->email = $request->email;
-		// $document->password = Hash::make($request->password);
-		$document->trx_amount = Jalurpmb::select('biaya')->where('id', $request->jalur_daftar)->get()->first()->biaya;
+		if ($request->jalur_daftar == 1) {
+			$document->trx_amount = \App\Models\SettingBiaya::where('nama', 'biaya-pendaftaran-smpbn')->first()->nilai;
+		}else{
+			$document->trx_amount = \App\Models\SettingBiaya::where('nama', 'biaya-pendaftaran-umpn')->first()->nilai;
+		}		
+		$document->tahun_ajaran = DB::table('periode')->select('tahun')->where('status', '1')->get()->first()->tahun;
 		$document->save();
 
 		if ($fotos = $request->file('foto')) {
@@ -351,6 +355,7 @@ class PendaftarController extends Controller
 			$namafile = md5($document->nomor.'f0to').'.'.$fotos->getClientOriginalExtension();
 			$update_data['foto'] = $namafile;
 			$update_data['nodaftar'] = date('Y').$document->nomor;
+			$update_data['password'] = Hash::make(date('Y').$document->nomor);
 			$fotos->move(public_path() . '/pendaftar', $namafile);
 			$check = Pendaftar::where('nomor', $document->nomor);
 			$check->update($update_data);
@@ -396,8 +401,19 @@ class PendaftarController extends Controller
 		$token = $request->header('token');
 		try {
 			$id = Crypt::decrypt($token);
-			$document = Pendaftar::where('nomor', $id)->get()->first();
+			$arr_berkas = [ 'foto', 'ijasah', 'foto_peraturan', 'rapor_smtr1', 'rapor_smtr2', 'rapor_smtr3', 'rapor_smtr4', 'rapor_smtr5', 'rapor_smtr6' ];
+			if (isset($request->berkas)) {
+				$document = Pendaftar::select($arr_berkas)->where('nomor', $id)->get()->first();
+			} else {
+				$document = Pendaftar::where('nomor', $id)->get()->first();
+			}
 			unset($document->nodaftar, $document->nomor, $document->password);
+			foreach ($arr_berkas as $v) {
+				$berkas = $document->$v;
+				if ( !$berkas || !file_exists(public_path('pendaftar/'.$berkas)) ) {
+					$document->$v = null;
+				}
+			}
 			$this->data = $document;
 			$this->status = "success";
 		} catch (QueryException $e) {
@@ -454,6 +470,56 @@ class PendaftarController extends Controller
 			'status' => 'success',
 			'data' => $update_data,
 			'messagge' => 'data berhasil di update'
+		]);
+	}
+
+	public function update_berkas(Request $request)
+	{
+		try {
+			$validator = Validator::make($request->all(), [
+				'nama' => 'required',
+				'file' => 'nullable|mimes:jpg,jpeg,png|max:2048'
+			]);
+
+			if ($validator->fails()) {
+				$error = $validator->errors()->all()[0];
+				return response()->json([
+					'status' => 'failed',
+					'message' => $error,
+					'data' => []
+				]);
+			} else {
+				$token = $request->header('token');
+				$id = Crypt::decrypt($token);
+
+				$pendaftar = Pendaftar::where('nomor', $id);
+				$files = $request->file('file');
+				if ($files && $request->file->isValid()) {
+					$nama_field = $request->nama;
+					$file_db = $pendaftar->first()->$nama_field;
+					$file_lama = $file_db ? public_path('pendaftar/'.$file_db) : null;
+					if ($file_lama && file_exists($file_lama)) unlink($file_lama);
+					$file_name = 'f0t0_pdftr_'.$request->nama.'_'.\App\Helpers\CoreHelper::base64url_encode($id).'_'.time().'.'.$files->getClientOriginalExtension();
+					$files->move(public_path('pendaftar'), $file_name);
+					$pendaftar->update([
+						$request->nama => $file_name
+					]);
+				}
+				return response()->json([
+					'status' => 'success',
+					'data' => [$request->nama => 'uploaded'],
+					'messagge' => 'berkas berhasil di update'
+				]);
+			}
+			$this->status = "success";
+		} catch (QueryException $e) {
+			$this->status = "failed";
+			$this->error = $e;
+		}
+		return response()->json([
+			"status" => $this->status,
+			"data" => $this->data,
+			"error" => $this->error
 		]);
 	}
 

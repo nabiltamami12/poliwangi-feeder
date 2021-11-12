@@ -61,7 +61,7 @@ function _load_datatable(){
 		"processing": true,
 		"ajax": {
 			url: dt_url,
-			type: 'GET',
+			type: dt_type,
 			data: {},
 			...dt_src,
 			headers: {
@@ -90,3 +90,11 @@ function _load_datatable(){
 if (typeof moment !== 'undefined') {
 	moment.locale('id');
 }
+
+function reformat_date(val) {
+	if (!val) return '';
+	const init_date = new Date(val);
+  const mm = init_date.getMonth() + 1; // getMonth() is zero-based
+  const dd = init_date.getDate();
+  return `${init_date.getFullYear()}-${(mm>9 ? '' : '0') + mm}-${(dd>9 ? '' : '0') + dd}`;
+};

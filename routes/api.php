@@ -233,6 +233,7 @@ Route::prefix('v1')->group(function () {
     Route::get('/pendaftar', [Ctr\PendaftarController::class, 'show']);
     Route::post('/pendaftar', [Ctr\PendaftarController::class, 'store']);
     Route::post('/pendaftar/update', [Ctr\PendaftarController::class, 'update']);
+    Route::post('/pendaftar/update-berkas', [Ctr\PendaftarController::class, 'update_berkas']);
     Route::post('/login', [Ctr\PendaftarController::class, 'login']);
     Route::post('/pendaftar/check', [Ctr\PendaftarController::class, 'is_lunas']);
     Route::get('/pendaftar/keuangan', [Ctr\PendaftarController::class, 'keuangan']);
@@ -255,12 +256,13 @@ Route::prefix('v1')->group(function () {
     Route::delete('/keuangan/rekap_ukt/{id}', [Ctr\UktController::class, 'destroy']);
     Route::get('/keuangan/detail', [Ctr\UktController::class, 'details']);
     Route::put('/keuangan/set-ukt/{id}', [Ctr\UktController::class, 'set_ukt_mahasiswa']);
-    Route::get('keuangan/atur-mahasiswa', [Ctr\UktController::class, 'atur_mahasiswa']); //keuangan/rekapitulasi/datamahasiswa
+    Route::post('keuangan/atur-mahasiswa', [Ctr\UktController::class, 'atur_mahasiswa']); //keuangan/rekapitulasi/datamahasiswa
+    Route::get('/keuangan/rangkuman/{id}', [Ctr\UktController::class, 'rangkuman']);
 
 
     // SPI Mandiri
     Route::post('/keuangan/spi/import', [Ctr\SpiController::class, 'import']);
-    Route::get('/keuangan/spi/export/{tahun}/{prodi}', [Ctr\SpiController::class, 'export']);
+    Route::get('/keuangan/spi/export/{prodi}', [Ctr\SpiController::class, 'export']);
     Route::get('/keuangan/spi', [Ctr\SpiController::class, 'index']);
     Route::get('/keuangan/spi/{id}', [Ctr\SpiController::class, 'show']);
 

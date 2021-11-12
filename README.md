@@ -22,6 +22,11 @@ $php artisan key:generate
 $php artisan migrate
 ```
 
+### Migrasi data program_studi mahasiswa lama
+```sh
+$php artisan code3:migrasi
+```
+
 ### Permision server
 sudo chown -R $USER:www-data storage
 or
@@ -34,3 +39,19 @@ Enable extension php pada file /etc/php/php.ini
 
 ### sync folder public
 rsync -a --exclude 'index.php' ../folder_laravel/public/* ../folder_html/;
+
+### php pull
+```php
+<?php
+$output_including_status = shell_exec("cd /home/patch_project; git pull 2>&1; echo $?");
+echo '<pre>';
+echo $output_including_status;
+echo '</pre>';
+echo '</hr>';
+echo '</hr>';
+echo '<pre>';
+$git_status = shell_exec("cd /home/patch_project; git status; echo $?");
+echo $git_status;
+echo '</pre>';
+?>
+```
