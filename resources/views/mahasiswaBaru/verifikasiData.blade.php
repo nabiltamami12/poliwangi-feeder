@@ -7,7 +7,7 @@
 <!-- Page content -->
 <section class="page-content container-fluid">
   <!-- Modal -->
-  <div class="modal fade" id="daftarUlang_unggahDokumen" tabindex="-1" aria-labelledby="daftarUlang_unggahDokumenLabel"
+  <div class="modal fade" id="verifikasi_unggahDokumen" tabindex="-1" aria-labelledby="verifikasi_unggahDokumenLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
       <div class="modal-content p-0 padding--medium">
@@ -275,30 +275,10 @@
 @section('js')
 <script>
   const arr_berkas = [ 'foto', 'ijasah', 'foto_peraturan', 'rapor_smtr1', 'rapor_smtr2', 'rapor_smtr3', 'rapor_smtr4', 'rapor_smtr5', 'rapor_smtr6' ];
-  $.ajax({
-    url: url_api+"/pendaftar",
-    type: 'get',
-    dataType: 'json',
-    data: {},
-    headers: {
-      'token': localStorage.getItem('pmb')
-    },
-    beforeSend: function(text) {
-    },
-    success: function(res) {
-      $.each(res.data, function(index, item) {
-        if($("[name='"+index+"']").length != 0){
-          if (index == 'tgllahir') {
-            $("[name='"+index+"']").datepicker('setDate', new Date(item));
-          } else{
-            $("[name='"+index+"']").val(item)
-          } 
-        } else if (arr_berkas.includes(index) && item) {
-          $('#status_'+index).html(`<i class="iconify status-success" data-icon="fluent:clock-20-filled"></i>`)
-        }
-      });
-    }
-  });
+  
+  jQuery(function ($) {
+    get_pendaftar();
+  })
 
   $("#submit-1").on('click', function() {
     $.ajax({
@@ -455,7 +435,7 @@
     $('#file').val("");
     customText.innerHTML = "tidak ada file dipilih";
     $('#btn-upload').attr("onclick", `send('${berkas}')`);
-    $('#daftarUlang_unggahDokumen').modal('show');
+    $('#verifikasi_unggahDokumen').modal('show');
   }
 
   function send(berkas) {
@@ -475,13 +455,46 @@
           'token': localStorage.getItem('pmb')
         },
         success: function (res) {
-          window.location.reload();
+          $('#verifikasi_unggahDokumen').modal('hide');
+          get_pendaftar(true);
         },
         error: function () {
           alert("Data Gagal Diupload");
         }
       });
     }
+  }
+
+  function get_pendaftar(get_berkas = false) {
+    const url_get = get_berkas ? "/pendaftar?berkas=true" : "/pendaftar";
+    $.ajax({
+      url: url_api+url_get,
+      type: 'get',
+      dataType: 'json',
+      data: {},
+      headers: {
+        'token': localStorage.getItem('pmb')
+      },
+      beforeSend: function(text) {
+      },
+      success: function(res) {
+        $.each(res.data, function(index, item) {
+          if($("[name='"+index+"']").length != 0){
+            if (index == 'tgllahir') {
+              $("[name='"+index+"']").datepicker('setDate', new Date(item));
+            } else {
+              $("[name='"+index+"']").val(item)
+            } 
+          } else if ( arr_berkas.includes(index) ) {
+            if(item){
+              $('#status_'+index).html(`<i class="iconify status-success" data-icon="fluent:clock-20-filled"></i>`);
+            } else {
+              $('#status_'+index).html(`<i class="iconify status-rejected" data-icon="bi:x-circle-fill"></i>`);
+            }
+          }
+        });
+      }
+    });
   }
 </script>
 @endsection

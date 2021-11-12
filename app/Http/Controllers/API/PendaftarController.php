@@ -401,9 +401,13 @@ class PendaftarController extends Controller
 		$token = $request->header('token');
 		try {
 			$id = Crypt::decrypt($token);
-			$document = Pendaftar::where('nomor', $id)->get()->first();
-			unset($document->nodaftar, $document->nomor, $document->password);
 			$arr_berkas = [ 'foto', 'ijasah', 'foto_peraturan', 'rapor_smtr1', 'rapor_smtr2', 'rapor_smtr3', 'rapor_smtr4', 'rapor_smtr5', 'rapor_smtr6' ];
+			if (isset($request->berkas)) {
+				$document = Pendaftar::select($arr_berkas)->where('nomor', $id)->get()->first();
+			} else {
+				$document = Pendaftar::where('nomor', $id)->get()->first();
+			}
+			unset($document->nodaftar, $document->nomor, $document->password);
 			foreach ($arr_berkas as $v) {
 				$berkas = $document->$v;
 				if ( !$berkas || !file_exists(public_path('pendaftar/'.$berkas)) ) {
