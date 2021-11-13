@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Kepegawaian\Pegawai;
 use App\Http\Controllers\Controller;
 use Yajra\DataTables\Facades\DataTables;
-use App\Models\Kepegawain\DataStruktural;
+use App\Models\Kepegawaian\DataStruktural;
 use Illuminate\Support\Facades\Validator;
 
 

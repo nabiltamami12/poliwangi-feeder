@@ -446,18 +446,12 @@ Route::prefix('admin')->middleware(['aksesuntuk:admin'])->group(function () {
         Route::resource('dataUnit', UnitController::class);
         //route staff
         Route::resource('dataStaff', StaffController::class);
-        
         //route data struktural
         Route::resource('/dataStruktural', DataStrukturalController::class);
         Route::get('/getData', [DataStrukturalController::class, 'getData'])->name('get-data');
         //route pangkat
         Route::resource('/dataPangkat', PangkatController::class);
         Route::get('/getPangkat', [PangkatController::class, 'getPangkat'])->name('get-pangkat');
-        // Route::get('/dataPangkat', function () {
-        //     return view('admin.masterKepegawaian.pangkat.index', [
-        //         "title" => "akademik-kepegawaian",
-        //     ]);
-        // });
     });
 
 

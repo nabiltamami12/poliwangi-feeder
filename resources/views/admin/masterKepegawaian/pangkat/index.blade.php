@@ -1,8 +1,8 @@
 @extends('layouts.main')
 
-@section('style')
+{{-- @section('style')
   <link href="{{ asset('css/loading.css') }}" rel="stylesheet">
-@endsection
+@endsection --}}
 
 @section('content')
 
@@ -180,61 +180,18 @@
 <script>
 
   var nomor = 1;
-  dt_url = `${url_api}/periode`;
+  dt_url = '{{ route('get-pangkat') }}';
   dt_opt = {
-    // "serverSide": true,
-    "columnDefs": [
-      {
-        "targets": [0],
-        "data": null,
-        "render": function(data, type, full) {
-          res = nomor++;
-          return res;
-        }
-      },{
-        "targets": [1],
-        "data": null,
-        "render": function(data, type, full) {
-          res = data['tahun']+"-"+(Number(data['tahun'])+1);
-          return res;
-        }
-      },{
-        "targets": [2],
-        "data": null,
-        "render": function(data, type, full) {
-          res = (data['status']=="1")?data['tahun']+data['semester']:"-";
-          return res;
-        }
-      },{
-        "targets": [3],
-        "data": null,
-        "render": function(data, type, full) {
-          var ganjil = (data['semester']==1)?'<span class="text-success">Gasal <i class="iconify-inline mr-1" style="font-size:12px;" data-icon="akar-icons:circle-check-fill"></i></span>' : `<span class="text-warning" style="cursor:pointer;" onclick="change_semester(${data['nomor']},1)">Gasal</span>`
-          var genap = (data['semester']==2)?'<span class="text-success">Genap <i class="iconify-inline mr-1" style="font-size:12px;" data-icon="akar-icons:circle-check-fill"></i></span>' : `<span class="text-warning" style="cursor:pointer;" onclick="change_semester(${data['nomor']},2)">Genap</span>`
-          res = (data['status']=="1")? ganjil+"  ||  "+genap:"-";
-          return res;
-        }
-      },{
-        "targets": [4],
-        "data": null,
-        "render": function(data, type, full) {
-          var aktif = "<span class='text-success' style='font-size:12px;font-weight:600;'>aktif <i class='iconify-inline mr-1' style='font-size:12px;' data-icon='akar-icons:circle-check-fill'></i></span>"
-          var non_aktif = `<button class="btn btn-warning btn-sm" onclick="change_status(${data['nomor']})"><i class="iconify-inline mr-1" style="font-size:12px;" data-icon="akar-icons:circle-check-fill"></i>aktifkan</button>`
-          res = (data['status']=="1")?aktif:non_aktif;
-          return res;
-        }
-      },{
-        "targets": [5],
-        "data": null,
-        "render": function(data, type, full) {
-          var id = data['nomor'];
-          var text_hapus = data['tahun']+"-"+(parseInt(data['tahun'])+1);
-          var btn_update = `<span class="iconify edit-icon text-primary" onclick='update_btn(${id})' data-icon="bx:bx-edit-alt" data-inline="true"></span>` 
-          var btn_delete = `<span class="iconify delete-icon text-primary" data-icon="bx:bx-trash" data-inline="true" onclick='delete_btn(${id},"periode","periode","${text_hapus}")'></span>`; 
-          res = btn_update+" "+btn_delete;
-          return res;
-        }
-      },
+    processing: true,
+    serverSide: true,
+    autoWidth: false,
+    "order": [[ 0, "desc" ]],
+    columns: [
+        {data: null, name: 'no', sortable: false, render: function(data, type, row, meta) {return meta.row + meta.settings._iDisplayStart + 1;}},
+        {data: 'nama_pangkat', name: 'nama_pangkat'},
+        {data: 'golongan', name: 'golongan'},
+        {data: 'urut', name: 'urut'},
+        {data: 'Aksi', name: 'Aksi',orderable:false,serachable:false,sClass:'text-center'},
     ]
   };
 
@@ -293,27 +250,10 @@
   $(document).ready(function() {
 
     var no = 1;
-    var dataTable = $('#datatable').DataTable({
-        processing: true,
-        serverSide: true,
-        autoWidth: false,
-        // pageLength: 5,
-        // scrollX: true,
-        "order": [[ 0, "desc" ]],
-        ajax: '{{ route('get-pangkat') }}',
-        columns: [
-            {data: null, name: 'no', sortable: false, render: function(data, type, row, meta) {return meta.row + meta.settings._iDisplayStart + 1;}},
-            {data: 'nama_pangkat', name: 'nama_pangkat'},
-            {data: 'golongan', name: 'golongan'},
-            {data: 'urut', name: 'urut'},
-            {data: 'Aksi', name: 'Aksi',orderable:false,serachable:false,sClass:'text-center'},
-        ]
-    });
 
     $('#SubmitAddForm').click(function(e) {
-        $("#loadingAdd").addClass("lds-dual-ring"); 
+        // $("#loadingAdd").addClass("lds-dual-ring"); 
         e.preventDefault();
-        $("body").addClass("loading"); 
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -334,7 +274,7 @@
                       $('.alert-danger').show();
                       $('.alert-danger').append('<strong><li>'+value+'</li></strong>');
                   });
-                  $("#loadingAdd").removeClass("lds-dual-ring"); 
+                  // $("#loadingAdd").removeClass("lds-dual-ring"); 
               } else {
                   $('.alert-danger').hide();
                   $('.alert-success').show();
@@ -375,7 +315,7 @@
     });
 
     $('#SubmitEditForm').click(function(e) {
-        $("#loadingEdit").addClass("lds-dual-ring"); 
+        // $("#loadingEdit").addClass("lds-dual-ring"); 
         e.preventDefault();
         $.ajaxSetup({
             headers: {
@@ -393,7 +333,7 @@
             success: function(result) {
                 if(result.errors) {
                     $('.alert-danger').html('');
-                    $("#loading").removeClass("lds-dual-ring"); 
+                    // $("#loading").removeClass("lds-dual-ring"); 
                     $.each(result.errors, function(key, value) {
                         $('.alert-danger').show();
                         $('.alert-danger').append('<strong><li>'+value+'</li></strong>');
@@ -417,7 +357,7 @@
         deleteID = $(this).data('id');
     })
     $('#SubmitDeleteForm').click(function(e) {
-        $("#loadingDelete").addClass("lds-dual-ring"); 
+        // $("#loadingDelete").addClass("lds-dual-ring"); 
         e.preventDefault();
         var id = deleteID;
         $.ajaxSetup({
