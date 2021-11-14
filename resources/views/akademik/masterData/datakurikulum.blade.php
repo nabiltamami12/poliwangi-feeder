@@ -106,7 +106,7 @@ dt_opt = {
       "targets": [3],
       "data": null,
       "render": function(data, type, full) {
-        res = `${data['periode']} - Semester ${data['semester']}`;
+        res = `${data['periode']} - ${parseInt(data['semester']) % 2 == 0 ? 'Genap' : 'Ganjil'}`;
         return res;
       }
     },{
