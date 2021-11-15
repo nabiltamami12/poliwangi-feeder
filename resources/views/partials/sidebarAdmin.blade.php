@@ -213,6 +213,12 @@
                   <span class="nav-link-text">Setting Syarat</span>
                 </a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url('/admin/pmb/settingjurusanlinear')}}">
+                  <span class="mini_icon">SS</span>
+                  <span class="nav-link-text">Jurusan Linear</span>
+                </a>
+              </li>
               <!-- <li class="nav-item">
                 <a class="nav-link" href="{{ url('/admin/pmb/settingjurusanpilihan')}}">
                   <span class="mini_icon">JP</span>
