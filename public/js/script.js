@@ -61,7 +61,7 @@ function _load_datatable(){
 		"processing": true,
 		"ajax": {
 			url: dt_url,
-			type: 'GET',
+			type: dt_type,
 			data: {},
 			...dt_src,
 			headers: {

@@ -48,6 +48,7 @@
         }
       }
     });
+    var dataGlobal = JSON.parse(localStorage.getItem('globalData'));
   </script>
 </head>
 

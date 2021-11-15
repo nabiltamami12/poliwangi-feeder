@@ -330,6 +330,7 @@
           }
         }
       });
+      return true;
     }
 
         function previewFile(input){

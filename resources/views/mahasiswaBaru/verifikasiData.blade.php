@@ -1,11 +1,141 @@
 @extends('layouts.mainMaba')
 
 @section('content')
+@php
+  $field_db = [
+    ["field" => "ummb", "title" => "UMMB"],
+    ["field" => "jurusan", "title" => "Jurusan"],
+    ["field" => "program", "title" => "Program"],
+    ["field" => "program_studi", "title" => "Program Studi 1"],
+    ["field" => "program_studi_2", "title" => "Program Studi 2"],
+    ["field" => "program_studi_luar", "title" => "Program Studi Luar"],
+    ["field" => "agama", "title" => "Agama"],
+    ["field" => "telp", "title" => "Telepon"],
+    ["field" => "spi", "title" => "SPI"],
+    ["field" => "nrp", "title" => "NIM"],
+    ["field" => "tahun_ajaran", "title" => "Tahun Ajaran"],
+    ["field" => "semester", "title" => "Semester"],
+    ["field" => "warga", "title" => "Warga"],
+    ["field" => "penghasilan", "title" => "Penghasilan"],
+    ["field" => "el", "title" => "EL"],
+    ["field" => "pmdk", "title" => "PMDK"],
+    ["field" => "gelombang", "title" => "Gelombang"],
+    ["field" => "bebas_spp", "title" => "Bebas SPP"],
+    ["field" => "bebas_ikoma", "title" => "Bebas Ikoma"],
+    ["field" => "bebas_kemahasiswaan", "title" => "Bebas Kemahasiswaan"],
+    ["field" => "bebas_spi", "title" => "Bebas SPI"],
+    ["field" => "keterangan_bebas_spi", "title" => "Keterangan Bebas SPI"],
+    ["field" => "alamat_smu", "title" => "Alamat SMU"],
+    ["field" => "nilai_ijazah", "title" => "Nilai Ijazah"],
+    ["field" => "nilai_uan", "title" => "Nilai UAN"],
+    ["field" => "darah", "title" => "Darah"],
+    ["field" => "prestasi_olahraga", "title" => "Prestasi Olahraga"],
+    ["field" => "nun", "title" => "NUN"],
+    ["field" => "nijazah", "title" => "Nijazah"],
+    ["field" => "ayah", "title" => "Ayah"],
+    ["field" => "kerja_ayah", "title" => "Kerja Ayah"],
+    ["field" => "keterangan_ayah", "title" => "Keterangan Ayah"],
+    ["field" => "ibu", "title" => "Ibu"],
+    ["field" => "kerja_ibu", "title" => "Kerja Ibu"],
+    ["field" => "keterangan_ibu", "title" => "Keteragnan Ibu"],
+    ["field" => "penghasilan_ibu", "title" => "Penghasilan Ibu"],
+    ["field" => "alamat_ortu", "title" => "Alamat Orang Tua"],
+    ["field" => "notelp_ortu", "title" => "Telepon Orang Tua"],
+    ["field" => "tanggal_ubah", "title" => "Tanggal Ubah"],
+    ["field" => "cadangan", "title" => "Cadangan"],
+    ["field" => "ukt", "title" => "UKT"],
+    ["field" => "bebas_ukt", "title" => "Bebas UKT"],
+    ["field" => "sekolah", "title" => "Sekolah"],
+    ["field" => "kode_transaksi", "title" => "Kode Transaksi"],
+    ["field" => "publik", "title" => "Publik"],
+    ["field" => "mahasiswa_jalur_penerimaan", "title" => "Mahasiswa Jalur Penerimaan"],
+    ["field" => "kota", "title" => "Kota"],
+    ["field" => "kota_ortu", "title" => "Kota Orang Tua"],
+    ["field" => "pendaftaran", "title" => "Pendaftaran"],
+    ["field" => "ikoma", "title" => "Ikoma"],
+    ["field" => "kemahasiswaan", "title" => "Kemahasiswaan"],
+    ["field" => "subkampus", "title" => "Sub Kampus"],
+    ["field" => "tanggal_transfer_spp", "title" => "Tanggal Transfer SPP"],
+    ["field" => "email", "title" => "Email"],
+    ["field" => "kelas_pagi_sore", "title" => "Kelas Pagi Sore"],
+    ["field" => "status_kawin", "title" => "Status Kawin"],
+    ["field" => "ukuran_baju", "title" => "Ukuran Baju"],
+    ["field" => "pernahpt", "title" => "Pernah PT"],
+    ["field" => "tahunmasuk_pt", "title" => "Tahun Masuk PT"],
+    ["field" => "jumlah_sks", "title" => "Jumlah SKS"],
+    ["field" => "pt_asal", "title" => "PT Asal"],
+    ["field" => "nunmapel", "title" => "NUN Mapel"],
+    ["field" => "nijazahmapel", "title" => "Nijazah Mapel"],
+    ["field" => "status_smu", "title" => "Status SMU"],
+    ["field" => "jurusan_smu", "title" => "Jurusan SMU"],
+    ["field" => "thlahirayah", "title" => "Tahun Lahir Ayah"],
+    ["field" => "pendidikanayah", "title" => "Pendidikan Ayah"],
+    ["field" => "thlahiribu", "title" => "Tahun Lahir Ibu"],
+    ["field" => "pendidikanibu", "title" => "Pendidikan Ibu"],
+    ["field" => "sumberbiaya", "title" => "Sumber Biaya"],
+    ["field" => "lembaga", "title" => "Lembaga"],
+    ["field" => "jenis_lembaga", "title" => "Jenis Lembaga"],
+    ["field" => "jenis_tempattinggal", "title" => "Jenis Tempat Tinggal"],
+    ["field" => "transportasi", "title" => "Transportasi"],
+    ["field" => "minat", "title" => "Minat"],
+    ["field" => "infopolije", "title" => "Info Polije"],
+    ["field" => "biaya_lain", "title" => "Biaya Lain"],
+    ["field" => "ukt3", "title" => "UKT 3"],
+    ["field" => "ukt4", "title" => "UKT 4"],
+    ["field" => "ukt5", "title" => "UKT 5"],
+    ["field" => "feeder_wilayah", "title" => "Feeder Wilayah"],
+    ["field" => "nomor_ukt", "title" => "Nomor UKT"],
+    ["field" => "bidikmisi", "title" => "Bidikmisi"],
+    ["field" => "rata_sem_1", "title" => "Rata-rata Semester 1"],
+    ["field" => "rata_sem_2", "title" => "Rata-rata Semester 2"],
+    ["field" => "rata_sem_3", "title" => "Rata-rata Semester 3"],
+    ["field" => "rata_sem_4", "title" => "Rata-rata Semester 4"],
+    ["field" => "rata_sem_5", "title" => "Rata-rata Semester 5"],
+    ["field" => "rata_sem_6", "title" => "Rata-rata Semester 6"],
+    ["field" => "kap_bidikmisi", "title" => "Kap Bidikmisi"],
+    ["field" => "noref_bank", "title" => "Noref Bank"],
+    ["field" => "tanggal_transfer", "title" => "Tanggal Transfer"],
+    ["field" => "pembayaran", "title" => "Pembayaran"],
+    ["field" => "scan_pembayaran", "title" => "Scan Pembayaran"],
+    ["field" => "jurusan_asal", "title" => "Jurusan Asal"],
+    ["field" => "prestasi", "title" => "Prestasi"],
+    ["field" => "jalur_daftar", "title" => "Jalur Daftar"],
+  ];
+@endphp
+
 <!-- Header -->
 <header class="header"></header>
 
 <!-- Page content -->
 <section class="page-content container-fluid">
+  <!-- Modal -->
+  <div class="modal fade" id="verifikasi_unggahDokumen" tabindex="-1" aria-labelledby="verifikasi_unggahDokumenLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content p-0 padding--medium">
+        <div class="modal-header">
+          <h5 class="modal-title my-3 mx-auto">Upload Berkas</h5>
+        </div>
+        <div class="modal-body">
+          <div style="margin-top: 0px !important;" class="form-group detail_dokumen d-flex justify-content-center align-items-center p-4" id="trigger-browse" style="cursor: pointer;">
+            <form class="d-none" onchange="showfilename()">
+              <i class="iconify mr-2" data-icon="bx:bxs-file-pdf" data-inline="false"></i>
+              <input type="file" id="file" hidden />
+              <span id="custom-text" class="nama_dokumen">tidak ada file dipilih</span>
+            </form>
+            <button type="button" id="custom-btn">
+              <i class="iconify text-primary" data-icon="bx:bx-cloud-upload" data-inline="false"></i>
+            </button>
+          </div>
+          <p class="mt-2 mb-0 font-italic jenis_dokumen">Upload Document dengan format .pdf (Max size 10MB)</p>
+        </div>
+        <div class="modal-footer pt-3">
+          <button type="button" class="btn btn-primary w-100 rounded-sm" id="btn-upload">Upload</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="row">
     <div class="col-xl-12">
       <div class="card shadow padding--small card_step">
@@ -30,8 +160,7 @@
 
   <div class="tab-content" id="pills-tabContent">
     {{-- TAB DATA CALON PESERTA DIDIK --}}
-    <div class="tab-pane fade show active" id="pills-dataCalonPendaftar" role="tabpanel"
-    aria-labelledby="pills-dataCalonPendaftar-tab">
+    <div class="tab-pane fade show active" id="pills-dataCalonPendaftar" role="tabpanel"aria-labelledby="pills-dataCalonPendaftar-tab">
     <div class="row">
       <div class="col-xl-12">
         <div class="tab-body">
@@ -149,8 +278,26 @@
                       <input type="text" class="form-control" id="kode-pos" placeholder="65122">
                     </div>
                   </div>
-                  <a class="btn btn-success btnNext rounded-sm mt-4-5 w-100 text-white" id="submit-1">Selanjutnya</a>
                 </div>
+
+                <div class="alamat_calonMahasiswa">
+                  <div class="row mt-4-5">
+                    <div class="col">
+                      <h2 class="card_title">Data Diri</h2>
+                    </div>
+                  </div>
+                  <hr class="my-4">
+                  <div class="form-row">
+                    @foreach ($field_db as $e)
+                    <div class="col-md-6 p-0 form-group">
+                      <label for="alamat">{{ $e['title'] }}</label>
+                      <input type="text" class="form-control" id="{{ $e['field'] }}" name="{{ $e['field'] }}">
+                    </div>
+                    @endforeach
+                  </div>
+                </div>
+
+                <a class="btn btn-success btnNext rounded-sm mt-4-5 w-100 text-white" id="submit-1">Selanjutnya</a>
               </form>
             </div>
           </div>
@@ -174,45 +321,67 @@
               <hr class="my-4">
             </div>
             <div class="card-body p-0">
-              <form class="form_data">
-                <div class="form-row">
-                  <div class="col-md-6 form-group pr-md-2">
-                    <label>Foto Calon Peserta Didik</label>
-                    <div class="input_file">
-                      <label for="file-input-foto">
-                        <i class="iconify fileUpload-icon" data-icon="bx:bx-image-add"></i>
-                      </label>
-                    </div>
-                    <input type="file" class="form-control-file" id="file-input-foto" name="foto" hidden>
-                  </div>
+              <div class="form-row table-responsive">
+                <table class="table align-items-center table-borderless table-flush table-hover">
+                  <thead class="table-header">
+                    <tr>
+                      <th scope="col" class="text-center px-2">No</th>
+                      <th scope="col" style="width: 58%">Keterangan</th>
+                      <th scope="col" class="text-center px-2">Tipe</th>
+                      <th scope="col">File</th>
+                      <th scope="col" class="text-center">Status</th>
+                    </tr>
+                  </thead>
+                  <tbody class="table-body table-body-lg">
 
-                  <div class="col-md-6 form-group mt-3 mt-md-0 pr-0 pr-md-1 pl-md-2">
-                    <label>Foto Ijazah</label>
-                    <div class="input_file">
-                      <label for="file-input-ijazah">
-                        <i class="iconify fileUpload-icon" data-icon="bx:bx-image-add"></i>
-                      </label>
-                    </div>
-                    <input type="file" class="form-control-file" id="file-input-ijazah" name="ijasah" hidden>
-                  </div>
-                </div>
+                    @php
+                      $arr_berkas = [
+                        [
+                          'title' => 'Foto Calon Peserta Didik',
+                          'tipe' => 'Gambar',
+                          'berkas' => 'foto',
+                        ],
+                        [
+                          'title' => 'Foto Ijazah',
+                          'tipe' => 'Gambar',
+                          'berkas' => 'ijasah',
+                        ],
+                        [
+                          'title' => 'Surat Pernyataan Taat Peraturan',
+                          'tipe' => 'Gambar',
+                          'berkas' => 'foto_peraturan',
+                        ],
+                      ];
+                      for ($i=1; $i < 7; $i++) { 
+                        $arr_berkas[] = [
+                          'title' => 'Rapor Semester '.$i,
+                          'tipe' => 'Gambar',
+                          'berkas' => 'rapor_smtr'.$i,
+                        ];
+                      }
+                    @endphp
+                    @foreach ($arr_berkas as $key => $el)
+                    <tr>
+                      <td class="text-center px-2">{{$key+1}}</td>
+                      <td>
+                        <h2 class="mb-0">{{ $el['title'] }}</h2>
+                      </td>
+                      <td class="text-center px-2">{{ $el['tipe'] }}</td>
+                      <td>
+                        <span onclick="show_modal('{{ $el['berkas'] }}')" style="cursor: pointer;">
+                          <i class="iconify-inline mr-1 text-primary" data-icon="bx:bx-cloud-upload"></i>
+                          <span class="text-primary">Unggah Dokumen</span>
+                        </span>
+                      </td>
+                      <td class="text-center" id="status_{{ $el['berkas'] }}">
+                        <i class="iconify status-rejected" data-icon="bi:x-circle-fill"></i>
+                      </td>
+                    </tr>
+                    @endforeach
 
-                <div class="form-row">
-                  <div class="col-md-12 form-group p-0 mt-4">
-                    <label>Surat Pernyataan Taat Peraturan</label>
-                    <div class="input_file">
-                      <label for="file-input-peraturan">
-                        <i class="iconify fileUpload-icon" data-icon="bx:bx-image-add"></i>
-                      </label>
-                    </div>
-                    <input type="file" class="form-control-file" id="file-input-peraturan" name="foto_peraturan" hidden>
-                  </div>
-                </div>
-                <div class="form_action mt-4">
-                  <a class="btn btn-info btnPrevious rounded-sm">Sebelumnya</a>
-                  <button type="submit" class="btn btn-primary rounded-sm" id="submit-2">Simpan</button>
-                </div>
-              </form>
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         </div>
@@ -225,52 +394,11 @@
 
 @section('js')
 <script>
-  $.ajax({
-    url: url_api+"/pendaftar",
-    type: 'get',
-    dataType: 'json',
-    data: {},
-    headers: {
-      'token': localStorage.getItem('pmb')
-    },
-    beforeSend: function(text) {
-    },
-    success: function(res) {
-      $.each(res.data, function(index, item) {
-        if($("[name='"+index+"']").length != 0){
-          if (index == 'tgllahir') {
-            $("[name='"+index+"']").datepicker('setDate', new Date(item));
-          }else if (index == 'foto'){
-            $('#file-input-foto').parent().find('.input_file').css(
-              {
-                'backgroundImage': 'url({{url("/")}}/pendaftar/'+item+')',
-                'backgroundSize': 'cover',
-                'backgroundPosition': 'center'
-              }
-              )
-          }else if (index == 'foto_peraturan'){
-            $('#file-input-peraturan').parent().find('.input_file').css(
-              {
-                'backgroundImage': 'url({{url("/")}}/pendaftar/'+item+')',
-                'backgroundSize': 'cover',
-                'backgroundPosition': 'center'
-              }
-              )
-          }else if (index == 'ijasah'){
-            $('#file-input-ijazah').parent().find('.input_file').css(
-              {
-                'backgroundImage': 'url({{url("/")}}/pendaftar/'+item+')',
-                'backgroundSize': 'cover',
-                'backgroundPosition': 'center'
-              }
-              )
-          }else{
-            $("[name='"+index+"']").val(item)
-          } 
-        }
-      });
-    }
-  });
+  const arr_berkas = [ 'foto', 'ijasah', 'foto_peraturan', 'rapor_smtr1', 'rapor_smtr2', 'rapor_smtr3', 'rapor_smtr4', 'rapor_smtr5', 'rapor_smtr6' ];
+  
+  jQuery(function ($) {
+    get_pendaftar();
+  })
 
   $("#submit-1").on('click', function() {
     $.ajax({
@@ -278,25 +406,6 @@
       type: 'post',
       dataType: 'json',
       data: new FormData($('.form_data')[0]),
-      headers: {
-        'token': localStorage.getItem('pmb')
-      },
-      processData: false,
-      contentType: false,
-      beforeSend: function(text) {
-      },
-      success: function(res) {
-      }
-    });
-  });
-
-  $("#submit-2").on('click', function(e) {
-    e.preventDefault();
-    $.ajax({
-      url: url_api+"/pendaftar/update",
-      type: 'post',
-      dataType: 'json',
-      data: new FormData($('.form_data')[1]),
       headers: {
         'token': localStorage.getItem('pmb')
       },
@@ -415,5 +524,97 @@
     });
   })
 
+  /** browse file */
+  const inputFile = document.getElementById("file");
+  const customBtn = document.getElementById("custom-btn");
+  const customText = document.getElementById("custom-text");
+  document.getElementById('trigger-browse').addEventListener('click', function () {
+    inputFile.click();
+  })
+  customBtn.addEventListener("click", function () {
+    inputFile.click();
+  });
+  inputFile.addEventListener("change", function () {
+    if (inputFile.value) {
+      let fileName = inputFile.value.match(/[0-9a-zA-Z\^\&\'\@\{\}\[\]\,\$\=\!\-\#\(\)\.\%\+\~\_ ]+$/)[0];
+      customText.innerHTML = fileName;
+    } else {
+      customText.innerHTML = "tidak ada file dipilih";
+    }
+  });
+  const formWrapper = document.querySelector('.detail_dokumen');
+  const formUpload = document.querySelector(".detail_dokumen form");
+  function showfilename(){
+    formUpload.classList.remove('d-none');
+    formWrapper.classList.remove('justify-content-center');
+    formWrapper.classList.add('justify-content-between');
+  }
+  /** end browse file */
+
+  function show_modal(berkas) {
+    $('#file').val("");
+    customText.innerHTML = "tidak ada file dipilih";
+    $('#btn-upload').attr("onclick", `send('${berkas}')`);
+    $('#verifikasi_unggahDokumen').modal('show');
+  }
+
+  function send(berkas) {
+    const fileupload = $('#file').prop('files')[0];
+    if (fileupload && fileupload!="" && berkas) {
+      let formData = new FormData();
+      formData.append('nama', berkas);
+      formData.append('file', fileupload);
+      $.ajax({
+        type: 'POST',
+        url: url_api+"/pendaftar/update-berkas",
+        data: formData,
+        cache: false,
+        processData: false,
+        contentType: false,
+        headers: {
+          'token': localStorage.getItem('pmb')
+        },
+        success: function (res) {
+          $('#verifikasi_unggahDokumen').modal('hide');
+          get_pendaftar(true);
+        },
+        error: function () {
+          alert("Data Gagal Diupload");
+        }
+      });
+    }
+  }
+
+  function get_pendaftar(get_berkas = false) {
+    const url_get = get_berkas ? "/pendaftar?berkas=true" : "/pendaftar";
+    $.ajax({
+      url: url_api+url_get,
+      type: 'get',
+      dataType: 'json',
+      data: {},
+      headers: {
+        'token': localStorage.getItem('pmb')
+      },
+      beforeSend: function(text) {
+      },
+      success: function(res) {
+        $.each(res.data, function(index, item) {
+          if($("[name='"+index+"']").length != 0){
+            if (index == 'tgllahir') {
+              $("[name='"+index+"']").datepicker('setDate', new Date(item));
+            } else {
+              $("[name='"+index+"']").val(item)
+            } 
+          } else if ( arr_berkas.includes(index) ) {
+            if(item){
+              $('#status_'+index).html(`<i class="iconify status-success" data-icon="fluent:clock-20-filled"></i>`);
+            } else {
+              $('#status_'+index).html(`<i class="iconify status-rejected" data-icon="bi:x-circle-fill"></i>`);
+            }
+          }
+        });
+      }
+    });
+  }
 </script>
 @endsection

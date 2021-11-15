@@ -51,6 +51,7 @@
     var dataGlobal = JSON.parse(localStorage.getItem('globalData'))
     var dataJurusan, dataDosen, dataProgram;
     var dt, dt_url, dt_opt, dt_src;
+    var dt_type = 'get';
     var id_mahasiswa = 31575
     console.log(id_mahasiswa)
   </script>
