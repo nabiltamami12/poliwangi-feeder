@@ -594,6 +594,13 @@ Route::prefix('admin')->middleware(['aksesuntuk:admin'])->group(function () {
             ]);
         });
 
+        Route::get('/datapendaftar/{id}', function ($id) {
+            return view('admin.pmb.cuDataPendaftar', [
+                "id" => $id,
+                "title" => "admin-pmb",
+            ]);
+        });
+
         Route::get('/generatenim', function () {
             return view('admin.pmb.generatenim', [
                 "title" => "admin-pmb",
