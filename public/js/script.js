@@ -31,16 +31,16 @@ jQuery(function ($) {
 	}
 
 	// $(".nav-item-dropdown-content").css("display", "none");
-	$(".nav-link").click(function () {
-		$(".nav-link").not(this).removeClass("open");
-		$(".nav-link").not(this).next().slideUp(300);
+	$(".navbar-nav .nav-link").click(function () {
+		$(".navbar-nav .nav-link").not(this).removeClass("open");
+		$(".navbar-nav .nav-link").not(this).next().slideUp(300);
 		$(this).toggleClass("open");
 		$(this).next().slideToggle(300);
 	});
 
-	$(".nav-link-submenu").click(function () {
-		$(".nav-link-submenu").not(this).removeClass("open");
-		$(".nav-link-submenu").not(this).next().slideUp(300);
+	$(".navbar-nav .nav-link-submenu").click(function () {
+		$(".navbar-nav .nav-link-submenu").not(this).removeClass("open");
+		$(".navbar-nav .nav-link-submenu").not(this).next().slideUp(300);
 		$(this).toggleClass("open");
 		$(this).next().slideToggle(300);
 	});

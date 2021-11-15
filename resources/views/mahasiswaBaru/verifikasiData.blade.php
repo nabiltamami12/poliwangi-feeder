@@ -99,7 +99,6 @@
     ["field" => "scan_pembayaran", "title" => "Scan Pembayaran"],
     ["field" => "jurusan_asal", "title" => "Jurusan Asal"],
     ["field" => "prestasi", "title" => "Prestasi"],
-    ["field" => "jalur_daftar", "title" => "Jalur Daftar"],
   ];
 @endphp
 
@@ -607,7 +606,7 @@
             } 
           } else if ( arr_berkas.includes(index) ) {
             if(item){
-              $('#status_'+index).html(`<i class="iconify status-success" data-icon="fluent:clock-20-filled"></i>`);
+              $('#status_'+index).html(`<a href="{{url('pendaftar')}}/${item}" target="__blank"><i class="iconify status-success" data-icon="fluent:clock-20-filled"></i></a>`);
             } else {
               $('#status_'+index).html(`<i class="iconify status-rejected" data-icon="bi:x-circle-fill"></i>`);
             }
