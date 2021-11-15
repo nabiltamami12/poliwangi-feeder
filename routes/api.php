@@ -47,6 +47,17 @@ Route::prefix('v1')->group(function () {
     Route::put('/jurusan/{id}', [Ctr\JurusanController::class, 'update']);
     Route::delete('/jurusan/{id}', [Ctr\JurusanController::class, 'destroy']);
     Route::get('/jurusan-mahasiswa', [Ctr\JurusanController::class, 'jurusan_mahasiswa']);
+    // Jurusan Asal
+    Route::get('/jurusan-asal', [Ctr\JurusanAsalController::class, 'index']);
+    Route::get('/jurusan-asal/{id}', [Ctr\JurusanAsalController::class, 'show']);
+    Route::post('/jurusan-asal', [Ctr\JurusanAsalController::class, 'store']);
+    Route::put('/jurusan-asal/{id}', [Ctr\JurusanAsalController::class, 'update']);
+    Route::delete('/jurusan-asal/{id}', [Ctr\JurusanAsalController::class, 'destroy']);
+
+    // Jurusan Linear
+    Route::get('/jurusan-linear/{id}', [Ctr\JurusanAsalController::class, 'jurusan_linear']);
+    Route::post('/jurusan-linear/{id}', [Ctr\JurusanAsalController::class, 'update_jurusan_linear']);
+
     // Kelas
     Route::get('/kelas', [Ctr\KelasController::class, 'index']);
     Route::get('/kelas/dosen/{id}', [Ctr\KelasController::class, 'dosen']);

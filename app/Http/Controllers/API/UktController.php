@@ -284,7 +284,7 @@ class UktController extends Controller
     public function rangkuman($id_mahasiswa)
     {
     	$this->data = DB::table('keuangan_pembayaran AS kpb')->select(
-    		DB::raw('CAST(IFNULL(kpb.semester, (SELECT hitung_semester(CONCAT(kp.tahun, kp.semester), (SELECT YEAR(tglmasuk) FROM mahasiswa WHERE nomor = kpb.id_mahasiswa)))) AS INTEGER) semester'),
+    		DB::raw('IFNULL(kpb.semester, (SELECT hitung_semester(CONCAT(kp.tahun, kp.semester), (SELECT YEAR(tglmasuk) FROM mahasiswa WHERE nomor = kpb.id_mahasiswa)))) semester'),
     		DB::raw('SUM(kpb.nominal) nominal'),
     		DB::raw('MAX(kpb.created_at) created_at')
     	)->leftJoin('keuangan_piutang AS kp', 'kp.id', '=', 'kpb.id_piutang')->where('kpb.id_mahasiswa', $id_mahasiswa)->where('kpb.status', '!=', null)->groupBy('kpb.semester')->orderByDesc('kpb.id')->get();

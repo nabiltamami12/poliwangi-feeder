@@ -634,44 +634,67 @@ Route::prefix('admin')->middleware(['aksesuntuk:admin'])->group(function () {
                 "title" => "admin-pmb"
             ]);
         });
-        Route::get('/settingjurusanpilihan', function () {
-            return view('admin.pmb.settingJurusanPilihan', [
-                "title" => "admin-pmb"
-            ]);
-        });
-        Route::get('/editjurusanpilihan', function () {
-            return view('admin.pmb.editJurusanPilihan', [
-                "title" => "admin-pmb"
-            ]);
-        });
-
-        Route::get('/settingjadwalseleksi', function () {
-            return view('admin.pmb.settingJadwalSeleksi', [
-                "title" => "admin-pmb"
-            ]);
-        });
-        Route::get('/editjadwalseleksi', function () {
-            return view('admin.pmb.editJadwalSeleksi', [
-                "title" => "admin-pmb"
-            ]);
-        });
-
-        Route::get('/settingjurusanasal', function () {
-            return view('admin.pmb.settingJurusanAsalPendaftar', [
-                "title" => "admin-pmb"
-            ]);
-        });
-        Route::get('/editjurusanasal', function () {
-            return view('admin.pmb.editJurusanAsalPendaftar', [
-                "title" => "admin-pmb"
-            ]);
-        });
-
         Route::get('/settingjurusanlinear', function () {
-            return view('admin.pmb.settingJurusanLinear', [
+            return view('admin.pmb.settingjurusanlinear', [
                 "title" => "admin-pmb"
             ]);
         });
+        Route::get('/settingjurusanlinear/{id}', function ($id) {
+            return view('admin.pmb.jurusanlinear', [
+                "id" => $id,
+                "title" => "admin-pmb"
+            ]);
+        });
+        Route::get('/settingjurusanlinear/cu/', function () {
+            return view('admin.pmb/cujurusanlinear', [
+                "id" => null,
+                "title" => "admin-pmb"
+            ]);
+        });
+        Route::get('/settingjurusanlinear/cu/{id}', function ($id) {
+            return view('admin.pmb/cujurusanlinear', [
+                "id" => $id,
+                "title" => "admin-pmb"
+            ]);
+        });
+        // Route::get('/settingjurusanpilihan', function () {
+        //     return view('admin.pmb.settingJurusanPilihan', [
+        //         "title" => "admin-pmb"
+        //     ]);
+        // });
+        // Route::get('/editjurusanpilihan', function () {
+        //     return view('admin.pmb.editJurusanPilihan', [
+        //         "title" => "admin-pmb"
+        //     ]);
+        // });
+
+        // Route::get('/settingjadwalseleksi', function () {
+        //     return view('admin.pmb.settingJadwalSeleksi', [
+        //         "title" => "admin-pmb"
+        //     ]);
+        // });
+        // Route::get('/editjadwalseleksi', function () {
+        //     return view('admin.pmb.editJadwalSeleksi', [
+        //         "title" => "admin-pmb"
+        //     ]);
+        // });
+
+        // Route::get('/settingjurusanasal', function () {
+        //     return view('admin.pmb.settingJurusanAsalPendaftar', [
+        //         "title" => "admin-pmb"
+        //     ]);
+        // });
+        // Route::get('/editjurusanasal', function () {
+        //     return view('admin.pmb.editJurusanAsalPendaftar', [
+        //         "title" => "admin-pmb"
+        //     ]);
+        // });
+
+        // Route::get('/settingjurusanlinear', function () {
+        //     return view('admin.pmb.settingJurusanLinear', [
+        //         "title" => "admin-pmb"
+        //     ]);
+        // });
     });
 
     Route::prefix('report')->group(function () {
