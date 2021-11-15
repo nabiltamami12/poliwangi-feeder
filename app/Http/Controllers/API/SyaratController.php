@@ -119,7 +119,7 @@ class SyaratController extends Controller
                 })
                 ->get();
             foreach ($this->data as $k => $v) {
-                if ( !$v->file || !file_exists(public_path('berkas/persyaratan_pendaftar/'.$v->file)) ) {
+                if ( $v->file && !file_exists(public_path('berkas/persyaratan_pendaftar/'.$v->file)) ) {
                     $this->data[$k]->status = 0;
                     $this->data[$k]->file = null;
                 }
