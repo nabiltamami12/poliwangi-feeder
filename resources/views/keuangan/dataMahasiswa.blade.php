@@ -225,7 +225,7 @@
 					$('#rangkumanModal .nomor_mahasiswa').text(nim)
 					$('#rangkumanModal .prodi_mahasiswa').text(prodi)
 					for (var i = res.data.length - 1; i >= 0; i--) {
-						$('#rangkumanModal table tbody').append('<tr><td>'+res.data[i].semester+'</td><td>'+res.data[i].nominal+'</td><td>'+res.data[i].created_at+'</td></tr>')	
+						$('#rangkumanModal table tbody').append('<tr><td>'+res.data[i].semester+'</td><td>'+formatAngka(res.data[i].nominal)+'</td><td>'+formatTanggal(res.data[i].created_at)+'</td></tr>')	
 					}
 				}
 				$('#rangkumanModal').modal('show')
