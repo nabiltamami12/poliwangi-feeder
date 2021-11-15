@@ -97,7 +97,9 @@ function getData() {
                   <span class="text-primary">dokumen terunggah</span>
                 </td>
                 <td class="text-center">
-                  <i class="iconify status-success" data-icon="fluent:clock-20-filled"></i>
+                  <a href="{{url('berkas/persyaratan_pendaftar')}}/${row.file}" target="__blank">
+                    <i class="iconify status-success" data-icon="fluent:clock-20-filled"></i>
+                  </a>
                 </td>
               </tr>`;
           } else if (row.status === null) {
