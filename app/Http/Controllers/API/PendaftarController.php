@@ -18,6 +18,7 @@ use DB;
 use App\Events\LogMahasiswaStatus;
 use App\Models\Mahasiswa;
 use Illuminate\Support\Carbon;
+use App\Datatables\PendaftarDatatable;
 
 class PendaftarController extends Controller
 {
@@ -33,21 +34,48 @@ class PendaftarController extends Controller
 	public function index(Request $request)
 	{
 		DB::enableQueryLog();
-		$table = DB::table('pendaftar as p');
-		$table->select('p.*','jp.jalur_daftar as jalur_penerimaan');
-		$table->join('jalur_penerimaan as jp','jp.id','=','p.jalur_daftar');
-		$table->join('jurusan_pilihan as jpl','jpl.id_pendaftar','=','p.nomor');
-		if ($request->program_studi) {
-			$table->where('jpl.program_studi',$request->program_studi); 
-		}
-		if ($request->jalur) {
-			$table->where('p.jalur_daftar',$request->jalur);
-		}
-		$table->groupBy('p.nomor');
-
 		try {
-			$this->data = $table->get();
-			$this->status = "success";
+			$where = [];
+			if ( $request->program_studi ) {
+				array_push($where,['jpl.program_studi','=',$request->program_studi]);
+			}
+			if ( $request->jalur ) {
+				array_push($where,['p.jalur_daftar','=',$request->jalur]);
+			}
+
+			$obj = new PendaftarDatatable($where);
+			$lists = $obj->get_datatables();
+			$data = [];
+			$no = $request->input("start");
+			foreach ($lists as $list) {
+				$no++;
+				$row = [];
+				$row[] = $no;
+				$row[] = $list->nodaftar;
+				$row[] = $list->nama;
+				$row[] = $list->jalur_penerimaan;
+				$row[] = ($list->status === "Y") ? "<span class='text-success'>LOLOS</span>" : ( ($list->status === "T") ? "<span class='text-danger'>TIDAK LOLOS</span>" : "<span class='text-warning'>MENUNGGU</span>" );
+				
+				$btn_konfirmasi = '<span id="btn_'.$list->nomor.'" onclick="func_modal('.$list->nomor.')" data-id="'.$list->nomor.'" class="badge btn-info_transparent text-primary">
+						<i class="iconify-inline mr-1 text-primary" data-icon="akar-icons:circle-check-fill"></i>
+						<span class="text-capitalize text-primary">Konfirmasi</span>
+					</span>';
+				$btn_edit = '<a href="'.url('admin/pmb/datapendaftar/'.$list->nomor).'" class="badge btn-info_transparent text-primary">
+						<i class="iconify-inline mr-1 text-primary" data-icon="bx:bx-edit-alt"></i>
+						<span class="text-capitalize text-primary">Edit</span>
+					</a>';
+				$row[] = $btn_konfirmasi.' &nbsp; '.$btn_edit;
+
+				$data[] = $row;
+			}
+			return [
+				"draw" => $request->input('draw'),
+				"recordsTotal" => $obj->count_all_datatables(),
+				"recordsFiltered" => $obj->count_filtered_datatables(),
+				"data" => $data,
+				"status" => "success",
+				"error" => $this->error
+			];
 		} catch (QueryException $e) {
 			$this->status = "failed";
 			$this->error = $e;
@@ -400,7 +428,7 @@ class PendaftarController extends Controller
 	{
 		$token = $request->header('token');
 		try {
-			$id = Crypt::decrypt($token);
+			$id = $request->id ?? Crypt::decrypt($token);
 			$arr_berkas = [ 'foto', 'ijasah', 'foto_peraturan', 'rapor_smtr1', 'rapor_smtr2', 'rapor_smtr3', 'rapor_smtr4', 'rapor_smtr5', 'rapor_smtr6' ];
 			if (isset($request->berkas)) {
 				$document = Pendaftar::select($arr_berkas)->where('nomor', $id)->get()->first();
@@ -437,7 +465,7 @@ class PendaftarController extends Controller
 	public function update(Request $request)
 	{
 		$token = $request->header('token');
-		$id = Crypt::decrypt($token);
+		$id = $request->id ?? Crypt::decrypt($token);
 		$update_data = [];
 		foreach ($request->all() as $key => $value) {
 			$update_data[$key] = $value;
@@ -490,7 +518,7 @@ class PendaftarController extends Controller
 				]);
 			} else {
 				$token = $request->header('token');
-				$id = Crypt::decrypt($token);
+				$id = $request->id ?? Crypt::decrypt($token);
 
 				$pendaftar = Pendaftar::where('nomor', $id);
 				$files = $request->file('file');
@@ -675,9 +703,8 @@ class PendaftarController extends Controller
 	public function keuangan(Request $request)
 	{
 		try {
-        	DB::enableQueryLog();
 			$data = $request->all();
-			$obj = new \App\Datatables\PendaftarDatatable();
+			$obj = new \App\Datatables\PendaftarKeuanganDatatable();
 			$lists = $obj->get_datatables();
 			$data = [];
 			$no = $request->input("start");
@@ -704,11 +731,11 @@ class PendaftarController extends Controller
 			$this->status = "failed";
 			$this->error = $e;
 		}
-        return response()->json([
-            "status" => $this->status,
-            "data" => $this->data,
-            "error" => $this->error
-        ]);
+		return response()->json([
+			"status" => $this->status,
+			"data" => $this->data,
+			"error" => $this->error
+		]);
 	}
 
 	public function mahasiswa(Request $request)
@@ -799,7 +826,7 @@ class PendaftarController extends Controller
 					$i++;
 				}
 			}
-			$this->data = null;
+			$this->data = $i;
 			$this->status = "success";
 		} catch (QueryException $e) {
 			$this->status = "failed";
