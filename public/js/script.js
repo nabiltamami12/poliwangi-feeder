@@ -8,6 +8,13 @@ jQuery(function ($) {
 		format: "dd MM yyyy",
 		autoclose: true
 	});
+	$('.timepicker').timepicker({
+		timeFormat: 'HH:mm',
+        'scrollDefaultNow'      : 'true',
+        'closeOnWindowScroll'   : 'true',
+        'showDuration'          : false,
+        'ignoreReadonly'        : true,
+	 })
 
   // jquery ajax global event handler
   $( document ).ajaxComplete(function() {

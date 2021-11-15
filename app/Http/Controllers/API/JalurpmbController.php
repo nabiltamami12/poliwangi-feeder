@@ -173,17 +173,11 @@ class JalurpmbController extends Controller
                 'is_active' => 0,
                 'kuota' => $data['kuota'],
                 'tanggal_buka' => Carbon::parse($data['tanggal_buka'])->format('Y-m-d'),
+                'jam_buka' => $data['jam_buka'].':00',
                 'tanggal_tutup' => Carbon::parse($data['tanggal_tutup'])->format('Y-m-d'),
+                'jam_tutup' => $data['jam_tutup'].':00',
             ]);
 
-            // Jalursyarat::where('id_jalur', $pmb)->delete();
-            // foreach ($request->syarat as $key => $value) {
-            //     $score = array(
-            //         'id_jalur' => $jalur->id,
-            //         'id_syarat' => $value['id_syarat']
-            //     );
-            //     $scores = Jalursyarat::Create($score);
-            // }
             $this->data = $jalur;
             $this->status = "success";
         } catch (QueryException $e) {

@@ -31,23 +31,40 @@
               <div class="col-lg-12 mb-2">
                 <div class="form-group row">
                   <label for="staticEmail" class="col-sm-12 col-form-label"><h2 class="card_title mb-2 font-weight-500">Tanggal Pendaftaran</h2></label>
-                  <div class="col-md-5 d-flex align-items-center date_picker">
+                  <div class="col-md-3 d-flex align-items-center date_picker">
                     <input id="tanggal_buka" type="text" class="form-control date-input" name="tanggal_buka" />
                     <label class="input-group-btn" for="txtDate1">
                       <span class="date_button" style="right: 16px;">
                         <i class="iconify" data-icon="bx:bx-calendar" data-inline="false"></i>
                       </span>
-                    </label>
+                    </label>      
+                  </div>
+                  <div class="col-md-2 d-flex align-items-center date_picker">
+                    <input type="text" id="jam_buka" name="jam_buka" class="form-control timepicker w-100">
+                    <label class="input-group-btn" for="txtDate1">
+                      <span class="date_button" style="right: 16px;">
+                        <i class="iconify" data-icon="bx:bx-time" data-inline="false"></i>
+                      </span>
+                    </label>      
                   </div>
                   <div class="col-md-2 d-flex align-items-center justify-content-center">Sampai</div>
-                  <div class="col-md-5 d-flex align-items-center date_picker">
-                      <input id="tanggal_tutup" type="text" class="form-control date-input" name="tanggal_tutup" />
-                      <label class="input-group-btn" for="txtDate2">
-                        <span class="date_button" style="right: 16px;">
-                          <i class="iconify" data-icon="bx:bx-calendar" data-inline="false"></i>
-                        </span>
-                      </label>
-                    </div>
+                  <div class="col-md-3 d-flex align-items-center date_picker">
+                    <input id="tanggal_tutup" type="text" class="form-control date-input" name="tanggal_tutup" />
+                    <label class="input-group-btn" for="txtDate2">
+                      <span class="date_button" style="right: 16px;">
+                        <i class="iconify" data-icon="bx:bx-calendar" data-inline="false"></i>
+                      </span>
+                    </label>
+                  </div>
+                  <div class="col-md-2 d-flex align-items-center date_picker">
+                    <input type="text" id="jam_tutup" name="jam_tutup" class="form-control timepicker w-100">
+                    <label class="input-group-btn" for="txtDate1">
+                      <span class="date_button" style="right: 16px;">
+                        <i class="iconify" data-icon="bx:bx-time" data-inline="false"></i>
+                      </span>
+                    </label>      
+                  </div>
+
                 </div>
               </div>
               <div class="col-md-6">
@@ -76,7 +93,7 @@
             </div>
             <div class="row">
               <div class="col">
-                <button type="submit" class="btn btn-primary w-100 rounded-sm mt-3">{{ ($id==null)?"Tambah":"Ubah" }}Simpan</button>
+                <button type="submit" class="btn btn-primary w-100 rounded-sm mt-3">Simpan</button>
               </div>
             </div>
         </div>
@@ -96,6 +113,7 @@
   });
 
   $(document).ready(function() {
+
     var id = "{{$id}}";
     getSyarat();
     if (id != "") {
@@ -114,7 +132,9 @@
       var data = {
         'jalur_daftar' : $('#jalur_daftar').val(),
         'tanggal_buka' : $('#tanggal_buka').val(),
+        'jam_buka' : $('#jam_buka').val(),
         'tanggal_tutup' : $('#tanggal_tutup').val(),
+        'jam_tutup' : $('#jam_tutup').val(),
         'kuota' : $('#kuota').val(),
         'jml_seleksi' : $('#jml_seleksi').val(),
       }
@@ -126,7 +146,7 @@
         data:{'data':data,'syarat':arr_syarat},
         success: function(res) {
           if (res.status == "success") {
-            window.location.href = "{{url('/admin/settingpmb/settingjalurpenerimaan')}}";
+            // window.location.href = "{{url('/admin/settingpmb/settingjalurpenerimaan')}}";
           } else {
             // alert gagal
           }

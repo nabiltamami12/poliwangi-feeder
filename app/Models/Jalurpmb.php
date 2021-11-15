@@ -25,6 +25,8 @@ class Jalurpmb extends Model
         "kuota",
         "tanggal_buka",
         "tanggal_tutup",
+        "jam_buka",
+        "jam_tutup",
         "syarat"
     ];
 
