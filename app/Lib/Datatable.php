@@ -36,7 +36,8 @@ class Datatable extends Model {
 		$order_post = $this->request->input('order');
 		if($order_post && $this->column_order[$order_post['0']['column']]){
 			$this->dt->orderBy($this->column_order[$order_post['0']['column']], $order_post['0']['dir']);
-		} else if(isset($this->order)){
+		}
+		if(isset($this->order)){
 			$order = $this->order;
 			$this->dt->orderBy(key($order), $order[key($order)]);
 		}

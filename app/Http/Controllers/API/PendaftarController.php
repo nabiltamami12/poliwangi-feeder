@@ -672,22 +672,43 @@ class PendaftarController extends Controller
 		]);
 	}
 
-	public function keuangan()
+	public function keuangan(Request $request)
 	{
 		try {
-			$tahun_aktif = DB::table('periode')->select('tahun')->where('status', '1')->get()->first()->tahun;
-			$data = Pendaftar::select('nomor_va', 'trx_amount', 'nama', 'is_lunas', 'pendaftar.nomor')->where('tahun_ajaran', $tahun_aktif)->orderBy('is_lunas', 'desc')->get();
-			$this->data = $data;
-			$this->status = "success";
+        	DB::enableQueryLog();
+			$data = $request->all();
+			$obj = new \App\Datatables\PendaftarDatatable();
+			$lists = $obj->get_datatables();
+			$data = [];
+			$no = $request->input("start");
+			foreach ($lists as $list) {
+				$no++;
+				$row = [];
+				$row[] = $no;
+				$row[] = $list->nomor_va;
+				$row[] = $list->nama;
+				$row[] = $list->trx_amount;
+				$row[] = $list->is_lunas;
+				$row[] = $list->nomor;
+				$data[] = $row;
+			}
+			return [
+				"draw" => $request->input('draw'),
+				"recordsTotal" => $obj->count_all_datatables(),
+				"recordsFiltered" => $obj->count_filtered_datatables(),
+				"data" => $data,
+				"status" => "success",
+				"error" => $this->error
+			];
 		} catch (QueryException $e) {
 			$this->status = "failed";
 			$this->error = $e;
 		}
-		return response()->json([
-			"status" => $this->status,
-			"data" => $this->data,
-			"error" => $this->error
-		]);
+        return response()->json([
+            "status" => $this->status,
+            "data" => $this->data,
+            "error" => $this->error
+        ]);
 	}
 
 	public function mahasiswa(Request $request)

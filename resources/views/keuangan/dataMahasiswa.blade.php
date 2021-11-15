@@ -3,7 +3,11 @@
 @section('content')
 <!-- Header -->
 <header class="header"></header>
-
+<style type="text/css">
+	.modal .table th, .modal .table td {
+		padding: 5px 15px;
+	}
+</style>
 <!-- Page content -->
 <section class="page-content container-fluid" id="akademik_datamahasiswa">
 	<div class="row">
@@ -213,6 +217,7 @@
 	}
 
 	function rangkuman_modal(id_mahasiswa,nim,nama,prodi) {
+		$('#rangkumanModal table tbody').html('')
 		$.ajax({
 			url: url_api+"/keuangan/rangkuman/"+id_mahasiswa,
 			type: 'get',

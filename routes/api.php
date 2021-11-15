@@ -247,7 +247,7 @@ Route::prefix('v1')->group(function () {
     Route::post('/pendaftar/update-berkas', [Ctr\PendaftarController::class, 'update_berkas']);
     Route::post('/login', [Ctr\PendaftarController::class, 'login']);
     Route::post('/pendaftar/check', [Ctr\PendaftarController::class, 'is_lunas']);
-    Route::get('/pendaftar/keuangan', [Ctr\PendaftarController::class, 'keuangan']);
+    Route::post('/pendaftar/keuangan', [Ctr\PendaftarController::class, 'keuangan']);
     Route::get('/pendaftar/mahasiswa', [Ctr\PendaftarController::class, 'mahasiswa']);
     Route::post('admin/pendaftar/generate-nim', [Ctr\PendaftarController::class, 'generate_nim']);
     // Route::post('/daftar/{id}', [Ctr\PendaftarController::class, 'update']);
