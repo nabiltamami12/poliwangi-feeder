@@ -61,13 +61,13 @@
         <div id="card_presensi" class="card-body p-0">
           <div id="info_penerimaan">
             <h6 class="mb-0 mb-2">Diterima Di</h6>
-            <h5 class="mb-0 mb-3" id="poltek_pilihan">-</h5>
+            <h5 class="mb-0 mb-3" id="poltek_pilihan">Belum ada pengumuman</h5>
             <h6 class="mb-0 mb-2">Pada Program Studi</h6>
-            <h5 class="mb-0 mb-3" id="prodi_pilihan">-</h5>
+            <h5 class="mb-0 mb-3" id="prodi_pilihan">Belum ada pengumuman</h5>
             <h6 class="mb-0 mb-2">Biaya SPI</h6>
-            <h5 class="mb-0 mb-3" id="spi_pilihan">-</h5>
+            <h5 class="mb-0 mb-3" id="spi_pilihan">Belum ada pengumuman</h5>
             <h6 class="mb-0 mb-2">Biaya UKT</h6>
-            <h5 class="mb-0 mb-3" id="ukt_pilihan">-</h5>
+            <h5 class="mb-0 mb-3" id="ukt_pilihan">Belum ada pengumuman</h5>
             <h6 class="mb-0 mb-2">Status</h6>
             <h5 class="mb-0 mb-3" id="status_pilihan"><span>Belum ada pengumuman</span></h5>
           </div>
@@ -133,7 +133,7 @@ function getDashboard() {
             $('.text-status').attr('hidden',true);
             $('#poltek_pilihan').text('-')
             $('#prodi_pilihan').text('-')
-            $('#status_pilihan').text('Tidak Lolos')
+            $('#status_pilihan').text('Tidak Lulus')
             $('#status_pilihan').addClass('text-danger')
 
             $('#btn_poltek_lain').attr('hidden',true);
@@ -157,7 +157,7 @@ function getDashboard() {
              
             $('#poltek_pilihan').text(info.politeknik)
             $('#prodi_pilihan').text(info.prodi)
-            $('#status_pilihan').text('Lolos')
+            $('#status_pilihan').text('Lulus')
             $('#status_pilihan').addClass('text-success')
           }
         }else{

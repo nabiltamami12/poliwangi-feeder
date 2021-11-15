@@ -359,6 +359,19 @@ class PendaftarController extends Controller
 				]
 			);
 		}
+		
+		$urutan = DB::table('pendaftar')->where('tahun_ajaran',date('Y'))->count()+1;
+		if (strlen($urutan)==1) {
+			$urutan = "0000".$urutan;
+		}elseif (strlen($urutan)==2) {
+			$urutan = "000".$urutan;
+		}elseif (strlen($urutan)==3) {
+			$urutan = "00".$urutan;
+		}elseif (strlen($urutan)==4) {
+			$urutan = "0".$urutan;
+		}
+		$nodaftar = "63".date('y').$request->jalur_daftar.$urutan;
+		$password = Hash::make("63".date('y').$request->jalur_daftar.$urutan);
 
 		$document = new Pendaftar();
 		$document->jalur_daftar = $request->jalur_daftar;
@@ -370,6 +383,9 @@ class PendaftarController extends Controller
 		$document->ibu = $request->ibu;
 		$document->notelp_ortu = $request->notelp_ortu;
 		$document->email = $request->email;
+		$document->nodaftar = $nodaftar;
+		$document->password = $password;
+		
 		if ($request->jalur_daftar == 1) {
 			$document->trx_amount = \App\Models\SettingBiaya::where('nama', 'biaya-pendaftaran-smpbn')->first()->nilai;
 		}else{
@@ -382,8 +398,6 @@ class PendaftarController extends Controller
 			$update_data = [];
 			$namafile = md5($document->nomor.'f0to').'.'.$fotos->getClientOriginalExtension();
 			$update_data['foto'] = $namafile;
-			$update_data['nodaftar'] = date('Y').$document->nomor;
-			$update_data['password'] = Hash::make(date('Y').$document->nomor);
 			$fotos->move(public_path() . '/pendaftar', $namafile);
 			$check = Pendaftar::where('nomor', $document->nomor);
 			$check->update($update_data);
