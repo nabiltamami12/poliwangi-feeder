@@ -99,7 +99,6 @@ $field_db = [
   ["field" => "scan_pembayaran", "title" => "Scan Pembayaran"],
   ["field" => "jurusan_asal", "title" => "Jurusan Asal"],
   ["field" => "prestasi", "title" => "Prestasi"],
-  ["field" => "jalur_daftar", "title" => "Jalur Daftar"],
 ];
 @endphp
 
@@ -126,7 +125,7 @@ $field_db = [
               <i class="iconify text-primary" data-icon="bx:bx-cloud-upload" data-inline="false"></i>
             </button>
           </div>
-          <p class="mt-2 mb-0 font-italic jenis_dokumen">Upload Document dengan format .pdf (Max size 10MB)</p>
+          <p class="mt-2 mb-0 font-italic jenis_dokumen">Upload Document dengan max size 10MB)</p>
         </div>
         <div class="modal-footer pt-3">
           <button type="button" class="btn btn-primary w-100 rounded-sm" id="btn-upload">Upload</button>
@@ -665,7 +664,7 @@ $field_db = [
             } 
           } else if ( arr_berkas.includes(index) ) {
             if(item){
-              $('#status_'+index).html(`<i class="iconify status-success" data-icon="fluent:clock-20-filled"></i>`);
+              $('#status_'+index).html(`<a href="{{url('pendaftar')}}/${item}" target="__blank"><i class="iconify status-success" data-icon="fluent:clock-20-filled"></i></a>`);
             } else {
               $('#status_'+index).html(`<i class="iconify status-rejected" data-icon="bi:x-circle-fill"></i>`);
             }
@@ -702,7 +701,9 @@ $field_db = [
                     </span>
                   </td>
                   <td class="text-center">
-                    <i class="iconify status-success" data-icon="fluent:clock-20-filled"></i>
+                    <a href="{{url('berkas/persyaratan_pendaftar')}}/${row.file}" target="__blank">
+                      <i class="iconify status-success" data-icon="fluent:clock-20-filled"></i>
+                    </a>
                   </td>
                 </tr>`;
             } else if (row.status === null) {

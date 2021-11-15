@@ -99,7 +99,6 @@
     ["field" => "scan_pembayaran", "title" => "Scan Pembayaran"],
     ["field" => "jurusan_asal", "title" => "Jurusan Asal"],
     ["field" => "prestasi", "title" => "Prestasi"],
-    ["field" => "jalur_daftar", "title" => "Jalur Daftar"],
   ];
 @endphp
 
