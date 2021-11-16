@@ -9,8 +9,10 @@
 <section class="page-content container-fluid">
   <div class="row">
     <div class="col-xl-12">
+      @if($kurikulum->jumlah_sks_matkul !== null && $kurikulum->jumlah_sks_matkul < $kurikulum->jumlah_sks)
+        <div class="alert alert-danger">Jumlah SKS Mata kuliah dibawah minimum SKS Kurikulum. <button class="close" data-dismiss="alert">&times;</button></div>
+      @endif
       <div class="card padding--small">
-
         <div class="card-header p-0">
           <div class="row align-items-center">
             <div class="col">

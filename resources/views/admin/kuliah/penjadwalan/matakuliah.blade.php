@@ -114,14 +114,18 @@ dt_opt = {
       "targets": [4],
       "data": null,
       "render": function(data, type, full) {
-        res = (data['dosen'] == null) ? '-' : data['dosen'];
+        gelar_dpn = (data['gelar_dpn_d1'] == null) ? '' : data['gelar_dpn_d1'] +'. '
+        gelar_blk = (data['gelar_blk_d1'] == null) ? '' : ', '+ data['gelar_blk_d1']
+        res = gelar_dpn + data['nama_d1'] + gelar_blk;
         return res;
       }
     },{
       "targets": [5],
       "data": null,
       "render": function(data, type, full) {
-        res = (data['dosen2'] == null) ? '-' : data['dosen2'];
+        gelar_dpn = (data['gelar_dpn_d2'] == null) ? '' : data['gelar_dpn_d2'] +'. '
+        gelar_blk = (data['gelar_blk_d2'] == null) ? '' : ', '+ data['gelar_blk_d2']
+        res = gelar_dpn + data['nama_d2'] + gelar_blk;
         return res;
       }
     },{
