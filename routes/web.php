@@ -271,7 +271,7 @@ Route::prefix('admin')->middleware(['aksesuntuk:admin'])->group(function () {
         Route::get('/datakurikulum/{id}/matakuliah', function ($id) {
             return view('akademik.masterData/matakuliah-kurikulum', [
                 "id" => $id,
-                "kurikulum" => Kurikulum::where('id', $id)->first(),
+                "kurikulum" => Kurikulum::select('kurikulum.*', DB::raw("(select sum((select sks from matakuliah where matakuliah.nomor=mk.matakuliah)) from kurikulum_matkul mk where mk.kurikulum = kurikulum.id) as jumlah_sks_matkul"))->where('id', $id)->first(),
                 "title" => "akademik-master"
             ]);
         });

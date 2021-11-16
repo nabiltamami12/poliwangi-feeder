@@ -91,7 +91,7 @@ class PenjadwalanController extends Controller
             $jumlah = Kuliah::all();
 
             $kuliah = Kuliah::create([
-                'nomor' => $jumlah->count(),
+                'nomor' => $jumlah->count() + 1,
                 'tahun' => $periode->tahun,
                 'semester' => $periode->semester,
                 'kelas' => $req->kelas,

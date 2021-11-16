@@ -203,13 +203,13 @@ class KurikulumController extends Controller
 
         $matkul = DB::table('matakuliah')->where('nomor', $request->matakuliah)->first();
 
-        if($request->status == 'wajib' && ($check_sks->jumlah_sks_wajib + $matkul->sks) > $check_sks->sks_wajib){
-            $this->status = "failed";
-            $this->error = ["code" => 422, "message" => "Jumlah Sks Wajib Melebihi batas yang telah ditentukan"];
-        } else if($request->status == 'pilihan' && ($check_sks->jumlah_sks_pilihan + $matkul->sks) > $check_sks->sks_pilihan){
-            $this->status = "failed";
-            $this->error = ["code" => 422, "message" => "Jumlah Sks Wajib Melebihi batas yang telah ditentukan"];
-        } else {
+        // if($request->status == 'wajib' && ($check_sks->jumlah_sks_wajib + $matkul->sks) > $check_sks->sks_wajib){
+        //     $this->status = "failed";
+        //     $this->error = ["code" => 422, "message" => "Jumlah Sks Wajib Melebihi batas yang telah ditentukan"];
+        // } else if($request->status == 'pilihan' && ($check_sks->jumlah_sks_pilihan + $matkul->sks) > $check_sks->sks_pilihan){
+        //     $this->status = "failed";
+        //     $this->error = ["code" => 422, "message" => "Jumlah Sks Wajib Melebihi batas yang telah ditentukan"];
+        // } else {
             try {
                 $check = DB::table('kurikulum_matkul')->where(['kurikulum' => $request->kurikulum, 'matakuliah' => $request->matakuliah, 'semester' => $request->semester]);
 
@@ -230,7 +230,7 @@ class KurikulumController extends Controller
                 $this->status = "failed";
                 $this->error = $e;
             }
-        }
+        // }
 
         return response()->json([
             "status" => $this->status,
