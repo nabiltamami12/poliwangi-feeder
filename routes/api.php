@@ -292,7 +292,7 @@ Route::prefix('v1')->group(function () {
     Route::post('setting_biaya', [Ctr\SettingBiayaController::class, 'store']);
 
     // Berkas Keuangan
-    Route::get('keuangan/list_cicilan', [Ctr\BerkasKeuanganController::class, 'index']);
+    Route::post('keuangan/list-cicilan', [Ctr\BerkasKeuanganController::class, 'index']);
     Route::get('keuangan/stats', [Ctr\BerkasKeuanganController::class, 'statistik']);
     Route::get('keuangan/detail-piutang/{id}', [Ctr\BerkasKeuanganController::class, 'detail_piutang']);
     Route::post('keuangan/pengajuan-cicilan', [Ctr\BerkasKeuanganController::class, 'store']);

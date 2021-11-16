@@ -24,7 +24,6 @@ class SpiController extends Controller
 
     public function index(Request $request)
     {
-        DB::enableQueryLog();
         try {
             $data = $request->all();
             $obj = new \App\Datatables\RekapitulasiSPIDatatable();
