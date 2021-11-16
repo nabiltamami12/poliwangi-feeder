@@ -60,6 +60,7 @@ class PenjadwalanController extends Controller
                 'h.hari',
                 'j.jam',
                 'm.matakuliah',
+                'm.kode',
                 'd.gelar_dpn as gelar_dpn_d1',
                 'd.nama as nama_d1',
                 'd.gelar_blk as gelar_blk_d1',
@@ -102,7 +103,7 @@ class PenjadwalanController extends Controller
             $dosenValidator1 = Kuliah::where(['tahun' => $periode->tahun, 'semester' => $periode->semester, 'hari' => $req->hari, 'jam' => $req->jam, 'dosen' => $req->dosen])->first();
             $dosenValidator2 = Kuliah::where(['tahun' => $periode->tahun, 'semester' => $periode->semester, 'hari' => $req->hari, 'jam' => $req->jam, 'dosen2' => $req->dosen2])->first();
             $ruanganValidator = Kuliah::where(['tahun' => $periode->tahun, 'semester' => $periode->semester, 'hari' => $req->hari, 'jam' => $req->jam, 'ruang' => $req->ruang])->first();
-            $matkulValidator = Kuliah::where(['tahun' => $periode->tahun, 'semester' => $periode->semester, 'hari' => $req->hari, 'jam' => $req->jam])->first();
+            $matkulValidator = Kuliah::where(['tahun' => $periode->tahun, 'semester' => $periode->semester, 'hari' => $req->hari, 'jam' => $req->jam, 'kelas' => $id])->first();
 
             if ($matkulValidator != null) {
                 $this->status = "failed";

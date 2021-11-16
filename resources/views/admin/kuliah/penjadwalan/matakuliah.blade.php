@@ -107,7 +107,7 @@ dt_opt = {
       "targets": [3],
       "data": null,
       "render": function(data, type, full) {
-        res = data['kode']+'  '+data['matakuliah'];
+        res = data['kode']+' - '+data['matakuliah'];
         return res;
       }
     },{
