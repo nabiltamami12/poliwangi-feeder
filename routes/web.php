@@ -271,7 +271,7 @@ Route::prefix('admin')->middleware(['aksesuntuk:admin'])->group(function () {
         Route::get('/datakurikulum/{id}/matakuliah', function ($id) {
             return view('akademik.masterData/matakuliah-kurikulum', [
                 "id" => $id,
-                "kurikulum" => Kurikulum::where('id', $id)->first(),
+                "kurikulum" => Kurikulum::select('kurikulum.*', DB::raw("(select sum((select sks from matakuliah where matakuliah.nomor=mk.matakuliah)) from kurikulum_matkul mk where mk.kurikulum = kurikulum.id) as jumlah_sks_matkul"))->where('id', $id)->first(),
                 "title" => "akademik-master"
             ]);
         });
@@ -473,6 +473,31 @@ Route::prefix('admin')->middleware(['aksesuntuk:admin'])->group(function () {
 
 
     Route::prefix('kuliah')->group(function () {
+        Route::get('/penjadwalan', function () {
+            return view('admin.kuliah.penjadwalan.index', [
+                'title' => 'admin-penjadwalan'
+            ]);
+        });
+        Route::get('/penjadwalan/{id}/matakuliah', function ($id) {
+            return view('admin.kuliah.penjadwalan.matakuliah', [
+                'title' => 'admin-penjadwalan',
+                'id' => $id,
+            ]);
+        });
+        Route::get('/penjadwalan/{id}/matakuliah/cu', function ($id) {
+            return view('admin.kuliah.penjadwalan.tambah-matakuliah', [
+                'title' => 'admin-penjadwalan',
+                'id' => $id,
+            ]);
+        });
+        Route::get('/penjadwalan/{id}/matakuliah/cu/{idKuliah}', function ($id, $idKuliah) {
+            return view('admin.kuliah.penjadwalan.edit-matakuliah', [
+                'title' => 'admin-penjadwalan',
+                'id' => $id,
+                'id_kuliah' => $idKuliah
+            ]);
+        });
+
 
         Route::get('/perwalian', function () {
             return view('admin.kuliah.perwalian', [

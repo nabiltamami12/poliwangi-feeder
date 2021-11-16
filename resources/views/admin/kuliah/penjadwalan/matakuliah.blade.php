@@ -14,11 +14,13 @@
         <div class="card-header p-0">
           <div class="row align-items-center">
             <div class="col">
-              <h2 class="mb-0">Data Kurikulum</h2>
+              @php $kelas = DB::table('kelas')->where('nomor', $id)->first(); @endphp
+              <h2 class="mb-0">JADWAL MATA KULIAH KELAS {{ strtoupper($kelas->kode) }}</h2>
             </div>
             <div class="col text-right">
-              <button type="button" onclick="add_btn()" class="btn btn-primary"><i class="iconify-inline mr-1" data-icon='bx:bx-plus-circle'></i> Tambah</button>
-            </div>
+                <a href="{{ url('admin/kuliah/penjadwalan') }}" class="btn btn-default">Kembali</a>
+                <button type="button" onclick="add_btn()" class="btn btn-primary"><i class="iconify-inline mr-1" data-icon='bx:bx-plus-circle'></i> Tambah</button>
+              </div>
           </div>
         </div>
         <hr class="mt">
@@ -26,14 +28,13 @@
           <table id="datatable" class="table align-items-center table-flush table-borderless table-hover">
             <thead class="table-header">
               <tr>
-                <th scope="col">NO</th>
-                <th scope="col">Nama Kurikulum</th>
-                <th scope="col">Program Studi</th>
-                <th scope="col">Tahun Ajaran</th>
-                <th scope="col">Jumlah SKS Kurikulum</th>
-                <th scope="col">Jumlah SKS MK</th>
-                <th scope="col">Status</th>
+                <th scope="col">No</th>
+                <th scope="col">Hari</th>
+                <th scope="col">Jam</th>
                 <th scope="col">Mata Kuliah</th>
+                <th scope="col">Dosen 1</th>
+                <th scope="col">Dosen 2</th>
+                <th scope="col">Ruangan</th>
                 <th scope="col">AKSI</th>
               </tr>
             </thead>
@@ -77,7 +78,7 @@
 @section('js')
 <script>
 var nomor = 1;
-dt_url = `${url_api}/kurikulum`;
+dt_url = `${url_api}/penjadwalan/{{ $id }}/matakuliah`;
 dt_opt = {
   // "serverSide": true,
   "columnDefs": [
@@ -92,62 +93,55 @@ dt_opt = {
       "targets": [1],
       "data": null,
       "render": function(data, type, full) {
-        res = data['kurikulum'];
+        res = data['hari'];
         return res;
       }
     },{
       "targets": [2],
       "data": null,
       "render": function(data, type, full) {
-        res = data['prodi'];
+        res = data['jam'];
         return res;
       }
     },{
       "targets": [3],
       "data": null,
       "render": function(data, type, full) {
-        res = `${data['periode']}/${parseInt(data['periode']) + 1}  ${parseInt(data['semester']) % 2 == 0 ? 'Genap' : 'Ganjil'}`;
+        res = data['kode']+' - '+data['matakuliah'];
         return res;
       }
     },{
       "targets": [4],
       "data": null,
       "render": function(data, type, full) {
-        res = data['jumlah_sks'];
+        gelar_dpn = (data['gelar_dpn_d1'] == null) ? '' : data['gelar_dpn_d1'] +'. '
+        gelar_blk = (data['gelar_blk_d1'] == null) ? '' : ', '+ data['gelar_blk_d1']
+        res = gelar_dpn + data['nama_d1'] + gelar_blk;
         return res;
       }
     },{
       "targets": [5],
       "data": null,
       "render": function(data, type, full) {
-        res = data['jumlah_matkul'] == null ? 0 : data['jumlah_matkul'];
+        gelar_dpn = (data['gelar_dpn_d2'] == null) ? '' : data['gelar_dpn_d2'] +'. '
+        gelar_blk = (data['gelar_blk_d2'] == null) ? '' : ', '+ data['gelar_blk_d2']
+        res = gelar_dpn + (data['nama_d2'] == null) ? '-' : data['nama_d2'] + gelar_blk;
         return res;
       }
     },{
       "targets": [6],
       "data": null,
       "render": function(data, type, full) {
-        var aktif = "<span class='text-success' style='font-size:12px;font-weight:600;'>aktif <i class='iconify-inline mr-1' style='font-size:12px;' data-icon='akar-icons:circle-check-fill'></i></span>"
-        var non_aktif = `<button class="btn btn-warning btn-sm" onclick="change_status(${data['id']})"><i class="iconify-inline mr-1" style="font-size:12px;" data-icon="akar-icons:circle-check-fill"></i>aktifkan</button>`
-        res = (data['status']=="1")?aktif:non_aktif;
+        res = (data['ruang'] == null) ? '-' : data['ruang'] + ' - ' + data['keterangan'];
         return res;
       }
     },{
       "targets": [7],
       "data": null,
       "render": function(data, type, full) {
-        var id = data['id']
-        var res = `<a href="{{ url('admin/master/datakurikulum/${id}/matakuliah') }}" class="btn btn-success btn-sm"><i class="iconify-inline mr-1" style="font-size:12px;" data-icon="akar-icons:search"></i>Mata Kuliah</a>`
-        return res;
-      }
-    },{
-      "targets": [8],
-      "data": null,
-      "render": function(data, type, full) {
-        var id = data['id'];
-        var text_hapus = data['kurikulum'];
+        var id = data['nomor'];
         var btn_update = `<span class="iconify edit-icon text-primary" onclick='update_btn(${id})' data-icon="bx:bx-edit-alt" data-inline="true"></span>`
-        var btn_delete = `<span class="iconify delete-icon text-primary" data-icon="bx:bx-trash" data-inline="true" onclick='delete_btn(${id},"kurikulum","kurikulum","${text_hapus}")'></span>`;
+        var btn_delete = `<span class="iconify delete-icon text-primary" data-icon="bx:bx-trash" data-inline="true" onclick='delete_btn(${id},"penjadwalan","jadwal","${text_hapus}")'></span>`;
         res = btn_update+" "+btn_delete;
         return res;
       }
@@ -173,7 +167,6 @@ function change_status(id) {
             } else {
               // alert gagal
             }
-            ;
         }
     });
 }

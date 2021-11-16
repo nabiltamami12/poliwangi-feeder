@@ -315,9 +315,19 @@ Route::prefix('v1')->group(function () {
     // Perwalian Admin
     Route::get('/admin/perwalian', [Ctr\PerwalianController::class, 'adminPerwalian']);
 
+<<<<<<< HEAD
     // Kunci Nilai Admin
     Route::get('/admin/kunci-nilai', [Ctr\KunciNilaiController::class, "index"]);
     Route::put('/admin/kunci-nilai/change_status/{id}', [Ctr\KunciNilaiController::class, 'change_status']);
+=======
+    // Penjadwalan
+    Route::get('/penjadwalan', [Ctr\PenjadwalanController::class, 'index']);
+    Route::get('/penjadwalan/{id}/matakuliah', [Ctr\PenjadwalanController::class, 'matakuliah']);
+    Route::post('/penjadwalan/{id}/matakuliah', [Ctr\PenjadwalanController::class, 'tambahMatakuliah']);
+    Route::delete('/penjadwalan/{id}', [Ctr\PenjadwalanController::class, 'destroy']);
+    Route::get('/penjadwalan/edit/{id}', [Ctr\PenjadwalanController::class, 'editMatakuliah']);
+    Route::post('/penjadwalan/{id}/matakuliah/update/{kode}', [Ctr\PenjadwalanController::class, 'updateMatakuliah']);
+>>>>>>> d758147540dd8994a765ccb3730b9d32f0415087
 });
 
 Route::prefix('v1')->middleware('auth:api')->group(function () {

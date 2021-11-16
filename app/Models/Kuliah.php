@@ -12,7 +12,16 @@ class Kuliah extends Model
     public $table = "kuliah";
     protected $primaryKey = 'nomor';
     protected $fillable = [
-        
+        'nomor',
+        'tahun',
+        'semester',
+        'kelas',
+        'matakuliah',
+        'hari',
+        'jam',
+        'ruang',
+        'dosen',
+        'dosen2'
     ];
 
     public function rKelas()
