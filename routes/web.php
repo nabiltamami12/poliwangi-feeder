@@ -473,6 +473,23 @@ Route::prefix('admin')->middleware(['aksesuntuk:admin'])->group(function () {
 
 
     Route::prefix('kuliah')->group(function () {
+        Route::get('/penjadwalan', function(){
+            return view('admin.kuliah.penjadwalan.index', [
+                'title' => 'admin-penjadwalan'
+            ]);
+        });
+        Route::get('/penjadwalan/{id}/matakuliah', function($id){
+            return view('admin.kuliah.penjadwalan.matakuliah', [
+                'title' => 'admin-penjadwalan',
+                'id' => $id,
+            ]);
+        });
+        Route::get('/penjadwalan/{id}/matakuliah/cu', function($id){
+            return view('admin.kuliah.penjadwalan.tambah-matakuliah', [
+                'title' => 'admin-penjadwalan',
+                'id' => $id,
+            ]);
+        });
 
         Route::get('/perwalian', function () {
             return view('admin.kuliah.perwalian', [

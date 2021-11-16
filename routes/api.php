@@ -314,6 +314,11 @@ Route::prefix('v1')->group(function () {
     Route::put('/dosen/perwalian/change_status/{id}', [Ctr\PerwalianController::class, 'change_status']);
     // Perwalian Admin
     Route::get('/admin/perwalian', [Ctr\PerwalianController::class, 'adminPerwalian']);
+
+    // Penjadwalan
+    Route::get('/penjadwalan', [Ctr\PenjadwalanController::class, 'index']);
+    Route::get('/penjadwalan/{id}/matakuliah', [Ctr\PenjadwalanController::class, 'matakuliah']);
+    Route::post('/penjadwalan/{id}/matakuliah', [Ctr\PenjadwalanController::class, 'tambahMatakuliah']);
 });
 
 Route::prefix('v1')->middleware('auth:api')->group(function () {

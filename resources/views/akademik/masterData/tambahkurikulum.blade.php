@@ -41,7 +41,7 @@
                 <label>Pilih Tahun Ajaran</label>
                 <select name="periode_id" id="" class="form-control">
                     @foreach($periode as $periode)
-                        <option value="{{ $periode->nomor }}">{{ ucwords($periode->tahun) }} - Semester {{ $periode->semester }}</option>
+                        <option value="{{ $periode->nomor }}">{{ ucwords($periode->tahun) }}/{{$periode->tahun+1}} {{ ($periode->semester % 2 == 0) ? 'Genap' : 'Ganjil' }}</option>
                     @endforeach
                 </select>
               </div>
