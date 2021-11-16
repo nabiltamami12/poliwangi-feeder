@@ -14,7 +14,7 @@
         <div class="card-header p-0">
           <div class="row align-items-center">
             <div class="col">
-              <h2 class="mb-0">TAMBAH JADWAL KELAS</h2>
+              <h2 class="mb-0">EDIT JADWAL KELAS</h2>
             </div>
           </div>
         </div>
@@ -128,8 +128,9 @@
 <script>
   $(document).ready(function() {
     var id = "{{$id}}";
+    var id_kuliah = "{{$id_kuliah}}";
     if (id!="") {
-        getData(id);
+        getData(id_kuliah);
     }else{
         $('#status').val(0)
     }
@@ -139,7 +140,7 @@
     // form tambah data
     $("#form_cu").submit(function(e) {
         e.preventDefault();
-        var url = url_api+"/penjadwalan/"+ id +"/matakuliah";
+        var url = url_api+"/penjadwalan/"+ id +"/matakuliah/update/" + id_kuliah;
         var type = "post";
         $.ajax({
             url: url,
@@ -165,17 +166,18 @@
     });
 } );
 
-function getData(id) {
+function getData(id_kuliah) {
     $.ajax({
-        url: url_api+"/kurikulum/"+id,
+        url: url_api+"/penjadwalan/edit/"+id_kuliah,
         type: 'get',
         dataType: 'json',
         data: {},
         success: function(res) {
+            
             if (res.status=="success") {
-                var data = res['data'][0];
+                var data = res.data;
                 $.each(data,function (key,row) {
-                    $('#'+key).val(row);
+                    $('#'+key).val(row).trigger('change');    
                 })
             } else {
                 // alert gagal

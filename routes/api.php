@@ -319,6 +319,9 @@ Route::prefix('v1')->group(function () {
     Route::get('/penjadwalan', [Ctr\PenjadwalanController::class, 'index']);
     Route::get('/penjadwalan/{id}/matakuliah', [Ctr\PenjadwalanController::class, 'matakuliah']);
     Route::post('/penjadwalan/{id}/matakuliah', [Ctr\PenjadwalanController::class, 'tambahMatakuliah']);
+    Route::delete('/penjadwalan/{id}', [Ctr\PenjadwalanController::class, 'destroy']);
+    Route::get('/penjadwalan/edit/{id}', [Ctr\PenjadwalanController::class, 'editMatakuliah']);
+    Route::post('/penjadwalan/{id}/matakuliah/update/{kode}', [Ctr\PenjadwalanController::class, 'updateMatakuliah']);
 });
 
 Route::prefix('v1')->middleware('auth:api')->group(function () {
