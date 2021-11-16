@@ -63,12 +63,21 @@
             </div>
             <div class="col-sm-12 col-12">
               <div class="form-group row mb-0">
+                @php $dosen = DB::table('pegawai')->get(); @endphp
                 <label>Dosen 1</label>
-                <select name="dosen" id="dosen" class="form-control select2"></select>
+                <select name="dosen" id="dosen" class="form-control select2">
+                    @foreach($dosen as $d)
+                        <option value="{{ $d->nomor }}">{{ ($d->gelar_dpn == null) ? '' : ucwords($d->gelar_dpn) .'. ' }}{{ ucwords($d->nama) }}{{ ($d->gelar_blk == null) ? '' : ', '. ucwords($d->gelar_blk) }}</option>
+                    @endforeach
+                </select>
               </div>
               <div class="form-group row mb-0">
                 <label>Dosen 2</label>
-                <select name="dosen2" id="dosen2" class="form-control select2"></select>
+                <select name="dosen2" id="dosen2" class="form-control select2">
+                    @foreach($dosen as $d)
+                        <option value="{{ $d->nomor }}">{{ ($d->gelar_dpn == null) ? '' : ucwords($d->gelar_dpn) .'. ' }}{{ ucwords($d->nama) }}{{ ($d->gelar_blk == null) ? '' : ', '. ucwords($d->gelar_blk) }}</option>
+                    @endforeach
+                </select>
               </div>
               <div class="form-group row mb-0">
                 @php $ruang = DB::table('ruang')->get(); @endphp
