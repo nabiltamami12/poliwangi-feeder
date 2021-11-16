@@ -125,7 +125,7 @@ dt_opt = {
       "render": function(data, type, full) {
         gelar_dpn = (data['gelar_dpn_d2'] == null) ? '' : data['gelar_dpn_d2'] +'. '
         gelar_blk = (data['gelar_blk_d2'] == null) ? '' : ', '+ data['gelar_blk_d2']
-        res = gelar_dpn + data['nama_d2'] + gelar_blk;
+        res = gelar_dpn + (data['nama_d2'] == null) ? '-' : data['nama_d2'] + gelar_blk;
         return res;
       }
     },{

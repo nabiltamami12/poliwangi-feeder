@@ -70,8 +70,8 @@ class PenjadwalanController extends Controller
             ->join('hari as h', 'h.nomor', '=', 'kuliah.hari')
             ->join('jam as j', 'j.nomor', '=', 'kuliah.jam')
             ->join('ruang as r', 'r.nomor', '=', 'kuliah.ruang')
-            ->join('pegawai as d', 'd.nomor', '=', 'kuliah.dosen')
-            ->join('pegawai as d2', 'd2.nomor', '=', 'kuliah.dosen2')
+            ->join('pegawai as d', 'd.nomor', '=', 'kuliah.dosen', 'left')
+            ->join('pegawai as d2', 'd2.nomor', '=', 'kuliah.dosen2', 'left')
             ->where([
                 'kuliah.tahun' => $periode->tahun,
                 'kuliah.semester' => $periode->semester,
@@ -79,6 +79,7 @@ class PenjadwalanController extends Controller
             ])
             ->get();
 
+            // dd($kuliah);
             $this->data = $kuliah;
             $this->status = "success";
         } catch (QueryException $e) {
