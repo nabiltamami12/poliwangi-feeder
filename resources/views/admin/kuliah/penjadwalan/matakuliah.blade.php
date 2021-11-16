@@ -107,7 +107,7 @@ dt_opt = {
       "targets": [3],
       "data": null,
       "render": function(data, type, full) {
-        res = data['matakuliah'];
+        res = data['kode']+' - '+data['matakuliah'];
         return res;
       }
     },{
@@ -141,7 +141,7 @@ dt_opt = {
       "render": function(data, type, full) {
         var id = data['nomor'];
         var btn_update = `<span class="iconify edit-icon text-primary" onclick='update_btn(${id})' data-icon="bx:bx-edit-alt" data-inline="true"></span>`
-        var btn_delete = `<span class="iconify delete-icon text-primary" data-icon="bx:bx-trash" data-inline="true" onclick='delete_btn(${id},"kurikulum","kurikulum","${text_hapus}")'></span>`;
+        var btn_delete = `<span class="iconify delete-icon text-primary" data-icon="bx:bx-trash" data-inline="true" onclick='delete_btn(${id},"penjadwalan","jadwal","${text_hapus}")'></span>`;
         res = btn_update+" "+btn_delete;
         return res;
       }
@@ -167,7 +167,6 @@ function change_status(id) {
             } else {
               // alert gagal
             }
-            ;
         }
     });
 }

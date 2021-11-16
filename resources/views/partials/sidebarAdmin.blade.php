@@ -117,6 +117,12 @@
             </div>
             <ul class="nav-item-dropdown-content">
               <li class="nav-item">
+                <a class="nav-link {{($title === "admin-penjadwalan") ? 'aktif' : ''}}" href="{{url('admin/kuliah/penjadwalan')}}">
+                  <span class="mini_icon">JK</span>
+                  <span class="nav-link-text ml-0">Penjadwalan Kuliah</span>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a class="nav-link {{($title === "admin-perwalian") ? 'aktif' : ''}}" href="{{url('admin/kuliah/perwalian')}}">
                   <span class="mini_icon">PW</span>
                   <span class="nav-link-text ml-0">Perwalian</span>
