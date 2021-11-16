@@ -314,6 +314,10 @@ Route::prefix('v1')->group(function () {
     Route::put('/dosen/perwalian/change_status/{id}', [Ctr\PerwalianController::class, 'change_status']);
     // Perwalian Admin
     Route::get('/admin/perwalian', [Ctr\PerwalianController::class, 'adminPerwalian']);
+
+    // Kunci Nilai Admin
+    Route::get('/admin/kunci-nilai', [Ctr\KunciNilaiController::class, "index"]);
+    Route::put('/admin/kunci-nilai/change_status/{id}', [Ctr\KunciNilaiController::class, 'change_status']);
 });
 
 Route::prefix('v1')->middleware('auth:api')->group(function () {

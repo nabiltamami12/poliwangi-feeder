@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Models\KunciNilai;
 use App\Models\Mahasiswa;
 use App\Models\Periode;
 use App\Models\Perwalian;
@@ -90,16 +91,23 @@ class PeriodeController extends Controller
             $insertedData = [];
             // return \dd($periode);
             for ($i = 1; $i <= 2; $i++) {
-                foreach ($mahasiswa as $m) {
-                    $perwalian = Perwalian::create([
-                        'periode_id' => $periode->id,
-                        'semester' => $i,
-                        'mahasiswa_id' => $m->nomor,
-                        'dosen_id' => $m->dosen_wali,
-                    ]);
-                    $insertedData[] = $perwalian;
-                }
+                // foreach ($mahasiswa as $m) {
+                //     $perwalian = Perwalian::create([
+                //         'periode_id' => $periode->id,
+                //         'semester' => $i,
+                //         'mahasiswa_id' => $m->nomor,
+                //         'dosen_id' => $m->dosen_wali,
+                //     ]);
+                //     $insertedData[] = $perwalian;
+                // }
+
+                KunciNilai::create([
+                    'semester' => $i,
+                    'tahun_ajaran' => $periode->tahun,
+                    'status' => 0
+                ]);
             }
+
 
             $this->data = $periode;
             $this->status = "success";
