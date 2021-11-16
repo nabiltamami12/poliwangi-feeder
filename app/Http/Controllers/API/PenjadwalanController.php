@@ -58,12 +58,20 @@ class PenjadwalanController extends Controller
                 'r.keterangan',
                 'h.hari',
                 'j.jam',
-                'm.matakuliah'
+                'm.matakuliah',
+                'd.gelar_dpn as gelar_dpn_d1',
+                'd.nama as nama_d1',
+                'd.gelar_blk as gelar_blk_d1',
+                'd2.gelar_dpn as gelar_dpn_d2',
+                'd2.nama as nama_d2',
+                'd2.gelar_blk as gelar_blk_d2',
             )
             ->join('matakuliah as m', 'm.nomor', '=', 'kuliah.matakuliah')
             ->join('hari as h', 'h.nomor', '=', 'kuliah.hari')
             ->join('jam as j', 'j.nomor', '=', 'kuliah.jam')
             ->join('ruang as r', 'r.nomor', '=', 'kuliah.ruang')
+            ->join('pegawai as d', 'd.nomor', '=', 'kuliah.dosen')
+            ->join('pegawai as d2', 'd2.nomor', '=', 'kuliah.dosen2')
             ->where([
                 'kuliah.tahun' => $periode->tahun,
                 'kuliah.semester' => $periode->semester,
