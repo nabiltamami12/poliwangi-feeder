@@ -75,28 +75,6 @@
                 </div>
               </div>
 
-              <div class="card_inner mt-4" id="list_jurusan">
-                <h2>Pilihan Jurusan Politeknik Negeri Banyuwangi</h2>
-                <hr>
-                <input type="hidden" id="jml_seleksi" name="jml_seleksi">
-                
-              </div>
-
-              <div class="card_inner mt-4">
-                <h2>Pilihan Politeknik Lainnya</h2>
-                <hr>
-                <div class="form-group mb-0">
-                  <label class="font-weight-bold">Pilih Politeknik</label>
-                  <select class="form-control" id="politeknik_lain" name="politeknik_lain">
-                  </select>
-                </div>
-                <div class="form-group mb-0 mt-3">
-                  <label class="font-weight-bold">Pilih Program Studi</label>
-                  <select class="form-control" id="program_studi_luar"  name="program_studi_luar" >
-                  </select>
-                </div>  
-              </div>
-
               <div class="card_inner mt-4">
                 <h2>Data Diri</h2>
                 <hr>
@@ -120,6 +98,11 @@
                           </span>
                         </label>
                       </div>
+                    </div>
+                    <div class="form-group mt-3">
+                      <label for="asal-sekolah">Jenjang Sekolah<span>*</span></label>
+                      <select class="form-control" id="jenjang_sekolah" name="jenjang_sekolah">
+                      </select>
                     </div>
                     <div class="form-group mt-3">
                       <label for="asal-sekolah">Asal Sekolah<span>*</span></label>
@@ -158,6 +141,28 @@
                     </div>
                   </div>
                 </div>
+              </div>
+
+              <div class="card_inner mt-4" id="list_jurusan">
+                <h2>Pilihan Jurusan Politeknik Negeri Banyuwangi</h2>
+                <hr>
+                <input type="hidden" id="jml_seleksi" name="jml_seleksi">
+                
+              </div>
+
+              <div class="card_inner mt-4">
+                <h2>Pilihan Politeknik Lainnya</h2>
+                <hr>
+                <div class="form-group mb-0">
+                  <label class="font-weight-bold">Pilih Politeknik</label>
+                  <select class="form-control" id="politeknik_lain" name="politeknik_lain">
+                  </select>
+                </div>
+                <div class="form-group mb-0 mt-3">
+                  <label class="font-weight-bold">Pilih Program Studi</label>
+                  <select class="form-control" id="program_studi_luar"  name="program_studi_luar" >
+                  </select>
+                </div>  
               </div>
               <button type="submit" class="btn btn-primary w-100 mt-4 rounded-sm">Simpan</button>
             </div>
@@ -272,6 +277,7 @@
             dataGlobal = JSON.parse(localStorage.getItem('globaldataRegister'))
           }
           var jalur_pmb = res.data.jalur_pmb
+          var jenjang = res.data.jenjang
           politeknik = res.data.politeknik
           politeknik_jurusan = res.data.politeknik_jurusan
           jurusan = res.data.jurusan
@@ -280,10 +286,13 @@
             var html = '';
             html = '<option value="">Pilih Jalur</option>'
             $.each(jalur_pmb,function (key,row) {
-              if (row.is_active==1) {
-                html = `<option data-jml="${row.jml_seleksi}" value="${row.id}">${row.jalur_daftar}</option>`;
-                $('#jalur_seleksi').append(html);
-              }
+              html = `<option data-jml="${row.jml_seleksi}" value="${row.id}">${row.jalur_daftar}</option>`;
+              $('#jalur_seleksi').append(html);
+            })
+            html = '<option value="">Pilih Jenjang</option>'
+            $.each(jenjang,function (key,row) {
+              html = `<option value="${row}">${row}</option>`;
+              $('#jenjang_sekolah').append(html);
             })
             var jml_seleksi = $('#jalur_seleksi :selected').data('jml');
             $("#jml_seleksi").val(jml_seleksi)

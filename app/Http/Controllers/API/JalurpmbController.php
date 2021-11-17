@@ -61,12 +61,19 @@ class JalurpmbController extends Controller
             ->join("jurusan", "program_studi.jurusan", "=", "jurusan.NOMOR")
             ->get();
             
+            $list_jenjang = DB::select("  SHOW COLUMNS 
+                FROM jurusan_asal 
+                LIKE 'jenjang'"
+            )[0]->type;
+            $list_jenjang = explode(",",str_replace('\'','',substr($list_jenjang,5,-1)) );
+
             $this->data = [
                 'jalur_pmb' => $jalur_pmb,
                 'politeknik' => $politeknik,
                 'politeknik_jurusan' => $politeknik_jurusan,
                 'jurusan' => $jurusan,
                 'prodi' => $prodi,
+                'jenjang' => $list_jenjang,
             ];
             $this->status = "success";
         } catch (QueryException $e) {

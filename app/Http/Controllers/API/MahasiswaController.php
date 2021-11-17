@@ -61,7 +61,7 @@ class MahasiswaController extends Controller
 				$row[] = $list->email;
 
 				$btn_update = '<span class="iconify edit-icon text-primary" onclick="update_btn('.$list->nomor.')" data-icon="bx:bx-edit-alt" ></span>';
-				$btn_delete = '<span class="iconify delete-icon text-primary" data-icon="bx:bx-trash"  onclick="delete_btn('.$list->nomor.',"mahasiswa","mahasiswa",\''.$list->nama.'\')"></span>';
+				$btn_delete = '<span class="iconify delete-icon text-primary" data-icon="bx:bx-trash"  onclick="delete_btn('.$list->nomor.',\'mahasiswa\',\'mahasiswa\',\''.$list->nama.'\')"></span>';
 				$row[] = $btn_update.$btn_delete;
 				$data[] = $row;
 			}
