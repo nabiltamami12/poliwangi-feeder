@@ -106,13 +106,12 @@ Route::middleware(['auth'])->group(function () {
             ]);
         });
 
-<<<<<<< HEAD
         // Route::get('/rekap-nilai', function () {
         //     return view('akademik.kuliah/datarekapnilai', [
             //         "title" => "rekap-nilai"
         //     ]);
         // });
-=======
+
         Route::get('/datarangenilai', function () {
             return view('akademik.masterData/datarangenilai', [
                 "title" => "akademik-master"
@@ -151,7 +150,6 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('/dataPangkat', PangkatController::class);
         Route::get('/getPangkat', [PangkatController::class, 'getPangkat'])->name('get-pangkat');
     });
->>>>>>> origin/adit-kp
 
     });
     
