@@ -109,80 +109,37 @@
       optProdi += `<option value="${row.nomor}">${row.nama_program} ${row.program_studi}</option>`
     })
     $('#prodi_export').append(optProdi)
-    var nomor = 1;
+
+    dt_pageLength = 100;
+    dt_type = 'post'
     dt_url = `${url_api}/keuangan/spi`;
     dt_opt = {
-      "columnDefs": [
+      serverSide: true,
+      order: [[0, 'desc']],
+      columnDefs: [
       {
-        "aTargets": [0],
-        "mData": null,
-        "className": 'text-center pr-0',
-        "mRender": function(data, type, full) {
-          res = nomor++;
-          return res;
-        }
-      },{
-        "aTargets": [1],
-        "mData": null,
+        "aTargets": 3,
         "className": 'text-center',
-        "mRender": function(data, type, full) {
-          res = data['nrp'];
-          return res;
+        "mRender": function (data, type, row) {
+          return formatTanggal(data);
         }
       },{
-        "aTargets": [2],
-        "mData": null,
-        "className": 'font-weight-bold text-capitalize',
-        "mRender": function(data, type, full) {
-          res = data['nama'];
-          return res;
-        }
-      },{
-        "aTargets": [3],
-        "mData": null,
-        "className": 'text-center',
-        "mRender": function(data, type, full) {
-          res = data['tanggal_pembayaran'];
-          return res;
-        }
-      },{
-        "aTargets": [4],
-        "mData": null,
+        "aTargets": [4, 5, 6],
         "className": 'font-weight-bold text-right',
         "mRender": function(data, type, full) {
-          res = formatAngka(data['tarif']);
-          return res;
+          return formatAngka(data);
         }
       },{
-        "aTargets": [5],
-        "mData": null,
+        "aTargets": 7,
         "className": 'font-weight-bold text-right',
         "mRender": function(data, type, full) {
-          res = formatAngka(data['nom_pembayaran']);
-          return res;
-        }
-      },{
-        "aTargets": [6],
-        "mData": null,
-        "className": 'font-weight-bold text-right',
-        "mRender": function(data, type, full) {
-          res = formatAngka(data['piutang']);
-          return res;
-        }
-      },{
-        "aTargets": [7],
-        "mData": null,
-        "className": 'font-weight-bold text-right',
-        "mRender": function(data, type, full) {
-          var id = data['id_mahasiswa'];
-          var detail = `<a href="{{ url('keuangan/rekapitulasi/spi/detail/${id}') }}" class="btn btn-sm btn-primary"><i class="iconify mr-1" data-icon="bx:bxs-user-detail"></i>
+          return `<a href="{{ url('keuangan/rekapitulasi/spi/detail/`+data+`') }}" class="btn btn-sm btn-primary"><i class="iconify mr-1" data-icon="bx:bxs-user-detail"></i>
           <span class="text-white">Lihat Detail</span></a>`
-          res = detail;
-          return res;
         }
-      },
+      }
       ]
-    }
+    };
+    load_datatable();
 
     $("#form_cu").submit(function(e) {
       e.preventDefault();

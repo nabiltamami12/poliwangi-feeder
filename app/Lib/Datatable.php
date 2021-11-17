@@ -55,11 +55,23 @@ class Datatable extends Model {
 	public function count_filtered_datatables(){
 		$this->dt = DB::table($this->table_datatables);
 		$this->_get_datatables_query();
-		return $this->dt->count();
+		$this->dt->select(DB::raw('COUNT(*) OVER() as total'));
+		$row = $this->dt->first();
+		if (isset($row->total)) {
+			return $row->total;
+		}else{
+			return 0;
+		}
 	}
 
 	public function count_all_datatables(){
-		return $this->dtc->count();
+		$this->dtc->select(DB::raw('COUNT(*) OVER() as total'));
+		$row = $this->dtc->first();
+		if (isset($row->total)) {
+			return $row->total;
+		}else{
+			return 0;
+		}
 	}
 
 	public function extra_datatables(){}

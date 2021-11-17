@@ -22,11 +22,35 @@ class SpiController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function index()
+    public function index(Request $request)
     {
         try {
-            $this->data = Spi::select('mahasiswa.nama', 'mahasiswa.nrp', 'spi.id', 'spi.tarif', 'spi.id_mahasiswa', 'spi.tanggal_pembayaran', DB::raw("SUM(spi.pembayaran) as nom_pembayaran"), DB::raw("spi.tarif - SUM(spi.pembayaran) as piutang"))->join('mahasiswa', 'mahasiswa.nomor', '=', 'spi.id_mahasiswa')->groupBy('spi.id_mahasiswa')->get();
-            $this->status = "success";
+            $data = $request->all();
+            $obj = new \App\Datatables\RekapitulasiSPIDatatable();
+            $lists = $obj->get_datatables();
+            $data = [];
+            $no = $request->input("start");
+            foreach ($lists as $list) {
+                $no++;
+                $row = [];
+                $row[] = $no;
+                $row[] = $list->nrp;
+                $row[] = $list->nama;
+                $row[] = $list->tanggal_pembayaran;
+                $row[] = $list->tarif;
+                $row[] = $list->nom_pembayaran;
+                $row[] = $list->piutang;
+                $row[] = $list->id_mahasiswa;
+                $data[] = $row;
+            }
+            return [
+                "draw" => $request->input('draw'),
+                "recordsTotal" => $obj->count_all_datatables(),
+                "recordsFiltered" => $obj->count_filtered_datatables(),
+                "data" => $data,
+                "status" => "success",
+                "error" => $this->error
+            ];
         } catch (QueryException $e) {
             $this->status = "failed";
             $this->error = $e;

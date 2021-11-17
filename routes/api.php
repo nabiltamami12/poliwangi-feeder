@@ -274,7 +274,7 @@ Route::prefix('v1')->group(function () {
     // SPI Mandiri
     Route::post('/keuangan/spi/import', [Ctr\SpiController::class, 'import']);
     Route::get('/keuangan/spi/export/{prodi}', [Ctr\SpiController::class, 'export']);
-    Route::get('/keuangan/spi', [Ctr\SpiController::class, 'index']);
+    Route::post('/keuangan/spi', [Ctr\SpiController::class, 'index']);
     Route::get('/keuangan/spi/{id}', [Ctr\SpiController::class, 'show']);
 
     //berkas
@@ -292,7 +292,7 @@ Route::prefix('v1')->group(function () {
     Route::post('setting_biaya', [Ctr\SettingBiayaController::class, 'store']);
 
     // Berkas Keuangan
-    Route::get('keuangan/list_cicilan', [Ctr\BerkasKeuanganController::class, 'index']);
+    Route::post('keuangan/list-cicilan', [Ctr\BerkasKeuanganController::class, 'index']);
     Route::get('keuangan/stats', [Ctr\BerkasKeuanganController::class, 'statistik']);
     Route::get('keuangan/detail-piutang/{id}', [Ctr\BerkasKeuanganController::class, 'detail_piutang']);
     Route::post('keuangan/pengajuan-cicilan', [Ctr\BerkasKeuanganController::class, 'store']);
@@ -316,7 +316,7 @@ Route::prefix('v1')->group(function () {
     // Riwayat Pembayaran
     Route::post('/keuangan/upload-riwayat', [Ctr\BerkasKeuanganController::class, 'upload_riwayat']);
     Route::post('/keuangan/upload-riwayat-cicilan', [Ctr\BerkasKeuanganController::class, 'upload_riwayat_cicilan']);
-    Route::get('/keuangan/riwayat-pembayaran', [Ctr\RiwayatPembayaranController::class, 'index']);
+    Route::post('/keuangan/riwayat-pembayaran', [Ctr\RiwayatPembayaranController::class, 'index']);
 
 
     // example use bni api
