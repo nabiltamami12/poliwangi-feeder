@@ -22,11 +22,35 @@ class SpiController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function index()
+    public function index(Request $request)
     {
         try {
-            $this->data = Spi::select('mahasiswa.nama', 'mahasiswa.nrp', 'spi.id', 'spi.tarif', 'spi.id_mahasiswa', 'spi.tanggal_pembayaran', DB::raw("SUM(spi.pembayaran) as nom_pembayaran"), DB::raw("spi.tarif - SUM(spi.pembayaran) as piutang"))->join('mahasiswa', 'mahasiswa.nomor', '=', 'spi.id_mahasiswa')->groupBy('spi.id_mahasiswa')->get();
-            $this->status = "success";
+            $data = $request->all();
+            $obj = new \App\Datatables\RekapitulasiSPIDatatable();
+            $lists = $obj->get_datatables();
+            $data = [];
+            $no = $request->input("start");
+            foreach ($lists as $list) {
+                $no++;
+                $row = [];
+                $row[] = $no;
+                $row[] = $list->nrp;
+                $row[] = $list->nama;
+                $row[] = $list->tanggal_pembayaran;
+                $row[] = $list->tarif;
+                $row[] = $list->nom_pembayaran;
+                $row[] = $list->piutang;
+                $row[] = $list->id_mahasiswa;
+                $data[] = $row;
+            }
+            return [
+                "draw" => $request->input('draw'),
+                "recordsTotal" => $obj->count_all_datatables(),
+                "recordsFiltered" => $obj->count_filtered_datatables(),
+                "data" => $data,
+                "status" => "success",
+                "error" => $this->error
+            ];
         } catch (QueryException $e) {
             $this->status = "failed";
             $this->error = $e;
@@ -44,13 +68,16 @@ class SpiController extends Controller
         $finalArr = array();
 
         foreach ($container as $key=>$value) {
-            $id_mahasiswa = DB::table('mahasiswa')->select('nomor')->where('nrp', $container[$key]['nim'])->first()->nomor;
+            $mhs = DB::table('mahasiswa')->select('nomor', 'program_studi')->where('nrp', $container[$key]['nim'])->first();
+            $id_mahasiswa = $mhs->nomor;
+            $program_studi = $mhs->program_studi;
+            $tarif_spi = DB::table('tarif_kelompok')->select('spi')->where('program_studi', $program_studi)->first()->spi;
             Spi::where('id_mahasiswa', $id_mahasiswa)->delete();
             $container[$key]['tgl_pembayaran'] = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject( $container[$key]['tgl_pembayaran'])->format('Y-m-d');
 
             array_push($finalArr, [
                 'id_mahasiswa' => $id_mahasiswa,
-                'tarif' => $container[$key]['tarif_spi'],
+                'tarif' => $tarif_spi,
                 'pembayaran' => $container[$key]['pembayaran_spi'],
                 'tanggal_pembayaran' => $container[$key]['tgl_pembayaran'],
                 'piutang' => $container[$key]['piutang']
@@ -83,8 +110,8 @@ class SpiController extends Controller
         ]);
     }
 
-    public function export($tahun,$prodi) {
-        if ($tahun == null || $prodi == null) {
+    public function export($prodi) {
+        if ($prodi == null) {
             return response()->json([
                 'status' => 'error', 
                 "data" => null, 
@@ -92,8 +119,8 @@ class SpiController extends Controller
         } else {
             $get = DB::table('program_studi')->select('program_studi')->where('nomor', $prodi)->get();
             $program_studi =  strtoupper($get[0]->program_studi);
-            $filename = "rekapspi_{$tahun}_".strtolower(str_replace(' ', '_',  $program_studi)).".xlsx";
-            return Excel::download(new SpiExport($tahun, $prodi, $program_studi), $filename);
+            $filename = "rekapspi_".strtolower(str_replace(' ', '_',  $program_studi)).".xlsx";
+            return Excel::download(new SpiExport($prodi, $program_studi), $filename);
         }
     }
 

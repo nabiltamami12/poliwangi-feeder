@@ -30,13 +30,11 @@ class SpiExport implements WithHeadings, WithColumnWidths, WithStyles, WithCusto
     * @return \Illuminate\Support\Collection
     */
     use Exportable;
-    protected $tahun;
     protected $prodi;
     protected $program_studi;
     protected $number;
 
-    public function __construct($tahun, $prodi, $program_studi) {
-        $this->tahun = $tahun;
+    public function __construct($prodi, $program_studi) {
         $this->prodi = $prodi;
         $this->program_studi = $program_studi;
         $this->number = 1;
@@ -47,13 +45,13 @@ class SpiExport implements WithHeadings, WithColumnWidths, WithStyles, WithCusto
     public function query() {
         return Spi::query()->select(
             'spi.id',
-            'spi.id_mahasiswa',
+            'mahasiswa.nrp',
             'mahasiswa.nama',
             'spi.tarif',
             'spi.pembayaran',
             'spi.tanggal_pembayaran',
             'spi.piutang'
-        )->where('spi.tahun', 'like', $this->tahun)
+        )
         ->where('mahasiswa.program_studi', 'like', $this->prodi)
         ->join('mahasiswa', 'spi.id_mahasiswa', '=', 'mahasiswa.nomor');
     }
@@ -62,7 +60,7 @@ class SpiExport implements WithHeadings, WithColumnWidths, WithStyles, WithCusto
         $date = Carbon::parse($spi->tanggal_pembayaran);
         return [
             $this->number++,
-            $spi->id_mahasiswa,
+            $spi->nrp,
             $spi->nama,
             $spi->tarif,
             $spi->pembayaran,
@@ -100,7 +98,6 @@ class SpiExport implements WithHeadings, WithColumnWidths, WithStyles, WithCusto
     {
         $sheet->setCellValue('A1', 'REKAPITULASI SUMBANGAN PENGEMBANGAN INSTITUSI (SPI) JALUR MANDIRI');
         $sheet->setCellValue('A2', 'PROGRAM STUDI '.$this->program_studi);
-        $sheet->setCellValue('A3', 'TAHUN AKADEMIK '.$this->tahun.'/'.($this->tahun+1));
         return [
             // Style the first row as bold text.
             5    => ['font' => ['bold' => true]],

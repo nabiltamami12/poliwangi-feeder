@@ -18,6 +18,7 @@ use DB;
 use App\Events\LogMahasiswaStatus;
 use App\Models\Mahasiswa;
 use Illuminate\Support\Carbon;
+use App\Datatables\PendaftarDatatable;
 
 class PendaftarController extends Controller
 {
@@ -33,21 +34,48 @@ class PendaftarController extends Controller
 	public function index(Request $request)
 	{
 		DB::enableQueryLog();
-		$table = DB::table('pendaftar as p');
-		$table->select('p.*','jp.jalur_daftar as jalur_penerimaan');
-		$table->join('jalur_penerimaan as jp','jp.id','=','p.jalur_daftar');
-		$table->join('jurusan_pilihan as jpl','jpl.id_pendaftar','=','p.nomor');
-		if ($request->program_studi) {
-			$table->where('jpl.program_studi',$request->program_studi); 
-		}
-		if ($request->jalur) {
-			$table->where('p.jalur_daftar',$request->jalur);
-		}
-		$table->groupBy('p.nomor');
-
 		try {
-			$this->data = $table->get();
-			$this->status = "success";
+			$where = [];
+			if ( $request->program_studi ) {
+				array_push($where,['jpl.program_studi','=',$request->program_studi]);
+			}
+			if ( $request->jalur ) {
+				array_push($where,['p.jalur_daftar','=',$request->jalur]);
+			}
+
+			$obj = new PendaftarDatatable($where);
+			$lists = $obj->get_datatables();
+			$data = [];
+			$no = $request->input("start");
+			foreach ($lists as $list) {
+				$no++;
+				$row = [];
+				$row[] = $no;
+				$row[] = $list->nodaftar;
+				$row[] = $list->nama;
+				$row[] = $list->jalur_penerimaan;
+				$row[] = ($list->status === "Y") ? "<span class='text-success'>LOLOS</span>" : ( ($list->status === "T") ? "<span class='text-danger'>TIDAK LOLOS</span>" : "<span class='text-warning'>MENUNGGU</span>" );
+				
+				$btn_konfirmasi = '<span id="btn_'.$list->nomor.'" onclick="func_modal('.$list->nomor.')" data-id="'.$list->nomor.'" class="badge btn-info_transparent text-primary">
+						<i class="iconify-inline mr-1 text-primary" data-icon="akar-icons:circle-check-fill"></i>
+						<span class="text-capitalize text-primary">Konfirmasi</span>
+					</span>';
+				$btn_edit = '<a href="'.url('admin/pmb/datapendaftar/'.$list->nomor).'" class="badge btn-info_transparent text-primary">
+						<i class="iconify-inline mr-1 text-primary" data-icon="bx:bx-edit-alt"></i>
+						<span class="text-capitalize text-primary">Edit</span>
+					</a>';
+				$row[] = $btn_konfirmasi.' &nbsp; '.$btn_edit;
+
+				$data[] = $row;
+			}
+			return [
+				"draw" => $request->input('draw'),
+				"recordsTotal" => $obj->count_all_datatables(),
+				"recordsFiltered" => $obj->count_filtered_datatables(),
+				"data" => $data,
+				"status" => "success",
+				"error" => $this->error
+			];
 		} catch (QueryException $e) {
 			$this->status = "failed";
 			$this->error = $e;
@@ -331,6 +359,19 @@ class PendaftarController extends Controller
 				]
 			);
 		}
+		
+		$urutan = DB::table('pendaftar')->where('tahun_ajaran',date('Y'))->count()+1;
+		if (strlen($urutan)==1) {
+			$urutan = "0000".$urutan;
+		}elseif (strlen($urutan)==2) {
+			$urutan = "000".$urutan;
+		}elseif (strlen($urutan)==3) {
+			$urutan = "00".$urutan;
+		}elseif (strlen($urutan)==4) {
+			$urutan = "0".$urutan;
+		}
+		$nodaftar = "63".date('y').$request->jalur_daftar.$urutan;
+		$password = Hash::make("63".date('y').$request->jalur_daftar.$urutan);
 
 		$document = new Pendaftar();
 		$document->jalur_daftar = $request->jalur_daftar;
@@ -342,15 +383,21 @@ class PendaftarController extends Controller
 		$document->ibu = $request->ibu;
 		$document->notelp_ortu = $request->notelp_ortu;
 		$document->email = $request->email;
-		// $document->password = Hash::make($request->password);
-		$document->trx_amount = Jalurpmb::select('biaya')->where('id', $request->jalur_daftar)->get()->first()->biaya;
+		$document->nodaftar = $nodaftar;
+		$document->password = $password;
+		
+		if ($request->jalur_daftar == 1) {
+			$document->trx_amount = \App\Models\SettingBiaya::where('nama', 'biaya-pendaftaran-smpbn')->first()->nilai;
+		}else{
+			$document->trx_amount = \App\Models\SettingBiaya::where('nama', 'biaya-pendaftaran-umpn')->first()->nilai;
+		}		
+		$document->tahun_ajaran = DB::table('periode')->select('tahun')->where('status', '1')->get()->first()->tahun;
 		$document->save();
 
 		if ($fotos = $request->file('foto')) {
 			$update_data = [];
 			$namafile = md5($document->nomor.'f0to').'.'.$fotos->getClientOriginalExtension();
 			$update_data['foto'] = $namafile;
-			$update_data['nodaftar'] = date('Y').$document->nomor;
 			$fotos->move(public_path() . '/pendaftar', $namafile);
 			$check = Pendaftar::where('nomor', $document->nomor);
 			$check->update($update_data);
@@ -395,9 +442,20 @@ class PendaftarController extends Controller
 	{
 		$token = $request->header('token');
 		try {
-			$id = Crypt::decrypt($token);
-			$document = Pendaftar::where('nomor', $id)->get()->first();
+			$id = $request->id ?? Crypt::decrypt($token);
+			$arr_berkas = [ 'foto', 'ijasah', 'foto_peraturan', 'rapor_smtr1', 'rapor_smtr2', 'rapor_smtr3', 'rapor_smtr4', 'rapor_smtr5', 'rapor_smtr6' ];
+			if (isset($request->berkas)) {
+				$document = Pendaftar::select($arr_berkas)->where('nomor', $id)->get()->first();
+			} else {
+				$document = Pendaftar::where('nomor', $id)->get()->first();
+			}
 			unset($document->nodaftar, $document->nomor, $document->password);
+			foreach ($arr_berkas as $v) {
+				$berkas = $document->$v;
+				if ( !$berkas || !file_exists(public_path('pendaftar/'.$berkas)) ) {
+					$document->$v = null;
+				}
+			}
 			$this->data = $document;
 			$this->status = "success";
 		} catch (QueryException $e) {
@@ -421,7 +479,7 @@ class PendaftarController extends Controller
 	public function update(Request $request)
 	{
 		$token = $request->header('token');
-		$id = Crypt::decrypt($token);
+		$id = $request->id ?? Crypt::decrypt($token);
 		$update_data = [];
 		foreach ($request->all() as $key => $value) {
 			$update_data[$key] = $value;
@@ -454,6 +512,56 @@ class PendaftarController extends Controller
 			'status' => 'success',
 			'data' => $update_data,
 			'messagge' => 'data berhasil di update'
+		]);
+	}
+
+	public function update_berkas(Request $request)
+	{
+		try {
+			$validator = Validator::make($request->all(), [
+				'nama' => 'required',
+				'file' => 'nullable|mimes:jpg,jpeg,png|max:2048'
+			]);
+
+			if ($validator->fails()) {
+				$error = $validator->errors()->all()[0];
+				return response()->json([
+					'status' => 'failed',
+					'message' => $error,
+					'data' => []
+				]);
+			} else {
+				$token = $request->header('token');
+				$id = $request->id ?? Crypt::decrypt($token);
+
+				$pendaftar = Pendaftar::where('nomor', $id);
+				$files = $request->file('file');
+				if ($files && $request->file->isValid()) {
+					$nama_field = $request->nama;
+					$file_db = $pendaftar->first()->$nama_field;
+					$file_lama = $file_db ? public_path('pendaftar/'.$file_db) : null;
+					if ($file_lama && file_exists($file_lama)) unlink($file_lama);
+					$file_name = 'f0t0_pdftr_'.$request->nama.'_'.\App\Helpers\CoreHelper::base64url_encode($id).'_'.time().'.'.$files->getClientOriginalExtension();
+					$files->move(public_path('pendaftar'), $file_name);
+					$pendaftar->update([
+						$request->nama => $file_name
+					]);
+				}
+				return response()->json([
+					'status' => 'success',
+					'data' => [$request->nama => 'uploaded'],
+					'messagge' => 'berkas berhasil di update'
+				]);
+			}
+			$this->status = "success";
+		} catch (QueryException $e) {
+			$this->status = "failed";
+			$this->error = $e;
+		}
+		return response()->json([
+			"status" => $this->status,
+			"data" => $this->data,
+			"error" => $this->error
 		]);
 	}
 
@@ -606,13 +714,33 @@ class PendaftarController extends Controller
 		]);
 	}
 
-	public function keuangan()
+	public function keuangan(Request $request)
 	{
 		try {
-			$tahun_aktif = DB::table('periode')->select('tahun')->where('status', '1')->get()->first()->tahun;
-			$data = Pendaftar::select('nomor_va', 'trx_amount', 'nama', 'is_lunas', 'pendaftar.nomor')->where('tahun_ajaran', $tahun_aktif)->orderBy('is_lunas', 'desc')->get();
-			$this->data = $data;
-			$this->status = "success";
+			$data = $request->all();
+			$obj = new \App\Datatables\PendaftarKeuanganDatatable();
+			$lists = $obj->get_datatables();
+			$data = [];
+			$no = $request->input("start");
+			foreach ($lists as $list) {
+				$no++;
+				$row = [];
+				$row[] = $no;
+				$row[] = $list->nomor_va;
+				$row[] = $list->nama;
+				$row[] = $list->trx_amount;
+				$row[] = $list->is_lunas;
+				$row[] = $list->nomor;
+				$data[] = $row;
+			}
+			return [
+				"draw" => $request->input('draw'),
+				"recordsTotal" => $obj->count_all_datatables(),
+				"recordsFiltered" => $obj->count_filtered_datatables(),
+				"data" => $data,
+				"status" => "success",
+				"error" => $this->error
+			];
 		} catch (QueryException $e) {
 			$this->status = "failed";
 			$this->error = $e;

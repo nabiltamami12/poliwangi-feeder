@@ -97,14 +97,16 @@ function getData() {
                   <span class="text-primary">dokumen terunggah</span>
                 </td>
                 <td class="text-center">
-                  <i class="iconify status-success" data-icon="fluent:clock-20-filled"></i>
+                  <a href="{{url('berkas/persyaratan_pendaftar')}}/${row.file}" target="__blank">
+                    <i class="iconify status-success" data-icon="fluent:clock-20-filled"></i>
+                  </a>
                 </td>
               </tr>`;
           } else if (row.status === null) {
             html = `<tr>
                 <td class="text-center px-2">${i++}</td>
                 <td>
-                  <h2 class="mb-0">Surat Keterangan Hasil Ujian</h2>
+                  <h2 class="mb-0">${row.nama}</h2>
                 </td>
                 <td>
                   <span onclick="show_modal('${row.id_syarat}')" style="cursor: pointer;">
@@ -120,7 +122,7 @@ function getData() {
             html = `<tr>
                 <td class="text-center px-2">${i++}</td>
                 <td>
-                  <h2 class="mb-0">Upload Foto dengan Almamater</h2>
+                  <h2 class="mb-0">${row.nama}</h2>
                 </td>
                 <td>
                   <span onclick="show_modal('${row.id_syarat}', 'put')" style="cursor: pointer;">

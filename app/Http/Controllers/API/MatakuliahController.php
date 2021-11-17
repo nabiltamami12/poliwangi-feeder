@@ -26,11 +26,9 @@ class MatakuliahController extends Controller
         try {
             $matakuliah = Matakuliah::select(
                                 'matakuliah.*',
-                                'kelas.kode as kode_kelas',
                                 'program_studi.program_studi as nama_program',
                                 'matakuliah_jenis.matakuliah_jenis as nama_mk_jenis',
                             )
-                            ->join('kelas', 'kelas.nomor', '=', 'matakuliah.kelas')
                             ->join('program_studi', 'program_studi.nomor', '=', 'matakuliah.program_studi')
                             ->join('matakuliah_jenis', 'matakuliah_jenis.nomor', '=', 'matakuliah.matakuliah_jenis','left')
                             ->get();
@@ -91,8 +89,6 @@ class MatakuliahController extends Controller
 
         try {
             $data['tahun'] = $this->tahun_aktif;
-            $data['tanggal_mulai_efektif'] = Carbon::parse($data['tanggal_mulai_efektif'])->format('Y-m-d');
-            $data['tanggal_akhir_efektif'] = Carbon::parse($data['tanggal_akhir_efektif'])->format('Y-m-d');
             $matakuliah = Matakuliah::create($data);
             $this->data = $matakuliah;
             $this->status = "success";

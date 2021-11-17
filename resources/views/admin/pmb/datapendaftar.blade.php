@@ -242,62 +242,10 @@ function setDatatable() {
     }
   var nomor = 1;
   dt_url = `${url_api}/admin/pendaftar?program_studi=${$('#program_studi').val()}`+jalur;
-dt_opt = {
-  "columnDefs": [
-        {
-          "aTargets": [0],
-          "mData": null,
-          "mRender": function(data, type, full) {
-            res = nomor++;
-            return (res==null)?"-":res;
-          }
-        },{
-          "aTargets": [1],
-          "mData": null,
-          "mRender": function(data, type, full) {
-            res = data['nodaftar'];
-            return (res==null)?"-":res;
-          }
-        },{
-          "aTargets": [2],
-          "mData": null,
-          "mRender": function(data, type, full) {
-            res = data['nama'];
-            return (res==null)?"-":res;
-          }
-        },{
-          "aTargets": [3],
-          "mData": null,
-          "mRender": function(data, type, full) {
-            res = data['jalur_penerimaan'];
-            return (res==null)?"-":res;
-          }
-        },{
-          "aTargets": [4],
-          "mData": null,
-          "mRender": function(data, type, full) {
-            res = (data['status']=="Y")?"<span class='text-success'>LOLOS</span>":(data['status']=="T")?"<span class='text-danger'>TIDAK LOLOS</span>":"<span class='text-warning'>MENUNGGU</span>";
-            return (res==null)?"-":res;
-          }
-        },{
-          "aTargets": [5],
-          "mData": null,
-          "mRender": function(data, type, full) {
-            var id = data['nomor']
-            
-            var status_sudah = `
-            
-                  <span id="btn_${id}" onclick="func_modal(${id})" data-id="${id}" class="badge btn-info_transparent text-primary">
-                    <i class="iconify-inline mr-1 text-primary" data-icon="akar-icons:circle-check-fill"></i>
-                    <span class="text-capitalize text-primary">Konfirmasi</span>
-                  </span>`
-
-            res = status_sudah;
-            
-            return res;
-          }
-        },
-      ]}
+  dt_opt = {
+    serverSide: true,
+    order: [[0, 'desc']]
+  };
 }
 </script>
 @endsection

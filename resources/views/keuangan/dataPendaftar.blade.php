@@ -3,7 +3,11 @@
 @section('content')
 <!-- Header -->
 <header class="header"></header>
-
+<style type="text/css">
+  .table td, .table th {
+    padding: 5px 15px;
+  }
+</style>
 <!-- Page content -->
 <section class="page-content page-content__keuangan container-fluid">
   <div class="row">
@@ -29,7 +33,7 @@
         <hr class="mt-4">
 
         <div class="table-responsive">
-          <table class="table align-items-center table-flush table-borderless table-hover" id="datatable">
+          <table class="table align-items-center table-flush table-hover" id="datatable-pending">
             <thead class="table-header">
               <tr>
                 <th scope="col" class="text-center">No</th>
@@ -45,11 +49,9 @@
       </div>
     </div>
   </div>
-
 </section>
 
 <script>
-
 function importFile() {
   $("#file").click()
 }
@@ -58,53 +60,33 @@ function clickButton() {
   $("#submit").click();
 }
 $(document).ready(function() {
-
-var nomor = 1;
-dt_url = `${url_api}/pendaftar/keuangan`;
-dt_opt = {
-"columnDefs": [
+  dt_pageLength = 100;
+  dt_type = 'post'
+  dt_url = `${url_api}/pendaftar/keuangan`;
+  dt_opt = {
+    serverSide: true,
+    order: [[0, 'desc']],
+    columnDefs: [
     {
-      "aTargets": [0],
-      "mData": null,
-      "className": 'text-center pr-0',
-      "mRender": function(data, type, full) {
-        return nomor++;
-      }
-    },{
-      "aTargets": [1],
-      "mData": null,
-      "className": 'text-center',
-      "mRender": function(data, type, full) {
-        return data['nomor_va'];
-      }
-    },{
-      "aTargets": [2],
-      "mData": null,
-      "className": 'font-weight-bold text-capitalize',
-      "mRender": function(data, type, full) {
-        return data['nama'];
-      }
-    },{
       "aTargets": [3],
-      "mData": null,
       "className": 'font-weight-bold text-right',
-      "mRender": function(data, type, full) {
-        return formatAngka(data['trx_amount']);
+      "mRender": function (data, type, row) {
+        return formatAngka(data);
       }
     },{
       "aTargets": [4],
-      "mData": null,
       "className": 'text-success text-uppercase font-weight-bold',
       "mRender": function(data, type, full) {
-        if (data['is_lunas'] == 1) {
+        if (data == 1) {
           return '<span style="color:green">Lunas</span>'
         }else{
           return '<span style="color:red">Belum Lunas</span>'
         }
       }
     }
-  ]}
-}
-);
+    ]
+  };
+  load_datatable();
+});
 </script>
 @endsection

@@ -2,12 +2,11 @@
 
 namespace App\Datatables;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+// use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Lib\Datatable;
 
 class MahasiswaUktDatatable extends Datatable
 {
-    use HasFactory;
     public $timestamps = false;
     protected $table = 'mahasiswa';
     protected $primaryKey = 'nomor';
@@ -31,5 +30,4 @@ class MahasiswaUktDatatable extends Datatable
 
         $this->dtc->where($this->where);
     }
-    // end datatable
 }

@@ -513,6 +513,7 @@
     </div>
   </section>
   <script>
+    const arr_date_form = ['tglmasuk', 'tgllulus', 'tgllahir', 'tanggal_lahir_ayah', 'tanggal_lahir_ibu'];
     $(document).ready(function() {
       var id = "{{ $id }}";
       getData(id);
@@ -523,8 +524,7 @@
         var kelas = $.grep(dataGlobal['kelas'], function(e) {
           return e.program_studi == program_studi;
         });
-        console.log(program_studi)
-        console.log(kelas)
+
         $('#kelas').html('')
         var optKelas = `<option value=""> - </option>`;
         $.each(kelas, function(key, row) {
@@ -536,7 +536,12 @@
       // form tambah data
       $("#form_cu").submit(function(e) {
         e.preventDefault();
-        var data = $('#form_cu').serialize();
+        var data = $('#form_cu').serializeArray();
+        for(const i in data){
+          if (arr_date_form.includes(data[i].name)) {
+            data[i].value = reformat_date( $('#'+data[i].name).val() );
+          } 
+        }
         if (id != "") {
           var url = url_api + "/mahasiswa/" + id;
           var type = "put";
@@ -619,9 +624,13 @@
           data: {},
           success: function(res) {
             if (res.status == "success") {
-              var data = res['data'][0];
+              var data = res['data'];
               $.each(data, function(key, row) {
-                $('#' + key).val(row);
+                if (arr_date_form.includes(key)) {
+                  $('#' + key).datepicker('setDate', new Date(row));
+                } else {
+                  $('#' + key).val(row);
+                }
               })
               var kelas = $.grep(dataGlobal['kelas'], function(e) {
                 return e.program_studi == data.program_studi;

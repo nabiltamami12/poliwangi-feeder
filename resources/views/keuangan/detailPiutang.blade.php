@@ -168,8 +168,10 @@
               var aa2 = newDate2.getFullYear() +"-" + (mm2 < 10? "0":"") +mm2 +"-" + (dd2 < 10? "0":"") + dd2;
               tgl_bl = '<input class="tgl_bl'+j+'" type="date" value="'+aa2+'">'
               cicilan_belum_lunas+=parseInt(list_riwayat_cicilan[j].nominal)
+            }else{
+              tgl_bl = formatTanggal(tgl_bl)
             }
-            $(".riwayat_cicilan table tbody").append(`<tr><td>`+formatAngka(list_riwayat_cicilan[j].nominal)+`</td><td>`+formatTanggal(tgl_bl)+`</td><td>`+(list_riwayat_cicilan[j].status == 1 ? 'Lunas' : 'Belum Lunas')+`</td><td>`+aksi_bl+`</td></tr>`)
+            $(".riwayat_cicilan table tbody").append(`<tr><td>`+formatAngka(list_riwayat_cicilan[j].nominal)+`</td><td>`+(tgl_bl)+`</td><td>`+(list_riwayat_cicilan[j].status == 1 ? 'Lunas' : 'Belum Lunas')+`</td><td>`+aksi_bl+`</td></tr>`)
           }
         }
         // ukt += cicilan_belum_lunas

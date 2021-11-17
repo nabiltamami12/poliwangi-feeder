@@ -8,6 +8,13 @@ jQuery(function ($) {
 		format: "dd MM yyyy",
 		autoclose: true
 	});
+	$('.timepicker').timepicker({
+		timeFormat: 'HH:mm',
+        'scrollDefaultNow'      : 'true',
+        'closeOnWindowScroll'   : 'true',
+        'showDuration'          : false,
+        'ignoreReadonly'        : true,
+	 })
 
   // jquery ajax global event handler
   $( document ).ajaxComplete(function() {
@@ -24,16 +31,16 @@ jQuery(function ($) {
 	}
 
 	// $(".nav-item-dropdown-content").css("display", "none");
-	$(".nav-link").click(function () {
-		$(".nav-link").not(this).removeClass("open");
-		$(".nav-link").not(this).next().slideUp(300);
+	$(".navbar-nav .nav-link").click(function () {
+		$(".navbar-nav .nav-link").not(this).removeClass("open");
+		$(".navbar-nav .nav-link").not(this).next().slideUp(300);
 		$(this).toggleClass("open");
 		$(this).next().slideToggle(300);
 	});
 
-	$(".nav-link-submenu").click(function () {
-		$(".nav-link-submenu").not(this).removeClass("open");
-		$(".nav-link-submenu").not(this).next().slideUp(300);
+	$(".navbar-nav .nav-link-submenu").click(function () {
+		$(".navbar-nav .nav-link-submenu").not(this).removeClass("open");
+		$(".navbar-nav .nav-link-submenu").not(this).next().slideUp(300);
 		$(this).toggleClass("open");
 		$(this).next().slideToggle(300);
 	});
@@ -61,7 +68,7 @@ function _load_datatable(){
 		"processing": true,
 		"ajax": {
 			url: dt_url,
-			type: 'GET',
+			type: dt_type,
 			data: {},
 			...dt_src,
 			headers: {
@@ -90,3 +97,11 @@ function _load_datatable(){
 if (typeof moment !== 'undefined') {
 	moment.locale('id');
 }
+
+function reformat_date(val) {
+	if (!val) return '';
+	const init_date = new Date(val);
+  const mm = init_date.getMonth() + 1; // getMonth() is zero-based
+  const dd = init_date.getDate();
+  return `${init_date.getFullYear()}-${(mm>9 ? '' : '0') + mm}-${(dd>9 ? '' : '0') + dd}`;
+};
