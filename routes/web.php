@@ -106,11 +106,52 @@ Route::middleware(['auth'])->group(function () {
             ]);
         });
 
+<<<<<<< HEAD
         // Route::get('/rekap-nilai', function () {
         //     return view('akademik.kuliah/datarekapnilai', [
             //         "title" => "rekap-nilai"
         //     ]);
         // });
+=======
+        Route::get('/datarangenilai', function () {
+            return view('akademik.masterData/datarangenilai', [
+                "title" => "akademik-master"
+            ]);
+        });
+        Route::get('/datarangenilai/cu/', function () {
+            return view('akademik.masterData/editrangenilai', [
+                "id" => null,
+                "title" => "akademik-master"
+            ]);
+        });
+        Route::get('/datarangenilai/history/', function () {
+            return view('akademik.masterData/historyrangenilai', [
+                "id" => null,
+                "title" => "akademik-master"
+            ]);
+        });
+        Route::get('/settingkuliah', function () {
+            return view('akademik.masterData/fe_settingKuliah', [
+                "title" => "akademik-master"
+            ]);
+        });
+    });
+
+    Route::prefix('kepegawaian')->group(function () {
+        //route pegawai
+        Route::resource('dataPegawai', PegawaiController::class);
+        //route unit
+        Route::resource('dataUnit', UnitController::class);
+        //route staff
+        Route::resource('dataStaff', StaffController::class);
+        //route data struktural
+        Route::resource('/dataStruktural', DataStrukturalController::class);
+        Route::get('/getData', [DataStrukturalController::class, 'getData'])->name('get-data');
+        //route pangkat
+        Route::resource('/dataPangkat', PangkatController::class);
+        Route::get('/getPangkat', [PangkatController::class, 'getPangkat'])->name('get-pangkat');
+    });
+>>>>>>> origin/adit-kp
 
     });
     

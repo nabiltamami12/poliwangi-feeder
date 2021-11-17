@@ -3,6 +3,7 @@
 
   <meta name="description" content="SIM Poliwangi adalah sistem informasi manajemen dari Poltek Banyuwangi">
   <meta name="author" content="SIM Poliwangi">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   @php
   $judul = 'SIM Poliwangi | '.ucwords(preg_replace('/-/m', ' ', $title));
   @endphp

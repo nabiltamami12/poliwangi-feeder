@@ -17,7 +17,15 @@
               <h2 class="mb-0">Data Unit</h2>
             </div>
             <div class="col text-right">
+<<<<<<< HEAD
+<<<<<<< HEAD
+              <button type="button" class="btn btn-primary" onclick="add_btn()"><i class="iconify-inline mr-1" data-icon='bx:bx-plus-circle'></i> Tambah</button>
+=======
               <a href="{{route('dataUnit.create')}}" class="btn btn-primary"><i class="iconify-inline mr-1" data-icon='bx:bx-plus-circle'></i> Tambah</a>
+>>>>>>> 90957374a7ba3e9db022fe4847b26293081a44e3
+=======
+              <a href="{{route('dataUnit.create')}}" class="btn btn-primary"><i class="iconify-inline mr-1" data-icon='bx:bx-plus-circle'></i> Tambah</a>
+>>>>>>> 3cef9bc60654b5ba233f3e4f66ab70d643751c95
             </div>
           </div>
         </div>
@@ -26,7 +34,16 @@
           <table id="datatable" class="table align-items-center table-flush table-borderless table-hover">
             <thead class="table-header">
               <tr>
+<<<<<<< HEAD
+<<<<<<< HEAD
+                <th scope="col">NO</th>
+                <th scope="col">Pegawai</th>
+=======
                 <th scope="col">No</th>
+>>>>>>> 90957374a7ba3e9db022fe4847b26293081a44e3
+=======
+                <th scope="col">No</th>
+>>>>>>> 3cef9bc60654b5ba233f3e4f66ab70d643751c95
                 <th scope="col">Unit</th>
                 <th scope="col">Kepala</th>
                 <th scope="col">AKSI</th>
