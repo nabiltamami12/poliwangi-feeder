@@ -25,7 +25,7 @@ class PegawaiController extends Controller
         $pegawai = Pegawai::all();
         return view('admin.masterKepegawaian.pegawai.index',
         [
-            "title" => "akademik-kepegawaian",
+            "title" => "kepegawaian",
             'pegawai' => $pegawai
         ]
         );
@@ -45,7 +45,7 @@ class PegawaiController extends Controller
         $jabatan = JabatanStruktural::all();
         return view('admin.masterKepegawaian.pegawai.create',[
                 "id" => null,
-                "title" => "akademik-kepegawaian",
+                "title" => "kepegawaian",
                 "kota" => $kota,
                 "kecamatan" => $kecamatan,
                 "provinsi" => $provinsi,
@@ -177,7 +177,7 @@ class PegawaiController extends Controller
 
         return view('admin.masterKepegawaian.pegawai.edit',[
                 "id" => $id,
-                "title" => "akademik-kepegawaian",
+                "title" => "kepegawaian",
                 "kota" => $kota,
                 "kecamatan" => $kecamatan,
                 "provinsi" => $provinsi,

@@ -18,7 +18,7 @@ class UnitController extends Controller
     {
         $unit = Unit::all();
         return view('admin.masterKepegawaian.unit.index', [
-                    "title" => "akademik-kepegawaian",
+                    "title" => "Unit-kepegawaian",
                     "unit" => $unit,
                 ]);
     }
@@ -33,7 +33,7 @@ class UnitController extends Controller
         $pgw = Pegawai::all();
         return view('admin.masterKepegawaian.unit.create', [
             "id" => null,
-            "title" => "akademik-kepegawaian",
+            "title" => "Unit-kepegawaian",
             "pegawai" => $pgw
         ]);
     }
@@ -74,7 +74,7 @@ class UnitController extends Controller
         $item = Unit::find($id);
         return view('admin.masterKepegawaian.unit.edit', [
             "id" => $id,
-            "title" => "akademik-kepegawaian",
+            "title" => "Unit-kepegawaian",
             "item" => $item,
             "pegawai" => $pgw
         ]);

@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\Kepegawaian\PegawaiController;
 use App\Http\Controllers\Admin\Kepegawaian\PangkatController;
 use App\Http\Controllers\Admin\Kepegawaian\JabatanStrukturalController;
 use App\Http\Controllers\Admin\Kepegawaian\DataStrukturalController;
+use App\Http\Controllers\Admin\Kepegawaian\ReportController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\Kepegawaian\UnitController;
 use App\Http\Controllers\Admin\Kepegawaian\StaffController;
@@ -45,7 +46,7 @@ Route::get('/pmbgenerateva', function () {
     return view('halamanAwal.pmbGenerateVA');
 })->name('generateVA-PMB');
 
-Route::middleware(['auth'])->group(function () {
+// Route::middleware(['auth'])->group(function () {
     
     Route::prefix('mahasiswabaru')->middleware(['aksesuntuk:maba'])->group(function () {
         Route::get('/dashboard', function () {
@@ -141,6 +142,7 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('dataPegawai', PegawaiController::class);
         //route unit
         Route::resource('dataUnit', UnitController::class);
+        Route::resource('reportPegawai', ReportController::class);
         //route staff
         Route::resource('dataStaff', StaffController::class);
         //route data struktural
@@ -149,9 +151,11 @@ Route::middleware(['auth'])->group(function () {
         //route pangkat
         Route::resource('/dataPangkat', PangkatController::class);
         Route::get('/getPangkat', [PangkatController::class, 'getPangkat'])->name('get-pangkat');
-    });
+
 
     });
+
+    // });
     
     Route::prefix('dosen')->middleware(['aksesuntuk:dosen'])->group(function () {
         Route::get('/dashboard', function () {
@@ -834,7 +838,6 @@ Route::middleware(['auth'])->group(function () {
         });
     });
 
-});
 
 require __DIR__.'/auth.php';
 

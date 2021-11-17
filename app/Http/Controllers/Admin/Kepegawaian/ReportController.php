@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Admin\Kepegawaian;
 
-use App\Http\Controllers\Controller;
-use App\Models\Kepegawaian\Pegawai;
-use App\Models\Kepegawaian\Staff;
 use Illuminate\Http\Request;
+use App\Models\Kepegawaian\Report;
+use App\Models\Kepegawaian\Pegawai;
+use App\Http\Controllers\Controller;
 
-class StaffController extends Controller
+class ReportController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,11 +16,11 @@ class StaffController extends Controller
      */
     public function index()
     {
-        $stf = Staff::all();
-        return view('admin.masterKepegawaian.staff.index', [
-                    "title" => "Staff",
-                    "stf" => $stf,
-                ]);
+        $item = Report::all();
+        return view('admin.masterKepegawaian.report.index',[
+            "title" => "report kepegawaian",
+            "item" => $item,
+        ]);
     }
 
     /**
@@ -31,9 +31,9 @@ class StaffController extends Controller
     public function create()
     {
         $pgw = Pegawai::all();
-        return view('admin.masterKepegawaian.staff.create', [
+        return view('admin.masterKepegawaian.report.create', [
             "id" => null,
-            "title" => "Staff",
+            "title" => "Report kepegawaian",
             "pegawai" => $pgw
         ]);
     }
@@ -46,9 +46,9 @@ class StaffController extends Controller
      */
     public function store(Request $request)
     {
-        $staff = Staff::create($request->all());
-        $staff->save();
-        return redirect()->route('dataStaff.index');
+        $Report = Report::create($request->all());
+        $Report->save();
+        return redirect()->route('reportPegawai.index');
     }
 
     /**
@@ -71,10 +71,10 @@ class StaffController extends Controller
     public function edit($id)
     {
         $pgw = Pegawai::all();
-        $item = Staff::find($id);
-        return view('admin.masterKepegawaian.staff.edit', [
+        $item = Report::find($id);
+        return view('admin.masterKepegawaian.report.edit', [
             "id" => $id,
-            "title" => "Staff",
+            "title" => "Report kepegawaian",
             "item" => $item,
             "pegawai" => $pgw
         ]);
@@ -89,12 +89,12 @@ class StaffController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $st = Staff::find($id);
-        $st->update([
+        $rt = Report::find($id);
+        $rt->update([
             'id_pegawai' => $request->id_pegawai,
-            'staf' => $request->staf,
+            'keterangan' => $request->keterangan,
         ]);
-        return redirect()->route('dataStaff.index');
+        return redirect()->route('reportPegawai.index');
     }
 
     /**
@@ -105,8 +105,8 @@ class StaffController extends Controller
      */
     public function destroy($id)
     {
-        $item = Staff::findOrFail($id);
-        $item->delete();
-        return redirect()->route('dataStaff.index');
+        $rt = Report::findOrFail($id);
+        $rt->delete();
+        return redirect()->route('reportPegawai.index');
     }
 }
