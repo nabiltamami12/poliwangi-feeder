@@ -138,6 +138,7 @@ Route::prefix('v1')->group(function () {
     Route::get('/mahasiswa-angkatan', [Ctr\MahasiswaController::class, 'mahasiswa_angkatan']);
     Route::get('/mahasiswa-kelas', [Ctr\MahasiswaController::class, 'mahasiswa_kelas']);
     Route::get('/mahasiswa-export', [Ctr\MahasiswaController::class, 'mahasiswa_export']);
+    Route::get('/mahasiswa/penilaian/{id}/{tahun}/{semester}/getNilai', [Ctr\MahasiswaController::class, 'getNilaiKhs']);
 
 
     // Dosen Pengampu
