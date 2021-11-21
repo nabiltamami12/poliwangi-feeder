@@ -146,6 +146,12 @@
                   <span class="nav-link-text ml-0">Rekap Nilai Mahasiswa</span>
                 </a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link {{($title === "admin-kunci-nilai") ? 'aktif' : ''}}" href="{{url('admin/kuliah/kunci-nilai')}}">
+                  <span class="mini_icon">KN</span>
+                  <span class="nav-link-text ml-0">Kunci Nilai</span>
+                </a>
+              </li>
             </ul>
           </li>
 

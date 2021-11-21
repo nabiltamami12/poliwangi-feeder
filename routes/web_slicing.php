@@ -62,10 +62,15 @@ Route::prefix('mahasiswalama')->middleware(['aksesuntuk:mala'])->group(function 
         });
 
         Route::get('/khs', function () {
-            return view('mahasiswaLama.khs', [
+            return view('mahasiswaLama.penilaian', [
                 "title" => "KHS"
             ]);
         });
+        // Route::get('/khs', function () {
+        //     return view('mahasiswaLama.khs', [
+        //         "title" => "KHS"
+        //     ]);
+        // });
     });
 
     Route::get('/formcuti', function () {

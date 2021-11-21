@@ -505,6 +505,12 @@ Route::prefix('admin')->middleware(['aksesuntuk:admin'])->group(function () {
                 "title" => "admin-perwalian"
             ]);
         });
+        Route::get('/kunci-nilai', function () {
+            return view('admin.kuliah.kuncinilai', [
+                "page" => "admin",
+                "title" => "admin-kunci-nilai"
+            ]);
+        });
         Route::get('/absensi/rekap', function () {
             return view('akademik.kuliah.rekapabsensimahasiswa', [
                 "page" => "admin",

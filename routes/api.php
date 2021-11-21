@@ -138,6 +138,7 @@ Route::prefix('v1')->group(function () {
     Route::get('/mahasiswa-angkatan', [Ctr\MahasiswaController::class, 'mahasiswa_angkatan']);
     Route::get('/mahasiswa-kelas', [Ctr\MahasiswaController::class, 'mahasiswa_kelas']);
     Route::get('/mahasiswa-export', [Ctr\MahasiswaController::class, 'mahasiswa_export']);
+    Route::get('/mahasiswa/penilaian/{id}/{tahun}/{semester}/getNilai', [Ctr\MahasiswaController::class, 'getNilaiKhs']);
 
 
     // Dosen Pengampu
@@ -315,6 +316,9 @@ Route::prefix('v1')->group(function () {
     // Perwalian Admin
     Route::get('/admin/perwalian', [Ctr\PerwalianController::class, 'adminPerwalian']);
 
+    // Kunci Nilai Admin
+    Route::get('/admin/kunci-nilai', [Ctr\KunciNilaiController::class, "index"]);
+    Route::put('/admin/kunci-nilai/change_status/{id}', [Ctr\KunciNilaiController::class, 'change_status']);
     // Penjadwalan
     Route::get('/penjadwalan', [Ctr\PenjadwalanController::class, 'index']);
     Route::get('/penjadwalan/{id}/matakuliah', [Ctr\PenjadwalanController::class, 'matakuliah']);
