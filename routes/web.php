@@ -505,6 +505,13 @@ Route::prefix('admin')->middleware(['aksesuntuk:admin'])->group(function () {
                 "title" => "admin-perwalian"
             ]);
         });
+
+        Route::get('/perwalian/cetak', function () {
+            return view('cetak.perwalian', [
+                "page" => "admin",
+                "title" => "admin-perwalian-cetak"
+            ]);
+        });
         Route::get('/kunci-nilai', function () {
             return view('admin.kuliah.kuncinilai', [
                 "page" => "admin",
