@@ -61,9 +61,9 @@
 		getTahun();
 
 		$('.dt-filter').on('change',function (e) {
-      var url = `{{ url('/api/v1') }}/absensi-dosen/rekap?tahun=${form_tahun.value}&semester=${form_semester.value}`;
-      dt.ajax.url(url).load();
-    });
+			var url = `{{ url('/api/v1') }}/absensi-dosen/rekap?tahun=${form_tahun.value}&semester=${form_semester.value}`;
+			dt.ajax.url(url).load();
+		});
 	});
 
 	function getTahun() {
