@@ -19,6 +19,7 @@
               <h2 class="mb-0 text-center text-md-left">Daftar Perwalian Periode {{ $semester->tahun }}/{{$semester->tahun + 1}} Semester {{ $semester->semester == 1 ? "Gasal" : "Genap  " }}</h2>
             </div>
             <div class="col-12 col-md-6 text-center text-md-right mt-3 mt-md-0">
+              <a href="{{ url('admin/kuliah/perwalian/cetak') }}" target="_blank" class="btn btn-primary"><i class="iconify-inline mr-1" data-icon='bx:bx-printer'></i> Cetak Perwalian</a>
             </div>
           </div>
         </div>
