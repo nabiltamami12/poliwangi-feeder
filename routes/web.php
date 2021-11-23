@@ -144,8 +144,11 @@ Route::get('/pmbgenerateva', function () {
         Route::prefix('kepegawaian')->group(function () {
             //route pegawai
             Route::resource('dataPegawai', PegawaiController::class);
+            Route::get('/getPegawai', [PegawaiController::class, 'getPegawai'])->name('get-pegawai');
             //route unit
             Route::resource('dataUnit', UnitController::class);
+            // Route::get('/getUnit', [UnitController::class, 'getUnit'])->name('get-unit');
+
             Route::resource('reportPegawai', ReportController::class);
             //route staff
             Route::resource('dataStaff', StaffController::class);

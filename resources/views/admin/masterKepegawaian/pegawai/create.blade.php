@@ -155,7 +155,7 @@
                                     Struktural</label>
                                 <select class="form-control" data-toggle="select" name="id_jabatan" id="exampleFormControlSelect1">
                                     @foreach ($jabatan as $item)
-                                    <option value="{{ $item->id }}">{{$item->nama_jabatan}}</option>
+                                    <option value="{{ $item->id }}">{{$item->jabatan_struktural}}</option>
                                     @endforeach
                                 </select>
                             </div>

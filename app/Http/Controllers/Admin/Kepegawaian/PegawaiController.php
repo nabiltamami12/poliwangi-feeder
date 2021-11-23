@@ -7,11 +7,11 @@ use Illuminate\Http\Request;
 use App\Models\Kepegawaian\Kota;
 use App\Models\Kepegawaian\Pangkat;
 use App\Models\Kepegawaian\Pegawai;
-use App\Models\Kepegawaian\Provinsi;
 use App\Http\Controllers\Controller;
+use App\Models\Kepegawaian\Provinsi;
 use App\Models\Kepegawaian\Kecamatan;
-use App\Models\Kepegawaian\Jabatan_struktural;
-use App\Models\Kepegawaian\JabatanStruktural;
+use Yajra\DataTables\Facades\DataTables;
+use App\Models\Kepegawaian\DataStruktural;
 
 class PegawaiController extends Controller
 {
@@ -22,13 +22,23 @@ class PegawaiController extends Controller
      */
     public function index()
     {
-        $pegawai = Pegawai::all();
+        // $pegawai = Pegawai::all();
         return view('admin.masterKepegawaian.pegawai.index',
         [
-            "title" => "kepegawaian",
-            'pegawai' => $pegawai
+            "title" => "kepegawaian"
         ]
         );
+    }
+    public function getPegawai(Request $request)
+    {
+        $data = Pegawai::orderBy('id', 'desc')->get();
+        return DataTables::of($data)
+            ->addColumn('Aksi', function($data) {
+                return '<button type="button" class="btn btn-success btn-sm" id="getEditPegawai" data-id="'.$data->id.'">Edit</button>
+                    <button type="button" data-id="'.$data->id.'" onclick="delete_btn()" class="btn btn-danger btn-sm" id="getDeleteId">Delete</button>';
+            })
+            ->rawColumns(['Aksi'])
+            ->make(true);
     }
 
     /**
@@ -42,7 +52,7 @@ class PegawaiController extends Controller
         $kecamatan = Kecamatan::paginate(5);
         $provinsi = Provinsi::all();
         $pangkat = Pangkat::all();
-        $jabatan = JabatanStruktural::all();
+        $jabatan = DataStruktural::all();
         return view('admin.masterKepegawaian.pegawai.create',[
                 "id" => null,
                 "title" => "kepegawaian",
@@ -171,7 +181,7 @@ class PegawaiController extends Controller
         $kecamatan = Kecamatan::paginate(5);
         $provinsi = Provinsi::all();
         $pangkat = Pangkat::all();
-        $jabatan = JabatanStruktural::all();
+        $jabatan = DataStruktural::all();
 
         $item = Pegawai::find($id);
 

@@ -10,7 +10,7 @@ class Pegawai extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
-    protected $table = "pegawais";
+    protected $table = "pegawai";
     protected $fillable = [
         'nip',
         'noid',

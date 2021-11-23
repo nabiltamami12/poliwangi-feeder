@@ -23,7 +23,7 @@
         </div>
         <hr class="mt">
         <div class="table-responsive">
-          <table class="table align-items-center table-flush table-borderless table-hover">
+          <table id="datatable" class="table align-items-center table-flush table-borderless table-hover">
             <thead class="table-header">
               <tr>
                 <th scope="col">No</th>
@@ -132,16 +132,19 @@
 
 @section('js')
 <script>
-  $(document).ready(function() {
-      $('.js-example-basic-single').select2();
-  });
-
- 
-
-  function add_btn() {
-    $('#modalAdd').modal();
-  }
-
-  
+      var nomor = 1;
+  dt_url = '{{ route('dataUnit.index') }}';
+  dt_opt = {
+    processing: true,
+    serverSide: true,
+    autoWidth: false,
+    "order": [[ 0, "desc" ]],
+    columns: [
+        {data: null, name: 'no', sortable: false, render: function(data, type, row, meta) {return meta.row + meta.settings._iDisplayStart + 1;}},
+        {data: 'unit', name: 'unit'},
+        {data: 'kepala', name: 'kepala'},
+        {data: 'Aksi', name: 'Aksi',orderable:false,serachable:false,sClass:'text-center'},
+    ]
+  };
 </script>
 @endsection
