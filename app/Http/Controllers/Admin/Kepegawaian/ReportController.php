@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Kepegawaian\Report;
 use App\Models\Kepegawaian\Pegawai;
 use App\Http\Controllers\Controller;
+use Yajra\DataTables\Facades\DataTables;
 
 class ReportController extends Controller
 {
@@ -16,13 +17,24 @@ class ReportController extends Controller
      */
     public function index()
     {
-        $item = Report::all();
+        // $item = Report::all();
         return view('admin.masterKepegawaian.report.index',[
             "title" => "report kepegawaian",
-            "item" => $item,
+            // "item" => $item,
         ]);
     }
 
+    public function dataReport(Request $request)
+    {
+        $data = Report::orderBy('id', 'desc')->get();
+        return DataTables::of($data)
+            ->addColumn('Aksi', function($data) {
+                return '<a href="'.route('reportPegawai.edit', $data->id).'" type="button" class="btn btn-success btn-sm">Edit</a>
+                    <button type="button" data-id="'.$data->id.'" onclick="delete_btn()" class="btn btn-danger btn-sm" id="getDeleteId">Delete</button>';
+            })
+            ->rawColumns(['Aksi'])
+            ->make(true);
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -105,8 +117,7 @@ class ReportController extends Controller
      */
     public function destroy($id)
     {
-        $rt = Report::findOrFail($id);
-        $rt->delete();
-        return redirect()->route('reportPegawai.index');
+        Report::destroy($id); 
+        return response()->json(['success'=>'Data report pegawai berhasil dihapus !!']);
     }
 }

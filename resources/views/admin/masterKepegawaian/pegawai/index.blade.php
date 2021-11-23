@@ -45,38 +45,25 @@
   </div>
 </section>
 
-<!-- Edit Modal -->
-{{-- <div class="modal" id="modalEdit" tabindex="-1" aria-labelledby="modalEditlLabel" aria-hidden="true">
-  <div id="loadingEdit"></div>
-  <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-          <div class="modal-header">
-              <h4 class="modal-title">Edit Pegawai</h4>
-              <button type="button" class="close modelClose" data-dismiss="modal">&times;</button>
-          </div>
-          <div class="modal-body">
-              <div class="alert alert-danger alert-dismissible fade show" role="alert" style="display: none;">
-                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                  </button>
-              </div>
-              <div class="alert alert-success alert-dismissible fade show" role="alert" style="display: none;">
-                  <strong>Berhasil !</strong>Pangkat berhasil diperbarui.
-                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                  </button>
-              </div>
-              <div id="EditModalBody">
-                    
-              </div>
-          </div>
-          <div class="modal-footer">
-              <button type="button" class="btn btn-primary" id="SubmitEditForm">Update</button>
-              <button type="button" class="btn btn-danger modelClose" data-dismiss="modal">Close</button>
-          </div>
-      </div>
+<!-- Delete Modal -->
+<div class="modal fade" id="modalDelete" tabindex="-1" aria-labelledby="modalDeletelLabel" aria-hidden="true">
+    <div id="loadingDelete"></div>
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Hapus Data Pegawai</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <h4>Apakah anda yakin menghapus data pegawai?</h4>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" id="SubmitDeleteForm">Iya</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Tidak</button>
+            </div>
+        </div>
+    </div>
   </div>
-</div> --}}
 
 @endsection
 @section('js')
@@ -163,7 +150,7 @@
             }
         });
         $.ajax({
-            url: "{{ route('dataPangkat.store') }}",
+            url: "{{ route('dataPegawai.store') }}",
             method: 'post',
             data: {
                 nama_pangkat: $('#namaPangkat').val(),
@@ -226,7 +213,7 @@
             }
         });
         $.ajax({
-            url: "dataPangkat/"+id,
+            url: "dataPegawai/"+id,
             method: 'PUT',
             data: {
                 nama_pangkat: $('#editNamaPangkat').val(),
@@ -269,7 +256,7 @@
             }
         });
         $.ajax({
-            url: "dataPangkat/"+id,
+            url: "dataPegawai/"+id,
             method: 'DELETE',
             success: function(result) {
                 setInterval(function(){ 

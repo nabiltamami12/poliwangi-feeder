@@ -129,12 +129,6 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{{ url('/admin/kepegawaian/dataPegawai')}}">
-                  <span class="mini_icon">PG</span>
-                  <span class="nav-link-text">Pegawai</span>
-                </a>
-              </li>
-              <li class="nav-item">
                 <a class="nav-link" href="{{ url('/admin/kepegawaian/dataUnit')}}">
                   <span class="mini_icon">UN</span>
                   <span class="nav-link-text">Unit</span>
@@ -144,6 +138,12 @@
                 <a class="nav-link" href="{{ url('/admin/kepegawaian/dataStruktural')}}">
                   <span class="mini_icon">DS</span>
                   <span class="nav-link-text">Data Struktural</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url('/admin/kepegawaian/dataPegawai')}}">
+                  <span class="mini_icon">PG</span>
+                  <span class="nav-link-text">Pegawai</span>
                 </a>
               </li>
               <li class="nav-item">

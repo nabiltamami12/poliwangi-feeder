@@ -34,7 +34,7 @@ class PegawaiController extends Controller
         $data = Pegawai::orderBy('id', 'desc')->get();
         return DataTables::of($data)
             ->addColumn('Aksi', function($data) {
-                return '<button type="button" class="btn btn-success btn-sm" id="getEditPegawai" data-id="'.$data->id.'">Edit</button>
+                return '<a href="'.route('dataPegawai.edit', $data->id).'" type="button" class="btn btn-success btn-sm">Edit</a>
                     <button type="button" data-id="'.$data->id.'" onclick="delete_btn()" class="btn btn-danger btn-sm" id="getDeleteId">Delete</button>';
             })
             ->rawColumns(['Aksi'])
@@ -222,9 +222,8 @@ class PegawaiController extends Controller
      */
     public function destroy($id)
     {
-        $pgw = Pegawai::where('id', $id)->first();
-        $pgw->delete();
-         return back();
-        
+        Pegawai::destroy($id);
+ 
+        return response()->json(['success'=>'Pegawai berhasil dihapus !!']);
     }
 }

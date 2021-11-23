@@ -32,34 +32,7 @@
               </tr>
             </thead>
             <tbody>
-              @foreach ($item as $row)
-              <tr>
-                <td>{{$loop->iteration}}</td>
-                <td>{{ $row->id_pegawai}}</td>
-                <td>{!! $row->keterangan !!}</td>
-                <td>                      
-                  <a href="{{ route('reportPegawai.edit', $row->id)}} " class="btn btn-success">Edit</a>
-
-                  {{-- <a href="{{route('reportPegawai.destroy',$row->id)}}" class="btn btn-danger text-white btn-sm"
-                    onclick="event.preventDefault();
-                document.getElementById('delete').submit();">
-                    Hapus
-                  </a>
-                  <form id="delete" action="{{route('reportPegawai.destroy',$row->id)}}" method="post" style="display: inline;">
-                    @csrf
-                    @method('delete')
-                  </form> --}}
-
-                  <form action="{{route('reportPegawai.destroy',$row->id)}}" method="post" style="display: inline;">
-                    @csrf
-                    @method('delete')
-                    <button class="btn btn-danger">
-                        Delete
-                    </button>
-                </form>
-                </td>
-              </tr>
-              @endforeach
+           
             </tbody>
           </table>
         </div>
@@ -70,6 +43,26 @@
   </div>
 </section>
 
+<!-- Delete Modal -->
+<div class="modal fade" id="modalDelete" tabindex="-1" aria-labelledby="modalDeletelLabel" aria-hidden="true">
+  <div id="loadingDelete"></div>
+  <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h4 class="modal-title">Hapus Data Report Pegawai</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+              <h4>Apakah anda yakin menghapus data report pegawai?</h4>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-danger" id="SubmitDeleteForm">Iya</button>
+              <button type="button" class="btn btn-default" data-dismiss="modal">Tidak</button>
+          </div>
+      </div>
+  </div>
+</div>
+
 @endsection
 
 @section('js')
@@ -79,7 +72,7 @@
   });
 
   var nomor = 1;
-  dt_url = '{{ route('reportPegawai.index') }}';
+  dt_url = '{{ route('data-report') }}';
   dt_opt = {
     processing: true,
     serverSide: true,
@@ -93,5 +86,146 @@
     ]
   };
   
+  
+  function add_btn() {
+    $('#modalAdd').modal();
+  }
+
+  function delete_btn() {
+    $('#modalDelete').modal();
+  }
+
+  $(document).ready(function() {
+
+    var no = 1;
+
+    $('#SubmitAddForm').click(function(e) {
+        // $("#loadingAdd").addClass("lds-dual-ring"); 
+        e.preventDefault();
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            url: "{{ route('reportPegawai.store') }}",
+            method: 'post',
+            data: {
+                nama_pangkat: $('#namaPangkat').val(),
+                golongan: $('#golongan').val(),
+                urut: $('#urut').val(),
+            },
+            success: function(result) {
+              if(result.errors) {
+                  $('.alert-danger').html('');
+                  $.each(result.errors, function(key, value) {
+                      $('.alert-danger').show();
+                      $('.alert-danger').append('<strong><li>'+value+'</li></strong>');
+                  });
+                  // $("#loadingAdd").removeClass("lds-dual-ring"); 
+              } else {
+                  $('.alert-danger').hide();
+                  $('.alert-success').show();
+                  $('#datatable').DataTable().ajax.reload();
+                  setInterval(function(){ 
+                      $('.alert-success').hide();
+                      $('#modalAdd').modal('hide');
+                      location.reload();
+                  }, 1000);
+              }
+            }
+        });
+    });
+
+    $('.modelClose').on('click', function(){
+        $('#modalEdit').hide();
+    });
+
+    var id;
+    $('body').on('click', '#getEditPegawai', function(e) {
+        $("#loading").addClass("lds-dual-ring"); 
+        // e.preventDefault();
+        $('.alert-danger').html('');
+        $('.alert-danger').hide();
+        id = $(this).data('id');
+        $.ajax({
+            url: "reportPegawai/"+id+"/edit",
+            method: 'GET',
+            // data: {
+            //     id: id,
+            // },
+            success: function(result) {
+                $('#EditModalBody').html(result.html);
+                $("#loading").removeClass("lds-dual-ring");
+                $('#modalEdit').show();
+            }
+        });
+    });
+
+    $('#SubmitEditForm').click(function(e) {
+        // $("#loadingEdit").addClass("lds-dual-ring"); 
+        e.preventDefault();
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            url: "reportPegawai/"+id,
+            method: 'PUT',
+            data: {
+                nama_pangkat: $('#editNamaPangkat').val(),
+                golongan: $('#editGolongan').val(),
+                urut: $('#editUrut').val(),
+            },
+            success: function(result) {
+                if(result.errors) {
+                    $('.alert-danger').html('');
+                    // $("#loading").removeClass("lds-dual-ring"); 
+                    $.each(result.errors, function(key, value) {
+                        $('.alert-danger').show();
+                        $('.alert-danger').append('<strong><li>'+value+'</li></strong>');
+                    });
+                } else {
+                    $('.alert-danger').hide();
+                    $('.alert-success').show();
+                    $('#datatable').DataTable().ajax.reload();
+                    setInterval(function(){ 
+                        $('.alert-success').hide();
+                        $('#modalEdit').hide();
+                        location.reload();
+                    }, 1000);
+                }
+            }
+        });
+    });
+
+    var deleteID;
+    $('body').on('click', '#getDeleteId', function(){
+        deleteID = $(this).data('id');
+    })
+    $('#SubmitDeleteForm').click(function(e) {
+        // $("#loadingDelete").addClass("lds-dual-ring"); 
+        e.preventDefault();
+        var id = deleteID;
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            url: "reportPegawai/"+id,
+            method: 'DELETE',
+            success: function(result) {
+                setInterval(function(){ 
+                    $('#modalDelete').modal('hide');
+                    $('#datatable').DataTable().ajax.reload();
+                    location.reload();
+                }, 1000);
+            }
+        });
+    });
+
+  });
 </script>
 @endsection

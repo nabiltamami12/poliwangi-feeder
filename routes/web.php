@@ -149,11 +149,13 @@ Route::get('/pmbgenerateva', function () {
             Route::get('/getPegawai', [PegawaiController::class, 'getPegawai'])->name('get-pegawai');
             //route unit
             Route::resource('dataUnit', UnitController::class);
-            // Route::get('/getUnit', [UnitController::class, 'getUnit'])->name('get-unit');
+            Route::get('/getUnit', [UnitController::class, 'getUnit'])->name('get-unit');
 
             Route::resource('reportPegawai', ReportController::class);
+            Route::get('/dataReport', [ReportController::class, 'dataReport'])->name('data-report');
             //route staff
             Route::resource('dataStaff', StaffController::class);
+            Route::get('/getStaff', [StaffController::class, 'getStaff'])->name('data-staff');
             //route data struktural
             Route::resource('/dataStruktural', DataStrukturalController::class);
             Route::get('/getData', [DataStrukturalController::class, 'getData'])->name('get-data');
