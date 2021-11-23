@@ -108,6 +108,7 @@
                 </a>
               </li>
             </ul>
+
           </li>
 
           <li class="nav-item">
@@ -252,6 +253,22 @@
             </ul>
           </li>
 
+          <li class="nav-item">
+            <div class="nav-link {{($title === "admin-report") ? 'aktif' : ''}}">
+              <i class="iconify-inline" data-icon="carbon:document"></i>
+              <span class="nav-link-text">Laporan</span>
+            </div>
+            <ul class="nav-item-dropdown-content">
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url('/admin/laporan/mahasiswa')}}">
+                  <span class="mini_icon">LM</span>
+                  <span class="nav-link-text">Laporan Mahasiswa</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+
 
           <li class="nav-item">
             <a class="nav-link {{($title === "admin-mahasiswa") ? 'aktif' : ''}}"
@@ -261,11 +278,11 @@
             </a>
           </li>
           <!-- ===================== -->
-          
 
-          
-          
-          
+
+
+
+
         </ul>
       </div>
     </div>

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API as Ctr;
+use App\Http\Controllers\API\LaporanMahasiswaController;
 use Illuminate\Support\Facades\Request;
 /*
 |--------------------------------------------------------------------------
@@ -319,6 +320,7 @@ Route::prefix('v1')->group(function () {
     // Kunci Nilai Admin
     Route::get('/admin/kunci-nilai', [Ctr\KunciNilaiController::class, "index"]);
     Route::put('/admin/kunci-nilai/change_status/{id}', [Ctr\KunciNilaiController::class, 'change_status']);
+
     // Penjadwalan
     Route::get('/penjadwalan', [Ctr\PenjadwalanController::class, 'index']);
     Route::get('/penjadwalan/{id}/matakuliah', [Ctr\PenjadwalanController::class, 'matakuliah']);

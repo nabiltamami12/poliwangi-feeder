@@ -228,6 +228,18 @@ Route::prefix('admin')->middleware(['aksesuntuk:admin'])->group(function () {
         ]);
     });
 
+    Route::prefix('laporan')->group(function() {
+
+        Route::get('mahasiswa', function() {
+            return view('admin.laporan.mahasiswa', [
+                'title' => 'admin-report'
+            ]);
+        });
+
+        Route::post('mahasiswa', [App\Http\Controllers\API\LaporanMahasiswaController::class, 'getReport']);
+
+    });
+
     Route::prefix('master')->group(function () {
         Route::get('/dataperiode', function () {
             return view('akademik.masterData/dataperiode', [
