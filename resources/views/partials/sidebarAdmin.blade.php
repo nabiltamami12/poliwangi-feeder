@@ -180,6 +180,12 @@
                 </a>
               </li>
               <li class="nav-item">
+                <a class="nav-link {{($title === "rekap-absensi-pegawai") ? 'aktif' : ''}}" href="{{url('admin/kuliah/absensi/pegawai')}}">
+                  <span class="mini_icon">RP</span>
+                  <span class="nav-link-text ml-0">Rekap Presensi Pegawai</span>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a class="nav-link {{($title === "rekap-nilai") ? 'aktif' : ''}}" href="{{url('admin/kuliah/rekap-nilai')}}">
                   <span class="mini_icon">RN</span>
                   <span class="nav-link-text ml-0">Rekap Nilai Mahasiswa</span>

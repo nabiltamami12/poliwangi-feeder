@@ -719,6 +719,19 @@ Route::get('/pmbgenerateva', function () {
             ]);
         });
 
+        Route::get('/absensi/pegawai', function () {
+            return view('admin.kuliah.absensipegawai', [
+                "page" => "admin",
+                "title" => "rekap-absensi-pegawai"
+            ]);
+        });
+
+        Route::get('/rekap-nilai', function () {
+            return view('admin.kuliah.datarekapnilai', [
+                "title" => "rekap-nilai"
+            ]);
+        });
+
         Route::get('/penilaian', function () {
             return view('dosen.inputNilai', [
                 "title" => "dosen-penilaian"
