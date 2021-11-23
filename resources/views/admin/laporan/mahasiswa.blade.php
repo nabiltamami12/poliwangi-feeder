@@ -26,8 +26,17 @@
 								<option value="">Semua Mahasiswa</option>
 								<option value="A">Mahasiswa Aktif</option>
 								<option value="X">Mahasiswa Tidak Aktif</option>
+                                <option value="R">Mahasiswa TA</option>
 								<option value="D">Mahasiswa DO</option>
 								<option value="C">Mahasiswa Cuti</option>
+                                <option value="P">Pendaftar</option>
+                                <option value="H">Punya SPTH</option>
+                                <option value="B">Mahasiswa Baru</option>
+                                <option value="R">Mahasiswa Tugas Akhir</option>
+                                <option value="L">Mahasiswa Lulus</option>
+                                <option value="K">Punya SPTH</option>
+                                <option value="M">Mahasiswa Meninggal</option>
+                                <option value="T">Mahasiswa Tanpa Keterangan</option>
 							</select>
 						</div>
 					</div>

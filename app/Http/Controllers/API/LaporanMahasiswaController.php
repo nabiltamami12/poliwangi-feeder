@@ -15,10 +15,18 @@ class LaporanMahasiswaController extends Controller
         'A' => 'Aktif',
         'X' => 'Tidak Aktif',
         'D' => 'DO',
-        'C' => 'Cuti'
+        'C' => 'Cuti',
+        'B' => 'Mahasiswa Baru',
+        'R' => 'Tugas Akhir',
+        'T' => 'Tanpa Keterangan',
+        'P' => 'Pendaftar',
+        'M' => 'Meninggal',
+        'L' => 'Lulus',
+        'K' => 'Mengundurkan Diri',
+        'H' => 'Punya SPTH',
     ];
 
-    const inactiveStats = ['K', 'M'];
+    const inactiveStats = ['K', 'M', 'D'];
 
     public function getReport(Request $request)
     {
