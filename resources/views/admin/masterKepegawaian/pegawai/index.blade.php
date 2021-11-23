@@ -27,7 +27,7 @@
             <thead class="table-header">
               <tr>
                 <th scope="col">NO</th>
-                <th scope="col">NIP</th>
+                <th scope="col">NIP / NIK</th>
                 <th scope="col">NOID</th>
                 <th scope="col">Nama</th>
                 <th scope="col">AKSI</th>

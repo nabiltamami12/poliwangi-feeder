@@ -31,7 +31,8 @@ class Pegawai extends Model
         'kota',
         'provinsi',
         'askes',
-        'kode_dosen',
+        'kode_dosen_sk034',
+        'dosen_vedc',
         'nip_lama',
         'npwp',
         'nidn',
@@ -41,7 +42,7 @@ class Pegawai extends Model
         'alamat_instansi',
         'pendidikan_terakhir',
         'id_user',
-        'id_jabatan',
+        'staff',
         'id_pangkat',
     ];
     
@@ -54,7 +55,7 @@ class Pegawai extends Model
     }
 
     public function staf() {
-        return $this->belongsToMany(Staff::class, 'id');
+        return $this->belongsTo(Staff::class, 'id');
     }
     public function data_pns() {
         return $this->hasMany(Datapns::class, 'id_pegawai');
@@ -85,6 +86,10 @@ class Pegawai extends Model
     }
     public function ttdCuti() {
         return $this->hasMany(Pegawai_ttd_cuti::class, 'id_pegawai');
+    }
+
+    public function report() {
+        return $this->hasMany(Report::class, 'id_pegawai');
     }
 
     // absensi

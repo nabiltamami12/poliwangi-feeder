@@ -27,15 +27,6 @@
                     <div class="form-row">
                         <div class="col-sm-12 col-12">
                             <div class="form-group row mb-0">
-                                <label class="form-control-label" for="id_pegawai">Nama Pegawai</label>
-                                <select class="form-control" id="id_pegawai" name="id_pegawai">
-                                    <option>Pilih Nama Pegawai...</option>
-                                    @foreach ($pegawai as $item)
-                                    <option value="{{ $item->id }}">{{$item->nama}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="form-group row mb-0">
                                 <label>Staff</label>
                                 <input type="text" class="form-control" id="staf" name="staf">
                             </div>

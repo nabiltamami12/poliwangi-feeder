@@ -5,10 +5,12 @@ namespace App\Http\Controllers\Admin\Kepegawaian;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Kepegawaian\Kota;
+use App\Models\Kepegawaian\Staff;
 use App\Models\Kepegawaian\Pangkat;
 use App\Models\Kepegawaian\Pegawai;
 use App\Http\Controllers\Controller;
 use App\Models\Kepegawaian\Provinsi;
+use Illuminate\Support\Facades\Hash;
 use App\Models\Kepegawaian\Kecamatan;
 use Yajra\DataTables\Facades\DataTables;
 use App\Models\Kepegawaian\DataStruktural;
@@ -52,7 +54,7 @@ class PegawaiController extends Controller
         $kecamatan = Kecamatan::paginate(5);
         $provinsi = Provinsi::all();
         $pangkat = Pangkat::all();
-        $jabatan = DataStruktural::all();
+        $jabatan = Staff::all();
         return view('admin.masterKepegawaian.pegawai.create',[
                 "id" => null,
                 "title" => "kepegawaian",
@@ -96,7 +98,7 @@ class PegawaiController extends Controller
             'kabupaten' => 'required',
             'provinsi' => 'required',
             'askes' => 'required',
-            'kode_dosen' => 'required',
+            'kode_dosen_sk034' => 'required',
             'nip_lama' => 'required',
             'npwp' => 'required',
             'nidn' => 'required',
@@ -112,9 +114,9 @@ class PegawaiController extends Controller
 
         //create user
         $user = User::create([
-            'name' => $request->name,
+            'name' => Hash::make($request->get($request->nip)),
             'email' => $request->email,
-            'password' => bcrypt($request->password)
+            'password' => Hash::make($request->get('password'))
         ]);
 
         Pegawai::create([
@@ -138,7 +140,7 @@ class PegawaiController extends Controller
             'kabupaten' =>$request->kabupaten,
             'provinsi' =>$request->provinsi,
             'askes' =>$request->askes,
-            'kode_dosen' =>$request->kode_dosen,
+            'kode_dosen_sk034' =>$request->kode_dosen_sk034,
             'nip_lama' =>$request->nip_lama,
             'npwp' =>$request->npwp,
             'nidn' =>$request->nidn,
@@ -181,7 +183,7 @@ class PegawaiController extends Controller
         $kecamatan = Kecamatan::paginate(5);
         $provinsi = Provinsi::all();
         $pangkat = Pangkat::all();
-        $jabatan = DataStruktural::all();
+        $jabatan = Staff::all();
 
         $item = Pegawai::find($id);
 

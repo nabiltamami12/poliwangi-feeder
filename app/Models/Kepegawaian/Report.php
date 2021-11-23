@@ -13,4 +13,8 @@ class Report extends Model
     protected $fillable = [
        'id_pegawai','keterangan'
     ];
+
+    public function pegawai() {
+        return $this->belongsTo(Pegawai::class, 'id');
+    }
 }

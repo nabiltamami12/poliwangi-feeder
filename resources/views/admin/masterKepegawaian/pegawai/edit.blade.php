@@ -27,7 +27,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="form-control-label" for="nip">NIP</label>
+                                <label class="form-control-label" for="nip">NIP / NIK</label>
                                 <input type="text" name="nip" class="form-control" value="{{ $item->nip }}" id="nip"
                                     placeholder="Masukan Nomor Induk Pegawai negeri sipil">
                             </div>
@@ -117,11 +117,10 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="form-control-label" for="exampleFormControlSelect1">Jabatan
-                                    Struktural</label>
+                                <label class="form-control-label" for="exampleFormControlSelect1">Staff</label>
                                 <select class="form-control" data-toggle="select" name="id_jabatan" id="exampleFormControlSelect1">
                                     @foreach ($jabatan as $item)
-                                    <option value="{{ $item->id }}">{{$item->nama_jabatan}}</option>
+                                    <option value="{{ $item->id }}">{{$item->staf}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -240,7 +239,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="form-control-label" for="kode_dsn">Kode Dosen</label>
-                                <input type="text" class="form-control" value="{{ $item->kode_dosen }}" id="kode_dsn" name="kode_dosen"
+                                <input type="text" class="form-control" value="{{ $item->kode_dosen_sk034 }}" id="kode_dsn" name="kode_dosen_sk034"
                                     placeholder="Masukan Kode Dosen">
                             </div>
                         </div>
