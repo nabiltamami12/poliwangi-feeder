@@ -12,17 +12,15 @@
         <div class="card-header p-0">
           <div class="row align-items-center">
             <div class="col-12 col-md-6">
-              <h2 class="mb-0 text-center text-md-left">Tarif SPI & UKT</h2>
+              <h2 class="mb-0 text-center text-md-left">Tarif Keuangan</h2>
             </div>
             <div class="col text-right">
+              <button type="button" onclick="setting_pendaftaran()" class="btn btn-primary ">Biaya Pendaftaran</button>
               <button type="button" onclick="setting_biaya()" class="btn btn-primary ">Biaya Admin</button>
             </div>
           </div>
         </div>
         <hr class="mt-4">
-
-       
-
         <div class="table-responsive">
           <table class="table align-items-center table-flush table-borderless table-hover" id="datatable" style="width:100%">
             <thead class="table-header">
@@ -44,19 +42,14 @@
                 <th colspan="1" scope="col" class="text-center px-2">8</th>
               </tr>
             </thead>
-
             <tbody class="table-body">
-             
             </tbody>
           </table>
-        </div>
-
-        
+        </div> 
       </div>
     </div>
   </div>
-  <div class="modal fade" id="biayaModal" tabindex="-1" aria-labelledby="deleteModalLabel"
-    aria-hidden="true">
+  <div class="modal fade" id="biayaModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
       <div class="modal-content p-0 padding--medium">
         <input type="hidden" id="id_delete">
@@ -66,15 +59,39 @@
           <h5 class="modal-title text-center">Setting Biaya Admin</h5>
         </div>
         <div class="modal-body">
-            <input type="text" class="form-control" id="biaya_admin" placeholder="Biaya Admin" name="biaya_admin">
+          <input type="text" class="form-control number-format" id="biaya_admin" placeholder="Biaya Admin" name="biaya_admin">
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-modal-cancel" data-dismiss="modal">Batal</button>
-          <button type="button" class="btn btn--blue btn-success" id="btn_modal_hapus" onclick="simpan_func()">Simpan</button>
+          <button type="button" class="btn btn--blue btn-success" onclick="simpan_func()">Simpan</button>
         </div>
       </div>
     </div>
-</div>
+  </div>
+  <div class="modal fade" id="biayaPendaftaranModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content p-0 padding--medium">
+        <input type="hidden" id="id_delete">
+        <input type="hidden" id="endpoint">
+
+        <div class="modal-header">
+          <h5 class="modal-title text-center">Setting Biaya Pendaftaran Mahasiswa Baru</h5>
+        </div>
+        <div class="modal-body">
+          <dl class="row">
+            <dt class="col-sm-7">Biaya Pendaftaran SMPBN</dt>
+            <dd class="col-sm-5"><input type="text" class="form-control number-format" placeholder="100.000" name="biaya-pendaftaran-smpbn"></dd>
+            <dt class="col-sm-7">Biaya Pendaftaran UMPN Se-Indonesia</dt>
+            <dd class="col-sm-5"><input type="text" class="form-control number-format" placeholder="150.000" name="biaya-pendaftaran-umpn"></dd>
+          </dl>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-modal-cancel" data-dismiss="modal">Batal</button>
+          <button type="button" class="btn btn--blue btn-success" onclick="simpan_pendaftaran()">Simpan</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 <script>
   
@@ -194,7 +211,8 @@ function setting_biaya() {
       data: {},
       success: function(res) {
           if (res.status=="success") {
-            $('#biaya_admin').val(res.data);              
+            $('#biaya_admin').val(res.data);
+            $('.number-format').number( true);
           } else {
               // alert gagal
           }
@@ -204,6 +222,7 @@ function setting_biaya() {
   });
 }
 function simpan_func() {
+  $('.number-format').number( true, 0, '', '');
     $.ajax({
         url: url_api+"/setting_biaya",
         type: 'post',
@@ -219,6 +238,43 @@ function simpan_func() {
 
         }
     });
+}
+
+function setting_pendaftaran() {
+  $('#biayaPendaftaranModal').modal('show')
+  $.ajax({
+    url: url_api+"/setting_biaya?pendaftaran=1",
+    type: 'get',
+    dataType: 'json',
+    data: {},
+    success: function(res) {
+      if (res.status=="success") {
+        $.each( res.data, function( key, value ) {
+          $('[name="'+key+'"]').val(value)
+        });
+        $('.number-format').number( true);
+      } else {
+      }
+    }
+  });
+}
+function simpan_pendaftaran() {
+  $('.number-format').number( true, 0, '', '');
+  $.ajax({
+    url: url_api+"/setting_biaya?pendaftaran=1",
+    type: 'post',
+    dataType: 'json',
+    data: {
+      'biaya-pendaftaran-smpbn':$('[name="biaya-pendaftaran-smpbn"]').val(),
+      'biaya-pendaftaran-umpn':$('[name="biaya-pendaftaran-umpn"]').val()
+    },
+    success: function(res) {
+      if (res.status=="success") {
+        $('#biayaPendaftaranModal').modal('hide')              
+      } else {
+      }
+    }
+  });
 }
 </script>
 @endsection

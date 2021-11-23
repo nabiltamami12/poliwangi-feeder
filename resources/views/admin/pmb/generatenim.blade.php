@@ -69,6 +69,31 @@
       </div>
     </div>
 </div>
+<div class="modal fade" id="listModal" tabindex="-1" aria-labelledby="listModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content p-0 padding--medium">
+        <input type="hidden" id="id_prodi">
+
+        <div class="modal-body">
+          <p class="text-center font-weight-bold">List hasil generate NIM :</p>
+          <table class="table align-items-center table-flush table-hover" id="list_generate">
+            <thead class="table-header">
+              <tr>
+                <th scope="col" >No</th>
+                <th scope="col" >NIM</th>
+                <th scope="col" >Nama</th>
+              </tr>
+            </thead>
+
+            <tbody class="table-body-list">
+             
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+</div>
 </section>
 <script>
   
@@ -126,13 +151,17 @@ $(document).ready(function() {
                     var disabled = "disabled";
                 }
             }
-            var status_sudah = `
+            var btn_generate = `
                 <button class="btn btn-info_transparent text-primary " ${disabled} id="btn_${id}" onclick="func_modal(${id},'${data['prodi']}',${data['jml_pendaftar']})" data-id="${id}">
                     <i class="iconify-inline mr-1 text-primary" data-icon="bx:bx-cog"></i>
                     Generate
                 </button>`
+            var btn_list = `
+                <button class="btn btn-warning" ${disabled} id="btn_${id}" onclick="func_modal_list(${id},'${data['prodi']}',${data['jml_pendaftar']})" data-id="${id}">
+                    List
+                </button>`
 
-            res = status_sudah;
+            res = btn_generate+" "+btn_list;
             
             return res;
         }
@@ -145,9 +174,45 @@ function func_modal(id,prodi,jml_pendaftar) {
     $('#text_keterangan').text(prodi+" - "+jml_pendaftar+" Orang")
     $('#konfirmModal').modal('show')
 }
+function func_modal_list(id,prodi,jml_pendaftar) {
+    $.ajax({
+        url: url_api + "/admin/pendaftar/list-generate-nim",
+        type: 'get',
+        dataType: 'json',
+        data: {'program_studi':id},
+        success: function(res) {
+            console.log(res)
+          if (res.status == "success") {
+            $('.table-body-list').html('')
+            $.each(res.data,function(key,row) {  
+              var html = `
+                  <tr>
+                    <td>
+                      ${key+1}
+                    </td>
+                    <td>
+                      ${row.nrp}
+                    </td>
+                    <td>
+                      ${row.nama}
+                    </td>
+                  </tr>
+                `
+
+                $('.table-body-list').append(html)
+            })
+              $('#listModal').modal('show')
+
+          } else {
+            // alert gagal
+          }
+          
+        }
+      });
+}
 function func_generate() {
     $.ajax({
-        url: url_api + "/admin/pendaftar/generate-nim/",
+        url: url_api + "/admin/pendaftar/generate-nim",
         type: 'post',
         dataType: 'json',
         data: {'program_studi':$('#id_prodi').val()},

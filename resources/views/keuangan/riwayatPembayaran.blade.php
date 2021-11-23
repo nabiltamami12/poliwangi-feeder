@@ -28,7 +28,7 @@
 			<div class="modal-content padding--medium">
 				<div class="perjanjian_pembayaran">
 					<h1 class="modal-title text-center mt-2">Import Pembayaran UKT</h1>
-					<p class="mt-5"><a target="_blank" href="{{url('/template/Template Upload UKT.xlsx')}}">Download Template Upload UKT</a></p>
+					<p class="mt-5"><a target="_blank" href="{{url('/template/template-upload-ukt.xlsx')}}">Download Template Upload UKT</a></p>
 					<div style="cursor: pointer;" class="pilih-file detail_dokumen upload-perjanjian d-flex align-items-center justify-content-between">
 						<form>
 							<span>
@@ -101,7 +101,7 @@
 								<i class="iconify-inline mr-1" data-icon="bx:bx-upload"></i>
 								Import
 							</button>
-							{{--  <a class="btn btn-success mt-3 mt-md-0" target="_blank" href="{{url('/template/Template Upload UKT.xlsx')}}">
+							{{--  <a class="btn btn-success mt-3 mt-md-0" target="_blank" href="{{url('/template/template-upload-ukt.xlsx')}}">
 								<i class="iconify-inline mr-1" data-icon="bx:bx-download"></i>
 								Template Import UKT
 							</a> --}}
@@ -122,7 +122,7 @@
 				<hr class="mt-4">
 
 				<div class="table-responsive">
-					<table class="table align-items-center table-flush table-borderless table-hover" id="datatable" style="width: 100%;">
+					<table class="table align-items-center table-flush table-borderless table-hover" id="datatable-pending" style="width: 100%;">
 						<thead class="table-header">
 							<tr>
 								<th scope="col" class="text-center">Tanggal</th>
@@ -146,54 +146,37 @@
 
 @section('js')
 <script type="text/javascript">
-	dt_url = `${url_api}/keuangan/riwayat-pembayaran`;
-	dt_opt = {
-		"processing": true,
-		"columns": [
+	$(function () {
+		dt_pageLength = 100;
+		dt_type = 'post'
+		dt_url = `${url_api}/keuangan/riwayat-pembayaran`;
+		dt_opt = {
+			serverSide: true,
+			order: [[0, 'desc']],
+			columnDefs: [
 			{
-				className : 'text-center',
-        data: 'created_at',
-        render: (data, type, row, meta) => {
-        	return moment(data).format('DD MMMM YYYY');
-        }
-    	},
-			{ data: "nrp", className : 'text-center', },
-			{ data: "nama", className : 'text-capitalize', },
-			{
-				className : 'font-weight-bold text-right',
-				data: "nominal",
-				render: (data, type, row, meta) => {
+				"aTargets": 0,
+				"className": 'text-center',
+				"mRender": function(data, type, full) {
+					return formatTanggal(data);
+				}
+			},{
+				"aTargets": 1,
+				"className": 'text-center',
+				"mRender": function(data, type, full) {
+					return data;
+				}
+			},{
+				"aTargets": 3,
+				"className": 'font-weight-bold text-right',
+				"mRender": function(data, type, full) {
 					return formatAngka(data);
 				}
-			},
-			{	
-				className : 'text-center',
-				data: null,
-				render: (data, type, row, meta) => {
-					if (data.kategori === 'UKT') {
-						if (data.semester) {
-							return data.kategori+' semester '+data.semester;
-						}else{
-							return data.kategori
-						}
-					} else {
-						return data.kategori;
-					}
-				}
-			},
-			{ data: "keterangan", className : 'text-right', },
-			// { 
-			// 	className : 'text-center',
-			// 	data: null,
-			// 	render: (data, type, row, meta) => {
-			// 		return `
-			// 			<i class="iconify edit-icon mr-2" data-icon="bx:bx-edit-alt"></i>
-			// 			<i class="iconify delete-icon" data-icon="bx:bx-trash"></i>
-			// 		`;
-			// 	}
-			// }
-		]
-	};
+			}
+			]
+		};
+		load_datatable();
+	});
 
 	inputRiwayat = document.getElementById('file_ukt');
 	namaRiwayat = document.getElementById('nama_ukt');

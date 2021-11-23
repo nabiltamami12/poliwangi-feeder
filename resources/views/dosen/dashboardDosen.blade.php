@@ -148,6 +148,7 @@ function getJadwal() {
     dataType: 'json',
     data: {},
     success: function(res) {
+      console.log(res)
       if (res.status=="success") {
           $('#tb_body_jadwal').html('');
           $('#tb_body_kelas').html('');
@@ -253,8 +254,8 @@ function getJadwal() {
               var status = $('#matkul_open :selected').data('status');
 
               status = "Belum Presensi";
-              $('#mahasiswa_saat_ini').html(jml_kelas)
-              $('#pertemuan_saat_ini').html(pertemuan)
+              $('#mahasiswa_saat_ini').html(jml_kelas+" Orang")
+              $('#pertemuan_saat_ini').html("Pertemuan ke-"+pertemuan)
               $('#status_saat_ini').html(status)
 
               $('#status_saat_ini').removeClass('text-success');

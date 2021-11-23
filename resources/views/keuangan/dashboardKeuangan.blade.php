@@ -167,7 +167,7 @@
         <hr class="mt-4">
 
         <div class="table-responsive">
-          <table id="datatable" class="table align-items-center table-flush table-borderless table-hover">
+          <table id="datatable-pending" class="table align-items-center table-flush table-borderless table-hover">
             <thead class="table-header">
               <tr>
                 <th scope="col" class="text-center pl-2">No</th>
@@ -194,137 +194,55 @@
 
 @section('js')
 <script>
-var path_berkas = "{{asset('')}}";
-var nomor = 1;
-dt_url = `${url_api}/keuangan/list_cicilan`;
-  dt_opt = {
-  "columnDefs": [
+  $(function () {
+    dt_pageLength = 100;
+    dt_type = 'post'
+    dt_url = `${url_api}/keuangan/list-cicilan`;
+    dt_opt = {
+      serverSide: true,
+      order: [[0, 'desc']],
+      columnDefs: [
       {
-        "aTargets": [0],
-        "mData": null,
+        "aTargets": [0, 6],
         "className": 'text-center px-2',
         "mRender": function(data, type, full) {
-          res = nomor++;
-          return res;
+          return data;
         }
       },{
-        "aTargets": [1],
-        "mData": null,
+        "aTargets": 1,
         "className": 'font-weight-bold text-capitalize px-2',
         "mRender": function(data, type, full) {
-          res = data['nim'];
-          return res;
+          return data;
         }
       },{
-        "aTargets": [2],
-        "mData": null,
+        "aTargets": 2,
         "className": 'px-2',
         "mRender": function(data, type, full) {
-          res = data['nama'];
-          return res;
+          return data;
         }
       },{
-        "aTargets": [3],
-        "mData": null,
+        "aTargets": [3, 4, 5],
         "className": 'text-center px-2',
         "mRender": function(data, type, full) {
-          res = formatAngka(data['ukt']);
-          return res;
+          return formatAngka(data);
         }
       },{
-        "aTargets": [4],
-        "mData": null,
+        "aTargets": 7,
         "className": 'text-center px-2',
         "mRender": function(data, type, full) {
-          res = formatAngka(data['spi']);
-          return res;
-        }
-      },{
-        "aTargets": [5],
-        "mData": null,
-        "className": 'text-center px-2',
-        "mRender": function(data, type, full) {
-          res = formatAngka(data['jumlah']);
-          return res;
-        }
-      },{
-        "aTargets": [6],
-        "mData": null,
-        "className": 'text-center px-2',
-        "mRender": function(data, type, full) {
-          res = data['status_piutang'];
-          return res;
-        }
-      },{
-        "aTargets": [7],
-        "mData": null,
-        "className": 'text-center px-2',
-        "mRender": function(data, type, full) {          
-          var file_perjanjian = data['path_perjanjian'];
-          var id = data['id'];
-          var id_mahasiswa = data['id_mahasiswa'];
-          var btn_update = `
-                  <a class="btn btn-sm btn-primary" href="{{url('')}}/keuangan/rekapitulasi/piutangmahasiswa/detail/${id}">
+          return `<a class="btn btn-sm btn-primary" href="{{url('')}}/keuangan/rekapitulasi/piutangmahasiswa/detail/`+data+`">
                     <i class="iconify mr-1" data-icon="bx:bxs-user-detail"></i>
                     <span class="text-white">Detail Piutang</span>
-                  </a>`
-          return res = btn_update;
+                  </a>`;
         }
       }
-    ]}
+      ]
+    };
+    load_datatable();
+  });
+
   $(document).ready(function () {
     getInfo()
-
-    // $('#jumlah_cicilan').on('change',function (e) {
-    //   $('#list_cicilan').html('')
-    //   var html = '';
-    //   for (let index = 1; index <= $(this).val(); index++) {
-    //     html += `<div class="form-row mt-4-5">
-    //           <div class="col-md-6 pr-0 pr-md-2">
-    //             <label for="tanggal_${index}">Tanggal Jatuh Tempo ke-${index}</label>
-    //             <input type="date" id="tanggal_${index}" class="form-control">
-    //           </div>
-    //           <div class="col-md-6 pl-0 pl-md-2 mt-3 mt-md-0">
-    //             <label for="nominal_${index}">Nominal ke-${index}</label>
-    //             <input type="text" class="form-control text-right" id="nominal_${index}" placeholder="Rp. x.xxx.xxx">
-    //           </div>
-    //         </div>`
-    //   }
-    //   $('#list_cicilan').append(html);
-    // })
-
-    // $('#btn_simpan').on('click',function (e) {
-    //   var arr_tanggal = [];
-    //   var arr_nominal = [];
-    //   var jml_tanggal = $('#jumlah_cicilan').val();
-    //   var id_piutang = $('#id_piutang').val();
-    //   var id_mahasiswa = $('#id_mahasiswa').val();
-    //   for (let index = 1; index <= jml_tanggal; index++) {
-    //     var key = arr_tanggal.indexOf($('#tanggal_'+index).val());
-    //     if(key !== -1){
-    //       arr_nominal[key] = $('#nominal_'+index).val()
-    //     } else{
-    //       arr_tanggal.push($('#tanggal_'+index).val());
-    //       arr_nominal.push($('#nominal_'+index).val());
-    //     }
-    //   }
-    //   var arr = {
-    //     'tenor' : jml_tanggal,
-    //     'id_mahasiswa' : id_mahasiswa,
-    //     'tanggal' : arr_tanggal,
-    //     'nominal' : arr_nominal,
-    //   }
-    //   $.ajax({
-    //       url: url_api+"/keuangan/cicilan/"+id_piutang,
-    //       type: 'post',
-    //       dataType: 'json',
-    //       data: arr,
-    //       success: function(res) {
-    //         console.log(res)
-    //         location.reload()
-    //       }
-    //   })
-    // })
 
     $("#nim").select2({
       ajax: {
@@ -339,7 +257,6 @@ dt_url = `${url_api}/keuangan/list_cicilan`;
         },
         processResults: function ({data}, params) {
           params.page = params.page || 1;
-
           return {
             results: data.items,
             pagination: {
@@ -352,7 +269,6 @@ dt_url = `${url_api}/keuangan/list_cicilan`;
       placeholder: 'Cari NIM',
       minimumInputLength: 3,
     });
-
   })
 
   $('#templatePerjanjian .custom-btn').on('click', function () {
@@ -381,7 +297,6 @@ dt_url = `${url_api}/keuangan/list_cicilan`;
           check_file_perjanjian()
         }
     });
-
   })
 
   function getInfo() {
@@ -391,7 +306,7 @@ dt_url = `${url_api}/keuangan/list_cicilan`;
         dataType: 'json',
         data: {},
         beforeSend: function(text) {
-                loading('show')
+          loading('show')
         },
         success: function(res) {
           console.log(res.data.total_mahasiswa)
@@ -444,10 +359,8 @@ dt_url = `${url_api}/keuangan/list_cicilan`;
     if ($('#masukkanMahasiswa [name="nim"]').val() == null) {
       return false
     }
-    // var file_data = $('#masukkanMahasiswa [name="file"]').prop('files')[0];   
     var id_mahasiswa = $('#masukkanMahasiswa [name="nim"]').val();   
-    var form_data = new FormData();                  
-    // form_data.append('file', file_data);
+    var form_data = new FormData();
     form_data.append('id_mahasiswa', id_mahasiswa);
     $.ajax({
         url: url_api+"/keuangan/perjanjian",

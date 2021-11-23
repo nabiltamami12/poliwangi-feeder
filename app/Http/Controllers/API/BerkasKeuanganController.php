@@ -30,32 +30,39 @@ class BerkasKeuanganController extends Controller
 	protected $error = null;
 	protected $data = null;
 
-	public function index()
+	public function index(Request $request)
 	{
 		try {
-			$periode = Periode::select('tahun', 'semester')->orderByDesc('status')->orderByDesc('tahun')->limit(1)->get();
-			$data = BK::select(
-			'keuangan_piutang.id', 
-			'keuangan_piutang.id_mahasiswa', 
-			'keuangan_piutang.path_perjanjian', 
-			'mahasiswa.nrp as nim',
-			'mahasiswa.nama',
-			'mahasiswa.ukt',
-			DB::raw('CASE WHEN jenis = "spi" THEN total ELSE 0 END as SPI'),
-			DB::raw('SUM(CASE WHEN id_mahasiswa = id_mahasiswa THEN `keuangan_piutang`.total END) as jumlah'),
-			'keuangan_piutang.status as status_piutang')
-			->where('tahun','=',$periode[0]->tahun)
-			->where('keuangan_piutang.semester','=',$periode[0]->semester)
-			->join('mahasiswa', 'mahasiswa.nomor', '=', 'keuangan_piutang.id_mahasiswa')
-			->groupBy('keuangan_piutang.id_mahasiswa')
-			->get();
-			$this->data = $data;
-			$this->status = "success";
+			$data = $request->all();
+			$obj = new \App\Datatables\PiutangMahasiswaDatatable();
+			$lists = $obj->get_datatables();
+			$data = [];
+			$no = $request->input("start");
+			foreach ($lists as $list) {
+				$no++;
+				$row = [];
+				$row[] = $no;
+				$row[] = $list->nim;
+				$row[] = $list->nama;
+				$row[] = $list->ukt;
+				$row[] = $list->spi;
+				$row[] = $list->jumlah;
+				$row[] = $list->status_piutang;
+				$row[] = $list->id;
+				$data[] = $row;
+			}
+			return [
+				"draw" => $request->input('draw'),
+				"recordsTotal" => $obj->count_all_datatables(),
+				"recordsFiltered" => $obj->count_filtered_datatables(),
+				"data" => $data,
+				"status" => "success",
+				"error" => $this->error
+			];
 		} catch (QueryException $e) {
 			$this->status = "failed";
 			$this->error = $e;
 		}
-
 		return response()->json([
 			"status" => $this->status,
 			"data" => $this->data,
@@ -64,7 +71,7 @@ class BerkasKeuanganController extends Controller
 	}
 
 	public function detail_piutang($id_piutang) {
-		$periode = Periode::select('tahun', 'semester')->orderByDesc('status')->orderByDesc('tahun')->limit(1)->get();
+		$periode = Periode::select('tahun', 'semester')->orderByDesc('status')->orderByDesc('tahun')->first();
 		$data = BK::select(
 			'keuangan_piutang.id', 
 			'keuangan_piutang.id_mahasiswa', 
@@ -79,8 +86,8 @@ class BerkasKeuanganController extends Controller
 			->join('mahasiswa', 'mahasiswa.nomor', '=', 'keuangan_piutang.id_mahasiswa')
 			->groupBy('keuangan_piutang.id_mahasiswa')
 			->where('keuangan_piutang.id', $id_piutang)
-			->where('keuangan_piutang.tahun', $periode[0]->tahun)
-			->where('keuangan_piutang.semester', $periode[0]->semester)
+			->where('keuangan_piutang.tahun', $periode->tahun)
+			->where('keuangan_piutang.semester', $periode->semester)
 			->get();
 		if (isset($data[0])) {
 			$data = $data[0];

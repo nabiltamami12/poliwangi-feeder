@@ -1,7 +1,4 @@
 {
     "/js/app.js": "/js/app.js",
-    "/css/main.css": "/css/main.css",
-    "/css/halamanAwal.css": "/css/halamanAwal.css",
-    "/css/app.css": "/css/app.css",
-    "/css/customComponent.css": "/css/customComponent.css"
+    "/css/app.css": "/css/app.css"
 }

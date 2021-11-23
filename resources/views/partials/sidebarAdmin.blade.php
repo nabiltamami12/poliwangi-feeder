@@ -112,6 +112,51 @@
           </li>
 
           <li class="nav-item">
+            <div class="nav-link {{($title === "admin-kepegawaian") ? 'aktif' : ''}}">
+              <i class="iconify" data-icon="bx:bx-briefcase-alt-2"></i>
+              <span class="nav-link-text">Master Kepegawaian</span>
+            </div>
+            <ul class="nav-item-dropdown-content">
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url('/admin/kepegawaian/dataStaff')}}">
+                  <span class="mini_icon">SF</span>
+                  <span class="nav-link-text">Staff</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url('/admin/kepegawaian/dataPangkat')}}">
+                  <span class="mini_icon">PK</span>
+                  <span class="nav-link-text">Pangkat</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url('/admin/kepegawaian/dataPegawai')}}">
+                  <span class="mini_icon">PG</span>
+                  <span class="nav-link-text">Pegawai</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url('/admin/kepegawaian/dataUnit')}}">
+                  <span class="mini_icon">UN</span>
+                  <span class="nav-link-text">Unit</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url('/admin/kepegawaian/dataStruktural')}}">
+                  <span class="mini_icon">DS</span>
+                  <span class="nav-link-text">Data Struktural</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url('/admin/kepegawaian/reportPegawai')}}">
+                  <span class="mini_icon">RP</span>
+                  <span class="nav-link-text">Report</span>
+                </a>
+              </li>
+            </ul>
+          </li>         
+
+          <li class="nav-item">
             <div class="nav-link {{($title === "admin-kuliah") ? 'aktif' : ''}}">
               <i class="iconify" data-icon="bx:bx-book-bookmark"></i>
               <span class="nav-link-text">Kuliah</span>
@@ -224,6 +269,12 @@
                 <a class="nav-link" href="{{ url('/admin/pmb/settingjalursyarat')}}">
                   <span class="mini_icon">SS</span>
                   <span class="nav-link-text">Setting Syarat</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url('/admin/pmb/settingjurusanlinear')}}">
+                  <span class="mini_icon">SS</span>
+                  <span class="nav-link-text">Jurusan Linear</span>
                 </a>
               </li>
               <!-- <li class="nav-item">

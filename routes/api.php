@@ -48,6 +48,17 @@ Route::prefix('v1')->group(function () {
     Route::put('/jurusan/{id}', [Ctr\JurusanController::class, 'update']);
     Route::delete('/jurusan/{id}', [Ctr\JurusanController::class, 'destroy']);
     Route::get('/jurusan-mahasiswa', [Ctr\JurusanController::class, 'jurusan_mahasiswa']);
+    // Jurusan Asal
+    Route::get('/jurusan-asal', [Ctr\JurusanAsalController::class, 'index']);
+    Route::get('/jurusan-asal/{id}', [Ctr\JurusanAsalController::class, 'show']);
+    Route::post('/jurusan-asal', [Ctr\JurusanAsalController::class, 'store']);
+    Route::put('/jurusan-asal/{id}', [Ctr\JurusanAsalController::class, 'update']);
+    Route::delete('/jurusan-asal/{id}', [Ctr\JurusanAsalController::class, 'destroy']);
+
+    // Jurusan Linear
+    Route::get('/jurusan-linear/{id}', [Ctr\JurusanAsalController::class, 'jurusan_linear']);
+    Route::post('/jurusan-linear/{id}', [Ctr\JurusanAsalController::class, 'update_jurusan_linear']);
+
     // Kelas
     Route::get('/kelas', [Ctr\KelasController::class, 'index']);
     Route::get('/kelas/dosen/{id}', [Ctr\KelasController::class, 'dosen']);
@@ -229,14 +240,16 @@ Route::prefix('v1')->group(function () {
 
     Route::get('admin/pendaftar', [Ctr\PendaftarController::class, 'index']);
     Route::get('admin/pendaftar/generate-nim', [Ctr\PendaftarController::class, 'get_prodi_nim']);
+    Route::get('admin/pendaftar/list-generate-nim', [Ctr\PendaftarController::class, 'list_generate_nim']);
     Route::put('admin/pendaftar/verifikasi/{id}', [Ctr\PendaftarController::class, 'verifikasi_pendaftar']);
     Route::get('/pendaftar/va', [Ctr\PendaftarController::class, 'va']);
     Route::get('/pendaftar', [Ctr\PendaftarController::class, 'show']);
     Route::post('/pendaftar', [Ctr\PendaftarController::class, 'store']);
     Route::post('/pendaftar/update', [Ctr\PendaftarController::class, 'update']);
+    Route::post('/pendaftar/update-berkas', [Ctr\PendaftarController::class, 'update_berkas']);
     Route::post('/login', [Ctr\PendaftarController::class, 'login']);
     Route::post('/pendaftar/check', [Ctr\PendaftarController::class, 'is_lunas']);
-    Route::get('/pendaftar/keuangan', [Ctr\PendaftarController::class, 'keuangan']);
+    Route::post('/pendaftar/keuangan', [Ctr\PendaftarController::class, 'keuangan']);
     Route::get('/pendaftar/mahasiswa', [Ctr\PendaftarController::class, 'mahasiswa']);
     Route::post('admin/pendaftar/generate-nim', [Ctr\PendaftarController::class, 'generate_nim']);
     // Route::post('/daftar/{id}', [Ctr\PendaftarController::class, 'update']);
@@ -256,13 +269,14 @@ Route::prefix('v1')->group(function () {
     Route::delete('/keuangan/rekap_ukt/{id}', [Ctr\UktController::class, 'destroy']);
     Route::get('/keuangan/detail', [Ctr\UktController::class, 'details']);
     Route::put('/keuangan/set-ukt/{id}', [Ctr\UktController::class, 'set_ukt_mahasiswa']);
-    Route::get('keuangan/atur-mahasiswa', [Ctr\UktController::class, 'atur_mahasiswa']); //keuangan/rekapitulasi/datamahasiswa
+    Route::post('keuangan/atur-mahasiswa', [Ctr\UktController::class, 'atur_mahasiswa']); //keuangan/rekapitulasi/datamahasiswa
+    Route::get('/keuangan/rangkuman/{id}', [Ctr\UktController::class, 'rangkuman']);
 
 
     // SPI Mandiri
     Route::post('/keuangan/spi/import', [Ctr\SpiController::class, 'import']);
-    Route::get('/keuangan/spi/export/{tahun}/{prodi}', [Ctr\SpiController::class, 'export']);
-    Route::get('/keuangan/spi', [Ctr\SpiController::class, 'index']);
+    Route::get('/keuangan/spi/export/{prodi}', [Ctr\SpiController::class, 'export']);
+    Route::post('/keuangan/spi', [Ctr\SpiController::class, 'index']);
     Route::get('/keuangan/spi/{id}', [Ctr\SpiController::class, 'show']);
 
     //berkas
@@ -280,7 +294,7 @@ Route::prefix('v1')->group(function () {
     Route::post('setting_biaya', [Ctr\SettingBiayaController::class, 'store']);
 
     // Berkas Keuangan
-    Route::get('keuangan/list_cicilan', [Ctr\BerkasKeuanganController::class, 'index']);
+    Route::post('keuangan/list-cicilan', [Ctr\BerkasKeuanganController::class, 'index']);
     Route::get('keuangan/stats', [Ctr\BerkasKeuanganController::class, 'statistik']);
     Route::get('keuangan/detail-piutang/{id}', [Ctr\BerkasKeuanganController::class, 'detail_piutang']);
     Route::post('keuangan/pengajuan-cicilan', [Ctr\BerkasKeuanganController::class, 'store']);
@@ -304,7 +318,7 @@ Route::prefix('v1')->group(function () {
     // Riwayat Pembayaran
     Route::post('/keuangan/upload-riwayat', [Ctr\BerkasKeuanganController::class, 'upload_riwayat']);
     Route::post('/keuangan/upload-riwayat-cicilan', [Ctr\BerkasKeuanganController::class, 'upload_riwayat_cicilan']);
-    Route::get('/keuangan/riwayat-pembayaran', [Ctr\RiwayatPembayaranController::class, 'index']);
+    Route::post('/keuangan/riwayat-pembayaran', [Ctr\RiwayatPembayaranController::class, 'index']);
 
 
     // example use bni api

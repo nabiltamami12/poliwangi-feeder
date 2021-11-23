@@ -1,5 +1,9 @@
 @extends('layouts.main')
 
+@section('style')
+  <link href="{{ asset('css/loading.css') }}" rel="stylesheet">
+@endsection
+
 @section('content')
 <!-- Header -->
 <header class="header"></header>
