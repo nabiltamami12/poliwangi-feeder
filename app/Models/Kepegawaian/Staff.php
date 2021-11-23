@@ -11,11 +11,11 @@ class Staff extends Model
     protected $primaryKey = "id";
     protected $table = "stafs";
     protected $fillable = [
-        'id_pegawai',
+        // 'id_pegawai',
         'staf'
     ];
 
     public function pegawai() {
-        return $this->belongsToMany(Pegawai::class, 'id');
+        return $this->hasMany(Pegawai::class, 'id_staf');
     }
 }

@@ -185,6 +185,10 @@ Route::prefix('v1')->group(function () {
     Route::get('/absensi-dosen/rekap-presensi/{id_dosen}', [Ctr\AbsensiDosenController::class, 'pertemuan_dosen']);
     Route::post('/absensi-dosen/simpan', [Ctr\AbsensiDosenController::class, 'simpan']);
 
+    // ABSENSI PEGAWAI
+    Route::get('/absensi-pegawai/rekap', [Ctr\AbsensiPegawaiController::class, 'list_data']);
+    Route::get('/absensi-pegawai/rekap/{id_pegawai}/{tahun}/{bulan}', [Ctr\AbsensiPegawaiController::class, 'detail_presensi']);
+
     // KELAS MENGAJAR
     Route::post('/kelas-mengajar', [Ctr\AbsensiController::class, 'kelas_mengajar']);
 

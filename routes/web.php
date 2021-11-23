@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\Kepegawaian\PegawaiController;
 use App\Http\Controllers\Admin\Kepegawaian\PangkatController;
 use App\Http\Controllers\Admin\Kepegawaian\JabatanStrukturalController;
 use App\Http\Controllers\Admin\Kepegawaian\DataStrukturalController;
+// use App\Http\Controllers\Admin\Kepegawaian\AbsensiDosenController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\Kepegawaian\UnitController;
 use App\Http\Controllers\Admin\Kepegawaian\StaffController;
@@ -468,6 +469,13 @@ Route::prefix('admin')->middleware(['aksesuntuk:admin'])->group(function () {
             return view('admin.kuliah.absensidosen', [
                 "page" => "admin",
                 "title" => "rekap-absensi-mahasiswa"
+            ]);
+        });
+
+        Route::get('/absensi/pegawai', function () {
+            return view('admin.kuliah.absensipegawai', [
+                "page" => "admin",
+                "title" => "rekap-absensi-pegawai"
             ]);
         });
 

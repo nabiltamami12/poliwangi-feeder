@@ -10,7 +10,7 @@ class Pegawai extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
-    protected $table = "pegawais";
+    protected $table = "pegawai";
     protected $fillable = [
         'nip',
         'noid',
@@ -54,7 +54,7 @@ class Pegawai extends Model
     }
 
     public function staf() {
-        return $this->hasMany(Staf::class, 'id_pegawai');
+        return $this->belongsToMany(Staff::class, 'id');
     }
     public function data_pns() {
         return $this->hasMany(Datapns::class, 'id_pegawai');
@@ -87,6 +87,13 @@ class Pegawai extends Model
         return $this->hasMany(Pegawai_ttd_cuti::class, 'id_pegawai');
     }
 
+    // absensi
+    public function totalpresensi() {
+        return $this->hasMany(AbsensiKaryawan::class, 'pegawai');
+    }
+    public function hadir() {
+        return $this->hasMany(AbsensiKaryawan::class, 'pegawai')->where('tidakmasuk', 0)->where('libur', 0);
+    }
 
     // wilayah
     public function kecamatan() {
