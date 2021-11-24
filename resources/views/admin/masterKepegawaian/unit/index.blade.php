@@ -33,7 +33,7 @@
               </tr>
             </thead>
             <tbody>
-              @foreach ($unit as $item)
+              {{-- @foreach ($unit as $item)
               <tr>
                 <td>{{$loop->iteration}}</td>
                 <td>{{$item->unit}}</td>
@@ -52,7 +52,7 @@
                   </form>
                 </td>
               </tr>
-              @endforeach
+              @endforeach --}}
             </tbody>
           </table>
         </div>
@@ -62,70 +62,24 @@
     </div>
   </div>
 </section>
-<div class="modal fade" id="konfirmModal" tabindex="-1" aria-labelledby="konfirmModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-      <div class="modal-content p-0 padding--medium">
-        <input type="hidden" id="id_konfirm">
 
-        <div class="modal-header">
-            <p class="text-center">
-                <h5 class="modal-title text-warning text-center">Peringatan</h5>
-            </p>
-        </div>
-        <div class="modal-body">
-          <p class="text-center font-weight-bold">Apakah anda yakin mau mengganti periode aktif ?</p>
-          <p class="text-center">Hal ini dapat menyebabkan perubahan data pada website</p>
-          <h2 class="text-center mb-4"><span id="text_hapus"></span></h2>
-          <div class="row">
-                <div class="col-md-6">
-                    <button type="button" class="btn btn-modal-cancel w-100" data-dismiss="modal">Batal</button>
-                </div>
-                <div class="col-md-6">
-                    <button type="button" class="btn btn-primary w-100" id="btn_modal_hapus" onclick="konfirm_func()">Yakin</button>
-                </div>
-            </div>
-        </div>
-      </div>
-    </div>
-</div>
-
-<!-- Modal Add -->
-<div class="modal fade" id="modalAdd" tabindex="-1" aria-labelledby="modalAddlLabel" aria-hidden="true">
+<!-- Delete Modal -->
+<div class="modal fade" id="modalDelete" tabindex="-1" aria-labelledby="modalDeletelLabel" aria-hidden="true">
+  <div id="loadingDelete"></div>
   <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="modalAddlLabel">Tambah Unit</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form action="#" method="POST">
-          @csrf
-          <div class="form-group">
-            <label for="">Pegawai</label>
-            <select class="js-example-basic-single form-control" name="id_pegawai" required>
-              <option selected disabled>Pilih Pegawai</option>
-              <option value="">Pegawai 1</option>
-              <option value="">Pegawai 2</option>
-            </select>
+      <div class="modal-content">
+          <div class="modal-header">
+              <h4 class="modal-title">Hapus Data Unit</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
           </div>
-          <div class="form-group">
-            <label for="">Nama Unit</label>
-            <input type="text" class="form-control" name="unit" placeholder="Nama unit" required>
+          <div class="modal-body">
+              <h4>Apakah anda yakin menghapus data unit?</h4>
           </div>
-          <div class="form-group">
-            <label for="">Nama Kepala</label>
-            <input type="text" class="form-control" name="kepala" placeholder="Nama kepala" required>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-danger" id="SubmitDeleteForm">Iya</button>
+              <button type="button" class="btn btn-default" data-dismiss="modal">Tidak</button>
           </div>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
-      </div>
-    </div>
   </div>
 </div>
 @endsection
@@ -133,7 +87,7 @@
 @section('js')
 <script>
       var nomor = 1;
-  dt_url = '{{ route('dataUnit.index') }}';
+  dt_url = '{{ route('get-unit') }}';
   dt_opt = {
     processing: true,
     serverSide: true,
@@ -146,5 +100,146 @@
         {data: 'Aksi', name: 'Aksi',orderable:false,serachable:false,sClass:'text-center'},
     ]
   };
+
+  function add_btn() {
+    $('#modalAdd').modal();
+  }
+
+  function delete_btn() {
+    $('#modalDelete').modal();
+  }
+
+  $(document).ready(function() {
+
+    var no = 1;
+
+    $('#SubmitAddForm').click(function(e) {
+        // $("#loadingAdd").addClass("lds-dual-ring"); 
+        e.preventDefault();
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            url: "{{ route('dataUnit.store') }}",
+            method: 'post',
+            data: {
+                nama_pangkat: $('#namaPangkat').val(),
+                golongan: $('#golongan').val(),
+                urut: $('#urut').val(),
+            },
+            success: function(result) {
+              if(result.errors) {
+                  $('.alert-danger').html('');
+                  $.each(result.errors, function(key, value) {
+                      $('.alert-danger').show();
+                      $('.alert-danger').append('<strong><li>'+value+'</li></strong>');
+                  });
+                  // $("#loadingAdd").removeClass("lds-dual-ring"); 
+              } else {
+                  $('.alert-danger').hide();
+                  $('.alert-success').show();
+                  $('#datatable').DataTable().ajax.reload();
+                  setInterval(function(){ 
+                      $('.alert-success').hide();
+                      $('#modalAdd').modal('hide');
+                      location.reload();
+                  }, 1000);
+              }
+            }
+        });
+    });
+
+    $('.modelClose').on('click', function(){
+        $('#modalEdit').hide();
+    });
+
+    var id;
+    $('body').on('click', '#getEditPegawai', function(e) {
+        $("#loading").addClass("lds-dual-ring"); 
+        // e.preventDefault();
+        $('.alert-danger').html('');
+        $('.alert-danger').hide();
+        id = $(this).data('id');
+        $.ajax({
+            url: "dataUnit/"+id+"/edit",
+            method: 'GET',
+            // data: {
+            //     id: id,
+            // },
+            success: function(result) {
+                $('#EditModalBody').html(result.html);
+                $("#loading").removeClass("lds-dual-ring");
+                $('#modalEdit').show();
+            }
+        });
+    });
+
+    $('#SubmitEditForm').click(function(e) {
+        // $("#loadingEdit").addClass("lds-dual-ring"); 
+        e.preventDefault();
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            url: "dataUnit/"+id,
+            method: 'PUT',
+            data: {
+                nama_pangkat: $('#editNamaPangkat').val(),
+                golongan: $('#editGolongan').val(),
+                urut: $('#editUrut').val(),
+            },
+            success: function(result) {
+                if(result.errors) {
+                    $('.alert-danger').html('');
+                    // $("#loading").removeClass("lds-dual-ring"); 
+                    $.each(result.errors, function(key, value) {
+                        $('.alert-danger').show();
+                        $('.alert-danger').append('<strong><li>'+value+'</li></strong>');
+                    });
+                } else {
+                    $('.alert-danger').hide();
+                    $('.alert-success').show();
+                    $('#datatable').DataTable().ajax.reload();
+                    setInterval(function(){ 
+                        $('.alert-success').hide();
+                        $('#modalEdit').hide();
+                        location.reload();
+                    }, 1000);
+                }
+            }
+        });
+    });
+
+    var deleteID;
+    $('body').on('click', '#getDeleteId', function(){
+        deleteID = $(this).data('id');
+    })
+    $('#SubmitDeleteForm').click(function(e) {
+        // $("#loadingDelete").addClass("lds-dual-ring"); 
+        e.preventDefault();
+        var id = deleteID;
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            url: "dataUnit/"+id,
+            method: 'DELETE',
+            success: function(result) {
+                setInterval(function(){ 
+                    $('#modalDelete').modal('hide');
+                    $('#datatable').DataTable().ajax.reload();
+                    location.reload();
+                }, 1000);
+            }
+        });
+    });
+
+  });
 </script>
 @endsection

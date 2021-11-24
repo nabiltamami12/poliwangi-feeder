@@ -24,14 +24,14 @@
                 <form id="form_cu" action="{{route('dataPegawai.store')}}" method="POST">
                     @csrf
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-6" hidden>
                             <div class="form-group">
                                 <label class="form-control-label" for="username">Username</label>
-                                <input type="text" name="name" class="form-control" id="username"
-                                    placeholder="Masukan Username">
+                                <input type="hidden" name="name" class="form-control" id="username"
+                                    placeholder="Masukan Username" value="{{ old('name') ?? 'Default value' }}">
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <div class="form-group">
                                 <label class="form-control-label" for="email">Email</label>
                                 <input type="email" class="form-control" id="email" name="email"
@@ -39,20 +39,20 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row" hidden>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="form-control-label" for="password">Password</label>
-                                <input type="password" name="password" class="form-control" id="password"
-                                    placeholder="Masukan Password">
+                                <input type="hidden" name="password" class="form-control" id="password"
+                                    placeholder="Masukan Password" value="{{ old('password') ?? 'password' }}">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="form-control-label" for="password_confirmation">Konfirmasi
                                     Password</label>
-                                <input type="password" class="form-control" id="password_confirmation"
-                                    name="password_confirmation" placeholder="Konfirmasi Password">
+                                <input type="hidden" class="form-control" id="password_confirmation"
+                                    name="password_confirmation" placeholder="Konfirmasi Password" value="{{ old('password') ?? 'password' }}">
                             </div>
                         </div>
                     </div>
@@ -61,9 +61,9 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="form-control-label" for="nip">NIP</label>
+                                <label class="form-control-label" for="nip">NIP / NIK</label>
                                 <input type="text" name="nip" class="form-control" id="nip"
-                                    placeholder="Masukan Nomor Induk Pegawai negeri sipil">
+                                    placeholder="Masukan Nomor Induk Pegawai">
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -151,11 +151,10 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="form-control-label" for="exampleFormControlSelect1">Jabatan
-                                    Struktural</label>
+                                <label class="form-control-label" for="exampleFormControlSelect1">Staff</label>
                                 <select class="form-control" data-toggle="select" name="id_jabatan" id="exampleFormControlSelect1">
                                     @foreach ($jabatan as $item)
-                                    <option value="{{ $item->id }}">{{$item->jabatan_struktural}}</option>
+                                    <option value="{{ $item->id }}">{{$item->staf}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -274,7 +273,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="form-control-label" for="kode_dsn">Kode Dosen</label>
-                                <input type="text" class="form-control" id="kode_dsn" name="kode_dosen"
+                                <input type="text" class="form-control" id="kode_dsn" name="kode_dosen_sk034"
                                     placeholder="Masukan Kode Dosen">
                             </div>
                         </div>

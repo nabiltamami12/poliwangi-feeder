@@ -16,6 +16,6 @@ class Staff extends Model
     ];
 
     public function pegawai() {
-        return $this->hasMany(Pegawai::class, 'id_staf');
+        return $this->hasOne(Pegawai::class, 'staff');
     }
 }

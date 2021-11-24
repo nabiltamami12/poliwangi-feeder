@@ -4,14 +4,14 @@ use App\Models\Prodi;
 use App\Models\Periode;
 use App\Models\Kurikulum;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Admin\Kepegawaian\PegawaiController;
+use App\Http\Controllers\Admin\Kepegawaian\PangkatController;
+use App\Http\Controllers\Admin\Kepegawaian\JabatanStrukturalController;
+use App\Http\Controllers\Admin\Kepegawaian\DataStrukturalController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\Kepegawaian\UnitController;
 use App\Http\Controllers\Admin\Kepegawaian\StaffController;
 use App\Http\Controllers\Admin\Kepegawaian\ReportController;
-use App\Http\Controllers\Admin\Kepegawaian\PangkatController;
-use App\Http\Controllers\Admin\Kepegawaian\PegawaiController;
-use App\Http\Controllers\Admin\Kepegawaian\DataStrukturalController;
-use App\Http\Controllers\Admin\Kepegawaian\JabatanStrukturalController;
 
 /*
 |--------------------------------------------------------------------------
@@ -147,11 +147,13 @@ Route::get('/pmbgenerateva', function () {
             Route::get('/getPegawai', [PegawaiController::class, 'getPegawai'])->name('get-pegawai');
             //route unit
             Route::resource('dataUnit', UnitController::class);
-            // Route::get('/getUnit', [UnitController::class, 'getUnit'])->name('get-unit');
+            Route::get('/getUnit', [UnitController::class, 'getUnit'])->name('get-unit');
 
             Route::resource('reportPegawai', ReportController::class);
+            Route::get('/dataReport', [ReportController::class, 'dataReport'])->name('data-report');
             //route staff
             Route::resource('dataStaff', StaffController::class);
+            Route::get('/getStaff', [StaffController::class, 'getStaff'])->name('data-staff');
             //route data struktural
             Route::resource('/dataStruktural', DataStrukturalController::class);
             Route::get('/getData', [DataStrukturalController::class, 'getData'])->name('get-data');
@@ -748,8 +750,8 @@ Route::get('/pmbgenerateva', function () {
             return view('cetak.evaluasinilai', [
                 "title" => "dosen-penilaian"
             ]);
-        })
-        ;Route::get('/cetak-absensi-kelas', function () {
+        });
+        Route::get('/cetak-absensi-kelas', function () {
             return view('cetak.cetakabsensikelas', [
                 "title" => "dosen-penilaian"
             ]);
@@ -969,66 +971,14 @@ Route::get('/pmbgenerateva', function () {
     });
 // });
 
-Route::prefix('keuangan')->middleware(['aksesuntuk:keuangan'])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('keuangan.dashboardKeuangan', [
-            "title" => "keuangan-dashboard",
-        ]);
-    });
-
-    Route::prefix('tarif')->group(function () {
-        Route::get('/', function () {
-            return view('keuangan.tarif_UKT_SPI', [
-                "title" => "keuangan-tarif",
-            ]);
-        });
-        Route::get('/cu', function () {
-            return view('keuangan.cutarifspi', [
-                "id" => null,
-                "title" => "keuangan-tarif"
-            ]);
-        });
-        Route::get('/cu/{id}', function ($id) {
-            return view('keuangan.cutarifspi', [
-                "id" => $id,
-                "title" => "keuangan-tarif"
-            ]);
-        });
-    });
-
-    Route::prefix('rekapitulasi')->group(function () {
-        Route::get('/datapendaftar', function () {
-            return view('keuangan.dataPendaftar', [
-                "title" => "keuangan-rekapitulasi",
-            ]);
-        });
-
-        Route::get('/datamahasiswa', function () {
-            return view('keuangan.dataMahasiswa', [
-                "title" => "keuangan-rekapitulasi",
-            ]);
-        });
-
-        Route::get('/spi', function () {
-            return view('keuangan.spiMandiri', [
-                "title" => "keuangan-rekapitulasi",
-            ]);
-        });
-
-        Route::get('/spi/detail/{id}', function ($id) {
-            return view('keuangan.detailSPI', [
-                "id" => $id,
-                "title" => "keuangan-rekapitulasi",
-            ]);
-        });
-
-        Route::get('/piutangmahasiswa', function () {
+    Route::prefix('keuangan')->middleware(['aksesuntuk:keuangan'])->group(function () {
+        Route::get('/dashboard', function () {
             return view('keuangan.dashboardKeuangan', [
                 "title" => "keuangan-dashboard",
             ]);
         });
-        
-        Route::prefix('tarif')->group(function() {
+
+        Route::prefix('tarif')->group(function () {
             Route::get('/', function () {
                 return view('keuangan.tarif_UKT_SPI', [
                     "title" => "keuangan-tarif",
@@ -1060,77 +1010,130 @@ Route::prefix('keuangan')->middleware(['aksesuntuk:keuangan'])->group(function (
                     "title" => "keuangan-rekapitulasi",
                 ]);
             });
-            
+
             Route::get('/spi', function () {
                 return view('keuangan.spiMandiri', [
                     "title" => "keuangan-rekapitulasi",
                 ]);
             });
 
-            Route::get('/spi/detail/{id}/{nama}', function ($id, $nama) {
+            Route::get('/spi/detail/{id}', function ($id) {
                 return view('keuangan.detailSPI', [
                     "id" => $id,
-                    'nama' => $nama,
                     "title" => "keuangan-rekapitulasi",
                 ]);
             });
 
-            Route::get('/piutangmahasiswa', function () { /*keuangan/dashboard*/
+            Route::get('/piutangmahasiswa', function () {
                 return view('keuangan.dashboardKeuangan', [
-                    "title" => "keuangan-rekapitulasi",
-                ]);
-            });
-
-            Route::get('/piutangmahasiswa/detail/{id}', function ($id) {
-                return view('keuangan.detailPiutang', [
-                    'id' => $id,
-                    "title" => "Detail Piutang",
-                ]);
-            });
-
-            Route::get('/piutangmahasiswa/masukkan', function () {
-                return view('keuangan.masukkanPiutang', [
-                    "title" => "Masukkan Mahasiswa pada Daftar Piutang",
-                ]);
-            });
-
-            Route::get('/penyisihanpiutang', function () {
-                return view('keuangan.penyisihanPiutang', [
-                    "title" => "keuangan-rekapitulasi",
+                    "title" => "keuangan-dashboard",
                 ]);
             });
             
-            Route::get('/inputdatapembayaran', function () {
-                return view('keuangan.inputDataPembayaran', [
-                    "title" => "keuangan-rekapitulasi",
-                ]);
+            Route::prefix('tarif')->group(function() {
+                Route::get('/', function () {
+                    return view('keuangan.tarif_UKT_SPI', [
+                        "title" => "keuangan-tarif",
+                    ]);
+                });
+                Route::get('/cu', function () {
+                    return view('keuangan.cutarifspi', [
+                        "id" => null,
+                        "title" => "keuangan-tarif"
+                    ]);
+                });
+                Route::get('/cu/{id}', function ($id) {
+                    return view('keuangan.cutarifspi', [
+                        "id" => $id,
+                        "title" => "keuangan-tarif"
+                    ]);
+                });
             });
-            
-            Route::get('/riwayatpembayaran', function () {
-                return view('keuangan.riwayatPembayaran', [
-                    "title" => "keuangan-rekapitulasi",
-                ]);
-            });
-        });
 
-        Route::prefix('buktipembayaran')->group(function () {
-            Route::get('/email', function () {
-                return view('keuangan.buktiPembayaran.email', [
-                    "title" => "keuangan-buktipembayaran",
-                ]);
+            Route::prefix('rekapitulasi')->group(function () {
+                Route::get('/datapendaftar', function () {
+                    return view('keuangan.dataPendaftar', [
+                        "title" => "keuangan-rekapitulasi",
+                    ]);
+                });
+
+                Route::get('/datamahasiswa', function () {
+                    return view('keuangan.dataMahasiswa', [
+                        "title" => "keuangan-rekapitulasi",
+                    ]);
+                });
+                
+                Route::get('/spi', function () {
+                    return view('keuangan.spiMandiri', [
+                        "title" => "keuangan-rekapitulasi",
+                    ]);
+                });
+
+                Route::get('/spi/detail/{id}/{nama}', function ($id, $nama) {
+                    return view('keuangan.detailSPI', [
+                        "id" => $id,
+                        'nama' => $nama,
+                        "title" => "keuangan-rekapitulasi",
+                    ]);
+                });
+
+                Route::get('/piutangmahasiswa', function () { /*keuangan/dashboard*/
+                    return view('keuangan.dashboardKeuangan', [
+                        "title" => "keuangan-rekapitulasi",
+                    ]);
+                });
+
+                Route::get('/piutangmahasiswa/detail/{id}', function ($id) {
+                    return view('keuangan.detailPiutang', [
+                        'id' => $id,
+                        "title" => "Detail Piutang",
+                    ]);
+                });
+
+                Route::get('/piutangmahasiswa/masukkan', function () {
+                    return view('keuangan.masukkanPiutang', [
+                        "title" => "Masukkan Mahasiswa pada Daftar Piutang",
+                    ]);
+                });
+
+                Route::get('/penyisihanpiutang', function () {
+                    return view('keuangan.penyisihanPiutang', [
+                        "title" => "keuangan-rekapitulasi",
+                    ]);
+                });
+                
+                Route::get('/inputdatapembayaran', function () {
+                    return view('keuangan.inputDataPembayaran', [
+                        "title" => "keuangan-rekapitulasi",
+                    ]);
+                });
+                
+                Route::get('/riwayatpembayaran', function () {
+                    return view('keuangan.riwayatPembayaran', [
+                        "title" => "keuangan-rekapitulasi",
+                    ]);
+                });
             });
 
-            Route::get('/kwitansi', function () {
-                return view('keuangan.buktiPembayaran.kwitansi', [
-                    "title" => "keuangan-buktipembayaran",
-                ]);
+            Route::prefix('buktipembayaran')->group(function () {
+                Route::get('/email', function () {
+                    return view('keuangan.buktiPembayaran.email', [
+                        "title" => "keuangan-buktipembayaran",
+                    ]);
+                });
+
+                Route::get('/kwitansi', function () {
+                    return view('keuangan.buktiPembayaran.kwitansi', [
+                        "title" => "keuangan-buktipembayaran",
+                    ]);
+                });
             });
         });
     });
-});
+// });
 
 
 
     require __DIR__.'/auth.php';
 
-require_once(__DIR__.'/web_slicing.php');
+    require_once(__DIR__.'/web_slicing.php');

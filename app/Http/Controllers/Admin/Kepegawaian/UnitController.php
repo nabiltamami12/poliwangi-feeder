@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Admin\Kepegawaian;
 
-use App\Http\Controllers\Controller;
-use App\Models\Kepegawaian\Pegawai;
-use App\Models\Kepegawaian\Unit;
 use Illuminate\Http\Request;
+use App\Models\Kepegawaian\Unit;
+use App\Models\Kepegawaian\Pegawai;
+use App\Http\Controllers\Controller;
+use Yajra\DataTables\Facades\DataTables;
 
 class UnitController extends Controller
 {
@@ -16,12 +17,23 @@ class UnitController extends Controller
      */
     public function index()
     {
-        $unit = Unit::all();
         return view('admin.masterKepegawaian.unit.index', [
-                    "title" => "Unit-kepegawaian",
-                    "unit" => $unit,
+                    "title" => "Unit-kepegawaian"
                 ]);
     }
+
+    public function getUnit(Request $request)
+    {
+        $data = Unit::orderBy('id', 'desc')->get();
+        return DataTables::of($data)
+            ->addColumn('Aksi', function($data) {
+                return '<a href="'.route('dataUnit.edit', $data->id).'" class="btn btn-success btn-sm">Edit</a>
+                    <button type="button" data-id="'.$data->id.'" onclick="delete_btn()" class="btn btn-danger btn-sm" id="getDeleteId">Delete</button>';
+            })
+            ->rawColumns(['Aksi'])
+            ->make(true);
+    }
+
 
     /**
      * Show the form for creating a new resource.
@@ -107,9 +119,8 @@ class UnitController extends Controller
      */
     public function destroy($id)
     {
-        $item = Unit::findOrFail($id);
-        $item->delete();
-        return redirect()->route('dataUnit.index');
 
+        Unit::destroy($id); 
+        return response()->json(['success'=>'Unit berhasil dihapus !!']);
     }
 }
