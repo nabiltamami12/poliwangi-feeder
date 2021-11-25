@@ -100,6 +100,10 @@ class Pegawai extends Model
         return $this->hasMany(AbsensiKaryawan::class, 'pegawai')->where('tidakmasuk', 0)->where('libur', 0);
     }
 
+    public function statuspegawai() {
+        return $this->hasMany(PegawaiStatus::class, 'id_pegawai');
+    }
+
     // wilayah
     public function kecamatan() {
         return $this->belongsTo(Kecamatan::class, 'id');

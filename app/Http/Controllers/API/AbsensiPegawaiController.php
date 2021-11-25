@@ -28,25 +28,164 @@ class AbsensiPegawaiController extends Controller
         $role = $request->get('role');
         
 		try {
-            // switch($role) {
-            //     case 'all':
-            //         break;
-            //     default:
-            //         break;
-            // }
-			if($bulan != 'all') {
-				$query = Pegawai::withCount(['hadir' => function($q) use ($year, $bulan) {
-							$q->whereYear('tanggal', $year)->whereMonth('tanggal', $bulan);
-						}, 'totalpresensi' => function($k) use ($year, $bulan) {
-							$k->whereYear('tanggal', $year)->whereMonth('tanggal', $bulan);
-						}])->where('id_staf', '!=', 4)->get();
-			} else {
-				$query = Pegawai::withCount(['hadir' => function($q) use ($year) {
-							$q->whereYear('tanggal', $year);
-						}, 'totalpresensi' => function($k) use ($year) {
-							$k->whereYear('tanggal', $year);
-						}])->where('id_staf', '!=', 4)->get();
-			}
+            switch($role) {
+                case 'all':
+					if($bulan != 'all') {
+					$query = Pegawai::withCount(['hadir' => function($q) use ($year, $bulan) {
+								$q->whereYear('tanggal', $year)->whereMonth('tanggal', $bulan);
+							}, 'totalpresensi' => function($k) use ($year, $bulan) {
+								$k->whereYear('tanggal', $year)->whereMonth('tanggal', $bulan);
+							}])->get();
+					} else {
+						$query = Pegawai::withCount(['hadir' => function($q) use ($year) {
+									$q->whereYear('tanggal', $year);
+								}, 'totalpresensi' => function($k) use ($year) {
+									$k->whereYear('tanggal', $year);
+								}])->get();
+					}
+                    break;
+				case 'dosen':
+					if($bulan != 'all') {
+						$query = Pegawai::whereHas('statuspegawai', function($b) {
+								$b->where('status_karyawan', 'dosen');
+							})->withCount(['hadir' => function($q) use ($year, $bulan) {
+								$q->whereYear('tanggal', $year)->whereMonth('tanggal', $bulan);
+							}, 'totalpresensi' => function($k) use ($year, $bulan) {
+								$k->whereYear('tanggal', $year)->whereMonth('tanggal', $bulan);
+							}])->where('staff', 4)->get();
+					} else {
+						$query = Pegawai::whereHas('statuspegawai', function($b) {
+									$b->where('status_karyawan', 'dosen');
+								})->withCount(['hadir' => function($q) use ($year) {
+									$q->whereYear('tanggal', $year);
+								}, 'totalpresensi' => function($k) use ($year) {
+									$k->whereYear('tanggal', $year);
+								}])->where('staff', 4)->get();
+					}
+					break;
+				case 'dosen_luarbiasa':
+					if($bulan != 'all') {
+						$query = Pegawai::whereHas('statuspegawai', function($b) {
+								$b->where('status_karyawan', 'dosen luar biasa');
+							})->withCount(['hadir' => function($q) use ($year, $bulan) {
+								$q->whereYear('tanggal', $year)->whereMonth('tanggal', $bulan);
+							}, 'totalpresensi' => function($k) use ($year, $bulan) {
+								$k->whereYear('tanggal', $year)->whereMonth('tanggal', $bulan);
+							}])->where('staff', 4)->get();
+					} else {
+						$query = Pegawai::whereHas('statuspegawai', function($b) {
+									$b->where('status_karyawan', 'dosen luar biasa');
+								})->withCount(['hadir' => function($q) use ($year) {
+									$q->whereYear('tanggal', $year);
+								}, 'totalpresensi' => function($k) use ($year) {
+									$k->whereYear('tanggal', $year);
+								}])->where('staff', 4)->get();
+					}
+					break;
+				case 'tendik':
+					if($bulan != 'all') {
+						$query = Pegawai::whereHas('statuspegawai', function($b) {
+								$b->where('status_karyawan', 'tenaga didik');
+							})->withCount(['hadir' => function($q) use ($year, $bulan) {
+								$q->whereYear('tanggal', $year)->whereMonth('tanggal', $bulan);
+							}, 'totalpresensi' => function($k) use ($year, $bulan) {
+								$k->whereYear('tanggal', $year)->whereMonth('tanggal', $bulan);
+							}])->get();
+					} else {
+						$query = Pegawai::whereHas('statuspegawai', function($b) {
+									$b->where('status_karyawan', 'tenaga didik');
+								})->withCount(['hadir' => function($q) use ($year) {
+									$q->whereYear('tanggal', $year);
+								}, 'totalpresensi' => function($k) use ($year) {
+									$k->whereYear('tanggal', $year);
+								}])->get();
+					}
+					break;
+				case 'pns':
+					if($bulan != 'all') {
+						$query = Pegawai::whereHas('statuspegawai', function($b) {
+								$b->where('status_karyawan', 'pns');
+							})->withCount(['hadir' => function($q) use ($year, $bulan) {
+								$q->whereYear('tanggal', $year)->whereMonth('tanggal', $bulan);
+							}, 'totalpresensi' => function($k) use ($year, $bulan) {
+								$k->whereYear('tanggal', $year)->whereMonth('tanggal', $bulan);
+							}])->get();
+					} else {
+						$query = Pegawai::whereHas('statuspegawai', function($b) {
+									$b->where('status_karyawan', 'pns');
+								})->withCount(['hadir' => function($q) use ($year) {
+									$q->whereYear('tanggal', $year);
+								}, 'totalpresensi' => function($k) use ($year) {
+									$k->whereYear('tanggal', $year);
+								}])->get();
+					}
+					break;
+				case 'kontrak':
+					if($bulan != 'all') {
+						$query = Pegawai::whereHas('statuspegawai', function($b) {
+								$b->where('status_karyawan', 'kontrak');
+							})->withCount(['hadir' => function($q) use ($year, $bulan) {
+								$q->whereYear('tanggal', $year)->whereMonth('tanggal', $bulan);
+							}, 'totalpresensi' => function($k) use ($year, $bulan) {
+								$k->whereYear('tanggal', $year)->whereMonth('tanggal', $bulan);
+							}])->get();
+					} else {
+						$query = Pegawai::whereHas('statuspegawai', function($b) {
+									$b->where('status_karyawan', 'kontrak');
+								})->withCount(['hadir' => function($q) use ($year) {
+									$q->whereYear('tanggal', $year);
+								}, 'totalpresensi' => function($k) use ($year) {
+									$k->whereYear('tanggal', $year);
+								}])->get();
+					}
+					break;
+				case 'satpam':
+					if($bulan != 'all') {
+						$query = Pegawai::withCount(['hadir' => function($q) use ($year, $bulan) {
+								$q->whereYear('tanggal', $year)->whereMonth('tanggal', $bulan);
+							}, 'totalpresensi' => function($k) use ($year, $bulan) {
+								$k->whereYear('tanggal', $year)->whereMonth('tanggal', $bulan);
+							}])->where('staff', 5)->get();
+					} else {
+						$query = Pegawai::withCount(['hadir' => function($q) use ($year) {
+									$q->whereYear('tanggal', $year);
+								}, 'totalpresensi' => function($k) use ($year) {
+									$k->whereYear('tanggal', $year);
+								}])->where('staff', 5)->get();
+					}
+					break;
+				case 'kebersihan':
+					if($bulan != 'all') {
+					$query = Pegawai::withCount(['hadir' => function($q) use ($year, $bulan) {
+								$q->whereYear('tanggal', $year)->whereMonth('tanggal', $bulan);
+							}, 'totalpresensi' => function($k) use ($year, $bulan) {
+								$k->whereYear('tanggal', $year)->whereMonth('tanggal', $bulan);
+							}])->where('staff', 39)->get();
+					} else {
+						$query = Pegawai::withCount(['hadir' => function($q) use ($year) {
+									$q->whereYear('tanggal', $year);
+								}, 'totalpresensi' => function($k) use ($year) {
+									$k->whereYear('tanggal', $year);
+								}])->where('staff', 39)->get();
+					}
+					break;
+                default:
+					if($bulan != 'all') {
+						$query = Pegawai::withCount(['hadir' => function($q) use ($year, $bulan) {
+									$q->whereYear('tanggal', $year)->whereMonth('tanggal', $bulan);
+								}, 'totalpresensi' => function($k) use ($year, $bulan) {
+									$k->whereYear('tanggal', $year)->whereMonth('tanggal', $bulan);
+								}])->get();
+					} else {
+						$query = Pegawai::withCount(['hadir' => function($q) use ($year) {
+									$q->whereYear('tanggal', $year);
+								}, 'totalpresensi' => function($k) use ($year) {
+									$k->whereYear('tanggal', $year);
+								}])->get();
+					}
+                    break;
+            }
+			
 
 			$this->data = $query;
 			$this->status = "success";

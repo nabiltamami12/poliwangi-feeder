@@ -62,6 +62,8 @@
 							<label for="rekap_presensi">Presensi</label>
 							<select class="form-control dt-filter" id="role_presensi" name="role_presensi">
 								<option value="all"> All </option>
+								<option value="dosen"> Dosen </option>
+								<option value="dosen_luarbiasa"> Dosen Luar Biasa </option>
 								<option value="tendik"> Tenaga Didik </option>
 								<option value="pns"> PNS </option>
 								<option value="kontrak"> Kontrak </option>
@@ -80,7 +82,6 @@
 								<th scope="col">Nama</th>
 								<th scope="col">Kehadiran</th>
 								<th scope="col">Tidak Hadir</th>
-								<!-- <th scope="col" class="text-center">Staf</th> -->
 								<th scope="col" class="text-center">Aksi</th>
 							</tr>
 						</thead>

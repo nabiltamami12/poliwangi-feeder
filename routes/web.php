@@ -444,6 +444,13 @@ Route::get('/pmbgenerateva', function () {
                     "title" => "rekap-absensi-dosen"
                 ]);
             });
+
+            Route::get('/absensi/pegawai', function () {
+                return view('admin.kuliah.absensipegawai', [
+                    "page" => "admin",
+                    "title" => "rekap-absensi-pegawai"
+                ]);
+            });
     
             Route::get('/absensi/dosen/{id}/{tahun}/{semester}', function ($id, $tahun, $semester) {
                 return view('admin.kuliah.rekapabsensidosen', [
