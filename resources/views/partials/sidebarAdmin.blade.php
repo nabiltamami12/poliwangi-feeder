@@ -135,6 +135,12 @@
                 </a>
               </li>
               <li class="nav-item">
+                <a class="nav-link" href="{{ url('/admin/kepegawaian/jabatan-struktural')}}">
+                  <span class="mini_icon">JS</span>
+                  <span class="nav-link-text">Jabatan Struktural</span>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a class="nav-link" href="{{ url('/admin/kepegawaian/dataStruktural')}}">
                   <span class="mini_icon">DS</span>
                   <span class="nav-link-text">Data Struktural</span>

@@ -160,6 +160,12 @@ Route::get('/pmbgenerateva', function () {
             //route pangkat
             Route::resource('/dataPangkat', PangkatController::class);
             Route::get('/getPangkat', [PangkatController::class, 'getPangkat'])->name('get-pangkat');
+
+            Route::get('/jabatan-struktural', function () {
+                return view('admin.masterKepegawaian.jabatanStruktural.index', [
+                    "title" => "jabatan-struktural",
+            ]);
+        });
         });
         Route::get('/dashboard', function () {
             return view('akademik.dashboardAkademik', [

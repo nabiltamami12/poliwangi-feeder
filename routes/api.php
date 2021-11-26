@@ -328,6 +328,12 @@ Route::prefix('v1')->group(function () {
     Route::post('/test/{id}', [Ctr\BerkasKeuanganController::class, 'detail_cicilan']);
 
 
+    // Kepegawaian Jabatan Struktural
+    Route::get('/getJabatan', [Ctr\JabatanStrukturalController::class, 'getJabatan']);
+    Route::post('/jabatan-struktural', [Ctr\JabatanStrukturalController::class, 'store']);
+    Route::get('/jabatan-struktural/{id}/edit', [Ctr\JabatanStrukturalController::class, 'edit']);
+    Route::put('/jabatan-struktural/{id}', [Ctr\JabatanStrukturalController::class, 'update']);
+    Route::delete('/jabatan-struktural/{id}', [Ctr\JabatanStrukturalController::class, 'destroy']);
 
 });
 
