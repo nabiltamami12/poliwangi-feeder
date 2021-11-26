@@ -1,9 +1,5 @@
 @extends('layouts.main')
 
-{{-- @section('style')
-  <link href="{{ asset('css/loading.css') }}" rel="stylesheet">
-@endsection --}}
-
 @section('content')
 
 <!-- Header -->
@@ -33,8 +29,8 @@
             <thead class="table-header">
               <tr>
                 <th scope="col">NO</th>
-                <th scope="col">Pegawai</th>
-                <th scope="col">Jabatan</th>
+                <th scope="col">No SK</th>
+                <th scope="col">Nama Jabatan</th>
                 <th scope="col">AKSI</th>
               </tr>
             </thead>
@@ -102,10 +98,7 @@
               <div class="form-group col-md-6">
                 <label for="">Pegawai</label>
                 <select name="id_pegawai" class="form-control js-example-basic-single" id="idPegawai" required>
-                  <option selected disabled>Pilih Pegawai</option>
-                  @foreach($pegawai as $p)
-                    <option value="{{ $p->id }}">{{ $p->nama }}</option>
-                  @endforeach
+                  
                 </select>
               </div>
               <div class="form-group col-md-6">
@@ -115,20 +108,16 @@
           </div>
           <div class="form-row">
             <div class="form-group col-md-6">
-              <label for="">Tmt</label>
-              <input type="text" class="form-control" name="tmt" id="tmt" placeholder="tmt" required>
-            </div>
-            <div class="form-group col-md-6">
               <label for="">Nomor SK</label>
                 <input type="text" class="form-control" name="nomor_sk" id="nomorSk" placeholder="Nomor SK" required>
             </div>
-          </div>
-          <div class="form-row">
             <div class="form-group col-md-6">
               <label for="">Tanggal SK</label>
               <input type="date" class="form-control" name="tanggal_sk" id="tanggalSk" placeholder="Tanggal SK" required>
             </div>
-            <div class="form-group col-md-6">
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-12">
               <label for="">Yang Mengesahkan</label>
                 <input type="text" class="form-control" name="pejabat_yg_mengesahkan" id="pejabatYgMengesahkan" placeholder="Yang Mengesahkan" required>
             </div>
@@ -140,7 +129,9 @@
             </div>
             <div class="form-group col-md-6">
               <label for="">Jabatan Struktural</label>
-              <input type="text" class="form-control" name="jabatan_struktural" id="jabatanStruktural" placeholder="Jabatan Struktural" required>
+              <select name="jabatan_struktural" class="form-control js-example-basic-single" id="jabatanStruktural" required>
+                  
+              </select>
             </div>
           </div>
           <div class="form-row">
@@ -256,7 +247,7 @@
 @section('js')
 <script>
   var nomor = 1;
-  dt_url = '{{ route('get-data') }}';
+  dt_url = `{{ url('/api/v1') }}/getData`;
   dt_opt = {
     processing: true,
     serverSide: true,
@@ -266,63 +257,52 @@
     "order": [[ 0, "desc" ]],
     columns: [
         {data: null, name: 'no', sortable: false, render: function(data, type, row, meta) {return meta.row + meta.settings._iDisplayStart + 1;}},
-        {data: 'id_pegawai', name: 'id_pegawai'},
+        {data: 'nomor_sk', name: 'nomor_sk'},
         {data: 'nama_jabatan', name: 'nama_jabatan'},
         {data: 'Aksi', name: 'Aksi',orderable:false,serachable:false,sClass:'text-center'},
     ]
     
   };
 
-  function change_status(id) {
-      $('#konfirmModal').modal('show');
-      $('#id_konfirm').val(id)
-    }
-    function konfirm_func() {
-      var id = $("#id_konfirm").val();
-      $.ajax({
-        url: url_api+"/periode/change_status/"+id,
-        type: "put",
-        dataType: 'json',
-        data: {},
-        success: function(res) {
-          if (res.status=="success") {
-                $('#konfirmModal').modal('hide');
-                dt.ajax.reload();                
-              } else {
-                // alert gagal
-              }
-              ;
-          }
-      });
-  }
-  function change_semester(id,semester) {
-    var globalData = JSON.parse(localStorage.getItem('globalData'))
-    var periode = globalData['periode']
-    periode['semester'] = semester
-    
-    localStorage.setItem('globalData', JSON.stringify(globalData));
-    
-      $.ajax({
-          url: url_api+"/periode/change_semester/"+id+"/"+semester,
-          type: "put",
-          dataType: 'json',
-          data: {},
-            success: function(res) {
-              if (res.status=="success") {
-                dt.ajax.reload();
-              } else {
-                // alert gagal
-              }
-          }
-      });
-  }
-
   $(document).ready(function() {
     $('.js-example-basic-single').select2();
   });
 
   function add_btn() {
-    $('#modalAdd').modal();
+    $.ajax({
+        url: `{{ url('/api/v1') }}/getDataStruktural`,
+        method: 'GET',
+        success: function(result) {
+          $('#idPegawai').html('');
+          $('#idPegawai').append($('<option>', {
+            text: "Pilih Pegawai",
+            selected: true,
+            disabled: true,
+          }));
+          $.each(result.pegawai, function(i, p) {
+            $('#idPegawai').append($('<option>', {
+              value: p.id,
+              text: p.nama,
+            }));
+          });
+
+          $('#jabatanStruktural').html('');
+          $('#jabatanStruktural').append($('<option>', {
+            text: "Pilih Jabatan",
+            selected: true,
+            disabled: true,
+          }));
+          $.each(result.jabatan, function(a, j) {
+            $('#jabatanStruktural').append($('<option>', {
+              value: j.id,
+              text: j.nama_jabatan,
+            }));
+          });
+
+          $('.js-example-basic-single').select2();
+          $('#modalAdd').modal();
+        }
+    });
   }
 
   function delete_btn() {
@@ -334,7 +314,6 @@
     var no = 1;
 
     $('#SubmitAddForm').click(function(e) {
-        $("#loadingAdd").addClass("lds-dual-ring");
         e.preventDefault();
         $.ajaxSetup({
             headers: {
@@ -342,18 +321,17 @@
             }
         });
         $.ajax({
-            url: "{{ route('dataStruktural.store') }}",
+            url: `{{ url('/api/v1') }}/data-struktural`,
             method: 'post',
             data: {
                 id_pegawai: parseInt($('#idPegawai').val()),
                 nama_jabatan: $('#namaJabatan').val(),
-                tmt: $('#tmt').val(),
                 nomor_sk: $('#nomorSk').val(),
                 tanggal_sk: $('#tanggalSk').val(),
                 pejabat_yg_mengesahkan: $('#pejabatYgMengesahkan').val(),
                 keterangan: $('#keterangan').val(),
                 jabatan_fungsional: $('#jabatanFungsional').val(),
-                jabatan_struktural: $('#jabatanStruktural').val(),
+                id_jabatan_struktural: parseInt($('#jabatanStruktural').val()),
                 status: $('#status').val(),
                 tmt_struktural: $('#tmtStruktural').val(),
                 tmt_kerja: $('#tmtKerja').val(),
@@ -363,7 +341,6 @@
                 console.log(result)
                 if(result.errors) {
                     $('.alert-danger').html('');
-                    $("#loadingAdd").removeClass("lds-dual-ring");
                     $.each(result.errors, function(key, value) {
                         $('.alert-danger').show();
                         $('.alert-danger').append('<strong><li>'+value+'</li></strong>');
@@ -376,7 +353,7 @@
                         $('.alert-success').hide();
                         $('#modalAdd').modal('hide');
                         location.reload();
-                    }, 1000);
+                    }, 500);
                 }
             }
         });
@@ -389,31 +366,28 @@
     var id;
 
     $('body').on('click', '#getDetailData', function(e) {
-        $("#loading").addClass("lds-dual-ring");
         // e.preventDefault();
         id = $(this).data('id');
         $.ajax({
-            url: "dataStruktural/"+id,
+            url: `{{ url('/api/v1') }}/data-struktural/${id}`,
             method: 'GET',
             // data: {
             //     id: id,
             // },
             success: function(result) {
               $('#DetailModalBody').html(result.html);
-              $("#loading").removeClass("lds-dual-ring");
               $('#modalDetail').modal();
             }
         });
     });
 
     $('body').on('click', '#getEditData', function(e) {
-        $("#loading").addClass("lds-dual-ring");
         // e.preventDefault();
         $('.alert-danger').html('');
         $('.alert-danger').hide();
         id = $(this).data('id');
         $.ajax({
-            url: "dataStruktural/"+id+"/edit",
+            url: `{{ url('/api/v1') }}/data-struktural/${id}/edit`,
             method: 'GET',
             // data: {
             //     id: id,
@@ -428,14 +402,20 @@
                       selected: p.id == result.data.id_pegawai
                   }));
               });
-              $("#loading").removeClass("lds-dual-ring");
+              $('#editJabatanStruktural').html('');
+              $.each(result.jabatan, function(i, p) {
+                  $('#editJabatanStruktural').append($('<option>', {
+                      value: p.id,
+                      text: p.nama_jabatan,
+                      selected: p.id == result.data.id_jabatan_struktural
+                  }));
+              });
               $('#modalEdit').show();
             }
         });
     });
 
     $('#SubmitEditForm').click(function(e) {
-        $("#loadingEdit").addClass("lds-dual-ring");
         e.preventDefault();
         $.ajaxSetup({
             headers: {
@@ -443,18 +423,17 @@
             }
         });
         $.ajax({
-            url: "dataStruktural/"+id,
+            url: `{{ url('/api/v1') }}/data-struktural/${id}`,
             method: 'PUT',
             data: {
                 id_pegawai: parseInt($('#editIdPegawai').val()),
                 nama_jabatan: $('#editNamaJabatan').val(),
-                tmt: $('#editTmt').val(),
                 nomor_sk: $('#editNomorSk').val(),
                 tanggal_sk: $('#editTanggalSk').val(),
                 pejabat_yg_mengesahkan: $('#editPejabatYgMengesahkan').val(),
                 keterangan: $('#editKeterangan').val(),
                 jabatan_fungsional: $('#editJabatanFungsional').val(),
-                jabatan_struktural: $('#editJabatanStruktural').val(),
+                id_jabatan_struktural: parseInt($('#editJabatanStruktural').val()),
                 status: $('#editStatus').val(),
                 tmt_struktural: $('#editTmtStruktural').val(),
                 tmt_kerja: $('#editTmtKerja').val(),
@@ -463,7 +442,6 @@
             success: function(result) {
                 if(result.errors) {
                     $('.alert-danger').html('');
-                    $("#loadingEdit").removeClass("lds-dual-ring");
                     $.each(result.errors, function(key, value) {
                         $('.alert-danger').show();
                         $('.alert-danger').append('<strong><li>'+value+'</li></strong>');
@@ -476,7 +454,7 @@
                         $('.alert-success').hide();
                         $('#modalEdit').hide();
                         location.reload();
-                    }, 1000);
+                    }, 500);
                 }
             }
         });
@@ -487,7 +465,6 @@
         deleteID = $(this).data('id');
     })
     $('#SubmitDeleteForm').click(function(e) {
-        $("#loadingDelete").addClass("lds-dual-ring");
         e.preventDefault();
         var id = deleteID;
         $.ajaxSetup({
@@ -496,14 +473,14 @@
             }
         });
         $.ajax({
-            url: "dataStruktural/"+id,
+            url: `{{ url('/api/v1') }}/data-struktural/${id}`,
             method: 'DELETE',
             success: function(result) {
                 setInterval(function(){ 
                     $('#modalDelete').modal('hide');
                     $('#datatable').DataTable().ajax.reload();
                     location.reload();
-                }, 1000);
+                }, 500);
             }
         });
     });

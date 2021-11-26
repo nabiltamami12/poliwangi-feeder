@@ -13,16 +13,25 @@ class DataStruktural extends Model
     protected $fillable = [
         'id_pegawai',
         'nama_jabatan',
-        'tmt',
         'nomor_sk',
         'tanggal_sk',
         'pejabat_yg_mengesahkan',
         'keterangan',
         'jabatan_fungsional',
-        'jabatan_struktural',
+        'id_jabatan_struktural',
         'status',
         'tmt_struktural',
         'tmt_kerja',
         'tmt_kontrak',
     ];
+
+    public function jabatanStruktural()
+    {
+        return $this->belongsTo(JabatanStruktural::class, 'id');
+    }
+
+    public function pegawai()
+    {
+        return $this->belongsTo(Pegawai::class, 'id');
+    }
 }

@@ -335,6 +335,15 @@ Route::prefix('v1')->group(function () {
     Route::put('/jabatan-struktural/{id}', [Ctr\JabatanStrukturalController::class, 'update']);
     Route::delete('/jabatan-struktural/{id}', [Ctr\JabatanStrukturalController::class, 'destroy']);
 
+    // Kepegawaian Data Struktural
+    Route::get('/getData', [Ctr\DataStrukturalController::class, 'getData']);
+    Route::get('/getDataStruktural', [Ctr\DataStrukturalController::class, 'getDataStruktural']);
+    Route::post('/data-struktural', [Ctr\DataStrukturalController::class, 'store']);
+    Route::get('/data-struktural/{id}/edit', [Ctr\DataStrukturalController::class, 'edit']);
+    Route::get('/data-struktural/{id}', [Ctr\DataStrukturalController::class, 'show']);
+    Route::put('/data-struktural/{id}', [Ctr\DataStrukturalController::class, 'update']);
+    Route::delete('/data-struktural/{id}', [Ctr\DataStrukturalController::class, 'destroy']);
+
 });
 
 Route::prefix('v1')->middleware('auth:api')->group(function () {

@@ -154,18 +154,20 @@ Route::get('/pmbgenerateva', function () {
             //route staff
             Route::resource('dataStaff', StaffController::class);
             Route::get('/getStaff', [StaffController::class, 'getStaff'])->name('data-staff');
-            //route data struktural
-            Route::resource('/dataStruktural', DataStrukturalController::class);
-            Route::get('/getData', [DataStrukturalController::class, 'getData'])->name('get-data');
             //route pangkat
             Route::resource('/dataPangkat', PangkatController::class);
             Route::get('/getPangkat', [PangkatController::class, 'getPangkat'])->name('get-pangkat');
-
+            
+            Route::get('/data-struktural', function () { 
+                return view('admin.masterKepegawaian.dataStruktural.index', [
+                    "title" => "data-struktural",
+                ]);
+            });
             Route::get('/jabatan-struktural', function () {
                 return view('admin.masterKepegawaian.jabatanStruktural.index', [
                     "title" => "jabatan-struktural",
-            ]);
-        });
+                ]);
+            });
         });
         Route::get('/dashboard', function () {
             return view('akademik.dashboardAkademik', [

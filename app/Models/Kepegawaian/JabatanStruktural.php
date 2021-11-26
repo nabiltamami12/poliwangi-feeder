@@ -13,4 +13,9 @@ class JabatanStruktural extends Model
     protected $fillable = [
         "nama_jabatan",
     ];
+
+    public function dataStruktural()
+    {
+        return $this->hasMany(DataStruktural::class, 'id_jabatan_struktural');
+    }
 }

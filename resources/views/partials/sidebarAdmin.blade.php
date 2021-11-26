@@ -141,7 +141,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{{ url('/admin/kepegawaian/dataStruktural')}}">
+                <a class="nav-link" href="{{ url('/admin/kepegawaian/data-struktural')}}">
                   <span class="mini_icon">DS</span>
                   <span class="nav-link-text">Data Struktural</span>
                 </a>

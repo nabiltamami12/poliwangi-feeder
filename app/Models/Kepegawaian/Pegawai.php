@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Pegawai extends Model
 {
     use HasFactory;
-    protected $guarded = ['id'];
+    protected $primaryKey = "id";
     protected $table = "pegawai";
     protected $fillable = [
         'nip',
@@ -66,8 +66,9 @@ class Pegawai extends Model
     public function riwayatPekerjaan() {
         return $this->hasMany(Pegawai_riwayat_pekerjaan::class, 'id_pegawai');
     }
-    public function dataStruktural() {
-        return $this->hasMany(Data_struktural::class, 'id_pegawai');
+    public function dataStruktural()
+    {
+        return $this->hasMany(DataStruktural::class, 'id_pegawai');
     }
     public function pegawaiStatus() {
         return $this->hasMany(Pegawai_status::class, 'id_pegawai');
