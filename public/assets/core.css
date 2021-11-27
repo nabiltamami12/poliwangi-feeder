@@ -1,0 +1,146 @@
+.form-group {
+  padding-left: 1.5rem !important;
+  padding-right: 1.3rem !important;
+  margin-top: 16px !important;
+}
+form button {
+  height: 49px;
+}
+
+.page-content .detail_dokumen .custom-btn {
+  background-color: transparent;
+  border: none;
+  outline: none;
+}
+
+/*datatable*/
+.table-responsive{
+  padding-top: 1em;
+}
+.table.dataTable{
+  border-collapse: unset;
+}
+.table.dataTable thead th, table.dataTable thead td{
+  border-bottom: unset;
+}
+.table.dataTable.no-footer{
+  border-bottom: unset;
+}
+.dataTables_wrapper .page-item.active .page-link {
+  border-color: #28A3EB;
+  background-color: #28A3EB;
+}
+.dataTables_wrapper .custom-select {
+  font-weight: 400;
+  font-size: 0.875rem;
+  line-height: 1.21em;
+  color: #041f2f;
+  min-width: 70px;
+  max-width: 70px;
+  height: 30px;
+  border: 1px solid #999999;
+  border-radius: 0.5rem;
+  padding: 0 10px;
+  background-image: url("https://api.iconify.design/bx/bx-chevron-down.svg?color=#041F2F");
+  background-repeat: no-repeat;
+  background-size: 17px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  box-shadow: none;
+}
+.dataTables_wrapper div.dataTables_filter input{
+  border: 1px solid #28a3eb;
+  padding: 0 0.75rem;
+  max-height: 35px;
+}
+.dataTables_wrapper .dataTables_length select.form-control{
+  margin: 0px;
+}
+table tr td .iconify{
+  font-size: 1.5rem;
+  /* color: #28a3eb; */
+  cursor: pointer;
+}
+table tr td .iconify:hover{
+  color: #036bb1;
+}
+
+/*sidebar*/
+.aktif .nav-link-text, .sub-aktif>span{
+  color: #28a3eb !important;
+}
+.page-content hr.mt {
+  margin: 1rem 0;
+}
+.page-content input[type="search"]{
+  border-radius: .5rem;
+}
+.nav-item-dropdown-content {
+  display: none;
+}
+.showsubmenu .nav-item-dropdown-content{
+  display: inherit;
+}
+
+
+/*loading animation*/
+.lds-ellipsis {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+.lds-ellipsis div {
+  position: absolute;
+  top: 33px;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: #fff;
+  animation-timing-function: cubic-bezier(0, 1, 1, 0);
+}
+.lds-ellipsis div:nth-child(1) {
+  left: 8px;
+  animation: lds-ellipsis1 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(2) {
+  left: 8px;
+  animation: lds-ellipsis2 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(3) {
+  left: 32px;
+  animation: lds-ellipsis2 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(4) {
+  left: 56px;
+  animation: lds-ellipsis3 0.6s infinite;
+}
+@keyframes lds-ellipsis1 {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes lds-ellipsis3 {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+  }
+}
+@keyframes lds-ellipsis2 {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(24px, 0);
+  }
+}
+
+.dropdown-menu.show {
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}

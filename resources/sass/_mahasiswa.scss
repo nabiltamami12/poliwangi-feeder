@@ -1,0 +1,123 @@
+.informasi_mahasiswa {
+    background-color: #fff;
+    border-radius: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    p {
+        @include mixintext(400, 1.25rem, 1.21em, $font-black);
+    }
+}
+
+.va_aktif {
+    label {
+        @include mixintext(500, 1rem, 1.21em, #000);
+    }
+    .field_kode {
+        position: relative;
+    }
+    input:read-only {
+        background-color: #fff;
+        @include mixintext(400, 1.5rem, 1.21em, #000);
+        max-height: 50px;
+    }
+    button.salin_kode {
+        &:hover {
+            background-color: rgba(178, 222, 248, 0.2);
+            border-color: $primary;
+            color: $primary;
+        }
+    }
+    .salin_kode {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        border-radius: 0 0.5rem 0.5rem 0;
+        border-left: 1px solid #c4c4c4;
+    }
+}
+
+.rincian_pembayaran {
+    label {
+        @include mixintext(500, 1rem, 1.21em, #000);
+    }
+    input[type="text"] {
+        background-color: rgba(173, 181, 189, 0.2);
+        color: $font-placeholder !important;
+    }
+}
+
+.informasi_pembayaran {
+    margin-left: 0.625rem;
+    ul {
+        list-style: "- ";
+    }
+    li {
+        @include mixintext(400, 0.875rem, 1.5em, $placeholder);
+    }
+    h6 {
+        @include mixintext(600, 0.75rem, 1.5em, #d10429);
+    }
+}
+
+.card_step,
+.card_form {
+    h2 {
+        @include mixintext(600, 1.125rem, 1.22em, $font-black);
+    }
+}
+
+.card_step {
+    position: relative;
+    hr {
+        position: relative;
+        top: 1.5rem;
+        border: none;
+        height: 2px;
+        color: #c4c4c4;
+        background-color: #c4c4c4;
+    }
+    .input-group {
+        .input-group-text {
+            font-size: 1.125rem;
+            color: $font-white;
+            background-color: $placeholder;
+            padding-left: 1.167em;
+            padding-right: 1.167em;
+            border-radius: 8px 0 0 8px;
+            border: 1px solid $placeholder;
+            border-right: 0;
+        }
+        .form-control {
+            @include mixintext(
+                400,
+                0.875rem,
+                1.21em,
+                $font-placeholder !important
+            );
+            background-color: #fff;
+            border: 1px solid $placeholder;
+            border-left: 0;
+            border-radius: 0 0.5rem 0.5rem 0;
+        }
+        &.active {
+            .input-group-text {
+                background-color: #f0f8fe;
+                border: 1px solid $primary;
+                color: $primary;
+                font-weight: 600;
+            }
+            .form-control {
+                border: 1px solid $primary;
+                background-color: $primary;
+                color: $font-white !important;
+            }
+        }
+    }
+}
+
+.tab-body > div {
+    display: none;
+}
+.tab-body > div.active {
+    display: block;
+}

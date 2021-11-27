@@ -1,0 +1,293 @@
+.page-content__admin {
+    h1 {
+        @include mixintext(600, 1.3125rem, 1.22em, $font-black);
+    }
+
+    .form-group.focused {
+        .input-group-prepend {
+            .input-group-text {
+                border-color: $primary;
+            }
+        }
+    }
+
+    .input-group-prepend {
+        .input-group-text {
+            border-color: #c4c4c4;
+            border-radius: 0.5rem 0 0 0.5rem;
+            @include mixintext(500, 0.875rem !important, 1.21em, $font-black);
+            padding-left: 1.5rem;
+        }
+        + input {
+            border-left: 0;
+        }
+    }
+
+    // ===================== CALENDAR =====================
+    .calendar {
+        margin: auto;
+    }
+    .calendar_content,
+    .calendar_weekdays,
+    .calendar_header {
+        position: relative;
+        overflow: hidden;
+    }
+    .calendar_weekdays div,
+    .calendar_content div {
+        width: calc(100% / 7);
+        overflow: hidden;
+        padding: 0.5rem;
+        background-color: transparent;
+        @include mixintext(500, 1.125rem, 1.22em, $font-black);
+    }
+
+    .calendar_header {
+        width: 100%;
+        text-align: center;
+        h2 {
+            @include mixintext(600, 1.3125rem, 1.22em, $font-black);
+        }
+        .switch-month {
+            border: 0;
+            outline: 0;
+            background-color: transparent;
+            .iconify {
+                font-size: 2rem;
+            }
+        }
+    }
+
+    .calendar_content {
+        border: 1px solid rgba(153, 153, 153, 1);
+        div {
+            border: 1px solid rgba(153, 153, 153, 1);
+            float: left;
+            position: relative;
+            z-index: 0;
+            height: 5rem;
+            &.blank {
+                border: 1px solid rgba(153, 153, 153, 1);
+                width: calc(100% / 7);
+                height: 5rem;
+                position: relative;
+            }
+        }
+
+        div.today {
+            color: #fff;
+            &:after {
+                position: absolute;
+                top: 0.3rem;
+                left: 0.3rem;
+                content: "";
+                width: 1.75rem;
+                height: 1.75rem;
+                border-radius: 50%;
+                background: #28a3eb;
+                z-index: -1;
+            }
+        }
+
+        div.libur {
+            color: #f46a6a;
+        }
+    }
+
+    .calendar_weekdays {
+        @include mixintext(600, 1.125rem, 1.21em, $primary);
+        div {
+            display: inline-block;
+        }
+    }
+
+    // ===================== HARI AKTIF ASIDE =====================
+    h2.aside_title {
+        @include mixintext(600, 1.125rem, 1.5em, $font-black);
+    }
+
+    .uploadDokumen {
+        border: 1px solid #c4c4c4;
+        .iconify {
+            font-size: 1.5rem;
+            color: #000;
+        }
+    }
+
+    #custom-btn {
+        background-color: transparent;
+        border: none;
+        outline: none;
+    }
+
+    .nama_dokumen {
+        @include mixintext(400, 1.125rem, 1.22em, $font-black);
+    }
+
+    ::placeholder {
+        @include mixintext(400, 0.875rem, 1.21em, $font-black);
+    }
+
+    .customSelect {
+        position: relative;
+        display: inline-block;
+        width: 100%;
+    }
+
+    .customSelect-wrapper {
+        position: relative;
+        display: inline-block;
+        user-select: none;
+        width: 100%;
+        & select {
+            display: none;
+        }
+    }
+
+    .customSelect-trigger {
+        @include mixintext(500, 0.875rem, 1.21em, #000);
+        padding: 0.5rem 0.75rem;
+        position: relative;
+        display: block;
+        border-radius: 0.25rem;
+        cursor: pointer;
+        border: 1px solid #999;
+        &:after {
+            content: "";
+            background-image: url("https://api.iconify.design/bx/bx-chevron-down.svg?color=%23000");
+            background-repeat: no-repeat;
+            background-position: center;
+            position: absolute;
+            display: block;
+            pointer-events: none;
+            width: 10px;
+            height: 10px;
+            top: 50%;
+            right: 0.75rem;
+            transform: translateY(-50%);
+        }
+    }
+
+    .custom-options {
+        position: absolute;
+        display: block;
+        top: 100%;
+        left: 0;
+        right: 0;
+        border: 1px solid rgba(153, 153, 153, 0.2);
+        box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.15);
+        box-sizing: border-box;
+        background: #fff;
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        border-radius: 0.25rem 0.25rem 0.5rem 0.5rem;
+    }
+
+    .customSelect.opened .custom-options {
+        position: relative;
+        opacity: 1;
+        visibility: visible;
+        pointer-events: all;
+    }
+
+    .custom-option {
+        @include mixintext(400, 0.875rem, 1.21em, #000);
+        position: relative;
+        display: block;
+        padding: 0.5rem;
+        cursor: pointer;
+        &:hover {
+            background: rgba(40, 163, 235, 0.5);
+        }
+        &.selection {
+            background: rgba(40, 163, 235, 0.5);
+        }
+    }
+
+    .selecton {
+        border-color: $primary;
+    }
+
+    // ===================== MODAL =====================
+    .modal {
+        .modal-title {
+            @include mixintext(600, 1.25rem, 1.2em, $warning);
+            background: rgba(241, 180, 76, 0.2);
+            border-radius: 0.5rem;
+            width: 100%;
+            padding: 12px;
+        }
+
+        .modal-body {
+            p {
+                @include mixintext(600, 1rem, 1.21em, $font-black);
+            }
+            h2 {
+                @include mixintext(700, 1.375rem, 1.22em, $font-black);
+            }
+        }
+
+        .modal-footer {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            column-gap: 1.5rem;
+            .btn {
+                font-weight: 600 !important;
+                border-radius: 0.25rem;
+            }
+        }
+    }
+
+    .form_rangenilai {
+        label {
+            margin-bottom: 0;
+            margin-right: 1.5rem;
+            margin-left: 0.25rem;
+        }
+        .grade_nilai {
+            @include mixintext(600, 1.125rem, 1.22em, $font-white);
+            min-width: 3rem;
+            max-width: 3.125rem;
+            height: 100%;
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1.5rem;
+            & ~ input {
+                margin-right: 1.25rem;
+            }
+        }
+    }
+
+    .jadwal_sehari {
+        .jumlah_sesi {
+            select {
+                width: 55px;
+                background-position: calc(100% - 8px), calc(100% - 24px);
+                padding: 0.5rem;
+            }
+        }
+    }
+
+    .jalurPMB_pendaftaran {
+        p {
+            @include mixintext(600, 0.875rem, 1.22em, $font-black);
+            margin-bottom: 0;
+        }
+        .date-input {
+            padding-left: 1rem;
+        }
+        .biaya_pendaftaran {
+            position: relative;
+            &::after {
+                content: "Rp.";
+                @include mixintext(500, 0.875rem, 1.22em, $font-black);
+                position: absolute;
+                left: 1.5rem;
+                bottom: calc((1.5em + 1.25rem + 2px) / 3);
+            }
+        }
+    }
+}
