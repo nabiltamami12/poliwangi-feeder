@@ -14,9 +14,11 @@ class FeederDosenAjarController extends Controller
      */
     public function index()
     {
-        return view('admin.feeder.feeder-jurusan', [
+        $data = DB::table('dosens')
+        ->get();
+        return view('admin.feeder.feeder-data_dosen_ajar', [
                 "title" => "admin-feeder",
-                // "data" => $data
+                 "data" => $data
             ]);
     }
 

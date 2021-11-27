@@ -4,7 +4,7 @@ namespace App\Http\Controllers\feeder;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use DB;
 class FeederDosenController extends Controller
 {
     /**
@@ -14,10 +14,12 @@ class FeederDosenController extends Controller
      */
     public function index()
     {
-         return view('admin.feeder.feeder-jurusan', [
+        $data = DB::table('dosens')
+        ->get();
+         return view('admin.feeder.feeder-data_dosen', [
                 "title" => "admin-feeder",
-                // "data" => $data
-            ]);s
+                "data" => $data
+            ]);
     }
 
     /**
@@ -38,7 +40,60 @@ class FeederDosenController extends Controller
      */
     public function store(Request $request)
     {
-        //
+           
+        
+
+$data = new \App\Services\FeederDiktiApiService('GetListDosen');
+$data->runWS();
+$response = $data->runWS();
+  
+
+
+foreach ($response['data'] as $key => $value) {
+
+if (DB::table('dosens')->where('id_dosen_feeder','=', $value['id_dosen'])->exists()) {
+    DB::table('dosens')
+    ->where('id_dosen_feeder', $value['id_dosen'])
+    ->update([
+            'nip' => $value['nip'],
+            'nidn' => $value['nidn'],
+            'nama_dosen' => $value['nama_dosen'],
+            'kelamin' => $value['jenis_kelamin'],
+            'agama' => $value['nama_agama'],
+            'tmpt_lahir' => '',
+            'tgl_lahir' => 'tanggal_lahir',
+            'id_status_dosen' => 'nama_status_aktif',
+            'email' => '',
+            'telp' => '',
+            'alamat' => '',
+            'foto_dosen' => '',
+            'id_dosen_feeder' => $value['id_dosen'],
+ ]);
+}
+
+    else{
+
+    DB::table('dosens')
+    ->insert([
+            'nip' => $value['nip'],
+            'nidn' => $value['nidn'],
+            'nama_dosen' => $value['nama_dosen'],
+            'kelamin' => $value['jenis_kelamin'],
+            'agama' => $value['nama_agama'],
+            'tmpt_lahir' => '',
+            'tgl_lahir' => 'tanggal_lahir',
+            'id_status_dosen' => 'nama_status_aktif',
+            'email' => '',
+            'telp' => '',
+            'alamat' => '',
+            'foto_dosen' => '',
+            'id_dosen_feeder' => $value['id_dosen'],
+ ]);
+
+    }
+
+}
+
     }
 
     /**

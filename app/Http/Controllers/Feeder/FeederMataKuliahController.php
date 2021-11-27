@@ -76,7 +76,7 @@ if (DB::table('politeknik_jurusan')->where('kode_jurusan','=', $value['kode_prog
 
     }
 
-}s
+}
     }
 
     /**

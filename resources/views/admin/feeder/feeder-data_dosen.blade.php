@@ -20,10 +20,10 @@
         <div class="card-header p-0">
           <div class="row align-items-center">
             <div class="col">
-              <h2 class="mb-0">Feeder Data Jurusan</h2>
+              <h2 class="mb-0">Feeder Data Dosen</h2>
             </div>
             <div class="col text-right">
-              <form action="{{ url('admin/feeder/feeder-jurusan') }}" method="post">
+              <form action="{{ url('admin/feeder/feeder-data_dosen') }}" method="post">
                 {!! csrf_field() !!}
                 <button type="submit" class="btn btn-primary"><i class="iconify-inline mr-1" data-icon='bx:bx-download'></i> Download Feeder</button>
               </form>
@@ -35,12 +35,13 @@
           <table id="table" class="table align-items-center table-flush table-borderless table-hover">
             <thead class="table-header" style="text-align:center">
               <tr>
-                <th scope="col">NO</th>
-                <th scope="col">KODE</th>
-                <th scope="col">NAMA JURUSAN</th>
-                <th scope="col">STATUS</th>
-                <th scope="col">PROGRAM</th>
-                <th scope="col">ID JURUSAN FEEDER</th>
+           <th style="text-align:center">No</th>
+            <th style="text-align:center">NIP</th>
+            <th style="text-align:center">NIDN</th>
+            <th style="text-align:center">Nama Dosen</th>
+            <th style="text-align:center">Telp</th>
+            <th style="text-align:center">Status</th>
+            <th style="text-align:center">Status</th>
                 <!-- <th scope="col">AKSI</th> -->
               </tr>
             </thead>
@@ -49,12 +50,27 @@
 
     @forelse($data as $key => $value)
 
-            <td  style="text-align:center">{{ $key + 1 }}</td>
-            <td  style="text-align:center">{{ $value->kode_jurusan }}</td>
-            <td  style="text-align:center">{{ $value->jurusan }}</td>
-            <td  style="text-align:center">{{ $value->akreditasi }}</td>
-            <td  style="text-align:center">{{ $value->jenjang }}</td>
-            <td  style="text-align:center">{{ $value->id_prodi_feeder }}</td>
+      
+            <td >{{ $key + 1 }}</td>
+            <td  style="text-align:center">{{ $value->nip }}</td>
+            <td  style="text-align:center">{{ $value->nidn }}</td>
+            <td  style="text-align:center">{{ $value->nama_dosen }}</td>
+            <td  style="text-align:center"> {{ $value->telp }} </td>
+            @if($value->id_status_dosen == 0)
+            <td  style="text-align:center"> Aktif </td>
+            @else
+            <td  style="text-align:center"> Tidak Aktif </td>
+            @endif
+        
+            @if($value->id_dosen_feeder != null)
+
+            <td  style="text-align:center">SUDAH ADA</td>
+
+            @else
+
+            <td  style="text-align:center">BELUM ADA</td>
+
+            @endif
 
 
 

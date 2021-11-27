@@ -23,7 +23,7 @@
               <h2 class="mb-0">Feeder Data Jurusan</h2>
             </div>
             <div class="col text-right">
-              <form action="{{ url('admin/feeder/feeder-jurusan') }}" method="post">
+              <form action="{{ url('admin/feeder/feeder-data_dosen_ajar') }}" method="post">
                 {!! csrf_field() !!}
                 <button type="submit" class="btn btn-primary"><i class="iconify-inline mr-1" data-icon='bx:bx-download'></i> Download Feeder</button>
               </form>
