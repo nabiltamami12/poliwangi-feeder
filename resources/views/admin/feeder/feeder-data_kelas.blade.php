@@ -20,10 +20,10 @@
         <div class="card-header p-0">
           <div class="row align-items-center">
             <div class="col">
-              <h2 class="mb-0">Feeder Data Jurusan</h2>
+              <h2 class="mb-0">Feeder Data Kelas</h2>
             </div>
             <div class="col text-right">
-              <form action="{{ url('admin/feeder/feeder-jurusan') }}" method="post">
+              <form action="{{ url('admin/feeder/feeder-data_kelas') }}" method="post">
                 {!! csrf_field() !!}
                 <button type="submit" class="btn btn-primary"><i class="iconify-inline mr-1" data-icon='bx:bx-download'></i> Download Feeder</button>
               </form>
@@ -35,33 +35,41 @@
           <table id="table" class="table align-items-center table-flush table-borderless table-hover">
             <thead class="table-header" style="text-align:center">
               <tr>
-                <th scope="col">NO</th>
-                <th scope="col">KODE</th>
-                <th scope="col">NAMA JURUSAN</th>
-                <th scope="col">STATUS</th>
-                <th scope="col">PROGRAM</th>
-                <th scope="col">ID JURUSAN FEEDER</th>
+             <th style="text-align:center">No</th>
+            <th style="text-align:center">Nama MK</th>
+            <th style="text-align:center">SKS</th>
+            <th style="text-align:center">KLS</th>
+            <th style="text-align:center">Jurusan</th>
+            <th style="text-align:center">THN Ajaran</th>
+            <th style="text-align:center">Status</th>
                 <!-- <th scope="col">AKSI</th> -->
               </tr>
             </thead>
             <tbody>
 <tr>
+  @forelse($data as $key => $value)
+  <td >{{ $key + 1 }}</td>
+            <td  >{{ $value->nama_mk }}</td>
+            <td  >{{ $value->sks_mata_kuliah }}</td>
+            <td  >{{ $value->nama_kelas }}</td>
+            <td  > {{$value->nama_jurusan}} </td>
+            <td  > {{$value->nama_semester}} </td>
+            @if($value->id_kelas_feeder != null)
 
-    @forelse($data as $key => $value)
+            <td  style="text-align:center">SUDAH ADA</td>
 
-            <td  style="text-align:center">{{ $key + 1 }}</td>
-            <td  style="text-align:center">{{ $value->kode_jurusan }}</td>
-            <td  style="text-align:center">{{ $value->jurusan }}</td>
-            <td  style="text-align:center">{{ $value->akreditasi }}</td>
-            <td  style="text-align:center">{{ $value->jenjang }}</td>
-            <td  style="text-align:center">{{ $value->id_prodi_feeder }}</td>
+            @else
 
+            <td  style="text-align:center">BELUM ADA</td>
+
+            @endif
 
 
 </tr>
             @empty
             <td> - </td>
             @endforelse
+
             </tbody>
           </table>
         </div>

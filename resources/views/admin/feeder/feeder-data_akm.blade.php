@@ -23,7 +23,7 @@
               <h2 class="mb-0">Feeder Data Jurusan</h2>
             </div>
             <div class="col text-right">
-              <form action="{{ url('admin/feeder/feeder-jurusan') }}" method="post">
+              <form action="{{ url('admin/feeder/feeder-data_akm') }}" method="post">
                 {!! csrf_field() !!}
                 <button type="submit" class="btn btn-primary"><i class="iconify-inline mr-1" data-icon='bx:bx-download'></i> Download Feeder</button>
               </form>
@@ -49,12 +49,32 @@
 
     @forelse($data as $key => $value)
 
-            <td  style="text-align:center">{{ $key + 1 }}</td>
-            <td  style="text-align:center">{{ $value->kode_jurusan }}</td>
-            <td  style="text-align:center">{{ $value->jurusan }}</td>
-            <td  style="text-align:center">{{ $value->akreditasi }}</td>
-            <td  style="text-align:center">{{ $value->jenjang }}</td>
-            <td  style="text-align:center">{{ $value->id_prodi_feeder }}</td>
+      
+            <td >{{ $key + 1 }}</td>
+            <td  style="text-align:center">{{ $value->semester }}</td>
+            <td  style="text-align:center">{{ $value->nim }}</td>
+            <td  style="text-align:center">{{ $value->nama }}</td>
+            <td  style="text-align:center"> {{ $value->ips }} </td>
+            <td  style="text-align:center"> {{ $value->ipk }} </td>
+            <td  style="text-align:center"> {{ $value->sks_smt }} </td>
+            <td  style="text-align:center"> {{ $value->sks_total }} </td>
+            <td  style="text-align:center"> {{ $value->kode_jurusan }} </td>
+            <td  style="text-align:center"> {{ $value->status_kuliah }} </td>
+            @if($value->id_registrasi_mahasiswa == 0)
+            <td  style="text-align:center"> Aktif </td>
+            @else
+            <td  style="text-align:center"> Tidak Aktif </td>
+            @endif
+        
+            @if($value->id_registrasi_mahasiswa != null)
+
+            <td  style="text-align:center">SUDAH ADA</td>
+
+            @else
+
+            <td  style="text-align:center">BELUM ADA</td>
+
+            @endif
 
 
 
@@ -62,7 +82,7 @@
             @empty
             <td> - </td>
             @endforelse
-            </tbody>
+       </tbody>
           </table>
         </div>
       </div>

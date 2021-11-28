@@ -23,10 +23,17 @@
               <h2 class="mb-0">Feeder Data Mata Kuliah</h2>
             </div>
             <div class="col text-right">
-              <form action="{{ url('admin/feeder/feeder-jurusan') }}" method="post">
+       <form action="{{ url('admin/feeder/feeder-data_mata_kuliah') }}" method="post">
                 {!! csrf_field() !!}
-                <button type="submit" class="btn btn-primary"><i class="iconify-inline mr-1" data-icon='bx:bx-download'></i> Download Feeder</button>
+                <button  style="margin-right: -18em;" type="submit" class="btn btn-primary"><i class="iconify-inline mr-1" data-icon='bx:bx-download'></i> Download Feeder</button>
               </form>
+            </div>
+             <div class="col text-right">
+              <form action="{{ url('admin/feeder/upload_feeder-data_mata_kuliah') }}" method="post">
+                {!! csrf_field() !!}
+                <button type="submit" class="btn btn-primary"><i class="iconify-inline mr-1" data-icon='bx:bx-download'></i> Upload Feeder</button>
+              </form>
+              
             </div>
           </div>
         </div>
@@ -49,22 +56,45 @@
 
     @forelse($data as $key => $value)
 
-            <td  style="text-align:center">{{ $key + 1 }}</td>
-            <td  style="text-align:center">{{ $value->kode }}</td>
-            <td  style="text-align:center">{{ $value->matakuliah }}</td>
-            <td  style="text-align:center">{{ $value->bobot }} sks</td>
-            <td  style="text-align:center">{{ $value->jenis_mk }}</td>
-            <td  style="text-align:center">{{ $value->nm_jrsn }}</td>
+          <td >{{ $key + 1 }}</td>
+            <td  style="text-align:center">{{ $value->kode_mk }}</td>
+            <td  style="text-align:center">{{ $value->nama_mk }}</td>
+            <td  style="text-align:center">{{ $value->bobot_mk }}</td>
 
-            @if($value->id_feeder == null)
 
-            <td  style="text-align:center">BELUM ADA</td>
+            @if($value->jenis_mata_kuliah == "A")
+            <td  style="text-align:center">WAJIB PROGRAM STUDI</td>
+
+            @elseif($value->jenis_mata_kuliah == "B")
+
+            <td  style="text-align:center">PILIHAN</td>
+
+            @elseif($value->jenis_mata_kuliah == "C")
+
+            <td  style="text-align:center">PEMINATAN</td>
+
+            @elseif($value->jenis_mata_kuliah == "S")
+
+            <td  style="text-align:center">TUGAS AKHIR/SKRIPSI/TESIS/DISERTASI</td>
 
             @else
 
-            <td  style="text-align:center">SUDAH ADA</td>
+            <td  style="text-align:center">WAJIB NASIONAL</td>
 
             @endif
+
+            <td  style="text-align:center">{{ $value->prodi_mk }}</td>
+        
+            @if($value->id_mk != null)
+
+            <td  style="text-align:center">SUDAH ADA</td>
+
+            @else
+
+            <td  style="text-align:center">BELUM ADA</td>
+
+            @endif
+
 
 </tr>
             @empty

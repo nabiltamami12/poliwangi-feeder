@@ -5,11 +5,10 @@ namespace App\Models\feeder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class akm extends Model
+class feeder_akm extends Model
 {
     use HasFactory;
-      protected $fillable = [
-            'semester',
+        'semester',
             'nim',
             'nama',
             'ips',
@@ -21,5 +20,4 @@ class akm extends Model
             'status_error',
             'valid',
             'keterangan',
-        ];
 }

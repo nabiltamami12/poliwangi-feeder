@@ -14,7 +14,7 @@ class FeederKRSController extends Controller
      */
     public function index()
     {
-         return view('admin.feeder.feeder-jurusan', [
+         return view('admin.feeder.feeder-data_krs', [
                 "title" => "admin-feeder",
                 // "data" => $data
             ]);
@@ -38,7 +38,12 @@ class FeederKRSController extends Controller
      */
     public function store(Request $request)
     {
-        //
+            
+$data = new \App\Services\FeederDiktiApiService('GetKRSMahasiswa');
+$data->runWS();
+$response = $data->runWS();
+
+dd($response['data'][0]);
     }
 
     /**

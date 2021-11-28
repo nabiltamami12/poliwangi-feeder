@@ -4,7 +4,7 @@ namespace App\Http\Controllers\feeder;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use DB;
 class FeederKelasController extends Controller
 {
     /**
@@ -14,9 +14,11 @@ class FeederKelasController extends Controller
      */
     public function index()
     {
-         return view('admin.feeder.feeder-jurusan', [
+$data =  DB::table('feeder_kelas')->get();
+
+         return view('admin.feeder.feeder-data_kelas', [
                 "title" => "admin-feeder",
-                // "data" => $data
+                'data' => $data,
             ]);
     }
 
@@ -37,8 +39,71 @@ class FeederKelasController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
+    {  set_time_limit(600);
+        
+        $data = new \App\Services\FeederDiktiApiService('GetDetailKelasKuliah');
+        $data->runWS();
+        $response = $data->runWS();
+// dd($response['data'][0]);
+foreach ($response['data'] as $key => $value) {
+if (DB::table('feeder_kelas')->where('id_kelas_feeder','=', $value['id_kelas_kuliah'])->exists()) {
+    DB::table('feeder_kelas')
+    ->where('id_kelas_feeder', $value['id_kelas_kuliah'])
+    ->update([
+            'id_semester' => $value['id_semester'],
+            'nama_semester' => $value['nama_semester'],
+            'kode_mk' => $value['kode_mata_kuliah'],
+            'nama_mk' => $value['nama_mata_kuliah'],
+            'nama_kelas' => $value['nama_kelas_kuliah'],
+            'kode_jurusan' => $value['id_prodi'],
+            'nama_jurusan' => $value['nama_program_studi'],
+            'id_kelas_feeder' => $value['id_kelas_kuliah'],
+            'kode_ruang' => '1',
+            'jam' => '-',
+            'hari' => '-',
+            'id_master_kurikulum' => '0',
+            'status_error' => '0',
+            'keterangan' => '-',
+            'bahasan_case' => '-',
+            'tgl_mulai_kelas' => '-',
+            'tgl_selesai_kelas' => '-',
+            'keterangan_upload_kelas' => '',
+            'sks_mata_kuliah' => $value['sks_mata_kuliah'],
+  
+
+ ]);
+}
+
+    else{
+
+    DB::table('feeder_kelas')
+    ->insert([
+            'id_semester' => $value['id_semester'],
+            'nama_semester' => $value['nama_semester'],
+            'kode_mk' => $value['kode_mata_kuliah'],
+            'nama_mk' => $value['nama_mata_kuliah'],
+            'nama_kelas' => $value['nama_kelas_kuliah'],
+            'kode_jurusan' => $value['id_prodi'],
+            'nama_jurusan' => $value['nama_program_studi'],
+            'id_kelas_feeder' => $value['id_kelas_kuliah'],
+            'kode_ruang' => '1',
+            'jam' => '-',
+            'hari' => '-',
+            'id_master_kurikulum' => '0',
+            'status_error' => '0',
+            'keterangan' => '-',
+            'bahasan_case' => '-',
+            'tgl_mulai_kelas' => '-',
+            'tgl_selesai_kelas' => '-',
+            'keterangan_upload_kelas' => '',
+            'sks_mata_kuliah' => $value['sks_mata_kuliah'],
+ ]);
+
+    }
+
+}
+
+      
     }
 
     /**

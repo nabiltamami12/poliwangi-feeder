@@ -20,7 +20,7 @@
         <div class="card-header p-0">
           <div class="row align-items-center">
             <div class="col">
-              <h2 class="mb-0">Feeder Data Jurusan</h2>
+              <h2 class="mb-0">Feeder Data Dosen Ajar</h2>
             </div>
             <div class="col text-right">
               <form action="{{ url('admin/feeder/feeder-data_dosen_ajar') }}" method="post">
@@ -35,12 +35,15 @@
           <table id="table" class="table align-items-center table-flush table-borderless table-hover">
             <thead class="table-header" style="text-align:center">
               <tr>
-                <th scope="col">NO</th>
-                <th scope="col">KODE</th>
-                <th scope="col">NAMA JURUSAN</th>
-                <th scope="col">STATUS</th>
-                <th scope="col">PROGRAM</th>
-                <th scope="col">ID JURUSAN FEEDER</th>
+        <th style="text-align:center">No</th>
+            <th style="text-align:center">Nama MK</th>
+            <th style="text-align:center">SKS MK</th>
+            <th style="text-align:center">Kelas</th>
+            <th style="text-align:center">Jurusan</th>
+            <th style="text-align:center">THN Ajar</th>
+            <th style="text-align:center">Nama Dosen</th>
+            <th style="text-align:center">SKS Dosen</th>
+            <th style="text-align:center">Status</th>
                 <!-- <th scope="col">AKSI</th> -->
               </tr>
             </thead>
@@ -50,11 +53,14 @@
     @forelse($data as $key => $value)
 
             <td  style="text-align:center">{{ $key + 1 }}</td>
-            <td  style="text-align:center">{{ $value->kode_jurusan }}</td>
-            <td  style="text-align:center">{{ $value->jurusan }}</td>
-            <td  style="text-align:center">{{ $value->akreditasi }}</td>
-            <td  style="text-align:center">{{ $value->jenjang }}</td>
-            <td  style="text-align:center">{{ $value->id_prodi_feeder }}</td>
+            <td  style="text-align:center">{{ $value->nama_mk }}</td>
+            <td  style="text-align:center">{{ $value->sks_mata_kuliah }}</td>
+            <td  style="text-align:center">{{ $value->nama_kelas }}</td>
+            <td  style="text-align:center">{{ $value->nama_jurusan }}</td>
+            <td  style="text-align:center"> {{$value->nama_semester}} </td>
+            <td  style="text-align:center">{{ $value->nama_dosen }}</td>
+            <td  style="text-align:center">{{ $value->sks_ajar }}</td>      
+            <td> SUDAH UPLOAD </td>
 
 
 

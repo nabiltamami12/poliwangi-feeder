@@ -5,8 +5,10 @@ namespace App\Http\Controllers\feeder;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use DB;
 class FeederDosenAjarController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +16,9 @@ class FeederDosenAjarController extends Controller
      */
     public function index()
     {
-        $data = DB::table('dosens')
+        $data = DB::table('dosen_ajars')
+        ->join('politeknik_jurusan', 'politeknik_jurusan.id_prodi_feeder', '=', 'dosen_ajars.kode_jurusan')
+           ->join('feeder_kelas','feeder_kelas.id_kelas_feeder' ,'=', 'dosen_ajars.id_kelas')
         ->get();
         return view('admin.feeder.feeder-data_dosen_ajar', [
                 "title" => "admin-feeder",
@@ -40,7 +44,74 @@ class FeederDosenAjarController extends Controller
      */
     public function store(Request $request)
     {
-        //
+  $data = new \App\Services\FeederDiktiApiService('GetDosenPengajarKelasKuliah');
+$data->runWS();
+$response = $data->runWS();
+
+        set_time_limit(100);
+ 
+// dd($response['data']);
+
+// $value_kelas =  DB::table('feeder_kelas')->where('id_kelas_feeder', $value['id_kelas_kuliah'])->first();
+
+        
+         if ( DB::table('dosen_ajars')->get()->count() >= 1 ){
+
+  foreach ($response['data'] as $key => $value) {
+
+         DB::table('dosen_ajars')
+    ->where('id_aktifitas_mengajar', $value['id_aktivitas_mengajar'])
+    ->where('id_kelas', $value['id_kelas_kuliah'])
+    ->where('semester', $value['id_semester'])
+    ->update([
+
+            'semester' => $value['id_semester'],
+            'nidn' => $value['nidn'],
+            'nama_dosen' => $value['nama_dosen'],
+            // 'kode_mk' => $value_kelas->kode_mk,
+            // 'nama_mk' => $value_kelas->nama_mk,
+            'id_kelas' => $value['id_kelas_kuliah'],
+            'rencana_tatap_muka' => $value['rencana_minggu_pertemuan'],
+            'tatap_muka_real' => $value['realisasi_minggu_pertemuan'],
+            'kode_jurusan' => $value['id_prodi'],
+            'sks_ajar' => $value['sks_substansi_total'],
+            'status_error' => '1',
+            'keterangan' => '0',
+            'id_aktifitas_mengajar' => $value['id_aktivitas_mengajar'],
+          ]);
+
+
+        
+      }
+    }
+    else{
+ 
+
+  foreach ($response['data'] as $key => $value) {
+
+       DB::table('dosen_ajars')
+    ->where('id_kelas', $value['id_kelas_kuliah'])
+    ->where('semester', $value['id_semester'])
+    ->insert([
+            'semester' => $value['id_semester'],
+            'nidn' => $value['nidn'],
+            'nama_dosen' => $value['nama_dosen'],
+            // 'kode_mk' => $value_kelas->kode_mk,
+            // 'nama_mk' => $value_kelas->nama_mk,
+            'id_kelas' => $value['id_kelas_kuliah'],
+            'rencana_tatap_muka' => $value['rencana_minggu_pertemuan'],
+            'tatap_muka_real' => $value['realisasi_minggu_pertemuan'],
+            'kode_jurusan' => $value['id_prodi'],
+            'sks_ajar' => $value['sks_substansi_total'],
+            'status_error' => '1',
+            'keterangan' => '0',
+            'id_aktifitas_mengajar' => $value['id_aktivitas_mengajar'],
+          ]);
+ 
+      }
+    }
+
+        
     }
 
     /**
@@ -51,7 +122,8 @@ class FeederDosenAjarController extends Controller
      */
     public function show($id)
     {
-        //
+
+
     }
 
     /**

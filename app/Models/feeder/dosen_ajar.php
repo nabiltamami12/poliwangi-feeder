@@ -14,7 +14,7 @@ class dosen_ajar extends Model
             'nama_dosen',
             'kode_mk',
             'nama_mk',
-            'nama_kelas',
+            'id_kelas',
             'rencana_tatap_muka',
             'tatap_muka_real',
             'kode_jurusan',

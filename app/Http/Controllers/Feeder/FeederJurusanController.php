@@ -42,19 +42,7 @@ class FeederJurusanController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-      public function getFeederJurusan(Request $request)
-    {
- 
-       $data = DB::select('select * from politeknik_jurusan where id_politeknik = 1');
-        return DataTables::of($data)
-            ->addColumn('Aksi', function($data) {
-                return '<button type="button" class="btn btn-success btn-sm" id="getEditData" data-id="'.$data->id.'">Edit</button>
-                <button type="button" class="btn btn-secondary btn-sm" id="getDetailData" data-id="'.$data->id.'">Detail</button>
-                    <button type="button" data-id="'.$data->id.'" onclick="delete_btn()" class="btn btn-danger btn-sm" id="getDeleteId">Delete</button>';
-            })
-            ->rawColumns(['Aksi'])
-            ->make(true);
-    }
+    
 
     public function store(Request $request)
     {

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAkmsTable extends Migration
+class CreateFeederAkmsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class CreateAkmsTable extends Migration
      */
     public function up()
     {
-        Schema::create('akms', function (Blueprint $table) {
+        Schema::create('feeder_akms', function (Blueprint $table) {
             $table->id();
-              $table->string('semester')->nullable();
+             $table->string('id_registrasi_mahasiswa')->nullable();
+             $table->string('semester')->nullable();
             $table->string('nim')->nullable();
             $table->string('nama')->nullable();
             $table->float('ips')->nullable();
@@ -38,6 +39,6 @@ class CreateAkmsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('akms');
+        Schema::dropIfExists('feeder_akms');
     }
 }

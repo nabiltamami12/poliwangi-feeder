@@ -25,8 +25,16 @@
             <div class="col text-right">
               <form action="{{ url('admin/feeder/feeder-jurusan') }}" method="post">
                 {!! csrf_field() !!}
-                <button type="submit" class="btn btn-primary"><i class="iconify-inline mr-1" data-icon='bx:bx-download'></i> Download Feeder</button>
+                <button style="margin-right: -20em;" type="submit" class="btn btn-primary"><i class="iconify-inline mr-1" data-icon='bx:bx-download'></i> Download Feeder</button>
               </form>
+              
+            </div>
+                <div class="col text-right">
+              <form action="{{ url('admin/feeder/feeder-jurusan-upload') }}" method="post">
+                {!! csrf_field() !!}
+                <button type="submit" class="btn btn-primary"><i class="iconify-inline mr-1" data-icon='bx:bx-download'></i> Upload Feeder</button>
+              </form>
+              
             </div>
           </div>
         </div>

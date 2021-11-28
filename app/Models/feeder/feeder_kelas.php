@@ -5,10 +5,10 @@ namespace App\Models\feeder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class kelas extends Model
+class feeder_kelas extends Model
 {
     use HasFactory;
-       protected $fillable = [
+      protected $fillable = [
             'id_semester',
             'kode_mk',
             'nama_mk',
@@ -27,5 +27,5 @@ class kelas extends Model
             'sks_mata_kuliah',
             'keterangan_upload_kelas',
             
-        ];
+        ];s
 }

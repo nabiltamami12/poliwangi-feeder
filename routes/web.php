@@ -161,12 +161,14 @@ Route::get('/pmbgenerateva', function () {
         //Feeder Jurusan
         Route::resource('feeder-jurusan', FeederJurusanController::class);
         Route::get('/getFeederJurusan', [FeederJurusanController::class, 'getFeederJurusan'])->name('get-feeder-jurusan');
+        Route::get('/UploadFeederJurusan', [FeederJurusanController::class, 'UploadFeeder'])->name('feeder-jurusan-upload');
         //Feeder Skala Nilai
         Route::resource('feeder-skala_nilai', FeederSkalaNilaiController::class);
         Route::get('/getFeederSkalaNilai', [FeederSkalaNilaiController::class, 'getFeederSkalaNilai'])->name('get-skala_nilai');
         //Feeder Mata Kuliah
         Route::resource('feeder-data_mata_kuliah', FeederMataKuliahController::class);
         Route::get('/getFeederDataMataKuliah', [FeederMataKuliahController::class, 'getFeederDataMataKuliah'])->name('get-feeder-data_mata_kuliah');
+        Route::post('upload_feeder-data_mata_kuliah', [FeederMataKuliahController::class, 'UploadFeeder'])->name('feeder-mata_kuliah-upload');
         //Feeder Kurikulum
         Route::resource('feeder-data_kurikulum', FeederKurikulumController::class);
         Route::get('/getFeederDataKurikulum', [FeederKurikulumController::class, 'getFeederDataKurikulum'])->name('get-feeder-data_kuriulum');

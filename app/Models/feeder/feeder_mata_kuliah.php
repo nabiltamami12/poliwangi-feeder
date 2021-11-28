@@ -5,10 +5,10 @@ namespace App\Models\feeder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class matakuliah extends Model
+class feeder_mata_kuliah extends Model
 {
     use HasFactory;
-      protected $fillable = [
+     protected $fillable = [
        'nama_mk',
           'jenis_mata_kuliah',
           'bobot_mk',

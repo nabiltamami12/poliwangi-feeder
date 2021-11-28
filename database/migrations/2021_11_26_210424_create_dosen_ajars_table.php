@@ -18,9 +18,9 @@ class CreateDosenAjarsTable extends Migration
                 $table->string('semester')->nullable();
             $table->string('nidn')->nullable();
             $table->string('nama_dosen')->nullable();
-            $table->string('kode_mk')->nullable();
-            $table->string('nama_mk')->nullable();
-            $table->string('nama_kelas')->nullable();
+            // $table->string('kode_mk')->nullable();
+            // $table->string('nama_mk')->nullable();
+            $table->string('id_kelas')->nullable();
             $table->integer('rencana_tatap_muka')->nullable();
             $table->integer('tatap_muka_real')->nullable();
             $table->string('kode_jurusan')->nullable();

@@ -14,7 +14,7 @@ class FeederNilaiController extends Controller
      */
     public function index()
     {
-       return view('admin.feeder.feeder-jurusan', [
+       return view('admin.feeder.feeder-data_nilai', [
                 "title" => "admin-feeder",
                 // "data" => $data
             ]);
@@ -38,7 +38,43 @@ class FeederNilaiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+$data = new \App\Services\FeederDiktiApiService('GetDetailNilaiPerkuliahanKelas');
+$data->runWS();
+$response = $data->runWS();
+
+dd($response['data'][0]);
+
+foreach ($response['data'] as $key => $value) {
+
+// $kd_program_studi = $value->kode_program_studi;
+// dd($value['kode_program_studi']);
+if (DB::table('politeknik_jurusan')->where('kode_jurusan','=', $value['kode_program_studi'])->exists()) {
+    DB::table('politeknik_jurusan')
+    ->where('kode_jurusan', $value['kode_program_studi'])
+    ->update([
+    'jenjang' => $value['nama_jenjang_pendidikan'],
+     'jurusan' => $value['nama_program_studi'],
+     'akreditasi' => $value['status'],
+     'id_prodi_feeder' => $value['id_prodi'],
+ ]);
+}
+
+    else{
+
+    DB::table('politeknik_jurusan')
+    ->insert([
+    'kode_jurusan'=> $value['kode_program_studi'],
+    'jenjang' => $value['nama_jenjang_pendidikan'],
+     'jurusan' => $value['nama_program_studi'],
+     'akreditasi' => $value['status'],
+     'id_prodi_feeder' => $value['id_prodi'],
+     'id_politeknik' => "1",
+ ]);
+
+    }
+
+}
     }
 
     /**

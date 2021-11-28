@@ -23,7 +23,7 @@
               <h2 class="mb-0">Feeder Data Jurusan</h2>
             </div>
             <div class="col text-right">
-              <form action="{{ url('admin/feeder/feeder-jurusan') }}" method="post">
+              <form action="{{ url('admin/feeder/feeder-data_nilai') }}" method="post">
                 {!! csrf_field() !!}
                 <button type="submit" class="btn btn-primary"><i class="iconify-inline mr-1" data-icon='bx:bx-download'></i> Download Feeder</button>
               </form>
@@ -47,21 +47,7 @@
             <tbody>
 <tr>
 
-    @forelse($data as $key => $value)
-
-            <td  style="text-align:center">{{ $key + 1 }}</td>
-            <td  style="text-align:center">{{ $value->kode_jurusan }}</td>
-            <td  style="text-align:center">{{ $value->jurusan }}</td>
-            <td  style="text-align:center">{{ $value->akreditasi }}</td>
-            <td  style="text-align:center">{{ $value->jenjang }}</td>
-            <td  style="text-align:center">{{ $value->id_prodi_feeder }}</td>
-
-
-
-</tr>
-            @empty
-            <td> - </td>
-            @endforelse
+  </tr>
             </tbody>
           </table>
         </div>
