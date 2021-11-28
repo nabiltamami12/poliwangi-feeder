@@ -137,17 +137,17 @@
           <div class="form-row">
             <div class="form-group col-md-6">
               <label for="">Tmt Struktural</label>
-              <input type="text" class="form-control" name="tmt_struktural" id="tmtStruktural" placeholder="Tmt Struktural" required>
+              <input type="date" class="form-control" name="tmt_struktural" id="tmtStruktural" placeholder="Tmt Struktural" required>
             </div>
             <div class="form-group col-md-6">
               <label for="">Tmt Kerja</label>
-              <input type="text" class="form-control" name="tmt_kerja" id="tmtKerja" placeholder="Tmt Kerja" required>
+              <input type="date" class="form-control" name="tmt_kerja" id="tmtKerja" placeholder="Tmt Kerja" required>
             </div>
           </div>
           <div class="form-row">
             <div class="form-group col-md-6">
               <label for="">Tmt Kontrak</label>
-              <input type="text" class="form-control" name="tmt_kontrak" id="tmtKontrak" placeholder="Tmt Kontrak" required>
+              <input type="date" class="form-control" name="tmt_kontrak" id="tmtKontrak" placeholder="Tmt Kontrak" required>
             </div>
             <div class="form-group col-md-6">
               <label for="">Status</label>

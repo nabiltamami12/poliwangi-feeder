@@ -108,9 +108,12 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="form-control-label" for="jurusan">Jurusan</label>
-                                <input type="text" class="form-control" id="jurusan" name="jurusan"
-                                    placeholder="Masukan Jurusan">
+                                    <label class="form-control-label" for="jurusan">Jurusan</label>
+                                    <select class="form-control" id="jurusan" name="jurusan">
+                                        @foreach ($jurusan as $item)
+                                        <option value="{{$item->jurusan}}">{{$item->jurusan}}</option>
+                                        @endforeach
+                                    </select>
                             </div>
                         </div>
 
@@ -221,9 +224,12 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="form-control-label" for="kelurahan">Kelurahan</label>
-                                <input type="text" class="form-control" id="kelurahan" name="kelurahan"
-                                    placeholder="Contoh : Rejosopinggir">
+                                    <label class="form-control-label" for="kelurahan">Kelurahan</label>
+                                    <select class="form-control" id="kelurahan" name="kelurahan">
+                                        @foreach ($kelurahan as $item)
+                                        <option value="{{$item->id_kelurahan}}">{{$item->nama}}</option>
+                                        @endforeach
+                                    </select>
                             </div>
                         </div>
                     </div>
