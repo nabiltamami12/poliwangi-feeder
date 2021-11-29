@@ -38,6 +38,13 @@
                                     placeholder="Masukan Email">
                             </div>
                         </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="form-control-label" for="nip">NIP / NIK</label>
+                                <input type="text" name="nip" class="form-control" id="nip"
+                                    placeholder="Masukan Nomor Induk Pegawai">
+                            </div>
+                        </div>
                     </div>
                     <div class="row" hidden>
                         <div class="col-md-6">
@@ -61,9 +68,13 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="form-control-label" for="nip">NIP / NIK</label>
-                                <input type="text" name="nip" class="form-control" id="nip"
-                                    placeholder="Masukan Nomor Induk Pegawai">
+                                <label class="form-control-label" for="jabatan_struktural">Jabatan Struktural</label>
+                                <select class="form-control" id="jabatan_struktural" name="jabatan">
+                                    <option>Pilih Jabatan</option>
+                                    @foreach ($jabatan as $row)
+                                        <option value="{{$row->id}}">{{$row->nama_jabatan}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -110,6 +121,7 @@
                             <div class="form-group">
                                     <label class="form-control-label" for="jurusan">Jurusan</label>
                                     <select class="form-control" id="jurusan" name="jurusan">
+                                    <option>Pilih Jurusan...</option>
                                         @foreach ($jurusan as $item)
                                         <option value="{{$item->jurusan}}">{{$item->jurusan}}</option>
                                         @endforeach
@@ -146,6 +158,7 @@
                             <div class="form-group">
                                 <label class="form-control-label" for="exampleFormControlSelect1">Pangkat</label>
                                 <select class="form-control" id="exampleFormControlSelect1" name="id_pangkat">
+                                    <option>Pilih Pangkat...</option>
                                     @foreach ($pangkat as $item)
                                     <option value="{{ $item->id }}">{{$item->nama_pangkat}}</option>
                                     @endforeach
@@ -156,6 +169,7 @@
                             <div class="form-group">
                                 <label class="form-control-label" for="exampleFormControlSelect1">Staff</label>
                                 <select class="form-control" data-toggle="select" name="id_jabatan" id="exampleFormControlSelect1">
+                                    <option>Pilih Staff...</option>
                                     @foreach ($jabatan as $item)
                                     <option value="{{ $item->id }}">{{$item->staf}}</option>
                                     @endforeach
@@ -226,6 +240,7 @@
                             <div class="form-group">
                                     <label class="form-control-label" for="kelurahan">Kelurahan</label>
                                     <select class="form-control" id="kelurahan" name="kelurahan">
+                                    <option>Pilih kelurahan...</option>
                                         @foreach ($kelurahan as $item)
                                         <option value="{{$item->id_kelurahan}}">{{$item->nama}}</option>
                                         @endforeach
@@ -238,6 +253,7 @@
                             <div class="form-group">
                                 <label class="form-control-label" for="kecamatan">Kecamatan</label>
                                 <select class="form-control" id="kecamatan" name="kecamatan">
+                                    <option>Pilih kecamatan...</option>
                                     @foreach ($kecamatan as $item)
                                     <option value="{{$item->id}}">{{$item->nama}}</option>
                                     @endforeach
@@ -248,6 +264,7 @@
                             <div class="form-group">
                                 <label class="form-control-label" for="kota">Kota</label>
                                 <select class="form-control" id="kota" name="kabupaten">
+                                    <option>Pilih Kota...</option>
                                     @foreach ($kota as $item)
                                     <option value="{{ $item->id }}">{{$item->nama}}</option>
                                     @endforeach
@@ -260,6 +277,7 @@
                             <div class="form-group">
                                 <label class="form-control-label" for="provinsi">Provinsi</label>
                                 <select class="form-control" id="provinsi" name="provinsi">
+                                    <option>Pilih Provinsi...</option>
                                     @foreach ($provinsi as $item)
                                     <option value="{{ $item->id }}">{{$item->nama}}</option>
                                     @endforeach

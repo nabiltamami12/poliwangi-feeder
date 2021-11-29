@@ -25,11 +25,24 @@
                     @method('put')
                     @csrf
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <div class="form-group">
                                 <label class="form-control-label" for="nip">NIP / NIK</label>
                                 <input type="text" name="nip" class="form-control" value="{{ $item->nip }}" id="nip"
-                                    placeholder="Masukan Nomor Induk Pegawai negeri sipil">
+                                placeholder="Masukan Nomor Induk Pegawai negeri sipil">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-control-label" for="jabatan_struktural">Jabatan Struktural</label>
+                                    <select class="form-control" id="jabatan_struktural" name="jabatan">
+                                        <option>Pilih Jabatan</option>
+                                        @foreach ($jabatan as $row)
+                                            <option value="{{$row->id}}">{{$row->nama_jabatan}}</option>
+                                        @endforeach
+                                    </select>
                             </div>
                         </div>
                         <div class="col-md-6">

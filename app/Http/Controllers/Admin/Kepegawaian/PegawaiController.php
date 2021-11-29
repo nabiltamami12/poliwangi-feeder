@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\Kepegawaian\Kecamatan;
 use Yajra\DataTables\Facades\DataTables;
 use App\Models\Kepegawaian\DataStruktural;
+use App\Models\Kepegawaian\JabatanStruktural;
 use App\Models\Kepegawaian\Jurusan;
 use App\Models\Kepegawaian\Kelurahan;
 
@@ -58,17 +59,19 @@ class PegawaiController extends Controller
         $pangkat = Pangkat::all();
         $jurusan = Jurusan::all();
         $kelurahan = Kelurahan::all();
+        $jabatan = JabatanStruktural::all();
+
 
 
         $jabatan = Staff::all();
         return view('admin.masterKepegawaian.pegawai.create',[
                 "id" => null,
                 "title" => "kepegawaian",
+                "jabatan" => $jabatan,
                 "kota" => $kota,
                 "kecamatan" => $kecamatan,
                 "provinsi" => $provinsi,
                 "pangkat" => $pangkat,
-                "jabatan" => $jabatan,
                 "kelurahan" => $kelurahan,
                 "jurusan" => $jurusan,
 
@@ -195,6 +198,7 @@ class PegawaiController extends Controller
         $jabatan = Staff::all();
         $jurusan = Jurusan::all();
         $kelurahan = Kelurahan::all();
+        $jabatan = JabatanStruktural::all();
 
         $item = Pegawai::find($id);
 
@@ -208,7 +212,7 @@ class PegawaiController extends Controller
                 "jabatan" => $jabatan,
                 "item" => $item,
                 "jurusan" => $jurusan,
-                "kelurahan" => $kelurahan,
+                "kelurahan" => $kelurahan, 
 
                 
         ]);
