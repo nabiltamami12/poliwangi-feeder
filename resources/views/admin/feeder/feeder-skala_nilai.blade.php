@@ -28,7 +28,7 @@
                 <button type="submit" class="btn btn-primary"><i class="iconify-inline mr-1" data-icon='bx:bx-download'></i> Download Feeder</button>
               </form>
             </div>
-                                 <div class="col text-right">
+              <div class="col" style="margin-right: -20em">
               <form action="{{ url('admin/feeder/upload_feeder-skala_nilai') }}" method="post">
                 {!! csrf_field() !!}
                 <button type="submit" class="btn btn-primary"><i class="iconify-inline mr-1" data-icon='bx:bx-download'></i> Upload Feeder</button>
@@ -39,7 +39,7 @@
         </div>
         <hr class="mt">
         <div class="table-responsive">
-          <table id="table" class="table align-items-center table-flush table-borderless table-hover">
+          <table id="datatable" class="table align-items-center table-flush table-borderless table-hover">
             <thead class="table-header" style="text-align:center">
               <tr>
                 <th scope="col">NO</th>
@@ -88,13 +88,13 @@
       </div>
     </div>
   </div>
-
+</section>
 @endsection
 
-<!-- @section('js')
+@section('js')
 <script>
   var nomor = 1;
-  dt_url = "{{ route('get-feeder-jurusan') }}";
+  dt_url = "{{ route('get-feeder-skala_nilai') }}";
   dt_opt = {
     processing: true,
     serverSide: true,
@@ -104,16 +104,16 @@
     "order": [[ 0, "desc" ]],
     columns: [
         {data: null, name: 'no', sortable: false, render: function(data, type, row, meta) {return meta.row + meta.settings._iDisplayStart + 1;}},
-        {data: 'kode_jurusan', name: 'kode_jurusan'},
-        {data: 'jurusan', name: 'jurusan'},
-        {data: 'akreditasi', name: 'akreditasi'},
-        {data: 'jenjang', name: 'jenjang'},
-        {data: 'id_prodi_feeder', name: 'id_prodi_feeder'},
+        {data: 'nilai_huruf', name: 'nilai_huruf'},
+        {data: 'nilai_indeks', name: 'nilai_indeks'},
+        {data: 'bobot_nilai_min', name: 'bobot_nilai_min'},
+        {data: 'bobot_nilai_maks', name: 'bobot_nilai_maks'},
+        {data: 'tgl_mulai_efektif', name: 'tgl_mulai_efektif'},
+        {data: 'tgl_akhir_efektif', name: 'tgl_akhir_efektif'},
         {data: 'Aksi', name: 'Aksi',orderable:false,serachable:false,sClass:'text-center'},
     ]
-     
      
   };
 </script>
 
-@endsection -->
+@endsection

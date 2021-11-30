@@ -15,7 +15,10 @@ class FeederAKMController extends Controller
     public function index()
     {
            $data = DB::table('feeder_akms')
+             ->join('politeknik_jurusan', 'politeknik_jurusan.id_prodi_feeder', '=', 'feeder_akms.kode_jurusan')
+           // ->join('feeder_kelas','feeder_kelas.id_kelas_feeder' ,'=', 'dosen_ajars.id_kelas')
         ->get();
+        // dd($data[0]);
         return view('admin.feeder.feeder-data_akm', [
                 "title" => "admin-feeder",
                 "data" => $data

@@ -22,17 +22,17 @@
             <div class="col">
               <h2 class="mb-0">Feeder Data Jurusan</h2>
             </div>
-            <div class="col text-right">
+            <div class="col text-right" >
               <form action="{{ url('admin/feeder/feeder-jurusan') }}" method="post">
                 {!! csrf_field() !!}
-                <button style="margin-right: -20em;" type="submit" class="btn btn-primary"><i class="iconify-inline mr-1" data-icon='bx:bx-download'></i> Download Feeder</button>
+                <button  type="submit" class="btn btn-primary"><i class="iconify-inline mr-1" data-icon='bx:bx-download'></i> Download Feeder</button>
               </form>
               
             </div>
-                <div class="col text-right">
+                <div class="col" style="margin-right: -20em">
               <form action="{{ url('admin/feeder/feeder-jurusan-upload') }}" method="post">
                 {!! csrf_field() !!}
-                <button type="submit" class="btn btn-primary"><i class="iconify-inline mr-1" data-icon='bx:bx-download'></i> Upload Feeder</button>
+                <button type="submit" class="btn btn-primary"><i class="iconify-inline mr-1" data-icon='bx:bx-upload'></i> Upload Feeder</button>
               </form>
               
             </div>
@@ -40,7 +40,7 @@
         </div>
         <hr class="mt">
         <div class="table-responsive">
-          <table id="table" class="table align-items-center table-flush table-borderless table-hover">
+          <table id="datatable" class="table align-items-center table-flush table-borderless table-hover">
             <thead class="table-header" style="text-align:center">
               <tr>
                 <th scope="col">NO</th>
@@ -55,8 +55,8 @@
             <tbody>
 <tr>
 
-    @forelse($data as $key => $value)
 
+    @forelse($data as $key => $value)
             <td  style="text-align:center">{{ $key + 1 }}</td>
             <td  style="text-align:center">{{ $value->kode_jurusan }}</td>
             <td  style="text-align:center">{{ $value->jurusan }}</td>
@@ -76,10 +76,10 @@
       </div>
     </div>
   </div>
-
+</section>
 @endsection
 
-<!-- @section('js')
+@section('js')
 <script>
   var nomor = 1;
   dt_url = "{{ route('get-feeder-jurusan') }}";
@@ -104,4 +104,4 @@
   };
 </script>
 
-@endsection -->
+@endsection

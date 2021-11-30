@@ -18,7 +18,11 @@ class FeederJurusanController extends Controller
      */
     public function index()
     {
-        $data = DB::select('select * from politeknik_jurusan where id_politeknik = 1');
+        // $data = DB::select('select * from politeknik_jurusan where id_politeknik = 1');
+          $data = DB::table('politeknik_jurusan')
+        // ->where('id_politeknik','==', 1)
+        ->where('id_prodi_feeder','!=','')
+        ->get();
          return view('admin.feeder.feeder-jurusan', [
                 "title" => "admin-feeder",
                 "data" => $data
