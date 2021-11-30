@@ -41,6 +41,99 @@ class FeederSkalaNilaiController extends Controller
     {
         //
     }
+public function UploadFeeder(Request $request)
+    {
+
+        set_time_limit(600);
+
+// $data_feed_local = DB::table('feeder_mk_kurikulums')->get();
+$data_feed_local = DB::table('skala_nilais')
+        ->get();
+
+$update=0;
+$tambah=0;
+foreach ($data_feed_local as $key => $value) {
+
+// dd($value->id_kurikulum);
+
+if ($value->id_bobot_nilai == null) {
+           
+            
+   // dd("kenek else e");
+      $data_con = array(
+
+      "id_bobot_nilai"          => $value->id_bobot_nilai,     
+        "id_prodi"              => $value->kode_jurusan,
+        "nilai_huruf"           => $value->nilai_huruf,
+        "nilai_indeks"          => $value->nilai_indeks,
+        "bobot_minimum"         => $value->bobot_nilai_min,
+        "bobot_maksimum"        => $value->bobot_nilai_maks,
+        "tanggal_mulai_efektif" => $value->tgl_mulai_efektif,
+        "tanggal_akhir_efektif" => $value->tgl_akhir_efektif, 
+
+    
+    );
+
+    // dd("insert");
+    $run = new \App\Services\FeederDiktiApiService('InsertSkalaNilaiProdi');
+    $run->getToken();
+    $token = $run->getToken();
+
+    $run->InsertSkalaNilai($data_con);
+    $response = $run->InsertSkalaNilai($data_con);
+       
+    if ($response) {
+                   echo "Sukses Insert";
+
+    }
+    else{
+        echo "gagal insert";
+    }
+
+
+
+}
+  
+    else{
+    
+    // $key = $value->id_kurikulum;
+    $data_con = array(
+       "id_bobot_nilai"          => $value->id_bobot_nilai,     
+        "id_prodi"              => $value->kode_jurusan,
+        "nilai_huruf"           => $value->nilai_huruf,
+        "nilai_indeks"          => $value->nilai_indeks,
+        "bobot_minimum"         => $value->bobot_nilai_min,
+        "bobot_maksimum"        => $value->bobot_nilai_maks,
+        "tanggal_mulai_efektif" => $value->tgl_mulai_efektif,
+        "tanggal_akhir_efektif" => $value->tgl_akhir_efektif, 
+
+    );
+    
+    // dd("Ndek update");
+    $run = new \App\Services\FeederDiktiApiService('UpdateSkalaNilaiProdi');
+
+    $run->getToken();
+    $token = $run->getToken();
+// dd($token);
+    $run->UpdateSkalaNilai($data_con);
+    $response = $run->UpdateSkalaNilai($data_con);
+
+ 
+
+    if ($response) {
+            echo "Sukses Update";
+    }
+    else{
+        echo "gagal update";
+    } 
+
+  }
+
+}
+
+    }
+
+ 
 
     /**
      * Store a newly created resource in storage.

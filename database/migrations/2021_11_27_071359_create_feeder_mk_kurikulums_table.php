@@ -17,6 +17,7 @@ class CreateFeederMkKurikulumsTable extends Migration
             $table->id();
             $table->integer('kode_mk_kurikulum')->nullable();
             $table->string('kode_mk')->nullable();
+            $table->string('nama_mk')->nullable();
             $table->string('kode_kurikulum')->nullable();
             $table->string('nama_kurikulum')->nullable();
             $table->string('bobot_mk')->nullable();
@@ -25,6 +26,7 @@ class CreateFeederMkKurikulumsTable extends Migration
             $table->integer('semester')->nullable();
             $table->integer('status_mk')->nullable();
             $table->string('id_prodi_feeder')->nullable();
+            $table->string('id_matkul')->nullable();
             $table->integer('status_upload_mk_kurikulum')->nullable();
             $table->string('keterangan_upload_mk_kurikulum')->nullable();
             $table->timestamps();

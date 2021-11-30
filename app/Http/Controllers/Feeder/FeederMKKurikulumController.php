@@ -36,6 +36,105 @@ class FeederMKKurikulumController extends Controller
         //
     }
 
+ public function UploadFeeder(Request $request)
+    {
+
+        set_time_limit(600);
+
+$data_feed_local = DB::table('feeder_mk_kurikulums')->get();
+
+$update=0;
+$tambah=0;
+foreach ($data_feed_local as $key => $value) {
+
+// dd($value->id_kurikulum);
+
+if ($value->status_upload_mk_kurikulum == 0) {
+    
+
+   // dd("kenek else e");
+      $data_con = array(
+        "id_kurikulum"         => $value->kode_kurikulum,
+        "id_matkul"            => $value->id_matkul,
+        "semester"             => $value->semester,
+        "sks_mata_kuliah"      => $value->bobot_mk,
+        "sks_tatap_muka"       => "",
+        "sks_praktek"          => "",
+        "sks_praktek_lapangan" => "",
+        "sks_simulasi"         => "",
+        "apakah_wajib"         => $value->status_mk,
+
+
+
+      
+    );
+
+    // dd("insert");
+    $run = new \App\Services\FeederDiktiApiService('InsertMatkulKurikulum');
+    $run->getToken();
+    $token = $run->getToken();
+
+    $run->InsertMKKurikulum($data_con);
+    $response = $run->InsertMKKurikulum($data_con);
+       
+    if ($response) {
+        DB::table('feeder_mk_kurikulums')
+    ->where('kode_kurikulum', $value->kode_kurikulum)
+    ->update([
+                'status_upload_mk_kurikulum' => 1,
+                'keterangan_upload_mk_kurikulum' => 'SUDAH UPLOAD',
+ ]);
+                   echo "Sukses Insert";
+
+    }
+    else{
+        echo "gagal insert";
+    }
+
+
+
+}
+  
+    else{
+    
+    // $key = $value->id_kurikulum;
+    $data_con = array(
+      "id_kurikulum"         => $value->kode_kurikulum,
+        "id_matkul"            => $value->id_matkul,
+        "semester"             => $value->semester,
+        "sks_mata_kuliah"      => $value->bobot_mk,
+        "sks_tatap_muka"       => "",
+        "sks_praktek"          => "",
+        "sks_praktek_lapangan" => "",
+        "sks_simulasi"         => "",
+        "apakah_wajib"         => $value->status_mk,
+    );
+    
+    // dd("Ndek update");
+    $run = new \App\Services\FeederDiktiApiService('UpdateMKKurikulum');
+
+    $run->getToken();
+    $token = $run->getToken();
+
+    $run->UpdateMKKurikulum($data_con);
+    $response = $run->UpdateMKKurikulum($data_con);
+
+ 
+
+    if ($response) {
+            echo "Sukses Update";
+    }
+    else{
+        echo "gagal update";
+    } 
+
+  }
+
+}
+
+    }
+
+
     /**
      * Store a newly created resource in storage.
      *
@@ -47,7 +146,7 @@ class FeederMKKurikulumController extends Controller
          $data = new \App\Services\FeederDiktiApiService('GetMatkulKurikulum');
         $data->runWS();
         $response = $data->runWS();
-dd($response['data'][0]);
+// dd($response['data'][0]);
 foreach ($response['data'] as $key => $value) {
 
 // $kd_program_studi = $value->kode_program_studi;
@@ -60,6 +159,7 @@ if (DB::table('feeder_mk_kurikulums')->where('kode_kurikulum','=', $value['id_ku
     ->update([
           'kode_mk_kurikulum' => $key + 1,
             'kode_mk' => $value['kode_mata_kuliah'],
+            'nama_mk' => $value['nama_mata_kuliah'],
             'kode_kurikulum' => $value['id_kurikulum'],
             'semester' => $value['semester'],
             'nama_kurikulum' => $value['nama_kurikulum'],
@@ -68,8 +168,9 @@ if (DB::table('feeder_mk_kurikulums')->where('kode_kurikulum','=', $value['id_ku
             'status_mk' => $value['apakah_wajib'],
             'id_prodi_feeder' => $value['id_prodi'],
             'nama_program_studi' => $value['nama_program_studi'],
-            'status_upload_mk_kurikulum' => 0,
-            'keterangan_upload_mk_kurikulum' => 'BELUM UPLOAD',
+            'status_upload_mk_kurikulum' => 1,
+            'keterangan_upload_mk_kurikulum' => 'SUDAH UPLOAD',
+            "id_matkul" => $value['id_matkul'],
  ]);
 }
 
@@ -79,6 +180,7 @@ if (DB::table('feeder_mk_kurikulums')->where('kode_kurikulum','=', $value['id_ku
     ->insert([
         'kode_mk_kurikulum' => $key + 1,
             'kode_mk' => $value['kode_mata_kuliah'],
+            'nama_mk' => $value['nama_mata_kuliah'],
             'kode_kurikulum' => $value['id_kurikulum'],
             'semester' => $value['semester'],
             'nama_kurikulum' => $value['nama_kurikulum'],
@@ -87,8 +189,10 @@ if (DB::table('feeder_mk_kurikulums')->where('kode_kurikulum','=', $value['id_ku
             'status_mk' => $value['apakah_wajib'],
             'id_prodi_feeder' => $value['id_prodi'],
             'nama_program_studi' => $value['nama_program_studi'],
-            'status_upload_mk_kurikulum' => 0,
-            'keterangan_upload_mk_kurikulum' => 'BELUM UPLOAD',
+            'status_upload_mk_kurikulum' => 1,
+            'keterangan_upload_mk_kurikulum' => 'SUDAH UPLOAD',
+            "id_matkul" => $value['id_matkul'],
+
  ]);
 
     }

@@ -28,6 +28,13 @@
                 <button type="submit" class="btn btn-primary"><i class="iconify-inline mr-1" data-icon='bx:bx-download'></i> Download Feeder</button>
               </form>
             </div>
+                      <div class="col text-right">
+              <form action="{{ url('admin/feeder/upload_feeder-data_mk_kurikulum') }}" method="post">
+                {!! csrf_field() !!}
+                <button type="submit" class="btn btn-primary"><i class="iconify-inline mr-1" data-icon='bx:bx-download'></i> Upload Feeder</button>
+              </form>
+              
+            </div>
           </div>
         </div>
         <hr class="mt">
@@ -54,9 +61,15 @@
 
             <td >{{ $key + 1 }}</td>
             <td  style="text-align:center">{{ $value->kode_mk }}</td>
-            <td  style="text-align:center">{{ $value->nama_program_studi }}</td>     
+            <td  style="text-align:center">{{ $value->nama_mk }}</td>     
             <td  style="text-align:center">{{ $value->bobot_mk }}</td>
-            <td  style="text-align:center">{{ $value->status_mk }}</td>
+            @if($value->status_mk == 1)
+            <td  style="text-align:center">WAJIB</td>
+            @elseif($value->status_mk == 0)
+            <td  style="text-align:center">TIDAK WAJIB</td>
+            @else
+            <td  style="text-align:center"> - </td>
+            @endif
             <td  style="text-align:center">{{ $value->nama_kurikulum }}</td>
             <td  style="text-align:center">{{ $value->nama_program_studi }}</td>     
             <td  style="text-align:center">{{ $value->semester }}</td>

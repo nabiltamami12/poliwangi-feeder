@@ -36,6 +36,86 @@ class FeederKurikulumController extends Controller
         //
     }
 
+ public function UploadFeeder(Request $request)
+    {
+
+        set_time_limit(600);
+
+$data_feed_local = DB::table('feeder_kurikulums')->get();
+
+$update=0;
+$tambah=0;
+foreach ($data_feed_local as $key => $value) {
+
+// dd($value->id_kurikulum);
+
+if ($value->id_kurikulum == null) {
+    
+
+   // dd("kenek else e");
+      $data_con = array(
+      "nama_kurikulum"     => $value->nama_kurikulum,
+       "id_prodi"           => $value->id_prodi,
+       "id_semester"        => $value->kode_thn_ajaran,
+       "jumlah_sks_lulus"   => $value->jum_sks,
+       "jumlah_sks_wajib"   => $value->jum_sks_wajib,
+       "jumlah_sks_pilihan" => $value->jum_sks_pilihan,
+       "id_kurikulum" => $value->id_kurikulum,
+    );
+
+    // dd("insert");
+    $run = new \App\Services\FeederDiktiApiService('InsertKurikulum');
+    $run->getToken();
+    $token = $run->getToken();
+
+    $run->InsertKurikulum($data_con);
+    $response = $run->InsertKurikulum($data_con);
+    if ($response) {
+                   echo "Sukses Insert";
+
+    }
+    else{
+        echo "gagal insert";
+    }
+
+
+
+}
+  
+    else{
+    
+    $key = $value->id_kurikulum;
+    $data_con = array(
+        "nama_kurikulum"     => $value->nama_kurikulum,
+       "id_prodi"           => $value->id_prodi,
+       "id_semester"        => $value->kode_thn_ajaran,
+       "jumlah_sks_lulus"   => $value->jum_sks,
+       "jumlah_sks_wajib"   => $value->jum_sks_wajib,
+       "jumlah_sks_pilihan" => $value->jum_sks_pilihan,
+       "id_kurikulum" => $value->id_kurikulum,
+    );
+    
+    // dd("Ndek update");
+    $run = new \App\Services\FeederDiktiApiService('UpdateKurikulum');
+
+    $run->getToken();
+    $token = $run->getToken();
+
+    $run->UpdateKurikulum($data_con);
+    $response = $run->UpdateKurikulum($data_con);
+    if ($response) {
+            echo "Sukses Update";
+    }
+    else{
+        echo "gagal update";
+    } 
+
+  }
+
+}
+
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -67,6 +147,8 @@ if (DB::table('feeder_kurikulums')->where('id_kurikulum','=', $value['id_kurikul
         'jum_sks_pilihan' => $value['jumlah_sks_pilihan'],
         'status_kurikulum' => 1,
         'id_kurikulum' => $value['id_kurikulum'],
+         'id_prodi'   => $value['id_prodi'],
+
  ]);
 }
 
@@ -83,6 +165,8 @@ if (DB::table('feeder_kurikulums')->where('id_kurikulum','=', $value['id_kurikul
         'jum_sks_pilihan' => $value['jumlah_sks_pilihan'],
         'status_kurikulum' => 1,
         'id_kurikulum' => $value['id_kurikulum'],
+         'id_prodi'   => $value['id_prodi'],
+
  ]);
 
     }

@@ -165,6 +165,7 @@ Route::get('/pmbgenerateva', function () {
         //Feeder Skala Nilai
         Route::resource('feeder-skala_nilai', FeederSkalaNilaiController::class);
         Route::get('/getFeederSkalaNilai', [FeederSkalaNilaiController::class, 'getFeederSkalaNilai'])->name('get-skala_nilai');
+        Route::post('upload_feeder-skala_nilai', [FeederSkalaNilaiController::class, 'UploadFeeder'])->name('feeder-skala_nilai-upload');
         //Feeder Mata Kuliah
         Route::resource('feeder-data_mata_kuliah', FeederMataKuliahController::class);
         Route::get('/getFeederDataMataKuliah', [FeederMataKuliahController::class, 'getFeederDataMataKuliah'])->name('get-feeder-data_mata_kuliah');
@@ -172,9 +173,11 @@ Route::get('/pmbgenerateva', function () {
         //Feeder Kurikulum
         Route::resource('feeder-data_kurikulum', FeederKurikulumController::class);
         Route::get('/getFeederDataKurikulum', [FeederKurikulumController::class, 'getFeederDataKurikulum'])->name('get-feeder-data_kuriulum');
+         Route::post('upload_feeder-data_kurikulum', [FeederKurikulumController::class, 'UploadFeeder'])->name('feeder-data_kurikulum-upload');
         //Feeder MK Kurikulum
         Route::resource('feeder-data_mk_kurikulum', FeederMKKurikulumController::class);
         Route::get('/getFeederDataKurikulum', [FeederMKKurikulumController::class, 'getFeederDataKurikulum'])->name('get-feeder-data_mk_kurikulum');
+            Route::post('upload_feeder-data_mk_kurikulum', [FeederMKKurikulumController::class, 'UploadFeeder'])->name('feeder-data_mk_kurikulum-upload');
         //Feeder Mahasiswa
         Route::resource('feeder-data_mahasiswa', FeederMahasiswaController::class);
         Route::get('/getFeederDataMahasiswa', [FeederMahasiswaController::class, 'getDataFeederMahasiswa'])->name('get-feeder-data_mahasiswa');
@@ -184,9 +187,11 @@ Route::get('/pmbgenerateva', function () {
         //Feeder Kelas
         Route::resource('feeder-data_kelas', FeederKelasController::class);
         Route::get('/getFeederDataKelas', [FeederKelasController::class, 'getDataFeederKelas'])->name('get-feeder-data_kelas');
+         Route::post('upload_feeder-data_kelas', [FeederKelasController::class, 'UploadFeeder'])->name('feeder-data_kelas-upload');
         //Feeder Dosen Ajar
         Route::resource('feeder-data_dosen_ajar', FeederDosenAjarController::class);
         Route::get('/getFeederDataDosenAjar', [FeederDosenAjarController::class, 'getDataFeederDosenAjar'])->name('get-feeder-data_dosen_ajar');
+        Route::post('upload_feeder-data_dosen_ajar', [FeederDosenAjarController::class, 'UploadFeeder'])->name('feeder-data_dosen_ajar-upload');
         //Feeder KRS
         Route::resource('feeder-data_krs', FeederKRSController::class);
         Route::get('/getFeederDataKRS', [FeederKRSController::class, 'getDataFeederKRS'])->name('get-feeder-data_krs');
@@ -196,6 +201,7 @@ Route::get('/pmbgenerateva', function () {
         //Feeder AKM
         Route::resource('feeder-data_akm', FeederAKMController::class);
         Route::get('/getFeederDataAKM', [FeederAKMController::class, 'getDataFeederAKM'])->name('get-feeder-data_akm');
+        Route::post('upload_feeder-data_akm', [FeederAKMController::class, 'UploadFeeder'])->name('feeder-data_akm-upload');
         //Feeder Koneksi
         Route::any('feeder-koneksi', function () {
                 return view('admin.feeder.feeder-koneksi', [

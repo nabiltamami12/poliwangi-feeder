@@ -31,7 +31,99 @@ $data =  DB::table('feeder_kelas')->get();
     {
         //
     }
+ public function UploadFeeder(Request $request)
+    {
 
+        set_time_limit(600);
+
+// $data_feed_local = DB::table('feeder_mk_kurikulums')->get();
+$data_feed_local = DB::table('feeder_kelas')
+        ->get();
+
+$update=0;
+$tambah=0;
+foreach ($data_feed_local as $key => $value) {
+
+// dd($value->id_kurikulum);
+
+if ($value->id_kelas_feeder == null) {
+           
+            
+   // dd("kenek else e");
+      $data_con = array(
+
+      "id_kelas_kuliah"         => $value->id_kelas_feeder,
+      "id_prodi"             => $value->kode_jurusan,
+      "id_semester"          => $value->id_semester,
+      "id_matkul"            => $value->id_mk,
+      "nama_kelas_kuliah"    => $value->nama_kelas,
+      "bahasan"              => $value->bahasan_case,
+      "tanggal_mulai_efektif" => $value->tgl_mulai_kelas,
+      "tanggal_akhir_efektif" => $value->tgl_selesai_kelas,
+
+
+
+      
+    );
+
+    // dd("insert");
+    $run = new \App\Services\FeederDiktiApiService('InsertKelasKuliah');
+    $run->getToken();
+    $token = $run->getToken();
+
+    $run->InsertKelas($data_con);
+    $response = $run->InsertKelas($data_con);
+       
+    if ($response) {
+                   echo "Sukses Insert";
+
+    }
+    else{
+        echo "gagal insert";
+    }
+
+
+
+}
+  
+    else{
+    
+    // $key = $value->id_kurikulum;
+    $data_con = array(
+      "id_kelas_kuliah"         => $value->id_kelas_feeder,
+      "id_prodi"             => $value->kode_jurusan,
+      "id_semester"          => $value->id_semester,
+      "id_matkul"            => $value->id_mk,
+      "nama_kelas_kuliah"    => $value->nama_kelas,
+      "bahasan"              => $value->bahasan_case,
+      "tanggal_mulai_efektif" => $value->tgl_mulai_kelas,
+      "tanggal_akhir_efektif" => $value->tgl_selesai_kelas,
+
+    );
+    
+    // dd("Ndek update");
+    $run = new \App\Services\FeederDiktiApiService('UpdateKelasKuliah');
+
+    $run->getToken();
+    $token = $run->getToken();
+// dd($token);
+    $run->UpdateKelas($data_con);
+    $response = $run->UpdateKelas($data_con);
+
+ 
+
+    if ($response) {
+            echo "Sukses Update";
+    }
+    else{
+        echo "gagal update";
+    } 
+
+  }
+
+}
+
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -59,16 +151,17 @@ if (DB::table('feeder_kelas')->where('id_kelas_feeder','=', $value['id_kelas_kul
             'nama_jurusan' => $value['nama_program_studi'],
             'id_kelas_feeder' => $value['id_kelas_kuliah'],
             'kode_ruang' => '1',
-            'jam' => '-',
-            'hari' => '-',
+            'jam' => '',
+            'hari' => '',
             'id_master_kurikulum' => '0',
             'status_error' => '0',
-            'keterangan' => '-',
-            'bahasan_case' => '-',
-            'tgl_mulai_kelas' => '-',
-            'tgl_selesai_kelas' => '-',
+            'keterangan' => '',
+            'bahasan_case' => '',
+            'tgl_mulai_kelas' => '',
+            'tgl_selesai_kelas' => '',
             'keterangan_upload_kelas' => '',
             'sks_mata_kuliah' => $value['sks_mata_kuliah'],
+            'id_mk' => $value['id_matkul'],
   
 
  ]);
@@ -87,16 +180,18 @@ if (DB::table('feeder_kelas')->where('id_kelas_feeder','=', $value['id_kelas_kul
             'nama_jurusan' => $value['nama_program_studi'],
             'id_kelas_feeder' => $value['id_kelas_kuliah'],
             'kode_ruang' => '1',
-            'jam' => '-',
-            'hari' => '-',
+            'jam' => '',
+            'hari' => '',
             'id_master_kurikulum' => '0',
             'status_error' => '0',
-            'keterangan' => '-',
-            'bahasan_case' => '-',
-            'tgl_mulai_kelas' => '-',
-            'tgl_selesai_kelas' => '-',
+            'keterangan' => '',
+            'bahasan_case' => '',
+            'tgl_mulai_kelas' => '',
+            'tgl_selesai_kelas' => '',
             'keterangan_upload_kelas' => '',
             'sks_mata_kuliah' => $value['sks_mata_kuliah'],
+            'id_mk' => $value['id_matkul'],
+
  ]);
 
     }

@@ -17,6 +17,9 @@ class CreateFeederAkmsTable extends Migration
             $table->id();
              $table->string('id_registrasi_mahasiswa')->nullable();
              $table->string('semester')->nullable();
+             $table->string('id_semester')->nullable();
+             $table->string('id_status_mahasiswa')->nullable();
+             $table->string('biaya_kuliah_smt')->nullable();
             $table->string('nim')->nullable();
             $table->string('nama')->nullable();
             $table->float('ips')->nullable();

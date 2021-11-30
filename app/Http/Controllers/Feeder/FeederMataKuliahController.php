@@ -37,7 +37,8 @@ class FeederMataKuliahController extends Controller
   public function UploadFeeder(Request $request)
     {
 
-        set_time_limit(600);
+              set_time_limit(2000);
+
 
 $data_feed_local = DB::table('feeder_mata_kuliahs')->get();
 
@@ -45,40 +46,9 @@ $update=0;
 $tambah=0;
 foreach ($data_feed_local as $key => $value) {
 
-if ($value->id_mk != null) {
-    $key = $value->id_mk;
-    $data_con = array(
-      'nama_mata_kuliah'=> $value->nama_mk,
-      'id_jenis_mata_kuliah'=> $value->jenis_mata_kuliah,
-      'sks_mata_kuliah'=> $value->bobot_mk,
-      'sks_tatap_muka'=> $value->bobot_tatap_muka,
-      'sks_praktek'=> $value->bobot_pratikum,
-      'sks_praktek_lapangan'=> $value->bobot_praktek_lapangan,
-      'sks_simulasi'=> $value->bobot_simulasi,
-      'id_matkul'=> $value->id_mk,
-      'kode_mata_kuliah'=> $value->kode_mk,
-      'nama_program_studi'=> $value->prodi_mk,
-      'tanggal_mulai_efektif'=> "",
-      'tanggal_akhir_efektif'=> "",      
-    );
-    
-    $run = new \App\Services\FeederDiktiApiService('UpdateMataKuliah');
+if ($value->id_mk == null) {
 
-    $run->getToken();
-    $token = $run->getToken();
 
-    $run->UpdateMataKuliah($data_con);
-    $response = $run->UpdateMataKuliah($data_con);
-    if ($response) {
-            echo "Sukses Update";
-    }
-    else{
-        echo "gagal update";
-    }
-
-}
-
-    else{
         // dd("kenek else e");
       $data_con = array(
      'nama_mata_kuliah'=> $value->nama_mk,
@@ -109,6 +79,44 @@ if ($value->id_mk != null) {
     else{
         echo "gagal insert";
     }
+
+
+    
+}
+
+    else{
+
+$key = $value->id_mk;
+    $data_con = array(
+      'nama_mata_kuliah'=> $value->nama_mk,
+      'id_jenis_mata_kuliah'=> $value->jenis_mata_kuliah,
+      'sks_mata_kuliah'=> $value->bobot_mk,
+      'sks_tatap_muka'=> $value->bobot_tatap_muka,
+      'sks_praktek'=> $value->bobot_pratikum,
+      'sks_praktek_lapangan'=> $value->bobot_praktek_lapangan,
+      'sks_simulasi'=> $value->bobot_simulasi,
+      'id_matkul'=> $value->id_mk,
+      'kode_mata_kuliah'=> $value->kode_mk,
+      'nama_program_studi'=> $value->prodi_mk,
+      'tanggal_mulai_efektif'=> "",
+      'tanggal_akhir_efektif'=> "",      
+    );
+    
+    $run = new \App\Services\FeederDiktiApiService('UpdateMataKuliah');
+
+    $run->getToken();
+    $token = $run->getToken();
+
+    $run->UpdateMataKuliah($data_con);
+    $response = $run->UpdateMataKuliah($data_con);
+    if ($response) {
+            echo "Sukses Update";
+    }
+    else{
+        echo "gagal update";
+    }
+
+
     }
 
 }

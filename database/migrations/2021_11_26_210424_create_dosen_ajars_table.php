@@ -18,8 +18,9 @@ class CreateDosenAjarsTable extends Migration
                 $table->string('semester')->nullable();
             $table->string('nidn')->nullable();
             $table->string('nama_dosen')->nullable();
-            // $table->string('kode_mk')->nullable();
-            // $table->string('nama_mk')->nullable();
+            $table->string('id_aktivitas_mengajar')->nullable();
+            $table->string('id_registrasi_dosen')->nullable();
+            $table->string('id_jenis_evaluasi')->nullable();
             $table->string('id_kelas')->nullable();
             $table->integer('rencana_tatap_muka')->nullable();
             $table->integer('tatap_muka_real')->nullable();
@@ -27,7 +28,7 @@ class CreateDosenAjarsTable extends Migration
             $table->string('sks_ajar')->nullable();
             $table->integer('status_error')->nullable();
             $table->string('keterangan')->nullable();
-            $table->string('id_aktifitas_mengajar')->nullable();
+            $table->string('id_substansi')->nullable();
             $table->timestamps();
         });
     }

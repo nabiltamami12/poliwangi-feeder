@@ -32,6 +32,98 @@ class FeederAKMController extends Controller
         //
     }
 
+public function UploadFeeder(Request $request)
+    {
+
+        set_time_limit(600);
+
+// $data_feed_local = DB::table('feeder_mk_kurikulums')->get();
+$data_feed_local = DB::table('feeder_akms')
+        ->get();
+
+$update=0;
+$tambah=0;
+foreach ($data_feed_local as $key => $value) {
+
+// dd($value->id_kurikulum);
+
+if ($value->id_registrasi_mahasiswa == null) {
+           
+            
+   // dd("kenek else e");
+      $data_con = array(
+
+        "id_registrasi_mahasiswa" => $value->id_registrasi_mahasiswa,
+        "id_semester"             => $value->id_semester,
+       "id_status_mahasiswa"  => $value->id_status_mahasiswa,
+       "ips"                  => $value->ips,
+       "ipk"                  => $value->ipk,
+       "sks_semester"         => $value->sks_smt,
+       "total_sks"            => $value->sks_total,
+       "biaya_kuliah_smt"     => $value->biaya_kuliah_smt, 
+
+    
+    );
+
+    // dd("insert");
+    $run = new \App\Services\FeederDiktiApiService('InsertPerkuliahanMahasiswa');
+    $run->getToken();
+    $token = $run->getToken();
+
+    $run->InsertAKM($data_con);
+    $response = $run->InsertAKM($data_con);
+       
+    if ($response) {
+                   echo "Sukses Insert";
+
+    }
+    else{
+        echo "gagal insert";
+    }
+
+
+
+}
+  
+    else{
+    
+    // $key = $value->id_kurikulum;
+    $data_con = array(
+       "id_registrasi_mahasiswa" => $value->id_registrasi_mahasiswa,
+        "id_semester"             => $value->id_semester,
+       "id_status_mahasiswa"  => $value->id_status_mahasiswa,
+       "ips"                  => $value->ips,
+       "ipk"                  => $value->ipk,
+       "sks_semester"         => $value->sks_smt,
+       "total_sks"            => $value->sks_total,
+       "biaya_kuliah_smt"     => $value->biaya_kuliah_smt, 
+
+    );
+    
+    // dd("Ndek update");
+    $run = new \App\Services\FeederDiktiApiService('UpdatePerkuliahanMahasiswa');
+
+    $run->getToken();
+    $token = $run->getToken();
+// dd($token);
+    $run->UpdateAKM($data_con);
+    $response = $run->UpdateAKM($data_con);
+
+ 
+
+    if ($response) {
+            echo "Sukses Update";
+    }
+    else{
+        echo "gagal update";
+    } 
+
+  }
+
+}
+
+    }
+ 
     /**
      * Store a newly created resource in storage.
      *
@@ -85,6 +177,9 @@ if (DB::table('feeder_akms')->where('nim','=', $value['nim'])->exists()) {
             'status_error' => '0',
             'valid' => '0',
             'keterangan' => '0',
+            "id_semester"          => $value["id_semester"],
+            "id_status_mahasiswa"  => $value["id_status_mahasiswa"],
+            "biaya_kuliah_smt"     => $value["biaya_kuliah_smt"], 
 
 
  ]);
@@ -107,6 +202,9 @@ if (DB::table('feeder_akms')->where('nim','=', $value['nim'])->exists()) {
             'status_error' => '0',
             'valid' => '0',
             'keterangan' => '0',
+            "id_semester"          => $value["id_semester"],
+            "id_status_mahasiswa"  => $value["id_status_mahasiswa"],
+            "biaya_kuliah_smt"     => $value["biaya_kuliah_smt"], 
 
 
  ]);

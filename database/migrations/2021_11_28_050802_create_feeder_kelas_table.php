@@ -13,12 +13,14 @@ class CreateFeederKelasTable extends Migration
      */
     public function up()
     {
+
         Schema::create('feeder_kelas', function (Blueprint $table) {
             $table->id();
                       $table->string('id_semester')->nullable();
                       $table->string('nama_semester')->nullable();
             $table->string('kode_mk')->nullable();
             $table->string('nama_mk')->nullable();
+            $table->string('id_mk')->nullable();
             $table->string('nama_kelas')->nullable();
             $table->string('kode_jurusan')->nullable();
             $table->string('nama_jurusan')->nullable();

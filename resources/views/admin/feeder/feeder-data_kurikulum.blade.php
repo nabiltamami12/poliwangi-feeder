@@ -22,11 +22,18 @@
             <div class="col">
               <h2 class="mb-0">Feeder Data Kurkulum</h2>
             </div>
-            <div class="col text-right">
+            <div class="col text-right" >
               <form action="{{ url('admin/feeder/feeder-data_kurikulum') }}" method="post">
                 {!! csrf_field() !!}
                 <button type="submit" class="btn btn-primary"><i class="iconify-inline mr-1" data-icon='bx:bx-download'></i> Download Feeder</button>
               </form>
+            </div>
+                     <div   class="col text-right">
+              <form action="{{ url('admin/feeder/upload_feeder-data_kurikulum') }}" method="post">
+                {!! csrf_field() !!}
+                <button type="submit" class="btn btn-primary"><i class="iconify-inline mr-1" data-icon='bx:bx-download'></i> Upload Feeder</button>
+              </form>
+              
             </div>
           </div>
         </div>

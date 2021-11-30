@@ -24,6 +24,7 @@ class CreateFeederKurikulumsTable extends Migration
             $table->integer('jum_sks_pilihan')->nullable();
             $table->integer('status_kurikulum')->nullable();
             $table->string('id_kurikulum')->nullable();
+            $table->string('id_prodi')->nullable();
             $table->timestamps();
         });
     }

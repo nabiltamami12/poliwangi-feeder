@@ -36,6 +36,106 @@ class FeederDosenAjarController extends Controller
         //
     }
 
+
+
+
+ public function UploadFeeder(Request $request)
+    {
+
+        set_time_limit(600);
+
+// $data_feed_local = DB::table('feeder_mk_kurikulums')->get();
+$data_feed_local = DB::table('dosen_ajars')
+        ->get();
+
+$update=0;
+$tambah=0;
+foreach ($data_feed_local as $key => $value) {
+
+// dd($value->id_kurikulum);
+
+if ($value->id_aktivitas_mengajar == null) {
+    
+
+           
+            
+   // dd("kenek else e");
+      $data_con = array(
+
+        "id_registrasi_dosen"  => $value->id_registrasi_dosen,
+        "id_kelas_kuliah"      => $value->id_kelas,
+        "id_substansi"         => $value->id_substansi,
+        "sks_substansi_total"  => $value->sks_ajar,
+        "rencana_tatap_muka"   => $value->rencana_tatap_muka,
+        "realisasi_tatap_muka" => $value->tatap_muka_real,
+        "id_jenis_evaluasi"    => $value->id_jenis_evaluasi,
+        "id_aktivitas_mengajar"    => $value->id_aktivitas_mengajar,
+
+
+
+      
+    );
+
+    // dd("insert");
+    $run = new \App\Services\FeederDiktiApiService('InsertDosenPengajarKelasKuliah');
+    $run->getToken();
+    $token = $run->getToken();
+
+    $run->InsertDosenAjar($data_con);
+    $response = $run->InsertDosenAjar($data_con);
+       
+    if ($response) {
+                   echo "Sukses Insert";
+
+    }
+    else{
+        echo "gagal insert";
+    }
+
+
+
+}
+  
+    else{
+    
+    // $key = $value->id_kurikulum;
+    $data_con = array(
+
+        "id_registrasi_dosen"  => $value->id_registrasi_dosen,
+        "id_kelas_kuliah"      => $value->id_kelas,
+        "id_substansi"         => $value->id_substansi,
+        "sks_substansi_total"  => $value->sks_ajar,
+        "rencana_tatap_muka"   => $value->rencana_tatap_muka,
+        "realisasi_tatap_muka" => $value->tatap_muka_real,
+        "id_jenis_evaluasi"    => $value->id_jenis_evaluasi,
+        "id_aktivitas_mengajar"    => $value->id_aktivitas_mengajar,
+
+    );
+    
+    // dd("Ndek update");
+    $run = new \App\Services\FeederDiktiApiService('UpdateDosenPengajarKelasKuliah');
+
+    $run->getToken();
+    $token = $run->getToken();
+// dd($token);
+    $run->UpdateDosenAjar($data_con);
+    $response = $run->UpdateDosenAjar($data_con);
+
+ 
+
+    if ($response) {
+            echo "Sukses Update";
+    }
+    else{
+        echo "gagal update";
+    } 
+
+  }
+
+}
+
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -60,7 +160,7 @@ $response = $data->runWS();
   foreach ($response['data'] as $key => $value) {
 
          DB::table('dosen_ajars')
-    ->where('id_aktifitas_mengajar', $value['id_aktivitas_mengajar'])
+    ->where('id_aktivitas_mengajar', $value['id_aktivitas_mengajar'])
     ->where('id_kelas', $value['id_kelas_kuliah'])
     ->where('semester', $value['id_semester'])
     ->update([
@@ -68,8 +168,8 @@ $response = $data->runWS();
             'semester' => $value['id_semester'],
             'nidn' => $value['nidn'],
             'nama_dosen' => $value['nama_dosen'],
-            // 'kode_mk' => $value_kelas->kode_mk,
-            // 'nama_mk' => $value_kelas->nama_mk,
+            'id_jenis_evaluasi' => $value['id_jenis_evaluasi'],
+            'id_registrasi_dosen' => $value['id_registrasi_dosen'],
             'id_kelas' => $value['id_kelas_kuliah'],
             'rencana_tatap_muka' => $value['rencana_minggu_pertemuan'],
             'tatap_muka_real' => $value['realisasi_minggu_pertemuan'],
@@ -77,8 +177,10 @@ $response = $data->runWS();
             'sks_ajar' => $value['sks_substansi_total'],
             'status_error' => '1',
             'keterangan' => '0',
-            'id_aktifitas_mengajar' => $value['id_aktivitas_mengajar'],
+            'id_aktivitas_mengajar' => $value['id_aktivitas_mengajar'],
+            'id_substansi' => $value['id_substansi'],
           ]);
+
 
 
         
@@ -96,8 +198,8 @@ $response = $data->runWS();
             'semester' => $value['id_semester'],
             'nidn' => $value['nidn'],
             'nama_dosen' => $value['nama_dosen'],
-            // 'kode_mk' => $value_kelas->kode_mk,
-            // 'nama_mk' => $value_kelas->nama_mk,
+            'id_jenis_evaluasi' => $value['id_jenis_evaluasi'],
+            'id_registrasi_dosen' => $value['id_registrasi_dosen'],
             'id_kelas' => $value['id_kelas_kuliah'],
             'rencana_tatap_muka' => $value['rencana_minggu_pertemuan'],
             'tatap_muka_real' => $value['realisasi_minggu_pertemuan'],
@@ -105,7 +207,9 @@ $response = $data->runWS();
             'sks_ajar' => $value['sks_substansi_total'],
             'status_error' => '1',
             'keterangan' => '0',
-            'id_aktifitas_mengajar' => $value['id_aktivitas_mengajar'],
+            'id_aktivitas_mengajar' => $value['id_aktivitas_mengajar'],
+            'id_substansi' => $value['id_substansi'],
+
           ]);
  
       }

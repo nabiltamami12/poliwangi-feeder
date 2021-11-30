@@ -20,4 +20,7 @@ class feeder_akm extends Model
             'status_error',
             'valid',
             'keterangan',
+            'id_semester',
+            'id_status_mahasiswa',
+            'biaya_kuliah_smt',
 }
