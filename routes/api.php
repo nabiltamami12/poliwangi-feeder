@@ -369,12 +369,15 @@ Route::prefix('v1')->group(function () {
     Route::delete('/data-report/{id}', [Ctr\ReportController::class, 'destroy']);
 
         // Kepegawaian Data Pegawai
-        Route::get('/getPegawai', [Ctr\ReportController::class, 'getData'])->name('data-pegawai');
-        Route::get('/getDataPegawai', [Ctr\ReportController::class, 'getPegawai']);
-        Route::post('/store-pegawai', [Ctr\ReportController::class, 'store'])->name('store-pegawai');
-        Route::get('/data-pegawai/{id}/edit', [Ctr\ReportController::class, 'edit'])->name('dataPegawai');
-        Route::put('/data-pegawai/{id}', [Ctr\ReportController::class, 'update']);
-        Route::delete('/data-pegawai/{id}', [Ctr\ReportController::class, 'destroy']);
+        Route::get('/getPegawai', [Ctr\PegawaiController::class, 'getData'])->name('data-pegawai');
+        Route::get('/getDataPegawai', [Ctr\PegawaiController::class, 'getPegawai']);
+        Route::get('/getKabupaten', [Ctr\PegawaiController::class, 'getKabupaten']);
+        Route::get('/getKecamatan', [Ctr\PegawaiController::class, 'getKecamatan']);
+        Route::get('/getKelurahan', [Ctr\PegawaiController::class, 'getKelurahan']);
+        Route::post('/store-pegawai', [Ctr\PegawaiController::class, 'store'])->name('store-pegawai');
+        // Route::get('/data-pegawai/{id}/edit', [Ctr\PegawaiController::class, 'edit'])->name('data-edit');
+        Route::put('/data-pegawai/{id}', [Ctr\PegawaiController::class, 'update']);
+        Route::delete('/data-pegawai/{id}', [Ctr\PegawaiController::class, 'destroy']);
 
           // Kepegawaian Data Pangkat
           Route::get('/getPangkat', [Ctr\PangkatController::class, 'getData'])->name('data-pangkat');

@@ -8,14 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Kecamatan extends Model
 {
     use HasFactory;
-    protected $primaryKey = "id";
-    protected $table = "kecamatan";
+    protected $primaryKey = "id_kecamatan";
+    protected $table = "tb_kecamatan";
     protected $fillable = [
-        'id_kota',
+        'id_kabupaten',
         'nama'
     ];
     public function kota() {
-        return $this->belongsTo(Kota::class, 'id');
+        return $this->belongsTo(Kota::class, 'id_kabupaten');
     }
 
     public function pegawai() {

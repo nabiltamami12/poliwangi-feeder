@@ -21,7 +21,7 @@
 
                 <hr class="my-4">
 
-                <form id="form_cu" action="{{route('dataPegawai.store')}}" method="POST">
+                <form id="form_cu" action="" method="POST">
                     @csrf
                     <div class="row">
                         <div class="col-md-6" hidden>
@@ -109,7 +109,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                     <label class="form-control-label" for="jurusan">Jurusan</label>
-                                    <select class="form-control" id="jurusan" name="jurusan">
+                                    <select class="form-control js-example-basic-single" id="jurusan" name="jurusan">
                                     <option>Pilih Jurusan...</option>
                                         @foreach ($jurusan as $item)
                                         <option value="{{$item->jurusan}}">{{$item->jurusan}}</option>
@@ -146,7 +146,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="form-control-label" for="exampleFormControlSelect1">Pangkat</label>
-                                <select class="form-control" id="exampleFormControlSelect1" name="id_pangkat">
+                                <select class="form-control js-example-basic-single" data-toggle="select" id="exampleFormControlSelect1" name="id_pangkat">
                                     <option>Pilih Pangkat...</option>
                                     @foreach ($pangkat as $item)
                                     <option value="{{ $item->id }}">{{$item->nama_pangkat}}</option>
@@ -157,7 +157,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="form-control-label" for="exampleFormControlSelect1">Staff</label>
-                                <select class="form-control" data-toggle="select" name="id_jabatan" id="exampleFormControlSelect1">
+                                <select class="form-control js-example-basic-single" data-toggle="select" name="staff" id="exampleFormControlSelect1">
                                     <option>Pilih Staff...</option>
                                     @foreach ($jabatan as $item)
                                     <option value="{{ $item->id }}">{{$item->staf}}</option>
@@ -225,52 +225,45 @@
                                     placeholder="Contoh : Belum Kawin">
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                    <label class="form-control-label" for="kelurahan">Kelurahan</label>
-                                    <select class="form-control" id="kelurahan" name="kelurahan">
-                                    <option>Pilih kelurahan...</option>
-                                        @foreach ($kelurahan as $item)
-                                        <option value="{{$item->id_kelurahan}}">{{$item->nama}}</option>
-                                        @endforeach
-                                    </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="form-control-label" for="kecamatan">Kecamatan</label>
-                                <select class="form-control" id="kecamatan" name="kecamatan">
-                                    <option>Pilih kecamatan...</option>
-                                    @foreach ($kecamatan as $item)
-                                    <option value="{{$item->id}}">{{$item->nama}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="form-control-label" for="kota">Kota</label>
-                                <select class="form-control" id="kota" name="kabupaten">
-                                    <option>Pilih Kota...</option>
-                                    @foreach ($kota as $item)
-                                    <option value="{{ $item->id }}">{{$item->nama}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
+
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="form-control-label" for="provinsi">Provinsi</label>
-                                <select class="form-control" id="provinsi" name="provinsi">
+                                <select class="form-control js-example-basic-single" id="provinsi" name="provinsi">
                                     <option>Pilih Provinsi...</option>
                                     @foreach ($provinsi as $item)
-                                    <option value="{{ $item->id }}">{{$item->nama}}</option>
+                                    <option value="{{ $item->id_provinsi }}">{{$item->nama}}</option>
                                     @endforeach
                                 </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-control-label" for="kota">Kota</label>
+                                <select class="form-control js-example-basic-single" id="kota" name="kabupaten">
+                                   
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-control-label" for="kecamatan">Kecamatan</label>
+                                <select class="form-control js-example-basic-single" id="kecamatan" name="kecamatan">
+                                   
+                                </select>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                    <label class="form-control-label" for="kelurahan">Kelurahan</label>
+                                    <select class="form-control js-example-basic-single" id="kelurahan" name="kelurahan">
+                                   
+                                    </select>
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -342,61 +335,152 @@
         </div>
     </div>
 </section>
-{{-- <script>
-  $(document).ready(function() {
-    var id = "{{$id}}";
-if (id!="") {
-getData(id);
-}else{
-$('#status').val(0)
-}
+<script>
+   $(document).ready(function() {
+    $('.js-example-basic-single').select2();
+  });
 
-// form tambah data
-$("#form_cu").submit(function(e) {
-e.preventDefault();
-var data = $('#form_cu').serialize();
-if (id!="") {
-var url = url_api+"/periode/"+id;
-var type = "put";
-} else {
-var url = url_api+"/periode";
-var type = "post";
-}
-$.ajax({
-url: url,
-type: type,
-dataType: 'json',
-data: data,
-success: function(res) {
-if (res.status=="success") {
-window.location.href = "{{url('/admin/master/dataperiode')}}";
-} else {
-// alert gagal
-}
+//   $.ajax({
+//         url: `{{ url('/api/v1') }}/getDataPegawai`,
+//         method: 'GET',
+//         success: function(result) {
+//           $('#kelurahan').html('');
+//           $('#kelurahan').append($('<option>', {
+//             text: "Pilih Kelurahan",
+//             selected: true,
+//             disabled: true,
+//           }));
+//           $.each(result.kelurahan, function(i, p) {
+//             $('#kelurahan').append($('<option>', {
+//               value: p.id,
+//               text: p.nama,
+//             }));
+//           });
 
-}
-});
-});
-} );
+//           $('#kecamatan').html('');
+//           $('#kecamatan').append($('<option>', {
+//             text: "Pilih Kecamatan",
+//             selected: true,
+//             disabled: true,
+//           }));
+//           $.each(result.kecamatan, function(a, j) {
+//             $('#kecamatan').append($('<option>', {
+//               value: j.id,
+//               text: j.nama,
+//             }));
+//           });
 
-function getData(id) {
-$.ajax({
-url: url_api+"/periode/"+id,
-type: 'get',
-dataType: 'json',
-data: {},
-success: function(res) {
-if (res.status=="success") {
-var data = res['data'][0];
-$.each(data,function (key,row) {
-$('#'+key).val(row);
-})
-} else {
-// alert gagal
-}
+//           $('#kota').html('');
+//           $('#kota').append($('<option>', {
+//             text: "Pilih kota",
+//             selected: true,
+//             disabled: true,
+//           }));
+//           $.each(result.kota, function(a, j) {
+//             $('#kota').append($('<option>', {
+//               value: j.id,
+//               text: j.nama,
+//             }));
+//           });
 
-}
-});
-}
-</script> --}}
+        
+
+//           $('.js-example-basic-single').select2();
+//           $('#modalAdd').modal();
+//         }
+//     });
+
+
+$('#provinsi').change(function(){
+    var provID = $(this).val(); 
+    console.log($(this).val())   
+    if(provID){
+        $.ajax({
+           type:"GET",
+           url: `{{ url('/api/v1') }}/getKabupaten?id_provinsi=`+provID,
+           data : {"_token":"{{ csrf_token() }}"},
+           dataType: 'JSON',
+           success:function(res){               
+            if(res){
+                $("#kota").empty();
+                $("#kecamatan").empty();
+                $("#kota").append('<option>---Pilih Kabupaten / Kota---</option>');
+                $("#kecamatan").append('<option>---Pilih Kecamatan---</option>');
+                $.each(res,function(id_kabupaten, nama){
+                    $("#kota").append('<option value="'+id_kabupaten+'">'+nama+'</option>');
+                });
+            }else{
+               $("#kota").empty();
+               $("#kecamatan").empty();
+            }
+           }
+        });
+    }else{
+        $("#kota").empty();
+        $("#kecamatan").empty();
+    }      
+   });
+
+   $('#kota').change(function(){
+    var kabID = $(this).val(); 
+    console.log($(this).val())   
+    if(kabID){
+        $.ajax({
+           type:"GET",
+           url: `{{ url('/api/v1') }}/getKecamatan?id_kabupaten=`+kabID,
+           data : {"_token":"{{ csrf_token() }}"},
+           dataType: 'JSON',
+           success:function(res){               
+            if(res){
+                $("#kecamatan").empty();
+                $("#kelurahan").empty();
+
+                $("#kecamatan").append('<option>---Pilih Kecamatan---</option>');
+                $("#kelurahan").append('<option>---Pilih Kelurahan---</option>');
+
+                $.each(res,function(id_kecamatan, nama){
+                    $("#kecamatan").append('<option value="'+id_kecamatan+'">'+nama+'</option>');
+                });
+            }else{
+               $("#kecamatan").empty();
+               $("#kelurahan").empty();
+
+            }
+           }
+        });
+    }else{
+        $("#kecamatan").empty();
+        $("#kelurahan").empty();
+
+    }      
+   });
+
+   $('#kecamatan').change(function(){
+    var kecID = $(this).val(); 
+    console.log($(this).val())   
+    if(kecID){
+        $.ajax({
+           type:"GET",
+           url: `{{ url('/api/v1') }}/getKelurahan?id_kecamatan=`+kecID,
+           data : {"_token":"{{ csrf_token() }}"},
+           dataType: 'JSON',
+           success:function(res){               
+            if(res){
+                $("#kelurahan").empty();
+                $("#kelurahan").append('<option>---Pilih Kelurahan---</option>');
+
+                $.each(res,function(id_kelurahan, nama){
+                    $("#kelurahan").append('<option value="'+id_kelurahan+'">'+nama+'</option>');
+                });
+            }else{
+               $("#kelurahan").empty();
+
+            }
+           }
+        });
+    }else{
+        $("#kelurahan").empty();
+    }      
+   });
+</script>
 @endsection

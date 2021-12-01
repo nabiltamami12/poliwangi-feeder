@@ -21,7 +21,7 @@
 
                 <hr class="my-4">
 
-                <form id="form_cu" action="{{route('dataPegawai.update', $item->id)}}" method="POST">
+                <form id="form_cu" action="" method="POST">
                     @method('put')
                     @csrf
                     <div class="row">
