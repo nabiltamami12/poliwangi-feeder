@@ -167,7 +167,7 @@
 @section('js')
 <script>
       var nomor = 1;
-  dt_url = '{{ route('data-staff') }}';
+  dt_url = `{{ url('/api/v1') }}/getStaff`;
   dt_opt = {
     processing: true,
     serverSide: true,

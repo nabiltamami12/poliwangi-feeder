@@ -117,7 +117,7 @@
             </div>
             <ul class="nav-item-dropdown-content">
               <li class="nav-item">
-                <a class="nav-link" href="{{ url('/admin/kepegawaian/dataStaff')}}">
+                <a class="nav-link" href="{{ url('/admin/kepegawaian/data-staff')}}">
                   <span class="mini_icon">JB</span>
                   <span class="nav-link-text">Jabatan</span>
                 </a>
@@ -129,7 +129,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{{ url('/admin/kepegawaian/dataUnit')}}">
+                <a class="nav-link" href="{{ url('/admin/kepegawaian/data-unit')}}">
                   <span class="mini_icon">UN</span>
                   <span class="nav-link-text">Unit</span>
                 </a>
@@ -153,7 +153,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{{ url('/admin/kepegawaian/reportPegawai')}}">
+                <a class="nav-link" href="{{ url('/admin/kepegawaian/data-report')}}">
                   <span class="mini_icon">RP</span>
                   <span class="nav-link-text">Report</span>
                 </a>

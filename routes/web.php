@@ -143,17 +143,26 @@ Route::get('/pmbgenerateva', function () {
     Route::prefix('admin')->middleware(['aksesuntuk:admin'])->group(function () {
         Route::prefix('kepegawaian')->group(function () {
             //route pegawai
-            Route::resource('dataPegawai', PegawaiController::class);
-            Route::get('/getPegawai', [PegawaiController::class, 'getPegawai'])->name('get-pegawai');
+            Route::get('/data-pegawai', function () { 
+                return view('admin.masterKepegawaian.pegawai.index', [
+                    "title" => "data-pegawai",
+                ]);
+            });
             //route unit
-            Route::resource('dataUnit', UnitController::class);
-            Route::get('/getUnit', [UnitController::class, 'getUnit'])->name('get-unit');
+            
+            Route::get('/data-unit', function () { 
+                return view('admin.masterKepegawaian.unit.index', [
+                    "title" => "data-unit",
+                ]);
+            });
 
-            Route::resource('reportPegawai', ReportController::class);
-            Route::get('/dataReport', [ReportController::class, 'dataReport'])->name('data-report');
+            Route::get('/data-report', function () { 
+                return view('admin.masterKepegawaian.report.index', [
+                    "title" => "data-report",
+                ]);
+            });
+
             //route staff
-            // Route::resource('dataStaff', StaffController::class);
-            // Route::get('/getStaff', [StaffController::class, 'getStaff'])->name('data-staff');
             Route::get('/data-staff', function () { 
                 return view('admin.masterKepegawaian.staff.index', [
                     "title" => "data-staff",

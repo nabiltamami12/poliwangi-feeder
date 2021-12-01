@@ -345,12 +345,36 @@ Route::prefix('v1')->group(function () {
     Route::delete('/data-struktural/{id}', [Ctr\DataStrukturalController::class, 'destroy']);
 
      // Kepegawaian Data Staff
-     Route::get('/getData', [Ctr\StaffController::class, 'getData'])->name('data-staff');
+     Route::get('/getStaff', [Ctr\StaffController::class, 'getData'])->name('data-staff');
      Route::post('/data-staff', [Ctr\StaffController::class, 'store']);
      Route::get('/data-staff/{id}/edit', [Ctr\StaffController::class, 'edit'])->name('dataStaff');
      Route::get('/data-staff/{id}', [Ctr\StaffController::class, 'show']);
      Route::put('/data-staff/{id}', [Ctr\StaffController::class, 'update']);
      Route::delete('/data-staff/{id}', [Ctr\StaffController::class, 'destroy']);
+
+    // Kepegawaian Data Unit
+    Route::get('/getUnit', [Ctr\UnitController::class, 'getData'])->name('data-unit');
+    Route::get('/getDataUnit', [Ctr\UnitController::class, 'getUnit']);
+    Route::post('/store-unit', [Ctr\UnitController::class, 'store'])->name('store-unit');
+    Route::get('/data-unit/{id}/edit', [Ctr\UnitController::class, 'edit'])->name('dataunit');
+    Route::put('/data-unit/{id}', [Ctr\UnitController::class, 'update']);
+    Route::delete('/data-unit/{id}', [Ctr\UnitController::class, 'destroy']);
+
+      // Kepegawaian Data report
+    Route::get('/getReport', [Ctr\ReportController::class, 'getData'])->name('data-report');
+    Route::get('/getDataReport', [Ctr\ReportController::class, 'getReport']);
+    Route::post('/store-report', [Ctr\ReportController::class, 'store'])->name('store-report');
+    Route::get('/data-report/{id}/edit', [Ctr\ReportController::class, 'edit'])->name('datareport');
+    Route::put('/data-report/{id}', [Ctr\ReportController::class, 'update']);
+    Route::delete('/data-report/{id}', [Ctr\ReportController::class, 'destroy']);
+
+        // Kepegawaian Data Pegawai
+        Route::get('/getData', [Ctr\ReportController::class, 'getData'])->name('data-pegawai');
+        Route::get('/getDataPegawai', [Ctr\ReportController::class, 'getPegawai']);
+        Route::post('/store-pegawai', [Ctr\ReportController::class, 'store'])->name('store-pegawai');
+        Route::get('/data-pegawai/{id}/edit', [Ctr\ReportController::class, 'edit'])->name('dataPegawai');
+        Route::put('/data-pegawai/{id}', [Ctr\ReportController::class, 'update']);
+        Route::delete('/data-pegawai/{id}', [Ctr\ReportController::class, 'destroy']);
 
 });
 
