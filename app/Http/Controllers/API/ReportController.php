@@ -14,8 +14,12 @@ class ReportController extends Controller
 {
     public function getData(Request $request)
     {
-        $data = Report::orderBy('id', 'desc')->get();
+        // $report = Report::with('pegawai')->get();
+        $data = Report::orderBy('id', 'desc')->with('pegawai')->get();
         return DataTables::of($data)
+            ->addColumn('id_pegawai', function($data) {
+                return $data->pegawai->nama;
+            })
             ->addColumn('Aksi', function($data) {
                 return '<button type="button" class="btn btn-success btn-sm" id="getEditData" data-id="'.$data->id.'">Edit</button>
                     <button type="button" data-id="'.$data->id.'" onclick="delete_btn()" class="btn btn-danger btn-sm" id="getDeleteId">Delete</button>';
@@ -26,7 +30,9 @@ class ReportController extends Controller
 
     public function getReport()
     {
+        // $report = Report::with('pegawai')->get();
         $pegawai = Pegawai::orderBy('nama', 'ASC')->get();
+        // dd($report);
         return response()->json(['pegawai'=>$pegawai]);
     }
     public function store(Request $request, Report $data)
@@ -65,7 +71,7 @@ class ReportController extends Controller
           <div class="form-row">
               <div class="form-group col-md-12">
             <label for="">Keterangan</label>
-             <input type="text" class="form-control" name="keterangan" id="keterangan" placeholder="Masukan Keterangan" value="'.$data->keterangan.'" required>
+             <input type="text" class="form-control" name="keterangan" id="editKeterangan" placeholder="Masukan Keterangan" value="'.$data->keterangan.'" required>
             </div>
           </div>';
  

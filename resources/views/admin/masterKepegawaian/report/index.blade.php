@@ -302,7 +302,7 @@
             method: 'PUT',
             data: {
                 id_pegawai: parseInt($('#editIdPegawai').val()),
-                keterangan: $('#keterangan').val(),
+                keterangan: $('#editKeterangan').val(),
                 
             },
             success: function(result) {
@@ -344,7 +344,7 @@
             success: function(result) {
                 setInterval(function(){ 
                     $('#modalDelete').modal('hide');
-                    $('#datatable').DataTable().ajax.reload();
+                    // $('#datatable').DataTable().ajax.reload();
                     location.reload();
                 }, 500);
             }

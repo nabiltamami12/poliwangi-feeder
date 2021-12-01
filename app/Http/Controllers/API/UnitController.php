@@ -68,13 +68,13 @@ class UnitController extends Controller
                 <div class="form-row">
                     <div class="form-group col-md-12">
                         <label for="">Nama Unit</label>
-                        <input type="text" class="form-control" name="unit" id="unit" placeholder="Masukan nama unit" value="'.$data->unit.'" required>
+                        <input type="text" class="form-control" name="unit" id="editUnit" placeholder="Masukan nama unit" value="'.$data->unit.'" required>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-12">
                         <label for="">Nama Kepala</label>
-                        <input type="text" class="form-control" name="kepala" id="kepala" placeholder="Masukan nama kepala unit" value="'.$data->kepala.'" required>
+                        <input type="text" class="form-control" name="kepala" id="editKepala" placeholder="Masukan nama kepala unit" value="'.$data->kepala.'" required>
                     </div>
                 </div>';
  

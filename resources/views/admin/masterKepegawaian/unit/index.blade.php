@@ -320,8 +320,8 @@
             method: 'PUT',
             data: {
                 id_pegawai: parseInt($('#editIdPegawai').val()),
-                unit: $('#unit').val(),
-                kepala: $('#kepala').val(),
+                unit: $('#editUnit').val(),
+                kepala: $('#editKepala').val(),
                 
             },
             success: function(result) {
@@ -363,7 +363,7 @@
             success: function(result) {
                 setInterval(function(){ 
                     $('#modalDelete').modal('hide');
-                    $('#datatable').DataTable().ajax.reload();
+                    // $('#datatable').DataTable().ajax.reload();
                     location.reload();
                 }, 500);
             }
