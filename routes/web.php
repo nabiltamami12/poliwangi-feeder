@@ -8,6 +8,7 @@ use App\Models\Kepegawaian\Kota;
 use App\Models\Kepegawaian\Staff;
 use Illuminate\Support\Facades\DB;
 use App\Models\Kepegawaian\Pangkat;
+use App\Models\Kepegawaian\Pegawai;
 use App\Models\Kepegawaian\Provinsi;
 use App\Models\Kepegawaian\Kecamatan;
 use App\Models\Kepegawaian\Kelurahan;
@@ -173,11 +174,33 @@ Route::get('/pmbgenerateva', function () {
                 ]);
             })->name('data-create');
 
-            Route::get('/data-edit', function () { 
-                return view('admin.masterKepegawaian.pegawai.edit', [
-                    "title" => "data-pegawai",
+            Route::get('/data-edit/edit/{id}', function ($id) { 
+                $kota = Kota::all();
+                $kecamatan = Kecamatan::all();
+                $provinsi = Provinsi::all();
+                $pangkat = Pangkat::all();
+                $jabatan = Staff::all();
+                $jurusan = Jurusan::all();
+                $kelurahan = Kelurahan::all();
+                // $jabatan = JabatanStruktural::all();
+        
+                $item = Pegawai::find($id);
+        
+                return view('admin.masterKepegawaian.pegawai.edit',[
+                        "id" => $id,
+                        "title" => "kepegawaian",
+                        "kota" => $kota,
+                        "kecamatan" => $kecamatan,
+                        "provinsi" => $provinsi,
+                        "pangkat" => $pangkat,
+                        "jabatan" => $jabatan,
+                        "item" => $item,
+                        "jurusan" => $jurusan,
+                        "kelurahan" => $kelurahan, 
+        
+                        
                 ]);
-            });
+            })->name('data-edit');
             //route unit
             
             Route::get('/data-unit', function () { 

@@ -23,7 +23,7 @@ class PegawaiController extends Controller
         $data = Pegawai::orderBy('id', 'desc')->get();
         return DataTables::of($data)
             ->addColumn('Aksi', function($data) {
-                return '<a href="" class="btn btn-success btn-sm" id="getEditData" data-id="'.$data->id.'">Edit</a>
+                return '<a href="'.route('data-edit', $data->id).'" class="btn btn-success btn-sm" id="getEditData" data-id="'.$data->id.'">Edit</a>
                     <button type="button" data-id="'.$data->id.'" onclick="delete_btn()" class="btn btn-danger btn-sm" id="getDeleteId">Delete</button>';
             })
             ->rawColumns(['Aksi'])
@@ -70,36 +70,36 @@ class PegawaiController extends Controller
             'name' => 'required | max:25',
             'email' => 'email | required | unique:users',
             'password' => 'required | confirmed',
-            'nip' => 'required',
-            'noid' => 'required',
-            'nama' => 'required',
-            'jurusan' => 'required',
-            'jenis_kelamin' => 'required',
-            'agama' => 'required',
-            'no_tlp' => 'required',
-            'tmp_lahir' => 'required',
-            'tgl_lahir' => 'required',
-            'shift' => 'required',
-            'gol_darah' => 'required',
-            'gelar_dpn' => 'required',
-            'gelar_blk' => 'required',
-            'status_kawin' => 'required',
-            'kelurahan' => 'required',
-            'kecamatan' => 'required',
-            'kabupaten' => 'required',
-            'provinsi' => 'required',
-            'askes' => 'required',
-            'kode_dosen_sk034' => 'required',
-            'nip_lama' => 'required',
-            'npwp' => 'required',
-            'nidn' => 'required',
-            'departemen' => 'required',
-            'praktisi' => 'required',
-            'nama_instansi' => 'required',
-            'alamat_instansi' => 'required',
-            'pendidikan_terakhir' => 'required',
-            'id_jabatan' => 'required',
-            'id_pangkat' => 'required',
+            'nip' => 'nullable',
+            'noid' => 'nullable',
+            'nama' => 'nullable',
+            'jurusan' => 'nullable',
+            'jenis_kelamin' => 'nullable',
+            'agama' => 'nullable',
+            'no_tlp' => 'nullable',
+            'tmp_lahir' => 'nullable',
+            'tgl_lahir' => 'nullable',
+            'shift' => 'nullable',
+            'gol_darah' => 'nullable',
+            'gelar_dpn' => 'nullable',
+            'gelar_blk' => 'nullable',
+            'status_kawin' => 'nullable',
+            'kelurahan' => 'nullable',
+            'kecamatan' => 'nullable',
+            'kabupaten' => 'nullable',
+            'provinsi' => 'nullable',
+            'askes' => 'nullable',
+            'kode_dosen_sk034' => 'nullable',
+            'nip_lama' => 'nullable',
+            'npwp' => 'nullable',
+            'nidn' => 'nullable',
+            'departemen' => 'nullable',
+            'praktisi' => 'nullable',
+            'nama_instansi' => 'nullable',
+            'alamat_instansi' => 'nullable',
+            'pendidikan_terakhir' => 'nullable',
+            'id_jabatan' => 'nullable',
+            'id_pangkat' => 'nullable',
             
         ]);
 
@@ -147,7 +147,7 @@ class PegawaiController extends Controller
         
 
 
-        return redirect()->route('dataPegawai.index');
+        return redirect()->route('data-pegawai');
     }
 
     public function edit($id)
@@ -185,7 +185,7 @@ class PegawaiController extends Controller
         $pgw->update($request->all()); 
 
 
-        return redirect()->route('dataPegawai.index');
+        return redirect()->route('data-pegawai');
     }
 
     public function destroy($id)

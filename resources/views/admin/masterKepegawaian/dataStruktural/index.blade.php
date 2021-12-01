@@ -97,6 +97,7 @@
           <div class="form-row">
               <div class="form-group col-md-6">
                 <label for="">Pegawai</label>
+                <span class="text-danger float-right">*(Wajib diisi)</span>
                 <select name="id_pegawai" class="form-control js-example-basic-single" id="idPegawai" required>
                   
                 </select>
