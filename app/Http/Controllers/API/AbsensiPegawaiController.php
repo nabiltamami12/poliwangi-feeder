@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Database\QueryException;
 use App\Models\Kepegawaian\AbsensiKaryawan;
 use App\Models\Kepegawaian\Pegawai;
+use App\Models\Kepegawaian\AbsensiShift;
 
 class AbsensiPegawaiController extends Controller
 {
@@ -29,21 +30,21 @@ class AbsensiPegawaiController extends Controller
         
 		try {
             switch($role) {
-                case 'all':
-					if($bulan != 'all') {
-					$query = Pegawai::withCount(['hadir' => function($q) use ($year, $bulan) {
-								$q->whereYear('tanggal', $year)->whereMonth('tanggal', $bulan);
-							}, 'totalpresensi' => function($k) use ($year, $bulan) {
-								$k->whereYear('tanggal', $year)->whereMonth('tanggal', $bulan);
-							}])->get();
-					} else {
-						$query = Pegawai::withCount(['hadir' => function($q) use ($year) {
-									$q->whereYear('tanggal', $year);
-								}, 'totalpresensi' => function($k) use ($year) {
-									$k->whereYear('tanggal', $year);
-								}])->get();
-					}
-                    break;
+                // case 'all':
+				// 	if($bulan != 'all') {
+				// 	$query = Pegawai::withCount(['hadir' => function($q) use ($year, $bulan) {
+				// 				$q->whereYear('tanggal', $year)->whereMonth('tanggal', $bulan);
+				// 			}, 'totalpresensi' => function($k) use ($year, $bulan) {
+				// 				$k->whereYear('tanggal', $year)->whereMonth('tanggal', $bulan);
+				// 			}])->get();
+				// 	} else {
+				// 		$query = Pegawai::withCount(['hadir' => function($q) use ($year) {
+				// 					$q->whereYear('tanggal', $year);
+				// 				}, 'totalpresensi' => function($k) use ($year) {
+				// 					$k->whereYear('tanggal', $year);
+				// 				}])->get();
+				// 	}
+                //     break;
 				case 'dosen':
 					if($bulan != 'all') {
 						$query = Pegawai::whereHas('statuspegawai', function($b) {
@@ -141,15 +142,15 @@ class AbsensiPegawaiController extends Controller
 					break;
 				case 'satpam':
 					if($bulan != 'all') {
-						$query = Pegawai::withCount(['hadir' => function($q) use ($year, $bulan) {
+						$query = Pegawai::withCount(['hadirkeamanan' => function($q) use ($year, $bulan) {
 								$q->whereYear('tanggal', $year)->whereMonth('tanggal', $bulan);
-							}, 'totalpresensi' => function($k) use ($year, $bulan) {
+							}, 'tidakhadirkeamanan' => function($k) use ($year, $bulan) {
 								$k->whereYear('tanggal', $year)->whereMonth('tanggal', $bulan);
 							}])->where('staff', 5)->get();
 					} else {
-						$query = Pegawai::withCount(['hadir' => function($q) use ($year) {
+						$query = Pegawai::withCount(['hadirkeamanan' => function($q) use ($year) {
 									$q->whereYear('tanggal', $year);
-								}, 'totalpresensi' => function($k) use ($year) {
+								}, 'tidakhadirkeamanan' => function($k) use ($year) {
 									$k->whereYear('tanggal', $year);
 								}])->where('staff', 5)->get();
 					}
@@ -170,19 +171,19 @@ class AbsensiPegawaiController extends Controller
 					}
 					break;
                 default:
-					if($bulan != 'all') {
-						$query = Pegawai::withCount(['hadir' => function($q) use ($year, $bulan) {
-									$q->whereYear('tanggal', $year)->whereMonth('tanggal', $bulan);
-								}, 'totalpresensi' => function($k) use ($year, $bulan) {
-									$k->whereYear('tanggal', $year)->whereMonth('tanggal', $bulan);
-								}])->get();
-					} else {
-						$query = Pegawai::withCount(['hadir' => function($q) use ($year) {
-									$q->whereYear('tanggal', $year);
-								}, 'totalpresensi' => function($k) use ($year) {
-									$k->whereYear('tanggal', $year);
-								}])->get();
-					}
+					// if($bulan != 'all') {
+					// 	$query = Pegawai::withCount(['hadir' => function($q) use ($year, $bulan) {
+					// 				$q->whereYear('tanggal', $year)->whereMonth('tanggal', $bulan);
+					// 			}, 'totalpresensi' => function($k) use ($year, $bulan) {
+					// 				$k->whereYear('tanggal', $year)->whereMonth('tanggal', $bulan);
+					// 			}])->get();
+					// } else {
+					// 	$query = Pegawai::withCount(['hadir' => function($q) use ($year) {
+					// 				$q->whereYear('tanggal', $year);
+					// 			}, 'totalpresensi' => function($k) use ($year) {
+					// 				$k->whereYear('tanggal', $year);
+					// 			}])->get();
+					// }
                     break;
             }
 			
@@ -211,6 +212,35 @@ class AbsensiPegawaiController extends Controller
 										->get();
 		   	}else {
 				$query = AbsensiKaryawan::where('pegawai', $request->id_pegawai)
+										->whereYear('tanggal', $request->tahun)
+										->orderBy('tanggal', 'asc')
+										->get();
+		   	}
+
+			$this->data = $query;
+			$this->status = "success";
+		} catch (QueryException $e) {
+			$this->status = "failed";
+			$this->error = $e;
+		}
+		return response()->json([
+			"status" => $this->status,
+			"data" => $this->data,
+			"error" => $this->error
+		]);
+   }
+
+   public function detail_presensi_keamanan(Request $request)
+   {
+       try {
+		   	if($request->bulan != 'all') {
+				$query = AbsensiShift::where('pegawai', $request->id_pegawai)
+										->whereYear('tanggal', $request->tahun)
+										->whereMonth('tanggal', $request->bulan)
+										->orderBy('tanggal', 'asc')
+										->get();
+		   	}else {
+				$query = AbsensiShift::where('pegawai', $request->id_pegawai)
 										->whereYear('tanggal', $request->tahun)
 										->orderBy('tanggal', 'asc')
 										->get();
