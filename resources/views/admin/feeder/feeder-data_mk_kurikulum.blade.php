@@ -28,7 +28,7 @@
                 <button type="submit" class="btn btn-primary"><i class="iconify-inline mr-1" data-icon='bx:bx-download'></i> Download Feeder</button>
               </form>
             </div>
-                      <div class="col text-right">
+                      <div  class="col" style="margin-right: -20em">
               <form action="{{ url('admin/feeder/upload_feeder-data_mk_kurikulum') }}" method="post">
                 {!! csrf_field() !!}
                 <button type="submit" class="btn btn-primary"><i class="iconify-inline mr-1" data-icon='bx:bx-download'></i> Upload Feeder</button>
@@ -39,7 +39,7 @@
         </div>
         <hr class="mt">
         <div class="table-responsive">
-          <table id="table" class="table align-items-center table-flush table-borderless table-hover">
+          <table id="datatable" class="table align-items-center table-flush table-borderless table-hover">
             <thead class="table-header" style="text-align:center">
               <tr>
                   <th style="text-align:center">No</th>
@@ -87,13 +87,13 @@
       </div>
     </div>
   </div>
-
+</section>
 @endsection
 
-<!-- @section('js')
+@section('js')
 <script>
   var nomor = 1;
-  dt_url = "{{ route('get-feeder-jurusan') }}";
+  dt_url = "{{ url('getFeederDataMKKurikulum') }}";
   dt_opt = {
     processing: true,
     serverSide: true,
@@ -103,11 +103,16 @@
     "order": [[ 0, "desc" ]],
     columns: [
         {data: null, name: 'no', sortable: false, render: function(data, type, row, meta) {return meta.row + meta.settings._iDisplayStart + 1;}},
-        {data: 'kode_jurusan', name: 'kode_jurusan'},
-        {data: 'jurusan', name: 'jurusan'},
-        {data: 'akreditasi', name: 'akreditasi'},
-        {data: 'jenjang', name: 'jenjang'},
-        {data: 'id_prodi_feeder', name: 'id_prodi_feeder'},
+
+        {data: 'kode_mk', name: 'kode_mk'},
+        {data: 'nama_mk', name: 'nama_mk'},
+        {data: 'bobot_mk', name: 'bobot_mk'},
+        {data: 'status_mk', name: 'status_mk'},
+        {data: 'nama_kurikulum', name: 'nama_kurikulum'},
+        {data: 'program_studi', name: 'program_studi'},
+        {data: 'nama_program_studi', name: 'nama_program_studi'},
+        {data: 'semester', name: 'semester'},
+        {data: 'keterangan_upload_mk_kurikulum', name: 'keterangan_upload_mk_kurikulum'},
         {data: 'Aksi', name: 'Aksi',orderable:false,serachable:false,sClass:'text-center'},
     ]
      
@@ -115,4 +120,4 @@
   };
 </script>
 
-@endsection -->
+@endsection

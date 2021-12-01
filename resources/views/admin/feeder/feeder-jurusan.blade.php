@@ -64,8 +64,6 @@
             <td  style="text-align:center">{{ $value->jenjang }}</td>
             <td  style="text-align:center">{{ $value->id_prodi_feeder }}</td>
 
-
-
 </tr>
             @empty
             <td> - </td>

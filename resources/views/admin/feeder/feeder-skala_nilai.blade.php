@@ -43,14 +43,14 @@
             <thead class="table-header" style="text-align:center">
               <tr>
                 <th scope="col">NO</th>
-              <th style="text-align:center">Program Studi</th>
-              <th style="text-align:center">Nilai Huruf</th>
-              <th style="text-align:center">Nilai Huruf</th>                 
-              <th style="text-align:center">Bobot Minimum</th>                        
-              <th style="text-align:center">Bobot Maximum</th>                        
-              <th style="text-align:center">Tgl Mulai</th>
-              <th style="text-align:center">Tgl Akhir</th>
-              <th style="text-align:center">Status</th>
+              <th scope="col">Program Studi</th>
+              <th scope="col">Nilai Huruf</th>
+              <th scope="col">Nilai Huruf</th>                 
+              <th scope="col">Bobot Minimum</th>                        
+              <th scope="col">Bobot Maximum</th>                        
+              <th scope="col">Tgl Mulai</th>
+              <th scope="col">Tgl Akhir</th>
+              <th scope="col">Status</th>
               </tr>
             </thead>
             <tbody>
@@ -104,6 +104,7 @@
     "order": [[ 0, "desc" ]],
     columns: [
         {data: null, name: 'no', sortable: false, render: function(data, type, row, meta) {return meta.row + meta.settings._iDisplayStart + 1;}},
+        {data: 'nama_program_studi', name: 'nama_program_studi'},
         {data: 'nilai_huruf', name: 'nilai_huruf'},
         {data: 'nilai_indeks', name: 'nilai_indeks'},
         {data: 'bobot_nilai_min', name: 'bobot_nilai_min'},

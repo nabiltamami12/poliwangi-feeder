@@ -71,7 +71,14 @@
             {
           $stsfeeder = "BELUM ADA";
             }
-            
+            if($value->kode_jurusan != '') 
+            {
+            $ket = "SUKSES";
+            }
+            else
+            {
+          $ket = "GAGAL";
+            }
             //STS
             if($value->status_kuliah == "C")
             {
@@ -87,7 +94,7 @@
             }
             else
             {
-              $sts = "AKTIF";
+              $sts = "Aktif";
             }
             @endphp
 
@@ -101,7 +108,7 @@
             <td  style="text-align:center"> {{ $value->ips }} </td>
             <td  style="text-align:center"> {{ $value->ipk }} </td>
             <td  style="text-align:center"> {{ $stsfeeder }} </td>
-            <td  style="text-align:center"> SUKSES </td>
+            <td  style="text-align:center"> {{ $ket }} </td>
 </tr>
             @empty
             <td> - </td>
@@ -130,13 +137,11 @@
         {data: null, name: 'no', sortable: false, render: function(data, type, row, meta) {return meta.row + meta.settings._iDisplayStart + 1;}},
         {data: 'nim', name: 'nim'},
         {data: 'nama', name: 'nama'},
+        {data: 'jurusan', name: 'jurusan'},
         {data: 'semester', name: 'semester'},
+        {data: 'status_kuliah', name: 'status_kuliah'},
         {data: 'ips', name: 'ips'},
         {data: 'ipk', name: 'ipk'},
-        {data: 'sks_smt', name: 'sks_smt'},
-        {data: 'sks_total', name: 'sks_total'},
-        {data: 'jurusan', name: 'jurusan'},
-        {data: 'status_kuliah', name: 'status_kuliah'},
         {data: 'id_registrasi_mahasiswa', name: 'id_registrasi_mahasiswa'},
         {data: 'Aksi', name: 'Aksi',orderable:false,serachable:false,sClass:'text-center'},
     ]
