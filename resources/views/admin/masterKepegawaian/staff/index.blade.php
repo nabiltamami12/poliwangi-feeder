@@ -13,11 +13,11 @@
                 <div class="card-header p-0">
                     <div class="row align-items-center">
                         <div class="col">
-                            <h2 class="mb-0">Data Staff</h2>
+                            <h2 class="mb-0">Data Jabatan</h2>
                         </div>
                         <div class="col text-right">
-                            <a href="{{route('dataStaff.create')}}" class="btn btn-primary"><i
-                                    class="iconify-inline mr-1" data-icon='bx:bx-plus-circle'></i> Tambah</a>
+                            <button type="button" onclick="add_btn()" class="btn btn-primary"><i
+                                    class="iconify-inline mr-1" data-icon='bx:bx-plus-circle'></i> Tambah</button>
                         </div>
                     </div>
 
@@ -65,7 +65,84 @@
 
 </section>
 
-<!-- Delete Modal -->
+<!-- Modal Add -->
+<div class="modal fade" id="modalAdd" tabindex="-1" aria-labelledby="modalAddlLabel" aria-hidden="true">
+    <div id="loadingAdd"></div>
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalAddlLabel">Tambah Jabatan</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <div class="alert alert-danger alert-dismissible fade show" role="alert" style="display: none;">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="form-group">
+              <div class="alert alert-success alert-dismissible fade show" role="alert" style="display: none;">
+                  <strong>Berhasil ! </strong>Jabatan berhasil ditambahkan.
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="">Nama Jabatan</label>
+              <input type="text" class="form-control" name="staf" id="staff" placeholder="Nama jabatan" required>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary" id="SubmitAddForm">Submit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  
+<!-- Edit Modal -->
+<div class="modal" id="modalEdit" tabindex="-1" aria-labelledby="modalEditlLabel" aria-hidden="true">
+    <div id="loadingEdit"></div>
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Edit Jabatan</h4>
+                <button type="button" class="close modelClose" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                  <div class="alert alert-danger alert-dismissible fade show" role="alert" style="display: none;">
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                      </button>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="alert alert-success alert-dismissible fade show" role="alert" style="display: none;">
+                      <strong>Berhasil ! </strong>Jabatan berhasil diperbarui.
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                      </button>
+                  </div>
+                </div>
+                <div id="EditModalBody">
+                      
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="SubmitEditForm">Update</button>
+                <button type="button" class="btn btn-danger modelClose" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+  </div>
+
+  <!-- Delete Modal -->
 <div class="modal fade" id="modalDelete" tabindex="-1" aria-labelledby="modalDeletelLabel" aria-hidden="true">
     <div id="loadingDelete"></div>
     <div class="modal-dialog modal-dialog-centered">
@@ -117,7 +194,6 @@
     var no = 1;
 
     $('#SubmitAddForm').click(function(e) {
-        // $("#loadingAdd").addClass("lds-dual-ring"); 
         e.preventDefault();
         $.ajaxSetup({
             headers: {
@@ -125,31 +201,29 @@
             }
         });
         $.ajax({
-            url: "{{ route('dataStaff.store') }}",
+            url: `{{ url('/api/v1') }}/data-staff`,
             method: 'post',
             data: {
-                nama_pangkat: $('#namaPangkat').val(),
-                golongan: $('#golongan').val(),
-                urut: $('#urut').val(),
+                staf: $('#staff').val(),
             },
             success: function(result) {
-              if(result.errors) {
-                  $('.alert-danger').html('');
-                  $.each(result.errors, function(key, value) {
-                      $('.alert-danger').show();
-                      $('.alert-danger').append('<strong><li>'+value+'</li></strong>');
-                  });
-                  // $("#loadingAdd").removeClass("lds-dual-ring"); 
-              } else {
-                  $('.alert-danger').hide();
-                  $('.alert-success').show();
-                  $('#datatable').DataTable().ajax.reload();
-                  setInterval(function(){ 
-                      $('.alert-success').hide();
-                      $('#modalAdd').modal('hide');
-                      location.reload();
-                  }, 1000);
-              }
+                console.log(result)
+                if(result.errors) {
+                    $('.alert-danger').html('');
+                    $.each(result.errors, function(key, value) {
+                        $('.alert-danger').show();
+                        $('.alert-danger').append('<strong><li>'+value+'</li></strong>');
+                    });
+                } else {
+                    $('.alert-danger').hide();
+                    $('.alert-success').show();
+                    $('#datatable').DataTable().ajax.reload();
+                    setInterval(function(){ 
+                        $('.alert-success').hide();
+                        $('#modalAdd').modal('hide');
+                        location.reload();
+                    }, 500);
+                }
             }
         });
     });
@@ -159,28 +233,25 @@
     });
 
     var id;
-    $('body').on('click', '#getEditPegawai', function(e) {
-        $("#loading").addClass("lds-dual-ring"); 
-        // e.preventDefault();
+
+    $('body').on('click', '#getEditJabatan', function(e) {
         $('.alert-danger').html('');
         $('.alert-danger').hide();
         id = $(this).data('id');
         $.ajax({
-            url: "dataStaff/"+id+"/edit",
+            url: `{{ url('/api/v1') }}/data-staff/${id}/edit`,
             method: 'GET',
             // data: {
             //     id: id,
             // },
             success: function(result) {
-                $('#EditModalBody').html(result.html);
-                $("#loading").removeClass("lds-dual-ring");
-                $('#modalEdit').show();
+              $('#EditModalBody').html(result.html);
+              $('#modalEdit').show();
             }
         });
     });
 
     $('#SubmitEditForm').click(function(e) {
-        // $("#loadingEdit").addClass("lds-dual-ring"); 
         e.preventDefault();
         $.ajaxSetup({
             headers: {
@@ -188,17 +259,14 @@
             }
         });
         $.ajax({
-            url: "dataStaff/"+id,
+            url: `{{ url('/api/v1') }}/data-staff/${id}`,
             method: 'PUT',
             data: {
-                nama_pangkat: $('#editNamaPangkat').val(),
-                golongan: $('#editGolongan').val(),
-                urut: $('#editUrut').val(),
+                staf: $('#editstaff').val(),
             },
             success: function(result) {
                 if(result.errors) {
                     $('.alert-danger').html('');
-                    // $("#loading").removeClass("lds-dual-ring"); 
                     $.each(result.errors, function(key, value) {
                         $('.alert-danger').show();
                         $('.alert-danger').append('<strong><li>'+value+'</li></strong>');
@@ -211,7 +279,7 @@
                         $('.alert-success').hide();
                         $('#modalEdit').hide();
                         location.reload();
-                    }, 1000);
+                    }, 500);
                 }
             }
         });
@@ -222,7 +290,6 @@
         deleteID = $(this).data('id');
     })
     $('#SubmitDeleteForm').click(function(e) {
-        // $("#loadingDelete").addClass("lds-dual-ring"); 
         e.preventDefault();
         var id = deleteID;
         $.ajaxSetup({
@@ -231,14 +298,12 @@
             }
         });
         $.ajax({
-            url: "dataStaff/"+id,
+            url: `{{ url('/api/v1') }}/data-staff/${id}`,
             method: 'DELETE',
             success: function(result) {
-                setInterval(function(){ 
-                    $('#modalDelete').modal('hide');
-                    $('#datatable').DataTable().ajax.reload();
-                    location.reload();
-                }, 1000);
+                $('#modalDelete').modal('hide');
+                $('#datatable').DataTable().ajax.reload();
+                location.reload();
             }
         });
     });

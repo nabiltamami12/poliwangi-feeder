@@ -152,8 +152,14 @@ Route::get('/pmbgenerateva', function () {
             Route::resource('reportPegawai', ReportController::class);
             Route::get('/dataReport', [ReportController::class, 'dataReport'])->name('data-report');
             //route staff
-            Route::resource('dataStaff', StaffController::class);
-            Route::get('/getStaff', [StaffController::class, 'getStaff'])->name('data-staff');
+            // Route::resource('dataStaff', StaffController::class);
+            // Route::get('/getStaff', [StaffController::class, 'getStaff'])->name('data-staff');
+            Route::get('/data-staff', function () { 
+                return view('admin.masterKepegawaian.staff.index', [
+                    "title" => "data-staff",
+                ]);
+            });
+
             //route pangkat
             Route::resource('/dataPangkat', PangkatController::class);
             Route::get('/getPangkat', [PangkatController::class, 'getPangkat'])->name('get-pangkat');

@@ -118,8 +118,8 @@
             <ul class="nav-item-dropdown-content">
               <li class="nav-item">
                 <a class="nav-link" href="{{ url('/admin/kepegawaian/dataStaff')}}">
-                  <span class="mini_icon">SF</span>
-                  <span class="nav-link-text">Staff</span>
+                  <span class="mini_icon">JB</span>
+                  <span class="nav-link-text">Jabatan</span>
                 </a>
               </li>
               <li class="nav-item">

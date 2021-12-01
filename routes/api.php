@@ -344,6 +344,14 @@ Route::prefix('v1')->group(function () {
     Route::put('/data-struktural/{id}', [Ctr\DataStrukturalController::class, 'update']);
     Route::delete('/data-struktural/{id}', [Ctr\DataStrukturalController::class, 'destroy']);
 
+     // Kepegawaian Data Staff
+     Route::get('/getData', [Ctr\StaffController::class, 'getData'])->name('data-staff');
+     Route::post('/data-staff', [Ctr\StaffController::class, 'store']);
+     Route::get('/data-staff/{id}/edit', [Ctr\StaffController::class, 'edit'])->name('dataStaff');
+     Route::get('/data-staff/{id}', [Ctr\StaffController::class, 'show']);
+     Route::put('/data-staff/{id}', [Ctr\StaffController::class, 'update']);
+     Route::delete('/data-staff/{id}', [Ctr\StaffController::class, 'destroy']);
+
 });
 
 Route::prefix('v1')->middleware('auth:api')->group(function () {

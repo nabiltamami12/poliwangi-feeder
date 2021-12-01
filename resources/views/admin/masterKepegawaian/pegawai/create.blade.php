@@ -38,13 +38,6 @@
                                     placeholder="Masukan Email">
                             </div>
                         </div>
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label class="form-control-label" for="nip">NIP / NIK</label>
-                                <input type="text" name="nip" class="form-control" id="nip"
-                                    placeholder="Masukan Nomor Induk Pegawai">
-                            </div>
-                        </div>
                     </div>
                     <div class="row" hidden>
                         <div class="col-md-6">
@@ -68,13 +61,9 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="form-control-label" for="jabatan_struktural">Jabatan Struktural</label>
-                                <select class="form-control" id="jabatan_struktural" name="jabatan">
-                                    <option>Pilih Jabatan</option>
-                                    @foreach ($jabatan as $row)
-                                        <option value="{{$row->id}}">{{$row->nama_jabatan}}</option>
-                                    @endforeach
-                                </select>
+                                <label class="form-control-label" for="nip">NIP / NIK</label>
+                                <input type="text" name="nip" class="form-control" id="nip"
+                                placeholder="Masukan Nomor Induk Pegawai">
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -231,7 +220,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="form-control-label" for="status_kawin">Status Kawin</label>
+                                <label class="form-control-label" for="status_kawin">Status Perkawinan</label>
                                 <input type="text" class="form-control" id="status_kawin" name="status_kawin"
                                     placeholder="Contoh : Belum Kawin">
                             </div>
