@@ -170,8 +170,13 @@ Route::get('/pmbgenerateva', function () {
             });
 
             //route pangkat
-            Route::resource('/dataPangkat', PangkatController::class);
-            Route::get('/getPangkat', [PangkatController::class, 'getPangkat'])->name('get-pangkat');
+            // Route::resource('/dataPangkat', PangkatController::class);
+            // Route::get('/getPangkat', [PangkatController::class, 'getPangkat'])->name('get-pangkat');
+            Route::get('/data-pangkat', function () { 
+                return view('admin.masterKepegawaian.pangkat.index', [
+                    "title" => "data-pangkat",
+                ]);
+            });
             
             Route::get('/data-struktural', function () { 
                 return view('admin.masterKepegawaian.dataStruktural.index', [

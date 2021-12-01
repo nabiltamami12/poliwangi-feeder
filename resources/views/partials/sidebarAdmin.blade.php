@@ -123,7 +123,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{{ url('/admin/kepegawaian/dataPangkat')}}">
+                <a class="nav-link" href="{{ url('/admin/kepegawaian/data-pangkat')}}">
                   <span class="mini_icon">PK</span>
                   <span class="nav-link-text">Pangkat</span>
                 </a>
@@ -147,7 +147,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{{ url('/admin/kepegawaian/dataPegawai')}}">
+                <a class="nav-link" href="{{ url('/admin/kepegawaian/data-pegawai')}}">
                   <span class="mini_icon">PG</span>
                   <span class="nav-link-text">Pegawai</span>
                 </a>

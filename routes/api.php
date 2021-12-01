@@ -369,12 +369,20 @@ Route::prefix('v1')->group(function () {
     Route::delete('/data-report/{id}', [Ctr\ReportController::class, 'destroy']);
 
         // Kepegawaian Data Pegawai
-        Route::get('/getData', [Ctr\ReportController::class, 'getData'])->name('data-pegawai');
+        Route::get('/getPegawai', [Ctr\ReportController::class, 'getData'])->name('data-pegawai');
         Route::get('/getDataPegawai', [Ctr\ReportController::class, 'getPegawai']);
         Route::post('/store-pegawai', [Ctr\ReportController::class, 'store'])->name('store-pegawai');
         Route::get('/data-pegawai/{id}/edit', [Ctr\ReportController::class, 'edit'])->name('dataPegawai');
         Route::put('/data-pegawai/{id}', [Ctr\ReportController::class, 'update']);
         Route::delete('/data-pegawai/{id}', [Ctr\ReportController::class, 'destroy']);
+
+          // Kepegawaian Data Pangkat
+          Route::get('/getPangkat', [Ctr\PangkatController::class, 'getData'])->name('data-pangkat');
+          Route::get('/getDataPangkat', [Ctr\PangkatController::class, 'getPangkat']);
+          Route::post('/store-pangkat', [Ctr\PangkatController::class, 'store'])->name('store-pangkat');
+          Route::get('/data-pangkat/{id}/edit', [Ctr\PangkatController::class, 'edit'])->name('dataPangkat');
+          Route::put('/data-pangkat/{id}', [Ctr\PangkatController::class, 'update']);
+          Route::delete('/data-pangkat/{id}', [Ctr\PangkatController::class, 'destroy']);
 
 });
 

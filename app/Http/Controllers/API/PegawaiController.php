@@ -14,10 +14,16 @@ class PegawaiController extends Controller
         $data = Pegawai::orderBy('id', 'desc')->get();
         return DataTables::of($data)
             ->addColumn('Aksi', function($data) {
-                return '<a href="" type="button" class="btn btn-success btn-sm">Edit</a>
+                return '<button type="button" class="btn btn-success btn-sm" id="getEditData" data-id="'.$data->id.'">Edit</button>
                     <button type="button" data-id="'.$data->id.'" onclick="delete_btn()" class="btn btn-danger btn-sm" id="getDeleteId">Delete</button>';
             })
             ->rawColumns(['Aksi'])
             ->make(true);
     }
+    // public function getPegawai()
+    // {
+    //     $pegawai = Pegawai::orderBy('nama', 'ASC')->get();
+    //     $jabatan = JabatanStruktural::orderBy('nama_jabatan', 'ASC')->get();
+    //     return response()->json(['pegawai'=>$pegawai, 'jabatan'=>$jabatan]);
+    // }
 }

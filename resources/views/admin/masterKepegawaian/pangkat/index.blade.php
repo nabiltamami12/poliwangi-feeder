@@ -180,7 +180,7 @@
 <script>
 
   var nomor = 1;
-  dt_url = '{{ route('get-pangkat') }}';
+  dt_url = `{{ url('/api/v1') }}/getPangkat`;
   dt_opt = {
     processing: true,
     serverSide: true,
@@ -260,7 +260,7 @@
             }
         });
         $.ajax({
-            url: "{{ route('dataPangkat.store') }}",
+            url: `{{ url('/api/v1') }}/store-pangkat`,
             method: 'post',
             data: {
                 nama_pangkat: $('#namaPangkat').val(),
@@ -301,7 +301,7 @@
         $('.alert-danger').hide();
         id = $(this).data('id');
         $.ajax({
-            url: "dataPangkat/"+id+"/edit",
+            url: `{{ url('/api/v1') }}/data-pangkat/${id}/edit`,
             method: 'GET',
             // data: {
             //     id: id,
@@ -323,7 +323,7 @@
             }
         });
         $.ajax({
-            url: "dataPangkat/"+id,
+            url: `{{ url('/api/v1') }}/data-pangkat/${id}`,
             method: 'PUT',
             data: {
                 nama_pangkat: $('#editNamaPangkat').val(),
@@ -366,7 +366,7 @@
             }
         });
         $.ajax({
-            url: "dataPangkat/"+id,
+            url:  `{{ url('/api/v1') }}/data-pangkat/${id}`,
             method: 'DELETE',
             success: function(result) {
                 setInterval(function(){ 

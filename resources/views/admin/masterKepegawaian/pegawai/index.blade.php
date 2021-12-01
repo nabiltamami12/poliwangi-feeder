@@ -52,7 +52,7 @@
     <div class="modal-dialog modal-xl modal-dialog modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="modalAddlLabel">Tambah Data Struktural</h5>
+                <h5 class="modal-title" id="modalAddlLabel">Tambah Data Pegawai</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -69,326 +69,222 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
+                {{-- <div class="form-group col-md-6">
+              <label for="">Pegawai</label>
+              <select name="id_pegawai" class="form-control js-example-basic-single" id="idPegawai" required>
+              </select>
+            </div> --}}
+                <div class="form-row">
+                    <div class="form-group col-md-6" hidden>
+                        <label for="">Username</label>
+                        <input type="hidden" class="form-control" name="name" id="username"
+                            placeholder="Masukan Username" value="{{ old('name') ?? 'Default value' }}">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Masukan Email">
+                    </div>
+                </div>
+                <div class="form-row" hidden>
+                    <div class="form-group col-md-6">
+                        <label for="">Password</label>
+                        <input type="hidden" name="password" class="form-control" id="password"
+                            placeholder="Masukan Password" value="{{ old('password') ?? 'password' }}">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="">Konfirmasi Password</label>
+                        <input type="hidden" class="form-control" id="password_confirmation"
+                            name="password_confirmation" placeholder="konfirmasi_password"
+                            value="{{ old('password') ?? 'password' }}">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label for="">NIP</label>
+                        <input type="text" name="nip" class="form-control" id="nip"
+                            placeholder="Masukan Nomor Induk Pegawai">
+                    </div>
+                </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label for="">Pegawai</label>
-                        <select name="id_pegawai" class="form-control js-example-basic-single" id="idPegawai" required>
-
+                        <label for="">NOID</label>
+                        <input type="text" class="form-control" id="noid" name="noid" placeholder="Masukan NOID">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="">NPWP</label>
+                        <input type="text" class="form-control" name="npwp" id="npwp"
+                            placeholder="Masukan Nomor Pokok Wajib Pajak">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="">NIDN</label>
+                        <input type="text" class="form-control" name="nidn" id="nidn"
+                            placeholder="Masukan Nomor Induk Dosen Nasional">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="">Nama Pegawai</label>
+                        <input type="text" class="form-control" name="nama" id="nama"
+                            placeholder="Masukan Nama Pegawai">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="">NIP Lama</label>
+                        <input type="text" class="form-control" id="nip_lama" name="nip_lama"
+                            placeholder="Masukan NIP lama">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="">Jurusan</label>
+                        <select name="jurusan" class="form-control js-example-basic-single" id="jurusan" required>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="">Agama</label>
+                        <select class="form-control" id="agama" name="agama">
+                            <option>Pilih Agama...</option>
+                            <option value="Islam">Islam</option>
+                            <option value="Kristen">Kristen</option>
+                            <option value="Katolik">Katolik</option>
+                            <option value="Hindu">Hindu</option>
+                            <option value="Buddha">Buddha</option>
+                            <option value="Konghucu">Konghucu</option>
                         </select>
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="">Nama Jabatan</label>
-                        <input type="text" class="form-control" name="nama_jabatan" id="namaJabatan"
-                            placeholder="Nama jabatan" required>
+                        <label for="">Tempat Lahir</label>
+                        <input type="date" class="form-control" id="tgl_lahir" name="tgl_lahir">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="">Pangkat</label>
+                        <select name="id_pangkat" class="form-control js-example-basic-single" id="id_pangkat" required>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="">Staff</label>
+                        <select name="staff" class="form-control js-example-basic-single" id="staff" required>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="">Nomor Telepon</label>
+                        <input type="text" class="form-control" id="nomor_tlp" name="no_tlp"
+                                    placeholder="Contoh : 0865273944375">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="">Jenis Kelamin</label>
+                        <select class="form-control" id="jenis_kelamin" name="jenis_kelamin">
+                            <option>Pilih Jenis Kelamin...</option>
+                            <option value="L">Laki-laki</option>
+                            <option value="P">Perempuan</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="">Shift</label>
+                        <input type="text" class="form-control" id="shift" name="shift"
+                        placeholder="Masukan shift">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="">Gol Darah</label>
+                        <input type="text" class="form-control" id="golongan_darah" name="gol_darah"
+                        placeholder="Contoh : B+">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="">Gelar Depan</label>
+                        <input type="text" class="form-control" id="gelar_dpn" name="gelar_dpn"
+                        placeholder="Contoh : Prof">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="">Gelar Belakang</label>
+                        <input type="text" class="form-control" id="gelar_belakang" name="gelar_blk"
+                        placeholder="Contoh : Amd">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="">Status Perkawinan</label>
+                        <select class="form-control" id="status_kawin" name="status_kawin">
+                            <option>Pilih Jenis Kelamin...</option>
+                            <option value="Belum Kawin">Belum Kawin</option>
+                            <option value="Sudah Kawin">Sudah Kawin</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="">Kelurahan</label>
+                        <select name="kelurahan" class="form-control js-example-basic-single" id="kelurahan" required>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="">Kecamatan</label>
+                        <select name="kecamatan" class="form-control js-example-basic-single" id="kecamatan" required>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="">Kota / Kabupaten</label>
+                        <select name="kota" class="form-control js-example-basic-single" id="kota" required>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="">Provinsi</label>
+                        <select name="provinsi" class="form-control js-example-basic-single" id="provinsi" required>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="">Askes</label>
+                        <input type="text" class="form-control" id="askes" name="askes"
+                                    placeholder="Masukan data Askes">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="">Kode Dosen</label>
+                        <input type="text" class="form-control" id="kode_dosen_sk034" name="kode_dosen_sk034"
+                        placeholder="Masukan Kode Dosen">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="">Departemen</label>
+                        <input type="text" class="form-control" id="departemen" name="departemen"
+                        placeholder="Masukan Departemen">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="">Praktisi</label>
+                        <input type="text" class="form-control" id="praktisi" name="praktisi"
+                        placeholder="Masukan Praktisi">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="">Nama Instansi</label>
+                        <input type="text" class="form-control" id="nama_instansi" name="nama_instansi"
+                                    placeholder="Masukan nama instansi">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="">Alamat Instansi</label>
+                        <input type="text" class="form-control" id="alamat_instansi" name="alamat_instansi"
+                        placeholder="Masukan alamat instansi">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="">Pendidikan Terakhir</label>
+                        <input type="text" class="form-control" id="pendidikan_terakhir" name="pendidikan_terakhir"
+                        placeholder="Masukan Pendidikan Terakhir">
                     </div>
                 </div>
 
-                <div class="form-row">
-                      <div class="form-group col-md-6" hidden>
-                          <label class="form-control-label" for="username">Username</label>
-                          <input type="hidden" name="name" class="form-control" id="username"
-                              placeholder="Masukan Username" value="{{ old('name') ?? 'Default value' }}">
-                      </div>
-                  <div class="col-md-12">
-                      <div class="form-group col-md-6">
-                          <label class="form-control-label" for="email">Email</label>
-                          <input type="email" class="form-control" id="email" name="email"
-                              placeholder="Masukan Email">
-                      </div>
-                  </div>
-              </div>
-              <div class="form-row" hidden>
-                  <div class="col-md-6">
-                      <div class="form-group col-md-6">
-                          <label class="form-control-label" for="password">Password</label>
-                          <input type="hidden" name="password" class="form-control" id="password"
-                              placeholder="Masukan Password" value="{{ old('password') ?? 'password' }}">
-                      </div>
-                  </div>
-                  <div class="col-md-6">
-                      <div class="form-group col-md-6">
-                          <label class="form-control-label" for="password_confirmation">Konfirmasi
-                              Password</label>
-                          <input type="hidden" class="form-control" id="password_confirmation"
-                              name="password_confirmation" placeholder="Konfirmasi Password" value="{{ old('password') ?? 'password' }}">
-                      </div>
-                  </div>
-              </div>
-              <hr class="my-4">
-
-              <div class="form-row">
-                  <div class="col-md-6">
-                      <div class="form-group col-md-6">
-                          <label class="form-control-label" for="nip">NIP / NIK</label>
-                          <input type="text" name="nip" class="form-control" id="nip"
-                          placeholder="Masukan Nomor Induk Pegawai">
-                      </div>
-                  </div>
-                  <div class="col-md-6">
-                      <div class="form-group col-md-6">
-                          <label class="form-control-label" for="noid">NOID</label>
-                          <input type="text" class="form-control" id="noid" name="noid"
-                              placeholder="Masukan NOID">
-                      </div>
-                  </div>
-              </div>
-              <div class="form-row">
-                  <div class="col-md-6">
-                      <div class="form-group col-md-6">
-                          <label class="form-control-label" for="npwp">NPWP</label>
-                          <input type="text" class="form-control" name="npwp" id="npwp"
-                              placeholder="One of three cols">
-                      </div>
-                  </div>
-                  <div class="col-md-6">
-                      <div class="form-group col-md-6">
-                          <label class="form-control-label" for="nidn">NIDN</label>
-                          <input type="text" class="form-control" name="nidn" id="nidn"
-                              placeholder="One of three cols">
-                      </div>
-                  </div>
-              </div>
-              <div class="form-row">
-                  <div class="col-md-6">
-                      <div class="form-group col-md-6">
-                          <label class="form-control-label" for="nama">Nama Pegawai</label>
-                          <input type="text" class="form-control" name="nama" id="nama" placeholder="Masukan Nama Pegawai">
-                      </div>
-                  </div>
-                  <div class="col-md-6">
-                      <div class="form-group col-md-6">
-                          <label class="form-control-label" for="nip_lama">NIP lama</label>
-                          <input type="text" class="form-control" id="nip_lama" name="nip_lama"
-                              placeholder="One of three cols">
-                      </div>
-                  </div>
-              </div>
-              <div class="form-row">
-                  <div class="col-md-6">
-                      <div class="form-group col-md-6">
-                              <label class="form-control-label" for="jurusan">Jurusan</label>
-                              <select class="form-control" id="jurusan" name="jurusan">
-                              <option>Pilih Jurusan...</option>
-                                  @foreach ($jurusan as $item)
-                                  <option value="{{$item->jurusan}}">{{$item->jurusan}}</option>
-                                  @endforeach
-                              </select>
-                      </div>
-                  </div>
-
-                  <div class="col-md-6">
-                      <div class="form-group col-md-6">
-                          <label class="form-control-label" for="agama">Agama</label>
-                          <input type="text" class="form-control" id="agama" name="agama"
-                              placeholder="Contoh : Islam">
-                      </div>
-                  </div>
-              </div>
-              <div class="form-row">
-                  <div class="col-md-6">
-                      <div class="form-group col-md-6">
-                          <label class="form-control-label" for="tmp_lahir">Tempat Lahir</label>
-                          <input type="text" class="form-control" id="tmp_lahir" name="tmp_lahir"
-                              placeholder="Contoh : Jombang">
-                      </div>
-                  </div>
-
-                  <div class="col-md-6">
-                      <div class="form-group col-md-6">
-                          <label class="form-control-label" for="tgl_lahir">Tanggal Lahir</label>
-                          <input type="date" class="form-control" id="tgl_lahir" name="tgl_lahir">
-                      </div>
-                  </div>
-              </div>
-              <div class="form-row">
-                  <div class="col-md-6">
-                      <div class="form-group col-md-6">
-                          <label class="form-control-label" for="exampleFormControlSelect1">Pangkat</label>
-                          <select class="form-control" id="exampleFormControlSelect1" name="id_pangkat">
-                              <option>Pilih Pangkat...</option>
-                              @foreach ($pangkat as $item)
-                              <option value="{{ $item->id }}">{{$item->nama_pangkat}}</option>
-                              @endforeach
-                          </select>
-                      </div>
-                  </div>
-                  <div class="col-md-6">
-                      <div class="form-group col-md-6">
-                          <label class="form-control-label" for="exampleFormControlSelect1">Staff</label>
-                          <select class="form-control" data-toggle="select" name="id_jabatan" id="exampleFormControlSelect1">
-                              <option>Pilih Staff...</option>
-                              @foreach ($jabatan as $item)
-                              <option value="{{ $item->id }}">{{$item->staf}}</option>
-                              @endforeach
-                          </select>
-                      </div>
-                  </div>
-              </div>
-              <div class="form-row">
-                  <div class="col-md-6">
-                      <div class="form-group col-md-6">
-                          <label class="form-control-label" for="nomor_tlp">Nomor Telepon</label>
-                          <input type="text" class="form-control" id="nomor_tlp" name="no_tlp"
-                              placeholder="Contoh : 0865273944375">
-                      </div>
-                  </div>
-                  <div class="col-md-6">
-                      <div class="form-group col-md-6">
-                          <label class="form-control-label" for="Jk">Jenis Kelamin</label>
-                          <select class="form-control" id="Jk" name="jenis_kelamin">
-                              <option>Pilih Jenis Kelamin...</option>
-                              <option value="L">Laki-laki</option>
-                              <option value="P">Perempuan</option>
-                          </select>
-                      </div>
-                  </div>
-              </div>
-              <div class="form-row">
-                  <div class="col-md-6">
-                      <div class="form-group col-md-6">
-                          <label class="form-control-label" for="shift">Shift</label>
-                          <input type="text" class="form-control" id="shift" name="shift"
-                              placeholder="Masukan shift">
-                      </div>
-                  </div>
-                  <div class="col-md-6">
-                      <div class="form-group col-md-6">
-                          <label class="form-control-label" for="golongan_darah">Golongan Darah</label>
-                          <input type="text" class="form-control" id="golongan_darah" name="gol_darah"
-                              placeholder="Contoh : B+">
-                      </div>
-                  </div>
-              </div>
-              <div class="form-row">
-                  <div class="col-md-6">
-                      <div class="form-group col-md-6">
-                          <label class="form-control-label" for="gelar_dpn">Gelar Depan</label>
-                          <input type="text" class="form-control" id="gelar_dpn" name="gelar_dpn"
-                              placeholder="Contoh : Prof">
-                      </div>
-                  </div>
-                  <div class="col-md-6">
-                      <div class="form-group col-md-6">
-                          <label class="form-control-label" for="gelar_belakang">Gelar Belakang</label>
-                          <input type="text" class="form-control" id="gelar_belakang" name="gelar_blk"
-                              placeholder="Contoh : Amd">
-                      </div>
-                  </div>
-              </div>
-              <div class="form-row">
-                  <div class="col-md-6">
-                      <div class="form-group col-md-6">
-                          <label class="form-control-label" for="status_kawin">Status Perkawinan</label>
-                          <input type="text" class="form-control" id="status_kawin" name="status_kawin"
-                              placeholder="Contoh : Belum Kawin">
-                      </div>
-                  </div>
-                  <div class="col-md-6">
-                      <div class="form-group col-md-6">
-                              <label class="form-control-label" for="kelurahan">Kelurahan</label>
-                              <select class="form-control" id="kelurahan" name="kelurahan">
-                              <option>Pilih kelurahan...</option>
-                                  @foreach ($kelurahan as $item)
-                                  <option value="{{$item->id_kelurahan}}">{{$item->nama}}</option>
-                                  @endforeach
-                              </select>
-                      </div>
-                  </div>
-              </div>
-              <div class="form-row">
-                  <div class="col-md-6">
-                      <div class="form-group col-md-6">
-                          <label class="form-control-label" for="kecamatan">Kecamatan</label>
-                          <select class="form-control" id="kecamatan" name="kecamatan">
-                              <option>Pilih kecamatan...</option>
-                              @foreach ($kecamatan as $item)
-                              <option value="{{$item->id}}">{{$item->nama}}</option>
-                              @endforeach
-                          </select>
-                      </div>
-                  </div>
-                  <div class="col-md-6">
-                      <div class="form-group col-md-6">
-                          <label class="form-control-label" for="kota">Kota</label>
-                          <select class="form-control" id="kota" name="kabupaten">
-                              <option>Pilih Kota...</option>
-                              @foreach ($kota as $item)
-                              <option value="{{ $item->id }}">{{$item->nama}}</option>
-                              @endforeach
-                          </select>
-                      </div>
-                  </div>
-              </div>
-              <div class="form-row">
-                  <div class="col-md-6">
-                      <div class="form-group col-md-6">
-                          <label class="form-control-label" for="provinsi">Provinsi</label>
-                          <select class="form-control" id="provinsi" name="provinsi">
-                              <option>Pilih Provinsi...</option>
-                              @foreach ($provinsi as $item)
-                              <option value="{{ $item->id }}">{{$item->nama}}</option>
-                              @endforeach
-                          </select>
-                      </div>
-                  </div>
-                  <div class="col-md-6">
-                      <div class="form-group col-md-6">
-                          <label class="form-control-label" for="askes">Askes</label>
-                          <input type="text" class="form-control" id="askes" name="askes"
-                              placeholder="Masukan data Askes">
-                      </div>
-                  </div>
-              </div>
-
-              <div class="form-row">
-                  <div class="col-md-6">
-                      <div class="form-group col-md-6">
-                          <label class="form-control-label" for="kode_dsn">Kode Dosen</label>
-                          <input type="text" class="form-control" id="kode_dsn" name="kode_dosen_sk034"
-                              placeholder="Masukan Kode Dosen">
-                      </div>
-                  </div>
-                  <div class="col-md-6">
-                      <div class="form-group col-md-6">
-                          <label class="form-control-label" for="departemen">Departemen</label>
-                          <input type="text" class="form-control" id="departemen" name="departemen"
-                              placeholder="Masukan Departemen">
-                      </div>
-                  </div>
-
-              </div>
-              <div class="form-row">
-                  <div class="col-md-6">
-                      <div class="form-group col-md-6">
-                          <label class="form-control-label" for="praktisi">Praktisi</label>
-                          <input type="text" class="form-control" id="praktisi" name="praktisi"
-                              placeholder="Masukan Praktisi">
-                      </div>
-                  </div>
-                  <div class="col-md-6">
-                      <div class="form-group col-md-6">
-                          <label class="form-control-label" for="nama_instansi">Nama Instansi</label>
-                          <input type="text" class="form-control" id="nama_instansi" name="nama_instansi"
-                              placeholder="Masukan nama instansi">
-                      </div>
-                  </div>
-              </div>
-              <div class="form-row">
-                  <div class="col-md-6">
-                      <div class="form-group col-md-6">
-                          <label class="form-control-label" for="alamat_instansi">Alamat Instansi</label>
-                          <input type="text" class="form-control" id="alamat_instansi" name="alamat_instansi"
-                              placeholder="Masukan alamat instansi">
-                      </div>
-                  </div>
-                  <div class="col-md-6">
-                      <div class="form-group col-md-6">
-                          <label class="form-control-label" for="pendidikan">Pendidikan Terakhir</label>
-                          <input type="text" class="form-control" id="pendidikan" name="pendidikan_terakhir"
-                              placeholder="Masukan Pendidikan Terakhir">
-                      </div>
-                  </div>
-              </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -397,6 +293,9 @@
         </div>
     </div>
 </div>
+
+
+
 
 <!-- Delete Modal -->
 <div class="modal fade" id="modalDelete" tabindex="-1" aria-labelledby="modalDeletelLabel" aria-hidden="true">
@@ -422,44 +321,20 @@
 @section('js')
 <script>
     var nomor = 1;
-    dt_url = '{{ route('
-    data - pegawai ') }}';
-    dt_opt = {
-        processing: true,
-        serverSide: true,
-        autoWidth: false,
-        "order": [
-            [0, "desc"]
-        ],
-        columns: [{
-                data: null,
-                name: 'no',
-                sortable: false,
-                render: function (data, type, row, meta) {
-                    return meta.row + meta.settings._iDisplayStart + 1;
-                }
-            },
-            {
-                data: 'nip',
-                name: 'nip'
-            },
-            {
-                data: 'noid',
-                name: 'noid'
-            },
-            {
-                data: 'nama',
-                name: 'nama'
-            },
-            {
-                data: 'Aksi',
-                name: 'Aksi',
-                orderable: false,
-                serachable: false,
-                sClass: 'text-center'
-            },
-        ]
-    };
+  dt_url = `{{ url('/api/v1') }}/getPegawai`;
+  dt_opt = {
+    processing: true,
+    serverSide: true,
+    autoWidth: false,
+    "order": [[ 0, "desc" ]],
+    columns: [
+        {data: null, name: 'no', sortable: false, render: function(data, type, row, meta) {return meta.row + meta.settings._iDisplayStart + 1;}},
+        {data: 'nip', name: 'nip'},
+        {data: 'noid', name: 'noid'},
+        {data: 'nama', name: 'nama'},
+        {data: 'Aksi', name: 'Aksi',orderable:false,serachable:false,sClass:'text-center'},
+    ]
+  };
 
 
     $(document).ready(function () {
@@ -468,34 +343,88 @@
 
     function add_btn() {
         $.ajax({
-            url: `{{ url('/api/v1') }}/getDataStruktural`,
+            url: `{{ url('/api/v1') }}/getDataPegawai`,
             method: 'GET',
             success: function (result) {
-                $('#idPegawai').html('');
-                $('#idPegawai').append($('<option>', {
-                    text: "Pilih Pegawai",
+
+                $('#jurusan').html('');
+                $('#jurusan').append($('<option>', {
+                    text: "Pilih Jurusan",
                     selected: true,
                     disabled: true,
                 }));
                 $.each(result.pegawai, function (i, p) {
-                    $('#idPegawai').append($('<option>', {
+                    $('#jurusan').append($('<option>', {
                         value: p.id,
-                        text: p.nama,
+                        text: p.jurusan,
                     }));
                 });
 
-                $('#jabatanStruktural').html('');
-                $('#jabatanStruktural').append($('<option>', {
+                $('#id_pangkat').html('');
+                $('#id_pangkat').append($('<option>', {
+                    text: "Pilih Pangkat",
+                    selected: true,
+                    disabled: true,
+                }));
+                $.each(result.jabatan, function (a, j) {
+                    $('#id_pangkat').append($('<option>', {
+                        value: j.id,
+                        text: j.nama_pangkat,
+                    }));
+                });
+
+                $('#staff').html('');
+                $('#staff').append($('<option>', {
+                    text: "Pilih Staf",
+                    selected: true,
+                    disabled: true,
+                }));
+                $.each(result.jabatan, function (a, j) {
+                    $('#staff').append($('<option>', {
+                        value: j.id,
+                        text: j.staf,
+                    }));
+                });
+
+                $('#kelurahan').html('');
+                $('#kelurahan').append($('<option>', {
                     text: "Pilih Jabatan",
                     selected: true,
                     disabled: true,
                 }));
                 $.each(result.jabatan, function (a, j) {
-                    $('#jabatanStruktural').append($('<option>', {
+                    $('#kelurahan').append($('<option>', {
                         value: j.id,
-                        text: j.nama_jabatan,
+                        text: j.nama,
                     }));
                 });
+
+                $('#kota').html('');
+                $('#kota').append($('<option>', {
+                    text: "Pilih Jabatan",
+                    selected: true,
+                    disabled: true,
+                }));
+                $.each(result.jabatan, function (a, j) {
+                    $('#kota').append($('<option>', {
+                        value: j.id,
+                        text: j.nama,
+                    }));
+                });
+
+                $('#provinsi').html('');
+                $('#provinsi').append($('<option>', {
+                    text: "Pilih Jabatan",
+                    selected: true,
+                    disabled: true,
+                }));
+                $.each(result.jabatan, function (a, j) {
+                    $('#provinsi').append($('<option>', {
+                        value: j.id,
+                        text: j.nama,
+                    }));
+                });
+
 
                 $('.js-example-basic-single').select2();
                 $('#modalAdd').modal();
@@ -519,7 +448,7 @@
                 }
             });
             $.ajax({
-                url: `{{ url('/api/v1') }}/data-struktural`,
+                url: `{{ url('/api/v1') }}/store-pegawai`,
                 method: 'post',
                 data: {
                     id_pegawai: parseInt($('#idPegawai').val()),
@@ -568,7 +497,7 @@
             // e.preventDefault();
             id = $(this).data('id');
             $.ajax({
-                url: `{{ url('/api/v1') }}/data-struktural/${id}`,
+                url: `{{ url('/api/v1') }}/data-pegawai/${id}`,
                 method: 'GET',
                 // data: {
                 //     id: id,
@@ -586,7 +515,7 @@
             $('.alert-danger').hide();
             id = $(this).data('id');
             $.ajax({
-                url: `{{ url('/api/v1') }}/data-struktural/${id}/edit`,
+                url: `{{ url('/api/v1') }}/data-pegawai/${id}/edit`,
                 method: 'GET',
                 // data: {
                 //     id: id,
@@ -623,7 +552,7 @@
                 }
             });
             $.ajax({
-                url: `{{ url('/api/v1') }}/data-struktural/${id}`,
+                url: `{{ url('/api/v1') }}/data-pegawai/${id}`,
                 method: 'PUT',
                 data: {
                     id_pegawai: parseInt($('#editIdPegawai').val()),
@@ -674,7 +603,7 @@
                 }
             });
             $.ajax({
-                url: `{{ url('/api/v1') }}/data-struktural/${id}`,
+                url: `{{ url('/api/v1') }}/data-pegawai/${id}`,
                 method: 'DELETE',
                 success: function (result) {
                     setInterval(function () {
