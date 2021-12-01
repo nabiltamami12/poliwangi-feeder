@@ -22,7 +22,7 @@
             <div class="col">
               <h2 class="mb-0">Feeder Data Dosen</h2>
             </div>
-            <div class="col" style="margin-right: -20em">
+            <div class="col text-right">
               <form action="{{ url('admin/feeder/feeder-data_dosen') }}" method="post">
                 {!! csrf_field() !!}
                 <button type="submit" class="btn btn-primary"><i class="iconify-inline mr-1" data-icon='bx:bx-download'></i> Download Feeder</button>
