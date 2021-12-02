@@ -70,7 +70,7 @@ class PegawaiController extends Controller
             'name' => 'required | max:25',
             'email' => 'email | required | unique:users',
             'password' => 'required | confirmed',
-            'nip' => 'nullable',
+            'nip' => 'required',
             'noid' => 'nullable',
             'nama' => 'nullable',
             'jurusan' => 'nullable',
@@ -103,6 +103,8 @@ class PegawaiController extends Controller
             
         ]);
 
+        $pegawai = Pegawai::create($request->all());
+
         //create user
         $user = User::create([
             'name' => Hash::make($request->get($request->nip)),
@@ -110,44 +112,43 @@ class PegawaiController extends Controller
             'password' => Hash::make($request->get('password'))
         ]);
 
-        Pegawai::create([
-            'id_user' => $user->id,
-            'nip' =>$request->nip,
-            'noid' =>$request->noid,
-            'nama' =>$request->nama,
-            'jurusan' =>$request->jurusan,
-            'jenis_kelamin' =>$request->jenis_kelamin,
-            'agama' =>$request->agama,
-            'no_tlp' =>$request->no_tlp,
-            'tmp_lahir' =>$request->tmp_lahir,
-            'tgl_lahir' =>$request->tgl_lahir,
-            'shift' =>$request->shift,
-            'gol_darah' =>$request->gol_darah,
-            'gelar_dpn' =>$request->gelar_dpn,
-            'gelar_blk' =>$request->gelar_blk,
-            'status_kawin' =>$request->status_kawin,
-            'kelurahan' =>$request->kelurahan,
-            'kecamatan' =>$request->kecamatan,
-            'kabupaten' =>$request->kabupaten,
-            'provinsi' =>$request->provinsi,
-            'askes' =>$request->askes,
-            'kode_dosen_sk034' =>$request->kode_dosen_sk034,
-            'nip_lama' =>$request->nip_lama,
-            'npwp' =>$request->npwp,
-            'nidn' =>$request->nidn,
-            'departemen' =>$request->departemen,
-            'praktisi' =>$request->praktisi,
-            'nama_instansi' =>$request->nama_instansi,
-            'alamat_instansi' =>$request->alamat_instansi,
-            'pendidikan_terakhir' =>$request->pendidikan_terakhir,
-            'id_pangkat' =>$request->id_pangkat,
+        $pegawai->update([
+            'id_user' => $user->id
         ]);
-        // dd($user);
-        $user->save();
-        
+        // Pegawai::create([
+        //     'id_user' => $user->id,
+        //     'nip' =>$request->nip,
+        //     'noid' =>$request->noid,
+        //     'nama' =>$request->nama,
+        //     'jurusan' =>$request->jurusan,
+        //     'jenis_kelamin' =>$request->jenis_kelamin,
+        //     'agama' =>$request->agama,
+        //     'no_tlp' =>$request->no_tlp,
+        //     'tmp_lahir' =>$request->tmp_lahir,
+        //     'tgl_lahir' =>$request->tgl_lahir,
+        //     'shift' =>$request->shift,
+        //     'gol_darah' =>$request->gol_darah,
+        //     'gelar_dpn' =>$request->gelar_dpn,
+        //     'gelar_blk' =>$request->gelar_blk,
+        //     'status_kawin' =>$request->status_kawin,
+        //     'kelurahan' =>$request->kelurahan,
+        //     'kecamatan' =>$request->kecamatan,
+        //     'kabupaten' =>$request->kabupaten,
+        //     'provinsi' =>$request->provinsi,
+        //     'askes' =>$request->askes,
+        //     'kode_dosen_sk034' =>$request->kode_dosen_sk034,
+        //     'nip_lama' =>$request->nip_lama,
+        //     'npwp' =>$request->npwp,
+        //     'nidn' =>$request->nidn,
+        //     'departemen' =>$request->departemen,
+        //     'praktisi' =>$request->praktisi,
+        //     'nama_instansi' =>$request->nama_instansi,
+        //     'alamat_instansi' =>$request->alamat_instansi,
+        //     'pendidikan_terakhir' =>$request->pendidikan_terakhir,
+        //     'id_pangkat' =>$request->id_pangkat,
+        // ]);
 
-
-        return redirect()->route('data-pegawai');
+        return redirect()->route('list-pegawai')->with('status', 'Data Berhasil disimpan!');
     }
 
     public function edit($id)
@@ -174,8 +175,6 @@ class PegawaiController extends Controller
                 "item" => $item,
                 "jurusan" => $jurusan,
                 "kelurahan" => $kelurahan, 
-
-                
         ]);
     }
 
@@ -195,6 +194,25 @@ class PegawaiController extends Controller
         return response()->json(['success'=>'Pegawai berhasil dihapus !!']);
     }
 
+    public function getPangkat(Request $request){
+        $pangkat = Pangkat::orderBy('nama_pangkat', 'ASC')->get();
+        return response()->json($pangkat);
+    }
+
+    public function getJurusan(Request $request){
+        $jurusan = Jurusan::orderBy('jurusan', 'ASC')->get();
+        return response()->json($jurusan);
+    }
+
+    public function getStaff(Request $request){
+        $staff = Staff::orderBy('staf', 'ASC')->get();
+        return response()->json($staff);
+    }
+
+    public function getProvinsi(Request $request){
+        $provinsi = Provinsi::orderBy('nama', 'ASC')->get();
+        return response()->json($provinsi);
+    }
     public function getKabupaten(Request $request){
         $kota = Kota::where("id_provinsi", $request->id_provinsi)->pluck('nama', 'id_kabupaten');
         // dd($kota);

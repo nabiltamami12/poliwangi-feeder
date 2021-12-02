@@ -113,12 +113,12 @@ class Pegawai extends Model
 
     // wilayah
     public function kecamatan() {
-        return $this->belongsTo(Kecamatan::class, 'id');
+        return $this->belongsTo(Kecamatan::class, 'id_kecamatan');
      }
      public function kota() {
-        return $this->belongsTo(Kota::class, 'id');
+        return $this->belongsTo(Kota::class, 'id_kabupaten');
      }
      public function provinsi() {
-        return $this->belongsTo(Provinsi::class, 'id');
+        return $this->belongsTo(Provinsi::class, 'id_provinsi');
      }
 }

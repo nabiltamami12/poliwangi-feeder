@@ -148,31 +148,15 @@ Route::get('/pmbgenerateva', function () {
                 return view('admin.masterKepegawaian.pegawai.index', [
                     "title" => "data-pegawai",
                 ]);
-            });
+            })->name('list-pegawai');
             Route::get('/data-create', function () {
-                // $kota = Kota::all();
-                // $kecamatan = Kecamatan::all();
-                $provinsi = Provinsi::all();
-                $pangkat = Pangkat::all();
-                $jurusan = Jurusan::all();
-                $kelurahan = Kelurahan::all();
-                // $jabatan = JabatanStruktural::all();
-                $jabatan = Staff::all();
-
                 return view('admin.masterKepegawaian.pegawai.create',[
                         "id" => null,
                         "title" => "kepegawaian",
-                        "jabatan" => $jabatan,
-                        // "kota" => $kota,
-                        // "kecamatan" => $kecamatan,
-                        "provinsi" => $provinsi,
-                        "pangkat" => $pangkat,
-                        "kelurahan" => $kelurahan,
-                        "jurusan" => $jurusan,
-        
-                        
                 ]);
             })->name('data-create');
+
+            // Route::post('/store-pegawai', [PegawaiController::class, 'store'])->name('store-pegawai');
 
             Route::get('/data-edit/edit/{id}', function ($id) { 
                 $kota = Kota::all();

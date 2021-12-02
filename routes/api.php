@@ -371,7 +371,11 @@ Route::prefix('v1')->group(function () {
 
         // Kepegawaian Data Pegawai
         Route::get('/getPegawai', [Ctr\PegawaiController::class, 'getData'])->name('data-pegawai');
+        Route::get('/data-pegawai/getPangkat', [Ctr\PegawaiController::class, 'getPangkat']);
+        Route::get('/data-pegawai/getJurusan', [Ctr\PegawaiController::class, 'getJurusan']);
+        Route::get('/data-pegawai/getStaff', [Ctr\PegawaiController::class, 'getStaff']);
         Route::get('/getDataPegawai', [Ctr\PegawaiController::class, 'getPegawai']);
+        Route::get('/getProvinsi', [Ctr\PegawaiController::class, 'getProvinsi']);
         Route::get('/getKabupaten', [Ctr\PegawaiController::class, 'getKabupaten']);
         Route::get('/getKecamatan', [Ctr\PegawaiController::class, 'getKecamatan']);
         Route::get('/getKelurahan', [Ctr\PegawaiController::class, 'getKelurahan']);
