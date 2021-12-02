@@ -19,10 +19,12 @@
                     </div>
                 </div>
 
+                
                 <hr class="my-4">
-
-                <form id="form_cu" action="{{route('store-pegawai')}}" method="POST">
+                
+                <form id="form_cu" action="{{url('/api/v1/store-pegawai')}}" method="POST">
                     @csrf
+                    
                     <div class="row">
                         <div class="col-md-6" hidden>
                             <div class="form-group">
@@ -63,8 +65,9 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="form-control-label" for="nip">NIP</label>
+                                <span class="text-danger float-right">*wajib di isi</span>
                                 <input type="text" name="nip" class="form-control" id="nip"
-                                placeholder="Masukan Nomor Induk Pegawai">
+                                placeholder="Masukan Nomor Induk Pegawai" required>
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -138,10 +141,7 @@
                                     <label class="form-control-label" for="jurusan">Jurusan</label>
                                 <span class="text-danger float-right">*wajib di isi</span>
                                     <select class="form-control js-example-basic-single" id="jurusan" name="jurusan" required>
-                                    <option>Pilih Jurusan...</option>
-                                        @foreach ($jurusan as $item)
-                                        <option value="{{$item->jurusan}}">{{$item->jurusan}}</option>
-                                        @endforeach
+                                        
                                     </select>
                             </div>
                         </div>
@@ -174,11 +174,8 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="form-control-label" for="exampleFormControlSelect1">Pangkat</label>
-                                <select class="form-control js-example-basic-single" data-toggle="select" id="exampleFormControlSelect1" name="id_pangkat">
-                                    <option>Pilih Pangkat...</option>
-                                    @foreach ($pangkat as $item)
-                                    <option value="{{ $item->id }}">{{$item->nama_pangkat}}</option>
-                                    @endforeach
+                                <select class="form-control js-example-basic-single" data-toggle="select" id="pangkat" name="id_pangkat">
+                                    
                                 </select>
                             </div>
                         </div>
@@ -187,11 +184,8 @@
                                 <label class="form-control-label" for="exampleFormControlSelect1">Staff</label>
                                 <span class="text-danger float-right">*wajib di isi</span>
 
-                                <select class="form-control js-example-basic-single" data-toggle="select" name="staff" id="exampleFormControlSelect1" required>
-                                    <option>Pilih Staff...</option>
-                                    @foreach ($jabatan as $item)
-                                    <option value="{{ $item->id }}">{{$item->staf}}</option>
-                                    @endforeach
+                                <select class="form-control js-example-basic-single" data-toggle="select" name="staff" id="staff" required>
+
                                 </select>
                             </div>
                         </div>
@@ -246,11 +240,10 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="form-control-label" for="provinsi">Provinsi</label>
-                                <select class="form-control js-example-basic-single" id="provinsi" name="provinsi">
+                                <span class="text-danger float-right">*wajib di isi</span>
+                                <select class="form-control js-example-basic-single" id="provinsi" name="provinsi" required>
                                     <option>Pilih Provinsi...</option>
-                                    @foreach ($provinsi as $item)
-                                    <option value="{{ $item->id_provinsi }}">{{$item->nama}}</option>
-                                    @endforeach
+                                
                                 </select>
                             </div>
                         </div>
@@ -259,7 +252,8 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="form-control-label" for="kota">Kota</label>
-                                <select class="form-control js-example-basic-single" id="kota" name="kabupaten">
+                                <span class="text-danger float-right">*wajib di isi</span>
+                                <select class="form-control js-example-basic-single" id="kota" name="kabupaten" required>
                                    
                                 </select>
                             </div>
@@ -267,7 +261,8 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="form-control-label" for="kecamatan">Kecamatan</label>
-                                <select class="form-control js-example-basic-single" id="kecamatan" name="kecamatan">
+                                <span class="text-danger float-right">*wajib di isi</span>
+                                <select class="form-control js-example-basic-single" id="kecamatan" name="kecamatan" required>
                                    
                                 </select>
                             </div>
@@ -277,10 +272,11 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                    <label class="form-control-label" for="kelurahan">Kelurahan</label>
-                                    <select class="form-control js-example-basic-single" id="kelurahan" name="kelurahan">
-                                   
-                                    </select>
+                                <label class="form-control-label" for="kelurahan">Kelurahan</label>
+                                <span class="text-danger float-right">*wajib di isi</span>
+                                <select class="form-control js-example-basic-single" id="kelurahan" name="kelurahan" required>
+                                
+                                </select>
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -343,8 +339,23 @@
                     </div>
                     <hr class="my-4">
 
+                    <div class="row">
+                        <div class="col-12">
+                            <label for="">Pegawai Status</label>
+                            <select name="pegawai_status" id="pegawai_status" class="form-control">
+                                <option selected value="None">None</option>
+                                <option value="dosen">Dosen</option>
+                                <option value="dosen luar biasa">Dosen Luar Biasa</option>
+                                <option value="tendik">Tenaga Didik</option>
+                                <option value="pns">PNS</option>
+                                <option value="kontrak">Kontrak</option>
+                            </select>
+                        </div>
+                    </div>
+
+
                     <button type="submit"
-                        class="btn btn-primary w-100 simpanData-btn ">{{ ($id==null)?"Tambah":"Ubah" }}
+                        class="btn btn-primary w-100 simpanData-btn mt-5">{{ ($id==null)?"Tambah":"Ubah" }}
                         Data</button>
                 </form>
 
@@ -353,60 +364,97 @@
     </div>
 </section>
 <script>
-   $(document).ready(function() {
+$(document).ready(function() {
     $('.js-example-basic-single').select2();
-  });
+});
 
-//   $.ajax({
-//         url: `{{ url('/api/v1') }}/getDataPegawai`,
-//         method: 'GET',
-//         success: function(result) {
-//           $('#kelurahan').html('');
-//           $('#kelurahan').append($('<option>', {
-//             text: "Pilih Kelurahan",
-//             selected: true,
-//             disabled: true,
-//           }));
-//           $.each(result.kelurahan, function(i, p) {
-//             $('#kelurahan').append($('<option>', {
-//               value: p.id,
-//               text: p.nama,
-//             }));
-//           });
+$.ajax({
+    type:"GET",
+    url: `{{ url('/api/v1') }}/data-pegawai/getPangkat`,
+    data : {"_token":"{{ csrf_token() }}"},
+    dataType: 'JSON',
+    success:function(res){    
+        // console.log(res)           
+        if(res){
+            $("#pangkat").empty();
+            $("#pangkat").append('<option>---Pilih Pangkat---</option>');
+            $.each(res, function(a, j) {
+                $('#pangkat').append($('<option>', {
+                    value: j.id,
+                    text: j.nama_pangkat,
+                }));
+            });
+        }else{
+            $("#pangkat").empty();
+        }
+    }
+});
 
-//           $('#kecamatan').html('');
-//           $('#kecamatan').append($('<option>', {
-//             text: "Pilih Kecamatan",
-//             selected: true,
-//             disabled: true,
-//           }));
-//           $.each(result.kecamatan, function(a, j) {
-//             $('#kecamatan').append($('<option>', {
-//               value: j.id,
-//               text: j.nama,
-//             }));
-//           });
+$.ajax({
+    type:"GET",
+    url: `{{ url('/api/v1') }}/data-pegawai/getJurusan`,
+    data : {"_token":"{{ csrf_token() }}"},
+    dataType: 'JSON',
+    success:function(res){    
+        // console.log(res)           
+        if(res){
+            $("#jurusan").empty();
+            $("#jurusan").append('<option>---Pilih Jurusan---</option>');
+            $.each(res, function(a, j) {
+                $('#jurusan').append($('<option>', {
+                    value: j.nomor,
+                    text: j.jurusan,
+                }));
+            });
+        }else{
+            $("#jurusan").empty();
+        }
+    }
+});
 
-//           $('#kota').html('');
-//           $('#kota').append($('<option>', {
-//             text: "Pilih kota",
-//             selected: true,
-//             disabled: true,
-//           }));
-//           $.each(result.kota, function(a, j) {
-//             $('#kota').append($('<option>', {
-//               value: j.id,
-//               text: j.nama,
-//             }));
-//           });
+$.ajax({
+    type:"GET",
+    url: `{{ url('/api/v1') }}/data-pegawai/getStaff`,
+    data : {"_token":"{{ csrf_token() }}"},
+    dataType: 'JSON',
+    success:function(res){    
+        // console.log(res)           
+        if(res){
+            $("#staff").empty();
+            $("#staff").append('<option>---Pilih Staf---</option>');
+            $.each(res, function(a, j) {
+                $('#staff').append($('<option>', {
+                    value: j.id,
+                    text: j.staf,
+                }));
+            });
+        }else{
+            $("#staff").empty();
+        }
+    }
+});
 
-        
-
-//           $('.js-example-basic-single').select2();
-//           $('#modalAdd').modal();
-//         }
-//     });
-
+$.ajax({
+    type:"GET",
+    url: `{{ url('/api/v1') }}/getProvinsi`,
+    data : {"_token":"{{ csrf_token() }}"},
+    dataType: 'JSON',
+    success:function(res){    
+        // console.log(res)           
+        if(res){
+            $("#provinsi").empty();
+            $("#provinsi").append('<option>---Pilih Provinsi---</option>');
+            $.each(res, function(a, j) {
+                $('#provinsi').append($('<option>', {
+                    value: j.id_provinsi,
+                    text: j.nama,
+                }));
+            });
+        }else{
+            $("#provinsi").empty();
+        }
+    }
+});
 
 $('#provinsi').change(function(){
     var provID = $(this).val(); 
@@ -422,7 +470,6 @@ $('#provinsi').change(function(){
                 $("#kota").empty();
                 $("#kecamatan").empty();
                 $("#kota").append('<option>---Pilih Kabupaten / Kota---</option>');
-                $("#kecamatan").append('<option>---Pilih Kecamatan---</option>');
                 $.each(res,function(id_kabupaten, nama){
                     $("#kota").append('<option value="'+id_kabupaten+'">'+nama+'</option>');
                 });
@@ -453,7 +500,6 @@ $('#provinsi').change(function(){
                 $("#kelurahan").empty();
 
                 $("#kecamatan").append('<option>---Pilih Kecamatan---</option>');
-                $("#kelurahan").append('<option>---Pilih Kelurahan---</option>');
 
                 $.each(res,function(id_kecamatan, nama){
                     $("#kecamatan").append('<option value="'+id_kecamatan+'">'+nama+'</option>');

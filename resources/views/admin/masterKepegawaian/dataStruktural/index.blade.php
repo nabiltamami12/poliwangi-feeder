@@ -370,12 +370,13 @@
         // e.preventDefault();
         id = $(this).data('id');
         $.ajax({
-            url: `{{ url('/api/v1') }}/data-struktural/${id}`,
+            url: `{{ url('/api/v1') }}/data-struktural/${id}/detail`,
             method: 'GET',
             // data: {
             //     id: id,
             // },
             success: function(result) {
+              $('#DetailModalBody').html('');
               $('#DetailModalBody').html(result.html);
               $('#modalDetail').modal();
             }
@@ -394,6 +395,7 @@
             //     id: id,
             // },
             success: function(result) {
+              $('#EditModalBody').html('');
               $('#EditModalBody').html(result.html);
               $('#editIdPegawai').html('');
               $.each(result.pegawai, function(i, p) {

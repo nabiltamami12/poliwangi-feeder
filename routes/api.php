@@ -199,6 +199,7 @@ Route::prefix('v1')->group(function () {
     // ABSENSI PEGAWAI
     Route::get('/absensi-pegawai/rekap', [Ctr\AbsensiPegawaiController::class, 'list_data']);
     Route::get('/absensi-pegawai/rekap/{id_pegawai}/{tahun}/{bulan}', [Ctr\AbsensiPegawaiController::class, 'detail_presensi']);
+    Route::get('/absensi-pegawai/rekap/keamanan/{id_pegawai}/{tahun}/{bulan}', [Ctr\AbsensiPegawaiController::class, 'detail_presensi_keamanan']);
 
     // KELAS MENGAJAR
     Route::post('/kelas-mengajar', [Ctr\AbsensiController::class, 'kelas_mengajar']);
@@ -338,9 +339,9 @@ Route::prefix('v1')->group(function () {
     // Kepegawaian Data Struktural
     Route::get('/getData', [Ctr\DataStrukturalController::class, 'getData']);
     Route::get('/getDataStruktural', [Ctr\DataStrukturalController::class, 'getDataStruktural']);
+    Route::get('/data-struktural/{id}/detail', [Ctr\DataStrukturalController::class, 'show']);
     Route::post('/data-struktural', [Ctr\DataStrukturalController::class, 'store']);
     Route::get('/data-struktural/{id}/edit', [Ctr\DataStrukturalController::class, 'edit']);
-    Route::get('/data-struktural/{id}', [Ctr\DataStrukturalController::class, 'show']);
     Route::put('/data-struktural/{id}', [Ctr\DataStrukturalController::class, 'update']);
     Route::delete('/data-struktural/{id}', [Ctr\DataStrukturalController::class, 'destroy']);
 
@@ -370,13 +371,17 @@ Route::prefix('v1')->group(function () {
 
         // Kepegawaian Data Pegawai
         Route::get('/getPegawai', [Ctr\PegawaiController::class, 'getData'])->name('data-pegawai');
+        Route::get('/data-pegawai/getPangkat', [Ctr\PegawaiController::class, 'getPangkat']);
+        Route::get('/data-pegawai/getJurusan', [Ctr\PegawaiController::class, 'getJurusan']);
+        Route::get('/data-pegawai/getStaff', [Ctr\PegawaiController::class, 'getStaff']);
         Route::get('/getDataPegawai', [Ctr\PegawaiController::class, 'getPegawai']);
+        Route::get('/getProvinsi', [Ctr\PegawaiController::class, 'getProvinsi']);
         Route::get('/getKabupaten', [Ctr\PegawaiController::class, 'getKabupaten']);
         Route::get('/getKecamatan', [Ctr\PegawaiController::class, 'getKecamatan']);
         Route::get('/getKelurahan', [Ctr\PegawaiController::class, 'getKelurahan']);
         Route::post('/store-pegawai', [Ctr\PegawaiController::class, 'store'])->name('store-pegawai');
         // Route::get('/data-pegawai/{id}/edit', [Ctr\PegawaiController::class, 'edit'])->name('data-edit');
-        Route::put('/data-pegawai/{id}', [Ctr\PegawaiController::class, 'update']);
+        Route::put('/data-pegawai/{id}', [Ctr\PegawaiController::class, 'update'])->name('update-pegawai');
         Route::delete('/data-pegawai/{id}', [Ctr\PegawaiController::class, 'destroy']);
 
           // Kepegawaian Data Pangkat

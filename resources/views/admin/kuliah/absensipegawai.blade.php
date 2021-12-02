@@ -8,7 +8,7 @@
 		margin: 20px 10px 20px 20px;
 	}
 
-	#detailtable .badge {
+	#detailtable .badge, #detailtable_shift .badge {
 		font-size: 80%;
 		margin: 0 3px;
 		padding: 8px 15px;
@@ -61,7 +61,7 @@
 						<div class="col-md-3 form-group">
 							<label for="rekap_presensi">Presensi</label>
 							<select class="form-control dt-filter" id="role_presensi" name="role_presensi">
-								<option value="all"> All </option>
+								<!-- <option value="all"> All </option> -->
 								<option value="dosen"> Dosen </option>
 								<option value="dosen_luarbiasa"> Dosen Luar Biasa </option>
 								<option value="tendik"> Tenaga Didik </option>
@@ -92,7 +92,7 @@
 		</div>
 	</div>
 
-	<!-- Modal Detail -->
+	<!-- Modal Detail Absensi Karyawan-->
 	<div class="modal fade" id="detailModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="detailModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-scrollable">
 			<div class="modal-content">
@@ -123,6 +123,42 @@
 									<!-- <th scope="col">Mulai Istirahat</th>
 									<th scope="col">Akhir Istirahat</th>
 									<th scope="col">Keterangan</th> -->
+								</tr>
+							</thead>
+							<tbody></tbody>
+						</table>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal Detail Absensi Shift/Keamanan -->
+	<div class="modal fade" id="detailModalShift" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="detailModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-scrollable">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="staticBackdropLabel">Detail Presensi</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div id="DetailModalBody"></div>
+					<div class="table-responsive">
+						<table id="detailtable_shift" class="table align-items-center table-flush table-borderless table-hover" style="width: 100%;">
+							<thead class="table-header">
+								<tr>
+									<th scope="col" class="text-center">No</th>
+									<th scope="col">Tanggal</th>
+									<th scope="col">Masuk</th>
+									<th scope="col">Pulang</th>
+									<th scope="col">Shift</th>
+									<th scope="col">Status</th>
 								</tr>
 							</thead>
 							<tbody></tbody>
@@ -192,12 +228,34 @@
 						return dpn+data+blk
 					} 
 				},
-				{ "data": "hadir_count" },
-				{ "data": "totalpresensi_count", "render": (data, type, row, meta) => Number(data) - Number(row.hadir_count) },
+				{ 
+					"data": "hadir_count" ,
+					"render": (data, type, row, meta) => {
+						if(form_presensi.value == "satpam") {
+							return row.hadirkeamanan_count;
+						} else {
+							return data;
+						}
+					}
+				},
+				{ 
+					"data": "totalpresensi_count", 
+					"render": (data, type, row, meta) => {
+						if(form_presensi.value == "satpam") {
+							return row.tidakhadirkeamanan_count;
+						} else {
+							return Number(data) - Number(row.hadir_count);
+						}
+					}
+				},
 				{
 					"data": "id",
 					"render": ( data, type, row, meta ) => {
-						return `<button class="btn btn-primary btn-sm" onclick="detail('${data}')" >Detail</button>` 
+						if(form_presensi.value == "satpam") {
+							return `<button class="btn btn-primary btn-sm" onclick="detail_keamanan('${data}')" >Detail</button>` 
+						} else {
+							return `<button class="btn btn-primary btn-sm" onclick="detail('${data}')" >Detail</button>` 
+						}
 					},
 					"className": 'text-center'
 				}
@@ -275,5 +333,66 @@
 
 		$("#detailModal").modal('show');
 	}
+
+	function detail_keamanan(id) {
+		tahun = form_tahun.value;
+		bulan = form_bulan.value;
+
+		$('#detailtable_shift').dataTable().fnClearTable();
+    	$('#detailtable_shift').dataTable().fnDestroy();
+
+		$('#detailtable_shift').DataTable({
+			processing: true,
+			serverside: true,
+			ajax: {
+				url: `{{ url('/api/v1') }}/absensi-pegawai/rekap/keamanan/${id}/${tahun}/${bulan}`,
+				type: 'GET',
+				headers: {
+					"Authorization": window.localStorage.getItem('token')
+				}
+			},
+			columns: [
+				{data: null, name: 'no', className: 'text-center', sortable: false, render: function(data, type, row, meta) {return meta.row + meta.settings._iDisplayStart + 1;}},
+				{
+					data: 'tanggal', 
+					name: 'tanggal', 
+					className: 'text-center',
+					render: (data) => {
+						return moment(data).format('DD/MM/YYYY');
+					}
+				},
+				{data: 'masuk', name: 'masuk', defaultContent: "-", className: 'text-center'},
+				{data: 'pulang', name: 'pulang', defaultContent: "-", className: 'text-center'},
+				{data: 'shift', name: 'shift', defaultContent: "-", className: 'text-center'},
+				{
+					data: 'status', 
+					name: 'status', 
+					className: 'text-center',
+					render: (data, type, row, meta) => {
+						row.pulang != null? status = '<span class="badge badge-success badge-sm text-white">Masuk</span>' : status = '<span class="badge badge-danger badge-sm text-white">Tidak Masuk</span>';
+						return status;
+					}
+				},
+			],
+			order: [[0, 'asc']],
+			language: {
+				"paginate": {
+					"next": 'Next',
+					"previous": 'Previous'
+				},
+				"processing": "Proses ...",
+				"emptyTable": "Tidak ada data dalam tabel",
+				"info": "Menampilkan _START_ sampai _END_ dari _TOTAL_ total data",
+				"infoEmpty": "Menampilkan 0 sampai 0 dari 0 total data",
+				"infoFiltered": "(difilter dari _MAX_ total)",
+				"lengthMenu": "_MENU_ Data per halaman",
+				"search": "",
+				"searchPlaceholder": "Pencarian ..."
+			}
+		});
+
+		$("#detailModalShift").modal('show');
+	}
+
 </script>
 @endsection

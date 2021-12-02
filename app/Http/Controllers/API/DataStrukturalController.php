@@ -94,8 +94,10 @@ class DataStrukturalController extends Controller
     {
         //
         // $data = Pegawai::with(['dataStruktural'])->find($id);
-        $data = DataStruktural::with(['jabatanStruktural'])->find($id);
+        $data = DataStruktural::find($id);
         $pegawai = Pegawai::find($data->id_pegawai);
+        $jabatan = JabatanStruktural::find($data->id_jabatan_struktural);
+        // dd($data);
  
         $html = '<div class="form-row">
               <div class="form-group col-md-6">
@@ -130,7 +132,7 @@ class DataStrukturalController extends Controller
             </div>
             <div class="form-group col-md-6">
               <label for="">Jabatan Struktural</label>
-              <input type="text" class="form-control" value="'.$data->jabatanStruktural->nama_jabatan.'" disabled>
+              <input type="text" class="form-control" value="'.$jabatan->nama_jabatan.'" disabled>
             </div>
           </div>
           <div class="form-row">

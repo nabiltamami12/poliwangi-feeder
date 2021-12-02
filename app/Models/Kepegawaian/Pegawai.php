@@ -32,7 +32,6 @@ class Pegawai extends Model
         'provinsi',
         'askes',
         'kode_dosen_sk034',
-        'dosen_vedc',
         'nip_lama',
         'npwp',
         'nidn',
@@ -101,6 +100,12 @@ class Pegawai extends Model
     public function hadir() {
         return $this->hasMany(AbsensiKaryawan::class, 'pegawai')->where('tidakmasuk', 0)->where('libur', 0);
     }
+    public function tidakhadirkeamanan() {
+        return $this->hasMany(AbsensiShift::class, 'pegawai')->where('pulang', null);
+    }
+    public function hadirkeamanan() {
+        return $this->hasMany(AbsensiShift::class, 'pegawai')->where('pulang', '!=', null);
+    }
 
     public function statuspegawai() {
         return $this->hasMany(PegawaiStatus::class, 'id_pegawai');
@@ -108,12 +113,12 @@ class Pegawai extends Model
 
     // wilayah
     public function kecamatan() {
-        return $this->belongsTo(Kecamatan::class, 'id');
+        return $this->belongsTo(Kecamatan::class, 'id_kecamatan');
      }
      public function kota() {
-        return $this->belongsTo(Kota::class, 'id');
+        return $this->belongsTo(Kota::class, 'id_kabupaten');
      }
      public function provinsi() {
-        return $this->belongsTo(Provinsi::class, 'id');
+        return $this->belongsTo(Provinsi::class, 'id_provinsi');
      }
 }

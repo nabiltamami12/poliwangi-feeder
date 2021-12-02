@@ -7,6 +7,15 @@
 
 <!-- Page content -->
 <section class="page-content container-fluid">
+    @if(session('status'))
+        <div class="row">
+            <div class="col-12">
+                <div class="alert alert-success" role="alert">
+                    {{ session('status') }}
+                </div>
+            </div>
+        </div>
+    @endif
     <div class="row">
         <div class="col-xl-12">
             <div class="card padding--small">
