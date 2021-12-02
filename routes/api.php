@@ -381,7 +381,7 @@ Route::prefix('v1')->group(function () {
         Route::get('/getKelurahan', [Ctr\PegawaiController::class, 'getKelurahan']);
         Route::post('/store-pegawai', [Ctr\PegawaiController::class, 'store'])->name('store-pegawai');
         // Route::get('/data-pegawai/{id}/edit', [Ctr\PegawaiController::class, 'edit'])->name('data-edit');
-        Route::put('/data-pegawai/{id}', [Ctr\PegawaiController::class, 'update']);
+        Route::put('/data-pegawai/{id}', [Ctr\PegawaiController::class, 'update'])->name('update-pegawai');
         Route::delete('/data-pegawai/{id}', [Ctr\PegawaiController::class, 'destroy']);
 
           // Kepegawaian Data Pangkat

@@ -32,7 +32,6 @@ class Pegawai extends Model
         'provinsi',
         'askes',
         'kode_dosen_sk034',
-        'dosen_vedc',
         'nip_lama',
         'npwp',
         'nidn',
@@ -44,6 +43,7 @@ class Pegawai extends Model
         'id_user',
         'staff',
         'id_pangkat',
+        'nik'
     ];
     
     public function user() {

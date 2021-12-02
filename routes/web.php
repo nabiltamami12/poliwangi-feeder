@@ -1,17 +1,11 @@
 <?php
 
 use App\Models\Prodi;
-use App\Models\Jurusan;
 use App\Models\Periode;
 use App\Models\Kurikulum;
-use App\Models\Kepegawaian\Kota;
-use App\Models\Kepegawaian\Staff;
 use Illuminate\Support\Facades\DB;
-use App\Models\Kepegawaian\Pangkat;
 use App\Models\Kepegawaian\Pegawai;
-use App\Models\Kepegawaian\Provinsi;
-use App\Models\Kepegawaian\Kecamatan;
-use App\Models\Kepegawaian\Kelurahan;
+use App\Models\Kepegawaian\PegawaiStatus;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -159,30 +153,15 @@ Route::get('/pmbgenerateva', function () {
             // Route::post('/store-pegawai', [PegawaiController::class, 'store'])->name('store-pegawai');
 
             Route::get('/data-edit/edit/{id}', function ($id) { 
-                $kota = Kota::all();
-                $kecamatan = Kecamatan::all();
-                $provinsi = Provinsi::all();
-                $pangkat = Pangkat::all();
-                $jabatan = Staff::all();
-                $jurusan = Jurusan::all();
-                $kelurahan = Kelurahan::all();
-                // $jabatan = JabatanStruktural::all();
         
                 $item = Pegawai::find($id);
+                $status = PegawaiStatus::firstOrCreate(['id_pegawai' => $item->id]);
         
                 return view('admin.masterKepegawaian.pegawai.edit',[
                         "id" => $id,
                         "title" => "kepegawaian",
-                        "kota" => $kota,
-                        "kecamatan" => $kecamatan,
-                        "provinsi" => $provinsi,
-                        "pangkat" => $pangkat,
-                        "jabatan" => $jabatan,
                         "item" => $item,
-                        "jurusan" => $jurusan,
-                        "kelurahan" => $kelurahan, 
-        
-                        
+                        "status" => $status,
                 ]);
             })->name('data-edit');
             //route unit

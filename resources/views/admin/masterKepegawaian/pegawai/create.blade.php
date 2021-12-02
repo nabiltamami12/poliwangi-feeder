@@ -65,6 +65,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="form-control-label" for="nip">NIP</label>
+                                <span class="text-danger float-right">*wajib di isi</span>
                                 <input type="text" name="nip" class="form-control" id="nip"
                                 placeholder="Masukan Nomor Induk Pegawai" required>
                             </div>
@@ -239,7 +240,8 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="form-control-label" for="provinsi">Provinsi</label>
-                                <select class="form-control js-example-basic-single" id="provinsi" name="provinsi">
+                                <span class="text-danger float-right">*wajib di isi</span>
+                                <select class="form-control js-example-basic-single" id="provinsi" name="provinsi" required>
                                     <option>Pilih Provinsi...</option>
                                 
                                 </select>
@@ -250,7 +252,8 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="form-control-label" for="kota">Kota</label>
-                                <select class="form-control js-example-basic-single" id="kota" name="kabupaten">
+                                <span class="text-danger float-right">*wajib di isi</span>
+                                <select class="form-control js-example-basic-single" id="kota" name="kabupaten" required>
                                    
                                 </select>
                             </div>
@@ -258,7 +261,8 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="form-control-label" for="kecamatan">Kecamatan</label>
-                                <select class="form-control js-example-basic-single" id="kecamatan" name="kecamatan">
+                                <span class="text-danger float-right">*wajib di isi</span>
+                                <select class="form-control js-example-basic-single" id="kecamatan" name="kecamatan" required>
                                    
                                 </select>
                             </div>
@@ -268,10 +272,11 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                    <label class="form-control-label" for="kelurahan">Kelurahan</label>
-                                    <select class="form-control js-example-basic-single" id="kelurahan" name="kelurahan">
-                                   
-                                    </select>
+                                <label class="form-control-label" for="kelurahan">Kelurahan</label>
+                                <span class="text-danger float-right">*wajib di isi</span>
+                                <select class="form-control js-example-basic-single" id="kelurahan" name="kelurahan" required>
+                                
+                                </select>
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -334,8 +339,23 @@
                     </div>
                     <hr class="my-4">
 
+                    <div class="row">
+                        <div class="col-12">
+                            <label for="">Pegawai Status</label>
+                            <select name="pegawai_status" id="pegawai_status" class="form-control">
+                                <option selected value="None">None</option>
+                                <option value="dosen">Dosen</option>
+                                <option value="dosen luar biasa">Dosen Luar Biasa</option>
+                                <option value="tendik">Tenaga Didik</option>
+                                <option value="pns">PNS</option>
+                                <option value="kontrak">Kontrak</option>
+                            </select>
+                        </div>
+                    </div>
+
+
                     <button type="submit"
-                        class="btn btn-primary w-100 simpanData-btn ">{{ ($id==null)?"Tambah":"Ubah" }}
+                        class="btn btn-primary w-100 simpanData-btn mt-5">{{ ($id==null)?"Tambah":"Ubah" }}
                         Data</button>
                 </form>
 
@@ -387,7 +407,7 @@ $.ajax({
                 }));
             });
         }else{
-            $("#pangkat").empty();
+            $("#jurusan").empty();
         }
     }
 });
@@ -426,8 +446,8 @@ $.ajax({
             $("#provinsi").append('<option>---Pilih Provinsi---</option>');
             $.each(res, function(a, j) {
                 $('#provinsi').append($('<option>', {
-                value: j.id_provinsi,
-                text: j.nama,
+                    value: j.id_provinsi,
+                    text: j.nama,
                 }));
             });
         }else{
@@ -450,7 +470,6 @@ $('#provinsi').change(function(){
                 $("#kota").empty();
                 $("#kecamatan").empty();
                 $("#kota").append('<option>---Pilih Kabupaten / Kota---</option>');
-                $("#kecamatan").append('<option>---Pilih Kecamatan---</option>');
                 $.each(res,function(id_kabupaten, nama){
                     $("#kota").append('<option value="'+id_kabupaten+'">'+nama+'</option>');
                 });
@@ -481,7 +500,6 @@ $('#provinsi').change(function(){
                 $("#kelurahan").empty();
 
                 $("#kecamatan").append('<option>---Pilih Kecamatan---</option>');
-                $("#kelurahan").append('<option>---Pilih Kelurahan---</option>');
 
                 $.each(res,function(id_kecamatan, nama){
                     $("#kecamatan").append('<option value="'+id_kecamatan+'">'+nama+'</option>');

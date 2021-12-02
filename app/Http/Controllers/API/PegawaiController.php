@@ -9,12 +9,15 @@ use App\Models\Kepegawaian\Staff;
 use App\Models\Kepegawaian\Jurusan;
 use App\Models\Kepegawaian\Pangkat;
 use App\Models\Kepegawaian\Pegawai;
+use App\Models\Kepegawaian\PegawaiStatus;
 use App\Http\Controllers\Controller;
 use App\Models\Kepegawaian\Provinsi;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Kepegawaian\Kecamatan;
 use App\Models\Kepegawaian\Kelurahan;
 use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Facades\Validator;
+
 
 class PegawaiController extends Controller
 {
@@ -41,27 +44,7 @@ class PegawaiController extends Controller
 
     public function create()
     {
-        $kota = Kota::all();
-        $kecamatan = Kecamatan::all();
-        $provinsi = Provinsi::all();
-        $pangkat = Pangkat::all();
-        $jurusan = Jurusan::all();
-        $kelurahan = Kelurahan::all();
-        // $jabatan = JabatanStruktural::all();
-        $jabatan = Staff::all();
-        return view('admin.masterKepegawaian.pegawai.create',[
-                "id" => null,
-                "title" => "kepegawaian",
-                "jabatan" => $jabatan,
-                "kota" => $kota,
-                "kecamatan" => $kecamatan,
-                "provinsi" => $provinsi,
-                "pangkat" => $pangkat,
-                "kelurahan" => $kelurahan,
-                "jurusan" => $jurusan,
-
-                
-        ]);
+        
     }
 
     public function store(Request $request)
@@ -98,12 +81,18 @@ class PegawaiController extends Controller
             'nama_instansi' => 'nullable',
             'alamat_instansi' => 'nullable',
             'pendidikan_terakhir' => 'nullable',
-            'id_jabatan' => 'nullable',
+            'staff' => 'nullable',
             'id_pangkat' => 'nullable',
-            
+            'nik' => 'nullable',
+            'pegawai_status' => 'nullable',
         ]);
 
+
         $pegawai = Pegawai::create($request->all());
+        $provinsi = Provinsi::where('id_provinsi', $request->provinsi)->first();
+        $kabupaten = Kota::where('id_kabupaten', $request->kabupaten)->first();
+        $kecamatan = Kecamatan::where('id_kecamatan', $request->kecamatan)->first();
+        $kelurahan = Kelurahan::where('id_kelurahan', $request->kelurahan)->first();
 
         //create user
         $user = User::create([
@@ -113,78 +102,74 @@ class PegawaiController extends Controller
         ]);
 
         $pegawai->update([
-            'id_user' => $user->id
+            'id_user' => $user->id,
+            'provinsi' => $provinsi->nama,
+            'kota' => $kabupaten->nama,
+            'kecamatan' => $kecamatan->nama,
+            'kelurahan' => $kelurahan->nama,
         ]);
-        // Pegawai::create([
-        //     'id_user' => $user->id,
-        //     'nip' =>$request->nip,
-        //     'noid' =>$request->noid,
-        //     'nama' =>$request->nama,
-        //     'jurusan' =>$request->jurusan,
-        //     'jenis_kelamin' =>$request->jenis_kelamin,
-        //     'agama' =>$request->agama,
-        //     'no_tlp' =>$request->no_tlp,
-        //     'tmp_lahir' =>$request->tmp_lahir,
-        //     'tgl_lahir' =>$request->tgl_lahir,
-        //     'shift' =>$request->shift,
-        //     'gol_darah' =>$request->gol_darah,
-        //     'gelar_dpn' =>$request->gelar_dpn,
-        //     'gelar_blk' =>$request->gelar_blk,
-        //     'status_kawin' =>$request->status_kawin,
-        //     'kelurahan' =>$request->kelurahan,
-        //     'kecamatan' =>$request->kecamatan,
-        //     'kabupaten' =>$request->kabupaten,
-        //     'provinsi' =>$request->provinsi,
-        //     'askes' =>$request->askes,
-        //     'kode_dosen_sk034' =>$request->kode_dosen_sk034,
-        //     'nip_lama' =>$request->nip_lama,
-        //     'npwp' =>$request->npwp,
-        //     'nidn' =>$request->nidn,
-        //     'departemen' =>$request->departemen,
-        //     'praktisi' =>$request->praktisi,
-        //     'nama_instansi' =>$request->nama_instansi,
-        //     'alamat_instansi' =>$request->alamat_instansi,
-        //     'pendidikan_terakhir' =>$request->pendidikan_terakhir,
-        //     'id_pangkat' =>$request->id_pangkat,
-        // ]);
+
+
+        // if($request->pegawai_status != "None") {
+            PegawaiStatus::create([
+                'id_pegawai' => $pegawai->id,
+                'status' => 'active',
+                'status_karyawan' => $request->pegawai_status,
+            ]);
+        // }
+       
 
         return redirect()->route('list-pegawai')->with('status', 'Data Berhasil disimpan!');
     }
 
     public function edit($id)
     {
-        $kota = Kota::all();
-        $kecamatan = Kecamatan::all();
-        $provinsi = Provinsi::all();
-        $pangkat = Pangkat::all();
-        $jabatan = Staff::all();
-        $jurusan = Jurusan::all();
-        $kelurahan = Kelurahan::all();
-        // $jabatan = JabatanStruktural::all();
-
-        $item = Pegawai::find($id);
-
-        return view('admin.masterKepegawaian.pegawai.edit',[
-                "id" => $id,
-                "title" => "kepegawaian",
-                "kota" => $kota,
-                "kecamatan" => $kecamatan,
-                "provinsi" => $provinsi,
-                "pangkat" => $pangkat,
-                "jabatan" => $jabatan,
-                "item" => $item,
-                "jurusan" => $jurusan,
-                "kelurahan" => $kelurahan, 
-        ]);
+        
     }
 
     public function update(Request $request, $id)
     {
+
         $pgw = Pegawai::find($id);
-        $pgw->update($request->all()); 
 
+        if($request->provinsi != null) {
 
-        return redirect()->route('data-pegawai');
+            $validator = Validator::make($request->all(), [
+                'kelurahan' => 'required',
+                'kecamatan' => 'required',
+                'kabupaten' => 'required',
+                'provinsi' => 'required',
+            ]);
+
+            if ($validator->fails()) {
+                return back()->withErrors(['msg', 'Lengkapi form input provinsi, kabupaten, kecamatan, dan kelurahan']);
+            }
+
+            $provinsi = Provinsi::where('id_provinsi', $request->provinsi)->first();
+            $kabupaten = Kota::where('id_kabupaten', $request->kabupaten)->first();
+            $kecamatan = Kecamatan::where('id_kecamatan', $request->kecamatan)->first();
+            $kelurahan = Kelurahan::where('id_kelurahan', $request->kelurahan)->first();
+            $pgw->update($request->all()); 
+            $pgw->update([
+                'provinsi' => $provinsi->nama,
+                'kota' => $kabupaten->nama,
+                'kecamatan' => $kecamatan->nama,
+                'kelurahan' => $kelurahan->nama,
+            ]); 
+
+            $status = PegawaiStatus::where('id_pegawai', $id)->first();
+            $status->update([
+                'status_karyawan' => $request->pegawai_status,
+            ]);
+        }  else {
+            $pgw->update($request->all()); 
+            $status = PegawaiStatus::where('id_pegawai', $id)->first();
+            $status->update([
+                'status_karyawan' => $request->pegawai_status,
+            ]);
+        }
+
+        return redirect()->route('list-pegawai')->with('status', 'Data Berhasil diperbarui!');
     }
 
     public function destroy($id)
