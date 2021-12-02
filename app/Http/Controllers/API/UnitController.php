@@ -14,8 +14,12 @@ class UnitController extends Controller
 {
     public function getData(Request $request)
     {
-        $data = Unit::orderBy('id', 'desc')->get();
+        $data = Unit::orderBy('id', 'desc')->with('pegawai')->get();
+        // dd($data);
         return DataTables::of($data)
+            ->addColumn('id_pegawai', function($data) {
+                return $data->pegawai->nama;
+            })
             ->addColumn('Aksi', function($data) {
                 return '<button type="button" class="btn btn-success btn-sm" id="getEditData" data-id="'.$data->id.'">Edit</button>
                     <button type="button" data-id="'.$data->id.'" onclick="delete_btn()" class="btn btn-danger btn-sm" id="getDeleteId">Delete</button>';
@@ -33,8 +37,7 @@ class UnitController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'id_pegawai' => 'required',
-            'unit' => 'required',
-            'kepala' => 'required'
+            'unit' => 'required'
         ]);
          
         if ($validator->fails()) {
@@ -70,12 +73,6 @@ class UnitController extends Controller
                         <label for="">Nama Unit</label>
                         <input type="text" class="form-control" name="unit" id="editUnit" placeholder="Masukan nama unit" value="'.$data->unit.'" required>
                     </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-12">
-                        <label for="">Nama Kepala</label>
-                        <input type="text" class="form-control" name="kepala" id="editKepala" placeholder="Masukan nama kepala unit" value="'.$data->kepala.'" required>
-                    </div>
                 </div>';
  
         return response()->json(['html'=>$html, 'pegawai'=>$pegawai,'data'=>$data]);
@@ -83,9 +80,7 @@ class UnitController extends Controller
     public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
-            'id_pegawai' => 'required',
-            'unit' => 'required',
-            'kepala' => 'required'
+            'id_pegawai' => 'required'
         ]);
          
         if ($validator->fails()) {

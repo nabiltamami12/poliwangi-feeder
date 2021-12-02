@@ -11,10 +11,10 @@ class Unit extends Model
     protected $primaryKey = "id";
     protected $table = "units";
     protected $fillable = [
-        'unit', 'kepala', 'id_pegawai'
+        'unit', 'id_pegawai'
     ];
 
     public function pegawai() {
-        return $this->belongsToMany(Pegawai::class, 'id');
+        return $this->belongsTo(Pegawai::class, 'id');
     }
 }

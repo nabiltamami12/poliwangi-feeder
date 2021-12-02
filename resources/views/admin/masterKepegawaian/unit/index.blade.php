@@ -100,12 +100,6 @@
               <input type="text" class="form-control" name="unit" id="unit" placeholder="Masukan Nama Unit" required>
             </div>
           </div>
-          <div class="form-row">
-            <div class="form-group col-md-12">
-              <label for="">Kepala Unit</label>
-                <input type="text" class="form-control" name="kepala" id="kepala" placeholder="Masukan data Kepala Unit" required>
-            </div>
-          </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -181,7 +175,7 @@
     columns: [
         {data: null, name: 'no', sortable: false, render: function(data, type, row, meta) {return meta.row + meta.settings._iDisplayStart + 1;}},
         {data: 'unit', name: 'unit'},
-        {data: 'kepala', name: 'kepala'},
+        {data: 'id_pegawai', name: 'id_pegawai'},
         {data: 'Aksi', name: 'Aksi',orderable:false,serachable:false,sClass:'text-center'},
     ]
   };
@@ -235,7 +229,6 @@
             data: {
                 id_pegawai: parseInt($('#idPegawai').val()),
                 unit: $('#unit').val(),
-                kepala: $('#kepala').val(),
                
             },
             success: function(result) {
@@ -321,7 +314,6 @@
             data: {
                 id_pegawai: parseInt($('#editIdPegawai').val()),
                 unit: $('#editUnit').val(),
-                kepala: $('#editKepala').val(),
                 
             },
             success: function(result) {

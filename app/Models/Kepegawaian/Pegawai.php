@@ -44,6 +44,7 @@ class Pegawai extends Model
         'id_user',
         'staff',
         'id_pangkat',
+        'nik'
     ];
     
     public function user() {
