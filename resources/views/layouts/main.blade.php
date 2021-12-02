@@ -29,6 +29,9 @@
     elseif(in_array('mahasiswa', $akses_untuk))
       $sidebar = 'partials.sidebarMala';
 
+    elseif(in_array('mala', $akses_untuk))
+      $sidebar = 'partials.sidebarMala';
+
     elseif(in_array('keuangan', $akses_untuk))
       $sidebar = 'partials.sidebarKeuangan';
   @endphp

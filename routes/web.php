@@ -2,6 +2,7 @@
 
 use App\Models\Prodi;
 use App\Models\Periode;
+use Symfony\Component\HttpFoundation\Request;
 use App\Models\Kurikulum;
 use Illuminate\Support\Facades\DB;
 use App\Models\Kepegawaian\Pegawai;
@@ -46,7 +47,7 @@ Route::get('/pmbgenerateva', function () {
 })->name('generateVA-PMB');
 
 // Route::middleware(['auth'])->group(function () {
-    
+
     Route::prefix('mahasiswabaru')->middleware(['aksesuntuk:maba'])->group(function () {
         Route::get('/dashboard', function () {
             return view('mahasiswaBaru.dashboardMaba', [
@@ -74,14 +75,179 @@ Route::get('/pmbgenerateva', function () {
             ]);
         });
     });
-    
+
+    Route::prefix('laporan')->group(function() {
+
+        Route::get('mahasiswa', function() {
+            return view('admin.laporan.mahasiswa', [
+                'title' => 'admin-report'
+            ]);
+        });
+
+        Route::post('mahasiswa', [App\Http\Controllers\API\LaporanMahasiswaController::class, 'getReport']);
+
+    });
+
+    Route::prefix('master')->group(function () {
+        Route::get('/dataperiode', function () {
+            return view('akademik.masterData/dataperiode', [
+                "title" => "akademik-master",
+            ]);
+        });
+        Route::get('/dataperiode/cu/', function () {
+            return view('akademik.masterData/cuperiode', [
+                "id" => null,
+                "title" => "akademik-master"
+            ]);
+        });
+        Route::get('/dataperiode/cu/{id}', function ($id) {
+            return view('akademik.masterData/cuperiode', [
+                "id" => $id,
+                "title" => "akademik-master"
+            ]);
+        });
+
+        Route::get('/datakurikulum', function () {
+            return view('akademik.masterData/datakurikulum', [
+                "title" => "akademik-master",
+            ]);
+        });
+        Route::get('/datakurikulum/cu/', function () {
+            return view('akademik.masterData/tambahkurikulum', [
+                "id" => null,
+                "title" => "akademik-master",
+                "prodi" => Prodi::all(),
+                "periode" => Periode::where('tahun', '>=', date('Y'))->get()
+            ]);
+        });
+        Route::get('/datakurikulum/cu/{id}', function ($id) {
+            return view('akademik.masterData/updatekurikulum', [
+                "id" => $id,
+                "title" => "akademik-master",
+                "prodi" => Prodi::all(),
+                "periode" => Periode::where('tahun', '>=', date('Y'))->get()
+            ]);
+        });
+        Route::get('/datakurikulum/{id}/matakuliah', function ($id) {
+            return view('akademik.masterData/matakuliah-kurikulum', [
+                "id" => $id,
+                "kurikulum" => Kurikulum::select('kurikulum.*', DB::raw("(select sum((select sks from matakuliah where matakuliah.nomor=mk.matakuliah)) from kurikulum_matkul mk where mk.kurikulum = kurikulum.id) as jumlah_sks_matkul"))->where('id', $id)->first(),
+                "title" => "akademik-master"
+            ]);
+        });
+        Route::get('/datakurikulum/{id}/matakuliah/cu', function ($id) {
+            $kurikulum = Kurikulum::where('id', $id)->first();
+            return view('akademik.masterData/tambahmatakuliah-kurikulum', [
+                "id" => $id,
+                "kurikulum" => $kurikulum,
+                "title" => "akademik-master",
+                "matkul" => DB::table('matakuliah')->where('program_studi', '=', $kurikulum->prodi_id)->get()
+            ]);
+        });
+
+        Route::get('/datahariaktif', function () {
+            return view('akademik.masterData/datahariaktif', [
+                "title" => "akademik-master"
+            ]);
+        });
+
+        Route::get('/datamahasiswa', function () {
+            return view('akademik.masterData.datamahasiswa', [
+                "title" => "akademik-master",
+            ]);
+        });
+        Route::get('/datamahasiswa/cu/', function () {
+            return view('akademik.masterData/cumahasiswa', [
+                "id" => null,
+                "title" => "akademik-master"
+            ]);
+        });
+        Route::get('/datamahasiswa/cu/{id}', function ($id) {
+            return view('akademik.masterData/cumahasiswa', [
+                "id" => $id,
+                "title" => "akademik-master"
+            ]);
+        });
+
+        Route::get('/datadosenpengampu', function () {
+            return view('akademik.masterData.datadosenpengampu', [
+                "title" => "akademik-master"
+            ]);
+        });
+        Route::get('/datadosenpengampu/cu/', function () {
+            return view('akademik.masterData/cudosenpengampu', [
+                "id" => null,
+                "title" => "akademik-master"
+            ]);
+        });
+        Route::get('/datadosenpengampu/cu/{id}', function ($id) {
+            return view('akademik.masterData/cudosenpengampu', [
+                "id" => $id,
+                "title" => "akademik-master"
+            ]);
+        });
+
+        Route::get('/datamatakuliah', function () {
+            return view('akademik.masterData/datamatakuliah', [
+                "title" => "akademik-master"
+            ]);
+        });
+        Route::get('/datamatakuliah/cu/', function () {
+            return view('akademik.masterData/cumatakuliah', [
+                "id" => null,
+                "title" => "akademik-master"
+            ]);
+        });
+        Route::get('/datamatakuliah/cu/{id}', function ($id) {
+            return view('akademik.masterData/cumatakuliah', [
+                "id" => $id,
+                "title" => "akademik-master"
+            ]);
+        });
+
+        Route::get('/datakelas', function () {
+            return view('akademik.masterData/datakelas', [
+                "title" => "akademik-master",
+            ]);
+        });
+        Route::get('/datakelas/cu/', function () {
+            return view('akademik.masterData/cukelas', [
+                "id" => null,
+                "title" => "akademik-master"
+            ]);
+        });
+        Route::get('/datakelas/cu/{id}', function ($id) {
+            return view('akademik.masterData/cukelas', [
+                "id" => $id,
+                "title" => "akademik-master"
+            ]);
+        });
+        Route::get('/datakelas/dosen/{id}', function ($id) {
+            return view('akademik.masterData/cukelasdosen', [
+                "id" => $id,
+                "title" => "akademik-master"
+            ]);
+        });
+
+        Route::get('/datadosen', function () {
+            return view('akademik.masterData/datadosen', [
+                "title" => "akademik-master",
+            ]);
+        });
+
+        Route::get('/dataruangan', function () {
+            return view('akademik.masterData/dataruangan', [
+                "title" => "akademik-master"
+            ]);
+        });
+
     Route::prefix('mahasiswa')->middleware(['aksesuntuk:mahasiswa'])->group(function () {
         Route::get('/dashboard', function () {
             return view('mahasiswaLama.dashboardMahasiswa', [
                 "title" => "absensi-mahasiswa"
             ]);
         });
-        
+
         Route::get('/rekap', function () {
             return view('mahasiswaLama.presensi', [
                 "title" => "rekap-absensi-mahasiswa"
@@ -93,13 +259,13 @@ Route::get('/pmbgenerateva', function () {
                 "title" => "Pembayaran"
             ]);
         });
-        
+
         Route::get('/pengajuan/cicilan', function () {
             return view('mahasiswaLama.pengajuancicilan', [
                 "title" => "pmb-pendaftar",
             ]);
         });
-        
+
         Route::get('/presensi', function () {
             return view('mahasiswaLama.presensi', [
                 "title" => "Presensi"
@@ -210,7 +376,7 @@ Route::get('/pmbgenerateva', function () {
                 "title" => "akademik-dashboard",
             ]);
         });
-    
+
         Route::get('/mahasiswa', function () {
             return view('akademik.masterData/datamahasiswalama', [
                 "title" => "admin-mahasiswa",
@@ -222,7 +388,7 @@ Route::get('/pmbgenerateva', function () {
                 "title" => "akademik-master"
             ]);
         });
-    
+
         Route::prefix('master')->group(function () {
             Route::get('/dataperiode', function () {
                 return view('akademik.masterData/dataperiode', [
@@ -241,7 +407,7 @@ Route::get('/pmbgenerateva', function () {
                     "title" => "akademik-master"
                 ]);
             });
-    
+
             Route::get('/datakurikulum', function () {
                 return view('akademik.masterData/datakurikulum', [
                     "title" => "akademik-master",
@@ -279,13 +445,13 @@ Route::get('/pmbgenerateva', function () {
                     "matkul" => DB::table('matakuliah')->where('program_studi', '=', $kurikulum->prodi_id)->get()
                 ]);
             });
-    
+
             Route::get('/datahariaktif', function () {
                 return view('akademik.masterData/datahariaktif', [
                     "title" => "akademik-master"
                 ]);
             });
-    
+
             Route::get('/datamahasiswa', function () {
                 return view('akademik.masterData.datamahasiswa', [
                     "title" => "akademik-master",
@@ -303,7 +469,7 @@ Route::get('/pmbgenerateva', function () {
                     "title" => "akademik-master"
                 ]);
             });
-    
+
             Route::get('/datadosenpengampu', function () {
                 return view('akademik.masterData.datadosenpengampu', [
                     "title" => "akademik-master"
@@ -321,7 +487,7 @@ Route::get('/pmbgenerateva', function () {
                     "title" => "akademik-master"
                 ]);
             });
-    
+
             Route::get('/datamatakuliah', function () {
                 return view('akademik.masterData/datamatakuliah', [
                     "title" => "akademik-master"
@@ -339,7 +505,7 @@ Route::get('/pmbgenerateva', function () {
                     "title" => "akademik-master"
                 ]);
             });
-    
+
             Route::get('/datakelas', function () {
                 return view('akademik.masterData/datakelas', [
                     "title" => "akademik-master",
@@ -363,13 +529,13 @@ Route::get('/pmbgenerateva', function () {
                     "title" => "akademik-master"
                 ]);
             });
-    
+
             Route::get('/datadosen', function () {
                 return view('akademik.masterData/datadosen', [
                     "title" => "akademik-master",
                 ]);
             });
-    
+
             Route::get('/dataruangan', function () {
                 return view('akademik.masterData/dataruangan', [
                     "title" => "akademik-master"
@@ -387,7 +553,7 @@ Route::get('/pmbgenerateva', function () {
                     "title" => "akademik-master"
                 ]);
             });
-    
+
             Route::get('/datajamkuliah', function () {
                 return view('akademik.masterData/datajamkuliah', [
                     "title" => "akademik-master"
@@ -405,7 +571,7 @@ Route::get('/pmbgenerateva', function () {
                     "title" => "akademik-master"
                 ]);
             });
-    
+
             Route::get('/datajurusan', function () {
                 return view('akademik.masterData/datajurusan', [
                     "title" => "akademik-master"
@@ -423,7 +589,7 @@ Route::get('/pmbgenerateva', function () {
                     "title" => "akademik-master"
                 ]);
             });
-    
+
             Route::get('/dataprodi', function () {
                 return view('akademik.masterData/dataprodi', [
                     "title" => "akademik-master"
@@ -441,7 +607,7 @@ Route::get('/pmbgenerateva', function () {
                     "title" => "akademik-master"
                 ]);
             });
-    
+
             Route::get('/datarangenilai', function () {
                 return view('akademik.masterData/datarangenilai', [
                     "title" => "akademik-master"
@@ -465,10 +631,10 @@ Route::get('/pmbgenerateva', function () {
                 ]);
             });
         });
-    
-    
+
+
         Route::prefix('kuliah')->group(function () {
-    
+
             Route::get('/perwalian', function () {
                 return view('admin.kuliah.perwalian', [
                     "page" => "admin",
@@ -481,7 +647,46 @@ Route::get('/pmbgenerateva', function () {
                     "title" => "rekap-absensi-mahasiswa"
                 ]);
             });
-    
+
+            Route::get('/penjadwalan/{id}/matakuliah', function ($id) {
+                return view('admin.kuliah.penjadwalan.matakuliah', [
+                    'title' => 'admin-penjadwalan',
+                    'id' => $id,
+                ]);
+            });
+            Route::get('/penjadwalan/{id}/matakuliah/cu', function ($id) {
+                return view('admin.kuliah.penjadwalan.tambah-matakuliah', [
+                    'title' => 'admin-penjadwalan',
+                    'id' => $id,
+                ]);
+            });
+            Route::get('/penjadwalan/{id}/matakuliah/cu/{idKuliah}', function ($id, $idKuliah) {
+                return view('admin.kuliah.penjadwalan.edit-matakuliah', [
+                    'title' => 'admin-penjadwalan',
+                    'id' => $id,
+                    'id_kuliah' => $idKuliah
+                ]);
+            });
+
+            Route::get('/perwalian/cetak', function () {
+                return view('cetak.perwalian', [
+                    "page" => "admin",
+                    "title" => "admin-perwalian-cetak"
+                ]);
+            });
+            Route::get('/kunci-nilai', function () {
+                return view('admin.kuliah.kuncinilai', [
+                    "page" => "admin",
+                    "title" => "admin-kunci-nilai"
+                ]);
+            });
+            Route::get('/absensi/rekap', function () {
+                return view('akademik.kuliah.rekapabsensimahasiswa', [
+                    "page" => "admin",
+                    "title" => "rekap-absensi-mahasiswa"
+                ]);
+            });
+
             Route::get('/absensi/dosen', function () {
                 return view('admin.kuliah.absensidosen', [
                     "page" => "admin",
@@ -489,6 +694,7 @@ Route::get('/pmbgenerateva', function () {
                 ]);
             });
 
+<<<<<<< HEAD
             Route::get('/absensi/pegawai', function () {
                 return view('admin.kuliah.absensipegawai', [
                     "page" => "admin",
@@ -496,6 +702,8 @@ Route::get('/pmbgenerateva', function () {
                 ]);
             });
     
+=======
+>>>>>>> staging
             Route::get('/absensi/dosen/{id}/{tahun}/{semester}', function ($id, $tahun, $semester) {
                 return view('admin.kuliah.rekapabsensidosen', [
                     "page" => "admin",
@@ -505,19 +713,19 @@ Route::get('/pmbgenerateva', function () {
                     "title" => "rekap-absensi-dosen"
                 ]);
             });
-    
+
             Route::get('/rekap-nilai', function () {
                 return view('admin.kuliah.datarekapnilai', [
                     "title" => "rekap-nilai"
                 ]);
             });
-    
+
             Route::get('/rekap-nilai/edit', function () {
                 return view('admin.kuliah.nilai', [
                     "title" => "dosen-penilaian"
                 ]);
             });
-    
+
             Route::get('/absensi/rekap-mahasiswa/{kelas}/{matkul}', function ($kelas, $matkul) {
                 return view('akademik.kuliah.rekapabsensikelasmahasiswa', [
                     "page" => "admin",
@@ -526,8 +734,8 @@ Route::get('/pmbgenerateva', function () {
                     "title" => "rekap-absensi-mahasiswa"
                 ]);
             });
-    
-    
+
+
             Route::get('/cetak-evaluasi-nilai', function () {
                 return view('cetak.evaluasinilai', [
                     "title" => "dosen-penilaian"
@@ -539,14 +747,14 @@ Route::get('/pmbgenerateva', function () {
                 ]);
             });
         });
-    
+
         Route::prefix('keuangan')->group(function () {
             Route::get('/piutangmahasiswa', function () {
                 return view('keuangan.dataMahasiswa', [
                     "title" => "keuangan-rekapitulasi",
                 ]);
             });
-    
+
             Route::get('/datapendaftar', function () {
                 return view('keuangan.dataPendaftar', [
                     "title" => "keuangan-rekapitulasi",
@@ -569,13 +777,13 @@ Route::get('/pmbgenerateva', function () {
                     "title" => "keuangan-tarif"
                 ]);
             });
-    
+
             Route::get('/spi', function () {
                 return view('keuangan.spiMandiri', [
                     "title" => "keuangan-rekapitulasi",
                 ]);
             });
-    
+
             Route::get('/spi/detail/{id}/{nama}', function ($id, $nama) {
                 return view('keuangan.detailSPI', [
                     "id" => $id,
@@ -589,27 +797,27 @@ Route::get('/pmbgenerateva', function () {
                 ]);
             });
         });
-    
+
         Route::prefix('pmb')->group(function () {
             Route::get('/datapendaftar', function () {
                 return view('admin.pmb.datapendaftar', [
                     "title" => "admin-pmb",
                 ]);
             });
-    
+
             Route::get('/datapendaftar/{id}', function ($id) {
                 return view('admin.pmb.cuDataPendaftar', [
                     "id" => $id,
                     "title" => "admin-pmb",
                 ]);
             });
-    
+
             Route::get('/generatenim', function () {
                 return view('admin.pmb.generatenim', [
                     "title" => "admin-pmb",
                 ]);
             });
-    
+
             Route::get('/settingjalurpenerimaan', function () {
                 return view('admin.pmb.settingJalurPenerimaan', [
                     "title" => "admin-pmb"
@@ -677,7 +885,7 @@ Route::get('/pmbgenerateva', function () {
             //         "title" => "admin-pmb"
             //     ]);
             // });
-    
+
             // Route::get('/settingjadwalseleksi', function () {
             //     return view('admin.pmb.settingJadwalSeleksi', [
             //         "title" => "admin-pmb"
@@ -688,7 +896,7 @@ Route::get('/pmbgenerateva', function () {
             //         "title" => "admin-pmb"
             //     ]);
             // });
-    
+
             // Route::get('/settingjurusanasal', function () {
             //     return view('admin.pmb.settingJurusanAsalPendaftar', [
             //         "title" => "admin-pmb"
@@ -699,46 +907,46 @@ Route::get('/pmbgenerateva', function () {
             //         "title" => "admin-pmb"
             //     ]);
             // });
-    
+
             // Route::get('/settingjurusanlinear', function () {
             //     return view('admin.pmb.settingJurusanLinear', [
             //         "title" => "admin-pmb"
             //     ]);
             // });
         });
-    
+
         Route::prefix('report')->group(function () {
             Route::get('/cuti', function () {
                 return view('akademik.report.reportcuti', [
                     "title" => "akademik-report",
                 ]);
             });
-    
+
             Route::get('/dropout', function () {
                 return view('akademik.report.reportdo', [
                     "title" => "akademik-report",
                 ]);
             });
-    
+
             Route::get('/melebihisemester', function () {
                 return view('akademik.report.reportmelebihisemester', [
                     "title" => "akademik-report",
                 ]);
             });
-    
+
             Route::get('/lulus', function () {
                 return view('akademik.report.reportlulus', [
                     "title" => "akademik-report",
                 ]);
             });
-    
+
             Route::get('/judultugasakhir', function () {
                 return view('akademik.report.reportjudulta', [
                     "title" => "akademik-report",
                 ]);
             });
         });
-    
+
         Route::prefix('khs')->group(function () {
             Route::get('/khs', function () {
                 return view('akademik.khs.khs', [
@@ -752,7 +960,7 @@ Route::get('/pmbgenerateva', function () {
             });
         });
     });
-    
+
     Route::prefix('dosen')->middleware(['aksesuntuk:dosen'])->group(function () {
         Route::get('/dashboard', function () {
             return view('dosen.dashboardDosen', [
@@ -765,7 +973,7 @@ Route::get('/pmbgenerateva', function () {
                 "title" => "dosen-presensi"
             ]);
         });
-        
+
         Route::get('/perwalian', function () {
             return view('dosen.perwalian', [
                 "title" => "dosen-perwalian"
@@ -1029,7 +1237,11 @@ Route::get('/pmbgenerateva', function () {
             ]);
         });
 
+<<<<<<< HEAD
         Route::prefix('tarif')->group(function () {
+=======
+        Route::prefix('tarif')->group(function() {
+>>>>>>> staging
             Route::get('/', function () {
                 return view('keuangan.tarif_UKT_SPI', [
                     "title" => "keuangan-tarif",
@@ -1108,6 +1320,7 @@ Route::get('/pmbgenerateva', function () {
                     ]);
                 });
 
+<<<<<<< HEAD
                 Route::get('/datamahasiswa', function () {
                     return view('keuangan.dataMahasiswa', [
                         "title" => "keuangan-rekapitulasi",
@@ -1119,6 +1332,26 @@ Route::get('/pmbgenerateva', function () {
                         "title" => "keuangan-rekapitulasi",
                     ]);
                 });
+=======
+            Route::get('/penyisihanpiutang', function () {
+                return view('keuangan.penyisihanPiutang', [
+                    "title" => "keuangan-rekapitulasi",
+                ]);
+            });
+
+            Route::get('/inputdatapembayaran', function () {
+                return view('keuangan.inputDataPembayaran', [
+                    "title" => "keuangan-rekapitulasi",
+                ]);
+            });
+
+            Route::get('/riwayatpembayaran', function () {
+                return view('keuangan.riwayatPembayaran', [
+                    "title" => "keuangan-rekapitulasi",
+                ]);
+            });
+        });
+>>>>>>> staging
 
                 Route::get('/spi/detail/{id}/{nama}', function ($id, $nama) {
                     return view('keuangan.detailSPI', [
@@ -1183,8 +1416,14 @@ Route::get('/pmbgenerateva', function () {
     });
 // });
 
+require __DIR__ . '/auth.php';
 
+require_once(__DIR__.'/web_slicing.php');
 
+<<<<<<< HEAD
     require __DIR__.'/auth.php';
 
     require_once(__DIR__.'/web_slicing.php');
+=======
+});
+>>>>>>> staging

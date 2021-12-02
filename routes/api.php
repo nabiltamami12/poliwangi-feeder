@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API as Ctr;
+use App\Http\Controllers\API\LaporanMahasiswaController;
 use Illuminate\Support\Facades\Request;
 /*
 |--------------------------------------------------------------------------
@@ -149,6 +150,7 @@ Route::prefix('v1')->group(function () {
     Route::get('/mahasiswa-angkatan', [Ctr\MahasiswaController::class, 'mahasiswa_angkatan']);
     Route::get('/mahasiswa-kelas', [Ctr\MahasiswaController::class, 'mahasiswa_kelas']);
     Route::get('/mahasiswa-export', [Ctr\MahasiswaController::class, 'mahasiswa_export']);
+    Route::get('/mahasiswa/penilaian/{id}/{tahun}/{semester}/getNilai', [Ctr\MahasiswaController::class, 'getNilaiKhs']);
 
 
     // Dosen Pengampu
@@ -226,7 +228,7 @@ Route::prefix('v1')->group(function () {
     Route::delete('/jurusanpilihan/{id}', [Ctr\JurusanpilihanController::class, 'destroy']);
     //syarat
     Route::get('/syarat', [Ctr\SyaratController::class, 'index']);
-    Route::get('/syarat-pendaftar', [Ctr\SyaratController::class,'get_syarat_pendaftar']);
+    Route::get('/syarat-pendaftar', [Ctr\SyaratController::class, 'get_syarat_pendaftar']);
     Route::get('/syarat/{id}', [Ctr\SyaratController::class, 'show']);
     Route::post('/syarat', [Ctr\SyaratController::class, 'store']);
     Route::put('/syarat/{id}', [Ctr\SyaratController::class, 'update']);
@@ -328,6 +330,7 @@ Route::prefix('v1')->group(function () {
     Route::get('/test', [Ctr\MahasiswaController::class, 'create_va']);
     Route::post('/test/{id}', [Ctr\BerkasKeuanganController::class, 'detail_cicilan']);
 
+<<<<<<< HEAD
 
     // Kepegawaian Jabatan Struktural
     Route::get('/getJabatan', [Ctr\JabatanStrukturalController::class, 'getJabatan']);
@@ -392,6 +395,25 @@ Route::prefix('v1')->group(function () {
           Route::put('/data-pangkat/{id}', [Ctr\PangkatController::class, 'update']);
           Route::delete('/data-pangkat/{id}', [Ctr\PangkatController::class, 'destroy']);
 
+=======
+    // Perwalian Dosen
+    Route::get('/dosen/perwalian', [Ctr\PerwalianController::class, 'dosenPerwalian']);
+    Route::put('/dosen/perwalian/change_status/{id}', [Ctr\PerwalianController::class, 'change_status']);
+    // Perwalian Admin
+    Route::get('/admin/perwalian', [Ctr\PerwalianController::class, 'adminPerwalian']);
+
+    // Kunci Nilai Admin
+    Route::get('/admin/kunci-nilai', [Ctr\KunciNilaiController::class, "index"]);
+    Route::put('/admin/kunci-nilai/change_status/{id}', [Ctr\KunciNilaiController::class, 'change_status']);
+
+    // Penjadwalan
+    Route::get('/penjadwalan', [Ctr\PenjadwalanController::class, 'index']);
+    Route::get('/penjadwalan/{id}/matakuliah', [Ctr\PenjadwalanController::class, 'matakuliah']);
+    Route::post('/penjadwalan/{id}/matakuliah', [Ctr\PenjadwalanController::class, 'tambahMatakuliah']);
+    Route::delete('/penjadwalan/{id}', [Ctr\PenjadwalanController::class, 'destroy']);
+    Route::get('/penjadwalan/edit/{id}', [Ctr\PenjadwalanController::class, 'editMatakuliah']);
+    Route::post('/penjadwalan/{id}/matakuliah/update/{kode}', [Ctr\PenjadwalanController::class, 'updateMatakuliah']);
+>>>>>>> staging
 });
 
 Route::prefix('v1')->middleware('auth:api')->group(function () {

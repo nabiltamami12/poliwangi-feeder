@@ -108,6 +108,7 @@
                 </a>
               </li>
             </ul>
+
           </li>
 
           <li class="nav-item">
@@ -168,6 +169,12 @@
             </div>
             <ul class="nav-item-dropdown-content">
               <li class="nav-item">
+                <a class="nav-link {{($title === "admin-penjadwalan") ? 'aktif' : ''}}" href="{{url('admin/kuliah/penjadwalan')}}">
+                  <span class="mini_icon">JK</span>
+                  <span class="nav-link-text ml-0">Penjadwalan Kuliah</span>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a class="nav-link {{($title === "admin-perwalian") ? 'aktif' : ''}}" href="{{url('admin/kuliah/perwalian')}}">
                   <span class="mini_icon">PW</span>
                   <span class="nav-link-text ml-0">Perwalian</span>
@@ -195,6 +202,12 @@
                 <a class="nav-link {{($title === "rekap-nilai") ? 'aktif' : ''}}" href="{{url('admin/kuliah/rekap-nilai')}}">
                   <span class="mini_icon">RN</span>
                   <span class="nav-link-text ml-0">Rekap Nilai Mahasiswa</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link {{($title === "admin-kunci-nilai") ? 'aktif' : ''}}" href="{{url('admin/kuliah/kunci-nilai')}}">
+                  <span class="mini_icon">KN</span>
+                  <span class="nav-link-text ml-0">Kunci Nilai</span>
                 </a>
               </li>
             </ul>
@@ -303,6 +316,22 @@
             </ul>
           </li>
 
+          <li class="nav-item">
+            <div class="nav-link {{($title === "admin-report") ? 'aktif' : ''}}">
+              <i class="iconify-inline" data-icon="carbon:document"></i>
+              <span class="nav-link-text">Laporan</span>
+            </div>
+            <ul class="nav-item-dropdown-content">
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url('/admin/laporan/mahasiswa')}}">
+                  <span class="mini_icon">LM</span>
+                  <span class="nav-link-text">Laporan Mahasiswa</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+
 
           <li class="nav-item">
             <a class="nav-link {{($title === "admin-mahasiswa") ? 'aktif' : ''}}"
@@ -312,11 +341,11 @@
             </a>
           </li>
           <!-- ===================== -->
-          
 
-          
-          
-          
+
+
+
+
         </ul>
       </div>
     </div>

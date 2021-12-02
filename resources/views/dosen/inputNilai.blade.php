@@ -17,6 +17,13 @@
 }
 </style>
 <!-- Page content -->
+@php
+	use App\Models\KunciNilai;
+	use App\Models\Periode;
+
+	$periode = Periode::where('status', 1)->first();
+	$kunciNilai = KunciNilai::where(['semester' => $periode->semester, 'tahun_ajaran' => $periode->tahun])->first();
+@endphp
 <section class="page-content container-fluid">
 	<div class="row">
 		<div class="col-xl-12">
@@ -25,17 +32,18 @@
 					<div class="row align-items-center">
 						<div class="col-lg-5">
 							<h3 class="mb-0 text-center text-lg-left font-weight-bold" id="title-page">Nilai Mahasiswa</h3>
+							{!! $kunciNilai->status == 0 ? '<small class="mb-0 mt-3 text-center text-lg-left font-weight-bold" style="color: red"><i>Input Nilai Dikunci</i></small>' : "" !!}
 						</div>
 						<div class="col-12 col-lg-7 text-center text-md-right">
-							<button type="button" id="btn_cetak" class="btn btn-icon btn-warning mt-3 mt-md-0">
+							<button type="button" id="btn_cetak" class="btn btn-icon btn-warning mt-3 mt-md-0" {{ $kunciNilai->status == 0 ? "disabled" : "" }}>
 								<span class="btn-inner--icon"><span class="iconify" data-icon="bx:bx-printer"></span></span>
 								<span class="btn-inner--text">Cetak Data</span>
 							</button>
-							<button type="button" id="btn_publish" class="btn btn-icon btn-secondary mt-3 mt-md-0 ml-0 ml-md-3">
+							<button type="button" id="btn_publish" class="btn btn-icon btn-secondary mt-3 mt-md-0 ml-0 ml-md-3" {{ $kunciNilai->status == 0 ? "disabled" : "" }}>
 								<span class="btn-inner--icon"><span class="iconify" data-icon="bx:bx-share-alt"></span></span>
 								<span class="btn-inner--text">Publish Nilai</span>
 							</button>
-							<button type="button" id="btn_simpan" class="btn btn-primary mt-3 mt-md-0 ml-0 ml-md-3">
+							<button type="button" id="btn_simpan" class="btn btn-primary mt-3 mt-md-0 ml-0 ml-md-3" {{ $kunciNilai->status == 0 ? "disabled" : "" }}>
 								<span>Simpan</span>
 							</button>
 						</div>
@@ -46,12 +54,12 @@
 					<div class="form-row">
 						<div class="col-md-6 form-group">
 							<label for="program-studi">Program Studi</label>
-							<select class="form-control" id="prodi">
+							<select class="form-control" id="prodi" {{ $kunciNilai->status == 0 ? "disabled" : "" }}>
 							</select>
 						</div>
 						<div class="col-md-6 form-group mt-3 mt-md-0">
 							<label for="jenjang">Semester</label>
-							<select class="form-control" id="semester">
+							<select class="form-control" id="semester" {{ $kunciNilai->status == 0 ? "disabled" : "" }}>
 								<option value="1">Semester Gasal</option>
 								<option value="2">Semester Genap</option>
 							</select>
@@ -60,12 +68,12 @@
 					<div class="form-row">
 						<div class="col-md-6 form-group mt-3 mt-md-0">
 							<label for="kelas">Kelas</label>
-							<select class="form-control" id="kelas">
+							<select class="form-control" id="kelas" {{ $kunciNilai->status == 0 ? "disabled" : "" }}>
 							</select>
 						</div>
 						<div class="col-md-6 form-group">
 							<label for="matakuliah">Mata Kuliah</label>
-							<select class="form-control" id="matkul">
+							<select class="form-control" id="matkul" {{ $kunciNilai->status == 0 ? "disabled" : "" }}>
 								
 							</select>
 						</div>

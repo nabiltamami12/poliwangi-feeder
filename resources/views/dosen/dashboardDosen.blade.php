@@ -55,7 +55,7 @@
               </thead>
 
               <tbody id="tb_body_jadwal" class="table-body table-body-lg">
-                
+
               </tbody>
             </table>
           </div>
@@ -88,7 +88,7 @@
       </div>
     </div>
     <div class="col-md-12">
-      
+
     <div class="card shadow padding--medium card_presensi mt-0 mt-md-4">
         <div class="card-header p-0">
           <div class="row align-items-center">
@@ -112,7 +112,7 @@
               </thead>
 
               <tbody id="tb_body_kelas" class="table-body table-body-lg">
-                
+
               </tbody>
             </table>
           </div>
@@ -126,7 +126,7 @@ var id_dosen = dataGlobal['user']['nomor'];
 var nama = dataGlobal['user']['nama'];
 var semester = dataGlobal['periode']['semester'];
 var tahun = dataGlobal['periode']['tahun'];
-
+console.log(id_dosen)
 var status_mahasiswa = "Aktif";
 var bulan = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
 var dt = new Date();
@@ -211,16 +211,16 @@ function getJadwal() {
               console.log("==============================")
 
             })
-            
+
             var opt = '';
             $.each(data_kelas_open,function (key,row_kelas_open) {
               var kelas = $.grep(res.data.data, function(e){ return e.kuliah == row_kelas_open.kuliah; });
-              opt += `<option data-status="${row_kelas_open.status}" data-pertemuan="${row_kelas_open.pertemuan}" data-jml="${kelas[0].jml_mhs}" value="${row_kelas_open.kuliah}">${row_kelas_open.matakuliah}</option>`;
-              
-              $('#mahasiswa_saat_ini').html(kelas[0].jml_mhs+" Orang")
+              opt += `<option data-status="${row_kelas_open.status}" data-pertemuan="${row_kelas_open.pertemuan}" data-jml="${res.data.data[0].jml_mhs}" value="${row_kelas_open.kuliah}">${row_kelas_open.matakuliah}</option>`;
+
+              $('#mahasiswa_saat_ini').html(res.data.data[0].jml_mhs+" Orang")
               $('#pertemuan_saat_ini').html("Pertemuan ke-"+row_kelas_open.pertemuan)
               $('#status_saat_ini').html(row_kelas_open.status)
-              
+
               $('#status_saat_ini').addClass('text-success');
               $('#btn_presensi').removeClass('btn-no-jadwal');
               $('#btn_presensi').css('display','block')
@@ -247,24 +247,24 @@ function getJadwal() {
               $('#btn_presensi').addClass('btn-no-jadwal');
               $('#btn_presensi').css('display','block')
               $('#btn_presensi').attr('disabled',true)
-              $('#btn_presensi').text('Presensi Tidak Tersedia') 
+              $('#btn_presensi').text('Presensi Tidak Tersedia')
             }else{
               var jml_kelas = $('#matkul_open :selected').data('jml');
               var pertemuan = $('#matkul_open :selected').data('pertemuan');
               var status = $('#matkul_open :selected').data('status');
-              
+
               status = "Belum Presensi";
               $('#mahasiswa_saat_ini').html(jml_kelas+" Orang")
               $('#pertemuan_saat_ini').html("Pertemuan ke-"+pertemuan)
               $('#status_saat_ini').html(status)
-              
+
               $('#status_saat_ini').removeClass('text-success');
               $('#status_saat_ini').addClass('text-danger');
               $('#btn_presensi').removeClass('btn-no-jadwal');
               $('#btn_presensi').css('display','block')
               $('#btn_presensi').attr('disabled',false)
               $('#btn_presensi').text('Cek Presensi')
-              
+
             }
           })
           $('#btn_presensi').on('click',function (e) {
@@ -276,7 +276,7 @@ function getJadwal() {
       } else {
           // alert gagal
       }
-      
+
     }
   });
 }
@@ -297,11 +297,11 @@ function buka_kelas(kuliah,pertemuan,status) {
     success: function(res) {
       console.log(res)
         if (res.status=="success") {
-          location.reload()                 
+          location.reload()
         } else {
             // alert gagal
         }
-        
+
 
     }
   });

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Mahasiswa;
 use App\Datatables\MahasiswaDatatable;
 use App\Models\Nilai;
+use App\Models\Periode;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\QueryException;
@@ -421,5 +422,36 @@ class MahasiswaController extends Controller
 		array_push($where,['m.status','=',$request->status]);
 
     return Excel::download(new \App\Exports\MahasiswaExport($where), 'Rekap Mahasiswa.xlsx');
+	}
+
+	public function getNilaiKhs($id, $tahun, $semester){
+		try {
+			$nilai = Nilai::select('m.kode', 'm.matakuliah', 'm.sks', 'nilai.nhu', DB::raw("(CASE
+						WHEN nilai.nhu = 'A' THEN 4
+						WHEN nilai.nhu = 'AB' THEN 3.5
+						WHEN nilai.nhu = 'B' THEN 3
+						WHEN nilai.nhu = 'BC' THEN 2.5
+						WHEN nilai.nhu = 'C' THEN 2
+						WHEN nilai.nhu = 'D' THEN 1
+						ELSE 0
+						END) as am")
+					)
+					->join('kuliah as k', 'k.nomor', '=', 'nilai.kuliah')
+					->join('matakuliah as m', 'm.nomor', '=', 'k.matakuliah')
+					->where(['nilai.mahasiswa' =>  $id, 'k.tahun' => $tahun, 'k.semester' => $semester])
+					->get();
+
+			$this->status = 'success';
+			$this->data = $nilai;
+		} catch(QueryException $e){
+			$this->status = "failed";
+			$this->error = $e;
+		}
+
+		return response()->json([
+			"status" => $this->status,
+			"data" => $this->data,
+			"error" => $this->error
+		]);
 	}
 }

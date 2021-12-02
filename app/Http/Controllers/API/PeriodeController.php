@@ -3,17 +3,22 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Models\KunciNilai;
+use App\Models\Mahasiswa;
 use App\Models\Periode;
+use App\Models\Perwalian;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use DB;
 use Illuminate\Database\QueryException;
+use phpDocumentor\Reflection\DocBlock\Tags\Var_;
 
 class PeriodeController extends Controller
 {
     protected $status = null;
     protected $error = null;
     protected $data = null;
+    protected $inserted = null;
 
     //
     /**
@@ -64,6 +69,7 @@ class PeriodeController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
+        $mahasiswa = Mahasiswa::where('status', 'A')->get();
 
         $validator = Validator::make($data, [
             'tahun' => 'required',
@@ -82,8 +88,30 @@ class PeriodeController extends Controller
 
         try {
             $periode = Periode::create($data);
+            $insertedData = [];
+            // return \dd($periode);
+            for ($i = 1; $i <= 2; $i++) {
+                // foreach ($mahasiswa as $m) {
+                //     $perwalian = Perwalian::create([
+                //         'periode_id' => $periode->id,
+                //         'semester' => $i,
+                //         'mahasiswa_id' => $m->nomor,
+                //         'dosen_id' => $m->dosen_wali,
+                //     ]);
+                //     $insertedData[] = $perwalian;
+                // }
+
+                KunciNilai::create([
+                    'semester' => $i,
+                    'tahun_ajaran' => $periode->tahun,
+                    'status' => 0
+                ]);
+            }
+
+
             $this->data = $periode;
             $this->status = "success";
+            $this->inserted = $insertedData;
         } catch (QueryException $e) {
             $this->status = "failed";
             $this->error = $e;
@@ -94,7 +122,8 @@ class PeriodeController extends Controller
             [
                 'status' => $this->status,
                 'data' => $this->data,
-                'error' => $this->error
+                'error' => $this->error,
+                'insertedData' => $this->inserted
             ]
         );
     }
@@ -135,8 +164,7 @@ class PeriodeController extends Controller
         $periode = Periode::where('nomor', $id);
         $data = $request->all();
 
-        $validate = Validator::make($data, [
-        ]);
+        $validate = Validator::make($data, []);
 
         if ($validate->fails()) {
             $this->status = "failed";
@@ -164,9 +192,9 @@ class PeriodeController extends Controller
     public function change_status($id)
     {
         try {
-            $periode = DB::table('periode')->update(['status'=>0]);
-            $periode = Periode::where('nomor',$id)->update(['status'=>1]);
-    
+            $periode = DB::table('periode')->update(['status' => 0]);
+            $periode = Periode::where('nomor', $id)->update(['status' => 1]);
+
             $this->data = [];
             $this->status = "success";
         } catch (QueryException $e) {
@@ -180,11 +208,11 @@ class PeriodeController extends Controller
         ]);
     }
 
-    public function change_semester($id,$semester)
+    public function change_semester($id, $semester)
     {
         try {
-            $periode = Periode::where('nomor',$id)->update(['semester'=>$semester]);
-  
+            $periode = Periode::where('nomor', $id)->update(['semester' => $semester]);
+
             $this->data = [];
             $this->status = "success";
         } catch (QueryException $e) {
@@ -209,7 +237,7 @@ class PeriodeController extends Controller
         try {
             $periode = Periode::where('nomor', $id);
             $periode->delete();
-      
+
             $this->data = [];
             $this->status = "success";
         } catch (QueryException $e) {

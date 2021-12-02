@@ -29,11 +29,14 @@
             <div class="col-md-6 form-group">
               <label for="kelas">Tahun</label>
               <select class="form-control" id="tahun" name="tahun">
-                <option value="2019">2019</option>
+                @for ($i = date('Y') - 10; $i < date('Y') + 1; $i++)
+                  <option value="{{ $i }}">{{ $i }}</option>
+                @endfor
+                {{-- <option value="2014">2014</option>
                 <option value="2020">2020</option>
                 <option value="2021">2021</option>
                 <option value="2022">2022</option>
-                <option value="2023">2023</option>
+                <option value="2023">2023</option> --}}
               </select>
             </div>
             <div class="col-md-6 form-group mt-3 mt-md-0">

@@ -14,10 +14,7 @@
         <div class="card-header p-0">
           <div class="row align-items-center">
             <div class="col">
-              <h2 class="mb-0">Data Kurikulum</h2>
-            </div>
-            <div class="col text-right">
-              <button type="button" onclick="add_btn()" class="btn btn-primary"><i class="iconify-inline mr-1" data-icon='bx:bx-plus-circle'></i> Tambah</button>
+              <h2 class="mb-0">Kunci Nilai</h2>
             </div>
           </div>
         </div>
@@ -27,14 +24,9 @@
             <thead class="table-header">
               <tr>
                 <th scope="col">NO</th>
-                <th scope="col">Nama Kurikulum</th>
-                <th scope="col">Program Studi</th>
-                <th scope="col">Tahun Ajaran</th>
-                <th scope="col">Jumlah SKS Kurikulum</th>
-                <th scope="col">Jumlah SKS MK</th>
+                <th scope="col">Periode</th>
+                <th scope="col">Semester</th>
                 <th scope="col">Status</th>
-                <th scope="col">Mata Kuliah</th>
-                <th scope="col">AKSI</th>
               </tr>
             </thead>
             <tbody></tbody>
@@ -58,7 +50,7 @@
             </p>
         </div>
         <div class="modal-body">
-          <p class="text-center font-weight-bold">Apakah anda yakin mau mengganti kurikulum aktif ?</p>
+          <p class="text-center font-weight-bold">Apakah anda yakin mau merubah ini ?</p>
           <h2 class="text-center mb-4"><span id="text_hapus"></span></h2>
           <div class="row">
                 <div class="col-md-6">
@@ -77,7 +69,7 @@
 @section('js')
 <script>
 var nomor = 1;
-dt_url = `${url_api}/kurikulum`;
+dt_url = `${url_api}/admin/kunci-nilai`;
 dt_opt = {
   // "serverSide": true,
   "columnDefs": [
@@ -92,66 +84,28 @@ dt_opt = {
       "targets": [1],
       "data": null,
       "render": function(data, type, full) {
-        res = data['kurikulum'];
+        res = data['tahun_ajaran']+"-"+(Number(data['tahun_ajaran'])+1);
         return res;
       }
     },{
       "targets": [2],
       "data": null,
       "render": function(data, type, full) {
-        res = data['prodi'];
+        res = (data['semester'] == "1") ? "GASAL" : "GENAP";
         return res;
       }
     },{
       "targets": [3],
       "data": null,
+      className: "font-weight-bold",
       "render": function(data, type, full) {
-        res = `${data['periode']}/${parseInt(data['periode']) + 1}  ${parseInt(data['semester']) % 2 == 0 ? 'Genap' : 'Ganjil'}`;
+        // var aktif = "<span class='text-success'>Aktif <i class='iconify-inline mr-1' style='font-size:16px;' data-icon='akar-icons:circle-check-fill'></i></span>";
+        var aktif = `<button class="btn btn-secondary btn-sm" style="font-size: 12px;" onclick="change_status(${data['id']})">Non Aktifkan</button>`;
+        var non_aktif = `<button class="btn btn-warning btn-sm" style="font-size: 12px;" onclick="change_status(${data['id']})"><i class="iconify-inline mr-1" style="font-size:16px;" data-icon="akar-icons:circle-check-fill"></i>Aktifkan</button>`;
+        res = (data['status'] == 1) ? aktif : non_aktif;
         return res;
       }
-    },{
-      "targets": [4],
-      "data": null,
-      "render": function(data, type, full) {
-        res = data['jumlah_sks'];
-        return res;
-      }
-    },{
-      "targets": [5],
-      "data": null,
-      "render": function(data, type, full) {
-        res = data['jumlah_matkul'] == null ? 0 : data['jumlah_matkul'];
-        return res;
-      }
-    },{
-      "targets": [6],
-      "data": null,
-      "render": function(data, type, full) {
-        var aktif = "<span class='text-success' style='font-size:12px;font-weight:600;'>aktif <i class='iconify-inline mr-1' style='font-size:12px;' data-icon='akar-icons:circle-check-fill'></i></span>"
-        var non_aktif = `<button class="btn btn-warning btn-sm" onclick="change_status(${data['id']})"><i class="iconify-inline mr-1" style="font-size:12px;" data-icon="akar-icons:circle-check-fill"></i>aktifkan</button>`
-        res = (data['status']=="1")?aktif:non_aktif;
-        return res;
-      }
-    },{
-      "targets": [7],
-      "data": null,
-      "render": function(data, type, full) {
-        var id = data['id']
-        var res = `<a href="{{ url('admin/master/datakurikulum/${id}/matakuliah') }}" class="btn btn-success btn-sm"><i class="iconify-inline mr-1" style="font-size:12px;" data-icon="akar-icons:search"></i>Mata Kuliah</a>`
-        return res;
-      }
-    },{
-      "targets": [8],
-      "data": null,
-      "render": function(data, type, full) {
-        var id = data['id'];
-        var text_hapus = data['kurikulum'];
-        var btn_update = `<span class="iconify edit-icon text-primary" onclick='update_btn(${id})' data-icon="bx:bx-edit-alt" data-inline="true"></span>`
-        var btn_delete = `<span class="iconify delete-icon text-primary" data-icon="bx:bx-trash" data-inline="true" onclick='delete_btn(${id},"kurikulum","kurikulum","${text_hapus}")'></span>`;
-        res = btn_update+" "+btn_delete;
-        return res;
-      }
-    },
+    }
   ]
 };
 
@@ -162,14 +116,14 @@ function change_status(id) {
   function konfirm_func() {
     var id = $("#id_konfirm").val();
     $.ajax({
-      url: url_api+"/kurikulum/change_status/"+id,
+      url: "/api/v1/admin/kunci-nilai/change_status/"+id,
       type: "put",
       dataType: 'json',
       data: {},
       success: function(res) {
         if (res.status=="success") {
               $('#konfirmModal').modal('hide');
-              dt.ajax.reload();
+              dt.ajax.reload();                
             } else {
               // alert gagal
             }
@@ -177,5 +131,26 @@ function change_status(id) {
         }
     });
 }
+// function change_semester(id,semester) {
+//   var globalData = JSON.parse(localStorage.getItem('globalData'))
+//   var periode = globalData['periode']
+//   periode['semester'] = semester
+  
+//   localStorage.setItem('globalData', JSON.stringify(globalData));
+  
+//     $.ajax({
+//         url: url_api+"/periode/change_semester/"+id+"/"+semester,
+//         type: "put",
+//         dataType: 'json',
+//         data: {},
+//           success: function(res) {
+//             if (res.status=="success") {
+//               dt.ajax.reload();
+//             } else {
+//               // alert gagal
+//             }
+//         }
+//     });
+// }
 </script>
 @endsection

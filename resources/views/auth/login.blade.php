@@ -66,6 +66,7 @@
                                 <p>Silahkan melengkapi data untuk melanjutkan</p>
                             </div>
                             <form method="POST" action="{{ route('login') }}">
+                                @csrf
                                 <div class="form-group">
                                     <div class="input-group input-group-merge input-group-alternative">
                                         <div class="input-group-prepend">
